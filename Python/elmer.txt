@@ -1,0 +1,72 @@
+Simulation
+  Simulation Type  transient
+  
+  Coordinate System    Cartesian 1D, Cartesian 2D, Cartesian 3D
+  
+  Timestepping Method Explicit Euler
+  
+  Solver solver id
+  
+    Equation String [Advection Diffusion Equation Variable_name]
+    The name of the equation, e.g., Advection Diffusion Equation Oxygen.
+
+    Variable String Variable_name
+    The name of the variable, e.g., Oxygen.
+
+    Procedure File "AdvectionDiffusion" "AdvectionDiffusionSolver"
+    The name of the file and subroutine.
+    
+    Nonlinear System Convergence Tolerance Real
+    Nonlinear System Max Iterations Integer
+    Nonlinear System Relaxation Factor Real
+    Steady State Convergence Tolerance Real
+    Stabilize Logical
+    
+  Equation eq id
+    Advection Diffusion Equation Variable_name                  Logical
+    If set to True, solve the advection-diffusion equation.
+    
+    Convection String
+    The type of convection to be used in the advection-diffusion equation, one of: None, Computed, Constant
+
+    Concentration Units Absolute Mass (autres options existantes)
+    
+  Initial Condition ic id
+    The initial condition section may be used to set initial values for the concentration ci , Ci or xi
+    
+    Variable_name Real
+    
+  Material mat id
+    
+    Convection Velocity i Real
+      Convection velocity i= 1, 2, 3 for the constant convection model
+      
+    Density Real
+    
+    Compressibility Model Incompressible
+    
+    Variable_name Diffusivity Real
+    
+    Variable_name Soret Diffusivity Real
+    
+  Boundary Condition bc id
+  
+    Variable_name Real
+    
+    Mass Transfer Coefficient Real
+    
+    External Concentration Real
+    These two keywords are used to define flux condition that depends on the external concentration
+    and a mass transfer coefficient. This condition is only applicable to absolute mass formulation
+    of the equation (see keywords for Equation block).
+    
+    Variable_name Flux Real
+    A user defined mass flux term in absolute mass units or, in case of scaling, in the scaled units.
+
+    Physical Units Logical True
+    
+    Variable_name Solubility Change Boundary Logical True
+    
+    Normal Target Body Integer bd id
+    
+    

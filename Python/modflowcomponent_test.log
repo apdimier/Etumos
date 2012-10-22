@@ -1,0 +1,69 @@
+--------------------
+ Definition of materials :
+--------------------
+--------------------
+ Definition of meshes :
+--------------------
+--------------------
+ Definition of meshes :
+--------------------
+-------------------------
+ Definition of regions :
+-------------------------
+<type 'instance'>  nom de la classe : StructuredMesh2D
+<type 'instance'>  nom de la classe : Material
+--------------------
+--------------------
+ Definition of boundary conditions :
+--------------------
+----------
+ east_bo_m :
+----------
+ class name  Head
+ on verifie la classe 
+ on a verifie la classe 
+ east_bo_m : append
+----------
+ west_bo_w :
+----------
+ east_bo_m : append
+Title of the study :   One dimensional simulation
+ Study definition 
+ SaturatedHydroModflow instance 
+temps de verifyZoneBoundaryConditionisUnique : 2.69412994385e-05s
+used memory : 8800 Ko 
+
+ SaturatedHydroModflow setMesh method 
+ SaturatedHydroModflow setData method 
+ Valeur de nrow
+ Valeur de nrow 1
+ Valeur de ncol 41
+ Randbedingungen  Dirichlet boundary east
+ type de boundaryzone.boundary.zones [<structuredmesh.StructuredZone2D instance at 0x84db78c>]
+ valeur des indices : 1 1 1 1
+ Randbedingungen  Dirichlet boundary west
+ type de boundaryzone.boundary.zones [<structuredmesh.StructuredZone2D instance at 0x84f33ac>]
+ valeur des indices : 41 41 1 1
+ longueur de ibound  41 1
+ mod ncol  40 1
+*********************************************************************************
+ traitement des conditions initiales 
+Initial cond. get value <physicalquantities.Head instance at 0x84f346c>
+Value of valeur  1e-08
+ longueur du tableau  41 1
+ Randbedingungen  Dirichlet boundary east
+ type de boundaryzone.boundary.zones [<structuredmesh.StructuredZone2D instance at 0x84db78c>]
+ boucle en i de boundary  1 1 2.2e-07
+valeur de i1 et i2 pour initialisation 1 1
+ Randbedingungen  Dirichlet boundary west
+ type de boundaryzone.boundary.zones [<structuredmesh.StructuredZone2D instance at 0x84f33ac>]
+ boucle en i de boundary  41 41 0.0
+valeur de i1 et i2 pour initialisation 41 41
+[2.2000000000000001e-07, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 1e-08, 0.0]
+2
+ delc 0 1.0 1.0
+ region  [<commonmodel.Region instance at 0x84db82c>]
+region consideree
+<commonmodel.Region instance at 0x84db82c>
+permeabilite  <tensors.IsotropicTensor instance at 0x84db4cc>
+valeur de Kx 1.0

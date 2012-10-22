@@ -1,0 +1,6 @@
+19/09/2011
+
+        ajout de self.transportSolver.setPorosityField(self.initialPorosityValues)
+        
+        La porosité est un attribut du transport alors que le transport dans le cas
+        // n'est que sur le noeud zéro.

@@ -1,0 +1,51 @@
+#! /bin/bash --noprofile
+
+#===============================
+# Created   : Wednesday 12/08/09
+# Author    : Alain Dimier
+# Project   : open source
+# $Name:  $
+#===============================
+# issued from the net courses : http://www.c-sait.net/cours/scripts.php
+#                               http://www.freeos.com/guides/lsst/ch02sec02.html
+                                
+# ##############################################################
+#
+# Function usage to list the different options
+# This function exits the shell
+#
+# ##############################################################
+pyfile=
+np=1
+echo "0 $0"
+echo "1 $1"
+echo "2 $2"
+if [[ $# -ge 0 ]] ; then
+    pyfile=$1
+    if [[ ! -f $pyfile ]] ; then
+        echo
+        echo "Can't find the file $pyfile. Bye ..."
+        echo
+        exit 1
+    fi
+fi
+if [[ $# -ge 2 ]] ; then
+    echo
+    np=$2
+    echo "number of processors: $np"
+    echo $np
+else
+    np=1
+fi
+echo "number of proc: $np, # $#, * $*"
+if [[ $np -eq 1 ]]; then
+        echo "LAUNCH WITHOUT MPI"
+        eval /usr/bin/python $pyfile
+else
+        echo "LAUNCH WITH MPI"
+        export WMPI=1
+        eval mpirun -np $np mpipython $pyfile "MPI"
+fi
+status=$?
+exit $status
+
