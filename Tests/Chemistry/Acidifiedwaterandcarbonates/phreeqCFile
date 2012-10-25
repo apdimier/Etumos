@@ -1,0 +1,211 @@
+
+SOLUTION_MASTER_SPECIES
+
+                S   SO4--    0.00000      S04--   32.06600
+                C   HCO3-    1.00000      HCO3-   12.01100
+             C(-3)   C2H6    0.00000       C2H6   12.01100
+            C(+4)   HCO3-    0.00000      HCO3-   12.01100
+                 Na   Na+    0.00000        Na+   22.98980
+                Ca   Ca++    0.00000       Ca++   40.07800
+                 Cl   Cl-    0.00000        Cl-   35.45270
+               Al   Al+++    0.00000      Al+++   26.98150
+            Fe(+2)   Fe++    0.00000         Fe   55.84700
+                Mg   Mg++    0.00000       Mg++   24.30500
+                Si   SiO2    0.00000       SiO2   28.08550
+            Fe(+3)   Fe+3   -2.00000         Fe   55.84700
+              S(-2)   HS-    1.00000          S   32.06600
+                Fe   Fe+2    0.00000       Fe+2   55.84700
+            S(+6)   SO4-2    0.00000        SO4   32.06600
+                   K   K+    0.00000         K+   39.09830
+
+SOLUTION_SPECIES
+
+           + 1.0HCO3- + 1.0Na+ = NaHCO3
+                    log_k   -2.6243211203e-01
+#
+           + 1.0Mg+2 + 1.0Cl- = MgCl+
+                    log_k   4.3022426443e-02
+#
+           + 1.0HCO3- + 1.0Fe++ = FeHCO3+
+                    log_k   2.7200000000e+00
+#
+           + 2.0H2O + 1.0Al+++ - 2.0H+ = Al(OH)2+
+                    log_k   -7.8275069354e+00
+#
+           + 1.0Cl- = Cl-
+                    log_k   0.0000000000e+00
+#
+           + 1.0K+ = K+
+                    log_k   0.0000000000e+00
+#
+           + 1.0HCO3- = HCO3-
+                    log_k   0.0000000000e+00
+#
+           + 2.0H2O + 1.0Al+3 - 3.0H+ = HAlO2
+                    log_k   -1.2393573662e+01
+#
+           + 1.0Mg+2 + 1.0HCO3- - 1.0H+ = MgCO3
+                    log_k   -6.7339193922e+00
+#
+           + 1.0Mg++ = Mg++
+                    log_k   0.0000000000e+00
+#
+           + 1.0H+ + 1.0Fe+2 + 0.25O2 - 0.5H2O = Fe+3
+                    log_k   5.7576929607e+00
+#
+           + 1.0Na+ + 1.0HCO3- - 1.0H+ = NaCO3-
+                    log_k   -1.0333644084e+01
+#
+           + 2.0H2O + 1.0Na+ + 1.0Al+3 - 4.0H+ = NaAlO2
+                    log_k   -1.8380456357e+01
+#
+           + 1.0SO4-2 + 1.0Fe+2 = FeSO4
+                    log_k   2.2000000000e+00
+#
+           + 1.0HCO3- + 1.0Fe+2 - 1.0H+ = FeCO3
+                    log_k   -5.5988000000e+00
+#
+           + 1.0Al+3 = Al+3
+                    log_k   0.0000000000e+00
+#
+           + 1.0Na+ = Na+
+                    log_k   0.0000000000e+00
+#
+           + 1.0SiO2 = SiO2
+                    log_k   0.0000000000e+00
+#
+           + 1.0HCO3- + 1.0Ca+2 - 1.0H+ = CaCO3
+                    log_k   -6.1980542340e+00
+#
+           + 1.0SO4-- + 1.0H+ - 2.0O2 = HS-
+                    log_k   -1.1421669775e+02
+#
+           + 1.0Ca++ = Ca++
+                    log_k   0.0000000000e+00
+#
+           + 1.0HCO3- + 1.0Mg+2 = MgHCO3+
+                    log_k   1.2806042632e+00
+#
+           + 2.0H+ + 2.0HCO3- + 1.0H2O - 3.5O2 = C2H6
+                    log_k   -1.9032817815e+02
+#
+           + 1.0SO4-- + 1.0Ca++ = CaSO4
+                    log_k   2.3876657747e+00
+#
+           + 1.0Fe+2 = Fe+2
+                    log_k   0.0000000000e+00
+#
+           + 1.0HCO3- - 1.0H+ = CO3-2
+                    log_k   -1.0084726478e+01
+#
+           + 1.0HCO3- + 1.0Ca+2 = CaHCO3+
+                    log_k   1.2703788624e+00
+#
+           + 1.0HCO3- + 1.0Fe+3 - 1.0H+ = FeCO3+
+                    log_k   -1.7108132541e+00
+#
+           + 1.0HCO3- + 1.0H+ - 1.0H2O = CO2
+                    log_k   6.3022968037e+00
+#
+           + 1.0SO4-- = SO4--
+                    log_k   0.0000000000e+00
+#
+           + 1.0Mg+2 + 1.0SO4-2 = MgSO4
+                    log_k   3.0813298028e+00
+#
+           + 2.0H2O + 1.0Al+3 - 4.0H+ = AlO2-
+                    log_k   -1.7988894187e+01
+#
+
+PHASES
+
+      Dolomite-dis
+          CaMg(CO3)2 =  - 2.0H+ + 1.0Ca++ + 1.0Mg++ + 2.0HCO3-
+                    log_k   1.9200000000e+00
+      Ankerite
+          CaMg0.3Fe0.7C2O6 =  - 4.0H+ + 1.0Ca++ + 0.3Mg++ + 0.7Fe++ + 2.0H2O + 2.0CO2
+                    log_k   1.2140000000e+01
+      Illite
+          K0.6Mg0.25Al1.8Al0.5Si3.5O10(OH)2 =  - 8.0H+ + 0.25Mg++ + 0.6K+ + 2.3Al+3 + 3.5SiO2 + 5.0H2O
+                    log_k   3.8000000000e+00
+      Chalcedony
+          SiO2 =  + 1.0SiO2
+                    log_k   -3.0200000000e+00
+      Anhydrite
+          CaSO4 =  + 1.0Ca++ + 1.0SO4--
+                    log_k   -5.0500000000e+00
+      Kaolinite
+          Al2Si2O5(OH)4 =  - 6.0H+ + 2.0Al+++ + 2.0SiO2 + 5.0H2O
+                    log_k   2.3800000000e+00
+      CO2(g)
+          CO2 =  + 1.0CO2
+                    log_k   -1.8986596139e+00
+      Quartz
+          SiO2 =  + 1.0SiO2
+                    log_k   -3.2400000000e+00
+      Montmor-Ca
+          Ca.165Mg.33Al1.67Si4O10(OH)2 =  - 6.0H+ + 0.165Ca+2 + 0.33Mg+2 + 1.67Al+3 + 4.0H2O + 4.0SiO2
+                    log_k   -8.3093346462e-01
+      Calcite
+          CaCO3 =  - 1.0H+ + 1.0Ca++ + 1.0HCO3-
+                    log_k   1.0500000000e+00
+      Siderite
+          FeCO3 =  - 1.0H+ + 1.0Fe++ + 1.0HCO3-
+                    log_k   -1.1700000000e+00
+      Montmor-Na
+          Na.33Mg.33Al1.67Si4O10(OH)2 =  - 6.0H+ + 0.33Mg++ + 0.33Na+ + 1.67Al+++ + 4.0H2O + 4.0SiO2
+                    log_k   -6.5000000000e-01
+      Goethite
+          FeOOH =  - 3.0H+ + 1.0Fe+++ + 2.0H2O
+                    log_k   -1.1300000000e+00
+      Pyrite
+          FeS2 =  - 1.0H2O + 0.25H+ + 0.25SO4-- + 1.0Fe++ + 1.75HS-
+                    log_k   -2.1910000000e+01
+
+SOLUTION                  1-1 Acidified_and_carbonates
+   temp 8.0000000000e+01
+   pH    4.6300000000e+00 
+   pe    4.0000000000e+00
+   units mol/l
+                       Al    1.2100000000e-08
+                        C    1.0200000000e+00
+                       Ca    5.5000000000e-02
+                       Cl    1.9200000000e-01
+                       Fe    9.3000000000e-06
+                        K    1.8500000000e-02
+                       Mg    1.5200000000e-02
+                       Na    8.0000000000e-02
+                        S    5.8600000000e-03
+                       Si    2.4800000000e-04
+
+EQUILIBRIUM_PHASES        1-1 Acidified_and_carbonates
+                  Calcite    0.0000000e+00  2.2484036e-01
+                Kaolinite    0.0000000e+00  1.9371466e-02
+                   Illite    0.0000000e+00  1.6934328e-02
+                   Quartz    0.0000000e+00  8.3231375e-02
+                Anhydrite    0.0000000e+00  1.8366148e-02
+                   Pyrite    0.0000000e+00  1.6669584e-02
+             Dolomite-dis    0.0000000e+00  8.1358580e-03
+               Montmor-Ca    0.0000000e+00  4.0986023e-03
+                 Siderite    0.0000000e+00  8.6325967e-03
+SELECTED_OUTPUT
+  -high_precision true
+KNOBS
+  -iterations 500
+  -diag true 
+  -tolerance 1.e-15
+SOLUTION 0
+PRINT
+  -reset	true
+# hereafter the -cells parameter is the 
+# only relevant parameter 
+TRANSPORT
+  -cells          0
+  -time_step          100.
+  -shifts          5
+  -lengths        0.1
+  -flow_direction diff
+  -boundary_conditions        closed closed
+  -print_frequency      1
+  -warnings False
+END
