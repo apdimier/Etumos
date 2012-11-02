@@ -1,0 +1,55 @@
+PHASES
+      Ankerite
+          CaFe0.7Mg0.3(CO3)2 + 4H+ = Ca++ + 0.7Fe++ + 0.3Mg++ + 2H2O + 2CO2 
+                    log_k   1.2140000000e+01
+
+SOLUTION                  1-1 caprock
+   temp 8.0000000000e+01
+   pH    6.5400000000e+00 
+   pe    4.0000000000e+00
+   units mol/l
+                       Al    1.5310000000e-07
+                        C    2.1800000000e-03
+                       Ca    1.5280000000e-02
+                       Cl    2.6010000000e-01
+                       Fe    1.5340000000e-05
+                        K    1.1900000000e-02
+                       Mg    8.9370000000e-04
+                       Na    2.5430000000e-01
+                        S    1.8410000000e-02
+                       Si    5.3710000000e-04
+
+EQUILIBRIUM_PHASES        1-1 caprock
+                  Calcite    0.00000e+00  2.49823e-01
+                 Ankerite    0.00000e+00  1.21096e-02
+               Montmor-Na    0.00000e+00  3.40644e-02
+                Kaolinite    0.00000e+00  5.81144e-03
+                   Illite    0.00000e+00  2.60528e-03
+                   Quartz    0.00000e+00  8.32314e-02
+                Anhydrite    0.00000e+00  1.10197e-02
+                   Pyrite    0.00000e+00  8.33479e-03
+                 Goethite    6.00000e-04  0.00000e+00
+               Chalcedony    -2.30000e-01  0.00000e+00
+             Dolomite-dis    -1.24000e+00  0.00000e+00
+                 Siderite    -8.00000e-01  0.00000e+00
+SELECTED_OUTPUT
+  -high_precision true
+KNOBS
+  -iterations 500
+  -diag true 
+  -tolerance 1.e-15
+SOLUTION 0
+PRINT
+  -reset	true
+# hereafter the -cells parameter is the 
+# only relevant parameter 
+TRANSPORT
+  -cells          0
+  -time_step          100.
+  -shifts          5
+  -lengths        0.1
+  -flow_direction diff
+  -boundary_conditions        closed closed
+  -print_frequency      1
+  -warnings False
+END

@@ -1,0 +1,68 @@
+(null)
+
+            
+
+
+number of aqueous primary species                         8
+number of aqueous secondary species                      16
+number of minerals                                        2
+number of sorbed species                                  0
+
+pH                                          5.24402860686
+pe                                            12.9215277551
+water activity                               0.963127270571
+ionicstrength                                 2.08819367003
+temperature                                            25.0
+electrical_balance                        9.10382880193e-15
+total H                                       117.777742335
+total O                                        65.822653541
+
+
+ primary species: mol/l
+
+                H(1) 1.0
+               C(-4) 0.0
+                C(4) 0.0340241042334
+                  Ca 1.62169450936
+                H(0) 0.0
+                O(0) 4.3833226151e-14
+               S(-2) 0.0
+                S(6) 1.61549813851
+
+
+ secondary species: mol/l
+
+                 OH- 3.19752078899e-09
+                 H2O 55.5062166963
+             CaHCO3+ 0.00826833143675
+               HCO3- 0.00421243366495
+               CaCO3 3.44060021219e-06
+               CO3-2 1.44404854207e-07
+                Ca+2 0.519453970201
+             CaHCO3+ 0.00826833143675
+             CaHSO4+ 5.66885793961e-05
+               CaCO3 3.44060021219e-06
+               CaOH+ 4.13758604265e-09
+                 HS- 0.0
+                 S-2 0.0
+               SO4-2 0.521498727115
+             CaHSO4+ 5.66885793961e-05
+               HSO4- 3.06484081439e-05
+
+
+ sorbed species: moles
+
+
+
+     SI( target saturation index):        SI < 0 undersaturation, 0: equilibrium and supersaturation otherwise
+
+
+
+
+
+                 mineral species:            SI                   moles
+
+                       Calcite          0.00000000e+00       1.34209378e+01
+
+                        CO2(g)          1.00000000e-02       1.34411166e+01
+

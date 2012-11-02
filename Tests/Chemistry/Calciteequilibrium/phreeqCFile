@@ -1,0 +1,34 @@
+
+SOLUTION                  1-1 alka
+   temp 2.5000000000e+01
+   pH    7.0000000000e+00 
+   pe    4.0000000000e+00
+   units mol/l
+               Alkalinity    4.0000000000e+00
+                     S(6)    1.0000000000e+00
+                       Ca    3.0000000000e+00
+
+EQUILIBRIUM_PHASES        1-1 alka
+                  Calcite    0.0000000e+00  1.0000000e+01
+                   CO2(g)    1.0000000e-02  1.0000000e+01
+SELECTED_OUTPUT
+  -high_precision true
+KNOBS
+  -iterations 500
+  -diag true 
+  -tolerance 1.e-15
+SOLUTION 0
+PRINT
+  -reset	true
+# hereafter the -cells parameter is the 
+# only relevant parameter 
+TRANSPORT
+  -cells          0
+  -time_step          100.
+  -shifts          5
+  -lengths        0.1
+  -flow_direction diff
+  -boundary_conditions        closed closed
+  -print_frequency      1
+  -warnings False
+END
