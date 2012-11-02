@@ -1,0 +1,435 @@
+import wx
+
+from geoi.actions.params_action import ParamsAction
+from geoi import parameters
+
+description = """ 
+       Used to set the Darcy velocity Field through steady components or Head boundary conditions
+       """
+HELP = """
+       <html><body>
+       <p>Used to define the components of a <b>Darcy</b> velocity;<br><br>
+<li type=1><div align="two options:"> 
+<blockquote>- a three dimensional constant velocity field in time and space can be defined.</blockquote>
+<blockquote>
+ - a stationary Darcy velocity field depending on head and on boundaries<br>&nbsp;&nbsp; can also be defined.</blockquote><blockquote>
+ - otherwise, only diffusion is relevant.</blockquote></div></li>
+<br>
+       </body></html>
+
+       """
+class DarcyVelocityComponentsElmer(ParamsAction):
+    """
+    Used to set the Darcy velocity components
+    """
+
+    def __init__(self, win, params_mgr):
+        ParamsAction.__init__(self, params_mgr, win, "Darcy Velocity",description  =description,help=HELP)
+        
+    def _createInterface(self, parent, params):
+#velocity components
+        self.params = params
+        self.checkButton_ctrls = []
+
+        toto = self.GetDialogPanel()
+        wx.CheckBox.SetTTS = wx.CheckBox.SetToolTipString
+        sizer = wx.BoxSizer( wx.VERTICAL )
+        box3 = wx.StaticBoxSizer(wx.StaticBox( parent, -1, "Constant velocity field components" ) , wx.HORIZONTAL)
+        box3.SetMinSize((300,50))
+        grid3 = wx.FlexGridSizer( 0, 4, 0, 0 )
+        grid3.SetFlexibleDirection( wx.HORIZONTAL)
+
+        velocity = params.getParam( parameters.DarcyVelocityStatic_list_elmer)
+        
+        label1 = wx.StaticText(parent, -1, "Vx")
+        label1.SetHelpText("This is the help text for the label")
+        box3.Add(label1, 0, wx.ALIGN_CENTRE|wx.ALL, 5)
+ 
+        self.vxCtrl = vxCtrl = wx.TextCtrl(parent, -1, "", size=(90,-1))
+        vxCtrl.SetHelpText("Here's some help text for field #1")
+        if velocity.getValue() != []:
+            [vx,vy,vz]  = velocity.getValue()
+        else:
+            vx = None
+            vy = None
+            vz = None
+            
+        if vx != None:
+            vxCtrl.SetValue( str(vx) )
+            vxCtrl.Enable(True)
+        else:
+            vxCtrl.Enable(False)
+        
+        box3.Add(vxCtrl, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
+       
+        label2 = wx.StaticText(parent, -1, "Vy")
+        label2.SetHelpText("This is the help text for the label")
+        box3.Add(label2, 0, wx.ALIGN_CENTRE|wx.ALL, 5)
+
+        self.vyCtrl = vyCtrl = wx.TextCtrl(parent, -1, "", size=(90,-1))
+        vyCtrl.SetHelpText("Here's some help text for field #1")
+        if vy != None:
+            vyCtrl.SetValue( str(vy) )
+            vyCtrl.Enable(True)
+        else:
+            vyCtrl.Enable(False)
+        box3.Add(vyCtrl, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
+       
+        label3 = wx.StaticText(parent, -1, "Vz")
+        label3.SetHelpText("This is the help text for the label")
+        box3.Add(label3, 0, wx.ALIGN_CENTRE|wx.ALL, 5)
+
+        self.vzCtrl = vzCtrl = wx.TextCtrl(parent, -1, "", size=(90,-1))
+        vzCtrl.SetHelpText("Here's some help text for field #1")
+        if vz != None:
+            vzCtrl.SetValue( str(vz) )
+            vzCtrl.Enable(True)
+        else:
+            vzCtrl.Enable(False)
+        box3.Add(vzCtrl, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
+        
+        self.DarcyControl = DarcyControl = wx.CheckBox( parent, -1, "",style = 0)
+        self.checkButton_ctrls.append(DarcyControl)
+        DarcyControl.SetTTS("used to control a constant Darcy Velocity,\n default being a zero normed one ")
+        box3.Add(DarcyControl, 0, wx.ALIGN_LEFT|wx.ALIGN_CENTRE_VERTICAL|wx.LEFT|wx.RIGHT|wx.TOP, 1 )
+        toto.Bind(wx.EVT_CHECKBOX, self._darcyControl, DarcyControl)
+         
+         
+        if params.getParam( parameters.DarcyVelocityStaticElmer).getValue()=="True" :
+            self.DarcyControl.SetValue(True)
+        else :
+            self.DarcyControl.SetValue(False)
+         
+               
+        sizer.Add( box3, 0, wx.ALIGN_LEFT|wx.ALL, 5 )  
+        
+        
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        
+        box6 = wx.StaticBoxSizer(wx.StaticBox( parent, -1, "Darcy velocity with head" ) , wx.VERTICAL)
+        box6.SetMinSize((300,200))
+        grid6 = wx.FlexGridSizer( 3, 1, 0, 0 )
+        grid6.SetFlexibleDirection( wx.VERTICAL)
+        
+        self.DarcyControl2 = DarcyControl2 = wx.CheckBox( parent, -1, "constant velocity field",style = 0)
+        self.checkButton_ctrls.append(DarcyControl2)
+        DarcyControl2.SetTTS("used to control a Darcy Velocity defined by heads,\n default being a zero normed one ")
+        box6.Add(DarcyControl2, 0, wx.ALIGN_LEFT|wx.ALIGN_CENTRE_VERTICAL|wx.LEFT|wx.RIGHT|wx.TOP, 1 )
+        toto.Bind(wx.EVT_CHECKBOX, self._darcyControl2, DarcyControl2)
+        
+        
+        if params.getParam( parameters.DarcyVelocityHeadElmer).getValue()=="True" :
+            self.DarcyControl2.SetValue(True)
+        else :
+            self.DarcyControl2.SetValue(False)
+        
+        
+        box4 = wx.StaticBoxSizer(wx.StaticBox( parent, -1, "New zone" ) , wx.HORIZONTAL)
+        box4.SetMinSize((200,50))
+        grid4 = wx.FlexGridSizer( 0, 3, 0, 0 )
+        grid4.SetFlexibleDirection( wx.HORIZONTAL)
+        
+        label1 = wx.StaticText(parent, -1, "Set Zones:")
+        label1.SetHelpText("This is the help text for the label")
+        box4.Add(label1, 0, wx.ALIGN_CENTRE|wx.ALL, 5)
+
+        
+        zones_not_used = []
+        zones_not_used2 = params.getParam( parameters.Zone_BCKind_list).getValue()
+        BCHList = params.getParam(parameters.Boundary_Condition_Head).getValue()
+        for zones in zones_not_used2 :
+            absent = True
+            for i in range(len(BCHList)) :
+                if zones == BCHList[i][0] :
+                    absent = False
+                   
+            if absent :
+                zones_not_used.append(zones)     
+
+        self.zoneCtrl = zoneCtrl = wx.ComboBox(parent, -1, "",\
+        (250, 20), (200, -1), zones_not_used, wx.CB_DROPDOWN)
+        zoneCtrl.SetHelpText("Here's some help text for field #1")
+
+        
+        box4.Add(zoneCtrl, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
+       
+        label2 = wx.StaticText(parent, -1, "Head Value")
+        label2.SetHelpText("This is the help text for the label")
+        box4.Add(label2, 0, wx.ALIGN_CENTRE|wx.ALL, 5)
+
+        self.HeadValueCtrl = HeadValueCtrl = wx.TextCtrl(parent, -1, "", size=(60,-1))
+        HeadValueCtrl.SetHelpText("Here's some help text for field #1")
+        
+        
+        box4.Add(HeadValueCtrl, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
+       
+               
+        box6.Add( box4, 0, wx.TOP|wx.ALL, 5 )  
+        
+        #~~~~~~~~~~~~~~~~~~~~~~~~
+        
+        box5 = wx.StaticBoxSizer(wx.StaticBox( parent, -1, "Zones already defined" ) , wx.HORIZONTAL)
+        box5.SetMinSize((200,50))
+        grid5 = wx.FlexGridSizer( 0, 3, 0, 0 )
+        grid5.SetFlexibleDirection( wx.HORIZONTAL)
+
+        
+        label1 = wx.StaticText(parent, -1, "Zones:")
+        label1.SetHelpText("This is the help text for the label")
+        box5.Add(label1, 0, wx.ALIGN_CENTRE|wx.ALL, 5)
+
+        zones_already_defined = []
+        for zones in params.getParam(parameters.Boundary_Condition_Head).getValue() :
+            zones_already_defined.append(zones[0])
+
+        self.zoneCtrlAlreadyD = zoneCtrlAlreadyD = wx.ComboBox(parent, -1, "",\
+        (250, 20), (200, -1), zones_already_defined, wx.CB_DROPDOWN)
+        zoneCtrlAlreadyD.SetHelpText("Here's some help text for field #1")
+        
+        toto.Bind(wx.EVT_COMBOBOX, self._alreadyDZoneHead, zoneCtrlAlreadyD)
+        
+        box5.Add(zoneCtrlAlreadyD, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
+       
+        label2 = wx.StaticText(parent, -1, "Head Value")
+        label2.SetHelpText("This is the help text for the label")
+        box5.Add(label2, 0, wx.ALIGN_CENTRE|wx.ALL, 5)
+
+        self.HeadValueCtrlAlreadyD = HeadValueCtrlAlreadyD = wx.TextCtrl(parent, -1, "", size=(60,-1))
+        HeadValueCtrlAlreadyD.SetHelpText("Here's some help text for field #1")
+        
+        
+        box5.Add(HeadValueCtrlAlreadyD, 1, wx.ALIGN_CENTRE|wx.ALL, 5)
+       
+        
+        label3 = wx.StaticText(parent, -1, "Delete")
+        label3.SetHelpText("This is the help text for the label")
+        box5.Add(label3, 0, wx.ALIGN_CENTRE|wx.ALL, 5)
+        
+        self.delete = delete = wx.CheckBox( parent, -1, "",style = 0)
+        delete.SetTTS("used to delete a head zone ")
+        box5.Add(delete, 0, wx.ALIGN_LEFT|wx.ALIGN_CENTRE_VERTICAL|wx.LEFT|wx.RIGHT|wx.TOP, 1 )
+        toto.Bind(wx.EVT_CHECKBOX, self._delete, delete)
+
+               
+        box6.Add( box5, 0, wx.BOTTOM|wx.ALL, 5 )  
+        sizer.Add( box6, 0, wx.ALIGN_LEFT|wx.ALL, 5 ) 
+        
+        
+        self.apply = wx.Button(parent, -1, "Apply", (400,200))
+        
+        toto.Bind(wx.EVT_BUTTON, self._applyZone, self.apply)
+        sizer.Add(self.apply, 0, wx.ALIGN_CENTRE_HORIZONTAL|wx.ALL, 10)
+        
+        
+        
+        
+        
+        if DarcyControl.GetValue()==False:
+            self.vxCtrl.Enable(False)
+            self.vyCtrl.Enable(False)
+            self.vzCtrl.Enable(False)
+            if DarcyControl2.GetValue()==True:
+                self.DarcyControl.Enable(False)
+         
+        if DarcyControl2.GetValue()==False:
+            self.zoneCtrl.Enable(False)
+            self.HeadValueCtrl.Enable(False)
+            self.zoneCtrlAlreadyD.Enable(False)
+            self.HeadValueCtrlAlreadyD.Enable(False)
+            self.delete.Enable(False)
+            if DarcyControl.GetValue()==True:
+                self.DarcyControl2.Enable(False)
+                
+        parent.SetSizerAndFit(sizer)
+
+    def _selectControl( self, event ):
+        button_selected = event.GetEventObject()
+
+        for checkButton in self.checkButton_ctrls:
+            print " checkButton ",checkButton.GetLabel(),checkButton.Name
+            ind = 0
+            if checkButton is button_selected:
+                if checkButton.GetValue() == True:
+                    checkButton.Enable(True)
+                    checkButton.SetValue(True)
+                    ind = 1
+                else:
+                    checkButton.Enable(False)
+                    checkButton.SetValue(False)
+            else:
+                checkButton.Enable(False)
+                checkButton.SetValue(False)
+     
+        
+    def _darcyControl(self, event):
+        self._selectControl(event)
+        if event.IsChecked()==True:
+            self.vxCtrl.Enable(True)
+            self.vyCtrl.Enable(True)
+            self.vzCtrl.Enable(True)
+            self.zoneCtrl.Enable(False)
+            self.HeadValueCtrl.Enable(False)
+            self.zoneCtrlAlreadyD.Enable(False)
+            self.HeadValueCtrlAlreadyD.Enable(False)
+            self.DarcyControl2.SetValue(False)
+            self.DarcyControl2.Enable(False)
+            self.delete.Enable(False)
+        else:
+            self.vxCtrl.Enable(False)
+            self.vyCtrl.Enable(False)
+            self.vzCtrl.Enable(False)
+            self.DarcyControl2.Enable(True)
+        return True    
+        
+    def _darcyControl2(self, event):
+        self._selectControl(event)
+        if event.IsChecked()==True:
+            self.zoneCtrl.Enable(True)
+            self.HeadValueCtrl.Enable(True)
+            self.zoneCtrlAlreadyD.Enable(True)
+            self.HeadValueCtrlAlreadyD.Enable(True)
+            self.DarcyControl.SetValue(False)
+            self.DarcyControl.Enable(False)
+            self.vxCtrl.Enable(False)
+            self.vyCtrl.Enable(False)
+            self.vzCtrl.Enable(False)
+            self.delete.Enable(True)
+        else:
+            self.zoneCtrl.Enable(False)
+            self.HeadValueCtrl.Enable(False)
+            self.zoneCtrlAlreadyD.Enable(False)
+            self.HeadValueCtrlAlreadyD.Enable(False)
+            self.DarcyControl.Enable(True)
+            self.delete.Enable(False)
+        return True
+        
+    def _delete(self, event) :
+        if event.IsChecked()==True:
+            self.zoneCtrl.Enable(False)
+            self.HeadValueCtrl.Enable(False)
+        else :
+            self.zoneCtrl.Enable(True)
+            self.HeadValueCtrl.Enable(True)
+    
+    def _alreadyDZoneHead(self, event) :
+        zoneName = self.zoneCtrlAlreadyD.GetValue()
+        
+        for zones in self.params.getParam(parameters.Boundary_Condition_Head).getValue() :
+            if zones[0] == zoneName :
+                value = zones[1]
+        self.HeadValueCtrlAlreadyD.SetValue(str(value))
+      
+      
+    def _applyZone(self, event):
+        gesch = []
+        velocity = self.params.getParam( parameters.DarcyVelocityStatic_list_elmer)
+        if self.DarcyControl.GetValue() == True:    # constant velocity    
+            value = self.vxCtrl.GetValue()
+            gesch.append(value)
+        
+            value = self.vyCtrl.GetValue()
+            gesch.append(value)
+        
+            value = self.vzCtrl.GetValue()
+            gesch.append(value)
+        
+            velocity.setValue( gesch )
+            
+            self.params.getParam( parameters.DarcyVelocityStaticElmer).setValue("True")
+            self.params.getParam( parameters.DarcyVelocityHeadElmer).setValue("False")
+        elif self.DarcyControl2.GetValue() == True:                                 # with hydraulic heads
+            velocity.setValue( gesch )
+            
+            if self.delete.IsChecked() == True :                                    # delete an hydraulic head
+                headCondition = self.params.getParam(parameters.Boundary_Condition_Head).getValue()    
+                i=0   
+                for zones in headCondition : 
+                    if zones[0] ==  self.zoneCtrlAlreadyD.GetValue() :
+                        j=i
+                    else :
+                        i += 1
+                zoneToDelete = headCondition[j]
+                headCondition.remove(zoneToDelete)
+                self.params.getParam(parameters.Boundary_Condition_Head).setValue(headCondition) 
+                toRemove = self.zoneCtrlAlreadyD.GetValue()
+                index = self.zoneCtrlAlreadyD.GetSelection()
+                self.zoneCtrlAlreadyD.Delete(index)
+                self.zoneCtrl.Append(toRemove) 
+                self.zoneCtrlAlreadyD.SetValue("") 
+                self.HeadValueCtrlAlreadyD.SetValue("")      
+            else : # create an hydraulic
+                if self.zoneCtrl.GetValue() != "" :
+                    headConditionNew = [self.zoneCtrl.GetValue(),int(self.HeadValueCtrl.GetValue())]
+                    headCondition = self.params.getParam(parameters.Boundary_Condition_Head).getValue()  
+                    headCondition.append(headConditionNew)    
+                    self.params.getParam(parameters.Boundary_Condition_Head).setValue(headCondition)
+                    self.zoneCtrlAlreadyD.Append(self.zoneCtrl.GetValue())
+                    index = self.zoneCtrl.GetSelection()
+                    self.zoneCtrl.Delete(index)
+                    self.zoneCtrl.SetValue("")
+                    self.HeadValueCtrl.SetValue("")
+            self.params.getParam( parameters.DarcyVelocityStaticElmer).setValue("False")
+            self.params.getParam( parameters.DarcyVelocityHeadElmer).setValue("True")
+            
+        else :
+            self.params.getParam( parameters.DarcyVelocityStaticElmer).setValue("False")
+            self.params.getParam( parameters.DarcyVelocityHeadElmer).setValue("False")
+            
+        return None
+        
+    def _onOk(self, params):
+        return True
+      
+        
+        
+    def _onOk_old(self, params):
+#
+# parameters
+#
+        gesch = []
+        velocity = params.getParam( parameters.DarcyVelocityStatic_list_elmer)
+        if self.DarcyControl.GetValue() == True:        # case static velocity
+            value = self.vxCtrl.GetValue()
+            gesch.append(value)
+        
+            value = self.vyCtrl.GetValue()
+            gesch.append(value)
+        
+            value = self.vzCtrl.GetValue()
+            gesch.append(value)
+        
+            velocity.setValue( gesch )
+            
+            self.params.getParam( parameters.DarcyVelocityStaticElmer).setValue("True")
+            self.params.getParam( parameters.DarcyVelocityHeadElmer).setValue("False")
+        elif self.DarcyControl2.GetValue() == True:     # case head velocity
+            velocity.setValue( gesch )
+            
+            if self.delete.IsChecked() == True :
+                headCondition = params.getParam(parameters.Boundary_Condition_Head).getValue()    
+                i=0   
+                for zones in headCondition : 
+                    if zones[0] ==  self.zoneCtrlAlreadyD.GetValue() :
+                        j=i
+                    else :
+                        i += 1
+                zoneToDelete = headCondition[j]
+                headCondition.remove(zoneToDelete)
+                params.getParam(parameters.Boundary_Condition_Head).setValue(headCondition)          
+            else :
+                if self.zoneCtrl.GetValue() != "" :
+                    headConditionNew = [self.zoneCtrl.GetValue(),int(self.HeadValueCtrl.GetValue())]
+                    headCondition = params.getParam(parameters.Boundary_Condition_Head).getValue()  
+                    headCondition.append(headConditionNew)    
+                    params.getParam(parameters.Boundary_Condition_Head).setValue(headCondition)
+            
+            self.params.getParam( parameters.DarcyVelocityStaticElmer).setValue("False")
+            self.params.getParam( parameters.DarcyVelocityHeadElmer).setValue("True")
+            
+        else :                                          #case no velocity
+            self.params.getParam( parameters.DarcyVelocityStaticElmer).setValue("False")
+            self.params.getParam( parameters.DarcyVelocityHeadElmer).setValue("False")
+            
+        return True
+        
+

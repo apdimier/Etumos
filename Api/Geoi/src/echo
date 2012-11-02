@@ -1,0 +1,1008 @@
+Les fichiers binaires geoi/actions/about.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/about.pyc sont différents.
+Les fichiers binaires geoi/actions/action.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/action.pyc sont différents.
+Les fichiers binaires geoi/actions/aqueous_master_species.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/aqueous_master_species.pyc sont différents.
+Les fichiers binaires geoi/actions/aqueous_secondary_species.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/aqueous_secondary_species.pyc sont différents.
+Les fichiers binaires geoi/actions/aqueous_state.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/aqueous_state.pyc sont différents.
+Seulement dans /home/dimier/Temp/Api/Geoi/src/geoi/actions: aqueous_state.py_old
+Les fichiers binaires geoi/actions/chemistry.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/chemistry.pyc sont différents.
+Les fichiers binaires geoi/actions/coupling_algorithm.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/coupling_algorithm.pyc sont différents.
+Les fichiers binaires geoi/actions/equilibrium_state.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/equilibrium_state.pyc sont différents.
+Les fichiers binaires geoi/actions/exchange_master_species.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/exchange_master_species.pyc sont différents.
+Les fichiers binaires geoi/actions/exchange_species.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/exchange_species.pyc sont différents.
+Les fichiers binaires geoi/actions/exchange_state.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/exchange_state.pyc sont différents.
+Les fichiers binaires geoi/actions/exit.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/exit.pyc sont différents.
+Seulement dans geoi/actions: greenflagIcon.py
+Les fichiers binaires geoi/actions/GridCustTable.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/GridCustTable.pyc sont différents.
+Les fichiers binaires geoi/actions/help.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/help.pyc sont différents.
+Les fichiers binaires geoi/actions/__init__.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/__init__.pyc sont différents.
+Les fichiers binaires geoi/actions/inspector.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/inspector.pyc sont différents.
+diff -irw geoi/actions/launchingGmsh.py~ /home/dimier/Temp/Api/Geoi/src/geoi/actions/launchingGmsh.py~
+17c17
+< 	os.system("/usr/local/bin/gmsh&")
+---
+>         os.system("$GMSH/gmsh&")
+Les fichiers binaires geoi/actions/launchingGmsh.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/launchingGmsh.pyc sont différents.
+Les fichiers binaires geoi/actions/launching.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/launching.pyc sont différents.
+Seulement dans /home/dimier/Temp/Api/Geoi/src/geoi/actions: load_gmsh_mesh_old.py
+diff -irw geoi/actions/load_gmsh_mesh.py~ /home/dimier/Temp/Api/Geoi/src/geoi/actions/load_gmsh_mesh.py~
+97a98,99
+> 
+>         
+Les fichiers binaires geoi/actions/load_gmsh_mesh.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/load_gmsh_mesh.pyc sont différents.
+Les fichiers binaires geoi/actions/materials_e.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/materials_e.pyc sont différents.
+Les fichiers binaires geoi/actions/materials.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/materials.pyc sont différents.
+Les fichiers binaires geoi/actions/mesh_constructor.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/mesh_constructor.pyc sont différents.
+Les fichiers binaires geoi/actions/mineral_phase.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/mineral_phase.pyc sont différents.
+Les fichiers binaires geoi/actions/mt3d_solver_parameters.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/mt3d_solver_parameters.pyc sont différents.
+Les fichiers binaires geoi/actions/new.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/new.pyc sont différents.
+Seulement dans geoi/actions: open_chemistry_db.py~
+Les fichiers binaires geoi/actions/open_chemistry_db.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/open_chemistry_db.pyc sont différents.
+diff -irw geoi/actions/open_file.py~ /home/dimier/Temp/Api/Geoi/src/geoi/actions/open_file.py~
+10c10,12
+<     "OpenFile: Open a Geoi file CTRL+O"
+---
+>     """
+>     OpenFile: Open a Geoi file -> CTRL+O
+>     """"
+Les fichiers binaires geoi/actions/open_file.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/open_file.pyc sont différents.
+Les fichiers binaires geoi/actions/open_shell.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/open_shell.pyc sont différents.
+Seulement dans /home/dimier/Temp/Api/Geoi/src/geoi/actions: os
+Les fichiers binaires geoi/actions/parameters_elmer.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/parameters_elmer.pyc sont différents.
+Les fichiers binaires geoi/actions/params_action.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/params_action.pyc sont différents.
+Les fichiers binaires geoi/actions/physics_software.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/physics_software.pyc sont différents.
+Les fichiers binaires geoi/actions/plotOverTime.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/plotOverTime.pyc sont différents.
+Seulement dans /home/dimier/Temp/Api/Geoi/src/geoi/actions: post_simulation_display_old.py
+Seulement dans /home/dimier/Temp/Api/Geoi/src/geoi/actions: post_simulation_display.pyc
+Les fichiers binaires geoi/actions/pywrite.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/pywrite.pyc sont différents.
+Seulement dans geoi/actions: redflagIcon.py
+Les fichiers binaires geoi/actions/save_file_as.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/save_file_as.pyc sont différents.
+diff -irw geoi/actions/save_file.py~ /home/dimier/Temp/Api/Geoi/src/geoi/actions/save_file.py~
+39a40,45
+>         print "\n\n\n\n\n"
+>         print "#-----------------------------------#"
+>         print "#     Your file have been saved     #"
+>         print "#-----------------------------------#"
+>         print "\nin file : ", filename, "\n\n\n"
+> 
+Les fichiers binaires geoi/actions/save_file.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/save_file.pyc sont différents.
+diff -irw geoi/actions/set_DarcyVelocity_elmer.py /home/dimier/Temp/Api/Geoi/src/geoi/actions/set_DarcyVelocity_elmer.py
+253a254,256
+>                 
+>         
+>         
+261a265
+>         
+296a301
+> 
+297a303
+> 
+329c335
+<     def _applyZoneValidation(self, event):
+---
+>     def _applyZoneValidation(self):
+610c616
+<         self._applyZoneValidation(self, event)
+---
+>         self._applyZoneValidation()
+611a618,622
+>         print "DarcyVelocityStatic_list_elmer = ", params.getParam( parameters.DarcyVelocityStatic_list_elmer)
+>         print "Boundary_Condition_Head = ", params.getParam( parameters.Boundary_Condition_Head)
+>         print "DarcyVelocityStaticElmer = ", params.getParam( parameters.DarcyVelocityStaticElmer)
+>         print "DarcyVelocityHeadElmer = ", params.getParam( parameters.DarcyVelocityHeadElmer)
+>         print "ReadDarcyVelocity = ", params.getParam( parameters.ReadDarcyVelocity)
+diff -irw geoi/actions/set_DarcyVelocity_elmer.py~ /home/dimier/Temp/Api/Geoi/src/geoi/actions/set_DarcyVelocity_elmer.py~
+116a117
+>          
+253a255,257
+>                 
+>         
+>         
+261a266
+>         
+296a302
+> 
+297a304
+> 
+329c336
+<     def _applyZoneValidation(self, event):
+---
+>     def _applyZoneValidation(self):
+610c617,623
+<         self._applyZoneValidation(self, event)
+---
+>         self._applyZoneValidation()
+>         self.params.getParam(parameters.ReadDarcyVelocity).setValue(str(self.readVelocity.GetValue()))
+>         print "DarcyVelocityStatic_list_elmer = ", params.getParam( parameters.DarcyVelocityStatic_list_elmer)
+>         print "Boundary_Condition_Head = ", params.getParam( parameters.Boundary_Condition_Head)
+>         print "DarcyVelocityStaticElmer = ", params.getParam( parameters.DarcyVelocityStaticElmer)
+>         print "DarcyVelocityHeadElmer = ", params.getParam( parameters.DarcyVelocityHeadElmer)
+>         print "ReadDarcyVelocity = ", params.getParam( parameters.ReadDarcyVelocity)
+Les fichiers binaires geoi/actions/set_DarcyVelocity_elmer.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/set_DarcyVelocity_elmer.pyc sont différents.
+Les fichiers binaires geoi/actions/set_DarcyVelocity.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/set_DarcyVelocity.pyc sont différents.
+Seulement dans /home/dimier/Temp/Api/Geoi/src/geoi/actions: set_globalGraphics.pyc
+Seulement dans /home/dimier/Temp/Api/Geoi/src/geoi/actions: set_interactivePlot.pyc
+diff -irw geoi/actions/set_PostProcessing.py /home/dimier/Temp/Api/Geoi/src/geoi/actions/set_PostProcessing.py
+41c41
+<         box3.SetMinSize((600,50))
+---
+>         box3.SetMinSize((600,100))
+46c46,48
+<         label1 = wx.StaticText(parent,-1,"Outputs:",size=(60,-1));label1.SetTTS("Already selected unknowns")
+---
+>         # Combo box for expected outputs selection
+>         
+>         label1 = wx.StaticText(parent,-1,"Expected\nOutputs:",size=(80,-1));label1.SetTTS("Already selected unknowns")
+53c55
+<         toto.Bind(wx.EVT_COMBOBOX, self._selectedOutputControl, selectedOutput)
+---
+>         toto.Bind(wx.EVT_COMBOBOX, self._ExpectedOutputControl, selectedOutput)
+59,60c61,72
+<         box32 = wx.StaticBoxSizer(wx.StaticBox( parent, -1, "" ) , wx.HORIZONTAL)
+<         box32.SetMinSize((250,20))
+---
+>         # Combo box for avaible outputs
+>         box32 = wx.StaticBoxSizer(wx.StaticBox( parent, -1, "" ) , wx.VERTICAL)
+>         box321 = wx.StaticBoxSizer(wx.StaticBox( parent, -1, "" ) , wx.HORIZONTAL)
+>         box321.SetMinSize((250,20))
+>         
+>         self.availableOutputList = availableOutputList = parameters.EXPECTEDOUTPUTS_STANDARD_LIST
+>         
+>         ams = params.getParamValue(parameters.CUSTOM_CHEMISTRY_DB).getSolutionMasterSpecies().keys()
+>         for i in ams:
+>             if "(" not in i:
+>                 print 'str(i) = ', str(i)
+>                 availableOutputList.append(str(i))
+62c74
+<         self.availableOutputList = availableOutputList = ["pH","Is"]
+---
+>         print params.getParamValue(parameters.CUSTOM_CHEMISTRY_DB).getMineralPhases().keys(), '\n\n'
+64c76
+<         availableOutputList += params.getParamValue(parameters.CUSTOM_CHEMISTRY_DB).getSolutionSecondarySpecies().keys()
+---
+> #        availableOutputList += params.getParamValue(parameters.CUSTOM_CHEMISTRY_DB).getSolutionSecondarySpecies().keys()
+66c78,79
+<         availableOutputList += params.getParamValue(parameters.IMPORTED_CHEMISTRY_DB).getSolutionSecondarySpecies().keys()
+---
+> #        availableOutputList += params.getParamValue(parameters.IMPORTED_CHEMISTRY_DB).getSolutionSecondarySpecies().keys()
+>         print params.getParamValue(parameters.IMPORTED_CHEMISTRY_DB).getMineralPhases().keys(), '\n\n'
+73c86
+<         box32.Add(label2, 0, wx.ALIGN_CENTER|wx.ALL, 1)
+---
+>         box321.Add(label2, 0, wx.ALIGN_TOP|wx.ALL, 1)
+83c96,114
+<         box32.Add(availableOutputCombo,0,wx.ALIGN_CENTER|wx.ALL, 1)
+---
+>         box321.Add(availableOutputCombo,0,wx.ALIGN_TOP|wx.ALL, 1)
+>         box32.Add(box321, 0, wx.ALIGN_LEFT|wx.ALL, 1)
+>         
+>         # Combo box with title for quantity type of each expected output
+>         
+>         box322 = wx.StaticBoxSizer(wx.StaticBox( parent, -1, "" ) , wx.HORIZONTAL)
+>         box322.SetMinSize((300,50))
+>         
+>         label3 = wx.StaticText(parent,-1,"Quantity:",size=(100,-1));label1.SetTTS("Quantity selected")
+>         label3.SetOwnFont(boldFont)
+>         box322.Add(label3, 0, wx.ALIGN_CENTER|wx.ALL, 1)
+>         
+>         self.availableQuantity = availableQuantity =  self.params.getParam(parameters.Quantity_list).getValue()
+>         self.availableQuantityCombo = availableQuantityCombo = \
+>         wx.ComboBox(parent, -1, "",(250, 20), (200, -1),availableQuantity, wx.CB_DROPDOWN)
+>         self.availableQuantityCombo.SetValue('AqueousConcentration')
+>         box322.Add(availableQuantityCombo, 0, wx.ALIGN_CENTER|wx.ALL, 1)
+>         
+>         box32.Add(box322, 0, wx.ALIGN_LEFT|wx.ALL, 1)
+95c126,137
+<         self.selectedOutputList = selectedOutputList = wx.TextCtrl(parent, -1,_outputToString(selectedOutputs),
+---
+>         # Initializing Expected Outputs Quantity (as a new variable, len(ExOutQ) may be different from len(selectedOutputs)
+>         ExOutQ = self.params.getParam(parameters.ExpectedOutputsQuantity_list).getValue()
+> 
+>         for outputName in selectedOutputs:
+>             found = False
+>             for j in range(len(ExOutQ)):
+>                 if ExOutQ[j][0] == outputName:
+>                     found = True
+>             if not found:
+>                 ExOutQ.append([outputName, ''])
+> 
+>         self.selectedOutputList = selectedOutputList = wx.TextCtrl(parent, -1,_outputToString(ExOutQ),
+115a158,166
+> 
+> 
+> ##############
+> #            #
+> #  Controls  #
+> #            #
+> ##############
+> 
+> 
+117c168
+<         print "ok"
+---
+> 
+119c170
+<         print "_updateOutput",outputName
+---
+> 
+126a178,179
+>         ExOutQ = self.params.getParam(parameters.ExpectedOutputsQuantity_list).getValue()
+>         self.availableQuantityCombo.GetValue()
+129c182,185
+<             pass            
+---
+>             for j in range(len(ExOutQ)):
+>                 if ExOutQ[j][0] == outputName:
+>                     ExOutQ[j][1] = self.availableQuantityCombo.GetValue()
+>                         
+132c188,194
+<         print self.outputList
+---
+>             newQuantity = self.availableQuantityCombo.GetValue()
+>             if newQuantity in self.availableQuantity:
+>                 ExOutQ.append([outputName, newQuantity])
+>             else:
+>                 ExOutQ.append([outputName, ''])
+> 
+>         
+133a196
+>         self.params.getParam(parameters.ExpectedOutputsQuantity_list).setValue(ExOutQ)
+137c200,201
+<         outputDescription = _outputToString(self.outputList)
+---
+>         outputDescription = _outputToString(ExOutQ)
+>         
+145a210,218
+>     def _ExpectedOutputControl(self, event):
+>         selected = str(self.selectedOutput.GetValue())
+>         ExpectedOutputsQuantity_list = self.params.getParam(parameters.ExpectedOutputsQuantity_list).getValue()
+>         quantity = ''
+>         for couple in ExpectedOutputsQuantity_list:
+>            if couple[0] == selected:
+>                quantity = couple[1]
+>         self.availableQuantityCombo.SetValue(quantity)
+>         
+149a223,224
+> 
+>             #delete it from expected outputs
+151a227,233
+>             
+>             ExOutQ = self.params.getParam(parameters.ExpectedOutputsQuantity_list).getValue()
+>             for i in range(len(ExOutQ)):
+>                 if ExOutQ[i][0] == selected:
+>                     indiz = i
+>             del ExOutQ[indiz]
+>             
+152a235
+>             self.params.getParam(parameters.ExpectedOutputsQuantity_list).setValue(ExOutQ)
+154c237
+<             outputDescription = _outputToString(self.outputList)
+---
+>             outputDescription = _outputToString(ExOutQ)
+157a241,264
+>             
+>             #delete it from vtk selected outputs
+>             vtkOutputList = self.params.getParam(parameters.PostprocessingContours_AqueousComponentsToPlot_list).getValue()
+>             print vtkOutputList
+>             if selected in vtkOutputList:
+>                 indiz = vtkOutputList.index(selected)
+>                 del vtkOutputList[indiz]
+>                 self.params.getParam(parameters.PostprocessingContours_AqueousComponentsToPlot_list).setValue(vtkOutputList)
+>                 
+>             #delete it from selected outputs list for interactive plot
+>             iPlotOutputList = self.params.getParam(parameters.IOutputs_list).getValue()
+>             if selected in iPlotOutputList:
+>                 indiz = iPlotOutputList.index(selected)
+>                 del iPlotOutputList[indiz]
+>                 self.params.getParam(parameters.IOutputs_list).setValue(iPlotOutputList)
+>             
+>             #delete it from selected outputs list for global plot
+>             globalOutputs_list = self.params.getParam(parameters.GlobalOutputs_list).getValue()
+>             if selected in globalOutputs_list:
+>                 indiz = globalOutputs_list.index(selected)
+>                 del globalOutputs_list[indiz]
+>                 self.params.getParam(parameters.GlobalOutputs_list).setValue(globalOutputs_list)
+>                 
+>                 
+174a282,285
+>     if len(outputList) == 0:
+>         return ""
+>     
+>     if type(outputList[0]) == str:
+178a290,300
+>     else:
+>         a = 'Exp. Out.:\t\tQuantity:\n'
+>         
+>         for i in range(len(outputList)):
+>             if len(outputList[i][0]) > 4:
+>                 a += outputList[i][0] + '\t\t' + outputList[i][1] + '\n'
+>             else:
+>                 a += outputList[i][0] + '\t\t\t' + outputList[i][1] + '\n'
+>         
+>         return a
+>         
+Les fichiers binaires geoi/actions/set_PostProcessing.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/set_PostProcessing.pyc sont différents.
+Les fichiers binaires geoi/actions/set_PyPostProcessing.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/set_PyPostProcessing.pyc sont différents.
+diff -irw geoi/actions/set_VtkPostProcessing.py /home/dimier/Temp/Api/Geoi/src/geoi/actions/set_VtkPostProcessing.py
+49c49
+<         self.selectedOutputs = selectedOutputs =  self.params.getParam(parameters.ExpectedOutputs_list).getValue()
+---
+>         self.selectedOutputs = selectedOutputs =  self.params.getParam(parameters.PostprocessingContours_AqueousComponentsToPlot_list).getValue()
+62,64c62
+<         self.availableOutputList = availableOutputList = ["pH"]
+<         availableOutputList += params.getParamValue(parameters.CUSTOM_CHEMISTRY_DB).getMineralPhases().keys()
+<         availableOutputList += params.getParamValue(parameters.CUSTOM_CHEMISTRY_DB).getSolutionSecondarySpecies().keys()
+---
+>         self.availableOutputList = availableOutputList = self.params.getParam(parameters.ExpectedOutputs_list).getValue()
+66,67d63
+<         availableOutputList += params.getParamValue(parameters.IMPORTED_CHEMISTRY_DB).getSolutionSecondarySpecies().keys()
+<         availableOutputList += params.getParamValue(parameters.IMPORTED_CHEMISTRY_DB).getMineralPhases().keys()        
+193c189
+<         self.params.getParam(parameters.ExpectedOutputs_list).setValue(self.outputList)
+---
+>         self.params.getParam(parameters.PostprocessingContours_AqueousComponentsToPlot_list).setValue(self.outputList)
+Les fichiers binaires geoi/actions/set_VtkPostProcessing.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/set_VtkPostProcessing.pyc sont différents.
+Les fichiers binaires geoi/actions/set_VtuPostProcessing.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/set_VtuPostProcessing.pyc sont différents.
+diff -irw geoi/actions/set_zones_gmsh.py /home/dimier/Temp/Api/Geoi/src/geoi/actions/set_zones_gmsh.py
+80a81
+>         
+diff -irw geoi/actions/set_zones_gmsh.py~ /home/dimier/Temp/Api/Geoi/src/geoi/actions/set_zones_gmsh.py~
+80a81,82
+>         
+>         print self.params.getParam(parameters.Gmsh_Name_File2).getValue()
+83c85
+<             f1 = file(meshName,"r")
+---
+>             f1 = open(meshName,"r")
+Les fichiers binaires geoi/actions/set_zones_gmsh.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/set_zones_gmsh.pyc sont différents.
+Les fichiers binaires geoi/actions/set_zones.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/set_zones.pyc sont différents.
+Les fichiers binaires geoi/actions/show_params.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/show_params.pyc sont différents.
+Seulement dans /home/dimier/Temp/Api/Geoi/src/geoi/actions: shutil
+diff -irw geoi/actions/simulate_elmer.py /home/dimier/Temp/Api/Geoi/src/geoi/actions/simulate_elmer.py
+98,141d97
+<     	flag_green = PyEmbeddedImage(
+<     "iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAABHNCSVQICAgIfAhkiAAABC9J"
+<     "REFUOI2lld1vlEUUxp8zc2be9113tx9QGgWtgFAsUTSkUUJCDRd+f1wQE6+4UsOdXKjXJkaC"
+<     "if+BNyZGxRsDRiGSQIwxSBAqETC1dCnUbVmh3W7pLt33Y+Z4sdsCkUTAkzxXk/nNM+d9nzO0"
+<     "bt06RUQ+TdPBwcHBn4eHh7cYY4ZFRDUaDd+7tgMnfzyLuy0WESEiENGVSqXyZ5w2q2NjZWx+"
+<     "dzX1vphHbfwatry5AVZrxKnD8Z0jdwSm9evXo6OjAwA6S6XS0Wq1+hKAywBo19/bZfJETVmj"
+<     "KbIsUaAlDBhRwBIGjFzACC3fHjw0NETFfFE8+dVTk1Pn4/7ZkVXP93wR2/hQrTZ/LpY4Lebz"
+<     "YKVxqXIN377zOpoSY6XNo4g8vrxyGon3gABEBAKw+/79oG3btlEx3yGi/OqJixMj8eOztveZ"
+<     "TiAvYlhdiAL+NbT6VBTwuTDgS6Hl6cDoOhHir74/654dWoONfT1grboApADqAMAEAhEgBBAR"
+<     "xVmCVNLsPmPZsl5rWK01rN5grcBaCbOat1bPR5Ybu3c+tWBYRRBYAAcAfLwElpv6IgC0JoSW"
+<     "OQoYhrUERvvAaliryRqtLKsiK1W0VsFoBQjKAnkfgq+bifNhoNF23G52W0YrhFYjDBhGK7JG"
+<     "68BoBEbDsoI1GoUOC8SSZbH/8LW+/o8eQZf7fOF3SCaYbcQtsPMezjkIhLz3YFYIA0ZkGawV"
+<     "rFEw3ALnCxYWypeOVfHbycs+3x/uGO2ffbGnMzexrCM8qhV9Y1hdcd6DszRFkiQQLXDOIWCF"
+<     "0LKEAQsrkjBk5HIG2pOaKS3QhZF5dTVuoPBkzq5YllvOSh1UhANEOJE5f7WnK0J1rglOsxRJ"
+<     "kgIsyDKHvFaIrKYoZDJKwSce5YtzmCrXUXe+xt3qbHd3eLRgzMFOBKdsg7LJ+jz+mprHZ9uP"
+<     "3UhemmZIdALyAucyWKsRhaYZBTxcvdA4c/74dGW62RwPB8LRVVvzo/s3jc3guTw2be3C9Q0Z"
+<     "Huwt6Ac6C7K8M/KflF/FEyuXYWR6DjQwMEBhEAlI1szMzIx2Pe3ee3vf1n17+w5Xfiq9Jd9l"
+<     "JYyPVzE8fhXeC5KKply3qEJopbsYevGChcQhTjM82rcCezYeWoo0BUEgIrKmVquNlMvlzaTp"
+<     "zKYdq/Qrezfi9P5JTFSuIT+Qk2gFi1toijIEqFaUj7z8x+2HUJqmUEpBpPXxtCXlEsHYkWn5"
+<     "9IXjftcPW/DYdYc9A4fvaPgsgbMsA1Hrb3bOwSXiAWChlkhzLsUHDx+6K+AtjttFWZbdsigi"
+<     "/9pwV44XAc65xSBCRJZuck9g59wSyHsPtJINESHv/T1b5nq9vuQsyzJBaxZB/k8fcGuPiwAM"
+<     "gIfQekEKi4e0y98k9x/y+qaNGsAvbagCEAEIAdi2uC3dXle4MRQXa+nG/wAkB+eGnJ9P7QAA"
+<     "AABJRU5ErkJggg==")
+<         flag_red = PyEmbeddedImage(
+<     "iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAABHNCSVQICAgIfAhkiAAAA95J"
+<     "REFUOI2dlc1rXFUYxn/n3HvnI5kvm6RgwdhQWmoXXQgp2k033agIlW5cCFYQceVK/AcSKy5V"
+<     "cCHislUUoZsKUkLRQqm2U7BN7HSaWjsmk0nSMNP5yNw5H6+LTJIJLmr6wHvhcjjPec7zvs+9"
+<     "6uDBg1op5Y0xk5OTk1eKxeLLURgWBXS71fLx4iLL3rNbhCIiSimUUstLS0uluNtdu7d/P6fm"
+<     "5tTrzSa9kRGWrKW9dy+pUonp/0msDh06RD6fByjMz8/PrK2tvQZUAbVw5oz8cu2a9sYo8V68"
+<     "MWI7Hbr1ujSdowGsA89ns+zJ54kbDfAepTXqxIkTKlcoiDg3sbCwUObWrdILYXhuj9Y/jVl7"
+<     "aywIzApgRLja7XJJ5MlqlSIUQEQQ77HWuiQcEZgOYSozPHx/eGjo94zWN0RkdqLd/vsLpVbv"
+<     "Qes8xCsjI+6b1VVeAq6Pjz8T1+sG71tfZ7OEauCUjQcAVmkdhun0gUQ+fyDKZN6MhocJ02kJ"
+<     "0+nmkaGh5hupVDuRza4np6bSq7VaIspmLzQqlU870MppvaGYvurBpiqt0VEkQRT5MJUiymRU"
+<     "olDQiVwul8jnc0OjoxAEtCqVfxrl8kffzs19dwH850BybGynYsVOKFAoFWy+S78xAVCbnbW1"
+<     "YnHqrZs3Pwbce8D7wFA+j+92CZ33OOfAOeUHVIsI3nu8c3jnEBECETorK/7Bw4e0Ewk/fuzY"
+<     "6V+PH3+1Xa0+XL5+faazuPhjp9FYTiaThNYYer0eOIezdpu3P17KWrS1xI2GXq3Xlc1m9ei+"
+<     "fUxkMgnp9Ua79fpF02xeEOd+89auzAJH45jQGIMxBpzDOrftgohycczjZpP2+jqSTpMvFOqj"
+<     "xtwO7tyZKd+/f/FctXpjFexxIAQ+G2ySsXZb8TZxDBRrvd4fc73eUiGd/uuoyN2xSuXuK9PT"
+<     "j7rlMqkrVzgDFM+eDRYvX5ZHt2/7L6tVfgBOQ9+KOAYRnLW6IfLhHq3Pf+9c9e1sVoJ2G4ki"
+<     "Jk6eJEyl+DOdVpWFBb12+LA8KJX8GLhUFPFsMskHQAmYAUJrLabXQ0Rwzvmycz/f63QWX0wm"
+<     "g7E4phNFaO+Zv3RJEvW6XG00RIF7rn/9dwGM2agdVhiD1nqTGA3aA3eck0/i2J8KAqwxvFOr"
+<     "sRuE1tqtwDnn8OABuiISe89Xvd6uCHco7kPZ7XED/pPG3SveJHDObYVPRAY+HU9BvDlim0mD"
+<     "jWSLiPLeP7XksNVqbSmz1gogfeKn94GdHueACBhn4w+S3TykDz9Q7gnlg4GNAXC1T6qBNJAC"
+<     "Ev0K+xX01zUbtg02YuvG/wIRNEX6jHrsmwAAAABJRU5ErkJggg==")
+189,191c145
+<         greenFlag = flag_green.GetBitmap()
+<         redFlag   = flag_red.GetBitmap()
+<         self.simulate = platebtn.PlateButton(parent, -1, "Simulate       ",greenFlag, (200,150))
+---
+>         self.simulate = platebtn.PlateButton(parent, -1, "Simulate       ",monkey, (200,150))
+200c154
+<     	self.stopSimulation = platebtn.PlateButton(parent, -1, "stop simulation",redFlag, (200,150))
+---
+>     	self.stopSimulation = platebtn.PlateButton(parent, -1, "stop simulation",monkey, (200,150))
+250a205
+> 
+259a215
+>      	
+265a222
+> 
+273c230
+<      	meshFileName, meshFileName2 = _meshimport(self.params,f1)
+---
+>      	_meshimport(self.params,f1)
+372,374c329,359
+<         f1.write("#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+<         f1.write("module.run()\n")
+<         f1.write("#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+---
+>         
+> #
+> # running module 
+> #
+> #        f1.write("#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+> #        f1.write("module.run()\n")
+> #        f1.write("#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+>         
+>         f1.write("#~~~~~~~~~~~~~~~~~~~\n")
+>         f1.write("#       Loop       ~\n")
+>         f1.write("#~~~~~~~~~~~~~~~~~~~\n")
+>         
+>         _moduleLooping(self.params,f1)
+> 
+> #        
+> # algebraic resolution
+> #        
+>         f1.write("\n\n#~~~~~~~~~~~~~~~~~~~~\n")
+>         f1.write("#  Post Processing  ~\n")
+>         f1.write("#~~~~~~~~~~~~~~~~~~~~\n")
+>         
+>         _postProcessing(self.params,f1)
+>         print '\n\n\n\n\n\ndir(self) =', dir(self)
+>         print '\n\n\n\n\n\nparent = ', self.parent
+>         print '\n\n\n\n\n\ngetParent = ', self.getParent()
+>         print '\n\n\n\n\n\nself.getParent.GetId() = ', self.getParent().Parent
+> #        print '\n\n\n\n\n\ngetParent[0] = ', self.getParent()[0]
+> #        print 'self.PyMethod_GET_SELF() = ', self.PyMethod_GET_SELF()
+>         
+> 
+> 
+381c366
+<         
+---
+>         wx.MessageDialog(self.parent, "Regarde le Terminal", "Warning", wx.OK | wx.ICON_WARNING).ShowModal()
+402a388,390
+>         
+>         
+>     
+diff -irw geoi/actions/simulate_elmer.py~ /home/dimier/Temp/Api/Geoi/src/geoi/actions/simulate_elmer.py~
+204a205
+> 
+213a215
+>      	
+219a222
+> 
+227c230
+<      	meshFileName, meshFileName2 = _meshimport(self.params,f1)
+---
+>      	_meshimport(self.params,f1)
+326,328c329,359
+<         f1.write("#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+<         f1.write("module.run()\n")
+<         f1.write("#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+---
+>         
+> #
+> # running module 
+> #
+> #        f1.write("#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+> #        f1.write("module.run()\n")
+> #        f1.write("#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+>         
+>         f1.write("#~~~~~~~~~~~~~~~~~~~\n")
+>         f1.write("#       Loop       ~\n")
+>         f1.write("#~~~~~~~~~~~~~~~~~~~\n")
+>         
+>         _moduleLooping(self.params,f1)
+> 
+> #        
+> # algebraic resolution
+> #        
+>         f1.write("\n\n#~~~~~~~~~~~~~~~~~~~~\n")
+>         f1.write("#  Post Processing  ~\n")
+>         f1.write("#~~~~~~~~~~~~~~~~~~~~\n")
+>         
+>         _postProcessing(self.params,f1)
+>         print '\n\n\n\n\n\ndir(self) =', dir(self)
+>         print '\n\n\n\n\n\nparent = ', self.parent
+>         print '\n\n\n\n\n\ngetParent = ', self.getParent()
+>         print '\n\n\n\n\n\nself.getParent.GetId() = ', self.getParent().Parent
+> #        print '\n\n\n\n\n\ngetParent[0] = ', self.getParent()[0]
+> #        print 'self.PyMethod_GET_SELF() = ', self.PyMethod_GET_SELF()
+>         
+> 
+> 
+335c366
+<         
+---
+>         wx.MessageDialog(self.parent, "Regarde le Terminal", "Warning", wx.OK | wx.ICON_WARNING).ShowModal()
+356a388,393
+> #        nom = nameFile + '.py'
+> #        import Caprock_integrite.py
+>         
+>         
+>         
+>     
+Les fichiers binaires geoi/actions/simulate_elmer.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/simulate_elmer.pyc sont différents.
+Les fichiers binaires geoi/actions/simulation_directory.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/simulation_directory.pyc sont différents.
+Les fichiers binaires geoi/actions/surface_master_species.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/surface_master_species.pyc sont différents.
+Les fichiers binaires geoi/actions/surface_species.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/surface_species.pyc sont différents.
+Les fichiers binaires geoi/actions/surface_state.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/surface_state.pyc sont différents.
+Les fichiers binaires geoi/actions/switch_to_std_dialog.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/switch_to_std_dialog.pyc sont différents.
+diff -irw geoi/actions/time_discretisation_elmer.py /home/dimier/Temp/Api/Geoi/src/geoi/actions/time_discretisation_elmer.py
+4a5
+> from parameters import inSecondsConverter, inUnitConverter
+48a50,51
+>     	
+>     	self.Unit = Unit = self.params.getParam(parameters.TimeUnit).getValue()     # define now the unit for times
+146,148c149,151
+<         start = params.getParam( parameters.Elmer_Iterate_InitialTime )
+<         dt0 = params.getParam( parameters.Elmer_Iterate_InitialTimeStep )
+<         simulationTime = params.getParam( parameters.Elmer_Iterate_SimulationTime )
+---
+>         startTime = inUnitConverter(params.getParam( parameters.Elmer_Iterate_InitialTime ).getValue(), self.Unit)
+>         dt0 = inUnitConverter(params.getParam( parameters.Elmer_Iterate_InitialTimeStep ).getValue(), self.Unit)
+>         simulationTime = inUnitConverter(params.getParam( parameters.Elmer_Iterate_SimulationTime ).getValue(), self.Unit)
+156c159
+<         startCtrl.SetValue( str(start.getValue()) )
+---
+>         startCtrl.SetValue( str(startTime) )
+166c169
+<         dt0Ctrl.SetValue( str(dt0.getValue()) )
+---
+>         dt0Ctrl.SetValue( str(dt0) )
+177c180
+<         simulationTimeCtrl.SetValue( str(simulationTime.getValue()) )
+---
+>         simulationTimeCtrl.SetValue( str(simulationTime) )
+179a183,195
+>         # Combo box for the unit of the dates
+>         
+>         label34 = wx.StaticText(parent, -1, "   Times unit:")
+>         label34.SetHelpText("This is the help text for the label")
+>         box3.Add(label34, 0, wx.ALIGN_CENTRE|wx.ALL, 2)
+>         
+>         self.datesUnits = datesUnits =  self.params.getParam(parameters.GlobalPlotUnits_list).getDefault()
+>         self.dateUnit = dateUnit = wx.ComboBox(parent, -1, "",(250, 20), (70, -1),datesUnits, wx.CB_DROPDOWN)
+>         dateUnit.SetToolTipString("Unit for all time values")
+>         self.dateUnit.SetValue(self.Unit)
+>         box3.Add(dateUnit, 0., wx.ALIGN_CENTER|wx.ALL, 1)
+>         simul.Bind(wx.EVT_COMBOBOX, self._changeUnit )
+>                
+241c257
+<         minTimeStep.SetValue( str(start.getValue()) )
+---
+>         minTimeStep.SetValue( str(startTime) )
+245c261
+<         minTimeStep= params.getParam( parameters.Elmer_Min_Time_Step ).getValue()   	
+---
+>         minTimeStep= inUnitConverter(params.getParam( parameters.Elmer_Min_Time_Step ).getValue(), self.Unit)
+256c272
+<         maxTimeStep.SetValue( str(dt0.getValue()) )
+---
+>         maxTimeStep.SetValue( str(dt0) )
+260,261c276
+<         
+<         maxTimeStep= params.getParam( parameters.Elmer_Max_Time_Step ).getValue()   	
+---
+>         maxTimeStep= inUnitConverter(params.getParam( parameters.Elmer_Max_Time_Step ).getValue(), self.Unit)
+314a330,339
+>     def _changeUnit(self, event):
+>         newUnit = self.dateUnit.GetValue()
+>         print newUnit
+>         oldUnit = self.Unit
+>         boxes = [ self.startCtrl, self.dt0Ctrl, self.simulationTimeCtrl, self.minTimeStep, self.maxTimeStep ]
+>         for box in boxes:
+>             box.SetValue(str(inSecondsConverter(str(box.GetValue()) + ' ' + oldUnit, False)))
+>             box.SetValue(str(inUnitConverter(box.GetValue(), newUnit)))
+>         self.Unit = newUnit
+> 
+333a359
+>         unit = ' ' + self.dateUnit.GetValue()
+337,341c363,368
+<         self.params.getParam(parameters.Elmer_Iterate_InitialTime).setValue(float(str(self.startCtrl.GetValue())))
+<         self.params.getParam(parameters.Elmer_Iterate_InitialTimeStep).setValue(float(str(self.dt0Ctrl.GetValue())))
+<         self.params.getParam(parameters.Elmer_Iterate_SimulationTime).setValue(float(str(self.simulationTimeCtrl.GetValue())))
+<         self.params.getParam(parameters.Elmer_Min_Time_Step).setValue(float(str(self.minTimeStep.GetValue())))
+<         self.params.getParam(parameters.Elmer_Max_Time_Step).setValue(float(str(self.maxTimeStep.GetValue())))
+---
+>         self.params.getParam(parameters.Elmer_Iterate_InitialTime).setValue(float(inSecondsConverter(str(self.startCtrl.GetValue()) + unit, False)))
+>         self.params.getParam(parameters.Elmer_Iterate_InitialTimeStep).setValue(float(inSecondsConverter(str(self.dt0Ctrl.GetValue()) + unit, False)))
+>         self.params.getParam(parameters.Elmer_Iterate_SimulationTime).setValue(float(inSecondsConverter(str(self.simulationTimeCtrl.GetValue()) + unit, False)))
+>         self.params.getParam(parameters.Elmer_Min_Time_Step).setValue(float(inSecondsConverter(str(self.minTimeStep.GetValue()) + unit, False)))
+>         self.params.getParam(parameters.Elmer_Max_Time_Step).setValue(float(inSecondsConverter(str(self.maxTimeStep.GetValue()) + unit, False)))
+>         self.params.getParam(parameters.TimeUnit).setValue(self.Unit) 
+363c390,391
+<             dtmin.setValue( value )
+---
+>             print value
+>             dtmin.setValue( int(inSecondsConverter(str(value) + unit, False)) )
+367c395,396
+<             dtmax.setValue(str(value))
+---
+>             print value
+>             dtmax.setValue(int(inSecondsConverter(str(value) + unit, False)) )
+378a408,416
+>         print '\n\n\nt0 = ', self.params.getParam(parameters.Elmer_Iterate_InitialTime).getValue()
+>         print 'dt0 = ', self.params.getParam(parameters.Elmer_Iterate_InitialTimeStep).getValue()
+>         print 'tmax = ', self.params.getParam(parameters.Elmer_Iterate_SimulationTime).getValue()
+>         print 'dtmin = ', self.params.getParam(parameters.Elmer_Min_Time_Step).getValue()
+>         print 'dtmax = ', self.params.getParam(parameters.Elmer_Max_Time_Step).getValue()
+>         print 'maintenant le CC:'
+>         print 'dtmin = ', self.params.getParam(parameters.Iterate_MinTimeStep).getValue()
+>         print 'dtmax = ', self.params.getParam(parameters.Iterate_MaxTimeStep).getValue()
+> 
+Les fichiers binaires geoi/actions/time_discretisation_elmer.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/time_discretisation_elmer.pyc sont différents.
+Les fichiers binaires geoi/actions/time_study.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/time_study.pyc sont différents.
+Les fichiers binaires geoi/actions/title.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/title.pyc sont différents.
+Les fichiers binaires geoi/actions/toggle_action.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/toggle_action.pyc sont différents.
+Les fichiers binaires geoi/actions/units.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/units.pyc sont différents.
+Les fichiers binaires geoi/actions/user_db_table_action.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/actions/user_db_table_action.pyc sont différents.
+Seulement dans /home/dimier/Temp/Api/Geoi/src/geoi/actions: wx
+Les fichiers binaires geoi/chemistry_db.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/chemistry_db.pyc sont différents.
+Les fichiers binaires geoi/chemistry_equation.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/chemistry_equation.pyc sont différents.
+Les fichiers binaires geoi/gui/choice_edit_listmixin.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/gui/choice_edit_listmixin.pyc sont différents.
+Les fichiers binaires geoi/gui/choiceedit_sortable_autowidth_listctrl.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/gui/choiceedit_sortable_autowidth_listctrl.pyc sont différents.
+Les fichiers binaires geoi/gui/floatctrl.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/gui/floatctrl.pyc sont différents.
+Les fichiers binaires geoi/gui/html_help_window.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/gui/html_help_window.pyc sont différents.
+Les fichiers binaires geoi/gui/images.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/gui/images.pyc sont différents.
+Les fichiers binaires geoi/gui/__init__.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/gui/__init__.pyc sont différents.
+Les fichiers binaires geoi/gui/multi_field_dialog.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/gui/multi_field_dialog.pyc sont différents.
+Les fichiers binaires geoi/gui/sortable_autowidth_listctrl.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/gui/sortable_autowidth_listctrl.pyc sont différents.
+Les fichiers binaires geoi/gui/validators.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/gui/validators.pyc sont différents.
+Les fichiers binaires geoi/__init__.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/__init__.pyc sont différents.
+Les fichiers binaires geoi/main_window.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/main_window.pyc sont différents.
+Les fichiers binaires geoi/material_db.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/material_db.pyc sont différents.
+Les fichiers binaires geoi/models/common_user_db_table_model.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/models/common_user_db_table_model.pyc sont différents.
+Les fichiers binaires geoi/models/__init__.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/models/__init__.pyc sont différents.
+Les fichiers binaires geoi/models/user_db_table_model.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/models/user_db_table_model.pyc sont différents.
+Les fichiers binaires geoi/parameter.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/parameter.pyc sont différents.
+diff -irw geoi/parameters.py /home/dimier/Temp/Api/Geoi/src/geoi/parameters.py
+61a62,63
+> Quantity_list = 'Quantity_list'
+> ExpectedOutputsQuantity_list = 'ExpectedOutputsQuantity_list'
+449a452
+> 
+533a537,538
+>         l.append( Parameter(Quantity_list, ['', 'AqueousConcentration', 'Concentration'], "??", check_is_list) )
+>         l.append( Parameter(ExpectedOutputsQuantity_list, [], "??", check_is_list) )
+840a846
+>         l.append( Parameter(ReadDarcyVelocity, "False", "", check_is_string) )
+909a916
+>         l.append( Parameter(TimeUnit, 'year' , 'Elmer Times Unit', check_is_string))
+937a945,977
+> 
+> #------------------------------------------------
+> #  Interactive plot parameters
+> #------------------------------------------------
+>         l.append( Parameter(IOutputs_list, default=[], description="Interactively ploted outputs", checkFunction=check_is_list))
+>         l.append( Parameter(ITitle, default='Etumos Interactive plot', description="Set the title", checkFunction=check_is_string))
+>         l.append( Parameter(ISubTitle, default='', description="under the title (new line)", checkFunction=check_is_string))
+>         l.append( Parameter(IFrequency, default=20, description="Display frequency", checkFunction=check_is_int))
+>         l.append( Parameter(IRotate, default= False, description="Axis directions"))
+>         l.append( Parameter(ISave, default= False, description="Saving Outputs"))
+>         l.append( Parameter(ISaveFrequency, default= 40, description="Frequency of the ouputs save"))
+>         l.append( Parameter(IOutputFormat, default= 'ps', description="Outputs Format"))
+>         l.append( Parameter(IOutputFormat_List, default= ['png', 'ps'], description="List of Outputs Format"))
+> 
+> 
+> #------------------------------------------------
+> #  Global plot parameters
+> #------------------------------------------------
+>         l.append( Parameter(GlobalOutputs_list, default=[], description="Global ploted outputs", checkFunction=check_is_list))
+>         l.append( Parameter(GlobalDates_list, default=[], description="Dates for outputs plot", checkFunction=check_is_list))
+>         l.append( Parameter(GlobalPlotUnits_list, default=['sec', 'hour', 'day', 'year'], description="Dates units for outputs plot", checkFunction=check_is_list))
+>         
+> #------------------------------------------------
+> #  Post Simulation Display
+> #------------------------------------------------
+>         l.append( Parameter(DataFileCWD, default= '\tNone\t\t\t', description="Directory of the datafile", checkFunction=check_is_string))
+>         l.append( Parameter(SavingFormat, default= 'png', description="Saving Format", checkFunction=check_is_string))
+>         l.append( Parameter(AvailableSpecies_list, default= [], description="", checkFunction=check_is_list))
+>         l.append( Parameter(AvailableDates_list, default= [], description="", checkFunction=check_is_list))
+>         l.append( Parameter(SpeciesSelection_list, default= [], description="", checkFunction=check_is_list))
+>         l.append( Parameter(DatesSelection_list, default= [], description="", checkFunction=check_is_list))
+>         
+>         
+1109a1150,1194
+> def inSecondsConverter(date, integer = True):
+>     # This function converts a date in form '20 days' or '1000 y' in the corresponding seconds numbers
+>     
+>     ref = [('seconds', 1), ('minutes', 60), ('hours', 3600), ('days', 86400), ('years', 31557600)]
+>     value = eval(date.split()[0])
+>     unit  = date.split()[1][0:3]
+>     
+>     i = 0
+>     found = False
+>     
+>     while not found and i < len(ref):
+>         if unit in ref[i][0][0:3]:
+>             found = True
+>             coef = ref[i][1]
+>         else:
+>             i += 1
+>     
+>     if not found:
+>         raise "Unit is not recognized"
+>     else:
+>         if integer:
+>             return int(value*coef)
+>         else:
+>             return value*coef
+> 
+> def inUnitConverter(date, unit):
+>     # This function converts a date in seconds to the value in specified unit
+>     
+>     ref = [('seconds', 1), ('minutes', 60), ('hours', 3600), ('days', 86400), ('years', 3.15576e+7)]
+>     
+>     i = 0
+>     found = False
+>     
+>     while not found and i < len(ref):
+>         if unit[0:3] in ref[i][0][0:3]:
+>             found = True
+>             coef = ref[i][1]
+>         else:
+>             i += 1
+>     
+>     if not found:
+>         raise "Unit is not recognized"
+>     else:
+>         return float(float(date)/coef)
+>     
+diff -irw geoi/parameters.py~ /home/dimier/Temp/Api/Geoi/src/geoi/parameters.py~
+62c62,64
+< EXPECTEDOUTPUTS_STANDARD_LIST = ['pH', 'pe', 'Eh', 'tc', 'mass_water', 'ionicstrength']
+---
+> Quantity_list = 'Quantity_list'
+> ExpectedOutputsQuantity_list = 'ExpectedOutputsQuantity_list'
+> EXPECTEDOUTPUTS_STANDARD_LIST = ['pH', 'porosity', 'pe', 'Eh', 'tc', 'mass_water', 'ionicstrength']
+271a274
+> ReadDarcyVelocity      = "ReadDarcyVelocity"
+341a345
+> TimeUnit = "TimeUnit"
+426a431,452
+> IOutputs_list = 'IOutputs_list'
+> ITitle = 'ITitle'
+> ISubTitle = 'ISubTitle'
+> IFrequency = 'IFrequency'
+> IRotate = 'IRotate'
+> ISave = 'ISave'
+> ISaveFrequency = 'ISaveFrequency'
+> IOutputFormat = 'IOutputFormat'
+> IOutputFormat_List = 'IOutputFormat_List'
+> 
+> GlobalOutputs_list = 'GlobalOutputs_list'
+> GlobalDates_list = 'GlobalDates_list'
+> GlobalPlotUnits_list = 'GlobalPlotUnits_list'
+> 
+> SavingFormat = 'SavingFormat'
+> DataFileCWD = 'DataFileCWD'
+> AvailableSpecies_list = 'AvailableSpecies_list'
+> AvailableDates_list = 'AvailableDates_list'
+> SpeciesSelection_list = 'SpeciesSelection_list'
+> DatesSelection_list = 'DatesSelection_list'
+> 
+> 
+510a537,538
+>         l.append( Parameter(Quantity_list, ['', 'AqueousConcentration', 'Concentration'], "??", check_is_list) )
+>         l.append( Parameter(ExpectedOutputsQuantity_list, [], "??", check_is_list) )
+817a846
+>         l.append( Parameter(ReadDarcyVelocity, "False", "", check_is_string) )
+886a916
+>         l.append( Parameter(TimeUnit, 'year' , 'Elmer Times Unit', check_is_string))
+914a945,977
+> 
+> #------------------------------------------------
+> #  Interactive plot parameters
+> #------------------------------------------------
+>         l.append( Parameter(IOutputs_list, default=[], description="Interactively ploted outputs", checkFunction=check_is_list))
+>         l.append( Parameter(ITitle, default='Etumos Interactive plot', description="Set the title", checkFunction=check_is_string))
+>         l.append( Parameter(ISubTitle, default='', description="under the title (new line)", checkFunction=check_is_string))
+>         l.append( Parameter(IFrequency, default=20, description="Display frequency", checkFunction=check_is_int))
+>         l.append( Parameter(IRotate, default= False, description="Axis directions"))
+>         l.append( Parameter(ISave, default= False, description="Saving Outputs"))
+>         l.append( Parameter(ISaveFrequency, default= 40, description="Frequency of the ouputs save"))
+>         l.append( Parameter(IOutputFormat, default= 'ps', description="Outputs Format"))
+>         l.append( Parameter(IOutputFormat_List, default= ['png', 'ps'], description="List of Outputs Format"))
+> 
+> 
+> #------------------------------------------------
+> #  Global plot parameters
+> #------------------------------------------------
+>         l.append( Parameter(GlobalOutputs_list, default=[], description="Global ploted outputs", checkFunction=check_is_list))
+>         l.append( Parameter(GlobalDates_list, default=[], description="Dates for outputs plot", checkFunction=check_is_list))
+>         l.append( Parameter(GlobalPlotUnits_list, default=['sec', 'hour', 'day', 'year'], description="Dates units for outputs plot", checkFunction=check_is_list))
+>         
+> #------------------------------------------------
+> #  Post Simulation Display
+> #------------------------------------------------
+>         l.append( Parameter(DataFileCWD, default= '\tNone\t\t\t', description="Directory of the datafile", checkFunction=check_is_string))
+>         l.append( Parameter(SavingFormat, default= 'png', description="Saving Format", checkFunction=check_is_string))
+>         l.append( Parameter(AvailableSpecies_list, default= [], description="", checkFunction=check_is_list))
+>         l.append( Parameter(AvailableDates_list, default= [], description="", checkFunction=check_is_list))
+>         l.append( Parameter(SpeciesSelection_list, default= [], description="", checkFunction=check_is_list))
+>         l.append( Parameter(DatesSelection_list, default= [], description="", checkFunction=check_is_list))
+>         
+>         
+1086a1150,1194
+> def inSecondsConverter(date, integer = True):
+>     # This function converts a date in form '20 days' or '1000 y' in the corresponding seconds numbers
+>     
+>     ref = [('seconds', 1), ('minutes', 60), ('hours', 3600), ('days', 86400), ('years', 31557600)]
+>     value = eval(date.split()[0])
+>     unit  = date.split()[1][0:3]
+>     
+>     i = 0
+>     found = False
+>     
+>     while not found and i < len(ref):
+>         if unit in ref[i][0][0:3]:
+>             found = True
+>             coef = ref[i][1]
+>         else:
+>             i += 1
+>     
+>     if not found:
+>         raise "Unit is not recognized"
+>     else:
+>         if integer:
+>             return int(value*coef)
+>         else:
+>             return value*coef
+> 
+> def inUnitConverter(date, unit):
+>     # This function converts a date in seconds to the value in specified unit
+>     
+>     ref = [('seconds', 1), ('minutes', 60), ('hours', 3600), ('days', 86400), ('years', 3.15576e+7)]
+>     
+>     i = 0
+>     found = False
+>     
+>     while not found and i < len(ref):
+>         if unit[0:3] in ref[i][0][0:3]:
+>             found = True
+>             coef = ref[i][1]
+>         else:
+>             i += 1
+>     
+>     if not found:
+>         raise "Unit is not recognized"
+>     else:
+>         return float(float(date)/coef)
+>     
+Les fichiers binaires geoi/parameters.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/parameters.pyc sont différents.
+Seulement dans geoi: params_manager.py~
+Seulement dans geoi: params_manager.pyc
+Seulement dans /home/dimier/Temp/Api/Geoi/src/geoi: params_manager.py_old
+Seulement dans geoi: phreeqc.log
+diff -irw geoi/scripting/chemical.py /home/dimier/Temp/Api/Geoi/src/geoi/scripting/chemical.py
+15a16,18
+> #    print ams
+> #    print ams.keys()
+> #    raw_input()
+Les fichiers binaires geoi/scripting/chemical.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/scripting/chemical.pyc sont différents.
+diff -irw geoi/scripting/elmer.py /home/dimier/Temp/Api/Geoi/src/geoi/scripting/elmer.py
+1a2
+> from parameters import inSecondsConverter
+6a8
+>     scriptFile.write("# -*- coding: utf-8 -*-\n")
+15a18
+>     scriptFile.write("import Gnuplot, Gnuplot.funcutils\n")
+16a20,26
+> #    scriptFile.write("""class executer():
+> #    '''
+> #'''
+> #def __init__(self):
+> #    '''
+> #'''
+> #""")
+26,53c36
+< #
+< # Writing the mesh in the simulation directory
+< #
+< #    directory = paramsDict.getParam(parameters.ResultDirectory).getValue()
+<     directory = ""
+<     nameFile = paramsDict.getParam(parameters.Title).getValue()
+<     
+<     print "nameFile",nameFile, meshFileName
+<     if meshFileName != directory +"/"+ nameFile + ".msh" :
+<         pass
+<     else :    
+<         nameFileMesh = directory +"/" +\
+<         nameFile + ".msh" 
+<         f2 = open(nameFileMesh,"w")
+<         f3 = open(meshFileName,"r")
+<         f2.write(f3.read())
+<         f2.close()
+<         f3.close()
+<         meshFileName = nameFileMesh
+< #    
+<     meshFileName2 = meshFileName
+<     print "meshFileName",meshFileName
+<     while "/" in meshFileName2 :
+<         i=0
+<         while meshFileName2[i] != "/" :
+<             i+=1
+< 	    meshFileName2=meshFileName2[i+1:len(meshFileName2)]	
+<     print "dbg mesh file name ",meshFileName2
+---
+>     meshFileName2 = meshFileName.split('/')[-1]
+58d40
+<     return meshFileName, meshFileName2
+65a48,54
+>     
+>     for ind in materials.keys():
+> 
+>         print '\n', materials[ind]
+>         for para in materials[ind]:
+>             print '\n', materials[ind][para]
+>     
+72a62
+>         if "EffectiveDiffusion" in materials[ind]:
+73a64,65
+>             print '1'
+>         if "KxPermeability" in materials[ind]:
+74a67
+>         if "EffectivePorosity" in materials[ind]:
+107c100
+<     outputList = paramsDict.getParam(parameters.ExpectedOutputs_list).getValue()
+---
+>     ExOutQ = paramsDict.getParam(parameters.ExpectedOutputsQuantity_list).getValue()
+109c102
+<     if outputList != []:
+---
+>     if ExOutQ != []:
+111,116c104,106
+<         for out in outputList:
+<             if str(out) == "pH":
+<                 string+="ExpectedOutput(\"pH\",format=\"table\",name=\"pH_output\"),\n"
+<             else:
+<                 string+="ExpectedOutput(\"Concentration\",\""+out+"\",format=\"table\",name=\""+out+"Output\"),\n"
+<         string = string[0:-2]+"]\n"
+---
+>         for out in ExOutQ:
+>             string+="ExpectedOutput(\"" + out[1] + "\",\""+out[0]+"\",format=\"table\",name=\""+out[0]+"\"),\\\n"
+>         string = string[0:-3]+"]\n"
+137,138c127,132
+<     darcy=[]
+<     if darcy == []:
+---
+>     readDarcy = eval(paramsDict.getParam(parameters.ReadDarcyVelocity).getValue())
+>     darcy=paramsDict.getParam(parameters.DarcyVelocityStatic_list_elmer).getValue()
+>     if readDarcy:
+>         scriptFile.write("                                    darcyVelocity      = 'Read',\\\n")
+>     else:
+>         if darcy == ['0.0', '0.0', '0.0']:
+141c135
+<         scriptFile.write("                                    darcyVelocity      = Velocity(Vector(["+darcyVelocity+"])),\\\n")
+---
+>             scriptFile.write("                                    darcyVelocity      = Velocity(Vector("+str([eval(darcy[0]), eval(darcy[1]), eval(darcy[2])])+")),\\\n")
+144a139,140
+>     porosityState = paramsDict.getParam(parameters.PorosityState).getValue().split()[0]
+>     scriptFile.write("                                    porosityState      = '" + porosityState + "', \\\n")
+Seulement dans geoi/scripting: elmer.py~
+Les fichiers binaires geoi/scripting/elmer.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/scripting/elmer.pyc sont différents.
+Les fichiers binaires geoi/scripting/__init__.pyc et /home/dimier/Temp/Api/Geoi/src/geoi/scripting/__init__.pyc sont différents.
+diff -irw geoi/wxmain.py /home/dimier/Temp/Api/Geoi/src/geoi/wxmain.py
+58c58,61
+< from geoi.actions import        set_PyPostProcessing
+---
+> from geoi.actions import        set_PyPostProcessing,\
+>                                 set_interactivePlot,\
+>                                 set_globalGraphics,\
+>                                 post_simulation_display
+99d101
+<                                set_VtkPostProcessing.VtkPostProcessing(mw, params_mgr),
+153,154c155,158
+<                                  ["Paraview", launching.Run(mw)
+<                                   ],
+---
+>                                  ["Interactive Plot",set_interactivePlot.interactivePlot(mw, params_mgr)],
+>                                  ["Global Graphics", set_globalGraphics.globalGraphics(mw, params_mgr)],
+>                                  ["Post simulation Display", post_simulation_display.displayOptions(mw, params_mgr)],
+>                                  ["Paraview", launching.Run(mw)],
+226a231
+> print sys.argv

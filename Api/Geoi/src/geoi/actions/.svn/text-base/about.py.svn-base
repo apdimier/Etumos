@@ -1,0 +1,38 @@
+import wx
+from wx.lib.wordwrap import wordwrap
+
+from geoi.actions import action
+
+LICENSE = \
+"""
+License type : GPL (see http://www.gnu.org/copyleft/gpl.html)
+
+============================================================================
+The License type has been set by the initial contract between the
+university of Pau and the Andra at the origin of this development.
+Thereafter all participants and users have been aware of these terms and agreed them.
+============================================================================
+"""
+class About(action.Action):
+    "About: display an about dialog"
+
+    def __init__(self, win):
+        action.Action.__init__(self, win, "About"
+                        , 'display an about dialog')
+
+    def run(self):
+        # First we create and fill the info object
+        info = wx.AboutDialogInfo()
+        info.Name = "geoi"
+        info.Version = "3.01"
+        info.Copyright = "ANDRA"
+        info.Description = wordwrap(
+            "Yet TO Be Done",
+            350, wx.ClientDC(self.getParent()))
+        info.WebSite = ("http://www.andra.fr", "ANDRA home page")
+        info.Developers = [ "Alain Dimier" ]
+
+        info.License = wordwrap(LICENSE, 500, wx.ClientDC(self.getParent()))
+
+        # Then we call wx.AboutBox giving it that info object
+        wx.AboutBox(info)

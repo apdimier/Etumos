@@ -1,0 +1,196 @@
+import wx
+
+from action import Action
+from geoi.gui.html_help_window import HtmlHelpWindow
+
+DIALOG_PANEL = None
+class ParamsAction(Action):
+    """
+    This is the base class for Actions that modify the current
+    parameters
+    """
+    def __init__(self, params_mgr, win, name, description, menuText=None, accelerator=None, iconXPM=None, help=None):
+        Action.__init__(self, win, name, description, menuText, accelerator, iconXPM, help=help)
+        self._params_mgr = params_mgr
+        self._dialog = None
+        self._cloned_params = None
+        self._help_window = None
+
+    @staticmethod
+    def SetDialogPanel(panel):
+        global DIALOG_PANEL
+        DIALOG_PANEL = panel
+
+    @staticmethod
+    def GetDialogPanel():
+        global DIALOG_PANEL
+        return DIALOG_PANEL
+
+    def getParamsMgr(self):
+        return self._params_mgr
+
+    def run(self):
+        mgr = self.getParamsMgr()
+        self._cloned_params = params = mgr.getCurrentParamSet().clone()
+        if self.runParams(params):
+            self._submit(params)
+
+
+    def _submit(self, params):
+        mgr = self.getParamsMgr()
+        # check there are changes
+        if not mgr.isItNew(params):
+            dlg = wx.MessageDialog(self.getParent(), "No Changes detected, so it is worthless to apply them"
+                                   , self.getDescription(), wx.ICON_EXCLAMATION)
+            dlg.ShowModal()
+        else:
+            mgr.submitNew(params)
+
+    def checkValue(self, param, value):
+        """
+        helper function that checks the value and displays an error message
+        if it is invalid
+
+        Return : True if valid
+        """
+        if param.checkValue(value):
+            return True
+
+        return False
+
+    def _createInterface(self, parent, params):
+        """TO BE OVERRIDEN : create the GUI to set the params, and add it to the parent"""
+        pass
+
+    def _onOk(self, params):
+        """TO BE OVERRIDEN : validate the params values
+        may change the params values if needed
+        Return: True if the params are to be accepted
+        """
+        pass
+
+    def getDialog(self):
+        return self._dialog
+
+    def isInDialog(self):
+        return self.GetDialogPanel() == None
+
+    def ok_callback(self, evt):
+        if self._onOk(self._cloned_params):
+            self._submit(self._cloned_params)
+
+        if self.isInDialog():
+            self.getDialog().Destroy()
+        else:
+            self.GetDialogPanel().DestroyChildren()
+
+
+    def cancel_callback(self, evt):
+        if self.isInDialog():
+            self.getDialog().Show(False)
+        else:
+            panel = self.GetDialogPanel()
+            panel.DestroyChildren()
+
+    def help_callback(self, evt):
+        if not self._help_window:
+            self._help_window = HtmlHelpWindow(self.getParent(), "Help for " + self.getText(), self.getHelp())
+        self._help_window.ShowModal()
+
+    def runParams(self, params):
+        if not self.isInDialog():
+            return self.runParamsOnPanel(params, self.GetDialogPanel())
+        else:
+            return self.runParamsOnDialog(params)
+
+    def _createButtonSizer(self, panel):
+        btnsizer = wx.StdDialogButtonSizer()
+        ok = wx.Button(panel, wx.ID_OK, "OK")
+        ok.Bind(wx.EVT_BUTTON, self.ok_callback)
+
+        cancel = wx.Button(panel, wx.ID_CANCEL, "Cancel")
+        cancel.Bind(wx.EVT_BUTTON, self.cancel_callback)
+
+        btnsizer.AddButton(ok)
+        btnsizer.AddButton(cancel)
+
+        help = self.getHelp()
+      
+        if help is not None and help != '':
+            hb = wx.Button(panel, wx.ID_HELP, "Help")
+            hb.Bind(wx.EVT_BUTTON, self.help_callback)
+            btnsizer.AddButton(hb)
+
+        btnsizer.Realize()
+
+        return btnsizer
+
+    def _createTitleBox(self, parent):
+        bsizer = wx.StaticBoxSizer(wx.StaticBox(parent, -1, ""), wx.VERTICAL)
+
+#        t = wx.TextCtrl(parent, -1, self.getDescription(), style=wx.TE_MULTILINE
+#                                                    | wx.TE_CENTER | wx.TE_READONLY)
+#        t.SetMinSize( (0,30) ) # don't know why default min size is inadequate
+
+        t = wx.StaticText(parent, -1, self.getDescription())
+
+        bsizer.Add(t, proportion=1, border=5, flag=wx.ALIGN_CENTER | wx.EXPAND | wx.ALL)
+
+        return bsizer
+
+    def createPanel(self, win, params):
+        panel = wx.Panel(win, name="contentDialogPanel")
+        dlgsizer = wx.BoxSizer(wx.VERTICAL)
+
+        dlgsizer.Add(self._createTitleBox(panel), proportion=0, flag=wx.EXPAND|wx.ALL, border = 4)
+
+        btnsizer = self._createButtonSizer(panel)
+
+        dial_panel = wx.Panel(panel, name="interface controls for action" )
+        self._createInterface(dial_panel, params)
+
+        dlgsizer.Add(dial_panel, proportion=1, flag=wx.EXPAND |wx.ALL, border=4)
+        dlgsizer.Add(btnsizer, proportion=0, flag=wx.EXPAND | wx.ALIGN_RIGHT, border=4)
+
+        panel.SetSizer(dlgsizer)
+
+        return panel
+
+    def runParamsOnPanel(self, params, panel):
+        panel.DestroyChildren()
+
+        subpanel = self.createPanel(panel, params)
+
+        sizer = wx.BoxSizer(wx.VERTICAL)
+        sizer.Add(subpanel,  proportion=1, flag=wx.EXPAND | wx.ALL)
+
+        subpanel.SetSize( panel.GetClientSize() )
+        panel.SetSizer( sizer )
+        # Caution : do not use SetSizerAntFit() otherwise panel shrinks
+        # and the rest of the aui pane space is full of garbage
+
+
+
+    def runParamsOnDialog(self, params):
+        self._dialog = dlg = wx.Dialog(self.getParent(), -1, self.getText(), style=wx.RESIZE_BORDER |wx.CAPTION)
+
+        panel = self.createPanel(dlg, params)
+
+        sizer = wx.BoxSizer(wx.VERTICAL)
+        sizer.Add(panel, proportion=1, flag=wx.EXPAND| wx.ALL)
+#        dlg.SetSizer( sizer)
+        dlg.SetSizerAndFit(sizer)
+        dlg.SetSize( (640, 400) )
+
+        dlg.ShowModal()
+
+
+
+#
+#        if  dlg.ShowModal() != wx.ID_OK:
+#            return False
+#
+#        return self._onOk(params)
+
+
+

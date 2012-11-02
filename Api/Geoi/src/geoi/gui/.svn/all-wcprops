@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/91/Geoi/src/geoi/gui
+END
+validators.py
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/92/Geoi/src/geoi/gui/validators.py
+END
+custom_data_table.py
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/25/Geoi/src/geoi/gui/custom_data_table.py
+END
+floatctrl.py
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/92/Geoi/src/geoi/gui/floatctrl.py
+END
+multi_field_dialog.py
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/91/Geoi/src/geoi/gui/multi_field_dialog.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/26/Geoi/src/geoi/gui/__init__.py
+END
+choice_edit_listmixin.py
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/76/Geoi/src/geoi/gui/choice_edit_listmixin.py
+END
+sortable_autowidth_listctrl.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/92/Geoi/src/geoi/gui/sortable_autowidth_listctrl.py
+END
+choiceedit_sortable_autowidth_listctrl.py
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/77/Geoi/src/geoi/gui/choiceedit_sortable_autowidth_listctrl.py
+END
+html_help_window.py
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/78/Geoi/src/geoi/gui/html_help_window.py
+END
+images.py
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/82/Geoi/src/geoi/gui/images.py
+END

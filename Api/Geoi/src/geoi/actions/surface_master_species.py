@@ -1,0 +1,61 @@
+from geoi.actions.user_db_table_action import UserDBTableAction
+from geoi import parameters
+from geoi.parameter import Parameter, IS_NUMBER, IS_POSITIVE_NUMBER
+from geoi.chemistry_db import *
+from geoi.chemistry_equation import Equation
+
+from geoi.models.common_user_db_table_model import CommonUserDBTableModel
+
+
+HEADERS = {NAME:"Surface Master Species Name",
+           FORMULA:"Surface Master Species Formula"}
+ORDER = [NAME, FORMULA]
+
+HELP = """
+<h1>Surface Master Species</h1>
+
+This frame is used to define the name of a surface binding site and the
+associated surface master species formula that is used in simulations.
+Only additions or modifications, specific to the ongoing simulation, of the available data file
+are introduced here.
+
+
+<br><br>
+In the table the <b>green</b> entries are those defined by the user,
+the others being those imported from the database, the last ones cannot be edited or renamed.
+
+"""
+
+class SurfaceMasterSpecies(UserDBTableAction, CommonUserDBTableModel):
+    """
+    Add and Edit surface master species, using those imported from the chemistry database
+    """
+
+    def __init__(self, win, params_mgr):
+        CommonUserDBTableModel.__init__(self, HEADERS, ORDER)
+        UserDBTableAction.__init__(self, params_mgr, win, "Surface Complexation Master Species",
+                              "add and edit custom Surface Master Species (SURFACE_MASTER_SPECIES)", self,
+                    help=HELP)
+
+    def getImportedDB(self, params):
+        return params.getParamValue(parameters.IMPORTED_CHEMISTRY_DB).getSurfaceMasterSpecies()
+
+    def getUserDB(self, params):
+        return params.getParamValue(parameters.CUSTOM_CHEMISTRY_DB).getSurfaceMasterSpecies()
+
+    def getParamsForNewEntry(self):
+        l = []
+
+        not_empty = lambda s: s != ""
+
+        p = Parameter(HEADERS[NAME], "", "surface master species name to define or to change\n")
+        p.setCheckFunction(lambda s: s != ""  and self.entryNameCallback(p, s))
+        l.append(p)
+
+        l.append(Parameter(HEADERS[FORMULA], "",
+                           'Formula for the surface master species,\n'
+                            ' usually the OH-form of the binding site'
+                           , not_empty) )
+
+        return l
+

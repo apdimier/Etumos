@@ -1,0 +1,167 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/91/Geoi/src/geoi/actions
+END
+help.py
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/25/Geoi/src/geoi/actions/help.py
+END
+open_shell.py
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/25/Geoi/src/geoi/actions/open_shell.py
+END
+new.py
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/25/Geoi/src/geoi/actions/new.py
+END
+switch_to_std_dialog.py
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/81/Geoi/src/geoi/actions/switch_to_std_dialog.py
+END
+physics_software.py
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/41/Geoi/src/geoi/actions/physics_software.py
+END
+exchange_species.py
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/92/Geoi/src/geoi/actions/exchange_species.py
+END
+save_file.py
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/81/Geoi/src/geoi/actions/save_file.py
+END
+open_chemistry_db.py
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/42/Geoi/src/geoi/actions/open_chemistry_db.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/91/Geoi/src/geoi/actions/__init__.py
+END
+open_file.py
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/81/Geoi/src/geoi/actions/open_file.py
+END
+units.py
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/27/Geoi/src/geoi/actions/units.py
+END
+aqueous_secondary_species.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/92/Geoi/src/geoi/actions/aqueous_secondary_species.py
+END
+inspector.py
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/25/Geoi/src/geoi/actions/inspector.py
+END
+chemistry.py
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/35/Geoi/src/geoi/actions/chemistry.py
+END
+mineral_phase.py
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/92/Geoi/src/geoi/actions/mineral_phase.py
+END
+aqueous_master_species.py
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/92/Geoi/src/geoi/actions/aqueous_master_species.py
+END
+exchange_master_species.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/92/Geoi/src/geoi/actions/exchange_master_species.py
+END
+exit.py
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/81/Geoi/src/geoi/actions/exit.py
+END
+about.py
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/81/Geoi/src/geoi/actions/about.py
+END
+action.py
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/77/Geoi/src/geoi/actions/action.py
+END
+toggle_action.py
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/26/Geoi/src/geoi/actions/toggle_action.py
+END
+surface_master_species.py
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/92/Geoi/src/geoi/actions/surface_master_species.py
+END
+params_action.py
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/82/Geoi/src/geoi/actions/params_action.py
+END
+save_file_as.py
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/30/Geoi/src/geoi/actions/save_file_as.py
+END
+title.py
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/30/Geoi/src/geoi/actions/title.py
+END
+show_params.py
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/91/Geoi/src/geoi/actions/show_params.py
+END
+user_db_table_action.py
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/92/Geoi/src/geoi/actions/user_db_table_action.py
+END

@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/91/Geoi/src/geoi
+END
+main_window.py
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/80/Geoi/src/geoi/main_window.py
+END
+chemistry_db.py
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/92/Geoi/src/geoi/chemistry_db.py
+END
+chemistry_equation.py
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/92/Geoi/src/geoi/chemistry_equation.py
+END
+params_manager.py
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/83/Geoi/src/geoi/params_manager.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/15/Geoi/src/geoi/__init__.py
+END
+parameter.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/92/Geoi/src/geoi/parameter.py
+END
+parameters.py
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/91/Geoi/src/geoi/parameters.py
+END
+wxmain.py
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/91/Geoi/src/geoi/wxmain.py
+END
+chemistry_utils.py
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ckryq8JGmr3kPAabIlDkbG/!svn/ver/17/Geoi/src/geoi/chemistry_utils.py
+END

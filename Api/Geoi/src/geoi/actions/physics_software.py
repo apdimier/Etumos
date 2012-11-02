@@ -1,0 +1,82 @@
+import wx
+
+from geoi.actions.params_action import ParamsAction
+from geoi import parameters
+
+SOLVERS_BY_LABEL = {'Chemistry':parameters.SOLVER_CHEMISTRY,
+                  'Transport - Chemistry':parameters.SOLVER_MODFLOW_MT3D_PHREEQC,
+                  'Hydraulic':parameters.SOLVER_MODFLOW }
+POROSITY_ENABLED_SOLVERS = {parameters.SOLVER_MODFLOW_MT3D_PHREEQC:True}
+
+SOLVERS_NEEDING_CHEMISTRY_DB = {parameters.SOLVER_MODFLOW_MT3D_PHREEQC:True
+                                ,parameters.SOLVER_CHEMISTRY:True}
+
+class PhysicsSoftware(ParamsAction):
+    """
+    Choose the Physics software (solver)
+    """
+
+    def __init__(self, win, params_mgr):
+        ParamsAction.__init__(self, params_mgr, win, "Physics / Software", 
+                    """ 
+                    the user determines the phenomenology to simulate 
+                    and thereafter the tools to be used for this simulation
+                    """)
+        self.radios = None
+        self.choice = None
+
+    def _createInterface(self, parent, params):
+        
+        names = SOLVERS_BY_LABEL.keys()
+        names.sort()
+   
+        solver = params.getParam(parameters.Solver)
+        porosity = params.getParam(parameters.PorosityState)
+   
+        sizer = wx.BoxSizer( wx.VERTICAL )
+        box = wx.StaticBoxSizer(wx.StaticBox( parent, -1, "Solvers" ) , wx.VERTICAL )
+        grid = wx.FlexGridSizer( 0, 2, 0, 0 )
+
+        radios = []
+        choice = None
+        currentSolver = str( solver.getValue() )
+        currentPorosity = str( porosity.getValue() )
+        for (i,n) in enumerate(names):
+            if i == 0:    
+                style = wx.RB_GROUP
+            else:
+                style = 0
+            radio = wx.RadioButton( parent, -1, n,  style=style )
+            radio.SetToolTipString("solver is " + SOLVERS_BY_LABEL[n])
+            grid.Add( radio, 0, wx.ALIGN_LEFT|wx.ALIGN_CENTRE_VERTICAL|wx.LEFT|wx.RIGHT|wx.TOP, 5 )
+            radios.append( radio )
+            radio.SetValue( currentSolver == SOLVERS_BY_LABEL[n] )
+            if SOLVERS_BY_LABEL[n] in POROSITY_ENABLED_SOLVERS:
+                e = choice = wx.Choice(parent, -1, choices=porosity.getPossibleValues())
+                choice.SetSelection( porosity.getPossibleValues().index( currentPorosity ) )
+            else:
+                e = wx.StaticText(parent, -1, "")
+            grid.Add( e, 0, wx.ALIGN_CENTRE_VERTICAL|wx.LEFT|wx.RIGHT|wx.TOP, 5 )
+            
+        self.radios = radios
+        self.choice = choice
+
+        box.Add( grid, 0, wx.ALIGN_CENTRE|wx.ALL, 5 )
+        sizer.Add( box, 0, wx.ALIGN_CENTRE|wx.ALL, 5 )
+
+        parent.SetSizerAndFit(sizer)
+
+    def _onOk(self, params):
+        radio = filter(lambda r: r.GetValue(), self.radios)[0]
+        name = radio.GetLabelText()
+        solver = SOLVERS_BY_LABEL[name]
+        params.getParam(parameters.Solver).setValue( solver )
+        if  solver in POROSITY_ENABLED_SOLVERS:
+            params.getParam(parameters.PorosityState).setValue( str(self.choice.GetStringSelection()) )
+            
+        if solver in SOLVERS_NEEDING_CHEMISTRY_DB:
+            self.getParamsMgr().importCurrentChemistryDB(params)
+        
+        return True
+        
+

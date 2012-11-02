@@ -1,0 +1,429 @@
+import warnings
+import pprint
+import re
+import copy
+
+from chemistry_equation import Equation
+
+SOLUTION_MASTER_SPECIES = "SOLUTION_MASTER_SPECIES"
+SOLUTION_SPECIES = "SOLUTION_SPECIES"
+PHASES = "PHASES"
+EXCHANGE_MASTER_SPECIES = "EXCHANGE_MASTER_SPECIES"
+EXCHANGE_SPECIES = "EXCHANGE_SPECIES"
+SURFACE_MASTER_SPECIES = "SURFACE_MASTER_SPECIES"
+SURFACE_SPECIES = "SURFACE_SPECIES"
+RATES = "RATES"
+
+
+PARTS = [SOLUTION_MASTER_SPECIES, SOLUTION_SPECIES, PHASES, EXCHANGE_MASTER_SPECIES
+         ,EXCHANGE_SPECIES, SURFACE_MASTER_SPECIES, SURFACE_SPECIES, RATES]
+
+COMMENT = '#'
+EQUALS = ' = '
+
+LOGK = 'LOGK'
+DELTAH = 'DELTAH'
+EQUATION = 'EQUATION'
+FORMULA = 'FORMULA'
+ELEMENT = 'ELEMENT'
+NAME = 'NAME'
+SPECIES = 'SPECIES'
+GFW = 'GFW' # Gram Formula weight
+DENSITY = 'DENSITY' # in kg/m3
+ACTIVITY_LAW = 'ACTIVITY_LAW'
+ACTIVITY_LAW_NONE = "Default"
+ACTIVITY_LAW_DAVIES = "Davies"
+ACTIVITY_LAW_DEBYE_HUCKEL = "Debye Huckel"
+ACTIVITY_LAWS = [ACTIVITY_LAW_NONE, ACTIVITY_LAW_DAVIES, ACTIVITY_LAW_DEBYE_HUCKEL]
+
+
+INDENT = 2
+
+class ChemistryDB:
+
+    def __init__(self, db=None):
+        if db is None:
+            self.db = dict([(i,{}) for i in PARTS])
+        else:
+            self.db = db
+
+    def getDatabaseDict(self):
+        return self.db
+
+    def getSolutionMasterSpecies(self):
+        return self.db[SOLUTION_MASTER_SPECIES]
+
+    def getSolutionSecondarySpecies(self):
+        return self.db[SOLUTION_SPECIES]
+
+    def getMineralPhases(self):
+        return self.db[PHASES]
+
+    def getExchangeMasterSpecies(self):
+        return self.db[EXCHANGE_MASTER_SPECIES]
+
+    def getExchangeSpecies(self):
+        return self.db[EXCHANGE_SPECIES]
+
+    def getSurfaceMasterSpecies(self):
+        return self.db[SURFACE_MASTER_SPECIES]
+
+    def getSurfaceSpecies(self):
+        return self.db[SURFACE_SPECIES]
+
+
+    def readFromPhreeqcFormat(self, fh):
+        partHash = {}
+        for p in PARTS:
+            partHash[p] = True
+
+        self.db = {}
+        block = []
+        part = None
+        for line in fh:
+            line = str(line.rstrip())
+            if line in partHash:
+                if block:          # process previous block
+                    parseMethod = getattr(self, "_parse_%s" % part)
+                    self.db[part] = parseMethod(block)
+
+                block = []
+                part = line
+            else:
+                if part:
+                    block.append(line)
+
+    def _skipEmptyLinesAndComments(self, it):
+        for line in it:
+#            print "SKIPLINE=",line
+            if line and not line[0] == COMMENT:
+                return line
+        return ""
+
+    def _readNextLine(self, it):
+        line = None
+        try:
+            line = it.next().rstrip()
+        except StopIteration:
+            pass
+        return line
+
+    def _parse_SOLUTION_MASTER_SPECIES(self, lines):
+        """
+        format is
+        #element species        alk     gfw_formula     element_gfw
+        renamed as
+        ELEMENT SPECIES LOGK FORMULA GFW
+        """
+        species = {}
+        FIELDS = [ELEMENT, SPECIES, LOGK, FORMULA, GFW]
+        default_gfw = ''
+
+        it = iter(lines)
+        line = self._skipEmptyLinesAndComments(it)
+
+        while line:
+            if not line[0] == COMMENT:
+                entry = dict( zip(FIELDS, line.split()) )
+                if GFW not in entry: # may not be set
+                    entry[GFW] = default_gfw
+                else:
+                    entry[GFW] = self._makeFloat(entry[GFW])
+                entry[LOGK] = self._makeFloat(entry[LOGK])
+                species[entry[ELEMENT]] = entry
+            line = self._readNextLine(it)
+        return species
+
+    def _makeFloat(self, s):
+        if s is None or s == '':
+            return ''
+        return float(s)
+
+    def _parse_SOLUTION_SPECIES(self, lines):
+        """
+        format a bit complex, seems to be several variants :
+        anyways the first line of an entry is an equation
+        followed by several other lines, but the only other
+        line that seems of interest for us is the log_k
+
+        the equation line has to be parsed : the main name of the element is
+        the first member of the right part
+
+        Return: a list of [Equation, logk]
+        """
+
+        species = {}
+        it = iter(lines)
+        line = self._skipEmptyLinesAndComments(it)
+        eq = None
+        # parse format1
+        entry = None
+        while line is not None:
+            if line and line[0] != COMMENT:
+                if line.find(EQUALS) != -1: # new entry
+                    try:
+                        eq = Equation(line)
+                    except Exception, err:
+                        warnings.warn("got exception parsing SOLUTION_SPECIES equation, line is \n" +
+                                      line + "\n error is " + str(err))
+                        raise
+
+                    elt = str(eq.getMainTerm())
+                    species[elt] = entry = {ELEMENT: elt, FORMULA: elt, EQUATION:eq}
+                elif line.find('log_k') != -1:
+                    logk = line.split()[1]
+                    entry[LOGK] = self._makeFloat(logk)
+
+            line = self._readNextLine(it)
+        return species
+
+    def _parse_PHASES(self, lines):
+        """
+        parses the PHASES part
+
+        here is a sample of an entry:
+
+Acanthite
+        Ag2S +1.0000 H+  =  + 1.0000 HS- + 2.0000 Ag+
+        log_k           -36.0346
+    -delta_H    226.982 kJ/mol  # Calculated enthalpy of reaction   Acanthite
+#   Enthalpy of formation:  -7.55 kcal/mol
+        -analytic -1.6067e+002 -4.7139e-002 -7.4522e+003 6.6140e+001 -1.1624e+002
+#       -Range:  0-300
+
+        The relevant parts are :
+            - the name Acanthite
+            - the symbol Ag2S
+            - the formula Ag2S +1.0000 H+  =  + 1.0000 HS- + 2.0000 Ag+
+            - the log_k -36.0346
+            - the optional delta_H : 226.982 kJ/mol
+        """
+        phases = {}
+        it = iter(lines)
+        line = self._skipEmptyLinesAndComments(it)
+        eq = None
+        name = None
+        logk_pattern = re.compile('log_k')
+        deltah_pattern = re.compile('delta_h', re.IGNORECASE)
+        while line is not None:
+            if line and line[0] != COMMENT:
+                if not line[0].isspace(): # new entry
+                    name = line.rstrip()
+                    # next line should be the equation
+                    line = self._skipEmptyLinesAndComments(it)
+                    try:
+                        # PHASES equations may use the ":" symbol
+                        # let's convert it to a ' + '
+
+                        eq = Equation(line.replace(":", " + "))
+                    except type, msg:
+                        warnings.warn("error parsing equation for PHASES : " + line)
+                        warnings.warn( msg )
+                        #raise
+                    phases[name] = {NAME:name, EQUATION:eq, FORMULA:eq.parseLeftMembers()[0][0],
+                                    LOGK:"", DELTAH:"", DENSITY:""}
+                elif logk_pattern.search(line):
+                    phases[name][LOGK] = line.split()[1]
+                elif deltah_pattern.search(line):
+                    li = line.split()
+                    d = li[1]
+                    if len(li) > 2 and li[2][0] != COMMENT:
+                        d += " " + li[2]
+                    phases[name][DELTAH] = d
+
+            line = self._readNextLine(it)
+        return phases
+
+
+    def _parse_EXCHANGE_MASTER_SPECIES(self, lines):
+        """
+correspondence between the name of an exchange site and an exchange species
+
+Line 1: exchange name, exchange master species
+
+exchange name --Name of an exchange site, X and Xa in this example data block. It must begin with a capital letter, followed by zero or more lower case letters or underscores ("_").
+
+exchange master species --Formula for the master exchange species, X - and Xa - in this example data block.
+
+        """
+        species = {}
+        it = iter(lines)
+        line = self._skipEmptyLinesAndComments(it)
+        while line is not None:
+            if line and line[0] != COMMENT:
+                name, formula = line.split()
+                species[name] =  {NAME:name, FORMULA:formula}
+            line = self._readNextLine(it)
+        return species
+
+    def _parse_EXCHANGE_SPECIES(self, lines):
+        """"
+        excerpt from the phreeqc manual:
+Example
+
+Line 0:  EXCHANGE_SPECIES
+Line 1a:      X- = X-
+Line 2a:           log_k     0.0
+Line 1b:      X- + Na+ = NaX
+Line 2b:           log_k     0.0
+Line 1c:      2X- + Ca+2 = CaX2
+Line 2c:           log_k     0.8
+Line 1d:      Xa- = Xa-
+Line 2d:           log_k     0.0
+Line 1e:      X- + Na+ = NaX
+Line 2e:           log_k     0.0
+Line 1f:      2Xa- + Ca+2 = CaXa2
+Line 2f:           log_k     2.0
+
+Explanation
+Line 0: EXCHANGE_SPECIES
+
+    Keyword for the data block. No other data are input on the keyword line.
+
+Line 1: Association reaction
+
+    Association reaction for exchange species.
+    The defined species must be the first species to the right of the equal sign.
+    The association reaction must precede any identifiers related to the exchange species.
+    Master species have an identity reaction (lines 1a and 1d).
+
+Line 2: log_k log K
+
+    log_k--Identifier for log K at 25oC. Optionally, -log_k, logk, -l[og_k], or -l[ogk].
+
+    log K--Log K at 25oC for the reaction. Default 0.0. Unlike log K for aqueous species, the log K for exchange species is implicitly relative to a single exchange species. In the default database file, sodium (NaX) is used as the reference and the reaction X- + Na+ = NaX is given a log K of 0.0 (line 2b). The log K for the exchange reaction for the reaction given in line 2c is then numerically equal to the log K for the reaction 2NaX + Ca+2 = CaX2 + 2Na+. Master species have log K of 0.0 (lines 2a and 2d); reference species have log K of 0.0 (lines 2b and 2e).
+        """
+
+        species = {}
+        it = iter(lines)
+        line = self._skipEmptyLinesAndComments(it)
+        eq = None
+        # parse format1
+        entry = None
+        while line is not None:
+            if line and line[0] != COMMENT:
+                if line.find(EQUALS) != -1: # new entry
+                    try:
+                        eq = Equation(line)
+                    except Exception, err:
+                        msg = "error parsing EXCHANGE_SPECIES equation, line %s \n error: %s \n" %(line, str(err))
+                        warnings.warn( msg )
+                        raise
+
+                    elt = str(eq.getMainTerm())
+                    species[elt] = entry = {ELEMENT: elt, FORMULA:elt, EQUATION:eq
+                                            , LOGK:0.0,
+                                             ACTIVITY_LAW:[ACTIVITY_LAW_NONE] }
+                elif line.find('og') != -1:
+                    logk = line.split()[1]
+                    entry[LOGK] = self._makeFloat(logk)
+
+            line = self._readNextLine(it)
+        return species
+
+
+    def _parse_SURFACE_MASTER_SPECIES(self, lines):
+        """"
+correspondence between surface binding-site names and surface master species.
+
+Line 1: surface binding-site name, surface master species
+
+surface binding-site name --Name of a surface binding site. It must begin with a capital letter, followed by zero or more lower case letters. Underscores ("_") plus one or more lower case letters are used to differentiate types of binding sites on a single surface. Multiple binding sites can be defined for each surface.
+
+surface master species --Formula for the surface master species, usually the OH-form of the binding site.
+        """
+        return self._parse_EXCHANGE_MASTER_SPECIES(lines)
+
+
+    def _parse_SURFACE_SPECIES(self, lines):
+        """
+sample :
+        Hfo_sOH  + H+ = Hfo_sOH2+
+        log_k  7.29    # = pKa1,int
+
+relevant info:
+        - name Hfo_sOH2+, first term of right member
+        - log_k 7.29
+        - equation
+        """
+        species = {}
+        it = iter(lines)
+        line = self._skipEmptyLinesAndComments(it)
+
+        # parse format1
+        entry = None
+        while line is not None:
+            if line and line[0] != COMMENT:
+                eq = Equation(line)
+                species[str(eq.getMainTerm())] = entry = {EQUATION:eq}
+
+                line = self._readNextLine(it)
+                logk = line.split()[1]
+                entry[LOGK] = logk
+
+            line = self._readNextLine(it)
+        return species
+
+        return ""
+
+    def _parse_RATES(self, lines):
+        "seems not to be used for now"
+        return None
+
+    def clone(self):
+        print "clone ChemistryDB"
+        c = ChemistryDB()
+        c.db = copy.deepcopy(self.db)
+        return c
+
+    def toExhaustiveStringDump(self):
+        s = self.__class__.__name__ + "(" + pprint.pformat(self.db, indent=INDENT) + ")\n"
+        #s = repr(self.db)
+        return s
+
+    def toSummaryStringRepresentation(self):
+        s = ""
+        max_elts = 5
+        indent = INDENT
+        parts = self.db.keys()
+        parts.sort()
+        for k in parts:
+            v = self.db[k]
+            nb = len(v)
+            s += "===== " + k + " : " + str(nb) + " elements =====\n"
+            # creates a hash with at most max_elts elements
+            nb = max(nb, max_elts)
+            to_print = {}
+            for i in v.keys()[0:max_elts]:
+                to_print[i] = v[i]
+
+            s += pprint.pformat(to_print, indent=indent) + "\n\n"
+        return s
+
+    def __repr__(self):
+        return self.toExhaustiveStringDump()
+
+    def __eq__(self, o):
+        equal = self is o or self.db == o.db
+        return equal
+
+    def __ne__(self, o):
+        return not self.__eq__(o)
+
+    def __str__(self):
+        return self.toExhaustiveStringDump()
+
+if __name__ == '__main__':
+    import traceback
+    file = 'llnl.dat'
+    path = "../../data/" + file
+    try:
+        fh = open(path,"r")
+    except:
+        traceback.print_exc()
+
+    db = ChemistryDB()
+    db.readFromPhreeqcFormat(fh)
+
+    print db.toSummaryStringRepresentation()
+    #print db

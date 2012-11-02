@@ -1,0 +1,70 @@
+import wx
+
+from geoi.actions.params_action import ParamsAction
+from geoi import parameters
+
+DISCRETISATION_BY_LABEL = {'Upwind':parameters.MT3D_ADVECTION_UPWIND,
+                  'Central':parameters.MT3D_ADVECTION_CENTRAL,
+                  'T.V.D.':parameters.MT3D_ADVECTION_TVD }
+
+SOLVERS_NEEDING_CHEMISTRY_DB = {parameters.SOLVER_MODFLOW_MT3D_PHREEQC:True
+                                ,parameters.SOLVER_CHEMISTRY:True}
+
+class Mt3dSolverParameters(ParamsAction):
+    """
+    Enables the choice of transport discretisation and of the algebraic solver
+    """
+
+    def __init__(self, win, params_mgr):
+        ParamsAction.__init__(self, params_mgr, win, "Mt3d Solver", 
+        """ 
+        Used to determine the spatial discretisation and the related algebraic solver
+        """)
+        self.radios = None
+        self.choice = None
+
+    def _createInterface(self, parent, params):
+        
+        discretisationLabels = DISCRETISATION_BY_LABEL.keys()
+        discretisationLabels.sort()
+   
+        solver = params.getParam(parameters.Mt3d_Default_Discretisation)
+   
+        sizer = wx.BoxSizer( wx.VERTICAL )
+        box = wx.StaticBoxSizer(wx.StaticBox( parent, -1, "Advection" ) , wx.VERTICAL )
+        grid = wx.FlexGridSizer( 0, 2, 0, 0 )
+
+        radios = []
+        choice = None
+        currentSolver = str( solver.getValue() )
+        for (i,n) in enumerate(discretisationLabels):
+            if i == 0:    
+                style = wx.RB_GROUP
+            else:
+                style = 0
+            radio = wx.RadioButton( parent, -1, n,  style=style )
+            radio.SetToolTipString("solver is " + DISCRETISATION_BY_LABEL[n])
+            grid.Add( radio, 0, wx.ALIGN_LEFT|wx.ALIGN_CENTRE_VERTICAL|wx.LEFT|wx.RIGHT|wx.TOP, 5 )
+            radios.append( radio )
+            radio.SetValue( currentSolver == DISCRETISATION_BY_LABEL[n] )
+#            e = wx.StaticText(parent, -1, "")
+#            grid.Add( e, 0, wx.ALIGN_CENTRE_VERTICAL|wx.LEFT|wx.RIGHT|wx.TOP, 5 )
+            
+        self.radios = radios
+        self.choice = choice
+
+        box.Add( grid, 0, wx.ALIGN_CENTRE|wx.ALL, 5 )
+        sizer.Add( box, 0, wx.ALIGN_CENTRE|wx.ALL, 5 )
+
+        parent.SetSizerAndFit(sizer)
+
+    def _onOk(self, params):
+        radio = filter(lambda r: r.GetValue(), self.radios)[0]
+        name = radio.GetLabelText()
+        print "name"
+        solver = DISCRETISATION_BY_LABEL[name]
+        params.getParam(parameters.Mt3d_Default_Discretisation).setValue( solver )
+        
+        return True
+        
+

@@ -1,0 +1,63 @@
+import re
+
+from geoi.actions.user_db_table_action import UserDBTableAction
+from geoi import parameters
+from geoi.parameter import Parameter, IS_NUMBER, IS_POSITIVE_NUMBER
+from geoi.chemistry_db import *
+from geoi.chemistry_equation import Equation
+
+from geoi.models.common_user_db_table_model import CommonUserDBTableModel
+
+
+HEADERS = {NAME:"Exchange Site Name",
+           FORMULA:'Exchange Master Specie Formula'}
+ORDER = [NAME, FORMULA]
+
+HELP = """
+<h1>Exchange Master Species</h1>
+
+This frame is used to define the name of an exchange site and the
+associated exchange master species formula that is used in simulations.
+Only additions or modifications, specific to the ongoing simulation, of the available data file\nare introduced here.'
+The user can define here addenda to the available database.
+
+<br><br>
+In the table the <b>green</b> entries are those defined by the user.
+The other entries are those imported from the database, and cannot be edited or renamed.
+
+"""
+
+class ExchangeMasterSpecies(UserDBTableAction, CommonUserDBTableModel):
+    """
+    Add and Edit exchange sites and associated exchange master species
+    , using those imported from the chemistry database
+    """
+
+    def __init__(self, win, params_mgr):
+        CommonUserDBTableModel.__init__(self, HEADERS, ORDER)
+        UserDBTableAction.__init__(self, params_mgr, win, "Exchange Master Species",
+                              "add and edit custom exchange sites (EXCHANGE_MASTER_SPECIES)", self,
+                    help=HELP)
+
+    def getImportedDB(self, params):
+        return params.getParamValue(parameters.IMPORTED_CHEMISTRY_DB).getExchangeMasterSpecies()
+
+    def getUserDB(self, params):
+        return params.getParamValue(parameters.CUSTOM_CHEMISTRY_DB).getExchangeMasterSpecies()
+
+    def getParamsForNewEntry(self):
+        l = []
+        not_empty = lambda s: s != ""
+
+        p = Parameter(HEADERS[NAME], "", '''
+        Name of an exchange site, it must begin with a capital letter,
+        followed by zero or more lower case letters or underscores ("_").''')
+        p.setCheckFunction(lambda s : re.match("^[A-Z][a-z_]*$", s)  and  self.entryNameCallback(p, s))
+        l.append(p)
+
+        l.append(Parameter(HEADERS[FORMULA], "",
+                           "Formula for the master exchange species: X- as an example"
+                           , not_empty) )
+
+        return l
+

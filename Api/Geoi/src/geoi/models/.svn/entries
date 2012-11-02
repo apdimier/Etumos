@@ -1,0 +1,52 @@
+8
+
+dir
+92
+http://svn2.assembla.com/svn/ckryq8JGmr3kPAabIlDkbG/Geoi/src/geoi/models
+http://svn2.assembla.com/svn/ckryq8JGmr3kPAabIlDkbG
+
+
+
+2008-01-30T17:53:05.630313Z
+92
+karl.forner
+
+
+svn:special svn:externals svn:needs-lock
+
+user_db_table_model.py
+file
+
+
+
+
+2008-01-29T17:04:45.890625Z
+589a95b04d839c32d2d2a328bf5fc9e0
+2008-01-30T17:53:05.630313Z
+92
+karl.forner
+
+__init__.py
+file
+
+
+
+
+2008-01-29T10:27:22.312500Z
+d41d8cd98f00b204e9800998ecf8427e
+2008-01-30T17:53:05.630313Z
+92
+karl.forner
+
+common_user_db_table_model.py
+file
+
+
+
+
+2008-01-30T11:28:57.125000Z
+728257dfb283d7f19814b835d1853d4b
+2008-01-30T17:53:05.630313Z
+92
+karl.forner
+

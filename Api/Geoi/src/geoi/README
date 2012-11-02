@@ -1,0 +1,2 @@
+The two kinds of meshings will be treated via the interface. For the moment only structured meshing is enabled. later on,
+access to a finite element mesh, will be enabled through the -u option.

@@ -1,0 +1,36 @@
+import wx
+
+from geoi.gui.validators import AposterioriValidator
+
+
+
+class FloatCtrl(wx.TextCtrl):
+    def __init__(self, *args, **kargs):
+        kargs['validator'] = AposterioriValidator(self.is_float)
+        wx.TextCtrl.__init__(self, *args,  **kargs)
+
+    def is_float(self, v):
+        try:
+            float(v)
+        except:
+            return False
+        return True
+
+if __name__ == '__main__':
+    app = wx.PySimpleApp()
+    frame = wx.Frame(None, -1, "")
+
+    mains = wx.BoxSizer(wx.VERTICAL)
+
+    sizer = wx.BoxSizer(wx.HORIZONTAL)
+    sizer.Add( wx.StaticText(frame, -1 , "test TextValidator : isdigit") )
+
+
+    fc = FloatCtrl(frame, -1 , "5.21", size=(640,400))
+    sizer.Add(fc)
+
+    mains.Add( sizer )
+
+    frame.SetSizerAndFit(mains)
+    frame.Show(True)
+    app.MainLoop()

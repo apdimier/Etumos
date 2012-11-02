@@ -1,0 +1,182 @@
+#============================================================================
+#  FREE PROJECT
+#  OPEN SOURCE
+#  CHEMICAL-TRANSPORT COUPLING INTERFACE
+#  Elmer as mechanical tool should be introduced in the near future
+#  to provide a C-T-M coupling
+#============================================================================
+#  Authors :
+#              Alain DIMIER:
+
+#============================================================================
+#  Version    : 1.0
+#============================================================================
+
+import sys
+import os.path
+# work-around for getting rid of annoying copy module in wrapper python modules
+# directory
+# The main collection of Python library modules is installed in the directory prefix + '/lib/pythonversion'
+mainpath = os.path.join(sys.prefix, 'lib/python' + sys.version[:3])
+sys.path.insert(0, mainpath)
+print " import wx "
+import wx 
+from wx.lib.art import img2pyartprov
+
+print " ourpath "
+
+ourpath = os.path.split(os.path.dirname(__file__))[0]
+sys.path.append( ourpath )
+
+print " geoi "
+from geoi.main_window import MainWindow
+print " geoi MainWindow"
+from geoi.actions import *
+print " geoi actions"
+import params_manager
+import parameters
+import geoi.gui.images as images
+print " geoi end"
+
+
+def createActionTree(mw, params_mgr):
+    # create the tree of actions, for menus and tree widget
+
+#    first element is the name of the subtree
+    tree = [ 'Root',
+    # File
+                ['File', new.New(mw), open_file.OpenFile(mw, params_mgr)
+                     , save_file.SaveFile(mw, params_mgr), save_file_as.SaveFileAs(mw, params_mgr)
+                     , exit.Exit(mw) ],
+    # Edit
+                     
+                ['Edit', params_mgr.getUndoAction(), params_mgr.getRedoAction()
+                    ,switch_to_std_dialog.SwitchToStdDialog(mw)],
+#                [':'],
+    # Define
+                ['Define'
+                    , title.Title(mw, params_mgr), units.Units(mw, params_mgr)
+                    , physics_software.PhysicsSoftware(mw, params_mgr)
+#                    , chemistry.Chemistry(mw, params_mgr) 
+                    ],
+    # Chemistry
+                    
+                ['Chemistry', open_chemistry_db.OpenChemistryDB(mw, params_mgr)
+                    ,['Base Addenda',
+                        ['Aqueous Phase', aqueous_master_species.AqueousMasterSpecies(mw, params_mgr),
+                         aqueous_secondary_species.AqueousSecondarySpecies(mw, params_mgr)
+                         ],
+                        ['Mineral Phase',mineral_phase.MineralPhases(mw, params_mgr)
+                         ],
+                         ['Exchange', exchange_master_species.ExchangeMasterSpecies(mw, params_mgr)
+                          , exchange_species.ExchangeSpecies(mw, params_mgr) ],
+                        ['Surface', surface_master_species.SurfaceMasterSpecies(mw, params_mgr)
+                        , surface_species.SurfaceSpecies(mw, params_mgr)]
+                      ],
+                      ['Aqeous States',
+                          aqueous_state.AqueousStatesDefinition(mw, params_mgr),
+                          equilibrium_state.EquilibriumPhasesDefinition(mw, params_mgr),
+                          exchange_state.ExchangeDefinition(mw, params_mgr),
+                          surface_state.SurfaceDefinition(mw, params_mgr)
+                      ],
+                 ],
+    # Transport
+
+                 ['Transport',
+                        materials.Materials(mw, params_mgr),
+                        mesh_constructor.MeshConstructor(mw, params_mgr),
+                        set_zones.SetZones(mw, params_mgr),
+                        set_DarcyVelocity.DarcyVelocityComponents(mw, params_mgr)
+                  ],
+    # Solve
+
+                 ['Solver', 
+                       mt3d_solver_parameters.Mt3dSolverParameters(mw, params_mgr),
+                       coupling_algorithm.CouplingAlgorithm(mw, params_mgr)
+
+                  ],
+    # Plot
+#                  'Simulate',coupling_algorithm.Coupling(mw, params_mgr)
+
+                 ["Plot/Output", ["Output",set_PostProcessing.PostProcessing(mw, params_mgr),
+                                  set_PyPostProcessing.PyPostProcessing(mw, params_mgr),
+                                  set_VtkPostProcessing.VtkPostProcessing(mw, params_mgr)],
+                                 ["Paraview", launching.Run(mw)
+                                  ],
+                                 ["Exit",exit.Exit(mw) ]
+                 ],
+    # Help
+
+                ['Help', help.Help(mw), show_params.ShowParams(mw, params_mgr),
+                  open_shell.OpenShell(mw), inspector.Inspector(mw), about.About(mw)],
+            ]
+    return tree
+
+# parse args
+def parse_args(argv, params_mgr):
+    file_to_open = None
+    if len (argv) > 1:
+        if argv[1] == '-u' or argv[1] == 'u':
+            params = params_mgr.getCurrentParamSet()
+            params.getParam(parameters.Mode_is_structured).setValue(False)
+        else:
+            file_to_open = argv[1]
+    return file_to_open
+
+def build_main_window(params):
+    win = MainWindow(None, -1, "")
+    win.SetMinSize((850,650))
+    if params.getParam(parameters.Mode_is_structured).getValue():
+        win.SetTitle('Geochemical - Transport GUI - phreeqC/Mt3d')
+    else:
+        win.SetTitle('Geochemical - Transport GUI - phreeqC/Elmer')
+
+    return win
+
+
+
+
+class MyAppProvider(wx.ArtProvider):
+    def __init__(self, size):
+        wx.ArtProvider.__init__(self)
+        self.size = size
+
+    def CreateBitmap(self, id, client=wx.ART_OTHER, size=wx.DefaultSize):
+        s = self.size
+        if size != wx.DefaultSize:
+            s = size
+        b = wx.ArtProvider.GetBitmap(id, client, s)
+
+        return b
+
+app = wx.App(0)
+params_mgr = params_manager.ParamsManager()
+file = parse_args(sys.argv, params_mgr)
+
+wx.ArtProvider.Push(MyAppProvider( (16,16) ))
+#imagesProvider = img2pyartprov.Img2PyArtProvider(images, artIdPrefix='wx.ART_IMAGES_')
+#wx.ArtProvider.Push(imagesProvider)
+#wx.ArtProvider.Push(images)
+
+#app = init_qt_and_set_styles(sys.argv)
+mw = build_main_window(params_mgr.getCurrentParamSet())
+params_mgr.createRedoAndUndoActions(mw)
+#mw = app.frame
+actionTree = createActionTree(mw, params_mgr)
+mw.setup(actionTree)
+
+params_action.ParamsAction.SetDialogPanel( mw.getDialogPanel() )
+
+#frame = wx.Frame(None, -1, "Hello from wxPython")
+#frame.Show()
+
+#actionTree = createActionTree(mw, params_mgr)
+mw.CenterOnScreen()
+mw.Show()
+
+if file:
+    params_mgr.openFile(file)
+
+app.MainLoop()
+
+

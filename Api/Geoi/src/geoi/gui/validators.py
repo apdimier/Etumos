@@ -1,0 +1,178 @@
+from geoi import parameter
+import  wx
+
+import geoi.parameter
+
+class BaseValidator(wx.PyValidator):
+    """
+    """
+
+    def Clone (self):
+        import copy
+        return copy.copy(self)
+        #return self.__class__()
+
+#    def Validate(self, window):     # window here is the *parent* of the ctrl
+#        """
+#        Because each operation on the control is vetted as it's made,
+#        the value of the control is always valid.
+#        """
+#        return 1
+
+
+    def OnChar(self, event):
+        pass
+
+
+    def TransferToWindow(self):
+        return True # Prevent wx.Dialog from complaining.
+
+
+    def TransferFromWindow(self):
+        return True # Prevent wx.Dialog from complaining.
+
+
+INVALID_COLOR = 'RED'
+
+class AposterioriValidator(BaseValidator):
+
+    def __init__(self, check_callback, invalid_color=INVALID_COLOR):
+        " check_callback is a function taking the value as argument "
+        BaseValidator.__init__(self)
+        self._invalid_color = invalid_color
+        self._check = check_callback
+        self._nbcalls = 0
+
+        self.Bind(wx.EVT_KILL_FOCUS, self._onFocus)
+        self.Bind(wx.EVT_TEXT, self._onText)
+        self.Bind(wx.EVT_CHAR, self._onChar)
+        self.Bind(wx.EVT_WINDOW_CREATE, self._onWinCreate)
+
+
+    def Clone(self):
+        return self.__class__(self._check, self._invalid_color)
+
+    def setValidEditorValue(self, editor, isValid):
+        "set if an editor has a valid value by displaying graphically if the value is invalid"
+
+        if isValid:
+            editor.SetBackgroundColour( self._default_bg_color )
+        else:
+            editor.SetBackgroundColour( self._invalid_color )
+        editor.Refresh()
+
+    def _onWinCreate(self, evt):
+        #print "_onWinCreate"
+        self._validate(evt)
+
+    def _onText(self, evt):
+        #print "_onText"
+        self._validate(evt)
+
+    def _onFocus(self, evt):
+        #print "_onFocus"
+        self._validate(evt)
+
+    def _onChar(self, evt):
+        #print "_onChar"
+        self._validate(evt)
+
+    def _validate(self, evt):
+        editor = evt.GetEventObject()
+        self.doTheValidation(editor)
+        evt.Skip()
+
+    def doTheValidation(self, editor):
+        if self._nbcalls == 0: # first time
+            self._default_bg_color = editor.GetBackgroundColour()
+        self._nbcalls += 1
+
+        value = editor.GetValue()
+        status = (self._check(value) == True)
+        self.setValidEditorValue(editor, status)
+
+        return status
+
+    def Validate(self, win):     # window here is the *parent* of the ctrl
+        """
+        """
+
+        status = self.doTheValidation(self.GetWindow())
+#        print ("Validate(self, win) => %s" % status), self
+        return status
+
+class ParameterValidator(AposterioriValidator):
+    def __init__(self, param, invalid_color=INVALID_COLOR):
+        " check_callback is a function taking the value as argument "
+        AposterioriValidator.__init__(self,self._check_callback, invalid_color)
+        self._param = param
+
+        self.Bind(wx.EVT_KILL_FOCUS, self._onFocus)
+        self.Bind(wx.EVT_TEXT, self._onText)
+        self.Bind(wx.EVT_CHAR, self._onChar)
+        self.Bind(wx.EVT_WINDOW_CREATE, self._onWinCreate)
+
+    def Clone(self):
+        return self.__class__(self._param, self._invalid_color)
+
+    def _check_callback(self, v):
+        return self._param.checkValue(v)
+
+    def TransferToWindow(self):
+#        print " TransferToWindow ", self
+        self.GetWindow().SetValue( str(self._param.getValue()) )
+        return True # Prevent wx.Dialog from complaining.
+
+    def TransferFromWindow(self):
+#        print " TransferFromWindow ", self
+        self._param.setValueFromString( str(self.GetWindow().GetValue()) )
+        return True # Prevent wx.Dialog from complaining.
+
+    def __str__(self):
+        s = "ParameterValidator for parameter %s of value %s, current window value:%s" \
+             % (self._param.getName(),self._param.getValue(), self.GetWindow().GetValue() )
+        return s
+
+
+def IS_FLOAT(v):
+    try:
+        float(v)
+    except:
+        return False
+    return True
+
+if __name__ == '__main__':
+    app = wx.PySimpleApp()
+    frame = wx.Frame(None, -1, "")
+
+    mains = wx.BoxSizer(wx.VERTICAL)
+
+    sizer = wx.BoxSizer(wx.HORIZONTAL)
+    sizer.Add( wx.StaticText(frame, -1 , "test TextValidator : isdigit") )
+
+    validator = AposterioriValidator(lambda v: str(v).isdigit())
+    fc = wx.TextCtrl(frame, -1 , "", validator=validator)
+    sizer.Add(fc)
+
+    mains.Add( sizer )
+
+    sizer = wx.BoxSizer(wx.HORIZONTAL)
+    sizer.Add( wx.StaticText(frame, -1 , "test TextValidator : isfloat") )
+
+    validator = AposterioriValidator(lambda v: IS_FLOAT(v))
+    fc = wx.TextCtrl(frame, -1 , "", validator=validator)
+    sizer.Add(fc)
+    mains.Add( sizer )
+
+    p = parameter.Parameter("parameter", "",
+                           'log of the equilibrium constant at 25 Celcius degrees'
+                           , parameter.IS_NUMBER)
+    sizer = wx.BoxSizer(wx.HORIZONTAL)
+    sizer.Add( wx.StaticText(frame, -1 , "test ParameterValidator ") )
+    fc = wx.TextCtrl(frame, -1 , "", validator=ParameterValidator(p))
+    sizer.Add(fc)
+    mains.Add( sizer )
+
+    frame.SetSizerAndFit(mains)
+    frame.Show(True)
+    app.MainLoop()

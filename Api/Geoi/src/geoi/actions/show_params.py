@@ -1,0 +1,77 @@
+from geoi import parameters
+import wx
+from  wx.lib.mixins.listctrl import ListCtrlAutoWidthMixin
+
+from geoi.gui.sortable_autowidth_listctrl import SortableAutoWidthListCtrl
+from geoi.params_manager import ParamsManager
+from geoi.actions.action import Action
+
+CHANGED_COLOUR = "RED"
+
+EXCEPTIONS = {parameters.IMPORTED_CHEMISTRY_DB:1, parameters.CUSTOM_CHEMISTRY_DB:1}
+
+class ShowParams(Action):
+    "Display the current parameters in a table"
+
+    def __init__(self, win, param_mgr):
+        Action.__init__(self, win, "ShowParams", "Display the current parameters in a table")
+        self.param_mgr = param_mgr
+
+
+
+    def run(self):
+        self.display_table_params(self.param_mgr.getCurrentParamSet())
+
+
+    def display_table_params(self, params):
+        """Display params in a table dialog"""
+
+
+        dialog = wx.Dialog(self.getParent(), -1, "ShowParams", size=(640,400)
+                           , style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER )
+
+        headers = ["Name", "Value", "Default value", "Description", "Possible Values"]
+        values = []
+        for name in params.getParamNames():
+            if name in EXCEPTIONS:
+                continue
+            p = params.getParam(name)
+
+            values.append([p.getName(),p.getValue(),p.getDefault()
+                           ,p.getDescription(), p.getPossibleValues()])
+
+
+        table = SortableAutoWidthListCtrl(dialog, headers=headers, values=values
+                                          , style=wx.LC_HRULES|wx.LC_VRULES)
+#
+# bug on Zones_list: the SetItemTextcolour crashes
+#
+        for (index,name) in enumerate(params.getParamNames()):
+            p = params.getParam(name)
+            if p.getValue() != p.getDefault() and p.getName()!="Zones_list":
+                print " name ",index,name,p.getValue(),p.getDefault()
+                table.SetItemTextColour(index, wx.GREEN)
+#                table.SetItemBackgroundColour(index, wx.GREEN)
+                pass
+        table.AutoSizeColumn(0)
+
+        sizer = wx.BoxSizer(wx.VERTICAL)
+        sizer.Add( table, 1, wx.ALL | wx.EXPAND, border=10 )
+
+        dialog.SetSizerAndFit(sizer)
+        dialog.SetInitialSize((640, 400))
+        dialog.CenterOnParent()
+        dialog.Show()
+
+if __name__ == '__main__':
+    app = wx.App(0)
+    #app = init_qt_and_set_styles(sys.argv)
+
+
+    #actionTree = createActionTree(mw, params_mgr)
+    params = ParamsManager()
+    action = ShowParams(None,params)
+    f = wx.Frame(None, -1)
+    f.Show()
+    app.MainLoop()
+    action.run()

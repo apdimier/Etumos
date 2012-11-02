@@ -1,0 +1,14 @@
+import wx
+
+from geoi.actions.action import Action
+
+class Help(Action):
+    "Help: show Help"
+
+    def __init__(self, win):
+        Action.__init__(self, win, "Help", "Will show Help", menuText = '&Help'
+                        , accelerator = 'CTRL+H', iconId = wx.ART_HELP)
+
+    def run(self):
+        print "Help.run()"
+        self.setDisabled(True)

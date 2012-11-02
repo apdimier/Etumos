@@ -1,0 +1,82 @@
+8
+
+dir
+91
+http://svn2.assembla.com/svn/ckryq8JGmr3kPAabIlDkbG/Geoi
+http://svn2.assembla.com/svn/ckryq8JGmr3kPAabIlDkbG
+
+
+
+2008-01-28T12:44:12.239603Z
+91
+karl.forner
+has-props
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+f711f47a-2549-4967-850e-05643b90d7f4
+
+documents
+dir
+
+.project
+file
+
+
+
+
+2007-11-30T17:34:56.703125Z
+db15757d36581c8762dffc7d456cea4d
+2007-11-26T10:20:08.188885Z
+10
+karl.forner
+
+src
+dir
+
+tests-src
+dir
+
+geoi.bat
+file
+
+
+
+
+2007-12-18T08:10:25.734375Z
+26d872ca3a6a65d2fa6cdd8f26c00768
+2007-12-18T08:17:00.754964Z
+32
+karl.forner
+
+data
+dir
+
+misc
+dir
+
+.pydevproject
+file
+
+
+
+
+2007-11-30T17:46:02.250000Z
+9d0398ee8b0009e33ca55725d3915c35
+2007-12-07T11:06:23.327806Z
+25
+karl.forner
+
+.settings
+dir
+

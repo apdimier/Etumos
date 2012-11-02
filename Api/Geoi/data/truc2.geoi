@@ -1,0 +1,449 @@
+
+
+
+#============================================================================
+#  Casefile: you could find here all data which are necessary
+#            to define a case. 
+
+#  This file is created whithin the /File/Save menu.
+#============================================================================
+
+
+
+
+
+#---------------------------
+#  Title of the study
+#---------------------------
+title = 'example_1'
+#---------------------------
+
+
+
+#------------------------------------
+#  Units
+#------------------------------------
+concentration_Unit = 'moles/l'
+density_Unit = 'kg/m3'
+dispersivity_Unit = 'm'
+effectiveDiffusion_Unit = 'm2/s'
+enthalpy_Unit = 'J/kg'
+head_Unit = 'm'
+length_Unit = 'm'
+permeability_Unit = 'm/s'
+temperature_Unit = 'Celcius'
+time_Unit = 's'
+#------------------------------------
+
+
+
+#--------------------------------------------------------------------------
+#  WhichSolverFrame Parameter
+#--------------------------------------------------------------------------
+#
+#  The Solver is defined here:
+#
+#    - 'Modflow': to do Hydraulic.
+#    - 'Modflow_Mt3d': to do Hydraulic and Transport.
+#    - 'Modflow_Mt3d_PhreeqC': to do Transport coupled with chemistry.
+#
+solver = 'Modflow_Mt3d_PhreeqC'
+#--------------------------------------------------------------------------
+
+
+
+#--------------------------------------------------------------------------
+#  ChemistryToolFrame Parameter
+#--------------------------------------------------------------------------
+#
+#  Here is defined the code used for Chemistry
+#
+chemistryTool = 'PhreeqC'
+#--------------------------------------------------------------------------
+
+
+
+#---------------------------
+#  Default Database
+#---------------------------
+defaultDatabase = 'llnl.dat'
+available_Databases_list = ['phreeqc.dat']
+#---------------------------
+
+
+
+#---------------------------------------------------------------------------------------------
+#  AqueousMasterSpeciesFrame Parameters
+#---------------------------------------------------------------------------------------------
+components_list = []
+
+componentSpecies_Name_list = []
+
+componentSpecies_Formula_list = []
+
+components_Properties_list = []
+#---------------------------------------------------------------------------------------------
+
+
+
+#---------------------------------------------------------------------------------------------
+#  AqueousSpeciesFrame Parameters
+#---------------------------------------------------------------------------------------------
+aqueousSpecies_list = []
+
+aqueousSpecies_Formula_list = []
+
+aqueousSpecies_Properties_list = []
+
+aqueousSpecies_Species_list = []
+#---------------------------------------------------------------------------------------------
+
+
+
+#----------------------------------
+#  MineralPhasesFrame Parameters
+#----------------------------------
+mineralPhases_list = []
+
+mineralPhases_Formula_list = []
+
+mineralPhases_Properties_list = []
+
+
+mineralPhases_Species_list = []
+
+#----------------------------------
+
+
+
+#------------------------------------
+#  ExchangeSpeciesFrame Parameters
+#------------------------------------
+exchangeSpecies_list = []
+
+exchangeSpecies_Properties_list = []
+
+exchangeSpecies_Reactants_list = []
+
+#  Debye-Huckel Parameters
+debyeHuckel_a = 0
+debyeHuckel_b = 0
+#------------------------------------
+
+
+
+#------------------------------------------
+#  ExchangeMasterSpeciesFrame Parameters
+#------------------------------------------
+exchangeMasterSpecies_list = []
+
+exchangeMasterSpecies_Formula_list = []
+#------------------------------------------
+
+
+
+#----------------------------------------------------
+#  Data_SurfaceComplexationSpeciesFrame Parameters
+#----------------------------------------------------
+surfaceSpecies_list = []
+
+surfaceSpecies_Properties_list = []
+
+surfaceSpecies_Reactants_list = []
+#----------------------------------------------------
+
+
+
+#----------------------------------------------------------
+#  Data_SurfaceComplexationMasterSpeciesFrame Parameters
+#----------------------------------------------------------
+surfaceMasterSpecies_list = []
+
+surfaceMasterSpecies_Formula_list = []
+#----------------------------------------------------------
+
+
+
+#-------------------------------------
+#  AqueousStateFrame Parameters
+#-------------------------------------
+aqueousStates_list = []
+
+  #
+  #  In the aqueousStates_Properties_list, the properties for each aqueous state (solution) are given:
+  #  It means that this list has the same number of elements than the naqueousStates_list.
+  #  The positions of an Aqueous State and its own properties are the same in the two lists
+  #  Each element of the aqueousStates_Properties_list is a list, containing:
+  #
+  #    - The Temperature of the corresponding Aqueous Solution.
+  #    - The pH of the corresponding Aqueous Solution.
+  #    - The pe of the corresponding Aqueous Solution.
+  #
+aqueousStates_Properties_list = []
+
+  #
+  #  The aqueousStates_Species_list is the list containing the species of each aqueous solution.
+  #  This is a list of lists: there are 3 levels:
+  #
+  #    - The aqueousStates_Species_list contains the species and their concentrations
+  #      for all aqueous solutions.
+  #    - The second level contains the lists of all species and their concentrations
+  #      contained by the considered solution.
+  #    - Each third-level list contains a species with its concentration in the considered solution.
+  #
+aqueousStates_Species_list = []
+
+#  Initialization parameters
+aqueousStates_Default_Temperature = 25.0
+aqueousStates_Default_pH = 7.0
+aqueousStates_Default_pe = 4.0
+#-------------------------------------
+
+
+
+#-----------------------------------------------
+#  State_EquilibriumPhasesFrame Parameters
+#-----------------------------------------------
+aqueousStates_MineralPhases_list = []
+
+aqueousStates_MineralPhases_Properties_list = []
+#-----------------------------------------------
+
+
+
+#-------------------------------------------------
+#  State_IonExchangeFrame Parameters 
+#-------------------------------------------------
+aqueousStates_ExchangeSpecies_list = []
+
+aqueousStates_ExchangeSpecies_Properties_list = []
+#-------------------------------------------------
+
+
+
+#---------------------------------------------------------
+#  State_SurfaceComplexationCompositionFrame Parameters
+#---------------------------------------------------------
+
+aqueousStates_SurfaceSpecies_list = []
+
+aqueousStates_SurfaceSpecies_Properties_list = []
+#---------------------------------------------------------
+
+
+
+#----------------------------------------------
+#  State_KineticRatesFrame Parameters
+#----------------------------------------------
+aqueousStates_KineticRates_list = []
+
+aqueousStates_KineticRates_Properties_list = []
+#----------------------------------------------
+
+
+
+#-------------------------------------
+#  State_GasPhaseFrame Parameters
+#-------------------------------------
+aqueousStates_Gas_list = []
+
+aqueousStates_Gas_Properties_list = []
+#-------------------------------------
+
+
+
+#---------------------------------
+#  MaterialsFrame Parameters
+#---------------------------------
+materials_list = []
+
+materials_Properties_list = []
+#---------------------------------
+
+
+
+#--------------------------------------------
+#  MeshBuildingUpDirectionFrame Parameters
+#--------------------------------------------
+meshLine_Direction = 'I'
+#--------------------------------------------
+
+
+
+#-------------------------------
+#  MeshLineInIFrame Parameters
+#-------------------------------
+gridLineInI = 'New'
+lineNumberInI = 0
+numberOfLinesInI = 0
+#-------------------------------
+
+
+
+#-------------------------------
+#  MeshLineInIParametersFrame Parameters
+#-------------------------------
+mesh_list_InI = []
+
+meshLineInINumberOfCells = 0
+meshLineInILength = 0
+meshLineInIGeometricRatio = 1
+#-------------------------------
+
+
+
+#-------------------------------
+#  MeshLineInJFrame Parameters
+#-------------------------------
+gridLineInJ = 'New'
+lineNumberInJ = 0
+numberOfLinesInJ = 0
+#-------------------------------
+
+
+
+#-------------------------------
+#  MeshLineInJParametersFrame Parameters
+#-------------------------------
+mesh_list_InJ = []
+
+meshLineInJNumberOfCells = 0
+meshLineInJLength = 0
+meshLineInJGeometricRatio = 1
+#-------------------------------
+
+
+
+#-----------------------------------
+#  SetZonesFrame Parameters 
+#-----------------------------------
+zones_list = []
+
+zone_Material_AqueousState_list = []
+
+boundaryConditionTimeVariation_dict = {}
+#-----------------------------------
+
+
+
+#------------------------------
+#  HydraulicBCFrame Parameter
+#------------------------------
+zone_BCKind_list = []
+#------------------------------
+
+
+
+#-------------------------------------
+#  HydraulicBCValuesFrame Parameter
+#-------------------------------------
+bCValues_list = []
+#-------------------------------------
+
+
+
+#----------------------------------
+#  Interactive XYPlot Parameters (Time)
+#----------------------------------
+interactiveXYPlot_Parameters_list = [0, 0, 1]
+interactiveXYPlot_AqueousComponentsToPlot_list = []
+interactiveXYPlot_AvailableAqueousComponents_list = []
+#----------------------------------
+
+
+
+#----------------------------------
+#  Interactive XYPlot Parameters (Space and Time)
+#----------------------------------
+interactiveXYPlot_Space_and_Time_Parameters_list = ['I', 1]
+interactiveXYPlot_Space_and_Time_ElementsToPlot_list = []
+#----------------------------------
+
+
+
+#------------------------------------
+#  Postprocessing Contours Parameters
+#------------------------------------
+postprocessingContours_Parameters_list = [200, 's']
+postprocessingContours_AqueousComponentsToPlot_list = []
+postprocessingContours_AvailableAqueousComponents_list = []
+#------------------------------------
+
+
+
+#------------------------------
+#  Modflow Solver Parameters
+#------------------------------
+  #
+  #  - accl is the Under Relaxation Factor
+  #  - mxiter is the Maximum Number of Iterations
+  #  - hclose is the Residual Convergence
+  #
+modflow_accl = 1.0
+modflow_mxiter = 200
+modflow_hclose = 1e-11
+#------------------------------
+
+
+
+#------------------------------
+#  Mt3d Solver Parameters
+#------------------------------
+mt3d_mxiter = 1
+mt3d_iter1 = 30
+mt3d_accl = 1.0
+mt3d_cclose = 1e-10
+
+mt3d_ConjugateGradientPreconditioner = 'JACOBI'
+
+mt3d_advection = 'UPWIND'
+#------------------------------
+
+
+
+#------------------------------
+#  PhreeqC Solver Parameters
+#------------------------------
+phreeqC_NumberOfIterations = 150
+phreeqC_ConvergenceCriterion = 1e-15
+#------------------------------
+
+
+
+#-------------------------------------
+#  SetDarcyVelocityFrame Parameter
+#-------------------------------------
+darcyVelocity_kind = 'By Component'
+
+darcyVelocity_list = ['', '', '0.0']
+#-------------------------------------
+
+
+
+#----------------------------------------
+#  IterateFrame Parameters 
+#----------------------------------------
+iterate_Algorithm = 'One_Step'
+iterate_InitialTime = 0
+iterate_InitialTimeStepSize = 0
+iterate_SimulationTime = 0
+
+iterate_MinTimeStep = 0
+iterate_MaxTimeStep = 0
+iterate_IterationTargetNumberForThePicard = 20
+iterate_MaxOfIterationsForThePicard = 40
+iterate_CouplingPrecision = 1e-05
+iterate_RelaxationMinFactor = 0.8
+iterate_RelaxationMaxFactor = 1.05
+iterate_ResidualReportingInterval = 10
+#---------------------------------------
+
+
+
+#----------------------------------------
+#  EquilibrateFrame Parameter 
+#----------------------------------------
+aqueousSolutionToEquilibrate_list = []
+#----------------------------------------
+
+

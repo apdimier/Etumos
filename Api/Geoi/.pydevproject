@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?eclipse-pydev version="1.0"?>
+
+<pydev_project>
+<pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
+<path>/Geoi/src</path>
+</pydev_pathproperty>
+<pydev_property name="org.python.pydev.PYTHON_PROJECT_VERSION">python 2.4</pydev_property>
+<pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
+<path>/home/kforner/alliances/alliances-build/lib/python2.4/site-packages/alliances</path>
+<path>/home/kforner/alliances/prods/Numeric-23.7/lib/python2.4/site-packages/Numeric</path>
+<path>/home/kforner/alliances/proda/lib/xdata</path>
+<path>/home/kforner/alliances/prods/PyQt-3.14.1</path>
+<path>/home/kforner/alliances/prods/sip-4.2.1</path>
+<path>/home/kforner/alliances/alliances-build/lib/python2.4/site-packages/alliances</path>
+<path>/home/kforner/alliances/alliances-build/lib</path>
+<path>/home/kforner/alliances/alliances-build/bin</path>
+<path>/home/kforner/alliances/alliances-build/lib</path>
+<path>/home/kforner/alliances/alliances-build/lib/python2.4/site-packages/alliances</path>
+<path>/home/kforner/alliances/proda/lib/xdata</path>
+<path>/home/kforner/alliances/proda//lib</path>
+<path>/home/kforner/alliances/proda//lib/</path>
+<path>/home/kforner/alliances/proda/</path>
+<path>/home/kforner/alliances/proda/lib/Pyro</path>
+<path>/home/kforner/alliances/proda/lib</path>
+<path>/home/kforner/alliances/prods/CALCULATOR_3.2.6/bin/salome</path>
+<path>/home/kforner/alliances/prods/CALCULATOR_3.2.6/lib/salome</path>
+<path>/home/kforner/alliances/prods/CALCULATOR_3.2.6/lib/python2.4/site-packages/salome</path>
+<path>/home/kforner/alliances/prods/PYCALCULATOR_3.2.6/bin/salome</path>
+<path>/home/kforner/alliances/prods/PYCALCULATOR_3.2.6/lib/python2.4/site-packages/salome</path>
+<path>/home/kforner/alliances/prods/COMPONENT_3.2.6/bin/salome</path>
+<path>/home/kforner/alliances/prods/COMPONENT_3.2.6/lib/salome</path>
+<path>/home/kforner/alliances/prods/COMPONENT_3.2.6/lib/python2.4/site-packages/salome</path>
+<path>/home/kforner/alliances/prods/NETGENPLUGIN_3.2.6/lib/salome</path>
+<path>/home/kforner/alliances/prods/NETGENPLUGIN_3.2.6/lib/python2.4/site-packages/salome</path>
+<path>/home/kforner/alliances/prods/SUPERV_3.2.6/bin/salome</path>
+<path>/home/kforner/alliances/prods/SUPERV_3.2.6/lib/salome</path>
+<path>/home/kforner/alliances/prods/SUPERV_3.2.6/lib/python2.4/site-packages/salome</path>
+<path>/home/kforner/alliances/prods/VISU_3.2.6/bin/salome</path>
+<path>/home/kforner/alliances/prods/VISU_3.2.6/lib/salome</path>
+<path>/home/kforner/alliances/prods/VISU_3.2.6/lib/python2.4/site-packages/salome</path>
+<path>/home/kforner/alliances/prods/SMESH_3.2.6/bin/salome</path>
+<path>/home/kforner/alliances/prods/SMESH_3.2.6/lib/salome</path>
+<path>/home/kforner/alliances/prods/SMESH_3.2.6/lib/python2.4/site-packages/salome</path>
+<path>/home/kforner/alliances/prods/MED_3.2.6/bin/salome</path>
+<path>/home/kforner/alliances/prods/MED_3.2.6/lib/salome</path>
+<path>/home/kforner/alliances/prods/MED_3.2.6/lib/python2.4/site-packages/salome</path>
+<path>/home/kforner/alliances/prods/GEOM_3.2.6/bin/salome</path>
+<path>/home/kforner/alliances/prods/GEOM_3.2.6/lib/salome</path>
+<path>/home/kforner/alliances/prods/GEOM_3.2.6/lib/python2.4/site-packages/salome</path>
+<path>/home/kforner/alliances/prods/GUI_3.2.6/bin/salome</path>
+<path>/home/kforner/alliances/prods/GUI_3.2.6/lib/salome</path>
+<path>/home/kforner/alliances/prods/GUI_3.2.6/lib/python2.4/site-packages/salome</path>
+<path>/home/kforner/alliances/prods/KERNEL_3.2.6/bin/salome</path>
+<path>/home/kforner/alliances/prods/KERNEL_3.2.6/lib/salome</path>
+<path>/home/kforner/alliances/prods/KERNEL_3.2.6/lib/python2.4/site-packages/salome</path>
+<path>/home/kforner/alliances/prods/docutils-0.3.7/lib/python2.4/site-packages</path>
+<path>/home/kforner/alliances/prods/Numeric-23.7/lib/python2.4/site-packages/Numeric</path>
+<path>/home/kforner/alliances/prods/VTK-4.2.6/lib/vtk</path>
+<path>/home/kforner/alliances/prods/VTK-4.2.6/lib/python2.4/site-packages/vtk_python</path>
+<path>/home/kforner/alliances/prods/omniORB-4.0.7/lib</path>
+<path>/home/kforner/alliances/prods/omniORB-4.0.7/lib/python2.4/site-packages</path>
+<path>/home/kforner/alliances/prods/PyQt-3.14.1</path>
+<path>/home/kforner/alliances/prods/sip-4.2.1</path>
+<path>/home/kforner/alliances/prods/Python-2.4.3/lib/python2.4</path>
+</pydev_pathproperty>
+</pydev_project>

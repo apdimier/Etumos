@@ -1,0 +1,13 @@
+import wx
+
+from geoi.actions.action import Action
+
+class New(Action):
+    "New File action : reset to defaults ?"
+
+    def __init__(self, win):
+        Action.__init__(self, win, "New", "For now, do nothing", menuText='&New'
+                        , accelerator='CTRL+N', iconId = wx.ART_NEW, )
+
+    def run(self):
+        print "New.run()"

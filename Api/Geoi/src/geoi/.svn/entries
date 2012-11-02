@@ -1,0 +1,151 @@
+8
+
+dir
+91
+http://svn2.assembla.com/svn/ckryq8JGmr3kPAabIlDkbG/Geoi/src/geoi
+http://svn2.assembla.com/svn/ckryq8JGmr3kPAabIlDkbG
+
+
+
+2008-01-28T12:44:12.239603Z
+91
+karl.forner
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+f711f47a-2549-4967-850e-05643b90d7f4
+
+actions
+dir
+
+main_window.py
+file
+
+
+
+
+2008-01-14T21:07:50.046875Z
+36f56b5b1f22f3c2c8b8efc4b816f333
+2008-01-08T18:26:07.272710Z
+80
+karl.forner
+
+chemistry_db.py
+file
+92
+
+
+
+2008-01-30T14:01:55.968750Z
+e70090800aa78ac07c1257d960a4b6df
+2008-01-30T17:53:05.630313Z
+92
+karl.forner
+
+chemistry_equation.py
+file
+92
+
+
+
+2008-01-30T11:15:10.703125Z
+c8f7e24dac81d428eccf06cfe281104e
+2008-01-30T17:53:05.630313Z
+92
+karl.forner
+
+models
+dir
+
+gui
+dir
+
+params_manager.py
+file
+
+
+
+
+2008-01-14T21:07:49.937500Z
+d80394e3fc2ff2a33822d5e220ba5028
+2008-01-14T20:34:07.266386Z
+83
+karl.forner
+
+__init__.py
+file
+
+
+
+
+2007-11-30T17:34:44.421875Z
+d41d8cd98f00b204e9800998ecf8427e
+2007-11-29T14:14:53.795702Z
+15
+karl.forner
+
+parameter.py
+file
+92
+
+
+
+2008-01-30T10:39:30.093750Z
+fdd1c4697d84820232b8ba09d8032122
+2008-01-30T17:53:05.630313Z
+92
+karl.forner
+
+parameters.py
+file
+
+
+
+
+2008-01-29T09:10:38.843750Z
+ca934cfa26ce639bd204f7f26e12ddc9
+2008-01-28T12:44:12.239603Z
+91
+karl.forner
+
+wxmain.py
+file
+
+
+
+
+2008-01-29T09:10:38.859375Z
+b3d369443248d9657f2d07c07742c7a1
+2008-01-28T12:44:12.239603Z
+91
+karl.forner
+
+obsolete
+dir
+
+frames
+dir
+
+chemistry_utils.py
+file
+
+
+
+
+2007-11-30T17:34:44.468750Z
+47071f046d6a567210dca41a56ff383d
+2007-11-29T14:19:20.666230Z
+17
+karl.forner
+

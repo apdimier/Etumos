@@ -1,0 +1,214 @@
+from geoi.gui.floatctrl import FloatCtrl
+from geoi.gui.validators import ParameterValidator
+from geoi.chemistry_db import ACTIVITY_LAW
+from geoi.models.common_user_db_table_model import CommonUserDBTableModel
+import wx
+from wx.lib import masked
+
+from geoi.actions.user_db_table_action import UserDBTableAction
+from geoi import parameters
+from geoi.parameter import Parameter, IS_NUMBER, IS_POSITIVE_NUMBER
+from geoi.chemistry_db import *
+from geoi.chemistry_equation import Equation
+from geoi.gui import multi_field_dialog
+from geoi.actions.aqueous_secondary_species import AqueousSecondarySpecies
+
+
+HEADERS = {ELEMENT:"Exchange Specie Name",
+           FORMULA:"Exchange Specie Formula", EQUATION:"Association reaction",
+            LOGK:"log k", ACTIVITY_LAW:"Activity Law"}
+ORDER = [ELEMENT, FORMULA, EQUATION, LOGK, ACTIVITY_LAW ]
+
+HELP = """
+<h1>Exchange Species</h1>
+
+This frame is used to define a half reaction and relative log K
+for each exchange species.
+<br>
+Only additions and modifications of the available
+simulation database are introduced here.
+
+<br><br>
+In the table the <b>green</b> entries are those defined by the user.
+The other entries are those imported from the database, and cannot be edited or renamed.
+
+"""
+
+class ExchangeSpecies(UserDBTableAction,  CommonUserDBTableModel):
+    """
+    Add and Edit exchange species, using those imported from the chemistry database
+    """
+
+    def __init__(self, win, params_mgr):
+        CommonUserDBTableModel.__init__(self, HEADERS, ORDER)
+        UserDBTableAction.__init__(self, params_mgr, win, "Exchange Species",
+                              "add and edit custom exchange species (EXCHANGE_SPECIES)", self,
+                    help=HELP)
+        self._radiobox = None
+        self._coefa = None
+        self._coefb = None
+
+    def getImportedDB(self, params):
+        return params.getParamValue(parameters.IMPORTED_CHEMISTRY_DB).getExchangeSpecies()
+
+    def getUserDB(self, params):
+        return params.getParamValue(parameters.CUSTOM_CHEMISTRY_DB).getExchangeSpecies()
+
+    def getParamsForNewEntry(self):
+        l = []
+        not_empty = lambda s: s != ""
+
+        pset = self.getDataModel().getParameterSet()
+
+        p = Parameter(HEADERS[ELEMENT], "", 'Specie Name')
+        p.setCheckFunction(lambda v: self.entryNameCallback(p, v))
+        l.append(p)
+
+        l.append(Parameter(HEADERS[FORMULA], "",
+                           "Formula for Species formed at the sorption surface"
+                           , not_empty) )
+
+        l.append(Parameter(HEADERS[EQUATION], "",
+                           'Association reaction for exchange species.'
+                           'The defined species must be the first species to the right of the equal sign.'
+                           , self.equationCallback) )
+
+        l.append(Parameter(HEADERS[LOGK], "",
+                           'log of the equilibrium constant at 25 Celcius degrees'
+                           , IS_NUMBER)  )
+
+        l.append(Parameter(HEADERS[ACTIVITY_LAW], ACTIVITY_LAW_NONE,'Activity Law', values=ACTIVITY_LAWS) )
+
+        l.append( pset.getParam(parameters.DebyeHuckel_a).clone())
+        l.append( pset.getParam(parameters.DebyeHuckel_b).clone())
+
+        return l
+
+    def getParamsForNewEntryFrom(self, name):
+        """
+        return a list of Parameter instances, initialized if needed in a way
+        to allow the creation of a new entry with same values. So appropriate
+        parameters such as Name or Id should be set to their default values, and thr others
+        initialized from this entry current values
+        """
+        # should be a generic implementation : assume that the entry name/id
+        # is the first element of the order list; so reuse getParamsForEntryEdit()
+        params = self.getParamsForEntryEdit(name)
+        params[self.getEntryIdColumn()].setValue("", check=False)
+        return params
+
+    def getParamsForEntryEdit(self, name):
+        """
+        return a list of Parameter instances, initialized if needed in a way
+        to allow the edition of current entry.
+        """
+        pset = self.getParameterSet()
+        params = self.getParamsForNewEntry()
+        first = params[:-3]
+
+        for (col, p) in enumerate(first):
+            v = self.getValueAt(name, col)
+            p.setDefault(v)
+            p.setValue(v, check=False)
+
+        alaw, a, b = params[-3:]
+        entry = self.getDataModel().getEntry(name)
+        encoded_activity = entry[ACTIVITY_LAW]
+        alaw.setValue(encoded_activity[0])
+        if len(encoded_activity) >= 3:
+            coefa = encoded_activity[1]
+            coefb = encoded_activity[2]
+        else:
+            coefa = pset.getParamValue(parameters.DebyeHuckel_a)
+            coefb = pset.getParamValue(parameters.DebyeHuckel_b)
+
+        a.setValue( coefa )
+        b.setValue( coefb )
+
+        return params
+
+    def _makeEntryFromParams(self, params_list):
+        entry = {}
+        first = params_list[:-3]
+        for (key, p) in zip(self.getOrder(), params_list):
+            entry[key] = p.getValue()
+
+        alaw, a, b = params_list[-3:]
+        if alaw.getValue() == ACTIVITY_LAW_DEBYE_HUCKEL:
+            entry[ACTIVITY_LAW] = [alaw.getValue(), a.getValue(), b.getValue()]
+        else:
+            entry[ACTIVITY_LAW] = [alaw.getValue()]
+
+        return entry
+
+    def equationCallback(self, value):
+        try:
+            eq = Equation(str(value))
+            rightmember = eq.parseRightMembers()[0]
+            if rightmember[1] == 1:
+                d = self.getCurrentEntryEditDialog()
+                if d is not None:
+                    editor = d.getEditorByName(HEADERS[FORMULA])
+                    #editor.ChangeValue( str(rightmember[0]) )
+                    editor.SetValue( str(rightmember[0]) )
+            else:
+                return False
+        except ValueError, err:
+            #print err
+            return False
+        return True
+
+    def updateRadioBox(self, evt=None):
+        i = self._radiobox.GetSelection()
+        activity = ACTIVITY_LAWS[i]
+        enable = activity == ACTIVITY_LAW_DEBYE_HUCKEL
+        self._coefa.Enable( enable )
+        self._coefb.Enable( enable )
+        # update its parameter accordingly
+        self._radiobox.param.setValue( str(self._radiobox.GetStringSelection()) )
+
+    def createEntryEditDialog(self, params_list):
+        others = params_list[:-3] #  handle the last 3 params manually
+        alaw, a, b = params_list[-3:]
+
+
+        d = UserDBTableAction.createEntryEditDialog(self, others)
+        d.getEditorByName(HEADERS[FORMULA]).SetEditable(False)
+
+        # create the controls for the activity law and its parameters
+        self._radiobox = rb = wx.RadioBox(d, -1, "law type", wx.DefaultPosition, wx.DefaultSize,
+                ACTIVITY_LAWS , 1, wx.RA_SPECIFY_COLS)
+        rb.param = alaw
+        rb.Bind(wx.EVT_RADIOBOX, self.updateRadioBox)
+        rb.SetSelection(ACTIVITY_LAWS.index(alaw.getValue()))
+
+        self._coefa = coefa = wx.TextCtrl(d, -1, str(a.getValue()), validator=ParameterValidator(a) )
+        self._coefb = coefb = wx.TextCtrl(d, -1, str(b.getValue()), validator=ParameterValidator(b) )
+
+
+        self.updateRadioBox() #now we can update all
+
+        # layout... gui .....
+
+        d.addToGrid( wx.StaticText(d, -1, "Activity Law"), 0  )
+
+        box = wx.BoxSizer(wx.HORIZONTAL)
+        box.Add(rb)
+
+        coef_box = wx.StaticBoxSizer(wx.StaticBox(d, -1, "Debye Huckel Coefficients"), wx.VERTICAL )
+        flag= wx.ALIGN_CENTER_VERTICAL|wx.EXPAND
+        abox = wx.BoxSizer(wx.HORIZONTAL)
+        abox.Add(wx.StaticText(d,-1,"a"))
+        abox.Add(coefa, flag=flag)
+        coef_box.Add(abox, flag=flag)
+
+        bbox = wx.BoxSizer(wx.HORIZONTAL)
+        bbox.Add(wx.StaticText(d,-1,"b"))
+        bbox.Add(coefb, flag=flag)
+        coef_box.Add( bbox, flag=flag )
+
+        box.Add( coef_box, proportion=1, flag=wx.EXPAND|wx.ALL )
+        d.addToGrid( box, 1 )
+
+        d.Fit()
+        return d

@@ -1,0 +1,95 @@
+import wx
+
+from geoi.actions.params_action import ParamsAction
+from geoi import parameters
+
+DISCRETISATION_BY_LABEL = {'Upwind':parameters.MT3D_ADVECTION_UPWIND,
+                           'Central':parameters.MT3D_ADVECTION_CENTRAL,
+                           'T.V.D.':parameters.MT3D_ADVECTION_TVD }
+
+PRECONDITONNER_BY_LABEL = {'Jacobi':parameters.MT3D_CGP_JACOBI,
+                           'M. Incomplete Cholesky':parameters.MT3D_CGP_MIC,
+                           'T.V.D.':parameters.MT3D_CGP_SSOR }
+
+class Mt3dSolverParameters(ParamsAction):
+    """
+    Enables the choice of transport discretisation and of the algebraic solver
+    """
+
+    def __init__(self, win, params_mgr):
+        ParamsAction.__init__(self, params_mgr, win, "Mt3d Solver", 
+        """ 
+        Used to determine the spatial discretisation and the related algebraic solver
+        """)
+        self.radios = None
+        self.choice = None
+
+    def _createInterface(self, parent, params):
+        
+   
+        sizer = wx.BoxSizer( wx.VERTICAL )
+# Advection
+        discretisationLabels = DISCRETISATION_BY_LABEL.keys()
+        #discretisationLabels.sort()
+   
+        discretisation = params.getParam(parameters.Mt3d_Default_Discretisation)
+        box1 = wx.StaticBoxSizer(wx.StaticBox( parent, -1, "Advection" ) , wx.HORIZONTAL )
+        grid1 = wx.FlexGridSizer( 0, 4, 0, 0 )
+        grid1.SetFlexibleDirection( wx.HORIZONTAL)
+
+        radios1 = []
+        radios2 = []
+        choice1 = None
+        currentDiscretisation = str( discretisation.getValue() )
+        for (i,n) in enumerate(discretisationLabels):
+            if i == 0:    
+                style = wx.RB_GROUP
+            else:
+                style = 0
+            radio = wx.RadioButton( parent, -1, n,  style=style )
+            radio.SetToolTipString("discretisation is " + DISCRETISATION_BY_LABEL[n])
+            grid1.Add( radio, 0, wx.ALIGN_LEFT|wx.ALIGN_CENTRE_VERTICAL|wx.LEFT|wx.RIGHT|wx.TOP, 5 )
+            radios1.append( radio )
+            radio.SetValue( currentDiscretisation == DISCRETISATION_BY_LABEL[n] )
+#            e = wx.StaticText(parent, -1, "")
+#            grid.Add( e, 0, wx.ALIGN_CENTRE_VERTICAL|wx.LEFT|wx.RIGHT|wx.TOP, 5 )
+
+        self.radios1 = radios1
+        self.choice1 = choice1
+        box1.Add( grid1, 0, wx.ALIGN_LEFT|wx.ALL, 5 )
+        sizer.Add( box1, 0, wx.ALIGN_LEFT|wx.ALL, 5 )
+# Preconditionner
+        preconditionnerLabels = PRECONDITONNER_BY_LABEL.keys()
+        #preconditionnerLabels.sort()
+        preconditionning = params.getParam(parameters.Mt3d_Default_Discretisation)
+        choice2 = None
+        currentPreconditionning = str( preconditionning.getValue() )
+        box2 = wx.StaticBoxSizer(wx.StaticBox( parent, -1, "CG Preconditionner" ) , wx.HORIZONTAL )
+        grid2 = wx.FlexGridSizer( 0, 4, 0, 0 )
+        grid2.SetFlexibleDirection( wx.HORIZONTAL)
+        for (i,n) in enumerate(preconditionnerLabels):
+            if i == 0:    
+                style = wx.RB_GROUP
+            else:
+                style = 0
+            radio = wx.RadioButton( parent, -1, n,  style=style )
+            radio.SetToolTipString("preconditionner is " + PRECONDITONNER_BY_LABEL[n])
+            grid2.Add( radio, 0, wx.ALIGN_LEFT|wx.ALIGN_CENTRE_VERTICAL|wx.LEFT|wx.RIGHT|wx.TOP, 5 )
+            radios2.append( radio )
+            radio.SetValue( currentPreconditionning == PRECONDITONNER_BY_LABEL[n] )
+        self.radios2 = radios2
+        self.choice2 = choice2
+        box2.Add( grid2, 0, wx.ALIGN_LEFT|wx.ALL, 5 )
+        sizer.Add( box2, 0, wx.ALIGN_LEFT|wx.ALL, 5 )
+
+        parent.SetSizerAndFit(sizer)
+
+    def _onOk(self, params):
+        radio = filter(lambda r: r.GetValue(), self.radios1)[0]
+        name = radio.GetLabelText()
+        print "name"
+        params.getParam(parameters.Mt3d_Default_Discretisation).setValue(DISCRETISATION_BY_LABEL[name])
+        
+        return True
+        
+

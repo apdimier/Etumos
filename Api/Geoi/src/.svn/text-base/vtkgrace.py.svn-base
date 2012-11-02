@@ -1,0 +1,118 @@
+"""
+It takes the argument given by the user.
+This argument must be a vtk file for a rectilinear grid.
+Selecting a direction and a position between min and max it plots the
+values by using grace.
+"""
+try:
+    from gracePlot import *
+except ImportError:
+    Grace = None
+    pass
+
+import sys
+import Numeric
+def dimension(line):
+    x = ""
+    ind = 0
+    while(line[ind]!=" "):
+        ind+=1
+    ind+=1
+    for i in line[ind:]:
+        if i!=" ":
+	    x+=i
+	else:
+	    break
+    return int(x)
+    
+def name(line):
+    x = ""
+    ind = 0
+    while(line[ind]!=" "):
+        ind+=1
+    ind+=1
+    for i in line[ind:]:
+        if i!=" ":
+	    x+=i
+	else:
+	    break
+    return x
+
+fileargument = sys.argv[1]
+x_coordinates = []
+y_coordinates = []
+
+vtkfile = open(fileargument,"r")
+line = vtkfile.readline()
+print " line ",line
+for i in range(0,2):
+    vtkfile.readline()
+line = vtkfile.readline()
+kontrolle = line[8:24]
+if kontrolle!="RECTILINEAR_GRID":
+    message=" bad file type"
+    raise Exception(message)
+line = vtkfile.readline()
+
+line = vtkfile.readline()
+x_dimension = dimension(line)
+
+for i in range(0,x_dimension):
+    x_coordinates.append(float(vtkfile.readline()))
+line = vtkfile.readline()
+y_dimension = dimension(line)
+for i in range(0,y_dimension):
+    y_coordinates.append(float(vtkfile.readline()))
+for i in range(0,2):
+   vtkfile.readline()
+line = vtkfile.readline()
+data_dimension = dimension(line)
+line = vtkfile.readline()
+species_name = name(line)
+vtkfile.readline()
+data_to_plot = []
+for i in range(0,data_dimension):
+    data_to_plot.append(float(vtkfile.readline()))
+#print "length ",len(data_to_plot)
+#print "ldata to plot  ",data_to_plot
+plot_richtung = sys.argv[2]
+print "plot_richtung: ",plot_richtung
+plot_nummer = int(sys.argv[3])
+print "plot_nummer: ",plot_nummer
+ord_plot = []
+if plot_richtung=="x":
+    print " type x_dimension",x_dimension
+    ind = (plot_nummer-1)*x_dimension
+    for i in range(0,x_dimension):
+        print " indices ",ind+i," et valeur ",data_to_plot[ind+i]
+        ord_plot.append(data_to_plot[ind+i])
+    X = Numeric.array(x_coordinates,Numeric.Float)
+    print X
+    print "ord_plot :",ord_plot
+    Y = Numeric.array(ord_plot,Numeric.Float)
+    print Y
+elif plot_richtung=="y":
+    print " type y_dimension",y_dimension
+    ind = 0
+    for i in range(0,y_dimension):
+	ind = i*x_dimension
+        ord_plot.append(data_to_plot[ind+plot_nummer])
+	print " indice ",i,ind+plot_nummer
+    X = Numeric.array(y_coordinates,Numeric.Float)
+    print X
+    print "ord_plot y :",ord_plot
+    Y = Numeric.array(ord_plot,Numeric.Float)
+else:
+    message=" bad direction argument: take x or y"
+    raise Exception(message)
+    pass
+gplot = gracePlot()
+gplot.title("1D plot")
+gplot.subtitle(species_name+" concentrations")
+gplot.xlabel("meters")
+gplot.ylabel(species_name+", mol/l")
+#ord_plotcurve.append(Numeric.array([0,2,4]))
+gplot.plot(X,Y)
+legend = species_name[0:3]
+gplot.legend([legend])
+gplot.legendsize("0.6")
