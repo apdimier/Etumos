@@ -1,0 +1,39 @@
+PHASES
+      Fix_H+
+          H+ = H+ 
+                    log_k   0.0000000000e+00
+SURFACE_SPECIES
+          Ca+2 -1H+ + Hfo_sOH  = Hfo_sOCa+
+                    log_k   -5.8500000000e+00
+          Ca+2 -1H+ + Hfo_wOH  = Hfo_wOCa+
+                    log_k   -5.8500000000e+00
+
+SOLUTION                  1-1 flaeche
+   temp 2.5000000000e+01
+   pH    6.5000000000e+00 
+   pe    4.0000000000e+00
+   units mol/l
+                       Ca    1.0000000000e-06
+                       Cl    5.0000000000e-03
+                       Na    5.0000000000e-03
+SELECTED_OUTPUT
+  -high_precision true
+KNOBS
+  -iterations 500
+  -diag true 
+  -tolerance 1.e-15
+SOLUTION 0
+PRINT
+  -reset	true
+# thereafter the -cells parameter is the 
+# only relevant parameter 
+TRANSPORT
+  -cells          0
+  -time_step          100.
+  -shifts          5
+  -lengths        0.1
+  -flow_direction diff
+  -boundary_conditions        closed closed
+  -print_frequency      1
+  -warnings False
+END

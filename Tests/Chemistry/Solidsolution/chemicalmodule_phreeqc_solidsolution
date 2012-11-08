@@ -1,0 +1,61 @@
+(null)
+
+st case for the SOLIDSOLUTION phreeqC keyword : see page 236 of the phreeqC manual
+# See the SOLID_SOLUTION  keyword definition p. 144 and 192 of the phreeqC manual
+#
+
+
+number of aqueous primary species                         6
+number of aqueous secondary species                       9
+number of minerals                                        2
+number of sorbed species                                  0
+
+pH                                          5.65724997811
+pe                                            12.1634694459
+water activity                               0.999226034566
+ionicstrength                               0.0113315692581
+temperature                                            25.0
+electrical_balance                        5.46918470325e-17
+total H                                       111.019985971
+total O                                       55.5975821556
+
+
+ primary species: mol/l
+
+                H(1) 1.0
+               C(-4) 0.0
+                C(4) 0.0418274514698
+                  Ca 0.00393451938075
+                H(0) 0.0
+                O(0) 3.1776204135e-15
+
+
+ secondary species: mol/l
+
+                 OH- 5.07796187742e-09
+                 H2O 55.5062166963
+               HCO3- 0.00763339499293
+             CaHCO3+ 0.000236422994458
+               CaCO3 5.95429573598e-07
+               CO3-2 2.22811452594e-07
+             CaHCO3+ 0.000236422994458
+               CaCO3 5.95429573598e-07
+               CaOH+ 2.03871461798e-10
+
+
+ sorbed species: moles
+
+
+
+     SI( target saturation index):        SI < 0 undersaturation, 0: equilibrium and supersaturation otherwise
+
+
+
+
+
+                 mineral species:            SI                   moles
+
+                     Aragonite         -1.11325987e+00       0.00000000e+00
+
+                        CO2(g)          5.68434189e-14       9.96604169e+00
+

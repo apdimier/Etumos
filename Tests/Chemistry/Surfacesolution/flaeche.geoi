@@ -1,0 +1,344 @@
+###### Geoi Parameter Set Save File generated on 2009-01-05#####
+#AqueousSolutionToEquilibrate_list : 
+AqueousSolutionToEquilibrate_list = []
+#AqueousStates_Default_Eh : 
+AqueousStates_Default_Eh = 0.23668639
+#AqueousStates_Default_Temperature : 
+AqueousStates_Default_Temperature = 25.0
+#AqueousStates_Default_pH : 
+AqueousStates_Default_pH = 7.0
+#AqueousStates_Default_pe : 
+AqueousStates_Default_pe = 4.0
+#AqueousStates_ExchangeSpecies_Properties_list : 
+AqueousStates_ExchangeSpecies_Properties_list = [[]]
+#AqueousStates_ExchangeSpecies_list : 
+AqueousStates_ExchangeSpecies_list = [[]]
+#AqueousStates_Gas_Properties_list : 
+AqueousStates_Gas_Properties_list = []
+#AqueousStates_Gas_list : 
+AqueousStates_Gas_list = []
+#AqueousStates_KineticRates_Properties_list : 
+AqueousStates_KineticRates_Properties_list = []
+#AqueousStates_KineticRates_list : 
+AqueousStates_KineticRates_list = []
+#AqueousStates_MineralPhases_Properties_list : 
+AqueousStates_MineralPhases_Properties_list = [[]]
+#AqueousStates_MineralPhases_list : 
+AqueousStates_MineralPhases_list = [[]]
+#AqueousStates_Properties_list : 
+AqueousStates_Properties_list = [[['pH', '6.5'], ['T', '25.0'], ['pe', '4'], ['2', ('10',"HCl")]]]
+#AqueousStates_Species_list : 
+AqueousStates_Species_list = [[['Ca', '1.e-6'], ['Cl', '5.e-3'], ['Na', '5.e-3']]]
+#AqueousStates_SurfaceSpecies_Properties_list : 
+AqueousStates_SurfaceSpecies_Properties_list = [[]]
+#AqueousStates_SurfaceSpecies_list : 
+AqueousStates_SurfaceSpecies_list = [[]]
+#AqueousStates_list : 
+AqueousStates_list = ['flaeche']
+#Available_Databases_list : ?? - useless ? 
+Available_Databases_list = ['phreeqc.dat']
+#BCValues_list : 
+BCValues_list = []
+#BoundaryConditionTimeVariation_dict : 
+BoundaryConditionTimeVariation_dict = {}
+#BoundaryConditions_list : 
+BoundaryConditions_list = []
+#CUSTOM_CHEMISTRY_DB : the custom chemistry database instance, user edited
+CUSTOM_CHEMISTRY_DB = ChemistryDB({ 'EXCHANGE_MASTER_SPECIES': {},
+  'EXCHANGE_SPECIES': {},
+  'PHASES': { 'Fix_H+': { 'DENSITY': 3000,
+                          'EQUATION': 'H+ = H+',
+                          'FORMULA': 'H+',
+                          'LOGK': 0.0,
+                          'NAME': 'Fix_H+'}},
+  'RATES': {},
+  'SOLUTION_MASTER_SPECIES': {},
+  'SOLUTION_SPECIES': {},
+  'SURFACE_MASTER_SPECIES': { 'Surf_s': { 'FORMULA': 'Surf_sOH',
+                                          'NAME': 'Surf_s'}},
+  'SURFACE_SPECIES': { 'Hfo_sOH + Ca+2 -1H+  = Hfo_sOCa+': { 'EQUATION': 'Hfo_sOH + Ca+2 -1H+  = Hfo_sOCa+',
+                                                             'LOGK': -5.8499999999999996},
+                       'Hfo_wOH + Ca+2 -1H+  = Hfo_wOCa+': { 'EQUATION': 'Hfo_wOH + Ca+2 -1H+  = Hfo_wOCa+',
+                                                             'LOGK': -5.8499999999999996}}})
+
+#CUSTOM_MATERIAL_DB : the custom material database instance, user edited
+CUSTOM_MATERIAL_DB = MaterialDB({'MATERIAL': {}})
+
+#ChemistryTool : the chemistry software to use
+ChemistryTool = 'PhreeqC'
+#Concentration_Unit : unit for concentration
+Concentration_Unit = 'moles/l'
+#CurrentDatabasePath : Full path of the current Thermochemical Database
+CurrentDatabasePath = u'/home/dimier/Wrapper/Phreeqc_dat/phreeqc.dat'
+#DarcyVelocity_kind : 
+DarcyVelocity_kind = 'By Component'
+#DarcyVelocity_list : 
+DarcyVelocity_list = ['0.0', '0.0', '0.0']
+#DebyeHuckel_a : 
+DebyeHuckel_a = 4.0
+#DebyeHuckel_b : 
+DebyeHuckel_b = 0.0
+#DefaultConductivity : 
+DefaultConductivity = 1.0
+#DefaultDatabase : Default Thermochemical Database name
+DefaultDatabase = 'llnl.dat'
+#DefaultEffectiveDiffusion : 
+DefaultEffectiveDiffusion = 4.0000000000000001e-10
+#DefaultEffectivePorosity : 
+DefaultEffectivePorosity = 1.0
+#DefaultKxPermeability : 
+DefaultKxPermeability = 1.0
+#DefaultKyPermeability : 
+DefaultKyPermeability = 1.0
+#DefaultKzPermeability : 
+DefaultKzPermeability = 1.0
+#DefaultLongitudinalDispersivity : 
+DefaultLongitudinalDispersivity = 0.0
+#DefaultMaterialName : 
+DefaultMaterialName = ''
+#DefaultTransverseDispersivity : 
+DefaultTransverseDispersivity = 0.0
+#Default_Density : 
+Default_Density = 3000.0
+#Default_Enthalpy : 
+Default_Enthalpy = 0.0
+#Default_log_k : 
+Default_log_k = 0.0
+#Density_Unit : unit for density
+Density_Unit = 'kg/m3'
+#DiffusionLaws_dict : 
+DiffusionLaws_dict = {}
+#DiffusionState : 
+DiffusionState = 'Constant'
+#Dispersivity_Unit : unit for dispersitivity (Longitudinal Dispersivity
+Dispersivity_Unit = 'm'
+#EffectiveDiffusion : 
+EffectiveDiffusion = 4.0000000000000001e-10
+#EffectiveDiffusion_Unit : unit for effective diffusion
+EffectiveDiffusion_Unit = 'm2/s'
+#EffectivePorosity : 
+EffectivePorosity = 1.0
+#Elmer_Parameters : 
+Elmer_Parameters = {'accelerator': 'cg', 'iterSolver': 1000, 'library': 'Gauss', 'preconditioner': 'NEUM', 'tolSolver': 1e-14, 'thetaScheme': 1}
+#Enthalpy_Unit : unit for enthalpy (of formation)
+Enthalpy_Unit = 'J/kg'
+#ExpectedOutputs_list : ??
+ExpectedOutputs_list = []
+#GridLineInI : 
+GridLineInI = 'New'
+#GridLineInJ : 
+GridLineInJ = 'New'
+#Head_Unit : 
+Head_Unit = 'm'
+#InitialConditions_list : 
+InitialConditions_list = []
+#InitialExchangeSurface : 
+InitialExchangeSurface = 1.0
+#InteractiveContours_AqueousComponentsToPlot_list : ??
+InteractiveContours_AqueousComponentsToPlot_list = []
+#InteractiveContours_AvailableAqueousComponents_list : ??
+InteractiveContours_AvailableAqueousComponents_list = []
+#InteractiveContours_Parameters_list : ??
+InteractiveContours_Parameters_list = []
+#InteractiveXYPlot_AqueousComponentsToPlot_list : ??
+InteractiveXYPlot_AqueousComponentsToPlot_list = []
+#InteractiveXYPlot_AvailableAqueousComponents_list : ??
+InteractiveXYPlot_AvailableAqueousComponents_list = []
+#InteractiveXYPlot_Parameters_list : ??
+InteractiveXYPlot_Parameters_list = [0, 0, 1]
+#InteractiveXYPlot_Space_and_Time_ElementsToPlot_list : ??
+InteractiveXYPlot_Space_and_Time_ElementsToPlot_list = []
+#InteractiveXYPlot_Space_and_Time_Parameters_list : ??
+InteractiveXYPlot_Space_and_Time_Parameters_list = ['I', 10]
+#Iterate_Algorithm : 
+Iterate_Algorithm = 'NI'
+#Iterate_CouplingPrecision : 
+Iterate_CouplingPrecision = 1.0000000000000001e-05
+#Iterate_Default_Algorithm : coupling algorithm 
+Iterate_Default_Algorithm = 'NI'
+#Iterate_InitialTime : 
+Iterate_InitialTime = 0
+#Iterate_InitialTimeStepSize : 
+Iterate_InitialTimeStepSize = 1
+#Iterate_MaxTimeStep : 
+Iterate_MaxTimeStep = 2
+#Iterate_MinTimeStep : 
+Iterate_MinTimeStep = 1
+#Iterate_PicardMaxOfIterations : 
+Iterate_PicardMaxOfIterations = 30
+#Iterate_PicardTargetNumber : 
+Iterate_PicardTargetNumber = 20
+#Iterate_RelaxationMaxFactor : 
+Iterate_RelaxationMaxFactor = 1.05
+#Iterate_RelaxationMinFactor : 
+Iterate_RelaxationMinFactor = 0.5
+#Iterate_SimulationTime : 
+Iterate_SimulationTime = 10.0
+#KineticConstant : 
+KineticConstant = 1.0
+#KineticRates_list : 
+KineticRates_list = []
+#KxPermeability : 
+KxPermeability = 1.0
+#KyPermeability : 
+KyPermeability = 1.0
+#KzPermeability : 
+KzPermeability = 1.0
+#Length_Unit : 
+Length_Unit = 'm'
+#LineNumberInI : 
+LineNumberInI = 0
+#LineNumberInJ : 
+LineNumberInJ = 0
+#LongitudinalDispersivity : 
+LongitudinalDispersivity = 1.0
+#MaterialConductivity : 
+MaterialConductivity = 0.0
+#MaterialName : 
+MaterialName = ''
+#Materials_Properties_list : 
+Materials_Properties_list = []
+#Materials_list : 
+Materials_list = []
+#Medfile : 
+Medfile = ''
+#MeshLineInIGeometricRatio : 
+MeshLineInIGeometricRatio = 1
+#MeshLineInILength : 
+MeshLineInILength = 0
+#MeshLineInINumberOfCells : 
+MeshLineInINumberOfCells = 0
+#MeshLineInJGeometricRatio : 
+MeshLineInJGeometricRatio = 1
+#MeshLineInJLength : 
+MeshLineInJLength = 0
+#MeshLineInJNumberOfCells : 
+MeshLineInJNumberOfCells = 0
+#MeshLine_Direction : 
+MeshLine_Direction = 'I'
+#Mesh_list_InI : 
+Mesh_list_InI = [(1, 1.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0)]
+#Mesh_list_InJ : 
+Mesh_list_InJ = [(1, 1.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0)]
+#Mode_is_structured : main mode of the geoi software
+Mode_is_structured = True
+#Modflow_Default_accl : Modflow acceleration Under Relaxation Factor
+Modflow_Default_accl = 1.0
+#Modflow_Default_hclose : Modflow: Residual Convergence
+Modflow_Default_hclose = 9.9999999999999994e-12
+#Modflow_Default_mxiter : Modflow: Number Of Iterations
+Modflow_Default_mxiter = 200
+#Modflow_accl : Modflow acceleration Under Relaxation Factor
+Modflow_accl = 1.0
+#Modflow_hclose : Modflow: Residual Convergence
+Modflow_hclose = 9.9999999999999994e-12
+#Modflow_mxiter : Modflow: Number Of Iterations
+Modflow_mxiter = 200
+#Mt3d_ConjugateGradientPreconditioner : 
+Mt3d_ConjugateGradientPreconditioner = 'Jacobi'
+#Mt3d_Default_CGPreconditioner : 
+Mt3d_Default_CGPreconditioner = 'Jacobi'
+#Mt3d_Default_Discretisation : advection spatial discretisation
+Mt3d_Default_Discretisation = 'T.V.D.'
+#Mt3d_Default_accl : 
+Mt3d_Default_accl = 1.0
+#Mt3d_Default_advection : 
+Mt3d_Default_advection = 'T.V.D.'
+#Mt3d_Default_cclose : 
+Mt3d_Default_cclose = 9.9999999999999998e-17
+#Mt3d_Default_iter1 : 
+Mt3d_Default_iter1 = 30
+#Mt3d_Default_mxiter : Mt3d: Number Of Iterations
+Mt3d_Default_mxiter = 1
+#Mt3d_accl : 
+Mt3d_accl = 1.0
+#Mt3d_advection : 
+Mt3d_advection = 'T.V.D.'
+#Mt3d_cclose : 
+Mt3d_cclose = 1.0000000000000001e-15
+#Mt3d_iter1 : 
+Mt3d_iter1 = 30
+#Mt3d_mxiter : Mt3d: Number Of Iterations
+Mt3d_mxiter = 1
+#NumberOfLinesInI : 
+NumberOfLinesInI = 0
+#NumberOfLinesInJ : 
+NumberOfLinesInJ = 0
+#Parallel_NumberOfNodes : 
+Parallel_NumberOfNodes = 1
+#Permeability_Unit : unit for permeability_Unit
+Permeability_Unit = 'm/s'
+#PhreeqC_ConvergenceCriterion : 
+PhreeqC_ConvergenceCriterion = 1.0000000000000001e-15
+#PhreeqC_Default_ConvergenceCriterion : 
+PhreeqC_Default_ConvergenceCriterion = 1.0000000000000001e-15
+#PhreeqC_Default_KNOBS : 
+PhreeqC_Default_KNOBS = ''
+#PhreeqC_Default_NumberOfIterations : Number Of Iterations
+PhreeqC_Default_NumberOfIterations = 500
+#PhreeqC_Default_pe_step_size_list : 
+PhreeqC_Default_pe_step_size_list = ['0', '']
+#PhreeqC_KNOBS : 
+PhreeqC_KNOBS = ''
+#PhreeqC_NumberOfIterations : Number Of Iterations
+PhreeqC_NumberOfIterations = 500
+#PhreeqC_pe_step_size_list : 
+PhreeqC_pe_step_size_list = ['0', '']
+#PorosityState : ?
+PorosityState = 'constant'
+#Postprocessing1_Parameters_list : 
+Postprocessing1_Parameters_list = []
+#Postprocessing2_VariablesToPlot_list : 
+Postprocessing2_VariablesToPlot_list = []
+#Postprocessing2_tmax : 
+Postprocessing2_tmax = 1
+#Postprocessing2_tmin : 
+Postprocessing2_tmin = 0
+#PostprocessingContours_AqueousComponentsToPlot_list : ??
+PostprocessingContours_AqueousComponentsToPlot_list = []
+#PostprocessingContours_AvailableAqueousComponents_list : ??
+PostprocessingContours_AvailableAqueousComponents_list = []
+#PostprocessingContours_Parameters_list : ??
+PostprocessingContours_Parameters_list = [200, 's']
+#PostprocessingVariablesToPlot_list : 
+PostprocessingVariablesToPlot_list = []
+#PostprocessingXYPlot_Parameters_list : ??
+PostprocessingXYPlot_Parameters_list = []
+#Postprocessing_ElementsToPlot_list : ??
+Postprocessing_ElementsToPlot_list = []
+#Rate : 
+Rate = 'Standard'
+#Solver : the solver software to use
+Solver = 'Modflow_Mt3d_PhreeqC'
+#SpecificHeatCapacity : 
+SpecificHeatCapacity = 0.0
+#SphereModelExponent : 
+SphereModelExponent = 0.66659999999999997
+#SphereModelExponent_On : 
+SphereModelExponent_On = False
+#TemkinNumber : 
+TemkinNumber = 1.0
+#Temperature_Unit : unit for temperature
+Temperature_Unit = 'Celcius'
+#Thermal : set if thermal mode is on
+Thermal = False
+#Time_Unit : unit of time
+Time_Unit = 's'
+#Times_list : ??
+Times_list = []
+#Title : Title of the study/case
+Title = 'title'
+#TransverseDispersivity : 
+TransverseDispersivity = 0.10000000000000001
+#UnstructuredHydraulicBC_list : 
+UnstructuredHydraulicBC_list = []
+#Unstructured_Zone_Material_list : 
+Unstructured_Zone_Material_list = []
+#Zone_BCKind_list : 
+Zone_BCKind_list = []
+#Zone_Material_AqueousState_list : 
+Zone_Material_AqueousState_list = []
+#Zones_list : 
+Zones_list = []
+#var_diff_list : 
+var_diff_list = []

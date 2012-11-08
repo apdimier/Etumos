@@ -1,0 +1,65 @@
+PHASES
+      Fix_H+
+          H+ = H+ 
+                    log_k   0.0000000000e+00
+SURFACE_SPECIES
+          Hfo_sOH  = Hfo_sOH
+                    log_k   0.0000000000e+00
+          Hfo_sOH + H+  = Hfo_sOH2+
+                    log_k   7.2900000000e+00
+          Hfo_sOH -1H+  = Hfo_sO-
+                    log_k   -8.9300000000e+00
+          Hfo_sOH + Ca+2 -1H+  = Hfo_sOCa+
+                    log_k   -5.8500000000e+00
+          Hfo_wOH  = Hfo_wOH
+                    log_k   0.0000000000e+00
+          Hfo_wOH + H+  = Hfo_wOH2+
+                    log_k   7.2900000000e+00
+          Hfo_wOH -1H+  = Hfo_wO-
+                    log_k   -8.9300000000e+00
+          Hfo_wOH + Ca+2 -1H+  = Hfo_wOCa+
+                    log_k   -5.8500000000e+00
+SURFACE_MASTER_SPECIES
+          Hfo_s   Hfo_sOH
+          Hfo_w   Hfo_wOH
+
+SOLUTION                  1-1 surface_solution
+   temp 2.5000000000e+01
+   pH    6.5000000000e+00 
+   pe    4.0000000000e+00
+   units mol/l
+                       Ca    1.0000000000e-06
+                       Cl    5.0000000000e-03
+                       Na    5.0000000000e-03
+
+EXCHANGE                  1-1 surface_solution
+               equilibrate       1
+
+SURFACE                   1-1 surface_solution
+               equilibrate with solution     1
+                  Hfo_wOH    1.2520000000e-04
+                  Hfo_sOH    3.1130000000e-06    6.0000000000e+02    5.0000000000e-02
+
+EQUILIBRIUM_PHASES        1-1 surface_solution
+                   Fix_H+    -6.50000e+00  HCl	1.00000e+01
+SELECTED_OUTPUT
+  -high_precision true
+KNOBS
+  -iterations 500
+  -diag true 
+  -tolerance 1.e-15
+SOLUTION 0
+PRINT
+  -reset	true
+# thereafter the -cells parameter is the 
+# only relevant parameter 
+TRANSPORT
+  -cells          0
+  -time_step          100.
+  -shifts          5
+  -lengths        0.1
+  -flow_direction diff
+  -boundary_conditions        closed closed
+  -print_frequency      1
+  -warnings False
+END

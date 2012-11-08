@@ -1,0 +1,37 @@
+SOLUTION 1-1 Solid Solution of Strontianite and Aragonite
+   temp        2.5E+01
+   pH         5.93E+00 charge
+   pe          4.0E+00
+   units mol/l
+                       Ca           3.932E-03
+                        C           7.864E-03
+SOLID_SOLUTION 1-1 Solid Solution of Strontianite and Aragonite
+     Ca(x)Sr(1-x)CO3 		#ideal
+              -comp                 Aragonite             0.0E+00
+              -comp              Strontianite             0.0E+00
+              -temp              2.5E+01
+              -Gugg_nondim         0.0E+00         0.0E+00
+EQUILIBRIUM_PHASES 1 Solid Solution of Strontianite and Aragonite
+                   CO2(g)    0.00000e+00  1.00000e+01
+                Aragonite    0.00000e+00  0.00000e+00
+SELECTED_OUTPUT
+-high_precision true
+KNOBS
+ -iterations 500
+  -diag true 
+-tolerance 1.e-15
+SOLUTION 0
+PRINT
+ -reset	true
+# the -cells parameter under TRANSPORT is the 
+# only relevant parameter 
+TRANSPORT
+  -cells          0
+  -time_step          100.
+  -shifts          5
+  -lengths        0.1
+  -flow_direction diff
+  -boundary_conditions        closed closed
+  -print_frequency      1
+  -warnings False
+END
