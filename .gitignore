@@ -5,7 +5,13 @@
 *.dll
 *.exe
 *.o
+*.out
 *.so
 *.pyc
 #  ~ files
 *~
+# files associated to phreeqc launch
+phreeqc.log
+# initial files for phreeqC
+phreeqCFile
+
