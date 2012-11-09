@@ -1,0 +1,16 @@
+Point (1) = {1, 0, 0, 0.1};
+Point (2) = {1.1, 0, 0, 0.1};
+Point (3) = {2, 0, 0, 0.1};
+Point (4) = {2, 0.9, 0, 0.1};
+Point (5) = {2, 1, 0, 0.1};
+Line (1) = {1, 2};
+Circle (2) = {2, 3, 4};
+Line (3) = {4, 5};
+Circle (4) = {5, 3, 1};
+Transfinite Line {1,3} = 4;
+Transfinite Line {2,4} = 20;
+Line Loop (6) = {1, 2, 3, 4};
+Plane Surface (6) = {6};
+Physical Line("inlet") = {1};
+Physical Line("outlet") = {3};
+Physical Surface("domain") = {6};

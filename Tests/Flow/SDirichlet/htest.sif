@@ -1,0 +1,141 @@
+Check Keywords Warn
+
+Header
+Mesh DB "." "SDarcy1d"
+Include Path "."
+Results Directory ""
+End
+
+Simulation
+  Coordinate System = "Cartesian 2D"
+
+  Simulation Type = "Steady"
+  Coordinate Mapping(3) = 1 2 3
+  Steady State Max Iterations = 1
+  Output Intervals = 1
+  Solver Input File =  "htest.sif"
+  Output File = "HeVel.dat"
+  Post File = "HeVel.ep"
+End
+
+! ~~
+! Constants
+! ~~
+Constants
+ Gravity(4) = 0 -1 0 9.780000e+00
+End
+
+! ~~
+! Body
+! ~~
+Body 1
+  Name = "body1"
+  Equation = 1
+  Material = 1
+End
+
+Body 2
+  Name = "body2"
+  Equation = 1
+  Material = 2
+End
+
+Body 3
+  Equation = 1 
+  Material = 3
+  Initial Condition = 3
+  Body Force = 1
+End
+
+! ~~
+! Material p29 ref. Manual
+! ~~
+Material 3
+  Water Density = Real 1.0000000000e+03
+  Viscosity = Real 1.0000000000e+00
+  Hydr Conductivity = Real 1.0000000000e-04
+  Saturated Hydraulic Conductivity = Real 1.0000000000e-04
+  Specific Storage = Real 1.0000000000e+00
+  Porosity = Real 1.0000000000e+00
+  Compressibility Model = Incompressible
+End
+
+Material 1
+  Water Density = Real 1.0000000000e+03
+  Viscosity = Real 1.0000000000e+00
+  Hydr Conductivity = Real 1.0000000000e-04
+  Saturated Hydraulic Conductivity = Real 1.0000000000e-04
+  Specific Storage = Real 1.0000000000e+00
+  Porosity = Real 1.0000000000e+00
+  Compressibility Model = Incompressible
+End
+
+Material 2
+  Water Density = Real 1.0000000000e+03
+  Viscosity = Real 1.0000000000e+00
+  Hydr Conductivity = Real 1.0000000000e-04
+  Saturated Hydraulic Conductivity = Real 1.0000000000e-04
+  Specific Storage = Real 1.0000000000e+00
+  Porosity = Real 1.0000000000e+00
+  Compressibility Model = Incompressible
+End
+
+! ~~
+! Equation p28 ref. Manual
+! ~~
+
+Equation 1
+  Active Solvers(2) = 1 2
+End
+
+! ~~
+! Solver p27 ref. Manual
+! ~~
+Solver 1
+  Exec Solver = "Always"
+  Equation = "Darcy Equation"
+  Procedure = "DarcySolve" "DarcySolver"
+  Variable = "Charge"
+  Variable Dofs = 1
+  Linear System Solver = "Iterative"
+  Linear System Iterative Method = "BiCGStab"
+  Linear System Max Iterations = 100
+  Linear System Convergence Tolerance = 1.000000e-15
+  Linear System Preconditioning = "ILU0"
+  Steady State Convergence Tolerance = 1e-08
+  Stabilize = True
+  Namespace = string "charge"
+End
+
+Solver 2
+  Equation = ComputeFlux
+  Procedure = "DFluxSolver" "DFluxSolver"
+  Flux Variable = String "Charge"
+  Flux Coefficient = String "Hydr Conductivity"
+  Flux Coefficient = String "Saturated Hydraulic Conductivity"
+  Linear System Convergence Tolerance = 5.000000e-01
+End
+
+! ~~
+! Material p29 ref. Manual
+! ~~
+! inlet
+Boundary Condition 101
+  Target Boundaries (1) = 1
+! charge
+  Charge = Real 1.000000e+02
+ End
+
+! outlet
+Boundary Condition 102
+  Target Boundaries (1) = 2
+! charge
+  Charge = Real 2.000000e+01
+ End
+
+! ~~
+! initial condition p8 ref. ElmersolverManual
+! ~~
+Initial Condition 3
+  Charge = Real 1.000000e+00
+End

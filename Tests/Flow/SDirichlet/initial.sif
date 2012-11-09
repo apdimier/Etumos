@@ -1,0 +1,103 @@
+CHECK KEYWORDS Warn
+Header
+Mesh DB "." "essai"
+Include Path ""
+Results Directory ""
+End
+
+Simulation
+  Max Output Level = 9
+
+  Coordinate System = "Cartesian 2D"
+  Simulation Type = "Steady State"
+  Coordinate Mapping(3) = 1 2 3
+  
+!  Simulation Type = "Steady State"
+!  Steady State Max Iterations = 100
+  Output Intervals = 1
+
+  Solver Input File = "initial.sif"
+  Output File = "TempDist.dat"
+  Post File = "TempDist.ep"
+End
+
+Constants
+  Gravity(4) = 0 -1 0 9.82
+End
+
+Body 1
+  Name = "body3"
+  Equation = 1
+  Initial Condition = 1
+  Material = 101
+  Body Force = 1
+End
+
+Equation 1
+  Active Solvers(2) = 1 2
+End
+
+Solver 1
+  Exec Solver = "Always"
+  Equation = "Darcy Equation"
+  Procedure = "DarcySolve" "DarcySolver"
+  Variable = "Charge"
+  Variable Dofs = 1
+  Linear System Solver = "Iterative"
+  Linear System Iterative Method = "BiCGStab"
+  Linear System Max Iterations = 50
+  Linear System Convergence Tolerance = 1.0e-11
+  Linear System Abort Not Converged = True
+  Linear System Preconditioning = "ILU0"
+  Linear System Residual Output = 1
+  Steady State Convergence Tolerance = 1.0e-06
+  Stabilize = True
+End
+
+Solver 2
+  Equation = ComputeFlux
+  Procedure = "FluxSolver" "FluxSolver"
+
+! to compute just one component give its name:
+! ------------------------------
+!  Flux Component = Integer 1
+
+  Flux Variable = String Charge
+  Flux Coefficient = String "Hydr Conductivity"
+
+! these are taken care by the defaults
+!  Linear System Solver = "Iterative"
+!  Linear System Iterative Method = "cg"
+!  Linear System Preconditioning = None
+!  Linear System Residual Output = 10
+!  Linear System Max Iterations = Integer 500
+  Linear System Convergence Tolerance = 1.0e-03
+End
+
+Material 101
+  Name = "Material1"
+  Density = Real 1.0000000000e+00
+  Hydr Conductivity = Real 1.0000000000e-04
+  Specific Storage = 100
+  Compressibility Model = Incompressible
+End
+
+Initial Condition 1
+  Charge = 1.23456
+End
+
+Body Force 1
+  Name = "BodyForce1"
+  Heat Source = real 0
+End
+
+Boundary Condition 1
+  Name = "Constraint1"
+  Target Boundaries(1) = 1 
+  Charge = Real 1.000000e+02
+End
+Boundary Condition 2
+  Name = "Constraint1"
+  Target Boundaries(1) = 2 
+  Charge = Real 2.000000e+01
+End

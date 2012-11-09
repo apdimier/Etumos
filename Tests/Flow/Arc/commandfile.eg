@@ -1,0 +1,4 @@
+Input File = tuy.msh
+Output File = tuy
+Input Mode = Gmsh
+Output Mode = ElmerSolver
