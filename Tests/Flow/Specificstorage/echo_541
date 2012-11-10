@@ -1,0 +1,1475 @@
+1 "AB"
+2 "domain"
+dbg self.physicalBodyNames {'domain': [2, []], 'AB': [1, []]}
+self.elementArray  array (42,15) , type = l, has 630 elements
+ mesh file name control:  SDarcy2d
+ ?  array (42,15) , type = l, has 630 elements
+ number of vetices  1
+         elments 42
+         nbcells 42
+63
+['domain', 'AB']
+3
+ AB 
+Tensor value 1e-05 <PhysicalUnit HydraulicConductivity>
+dbg property porosity PhysicalProperties.Porosity
+setproperty propClass is ok 
+ dbg material key porosity
+dbg property specificstorage PhysicalProperties.SpecificStorage
+setproperty propClass is ok 
+ dbg material key specificStorage
+dbg property hydraulicconductivity PhysicalProperties.HydraulicConductivity
+setproperty propClass is ok 
+ dbg material key hydraulicConductivity
+ dbg material we are here 
+value:  <type 'str'> Head
+dbg bcdict  ['Flux', 'Dirichlet', 'Neumann']
+valueeeee Head Head
+1.0 Head
+[Head(1.0,'Head')]
+ item  <type 'list'>
+dbg CommonInitialCondition 0.0 Head
+dbg verifyPhysicalQuantityOnRegion 1
+dbg verifyPhysicalQuantityOnRegion 1
+dbg verifyPhysicalQuantityOnRegion 1
+dbg verifyPhysicalQuantityOnRegion 1
+verifyClass commonmodel.Region verifyClass commonmodel.Region [0.0, 0.0, 9.8100000000000005]
+ dbg viscosity  1.0 Head*Mass/Time
+ dbg viscosity 1 1.0 Head*Mass/Time
+ problem type  saturated
+['__doc__', '__init__', '__module__', 'boundary', 'getBoundary', 'getRegion', 'getSupport', 'getType', 'getValue', 'type', 'value_property', 'value_species']
+dbg hm  20
+dbg hm  2000.0
+ the flow component has been set
+ debug eh setBoundaryConditions {0: {'boundaryName': 'AB', 'head': 1.0, 'material': <material.Material instance at 0x9c3e7ac>, 'typ': 'Dirichlet'}} <type 'dict'>
+ debug eh setinitialConditions {'domain': {'head': 0.0, 'material': <material.Material instance at 0x9c3e7ac>}}
+[0.0, 0.0, 9.8100000000000005]
+ initial  ['domain']
+ 355dbg  float
+{'domain': {'head': 0.0, 'material': <material.Material instance at 0x9c3e7ac>}}
+elmer initialise
+MAIN: 
+MAIN: ==========================================
+MAIN:  E L M E R  S O L V E R  S T A R T I N G
+MAIN:  Library version: 5.4.1
+MAIN:  Wrapped version: 0.2.0
+MAIN: ==========================================
+  Model Name: htest.sif                                                                                                                       
+MAIN: 
+MAIN: 
+MAIN: -----------------------
+MAIN: Reading Model ...
+Model Input:  Unlisted keyword: [water density] in section: [material 101]
+Model Input:  Unlisted keyword: [water density] in section: [material 201]
+Model Input:  Unlisted keyword: [namespace] in section: [solver 1]
+Model Input:  Unlisted keyword: [charge] in section: [boundary condition 101]
+Model Input:  Unlisted keyword: [charge] in section: [initial condition 1]
+MAIN: Done
+MAIN: -----------------------
+Loading user function library: [SaturatedDarcyTimeStep]...[SaturatedDarcyTimeStepSolver_Init]
+Loading user function library: [SaturatedDarcyTimeStep]...[SaturatedDarcyTimeStepSolver]
+ elmer_initialise: what (flow,heat,stress,...) should be computed
+  dbg ElmerAux: AddSolvers           2
+  dbg0 ElmerAux: AddSolvers NOfEq            1
+  dbg0 ElmerAux: AddSolvers NOfEq            1
+  dbg2 ElmerAux: AddSolvers NumberOfSolvers           2
+  dbg3 ElmerAux: AddSolvers iloop            1           2
+  dbg ElmerAux: AddSolvers InitSolver           1           2
+  dbg ElmerAux: AddSolvers CurrentModel % Solver => Solver
+  dbg ElmerAux: AddSolvers CALL AddEquation transients darcy equation                                                                                                                   T1  T
+  dbg beginning of AddEquation:darcy equation                                                                                                                  
+  dbg addequation eq: darcy equation                                                                                                                  
+  dbg addequation eq:  T
+  dbg addequation str
+  dbg addequation procedure: SaturatedDarcyTimeStep SaturatedDarcyTimeStepSolver                                                                             
+  before select darcy equation                                                                                                                  
+ print to be removed within mainutils: default0: darcy equation                                                                                                                  
+ print to be removed within mainutils: default0: SaturatedDarcyTimeStep SaturatedDarcyTimeStepSolver                                                                             
+ print to be removed within mainutils: default found: darcy equation                                                                                                                  
+ print to be removed within mainutils: var name: charge                                                                                                                          
+ print to be removed within mainutils: var name: Ndeg >= 1
+ print to be removed within mainutils: var name: Ndeg >= 1 END IF
+ print to be removed within mainutils: VariableOutput: charge                                                                                                                           T
+OptimizeBandwidth: ---------------------------------------------------------
+OptimizeBandwidth: Computing matrix structure for: darcy equation...done.
+OptimizeBandwidth:  Half bandwidth without optimization:            6
+OptimizeBandwidth: 
+OptimizeBandwidth: Bandwidth Optimization ...done.
+OptimizeBandwidth:  Half bandwidth after optimization:            7
+OptimizeBandwidth: Bandwidth optimization rejected, using original ordering.
+OptimizeBandwidth: ---------------------------------------------------------
+Loading user function library: [DFluxSolver]...[DFluxSolver_Init]
+Loading user function library: [DFluxSolver]...[DFluxSolver]
+ print to be removed within mainutils: default found over: darcy equation                                                                                                                  
+  dbg ElmerAux: AddSolvers CALL AddEquation over
+  dbg3 ElmerAux: AddSolvers iloop            2           2
+  dbg ElmerAux: AddSolvers InitSolver           2           2
+  dbg ElmerAux: AddSolvers CurrentModel % Solver => Solver
+  dbg ElmerAux: AddSolvers CALL AddEquation transients computeflux                                                                                                                      T1  T
+  dbg beginning of AddEquation:computeflux                                                                                                                     
+  dbg addequation eq: computeflux                                                                                                                     
+  dbg addequation eq:  T
+  dbg addequation str
+  dbg addequation procedure: DFluxSolver DFluxSolver                                                                                                         
+  before select computeflux                                                                                                                     
+ print to be removed within mainutils: default0: computeflux                                                                                                                     
+ print to be removed within mainutils: default0: DFluxSolver DFluxSolver                                                                                                         
+ print to be removed within mainutils: default found: computeflux                                                                                                                     
+ print to be removed within mainutils: var name: -nooutput flux_temp                                                                                                             
+ print to be removed within mainutils: var name: Ndeg >= 1
+ print to be removed within mainutils: var name: Ndeg >= 1 END IF
+ print to be removed within mainutils: VariableOutput: -nooutput flux_temp                                                                                                              T
+OptimizeBandwidth: ---------------------------------------------------------
+OptimizeBandwidth: Computing matrix structure for: computeflux...done.
+OptimizeBandwidth:  Half bandwidth without optimization:            6
+OptimizeBandwidth: 
+OptimizeBandwidth: Bandwidth Optimization ...done.
+OptimizeBandwidth:  Half bandwidth after optimization:            7
+OptimizeBandwidth: Bandwidth optimization rejected, using original ordering.
+OptimizeBandwidth: ---------------------------------------------------------
+ print to be removed within mainutils: default found over: computeflux                                                                                                                     
+  dbg ElmerAux: AddSolvers CALL AddEquation over
+ elmer_initialise: Time integration and/or steady state steps
+ Get Output File Options
+ Initial Conditions
+  dbg initial condition            1
+  dbg BC           40           2         101
+  elmer_initialise: equation name darcy equation                                                                                                                  
+  elmer_initialise: equation name computeflux                                                                                                                     
+  e90dbg allocating BULKCONC          40  number of unknowns            2          63          63
+ dbg valeur de unknownAnz 2 et activeCellsAnz 60
+ within the C 1 0 0 2 activeCellsAnz: 60 63
+            dt   Times          100.000000000000000                0   0.0000000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  dbg_0405 SDTS allocate of element nodes in SDTS            4
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):     0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.3920E-06
+       2 0.1086E-09
+       3 0.6056E-14
+       3 0.6056E-14
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.01    0.01
+DarcySolve: iter:    1 Assembly: (s)    0.01    0.01
+  SDTS dbg Result Norm  :   0.26540092101594470     
+DarcySolve: iter:    1 Assembly: (s)    0.01    0.01
+DarcySolve:   SDTS dbg Relative Change :    2.0000000000000000
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :    2.0000000000000000
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       3 0.2260E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       9 0.3318E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :    2.0000000000000000
+DFluxSolver:   SDTS dbg Relative Change :    2.0000000000000000
+  elmer_ots dbg velocity   2.46360466821592496E-004
+ pas de temps  100.0 temps:  100.0
+ dbg f90 dt  100.000000000000000       100.000000000000000     
+            dt   Times          100.000000000000000                1  100.000000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):     0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.2296E-06
+       2 0.5495E-10
+       3 0.5297E-14
+       3 0.5297E-14
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.30180403204091727     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   0.12835963730141536
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   0.12835963730141536
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       2 0.3283E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       9 0.2607E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   0.12835963730141536
+DFluxSolver:   SDTS dbg Relative Change :   0.12835963730141536
+  elmer_ots dbg velocity   1.52318096019383038E-004
+ pas de temps  100.0 temps:  200.0
+ dbg f90 dt  100.000000000000000        200.00000000000000     
+            dt   Times          100.000000000000000                2   200.00000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):     0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.1402E-06
+       2 0.6894E-10
+       3 0.1153E-13
+       3 0.1153E-13
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.32643003519879121     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   7.83975414325236430E-002
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   7.83975414325236430E-002
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       2 0.2816E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       8 0.4633E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   7.83975414325236430E-002
+DFluxSolver:   SDTS dbg Relative Change :   7.83975414325236430E-002
+  elmer_ots dbg velocity   1.17224860352111657E-004
+ pas de temps  100.0 temps:  300.0
+ dbg f90 dt  100.000000000000000        300.00000000000000     
+            dt   Times          100.000000000000000                3   300.00000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):    -0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.8799E-07
+       2 0.3112E-10
+       3 0.4564E-14
+       3 0.4564E-14
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.34506353187251632     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   5.54986602626570402E-002
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   5.54986602626570402E-002
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       2 0.2520E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       9 0.2744E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   5.54986602626570402E-002
+DFluxSolver:   SDTS dbg Relative Change :   5.54986602626570402E-002
+  elmer_ots dbg velocity   9.84295571200886172E-005
+ pas de temps  100.0 temps:  400.0
+ dbg f90 dt  100.000000000000000        400.00000000000000     
+            dt   Times          100.000000000000000                4   400.00000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):    -0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.5956E-07
+       2 0.1737E-10
+       3 0.3151E-14
+       3 0.3151E-14
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.36013159671848011     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   4.27344552877734485E-002
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   4.27344552877734485E-002
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       2 0.2287E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       9 0.3081E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   4.27344552877734485E-002
+DFluxSolver:   SDTS dbg Relative Change :   4.27344552877734485E-002
+  elmer_ots dbg velocity   8.64175803010962614E-005
+ pas de temps  100.0 temps:  500.0
+ dbg f90 dt  100.000000000000000        500.00000000000000     
+            dt   Times          100.000000000000000                5   500.00000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):    -0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.4313E-07
+       2 0.1153E-10
+       3 0.2647E-14
+       3 0.2647E-14
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.37283078960892035     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   3.46516905296358757E-002
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   3.46516905296358757E-002
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       2 0.2101E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       9 0.3430E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   3.46516905296358757E-002
+DFluxSolver:   SDTS dbg Relative Change :   3.46516905296358757E-002
+  elmer_ots dbg velocity   7.79244991248853922E-005
+ pas de temps  100.0 temps:  600.0
+ dbg f90 dt  100.000000000000000        600.00000000000000     
+            dt   Times          100.000000000000000                6   600.00000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):    -0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.3298E-07
+       2 0.8509E-11
+       2 0.8509E-11
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.38383620924502837     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   2.90892021266339722E-002
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   2.90892021266339722E-002
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       2 0.1952E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       9 0.3817E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   2.90892021266339722E-002
+DFluxSolver:   SDTS dbg Relative Change :   2.90892021266339722E-002
+  elmer_ots dbg velocity   7.15198211718858922E-005
+ pas de temps  100.0 temps:  700.0
+ dbg f90 dt  100.000000000000000        700.00000000000000     
+            dt   Times          100.000000000000000                7   700.00000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):    -0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.2632E-07
+       2 0.6702E-11
+       2 0.6702E-11
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.39356663993926622     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   2.50331747676193726E-002
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   2.50331747676193726E-002
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       2 0.1831E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       9 0.4126E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   2.50331747676193726E-002
+DFluxSolver:   SDTS dbg Relative Change :   2.50331747676193726E-002
+  elmer_ots dbg velocity   6.64705437534219738E-005
+ pas de temps  100.0 temps:  800.0
+ dbg f90 dt  100.000000000000000        800.00000000000000     
+            dt   Times          100.000000000000000                8   800.00000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):     0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.2174E-07
+       2 0.5509E-11
+       2 0.5509E-11
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.40230030648475085     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   2.19475543863874994E-002
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   2.19475543863874994E-002
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       2 0.1730E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       9 0.4349E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   2.19475543863874994E-002
+DFluxSolver:   SDTS dbg Relative Change :   2.19475543863874994E-002
+  elmer_ots dbg velocity   6.23585999030520271E-005
+ pas de temps  100.0 temps:  900.0
+ dbg f90 dt  100.000000000000000        900.00000000000000     
+            dt   Times          100.000000000000000                9   900.00000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):     0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.1846E-07
+       2 0.4665E-11
+       2 0.4665E-11
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.41023183073610497     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   1.95229798011010737E-002
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   1.95229798011010737E-002
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       2 0.1645E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       9 0.4546E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   1.95229798011010737E-002
+DFluxSolver:   SDTS dbg Relative Change :   1.95229798011010737E-002
+  elmer_ots dbg velocity   5.89262875727933756E-005
+ pas de temps  100.0 temps:  1000.0
+ dbg f90 dt  100.000000000000000       1000.00000000000000     
+            dt   Times          100.000000000000000               10  1000.00000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):     0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.1602E-07
+       2 0.4036E-11
+       2 0.4036E-11
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.41750291900641806     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   1.75686432702622346E-002
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   1.75686432702622346E-002
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       1 0.4990E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       9 0.4537E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   1.75686432702622346E-002
+DFluxSolver:   SDTS dbg Relative Change :   1.75686432702622346E-002
+  elmer_ots dbg velocity   5.63662698199134777E-005
+ pas de temps  100.0 temps:  1100.0
+ dbg f90 dt  100.000000000000000        1100.0000000000000     
+            dt   Times          100.000000000000000               11   1100.0000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):     0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.1415E-07
+       2 0.3550E-11
+       2 0.3550E-11
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.42422010440389030     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   1.59605599719894083E-002
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   1.59605599719894083E-002
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       1 0.4814E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       9 0.4815E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   1.59605599719894083E-002
+DFluxSolver:   SDTS dbg Relative Change :   1.59605599719894083E-002
+  elmer_ots dbg velocity   5.38366157502943646E-005
+ pas de temps  100.0 temps:  1200.0
+ dbg f90 dt  100.000000000000000        1200.0000000000000     
+            dt   Times          100.000000000000000               12   1200.0000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):    -0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.1269E-07
+       2 0.3163E-11
+       2 0.3163E-11
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.43046559769814685     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   1.46147134061005556E-002
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   1.46147134061005556E-002
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       1 0.4664E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+      10 0.2366E-02
+      10 0.2366E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   1.46147134061005556E-002
+DFluxSolver:   SDTS dbg Relative Change :   1.46147134061005556E-002
+  elmer_ots dbg velocity   5.16199689170820125E-005
+ pas de temps  100.0 temps:  1300.0
+ dbg f90 dt  100.000000000000000        1300.0000000000000     
+            dt   Times          100.000000000000000               13   1300.0000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):    -0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.1151E-07
+       2 0.2848E-11
+       2 0.2848E-11
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.43630423425228870     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   1.34721729781562636E-002
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   1.34721729781562636E-002
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       1 0.4534E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+      10 0.2567E-02
+      10 0.2567E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   1.34721729781562636E-002
+DFluxSolver:   SDTS dbg Relative Change :   1.34721729781562636E-002
+  elmer_ots dbg velocity   4.96567633566006276E-005
+ pas de temps  100.0 temps:  1400.0
+ dbg f90 dt  100.000000000000000        1400.0000000000000     
+            dt   Times          100.000000000000000               14   1400.0000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):    -0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.1055E-07
+       2 0.2587E-11
+       2 0.2587E-11
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.44178809370808392     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   1.24903937346385642E-002
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   1.24903937346385642E-002
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       1 0.4421E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+      10 0.2750E-02
+      10 0.2750E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   1.24903937346385642E-002
+DFluxSolver:   SDTS dbg Relative Change :   1.24903937346385642E-002
+  elmer_ots dbg velocity   4.79021668363805293E-005
+ pas de temps  100.0 temps:  1500.0
+ dbg f90 dt  100.000000000000000        1500.0000000000000     
+            dt   Times          100.000000000000000               15   1500.0000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):    -0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.9754E-08
+       2 0.2366E-11
+       2 0.2366E-11
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.44695967196549080     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   1.16378987540686225E-002
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   1.16378987540686225E-002
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       1 0.4320E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+      10 0.2918E-02
+      10 0.2918E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   1.16378987540686225E-002
+DFluxSolver:   SDTS dbg Relative Change :   1.16378987540686225E-002
+  elmer_ots dbg velocity   4.63217079981301943E-005
+ pas de temps  100.0 temps:  1600.0
+ dbg f90 dt  100.000000000000000        1600.0000000000000     
+            dt   Times          100.000000000000000               16   1600.0000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):    -0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.9079E-08
+       2 0.2178E-11
+       2 0.2178E-11
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.45185411948968396     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   1.08909043691220470E-002
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   1.08909043691220470E-002
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       1 0.4231E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+      10 0.3077E-02
+      10 0.3077E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   1.08909043691220470E-002
+DFluxSolver:   SDTS dbg Relative Change :   1.08909043691220470E-002
+  elmer_ots dbg velocity   4.48883905094204084E-005
+ pas de temps  100.0 temps:  1700.0
+ dbg f90 dt  100.000000000000000        1700.0000000000000     
+            dt   Times          100.000000000000000               17   1700.0000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):    -0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.8503E-08
+       2 0.2016E-11
+       2 0.2016E-11
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.45650085851745376     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   1.02311081906864033E-002
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   1.02311081906864033E-002
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       1 0.4151E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+      10 0.3231E-02
+      10 0.3231E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   1.02311081906864033E-002
+DFluxSolver:   SDTS dbg Relative Change :   1.02311081906864033E-002
+  elmer_ots dbg velocity   4.35807317930985097E-005
+ pas de temps  100.0 temps:  1800.0
+ dbg f90 dt  100.000000000000000        1800.0000000000000     
+            dt   Times          100.000000000000000               18   1800.0000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):    -0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.8004E-08
+       2 0.1874E-11
+       2 0.1874E-11
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.46092477583939329     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   9.64419819169512818E-003
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   9.64419819169512818E-003
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       1 0.4078E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+      10 0.3379E-02
+      10 0.3379E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   9.64419819169512818E-003
+DFluxSolver:   SDTS dbg Relative Change :   9.64419819169512818E-003
+  elmer_ots dbg velocity   4.23813957191842338E-005
+ pas de temps  100.0 temps:  1900.0
+ dbg f90 dt  100.000000000000000        1900.0000000000000     
+            dt   Times          100.000000000000000               19   1900.0000000000000      T           0           1
+            number of unknowns           2
+            Values                      63
+  solve equations call Darcy time step
+  dbg transient Saturated Darcy call to SolveEquations            1           2
+  dbg CoupledSolveEquations time step init:            1           2
+  no flow 
+  elmerdarcydbg 16/03/11 file saturated Darcy time step  100.000000000000000     
+DarcyT.S.Solver: 
+DarcyT.S.Solver: 
+DarcyT.S.Solver: -------------------------------------
+ CHARGE ITERATIONs           1
+DarcyT.S.Solver:  Coupled system iteration:            1
+DarcyT.S.Solver: -------------------------------------
+DarcyT.S.Solver: 
+DarcyT.S.Solver: Starting Assembly...
+ SDT we call DefaultInitialize 
+  SDT dbg CurrentCoordinateSystem == Cartesian l857 if C1 = 0 = diffusion:   0.0000000000000000     
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+DarcySolve: Assembly donessss
+ call to SolveSystem
+ILU(0) (Reals), Starting Factorization:
+CRS_IncompleteLU:  Coupled system iteration:            1
+ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), NOF nonzeros:       428
+CRS_IncompleteLU: ILU(0) (Real), filling (%) :       100
+CRS_IncompleteLU: ILU(0) (Real), Factorization ready at (s):     0.00
+  within IterSolve after CRS_IncompleteLU: T
+ IterCall within IterSolve     63715204
+       1 0.7568E-08
+       2 0.1750E-11
+       2 0.1750E-11
+ IterCall within IterSolve over           0
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+  SDTS dbg Result Norm  :   0.46514711864883951     
+DarcySolve: iter:    1 Assembly: (s)    0.00    0.00
+DarcySolve:   SDTS dbg Relative Change :   9.11882292201423444E-003
+  cumulativetime   100.000000000000000        0.0000000000000000       100.000000000000000     
+ Computing the flux V1.0 26/12/2010A $Id: DFluxSolver.f90,v 1.2 2011/03/15 22:04:32 dimier Exp $                                                                     
+DFluxSolver: ----------------------------------
+DFluxSolver: Computing the flux V1.0 26/12/2010A
+DFluxSolver: ----------------------------------
+ dbg dfluxsolver dim0            3
+DFluxSolver:   SDTS dbg Relative Change :   9.11882292201423444E-003
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+       1 0.4012E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+ IterCall within IterSolve     63715900
+      10 0.3518E-02
+      10 0.3518E-02
+ IterCall within IterSolve over           0
+ call to SolveSystem
+DFluxSolver:   SDTS dbg Relative Change :   9.11882292201423444E-003
+DFluxSolver:   SDTS dbg Relative Change :   9.11882292201423444E-003
+  elmer_ots dbg velocity   4.12762178726946332E-005
+ pas de temps  100.0 temps:  2000.0
+ out of fortran 60
+[0.92922323756234615, 0.92002924553992449, 0.92922323805067186, 0.85205090821697271, 0.8379691150208447, 0.85205090939416328, 0.76885063227114459, 0.75283701532183778, 0.76885063347322979, 0.68044802522328773]
+ Lange value out of c_elmer_getCoord bis 180
+[[ 0.        , 0.1       , 0.        ,]
+ [ 0.        , 0.05      , 0.        ,]
+ [ 0.        , 0.        , 0.        ,]
+ [ 0.01745963, 0.        , 0.        ,]
+ [ 0.01973369, 0.05      , 0.        ,]
+ [ 0.01745963, 0.1       , 0.        ,]
+ [ 0.03666521, 0.        , 0.        ,]
+ [ 0.04020246, 0.05      , 0.        ,]
+ [ 0.03666521, 0.1       , 0.        ,]
+ [ 0.05779136, 0.        , 0.        ,]
+ [ 0.06193092, 0.05      , 0.        ,]
+ [ 0.05779136, 0.1       , 0.        ,]
+ [ 0.08103012, 0.        , 0.        ,]
+ [ 0.08534667, 0.05      , 0.        ,]
+ [ 0.08103012, 0.1       , 0.        ,]
+ [ 0.10659276, 0.        , 0.        ,]
+ [ 0.11082638, 0.05      , 0.        ,]
+ [ 0.10659276, 0.1       , 0.        ,]
+ [ 0.13471166, 0.        , 0.        ,]
+ [ 0.138718  , 0.05      , 0.        ,]
+ [ 0.13471166, 0.1       , 0.        ,]
+ [ 0.16564245, 0.        , 0.        ,]
+ [ 0.16935438, 0.05      , 0.        ,]
+ [ 0.16564245, 0.1       , 0.        ,]
+ [ 0.19966632, 0.        , 0.        ,]
+ [ 0.20306459, 0.05      , 0.        ,]
+ [ 0.19966632, 0.1       , 0.        ,]
+ [ 0.23709257, 0.        , 0.        ,]
+ [ 0.24018459, 0.05      , 0.        ,]
+ [ 0.23709257, 0.1       , 0.        ,]
+ [ 0.27826145, 0.        , 0.        ,]
+ [ 0.28106719, 0.05      , 0.        ,]
+ [ 0.27826145, 0.1       , 0.        ,]
+ [ 0.32354722, 0.        , 0.        ,]
+ [ 0.32609103, 0.05      , 0.        ,]
+ [ 0.32354722, 0.1       , 0.        ,]
+ [ 0.37336157, 0.        , 0.        ,]
+ [ 0.37566793, 0.05      , 0.        ,]
+ [ 0.37336157, 0.1       , 0.        ,]
+ [ 0.42815735, 0.        , 0.        ,]
+ [ 0.43024911, 0.05      , 0.        ,]
+ [ 0.42815735, 0.1       , 0.        ,]
+ [ 0.48843271, 0.        , 0.        ,]
+ [ 0.49033057, 0.05      , 0.        ,]
+ [ 0.48843271, 0.1       , 0.        ,]
+ [ 0.55473561, 0.        , 0.        ,]
+ [ 0.55645814, 0.05      , 0.        ,]
+ [ 0.55473561, 0.1       , 0.        ,]
+ [ 0.62766879, 0.        , 0.        ,]
+ [ 0.62923254, 0.05      , 0.        ,]
+ [ 0.62766879, 0.1       , 0.        ,]
+ [ 0.7078953 , 0.        , 0.        ,]
+ [ 0.70931432, 0.05      , 0.        ,]
+ [ 0.7078953 , 0.1       , 0.        ,]
+ [ 0.79614445, 0.        , 0.        ,]
+ [ 0.79742452, 0.05      , 0.        ,]
+ [ 0.79614445, 0.1       , 0.        ,]
+ [ 0.89321852, 0.        , 0.        ,]
+ [ 0.89429495, 0.05      , 0.        ,]
+ [ 0.89321852, 0.1       , 0.        ,]
+ [ 1.        , 0.        , 0.        ,]
+ [ 1.        , 0.05      , 0.        ,]
+ [ 1.        , 0.1       , 0.        ,]]
+ dbg f90 dt  100.000000000000000        2000.0000000000000     
+  get velocity b          63
+  get velocity a  4.12762178726946332E-005  2.91948548905471597E-009   0.0000000000000000     
+  get velocity a  4.12762178726946332E-005  2.91948548905471597E-009   0.0000000000000000     
+after the call within the c
+ length of points 63
+charge 0 0.929223237562
+charge 3 0.852050908217
+charge 6 0.768850632271
+charge 9 0.680448025223
+charge 12 0.588240470707
+charge 15 0.49428021319
+charge 18 0.40128059003
+charge 21 0.312491485352
+charge 24 0.231398411156
+charge 27 0.161238239754
+charge 30 0.104399442255
+charge 33 0.061868479121
+charge 36 0.032945470823
+charge 39 0.0154115325383
+charge 42 0.00615470762673
+charge 45 0.00202084926234
+charge 48 0.000517300819259
+charge 51 9.48678799607e-05
+charge 54 1.05205632278e-05
+charge 57 7.83648704867e-07
+dbg py velocity length  189
+ analytic charge  [0.93043454357086575, 0.85454218521961367, 0.7726144411819571, 0.68536681767095764, 0.59405865314859008, 0.50059218473292988, 0.40755031884305837, 0.31811860143458004, 0.23583449273233503, 0.16413227173053874, 0.10571948043530285, 0.061928425879536557, 0.032291238152125472, 0.014599530519095046, 0.0055426502289346556, 0.0016990536552284375, 0.00040092147940680879, 6.8706189250960297e-05, 7.9661135109128067e-06, 5.7330314375838729e-07]
+ normax: 1.2113060085e-03  analytical sol.: 9.3043454357e-01 nume. sol:  9.2922323756e-01
+ normax: 2.4912770026e-03  analytical sol.: 8.5454218522e-01 nume. sol:  8.5205090822e-01
+ normax: 3.7638089108e-03  analytical sol.: 7.7261444118e-01 nume. sol:  7.6885063227e-01
+ normax: 4.9187924477e-03  analytical sol.: 6.8536681767e-01 nume. sol:  6.8044802522e-01
+ normax: 5.8181824419e-03  analytical sol.: 5.9405865315e-01 nume. sol:  5.8824047071e-01
+ normax: 6.3119715433e-03  analytical sol.: 5.0059218473e-01 nume. sol:  4.9428021319e-01
+ normax: 6.3119715433e-03  analytical sol.: 4.0755031884e-01 nume. sol:  4.0128059003e-01
+ normax: 6.3119715433e-03  analytical sol.: 3.1811860143e-01 nume. sol:  3.1249148535e-01
+ normax: 6.3119715433e-03  analytical sol.: 2.3583449273e-01 nume. sol:  2.3139841116e-01
+ normax: 6.3119715433e-03  analytical sol.: 1.6413227173e-01 nume. sol:  1.6123823975e-01
+ normax: 6.3119715433e-03  analytical sol.: 1.0571948044e-01 nume. sol:  1.0439944225e-01
+ normax: 6.3119715433e-03  analytical sol.: 6.1928425880e-02 nume. sol:  6.1868479121e-02
+ normax: 6.3119715433e-03  analytical sol.: 3.2291238152e-02 nume. sol:  3.2945470823e-02
+ normax: 6.3119715433e-03  analytical sol.: 1.4599530519e-02 nume. sol:  1.5411532538e-02
+ normax: 6.3119715433e-03  analytical sol.: 5.5426502289e-03 nume. sol:  6.1547076267e-03
+ normax: 6.3119715433e-03  analytical sol.: 1.6990536552e-03 nume. sol:  2.0208492623e-03
+ normax: 6.3119715433e-03  analytical sol.: 4.0092147941e-04 nume. sol:  5.1730081926e-04
+ normax: 6.3119715433e-03  analytical sol.: 6.8706189251e-05 nume. sol:  9.4867879961e-05
+ normax: 6.3119715433e-03  analytical sol.: 7.9661135109e-06 nume. sol:  1.0520563228e-05
+ normax: 6.3119715433e-03  analytical sol.: 5.7330314376e-07 nume. sol:  7.8364870487e-07
+
+ 
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ The hydraulic transient test on specific storage with analytical solution is ok
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+

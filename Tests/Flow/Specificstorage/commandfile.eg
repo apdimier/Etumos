@@ -1,0 +1,4 @@
+Input File = SDarcy2d.msh
+Output File = SDarcy2d
+Input Mode = Gmsh
+Output Mode = ElmerSolver

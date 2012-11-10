@@ -1,0 +1,4 @@
+Input File = RichardsDyke.msh
+Output File = RichardsDyke
+Input Mode = Gmsh
+Output Mode = ElmerSolver

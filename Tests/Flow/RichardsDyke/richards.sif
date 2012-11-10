@@ -1,0 +1,114 @@
+Header
+  CHECK KEYWORDS Warn
+  Mesh DB "." "land_dyke"
+  Include Path "."
+  Results Directory ""
+End
+
+Simulation
+  Max Output Level = 4
+  Coordinate System = "Cartesian 2D"
+  Coordinate Mapping(3) = 1 2 3
+  Simulation Type = Steady
+  Steady State Max Iterations = 1
+  Output Intervals = 0
+!  Post File = richards.ep
+End
+
+Constants
+End
+
+Body 1
+  Name = "dyke"
+  Equation   = 1
+  Material   = 1
+End
+
+Equation 1
+  Active Solvers(3) = 1 2 3
+End
+
+Material 1
+ Water Density = Real 1.0000000000e+03
+ Viscosity = Real 1.0000000000e+00
+ Hydr Conductivity = Real 1.0000000000e-04
+ Specific Storage = Real 1.0000000000e+00
+ Compressibility Model = Incompressible
+End
+
+
+Solver 1
+  Exec Solver = "Always"
+  Equation = "Darcy Equation"
+  Procedure = "DarcySolve" "DarcySolver"
+  Variable = "Charge"
+  Variable Dofs = 1
+
+!  Discontinuous Galerkin = Logical True ! not operational yet
+
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations  = 1000
+  Linear System Preconditioning = ILU1
+  Linear System Convergence Tolerance = 1.0e-12
+  Linear System Residual Output = 10
+
+!  Linear System Solver = Direct
+  Linear System Direct Method = umfpack
+
+  Nonlinear System Max Iterations = 100
+  Nonlinear System Convergence Tolerance = 1.0e-6
+  Nonlinear System Convergence Measure = solution
+  Nonlinear System Relaxation Factor = 1.0
+
+! Uses saturated conditions (pure Darcy flow) for the 1st iteration
+  Saturated Initial Guess = True
+
+!  Bubbles = Logical True
+  Namespace = string "Charge"
+End
+
+Solver 2
+  Equation = ComputeFlux
+  Procedure = "DFluxSolver" "DFluxSolver"
+  Flux Variable = String "Charge"
+  Flux Coefficient = String "Hydr Conductivity"
+  Linear System Convergence Tolerance = 5.000000e-03
+End
+
+Solver 3
+  Exec Solver = after all
+!  Exec Solver = never
+
+  Equation = "ResultOutput"
+  Procedure = "ResultOutputSolve" "ResultOutputSolver"
+  Output File Name = "essai"
+
+  Vtu format = Logical True
+!  Vtk format = Logical True
+
+  Scalar Field = String "charge"
+  Scalar Field = String "water content"
+  Vector Field = String "velocity"
+End
+
+Boundary Condition 1
+  Target Boundaries(1) = 2 
+  Name = "WetLeft"
+  Charge = Real 8.5
+End
+
+Boundary Condition 2
+  Target Boundaries(1) = 3 
+  Name = "WetRight"
+  Charge = Real 6.0
+End
+
+
+$fprintf( stderr, "TEST CASE 1\n");
+RUN
+$fprintf( stderr, "END TEST CASE 1: Target NRM=7.4644288\n");
+
+
+
+
