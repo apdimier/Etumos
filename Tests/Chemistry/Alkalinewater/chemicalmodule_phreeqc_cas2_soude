@@ -1,0 +1,47 @@
+(null)
+
+            
+
+
+number of aqueous primary species                         4
+number of aqueous secondary species                       3
+number of minerals                                        0
+number of sorbed species                                  0
+
+pH                                                12.2545
+pe                                                      4.0
+water activity                               0.999307113505
+ionicstrength                               0.0202769564193
+temperature                                            25.0
+electrical_balance                       -0.000943745120113
+total H                                       111.033386338
+total O                                       55.5271696415
+
+
+ primary species: mol/l
+
+                H(1) 1.0
+                H(0) 0.0
+                  Na 0.0200092001502
+                O(0) 1.72345622841e-21
+
+
+ secondary species: mol/l
+
+                 H2O 55.5062166963
+                 OH- 0.0207488289794
+                NaOH 0.000204116291531
+
+
+ sorbed species: moles
+
+
+
+     SI( target saturation index):        SI < 0 undersaturation, 0: equilibrium and supersaturation otherwise
+
+
+
+
+
+                 mineral species:            SI                   moles
+
