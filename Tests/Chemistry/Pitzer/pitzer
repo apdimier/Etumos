@@ -1,0 +1,84 @@
+(null)
+
+st case of the introduction of  PITZER phreeqC keyword : to treat Brines
+# a modified PITZER phreeqc database is used to treat an evaporation problem
+
+
+number of aqueous primary species                         9
+number of aqueous secondary species                      10
+number of minerals                                       12
+number of sorbed species                                  0
+
+pH                                          7.93733665328
+pe                                                      4.0
+water activity                               0.980621650003
+ionicstrength                                0.749055558317
+temperature                                            25.0
+electrical_balance                         0.00228307819502
+total H                                       111.014453519
+total O                                       55.6309579561
+
+
+ primary species: mol/l
+
+                H(1) 1.0
+                C(4) 0.000833955568727
+                  Ca 0.0102960965744
+                  Cl 0.587367198782
+                   K 0.0110001630867
+                  Mg 0.0571800930263
+                  Mn 0.0010377512346
+                  Na 0.503309348779
+                S(6) 0.0304061111737
+
+
+ secondary species: mol/l
+
+                  H+ 1.41351341292e-08
+                 H2O 55.5062166963
+               CO3-2 2.10309506667e-05
+               MgCO3 2.02790571606e-05
+                 CO2 9.48689245775e-06
+               CaCO3 5.55972843257e-06
+               CaCO3 5.55972843257e-06
+               MgCO3 2.02790571606e-05
+               MgOH+ 1.94257975179e-06
+               HSO4- 4.44002106797e-09
+
+
+ sorbed species: moles
+
+
+
+     SI( target saturation index):        SI < 0 undersaturation, 0: equilibrium and supersaturation otherwise
+
+
+
+
+
+                 mineral species:            SI                   moles
+
+                     Anhydrite         -8.58358729e-01       0.00000000e+00
+
+                    Bischofite         -7.22521645e+00       0.00000000e+00
+
+                       Calcite          0.00000000e+00       8.07850651e-04
+
+                    Carnallite         -9.68445548e+00       0.00000000e+00
+
+                        CO2(g)         -3.50000000e+00       1.00006195e+01
+
+                      Epsomite         -2.61350063e+00       0.00000000e+00
+
+                    Glauberite         -3.46658120e+00       0.00000000e+00
+
+                        Gypsum         -6.56552148e-01       0.00000000e+00
+
+                        Halite         -2.45789866e+00       0.00000000e+00
+
+                   Hexahydrite         -2.85128900e+00       0.00000000e+00
+
+                     Kieserite         -4.32036913e+00       0.00000000e+00
+
+                    Polyhalite         -8.03232209e+00       0.00000000e+00
+
