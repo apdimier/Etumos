@@ -1,0 +1,69 @@
+SOLUTION_MASTER_SPECIES
+                   T   T+    0.00000         T  35.00000
+                 Na   Na+    0.00000        Na  22.98980
+                   K   K+    0.00000         K  39.10200
+                 Cl   Cl-    0.00000        Cl  35.45300
+SOLUTION_SPECIES
+           + 1.0T+ = T+
+                    log_k   0.0000000000e+00
+           + 1.0Na+ = Na+
+                    log_k   0.0000000000e+00
+           + 1.0K+ = K+
+                    log_k   0.0000000000e+00
+           + 1.0Cl- = Cl-
+                    log_k   0.0000000000e+00
+EXCHANGE_MASTER_SPECIES
+          X   X-
+EXCHANGE_SPECIES
+                X-  = X-
+                    log_k   0.0000000000e+00
+                Na+ + X-  = NaX
+                    log_k   0.0000000000e+00
+                K+ + X-  = KX
+                    log_k   0.0000000000e+00
+                H+ + X-  = HX
+                    log_k   -9.9000000000e+01
+
+SOLUTION                  1-300 column
+   temp 2.5000000000e+01
+   pH    7.0000000000e+00 
+   pe    4.0000000000e+00
+   units mol/l
+                       Na    2.0000000000e-03
+                       Cl    2.0000000000e-03
+                        K    0.0000000000e+00
+
+EXCHANGE                  1-300 column
+               equilibrate       1
+                        X    2.0000000000e-03
+
+SOLUTION                  301-301 boundary
+   temp 2.5000000000e+01
+   pH    7.0000000000e+00 
+   pe    4.0000000000e+00
+   units mol/l
+                        K    1.0000000000e-03
+                        T    1.0000000000e-03
+                       Na    1.0000000000e-15
+                       Cl    1.0000000000e-03
+SELECTED_OUTPUT
+  -high_precision true
+KNOBS
+  -iterations 500
+  -diag true 
+  -tolerance 1.e-15
+SOLUTION 0
+PRINT
+  -reset	true
+# hereafter the -cells parameter is the 
+# only relevant parameter 
+TRANSPORT
+  -cells          301
+  -time_step          100.
+  -shifts          5
+  -lengths        0.1
+  -flow_direction diff
+  -boundary_conditions        closed closed
+  -print_frequency      1
+  -warnings False
+END

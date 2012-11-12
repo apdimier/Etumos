@@ -1,0 +1,3633 @@
+ 2 0 8
+
+$EndMeshFormat
+
+$PhysicalNames
+
+['2']
+['1', '"inlet"']
+['2', '"domain"']
+['$EndPhysicalNames']
+dimension 2
+1 "inlet"
+2 "domain"
+dbg self.physicalBodyNames {'domain': [2, []], 'inlet': [1, []]}
+self.elementArray  array (151,10) , type = l, has 1510 elements
+ mesh file name control:  essai
+ ?  array (151,10) , type = l, has 1510 elements
+ element array 151 151
+302
+302 domain 2 0 8
+
+$EndMeshFormat
+
+$PhysicalNames
+
+['2']
+['1', '"inlet"']
+['2', '"domain"']
+['$EndPhysicalNames']
+dimension 2
+1 "inlet"
+2 "domain"
+dbg self.physicalBodyNames {'domain': [2, []], 'inlet': [1, []]}
+
+2 inlet
+Tensor value 3e-10 m**2/s
+Tensor value 1.0 <PhysicalUnit Permeability>
+keyword kinematicDispersion
+dbg property:  kinematicdispersion PhysicalProperties.KinematicDispersionself.elementArray  array (151,10) , type = l, has 1510 elements
+
+setproperty propClass is ok 
+ dbg material key kinematicDispersion mesh file name control:  essai
+ ?  array (151,10) , type = l, has 1510 elements
+ element array 151 151
+302
+
+keyword porosity
+dbg property:  porosity PhysicalProperties.Porosity
+setproperty propClass is ok 
+ dbg material key porosity
+keyword permeability302 domain
+2 inlet
+Tensor value 3e-10 m**2/s
+Tensor value 1.0 <PhysicalUnit Permeability>
+
+keyword kinematicDispersion
+dbg property:  kinematicdispersion PhysicalProperties.KinematicDispersion
+setproperty propClass is ok 
+ dbg material key kinematicDispersion
+keyword porosity
+dbg property:  porosity PhysicalProperties.Porosity
+setproperty propClass is ok 
+ dbg material key porosity
+keyword permeability
+dbg property:  permeability PhysicalProperties.Permeability
+setproperty propClass is ok 
+ dbg material key permeability
+keyword effectiveDiffusion
+dbg property:  effectivediffusion PhysicalProperties.EffectiveDiffusion
+setproperty propClass is ok 
+ dbg material key effectiveDiffusion
+ dbg material we are here 
+dbg property:  permeability value: PhysicalProperties.Permeability
+setproperty propClass is ok 
+ dbg material key permeability
+keyword effectiveDiffusion
+dbg property:  effectivediffusion PhysicalProperties.EffectiveDiffusion
+setproperty propClass is ok 
+ dbg material key effectiveDiffusion
+ dbg material we are here 
+ <type 'str'> ChemicalState
+dbg bcdict  [value:  <type 'str'> ChemicalState
+dbg bcdict  ['Flux', 'Dirichlet']
+valueeeee ChemicalState
+dbg argv  ['teste_mpi.py']
+mpi is in argv  ['teste_mpi.py']'Flux', 'Dirichlet']
+valueeeee ChemicalState
+dbg argv  ['teMPI
+ 0
+verifyClass commonmodel.BoundaryCondition verifyClass commonmodel.Region verifyClass commonmodel.Region verifyClass commonmodel.InitialCondition verifyClass species.AqueousMasterSpecies verifyClass species.AqueousSecondarySpecies verifyClass species.AqueousMasterSpecies verifyClass species.AqueousMasterSpecies verifyClass species.AqueousMasterSpecies verifyClass species.AqueousSecondarySpecies verifyClass species.AqueousSecondarySpecies verifyClass species.SorbingSiteMasterSpecies verifyClass species.SorbedSecondarySpecies verifyClass species.AqueousSecondarySpecies verifyClass species.SorbedSecondarySpecies verifyClass species.SorbedSecondarySpecies verifyClass species.SorbedSecondarySpecies verifyClass chemistry.ExpectedOutput verifyClass chemistry.ExpectedOutput verifyClass chemistry.ExpectedOutput verifyClass chemistry.ExpectedOutput environ  None
+ste_mpi.py']
+mpi is in argv  ['teste_mpi.py']MPI
+ 0
+verifyClass commonmodel.BoundaryCondition verifyClass commonmodel.Region verifyClass commonmodel.Region verifyClass commonmodel.InitialCondition verifyClass species.AqueousMasterSpecies verifyClass species.AqueousSecondarySpecies verifyClass species.AqueousMasterSpecies verifyClass species.AqueousMasterSpecies verifyClass species.AqueousMasterSpecies verifyClass species.AqueousSecondarySpecies verifyClass species.AqueousSecondarySpecies verifyClass species.SorbingSiteMasterSpecies verifyClass species.SorbedSecondarySpecies verifyClass species.AqueousSecondarySpecies verifyClass species.SorbedSecondarySpecies verifyClass species.SorbedSecondarySpecies verifyClass species.SorbedSecondarySpecies verifyClass chemistry.ExpectedOutput verifyClass chemistry.ExpectedOutput verifyClass chemistry.ExpectedOutput verifyClass chemistry.ExpectedOutput environ  None
+ the simulation is //, the communicator is launched on 2 processors the simulation is //, the communicator is launched on 2 processors
+within getDarcyVelocity self.darcyVelocity V(0.0, 0.0, 0.0) Head/Time
+self.darcyVelocity V(0.0, 0.0, 0.0) Head/Time
+
+within getDarcyVelocity self.darcyVelocity 
+effective_diffusion:
+
+
+porosity
+
+
+effective diffusion
+
+ dbg fields getEntity is:
+   dbg fields getEntity is:
+   dbg fields getEntity is:
+  
+porosity
+
+
+effective diffusion
+
+ dbg fields getEntity is:
+  2
+ dbg fields getEntity over
+
+ dbg fields setZone: it was ok myEntity 2
+ dbg fields setZone ok
+ dbg fields getEntity is:
+  2
+ dbg fields getEntity over
+
+ dbg fields setZone: it was ok myEntity 2
+ dbg fields setZone ok
+ dbg fields getEntity is:
+  2
+ dbg fields getEntity over
+
+ dbg fields setZone: it was ok myEntity 2
+ dbg fields setZone ok
+ctm dbg out of region loop: inlet
+ self transportcomponent elmer mpiEnv 1
+mpiEnv
+mpiEnv
+mpiEnv
+mpiEnv
+mpiEnv
+mpiEnv
+mpiEnv
+
+ phreeqc init method  2
+V(0.0, 0.0, 0.0) Head/Time
+self.darcyVelocity V(0.0, 0.0, 0.0) Head/Time
+
+effective_diffusion:
+
+
+porosity
+
+
+effective diffusion
+ verbose settings
+ verbose settings over
+ctmdbg setElmerTransportParameter
+ctmdbg launch method
+py_definedatasetc wdefinedataset ok : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat 
+py_definedatasetc defined dataset ok : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat 
+
+ctm dbg elmer launch 
+2 dbg fields getEntity is:
+   dbg fields getEntity is:
+   dbg fields getEntity is:
+  
+porosity
+
+
+effective diffusion
+
+ dbg fields getEntity is:
+  2
+ dbg fields getEntity over
+ inlet
+ ini cond  domain
+
+ dbg fields setZone: it was ok myEntity2 inlet
+ 2
+ dbg fields setZone ok
+ dbg fields getEntity is:
+  2
+ dbg fields getEntity over
+
+ dbg fields setZone: it was ok myEntity 2
+ dbg fields setZone ok
+ dbg fields getEntity is:
+  2
+ dbg fields getEntity over
+
+ dbg fields setZone: it was ok myEntity 2 ---------------
+ boolean  0
+formationReaction [('T+', 1)]
+symbol T+
+('T+', 1) T+ 1
+ ---------------
+ boolean  0
+formationReaction [('Na+', 1)]
+symbol Na+
+('Na+', 1) Na+ 1
+ ---------------
+ boolean  0
+formationReaction [('K+', 1)]
+symbol K+
+('K+', 1) K+ 1
+ ---------------
+ boolean  0
+formationReaction [('Cl-', 1)]
+symbol Cl-
+('Cl-', 1) Cl- 1
+
+ dbg fields setZone ok
+ctm dbg out of region loop:  pdbg inFile  phreeqCFile1
+ pdbg outFile  guiteste.phout
+ dbg Wphreeqc MAX_LENGTH 256 
+ in  wioutdefinition opening output file guiteste.phout
+ output file opening 
+ database file opening /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+ database file opened /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+ log file opening 
+ log file opened 
+*PHREEQC2.17* Input name : phreeqCFile1
+*PHREEQC2.17* Output file: guiteste.phout
+*PHREEQC2.17* Data file  : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+read_database 
+inlet
+ self transportcomponent after tidy model call 1: 
+mpi_control is not null
+ py_initialize value of the mpianz parameter 2
+ value of the size and rank parameter size 2 and rank 1
+ initialising phreeqC solutions
+elmer mpiEnv 1
+mpiEnv
+mpiEnv
+mpiEnv
+mpiEnv
+mpiEnv
+mpiEnv
+mpiEnv
+
+ we launch the elmer transport solver  0
+ we launch the elmer transport solver 
+ we launch the elmer transport solver 
+ we launch the elmer transport solver 
+ we launch the elmer transport solver 
+ after initial_solution
+initialising exchangers
+ exchangers initialisation OK
+initialising  gas_phases
+gas_phases initialisation OK
+ chemistry reaction
+ chemistry reaction ok 301
+ mpi environment py_mpi_reactionsc
+dbp getPrimarySpeciesNames
+ dg getPrimarySpeciesc -> wgetcompo  dbgpc wgetcompo 301
+ dbg elmer class instantation 
+ elmer transport solver launchedNumber of components in the solution :  7
+ dwgetcompo Element n. 0 of old name CB new species name CB
+ dwgetcompo Element n. 1 of old name TH new species name TH
+ dwgetcompo Element n. 2 of old name TO new species name TO
+ dwgetcompo Element n. 3 of old name Cl new species name Cl
+ dwgetcompo Element n. 4 of old name Na new species name K
+ dwgetcompo Element n. 5 of old name Na new species name Na
+
+ dwgetcompo Element n. 6 of old name T new species name T
+ over
+ctmdbg mpiEnv ['CB', 'TH', 'TO', 'Cl', 'K', 'Na', 'T'] 1
+ctmdbg mpi 01
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ phreeqc init method  2
+ py_mo we have sent from node 1 1050 to node 0
+ verbose settings
+ verbose settings over
+<elmer.Elmer instance at 0xa33b3ec>
+ctmdbg setElmerTransportParameter
+ctmdbg launch method
+py_definedatasetc wdefinedataset ok : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat 
+py_definedatasetc defined dataset ok : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat 
+ctm dbg elmer launch 
+2 inlet
+ ini cond  domain
+2 inlet
+ ---------------
+ boolean  0
+formationReaction [('T+', 1)]
+symbol T+
+('T+', 1) T+ 1
+ ---------------
+ boolean  0
+formationReaction [('Na+', 1)]
+symbol Na+
+('Na+', 1) Na+ 1
+ ---------------
+ boolean  0
+formationReaction [('K+', 1)]
+symbol K+
+('K+', 1) K+ 1
+ ---------------
+ boolean  0
+formationReaction [('Cl-', 1)]
+symbol Cl-
+('Cl-', 1) Cl- 1
+ pdbg inFile  phreeqCFile0
+ pdbg outFile  guiteste.phout
+ dbg Wphreeqc MAX_LENGTH 256 
+ in  wioutdefinition opening output file guiteste.phout
+ output file opening 
+ database file opening /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+ database file opened /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+ log file opening 
+ log file opened 
+*PHREEQC2.17* Input name : phreeqCFile0
+*PHREEQC2.17* Output file: guiteste.phout
+*PHREEQC2.17* Data file  : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+read_database 
+after tidy model call 1: 
+mpi_control is not null
+ py_initialize value of the mpianz parameter 2
+ value of the size and rank parameter size 2 and rank 0
+ initialising phreeqC solutions
+ after initial_solution
+initialising exchangers
+ exchangers initialisation OK
+initialising  gas_phases
+gas_phases initialisation OK
+ chemistry reaction
+ chemistry reaction ok 301
+ mpi environment py_mpi_reactionsc
+dbp getPrimarySpeciesNames
+ dg getPrimarySpeciesc -> wgetcompo  dbgpc wgetcompo 301
+Number of components in the solution :  7
+ dwgetcompo Element n. 0 of old name CB new species name CB
+ dwgetcompo Element n. 1 of old name TH new species name TH
+ dwgetcompo Element n. 2 of old name TO new species name TO
+ dwgetcompo Element n. 3 of old name Cl new species name Cl
+ dwgetcompo Element n. 4 of old name Na new species name K
+ dwgetcompo Element n. 5 of old name Na new species name Na
+ dwgetcompo Element n. 6 of old name T new species name T
+ over
+ctmdbg mpiEnv ['CB', 'TH', 'TO', 'Cl', 'K', 'Na', 'T'] 0
+ctmdbg mpi 01
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 1
+ctmdbg mpi 02
+ctmdbg mpi 1 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ ctmdbg Transport initialisation~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ py_mpi_getMobileConcentrationc, end of the function 0
+ctmdbg mpi 02
+ ctmdbg Milestone: 
+
+2100 [-4.7987502448827657e-10, -4.7987502448827657e-10, -4.7987502448827657e-10, -4.7987502448827657e-10, -4.7987502448827657e-10, -4.7987502448827657e-10, -4.7987502448827657e-10, -4.7987502448827657e-10, -4.7987502448827657e-10, -4.7987502448827657e-10]
+ctmdbg mpi 1 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ ctmdbg Transport initialisation~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ctm dbg setRank method  0
+ ctmdbg transportInitialisation for rank 0
+ipv
+ipv
+ipv
+ipv
+ipv
+ipv
+ipv
+ipv
+ipv
+ipv
+ipv
+ipv
+ipv
+ipv
+ipv
+ipv
+ipv
+
+ctmdbg rank of  communicator 0
+ctmdbg transportinitialisation method 
+ctmdbg transportinitialisation setDarcy 
+dbg set Darcy velocity  V(0.0, 0.0, 0.0) Head/Time
+ctmdbg transportinitialisation setBody 
+ctmdbg transportinitialisation setBody over
+dbp getPrimarySpecies
+ dg getPrimarySpeciesc -> wgetcompo  dbgpc wgetcompo 301
+Number of components in the solution :  7
+ dwgetcompo Element n. 0 of old name CB new species name CB
+ dwgetcompo Element n. 1 of old name TH new species name TH
+ dwgetcompo Element n. 2 of old name TO new species name TO
+ dwgetcompo Element n. 3 of old name Cl new species name Cl
+ dwgetcompo Element n. 4 of old name Na new species name K
+ dwgetcompo Element n. 5 of old name Na new species name Na
+ dwgetcompo Element n. 6 of old name T new species name T
+ over
+dbg elmer species names  0 CB
+dbg elmer species names  1 TH
+dbg elmer species names  2 TO
+dbg elmer species names  3 Cl
+dbg elmer species names  4 K
+dbg elmer species names  5 Na
+dbg elmer species names  6 T
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ ctmdbg Elmer Boundaries: ~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ctmdbg number Of Boundaries  1
+dbp getPrimarySpeciesNames
+ dg getPrimarySpeciesc -> wgetcompo  dbgpc wgetcompo 301
+Number of components in the solution :  7
+ dwgetcompo Element n. 0 of old name CB new species name CB
+ dwgetcompo Element n. 1 of old name TH new species name TH
+ dwgetcompo Element n. 2 of old name TO new species name TO
+ dwgetcompo Element n. 3 of old name Cl new species name Cl
+ dwgetcompo Element n. 4 of old name Na new species name K
+ dwgetcompo Element n. 5 of old name Na new species name Na
+ dwgetcompo Element n. 6 of old name T new species name T
+ over
+ dbg fields getEntity is:
+  domain <type 'str'>
+inlet <type 'str'>
+ ctmdbg setPorosity 1
+dbg porosity dico setting [1.0, 1.0]
+['__add__', '__doc__', '__init__', '__module__', '__neg__', '__sub__', 'amult', 'appendZoneValues', 'bodies', 'components_names', 'depend', 'duplicate', 'entity', 'getBodies', 'getBody', 'getComponentsNames', 'getDepend', 'getEntity', 'getMaterial', 'getMaterials', 'getName', 'getNbBodies', 'getNbComponents', 'getNbZones', 'getValues', 'getZone', 'getZoneValues', 'getZones', 'materials', 'mesh', 'name', 'setComponentsNames', 'setDepend', 'setEntity', 'setName', 'setZone', 'type', 'values', 'verifyCompatible', 'zones'] ['CB', 'TH', 'TO', 'CL', 'K', 'NA', 'T']
+~~~~~~~~~~~~~~~~~~~~
+~ ctmdbg Elmer IC: ~
+~~~~~~~~~~~~~~~~~~~~
+ctmdbg componentAnz 7
+ctmdbg setDirIC 7 column 7
+2 inlet
+ic dbg Set expected outputs
+
+ e dbg transport: number of nodes 302
+porosityValue  1.0 302
+porosityValue  1.0 2
+ctmdbg length of initialPorosityValues 302
+ End of transport initialisation 
+ ctmdbg transportInitialisation for rank 0 over
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ p<type 'array'> 1 1
+y_mpi_getMobileConcentrationc, end of the function 0
+ ctmdbg get MobileConcentration over  2100
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 1
+ ctmdbg get MobileConcentration over  2100
+ ctm dbg set MobileConcentration over 
+ mpi environment py_mpi_reactionsc
+ ctm dbg equi over 
+ ctm dbg set MobileConcentration over 
+ mpi environment py_mpi_reactionsc
+ ctm dbg equi over 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ ctmdbg getImmobileConcentrationField over  0.0
+ctm dbg transport init method
+ launch ended 
+ ctmdbg getImmobileConcentrationField over  0.0
+ctm dbg transport init method
+ctm dbg transport init method rank:  True
+ctm dbg transport init method rank:  {'Linear System Iterative Method': 'CG', 'algebraicResolution': 'Iterative', 'BDF Order': '1', 'Timestepping Method': 'BDF', 'discretisation': 'FE', 'Linear System Max Iterations': 400, 'Linear System Preconditioning': 'ILU1', 'Linear System Convergence Tolerance': 1e-08}
+ dbg elmer init method
+ ic dbg self.nbTimes 2
+
+self.problemType chemicaltransport
+dbg createSifFile
+[{'index': 2, 'conc': [-4.7987502448827657e-10, 111.01243360250332, 55.506216801491604, 0.0020002337987277282, 0.0, 0.0020002337987277282, 0.0], 'name': 'column'}]
+<type 'instance'> 3e-10
+<type 'instance'> 1.0
+(0.00066699999999999995, 0) Head <type 'instance'>
+ v  V(0.0, 0.0, 0.0)
+<type 'instance'> 3e-10
+<type 'instance'> 1.0
+(0.00066699999999999995, 0) Head <type 'instance'>
+ v  V(0.0, 0.0, 0.0)
+<type 'instance'> 3e-10
+<type 'instance'> 1.0
+(0.00066699999999999995, 0) Head <type 'instance'>
+ v  V(0.0, 0.0, 0.0)
+<type 'instance'> 3e-10
+<type 'instance'> 1.0
+(0.00066699999999999995, 0) Head <type 'instance'>
+ v  V(0.0, 0.0, 0.0)
+<type 'instance'> 3e-10
+<type 'instance'> 1.0
+(0.00066699999999999995, 0) Head <type 'instance'>
+ v  V(0.0, 0.0, 0.0)
+<type 'instance'> 3e-10
+<type 'instance'> 1.0
+(0.00066699999999999995, 0) Head <type 'instance'>
+ v  V(0.0, 0.0, 0.0)
+<type 'instance'> 3e-10
+<type 'instance'> 1.0
+(0.00066699999999999995, 0) Head <type 'instance'>
+ v  V(0.0, 0.0, 0.0)
+<type 'instance'> 3e-10
+<type 'instance'> 1.0
+(0.00066699999999999995, 0) Head <type 'instance'>
+ v  V(0.0, 0.0, 0.0)
+<type 'instance'> 3e-10
+<type 'instance'> 1.0
+(0.00066699999999999995, 0) Head <type 'instance'>
+ v  V(0.0, 0.0, 0.0)
+<type 'instance'> 3e-10
+<type 'instance'> 1.0
+(0.00066699999999999995, 0) Head <type 'instance'>
+ v  V(0.0, 0.0, 0.0)
+<type 'instance'> 3e-10
+<type 'instance'> 1.0
+(0.00066699999999999995, 0) Head <type 'instance'>
+ v  V(0.0, 0.0, 0.0)
+<type 'instance'> 3e-10
+<type 'instance'> 1.0
+(0.00066699999999999995, 0) Head <type 'instance'>
+ v  V(0.0, 0.0, 0.0)
+<type 'instance'> 3e-10
+<type 'instance'> 1.0
+(0.00066699999999999995, 0) Head <type 'instance'>
+ v  V(0.0, 0.0, 0.0)
+<type 'instance'> 3e-10
+<type 'instance'> 1.0
+(0.00066699999999999995, 0) Head <type 'instance'>
+ v  V(0.0, 0.0, 0.0)
+[['inlet', 1, 'Dirichlet', [0.0010001091748597351, 111.0124336012523, 55.506216800822273, 0.0010001095671036352, 0.0010001095671036352, 1.0001095671036341e-15, 0.0010001095671036352]]]
+ dbg write BC  {'index': 1, 'conc': [0.0010001091748597351, 111.0124336012523, 55.506216800822273, 0.0010001095671036352, 0.0010001095671036352, 1.0001095671036341e-15, 0.0010001095671036352], 'type': 'Dirichlet', 'name': 'boundary'} ['CB', 'TH', 'TO', 'CL', 'K', 'NA', 'T']
+diric {'index': 2, 'conc': [-4.7987502448827657e-10, 111.01243360250332, 55.506216801491604, 0.0020002337987277282, 0.0, 0.0020002337987277282, 0.0], 'name': 'column'}
+dbg createSifFile end 0
+ initialisation of the instance 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+WElmer s.o. module:
+
+A. Dimier, GNU General Public License (GPL) beginning 2008/06/28 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+elmer initialise
+MAIN: 
+MAIN: ==========================================
+MAIN:  E L M E R  S O L V E R  S T A R T I N G
+MAIN:  Library version: 6.1 (Rev: 4955M)
+MAIN:  Wrapped version: 0.1.0
+MAIN: ==========================================
+  Model Name: test.sif                                                                                                                        
+MAIN: 
+MAIN: 
+MAIN: -----------------------
+MAIN: Reading Model ...
+Model Input: Found local SOLVER.KEYWORDS file, adding keywords to runtime database.
+Model Input:  Unlisted keyword: [water density] in section: [material 2]
+Model Input:  Unlisted keyword: [porosity] in section: [material 2]
+Model Input:  Unlisted keyword: [cb diffusivity] in section: [material 2]
+Model Input:  Unlisted keyword: [th diffusivity] in section: [material 2]
+Model Input:  Unlisted keyword: [to diffusivity] in section: [material 2]
+Model Input:  Unlisted keyword: [cl diffusivity] in section: [material 2]
+Model Input:  Unlisted keyword: [k diffusivity] in section: [material 2]
+Model Input:  Unlisted keyword: [na diffusivity] in section: [material 2]
+Model Input:  Unlisted keyword: [t diffusivity] in section: [material 2]
+Model Input:  Unlisted keyword: [long dispersivity] in section: [material 2]
+Model Input:  Unlisted keyword: [tran dispersivity] in section: [material 2]
+Model Input:  Unlisted keyword: [water density] in section: [material 1]
+Model Input:  Unlisted keyword: [porosity] in section: [material 1]
+Model Input:  Unlisted keyword: [cb diffusivity] in section: [material 1]
+Model Input:  Unlisted keyword: [th diffusivity] in section: [material 1]
+Model Input:  Unlisted keyword: [to diffusivity] in section: [material 1]
+Model Input:  Unlisted keyword: [cl diffusivity] in section: [material 1]
+Model Input:  Unlisted keyword: [k diffusivity] in section: [material 1]
+Model Input:  Unlisted keyword: [na diffusivity] in section: [material 1]
+Model Input:  Unlisted keyword: [t diffusivity] in section: [material 1]
+Model Input:  Unlisted keyword: [long dispersivity] in section: [material 1]
+Model Input:  Unlisted keyword: [tran dispersivity] in section: [material 1]
+Model Input:  Unlisted keyword: [cb diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [th diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [to diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [cl diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [k diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [na diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [t diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [namespace] in section: [solver 1]
+Model Input:  Unlisted keyword: [namespace] in section: [solver 2]
+Model Input:  Unlisted keyword: [namespace] in section: [solver 3]
+Model Input:  Unlisted keyword: [namespace] in section: [solver 4]
+Model Input:  Unlisted keyword: [namespace] in section: [solver 5]
+Model Input:  Unlisted keyword: [namespace] in section: [solver 6]
+Model Input:  Unlisted keyword: [namespace] in section: [solver 7]
+Model Input:  Unlisted keyword: [cb] in section: [boundary condition 1]
+Model Input:  Unlisted keyword: [th] in section: [boundary condition 1]
+Model Input:  Unlisted keyword: [to] in section: [boundary condition 1]
+Model Input:  Unlisted keyword: [cl] in section: [boundary condition 1]
+Model Input:  Unlisted keyword: [k] in section: [boundary condition 1]
+Model Input:  Unlisted keyword: [na] in section: [boundary condition 1]
+Model Input:  Unlisted keyword: [t] in section: [boundary condition 1]
+Model Input:  Unlisted keyword: [cb] in section: [initial condition 2]
+Model Input:  Unlisted keyword: [th] in section: [initial condition 2]
+Model Input:  Unlisted keyword: [to] in section: [initial condition 2]
+Model Input:  Unlisted keyword: [cl] in section: [initial condition 2]
+Model Input:  Unlisted keyword: [k] in section: [initial condition 2]
+Model Input:  Unlisted keyword: [na] in section: [initial condition 2]
+Model Input:  Unlisted keyword: [t] in section: [initial condition 2]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init0]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init0]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init0]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init0]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init0]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init0]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init0]
+MAIN: Done
+MAIN: -----------------------
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver]
+ elmer_initialise: what (flow,heat,stress,...) should be computed
+  dbg ElmerAux: AddSolvers           7
+  dbg0 ElmerAux: AddSolvers NOfEq            1
+  dbg0 ElmerAux: AddSolvers NOfEq            1
+  dbg0 ElmerAux: AddSolvers NOfEq            1
+  dbg0 ElmerAux: AddSolvers NOfEq            1
+  dbg0 ElmerAux: AddSolvers NOfEq            1
+  dbg0 ElmerAux: AddSolvers NOfEq            1
+  dbg0 ElmerAux: AddSolvers NOfEq            1
+  dbg2 ElmerAux: AddSolvers NumberOfSolvers           7
+  dbg3 ElmerAux: AddSolvers iloop            1           7
+  dbg ElmerAux: AddSolvers InitSolver           1           7
+  dbg ElmerAux: AddSolvers CurrentModel % Solver => Solver
+  dbg ElmerAux: AddSolvers CALL AddEquation transients advection diffusion equation cb                                                                                                  T1  T
+  dbg beginning of AddEquation:advection diffusion equation cb                                                                                                 
+  dbg ElmerAux: AddSolvers CALL AddEquation over
+  dbg3 ElmerAux: AddSolvers iloop            2           7
+  dbg ElmerAux: AddSolvers InitSolver           2           7
+  dbg ElmerAux: AddSolvers CurrentModel % Solver => Solver
+  dbg ElmerAux: AddSolvers CALL AddEquation transients advection diffusion equation th                                                                                                  T1  T
+  dbg beginning of AddEquation:advection diffusion equation th                                                                                                 
+  dbg ElmerAux: AddSolvers CALL AddEquation over
+  dbg3 ElmerAux: AddSolvers iloop            3           7
+  dbg ElmerAux: AddSolvers InitSolver           3           7
+  dbg ElmerAux: AddSolvers CurrentModel % Solver => Solver
+  dbg ElmerAux: AddSolvers CALL AddEquation transients advection diffusion equation to                                                                                                  T1  T
+  dbg beginning of AddEquation:advection diffusion equation to                                                                                                 
+  dbg ElmerAux: AddSolvers CALL AddEquation over
+  dbg3 ElmerAux: AddSolvers iloop            4           7
+  dbg ElmerAux: AddSolvers InitSolver           4           7
+  dbg ElmerAux: AddSolvers CurrentModel % Solver => Solver
+  dbg ElmerAux: AddSolvers CALL AddEquation transients advection diffusion equation cl                                                                                                  T1  T
+  dbg beginning of AddEquation:advection diffusion equation cl                                                                                                 
+  dbg ElmerAux: AddSolvers CALL AddEquation over
+  dbg3 ElmerAux: AddSolvers iloop            5           7
+  dbg ElmerAux: AddSolvers InitSolver           5           7
+  dbg ElmerAux: AddSolvers CurrentModel % Solver => Solver
+  dbg ElmerAux: AddSolvers CALL AddEquation transients advection diffusion equation k                                                                                                   T1  T
+  dbg beginning of AddEquation:advection diffusion equation k                                                                                                  
+  dbg ElmerAux: AddSolvers CALL AddEquation over
+  dbg3 ElmerAux: AddSolvers iloop            6           7
+  dbg ElmerAux: AddSolvers InitSolver           6           7
+  dbg ElmerAux: AddSolvers CurrentModel % Solver => Solver
+  dbg ElmerAux: AddSolvers CALL AddEquation transients advection diffusion equation na                                                                                                  T1  T
+  dbg beginning of AddEquation:advection diffusion equation na                                                                                                 
+  dbg ElmerAux: AddSolvers CALL AddEquation over
+ Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver]
+ dbg3 ElmerAux: AddSolvers iloop            7           7
+  dbg ElmerAux: AddSolvers InitSolver           7           7
+  dbg ElmerAux: AddSolvers CurrentModel % Solver => Solver
+  dbg ElmerAux: AddSolvers CALL AddEquation transients advection diffusion equation t                                                                                                   T1  T
+  dbg beginning of AddEquation:advection diffusion equation t                                                                                                  
+  dbg ElmerAux: AddSolvers CALL AddEquation over
+ elmer_initialise: Time integration and/or steady state steps
+ Get Output File Options
+ Initial Conditions
+  dbg initial condition            2
+  dbg BC          150           1           1
+  elmer_initialise: equation name advection diffusion equation cb                                                                                                 
+  elmer_initialise: equation name advection diffusion equation th                                                                                                 
+  elmer_initialise: equation name advection diffusion equation to                                                                                                 
+  elmer_initialise: equation name advection diffusion equation cl                                                                                                 
+  elmer_initialise: equation name advection diffusion equation k                                                                                                  
+  elmer_initialise: equation name advection diffusion equation na                                                                                                 
+  elmer_initialise: equation name advection diffusion equation t                                                                                                  
+  e90dbg allocating BULKCONC         150  number of unknowns            7         302         302
+ dbg valeur de unknownAnz 7 et activeCellsAnz 300
+ within the C 1 7 0 7 activeCellsAnz: 300 302
+ic_new dbg setSpeciesAnzahl:  0 7 <type 'int'>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ End of the elmer files writing phase
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ call of getCoordinates
+ Lange value out of c_elmer_getCoord bis 900
+ im_n dbg setPorosityValues
+ launch ended 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.0000e+00 , time step: 1.0000e+00 (time iteration # 1  )
+            ac dt   Times          1.00000000000000000                0  1.00000000000000000     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=  1.00000000000000000     
+  after allocation            1           7
+ c coupled            1           7
+  dbg_0405 ADTS allocation number of element nodes            4
+       1 0.6124E-22
+       1 0.6124E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81388107E-04  2.0000000     ) :: advection diffusion equation cb
+       1 0.6133E-18
+       1 0.6133E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      2.0000000     ) :: advection diffusion equation th
+       1 0.1354E-17
+       1 0.1354E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      2.0000000     ) :: advection diffusion equation to
+       1 0.3975E-17
+       1 0.3975E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19952444E-02  2.0000000     ) :: advection diffusion equation cl
+       1 0.1422E-21
+       1 0.1422E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81388188E-04  2.0000000     ) :: advection diffusion equation k
+       1 0.5285E-16
+       1 0.5285E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19935681E-02  2.0000000     ) :: advection diffusion equation na
+       1 0.1422E-21
+       1 0.1422E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81388188E-04  2.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+==>  Mpi Convergence error is:  1e-15 , it. =  1  Mem.  (348464.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi  pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.1487e+00 , time step: 1.1487e+00 (time iteration # 2  )
+            ac dt   Times           1.1486983549970351                0   2.1486983549970349     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   1.1486983549970351     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.5564E-22
+       1 0.5564E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81389499E-04 0.17105295E-04 ) :: advection diffusion equation cb
+       1 0.1084E-17
+       1 0.1084E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.54220500E-11 ) :: advection diffusion equation th
+       1 0.1264E-17
+       1 0.1264E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.10334359E-11 ) :: advection diffusion equation to
+       1 0.3576E-17
+       1 0.3576E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19952265E-02 0.89805754E-05 ) :: advection diffusion equation cl
+       1 0.1185E-21
+       1 0.1185E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81388817E-04 0.77195567E-05 ) :: advection diffusion equation k
+       1 0.3863E-16
+       1 0.3863E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19935429E-02 0.12624944E-04 ) :: advection diffusion equation na
+       1 0.7032E-23
+       1 0.7032E-23
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81389502E-04 0.16142940E-04 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   5.33845710e-01, iteration:    1 at point:     1
+            ac dt   Times           1.1486983549970351                0   2.1486983549970349     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   1.1486983549970351     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1054E-21
+       1 0.1054E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81391868E-04 0.29110854E-04 ) :: advection diffusion equation cb
+       1 0.1106E-17
+       1 0.1106E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.1264E-17
+       1 0.1264E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.3576E-17
+       1 0.3576E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19952265E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.4229E-22
+       1 0.4229E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81388253E-04 0.69279002E-05 ) :: advection diffusion equation k
+       1 0.5847E-16
+       1 0.5847E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19935550E-02 0.60772151E-05 ) :: advection diffusion equation na
+       1 0.7032E-23
+       1 0.7032E-23
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81389502E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   2.09606020e-03, iteration:    2 at point:     1
+            ac dt   Times           1.1486983549970351                0   2.1486983549970349     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   1.1486983549970351     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.3885E-21
+       1 0.3885E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81395183E-04 0.40723302E-04 ) :: advection diffusion equation cb
+       1 0.1106E-17
+       1 0.1106E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.1264E-17
+       1 0.1264E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.3576E-17
+       1 0.3576E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19952265E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.6070E-22
+       1 0.6070E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81388251E-04 0.21805194E-07 ) :: advection diffusion equation k
+       1 0.5285E-16
+       1 0.5285E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19935551E-02 0.28967480E-07 ) :: advection diffusion equation na
+       1 0.7032E-23
+       1 0.7032E-23
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81389502E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   8.54294501e-06, iteration:    3 at point:     0
+==>  Mpi Convergence error is:  8.54294500612e-06 , it. =  3  Mem.  (349412.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ py_mpi_getMobileConcentrationc, end of the function 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.4682e+00 , time step: 1.3195e+00 (time iteration # 3  )
+            ac dt   Times           1.3195079107728944                0   3.4682062657699291     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   1.3195079107728944     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.2952E-21
+       1 0.2952E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81400113E-04 0.60563312E-04 ) :: advection diffusion equation cb
+       1 0.1062E-17
+       1 0.1062E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.62004872E-11 ) :: advection diffusion equation th
+       1 0.1608E-17
+       1 0.1608E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.11803929E-11 ) :: advection diffusion equation to
+       1 0.3127E-17
+       1 0.3127E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19952061E-02 0.10236746E-04 ) :: advection diffusion equation cl
+       1 0.1092E-21
+       1 0.1092E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81389907E-04 0.20344717E-04 ) :: advection diffusion equation k
+       1 0.2596E-16
+       1 0.2596E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19935143E-02 0.20475243E-04 ) :: advection diffusion equation na
+       1 0.2250E-21
+       1 0.2250E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81392152E-04 0.32556877E-04 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   3.78801721e-01, iteration:    1 at point:     0
+            ac dt   Times           1.3195079107728944                0   3.4682062657699291     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   1.3195079107728944     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1385E-21
+       1 0.1385E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81406202E-04 0.74805355E-04 ) :: advection diffusion equation cb
+       1 0.1062E-17
+       1 0.1062E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.1608E-17
+       1 0.1608E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.3127E-17
+       1 0.3127E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19952061E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.1094E-21
+       1 0.1094E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81388932E-04 0.11972425E-04 ) :: advection diffusion equation k
+       1 0.2082E-16
+       1 0.2082E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19935281E-02 0.69240619E-05 ) :: advection diffusion equation na
+       1 0.2250E-21
+       1 0.2250E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81392152E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.70725329e-03, iteration:    2 at point:     1
+==>  Mpi Convergence error is:  0.00170725329265 , it. =  2  Mem.  (349412.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+ py_mpi_getMobileConcentrationc, end of the function 1
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  4.9839e+00 , time step: 1.5157e+00 (time iteration # 4  )
+            ac dt   Times           1.5157165665103984                0   4.9839228322803280     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   1.5157165665103984     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.2804E-21
+       1 0.2804E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81414564E-04 0.10271196E-03 ) :: advection diffusion equation cb
+       1 0.1319E-17
+       1 0.1319E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.70795413E-11 ) :: advection diffusion equation th
+       1 0.6942E-18
+       1 0.6942E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.13477038E-11 ) :: advection diffusion equation to
+       1 0.1694E-17
+       1 0.1694E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19951828E-02 0.11656720E-04 ) :: advection diffusion equation cl
+       1 0.2998E-21
+       1 0.2998E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81391633E-04 0.33178054E-04 ) :: advection diffusion equation k
+       1 0.3538E-16
+       1 0.3538E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19934817E-02 0.23270108E-04 ) :: advection diffusion equation na
+       1 0.1708E-23
+       1 0.1708E-23
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81396655E-04 0.55324457E-04 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   3.01984173e-01, iteration:    1 at point:     1
+            ac dt   Times           1.5157165665103984                0   4.9839228322803280     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   1.5157165665103984     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.2484E-21
+       1 0.2484E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81424333E-04 0.11998975E-03 ) :: advection diffusion equation cb
+       1 0.1319E-17
+       1 0.1319E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.6942E-18
+       1 0.6942E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1694E-17
+       1 0.1694E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19951828E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.1546E-21
+       1 0.1546E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81390090E-04 0.18953942E-04 ) :: advection diffusion equation k
+       1 0.4603E-16
+       1 0.4603E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19934974E-02 0.78795960E-05 ) :: advection diffusion equation na
+       1 0.1708E-23
+       1 0.1708E-23
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81396655E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.56167431e-03, iteration:    2 at point:     1
+==>  Mpi Convergence error is:  0.00156167430538 , it. =  2  Mem.  (349412.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ py_mpi_getMobileConcentrationc, end of the function 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  6.7250e+00 , time step: 1.7411e+00 (time iteration # 5  )
+            ac dt   Times           1.7411011265922489                0   6.7250239588725771     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   1.7411011265922489     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.3515E-21
+       1 0.3515E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81437201E-04 0.15801998E-03 ) :: advection diffusion equation cb
+       1 0.1623E-17
+       1 0.1623E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.80764939E-11 ) :: advection diffusion equation th
+       1 0.1393E-17
+       1 0.1393E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.15376727E-11 ) :: advection diffusion equation to
+       1 0.3641E-17
+       1 0.3641E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19951564E-02 0.13258587E-04 ) :: advection diffusion equation cl
+       1 0.2183E-21
+       1 0.2183E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81394225E-04 0.50796549E-04 ) :: advection diffusion equation k
+       1 0.3863E-16
+       1 0.3863E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19934447E-02 0.26452283E-04 ) :: advection diffusion equation na
+       1 0.4235E-21
+       1 0.4235E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81403686E-04 0.86372051E-04 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   2.56359689e-01, iteration:    1 at point:     1
+            ac dt   Times           1.7411011265922489                0   6.7250239588725771     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   1.7411011265922489     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.8870E-21
+       1 0.8870E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81451757E-04 0.17871935E-03 ) :: advection diffusion equation cb
+       1 0.1623E-17
+       1 0.1623E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.1393E-17
+       1 0.1393E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.3641E-17
+       1 0.3641E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19951564E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.7439E-25
+       1 0.7439E-25
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81391905E-04 0.28492737E-04 ) :: advection diffusion equation k
+       1 0.3606E-16
+       1 0.3606E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19934625E-02 0.89549214E-05 ) :: advection diffusion equation na
+       1 0.4235E-21
+       1 0.4235E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81403686E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.52071544e-03, iteration:    2 at point:     0
+==>  Mpi Convergence error is:  0.00152071543508 , it. =  2  Mem.  (349412.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  8.7250e+00 , time step: 2.0000e+00 (time iteration # 6  )
+            ac dt   Times           2.0000000000000009                0   8.7250239588725780     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   2.0000000000000009     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.3866E-21
+       1 0.3866E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81470431E-04 0.22924011E-03 ) :: advection diffusion equation cb
+       1 0.6505E-18
+       1 0.6505E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.92052983E-11 ) :: advection diffusion equation th
+       1 0.1193E-17
+       1 0.1193E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.17523478E-11 ) :: advection diffusion equation to
+       1 0.1062E-17
+       1 0.1062E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19951263E-02 0.15061593E-04 ) :: advection diffusion equation cl
+       1 0.7972E-22
+       1 0.7972E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81397982E-04 0.74658509E-04 ) :: advection diffusion equation k
+       1 0.3606E-16
+       1 0.3606E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19934027E-02 0.30030013E-04 ) :: advection diffusion equation na
+       1 0.4168E-24
+       1 0.4168E-24
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81414115E-04 0.12810333E-03 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   2.26279523e-01, iteration:    1 at point:     1
+            ac dt   Times           2.0000000000000009                0   8.7250239588725780     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   2.0000000000000009     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.6635E-21
+       1 0.6635E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81491101E-04 0.25368270E-03 ) :: advection diffusion equation cb
+       1 0.6505E-18
+       1 0.6505E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.1193E-17
+       1 0.1193E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1062E-17
+       1 0.1062E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19951263E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.2998E-21
+       1 0.2998E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81394614E-04 0.41384828E-04 ) :: advection diffusion equation k
+       1 0.2776E-16
+       1 0.2776E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19934229E-02 0.10161394E-04 ) :: advection diffusion equation na
+       1 0.4168E-24
+       1 0.4168E-24
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81414115E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.53926760e-03, iteration:    2 at point:     0
+==>  Mpi Convergence error is:  0.00153926760038 , it. =  2  Mem.  (349412.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi  pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.1022e+01 , time step: 2.2974e+00 (time iteration # 7  )
+            ac dt   Times           2.2973967099940711                0   11.022420668866650     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   2.2973967099940711     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.2716E-21
+       1 0.2716E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81517130E-04 0.31934937E-03 ) :: advection diffusion equation cb
+       1 0.5938E-18
+       1 0.5938E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.10480676E-10 ) :: advection diffusion equation th
+       1 0.1168E-17
+       1 0.1168E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.19953134E-11 ) :: advection diffusion equation to
+       1 0.8674E-18
+       1 0.8674E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19950922E-02 0.17086023E-04 ) :: advection diffusion equation cl
+       1 0.4374E-21
+       1 0.4374E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81403295E-04 0.10664625E-03 ) :: advection diffusion equation k
+       1 0.7912E-16
+       1 0.7912E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19933551E-02 0.34042281E-04 ) :: advection diffusion equation na
+       1 0.2995E-21
+       1 0.2995E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81429054E-04 0.18347868E-03 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   2.05039440e-01, iteration:    1 at point:     0
+            ac dt   Times           2.2973967099940711                0   11.022420668866650     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   2.2973967099940711     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.3221E-21
+       1 0.3221E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81545481E-04 0.34773396E-03 ) :: advection diffusion equation cb
+       1 0.5938E-18
+       1 0.5938E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.1168E-17
+       1 0.1168E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.8674E-18
+       1 0.8674E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19950922E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.2187E-21
+       1 0.2187E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81398521E-04 0.58644386E-04 ) :: advection diffusion equation k
+       1 0.2596E-16
+       1 0.2596E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19933780E-02 0.11510314E-04 ) :: advection diffusion equation na
+       1 0.2995E-21
+       1 0.2995E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81429054E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   6.07354985e-03, iteration:    2 at point:     5
+            ac dt   Times           2.2973967099940711                0   11.022420668866650     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   2.2973967099940711     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1242E-21
+       1 0.1242E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81576006E-04 0.37426989E-03 ) :: advection diffusion equation cb
+       1 0.5938E-18
+       1 0.5938E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.1168E-17
+       1 0.1168E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.8674E-18
+       1 0.8674E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19950922E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.5467E-22
+       1 0.5467E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81398487E-04 0.42005770E-06 ) :: advection diffusion equation k
+       1 0.5375E-16
+       1 0.5375E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19933782E-02 0.10845695E-06 ) :: advection diffusion equation na
+       1 0.2995E-21
+       1 0.2995E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81429054E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   9.04301474e-05, iteration:    3 at point:     4
+==>  Mpi Convergence error is:  9.0430147399e-05 , it. =  3  Mem.  (349828.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.3661e+01 , time step: 2.6390e+00 (time iteration # 8  )
+            ac dt   Times           2.6390158215457902                0   13.661436490412440     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   2.6390158215457902     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.9478E-21
+       1 0.9478E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81613520E-04 0.45975724E-03 ) :: advection diffusion equation cb
+       1 0.2656E-18
+       1 0.2656E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.11919012E-10 ) :: advection diffusion equation th
+       1 0.6228E-18
+       1 0.6228E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.22690017E-11 ) :: advection diffusion equation to
+       1 0.1422E-17
+       1 0.1422E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19950536E-02 0.19353025E-04 ) :: advection diffusion equation cl
+       1 0.2652E-22
+       1 0.2652E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81410661E-04 0.14955862E-03 ) :: advection diffusion equation k
+       1 0.4443E-16
+       1 0.4443E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19933012E-02 0.38637513E-04 ) :: advection diffusion equation na
+       1 0.8731E-21
+       1 0.8731E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81449909E-04 0.25608912E-03 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.89282274e-01, iteration:    1 at point:     0
+            ac dt   Times           2.6390158215457902                0   13.661436490412440     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   2.6390158215457902     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1344E-20
+       1 0.1344E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81653518E-04 0.48996696E-03 ) :: advection diffusion equation cb
+       1 0.2656E-18
+       1 0.2656E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.6228E-18
+       1 0.6228E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1422E-17
+       1 0.1422E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19950536E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.1521E-21
+       1 0.1521E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81404022E-04 0.81553779E-04 ) :: advection diffusion equation k
+       1 0.8032E-16
+       1 0.8032E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19933271E-02 0.13012491E-04 ) :: advection diffusion equation na
+       1 0.8731E-21
+       1 0.8731E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81449909E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   6.42017901e-03, iteration:    2 at point:     5
+            ac dt   Times           2.6390158215457902                0   13.661436490412440     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   2.6390158215457902     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.4374E-21
+       1 0.4374E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81695818E-04 0.51790603E-03 ) :: advection diffusion equation cb
+       1 0.2656E-18
+       1 0.2656E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.6228E-18
+       1 0.6228E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1422E-17
+       1 0.1422E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19950536E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.4244E-21
+       1 0.4244E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81403967E-04 0.67397515E-06 ) :: advection diffusion equation k
+       1 0.5847E-16
+       1 0.5847E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19933274E-02 0.14036085E-06 ) :: advection diffusion equation na
+       1 0.8731E-21
+       1 0.8731E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81449909E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.09753389e-04, iteration:    3 at point:     4
+==>  Mpi Convergence error is:  0.000109753388678 , it. =  3  Mem.  (349828.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.6693e+01 , time step: 3.0314e+00 (time iteration # 9  )
+            ac dt   Times           3.0314331330207982                0   16.692869623433239     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   3.0314331330207982     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.6088E-21
+       1 0.6088E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81746949E-04 0.62567174E-03 ) :: advection diffusion equation cb
+       1 0.7192E-18
+       1 0.7192E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.13536947E-10 ) :: advection diffusion equation th
+       1 0.3067E-18
+       1 0.3067E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.25771251E-11 ) :: advection diffusion equation to
+       1 0.1188E-17
+       1 0.1188E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19950100E-02 0.21884404E-04 ) :: advection diffusion equation cl
+       1 0.4252E-21
+       1 0.4252E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81420720E-04 0.20577120E-03 ) :: advection diffusion equation k
+       1 0.3469E-16
+       1 0.3469E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19932404E-02 0.43673098E-04 ) :: advection diffusion equation na
+       1 0.8487E-21
+       1 0.8487E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81478439E-04 0.35021254E-03 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.77141699e-01, iteration:    1 at point:     0
+            ac dt   Times           3.0314331330207982                0   16.692869623433239     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   3.0314331330207982     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1521E-21
+       1 0.1521E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81800652E-04 0.65673426E-03 ) :: advection diffusion equation cb
+       1 0.7192E-18
+       1 0.7192E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.3067E-18
+       1 0.3067E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1188E-17
+       1 0.1188E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19950100E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.4235E-21
+       1 0.4235E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81411624E-04 0.11171758E-03 ) :: advection diffusion equation k
+       1 0.3986E-16
+       1 0.3986E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19932696E-02 0.14677715E-04 ) :: advection diffusion equation na
+       1 0.8487E-21
+       1 0.8487E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81478439E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   6.87774917e-03, iteration:    2 at point:     5
+            ac dt   Times           3.0314331330207982                0   16.692869623433239     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   3.0314331330207982     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.8471E-21
+       1 0.8471E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81856712E-04 0.68508809E-03 ) :: advection diffusion equation cb
+       1 0.7192E-18
+       1 0.7192E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.3067E-18
+       1 0.3067E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1188E-17
+       1 0.1188E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19950100E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.4264E-24
+       1 0.4264E-24
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81411538E-04 0.10630970E-05 ) :: advection diffusion equation k
+       1 0.6089E-16
+       1 0.6089E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19932700E-02 0.18115349E-06 ) :: advection diffusion equation na
+       1 0.8487E-21
+       1 0.8487E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81478439E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.34993731e-04, iteration:    3 at point:     4
+==>  Mpi Convergence error is:  0.000134993730833 , it. =  3  Mem.  (349828.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi  pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.0175e+01 , time step: 3.4822e+00 (time iteration # 10  )
+            ac dt   Times           3.4822022531844992                0   20.175071876617739     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   3.4822022531844992     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.8735E-21
+       1 0.8735E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81923642E-04 0.81731510E-03 ) :: advection diffusion equation cb
+       1 0.8328E-18
+       1 0.8328E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.15352533E-10 ) :: advection diffusion equation th
+       1 0.6771E-18
+       1 0.6771E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.29227558E-11 ) :: advection diffusion equation to
+       1 0.1814E-17
+       1 0.1814E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19949607E-02 0.24702379E-04 ) :: advection diffusion equation cl
+       1 0.1061E-21
+       1 0.1061E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81434275E-04 0.27925607E-03 ) :: advection diffusion equation k
+       1 0.5464E-16
+       1 0.5464E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19931718E-02 0.49276398E-04 ) :: advection diffusion equation na
+       1 0.2183E-21
+       1 0.2183E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81516811E-04 0.47083425E-03 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.67491247e-01, iteration:    1 at point:     0
+            ac dt   Times           3.4822022531844992                0   20.175071876617739     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   3.4822022531844992     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1894E-20
+       1 0.1894E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81993138E-04 0.84793594E-03 ) :: advection diffusion equation cb
+       1 0.8328E-18
+       1 0.8328E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.6771E-18
+       1 0.6771E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1814E-17
+       1 0.1814E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19949607E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.1544E-21
+       1 0.1544E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81421970E-04 0.15112434E-03 ) :: advection diffusion equation k
+       1 0.4907E-16
+       1 0.4907E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19932047E-02 0.16514038E-04 ) :: advection diffusion equation na
+       1 0.2183E-21
+       1 0.2183E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81516811E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   7.44125365e-03, iteration:    2 at point:     5
+            ac dt   Times           3.4822022531844992                0   20.175071876617739     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   3.4822022531844992     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.2712E-19
+       1 0.2712E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82064948E-04 0.87542899E-03 ) :: advection diffusion equation cb
+       1 0.8328E-18
+       1 0.8328E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.6771E-18
+       1 0.6771E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1814E-17
+       1 0.1814E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19949607E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.1522E-21
+       1 0.1522E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81421835E-04 0.16533419E-05 ) :: advection diffusion equation k
+       1 0.4046E-16
+       1 0.4046E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19932051E-02 0.23307874E-06 ) :: advection diffusion equation na
+       1 0.2183E-21
+       1 0.2183E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81516811E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.67693066e-04, iteration:    3 at point:     5
+==>  Mpi Convergence error is:  0.000167693065736 , it. =  3  Mem.  (349828.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi  pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.4175e+01 , time step: 4.0000e+00 (time iteration # 11  )
+ py_mpi_getMobileConcentrationc, end of the function 1
+            ac dt   Times           4.0000000000000036                0   24.175071876617743     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   4.0000000000000036     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.2712E-19
+       1 0.2712E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82149841E-04 0.10339232E-02 ) :: advection diffusion equation cb
+       1 0.5421E-18
+       1 0.5421E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.17383433E-10 ) :: advection diffusion equation th
+       1 0.7273E-18
+       1 0.7273E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.33094782E-11 ) :: advection diffusion equation to
+       1 0.1564E-17
+       1 0.1564E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19949052E-02 0.27829323E-04 ) :: advection diffusion equation cl
+       1 0.1096E-21
+       1 0.1096E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81452338E-04 0.37456154E-03 ) :: advection diffusion equation k
+       1 0.4550E-16
+       1 0.4550E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19930945E-02 0.55492173E-04 ) :: advection diffusion equation na
+       1 0.5457E-22
+       1 0.5457E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81567661E-04 0.62360653E-03 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.59608633e-01, iteration:    1 at point:     1
+            ac dt   Times           4.0000000000000036                0   24.175071876617743     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   4.0000000000000036     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1694E-20
+       1 0.1694E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82237174E-04 0.10625256E-02 ) :: advection diffusion equation cb
+       1 0.5421E-18
+       1 0.5421E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.7273E-18
+       1 0.7273E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1564E-17
+       1 0.1564E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19949052E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.4243E-21
+       1 0.4243E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81435870E-04 0.20220788E-03 ) :: advection diffusion equation k
+       1 0.2861E-16
+       1 0.2861E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19931315E-02 0.18526909E-04 ) :: advection diffusion equation na
+       1 0.5457E-22
+       1 0.5457E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81567661E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   8.11086187e-03, iteration:    2 at point:     5
+            ac dt   Times           4.0000000000000036                0   24.175071876617743     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   4.0000000000000036     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1694E-20
+       1 0.1694E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82326667E-04 0.10876442E-02 ) :: advection diffusion equation cb
+       1 0.5421E-18
+       1 0.5421E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.7273E-18
+       1 0.7273E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1564E-17
+       1 0.1564E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19949052E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.4501E-21
+       1 0.4501E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81435663E-04 0.25400486E-05 ) :: advection diffusion equation k
+       1 0.5888E-16
+       1 0.5888E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19931321E-02 0.29884037E-06 ) :: advection diffusion equation na
+       1 0.5457E-22
+       1 0.5457E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81567661E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   2.09873033e-04, iteration:    3 at point:     4
+==>  Mpi Convergence error is:  0.00020987303313 , it. =  3  Mem.  (349828.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+ pdbg getMobileConcentrationField mpi py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+ py_mpi_getMobileConcentrationc, end of the function 1
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.8770e+01 , time step: 4.5948e+00 (time iteration # 12  )
+            ac dt   Times           4.5947934199881448                0   28.769865296605886     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   4.5947934199881448     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.3365E-23
+       1 0.3365E-23
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82431600E-04 0.12737755E-02 ) :: advection diffusion equation cb
+       1 0.5737E-18
+       1 0.5737E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.19646418E-10 ) :: advection diffusion equation th
+       1 0.5634E-18
+       1 0.5634E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.37410045E-11 ) :: advection diffusion equation to
+       1 0.1487E-17
+       1 0.1487E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19948427E-02 0.31287515E-04 ) :: advection diffusion equation cl
+       1 0.2118E-21
+       1 0.2118E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81476161E-04 0.49718310E-03 ) :: advection diffusion equation k
+       1 0.5969E-16
+       1 0.5969E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19930078E-02 0.62365517E-04 ) :: advection diffusion equation na
+       1 0.5294E-22
+       1 0.5294E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81634143E-04 0.81471461E-03 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.53006743e-01, iteration:    1 at point:     0
+            ac dt   Times           4.5947934199881448                0   28.769865296605886     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   4.5947934199881448     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.2711E-19
+       1 0.2711E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82538713E-04 0.12985816E-02 ) :: advection diffusion equation cb
+       1 0.5737E-18
+       1 0.5737E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.5634E-18
+       1 0.5634E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1487E-17
+       1 0.1487E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19948427E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.4366E-21
+       1 0.4366E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81454336E-04 0.26790436E-03 ) :: advection diffusion equation k
+       1 0.5004E-16
+       1 0.5004E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19930491E-02 0.20718156E-04 ) :: advection diffusion equation na
+       1 0.5294E-22
+       1 0.5294E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81634143E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   8.88995404e-03, iteration:    2 at point:     5
+            ac dt   Times           4.5947934199881448                0   28.769865296605886     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   4.5947934199881448     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.4737E-23
+       1 0.4737E-23
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82647708E-04 0.13196598E-02 ) :: advection diffusion equation cb
+       1 0.5737E-18
+       1 0.5737E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.5634E-18
+       1 0.5634E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1487E-17
+       1 0.1487E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19948427E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.4383E-21
+       1 0.4383E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81454022E-04 0.38596246E-05 ) :: advection diffusion equation k
+       1 0.3025E-16
+       1 0.3025E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19930498E-02 0.38164456E-06 ) :: advection diffusion equation na
+       1 0.5294E-22
+       1 0.5294E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81634143E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   2.64148989e-04, iteration:    3 at point:     5
+==>  Mpi Convergence error is:  0.000264148988698 , it. =  3  Mem.  (350228.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi  pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+ py_mpi_getMobileConcentrationc, end of the function 1
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.4048e+01 , time step: 5.2780e+00 (time iteration # 13  )
+            ac dt   Times           5.2780316430915830                0   34.047896939697466     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   5.2780316430915830     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1721E-20
+       1 0.1721E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82774617E-04 0.15343584E-02 ) :: advection diffusion equation cb
+       1 0.7967E-18
+       1 0.7967E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.22171315E-10 ) :: advection diffusion equation th
+       1 0.5864E-18
+       1 0.5864E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.42209192E-11 ) :: advection diffusion equation to
+       1 0.9937E-18
+       1 0.9937E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19947727E-02 0.35098924E-04 ) :: advection diffusion equation cl
+       1 0.1036E-24
+       1 0.1036E-24
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81507282E-04 0.65365700E-03 ) :: advection diffusion equation k
+       1 0.2944E-16
+       1 0.2944E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19929104E-02 0.69941629E-04 ) :: advection diffusion equation na
+       1 0.2183E-21
+       1 0.2183E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81719954E-04 0.10506098E-02 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.47342700e-01, iteration:    1 at point:     1
+            ac dt   Times           5.2780316430915830                0   34.047896939697466     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   5.2780316430915830     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1694E-20
+       1 0.1694E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82903307E-04 0.15535039E-02 ) :: advection diffusion equation cb
+       1 0.7967E-18
+       1 0.7967E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.5864E-18
+       1 0.5864E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.9937E-18
+       1 0.9937E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19947727E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.2647E-22
+       1 0.2647E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81478622E-04 0.35169578E-03 ) :: advection diffusion equation k
+       1 0.5508E-16
+       1 0.5508E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19929564E-02 0.23084890E-04 ) :: advection diffusion equation na
+       1 0.2183E-21
+       1 0.2183E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81719954E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   9.78405741e-03, iteration:    2 at point:     4
+            ac dt   Times           5.2780316430915830                0   34.047896939697466     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   5.2780316430915830     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.2711E-19
+       1 0.2711E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.83033471E-04 0.15688342E-02 ) :: advection diffusion equation cb
+       1 0.7967E-18
+       1 0.7967E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.5864E-18
+       1 0.5864E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.9937E-18
+       1 0.9937E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19947727E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.4244E-21
+       1 0.4244E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81478149E-04 0.58049195E-05 ) :: advection diffusion equation k
+       1 0.3180E-16
+       1 0.3180E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19929574E-02 0.48519437E-06 ) :: advection diffusion equation na
+       1 0.2183E-21
+       1 0.2183E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81719954E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   3.33885184e-04, iteration:    3 at point:     4
+==>  Mpi Convergence error is:  0.000333885184177 , it. =  3  Mem.  (349924.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi  pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+ py_mpi_getMobileConcentrationc, end of the function 1
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  4.0111e+01 , time step: 6.0629e+00 (time iteration # 14  )
+            ac dt   Times           6.0628662660415999                0   40.110763205739069     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   6.0628662660415999     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.3751E-22
+       1 0.3751E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.83184118E-04 0.18126423E-02 ) :: advection diffusion equation cb
+       1 0.3429E-18
+       1 0.3429E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.24958891E-10 ) :: advection diffusion equation th
+       1 0.3756E-18
+       1 0.3756E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.47525505E-11 ) :: advection diffusion equation to
+       1 0.1068E-17
+       1 0.1068E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19946944E-02 0.39285064E-04 ) :: advection diffusion equation cl
+       1 0.8470E-21
+       1 0.8470E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81547566E-04 0.85161341E-03 ) :: advection diffusion equation k
+       1 0.2687E-16
+       1 0.2687E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19928014E-02 0.78265716E-04 ) :: advection diffusion equation na
+       1 0.1665E-26
+       1 0.1665E-26
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81829333E-04 0.13375673E-02 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.42365987e-01, iteration:    1 at point:     0
+            ac dt   Times           6.0628662660415999                0   40.110763205739069     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   6.0628662660415999     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.3001E-21
+       1 0.3001E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.83336009E-04 0.18243039E-02 ) :: advection diffusion equation cb
+       1 0.3429E-18
+       1 0.3429E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.3756E-18
+       1 0.3756E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1068E-17
+       1 0.1068E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19946944E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.2185E-21
+       1 0.2185E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81510256E-04 0.45762690E-03 ) :: advection diffusion equation k
+       1 0.2687E-16
+       1 0.2687E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19928525E-02 0.25618080E-04 ) :: advection diffusion equation na
+       1 0.1665E-26
+       1 0.1665E-26
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81829333E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.08002668e-02, iteration:    2 at point:     5
+            ac dt   Times           6.0628662660415999                0   40.110763205739069     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   6.0628662660415999     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1374E-22
+       1 0.1374E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.83488842E-04 0.18322531E-02 ) :: advection diffusion equation cb
+       1 0.3429E-18
+       1 0.3429E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.3756E-18
+       1 0.3756E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1068E-17
+       1 0.1068E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19946944E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.1500E-21
+       1 0.1500E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81509552E-04 0.86449608E-05 ) :: advection diffusion equation k
+       1 0.5722E-16
+       1 0.5722E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19928537E-02 0.61379949E-06 ) :: advection diffusion equation na
+       1 0.1665E-26
+       1 0.1665E-26
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81829333E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   4.23401420e-04, iteration:    3 at point:     5
+==>  Mpi Convergence error is:  0.00042340141987 , it. =  3  Mem.  (350384.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  4.7075e+01 , time step: 6.9644e+00 (time iteration # 15  )
+            ac dt   Times           6.9644045063690028                0   47.075167712108069     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   6.9644045063690028     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.4792E-20
+       1 0.4792E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.83664806E-04 0.21054162E-02 ) :: advection diffusion equation cb
+       1 0.5528E-18
+       1 0.5528E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.28046013E-10 ) :: advection diffusion equation th
+       1 0.6414E-18
+       1 0.6414E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.53397387E-11 ) :: advection diffusion equation to
+       1 0.1301E-17
+       1 0.1301E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19946069E-02 0.43866945E-04 ) :: advection diffusion equation cl
+       1 0.8764E-21
+       1 0.8764E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81599242E-04 0.10997612E-02 ) :: advection diffusion equation k
+       1 0.7144E-16
+       1 0.7144E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19926796E-02 0.87382947E-04 ) :: advection diffusion equation na
+       1 0.2716E-19
+       1 0.2716E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81967007E-04 0.16810395E-02 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.37887458e-01, iteration:    1 at point:     0
+            ac dt   Times           6.9644045063690028                0   47.075167712108069     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   6.9644045063690028     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1185E-22
+       1 0.1185E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.83841351E-04 0.21079273E-02 ) :: advection diffusion equation cb
+       1 0.5528E-18
+       1 0.5528E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.6414E-18
+       1 0.6414E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1301E-17
+       1 0.1301E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19946069E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.8471E-21
+       1 0.8471E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81551090E-04 0.59027800E-03 ) :: advection diffusion equation k
+       1 0.5680E-16
+       1 0.5680E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19927360E-02 0.28303845E-04 ) :: advection diffusion equation na
+       1 0.2716E-19
+       1 0.2716E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81967007E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.19467848e-02, iteration:    2 at point:     4
+            ac dt   Times           6.9644045063690028                0   47.075167712108069     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   6.9644045063690028     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1986E-22
+       1 0.1986E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.84018194E-04 0.21070343E-02 ) :: advection diffusion equation cb
+       1 0.5528E-18
+       1 0.5528E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.6414E-18
+       1 0.6414E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1301E-17
+       1 0.1301E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19946069E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.1198E-20
+       1 0.1198E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81550050E-04 0.12749419E-04 ) :: advection diffusion equation k
+       1 0.3606E-16
+       1 0.3606E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19927375E-02 0.77090919E-06 ) :: advection diffusion equation na
+       1 0.2716E-19
+       1 0.2716E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81967007E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   5.38338877e-04, iteration:    3 at point:     5
+==>  Mpi Convergence error is:  0.000538338876644 , it. =  3  Mem.  (350384.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi  pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  5.5075e+01 , time step: 8.0000e+00 (time iteration # 16  )
+            ac dt   Times           8.0000000000000124                0   55.075167712108083     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   8.0000000000000124     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.2729E-22
+       1 0.2729E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.84220889E-04 0.24096066E-02 ) :: advection diffusion equation cb
+       1 0.7192E-18
+       1 0.7192E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.31440619E-10 ) :: advection diffusion equation th
+       1 0.8891E-18
+       1 0.8891E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.59853000E-11 ) :: advection diffusion equation to
+       1 0.1350E-17
+       1 0.1350E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19945094E-02 0.48865144E-04 ) :: advection diffusion equation cl
+       1 0.8470E-21
+       1 0.8470E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81664935E-04 0.14077679E-02 ) :: advection diffusion equation k
+       1 0.3180E-16
+       1 0.3180E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19925435E-02 0.97339339E-04 ) :: advection diffusion equation na
+       1 0.1036E-24
+       1 0.1036E-24
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82138067E-04 0.20847632E-02 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.33760178e-01, iteration:    1 at point:     1
+            ac dt   Times           8.0000000000000124                0   55.075167712108083     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   8.0000000000000124     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1678E-23
+       1 0.1678E-23
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.84423392E-04 0.24015371E-02 ) :: advection diffusion equation cb
+       1 0.7192E-18
+       1 0.7192E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.8891E-18
+       1 0.8891E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1350E-17
+       1 0.1350E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19945094E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.6618E-23
+       1 0.6618E-23
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81603328E-04 0.75467182E-03 ) :: advection diffusion equation k
+       1 0.5637E-16
+       1 0.5637E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19926055E-02 0.31116053E-04 ) :: advection diffusion equation na
+       1 0.1036E-24
+       1 0.1036E-24
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82138067E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.32335098e-02, iteration:    2 at point:     5
+            ac dt   Times           8.0000000000000124                0   55.075167712108083     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   8.0000000000000124     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.2134E-21
+       1 0.2134E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.84625454E-04 0.23905715E-02 ) :: advection diffusion equation cb
+       1 0.7192E-18
+       1 0.7192E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.8891E-18
+       1 0.8891E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.1350E-17
+       1 0.1350E-17
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19945094E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.8470E-21
+       1 0.8470E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81601808E-04 0.18617669E-04 ) :: advection diffusion equation k
+       1 0.3103E-16
+       1 0.3103E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19926075E-02 0.96346092E-06 ) :: advection diffusion equation na
+       1 0.1036E-24
+       1 0.1036E-24
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82138067E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   6.85735321e-04, iteration:    3 at point:     5
+==>  Mpi Convergence error is:  0.000685735321354 , it. =  3  Mem.  (350384.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  6.4265e+01 , time step: 9.1896e+00 (time iteration # 17  )
+            ac dt   Times           9.1895868399762950                0   64.264754552084383     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   9.1895868399762950     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.3390E-20
+       1 0.3390E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.84856161E-04 0.27225080E-02 ) :: advection diffusion equation cb
+       1 0.3833E-18
+       1 0.3833E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.35154101E-10 ) :: advection diffusion equation th
+       1 0.4788E-18
+       1 0.4788E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.66933310E-11 ) :: advection diffusion equation to
+       1 0.5839E-18
+       1 0.5839E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19944011E-02 0.54300010E-04 ) :: advection diffusion equation cl
+       1 0.1665E-26
+       1 0.1665E-26
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81747679E-04 0.17859932E-02 ) :: advection diffusion equation k
+       1 0.4497E-16
+       1 0.4497E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19923919E-02 0.10817902E-03 ) :: advection diffusion equation na
+       1 0.5294E-22
+       1 0.5294E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82347756E-04 0.25496380E-02 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.29867272e-01, iteration:    1 at point:     1
+            ac dt   Times           9.1895868399762950                0   64.264754552084383     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   9.1895868399762950     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.3833E-19
+       1 0.3833E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.85085812E-04 0.27026947E-02 ) :: advection diffusion equation cb
+       1 0.3833E-18
+       1 0.3833E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.4788E-18
+       1 0.4788E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.5839E-18
+       1 0.5839E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19944011E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.8732E-21
+       1 0.8732E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81669558E-04 0.95609063E-03 ) :: advection diffusion equation k
+       1 0.3672E-16
+       1 0.3672E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19924597E-02 0.34026906E-04 ) :: advection diffusion equation na
+       1 0.5294E-22
+       1 0.5294E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82347756E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.46600460e-02, iteration:    2 at point:     4
+            ac dt   Times           9.1895868399762950                0   64.264754552084383     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   9.1895868399762950     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.7718E-22
+       1 0.7718E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.85314205E-04 0.26806696E-02 ) :: advection diffusion equation cb
+       1 0.3833E-18
+       1 0.3833E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.4788E-18
+       1 0.4788E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.5839E-18
+       1 0.5839E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19944011E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.8471E-21
+       1 0.8471E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81667360E-04 0.26910444E-04 ) :: advection diffusion equation k
+       1 0.5551E-16
+       1 0.5551E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19924621E-02 0.11931944E-05 ) :: advection diffusion equation na
+       1 0.5294E-22
+       1 0.5294E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82347756E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   8.80668515e-04, iteration:    3 at point:     4
+==>  Mpi Convergence error is:  0.00088066851543 , it. =  3  Mem.  (350384.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi 
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+ py_mpi_getMobileConcentrationc, end of the function 1
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  7.4821e+01 , time step: 1.0556e+01 (time iteration # 18  )
+            ac dt   Times           10.556063286183171                0   74.820817838267558     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   10.556063286183171     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.5929E-22
+       1 0.5929E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.85574116E-04 0.30418833E-02 ) :: advection diffusion equation cb
+       1 0.4536E-18
+       1 0.4536E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.39218078E-10 ) :: advection diffusion equation th
+       1 0.3018E-18
+       1 0.3018E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.74658796E-11 ) :: advection diffusion equation to
+       1 0.6683E-18
+       1 0.6683E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19942811E-02 0.60191987E-04 ) :: advection diffusion equation cl
+       1 0.8487E-21
+       1 0.8487E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81850912E-04 0.22450295E-02 ) :: advection diffusion equation k
+       1 0.6728E-16
+       1 0.6728E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19922231E-02 0.11995097E-03 ) :: advection diffusion equation na
+       1 0.1695E-20
+       1 0.1695E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82601156E-04 0.30724593E-02 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.26114181e-01, iteration:    1 at point:     0
+            ac dt   Times           10.556063286183171                0   74.820817838267558     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   10.556063286183171     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1983E-21
+       1 0.1983E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.85832032E-04 0.30094122E-02 ) :: advection diffusion equation cb
+       1 0.4536E-18
+       1 0.4536E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.3018E-18
+       1 0.3018E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.6683E-18
+       1 0.6683E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19942811E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.8470E-21
+       1 0.8470E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81752768E-04 0.11997844E-02 ) :: advection diffusion equation k
+       1 0.4389E-16
+       1 0.4389E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19922969E-02 0.37056014E-04 ) :: advection diffusion equation na
+       1 0.1695E-20
+       1 0.1695E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82601156E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.61336613e-02, iteration:    2 at point:     4
+            ac dt   Times           10.556063286183171                0   74.820817838267558     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   10.556063286183171     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1499E-21
+       1 0.1499E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.86087811E-04 0.29755567E-02 ) :: advection diffusion equation cb
+       1 0.4536E-18
+       1 0.4536E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.3018E-18
+       1 0.3018E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.6683E-18
+       1 0.6683E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19942811E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.2184E-21
+       1 0.2184E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81749622E-04 0.38476438E-04 ) :: advection diffusion equation k
+       1 0.5637E-16
+       1 0.5637E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19922998E-02 0.14283323E-05 ) :: advection diffusion equation na
+       1 0.1695E-20
+       1 0.1695E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82601156E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.18732147e-03, iteration:    3 at point:     4
+==>  Mpi Convergence error is:  0.00118732146549 , it. =  3  Mem.  (350384.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi  pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+ py_mpi_getMobileConcentrationc, end of the function 1
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  8.6947e+01 , time step: 1.2126e+01 (time iteration # 19  )
+            ac dt   Times           12.125732532083205                0   86.946550370350764     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   12.125732532083205     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.2118E-21
+       1 0.2118E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.86378065E-04 0.33659363E-02 ) :: advection diffusion equation cb
+       1 0.3385E-18
+       1 0.3385E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.43634471E-10 ) :: advection diffusion equation th
+       1 0.3555E-18
+       1 0.3555E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.83069144E-11 ) :: advection diffusion equation to
+       1 0.6595E-18
+       1 0.6595E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19941483E-02 0.66562050E-04 ) :: advection diffusion equation cl
+       1 0.8470E-21
+       1 0.8470E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81978433E-04 0.27950112E-02 ) :: advection diffusion equation k
+       1 0.3672E-16
+       1 0.3672E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19920354E-02 0.13270893E-03 ) :: advection diffusion equation na
+       1 0.1355E-19
+       1 0.1355E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82903210E-04 0.36501006E-02 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.22423807e-01, iteration:    1 at point:     0
+            ac dt   Times           12.125732532083205                0   86.946550370350764     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   12.125732532083205     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.2995E-21
+       1 0.2995E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.86665325E-04 0.33200925E-02 ) :: advection diffusion equation cb
+       1 0.3385E-18
+       1 0.3385E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.3555E-18
+       1 0.3555E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.6595E-18
+       1 0.6595E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19941483E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.6462E-26
+       1 0.6462E-26
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81856333E-04 0.14905191E-02 ) :: advection diffusion equation k
+       1 0.3606E-16
+       1 0.3606E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19921153E-02 0.40092011E-04 ) :: advection diffusion equation na
+       1 0.1355E-19
+       1 0.1355E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82903210E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.77515870e-02, iteration:    2 at point:     5
+            ac dt   Times           12.125732532083205                0   86.946550370350764     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   12.125732532083205     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.4965E-23
+       1 0.4965E-23
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.86949515E-04 0.32737997E-02 ) :: advection diffusion equation cb
+       1 0.3385E-18
+       1 0.3385E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.3555E-18
+       1 0.3555E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.6595E-18
+       1 0.6595E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19941483E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.4047E-27
+       1 0.4047E-27
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81851880E-04 0.54405907E-04 ) :: advection diffusion equation k
+       1 0.3399E-16
+       1 0.3399E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19921188E-02 0.17491266E-05 ) :: advection diffusion equation na
+       1 0.1355E-19
+       1 0.1355E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82903210E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.50697860e-03, iteration:    3 at point:     5
+==>  Mpi Convergence error is:  0.00150697860368 , it. =  3  Mem.  (350384.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi  pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+ py_mpi_getMobileConcentrationc, end of the function 1
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.0088e+02 , time step: 1.3929e+01 (time iteration # 20  )
+            ac dt   Times           13.928809012738011                0   100.87535938308878     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   13.928809012738011     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.6777E-20
+       1 0.6777E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.87271231E-04 0.36931940E-02 ) :: advection diffusion equation cb
+       1 0.2969E-18
+       1 0.2969E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.48422992E-10 ) :: advection diffusion equation th
+       1 0.3161E-18
+       1 0.3161E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.92184834E-11 ) :: advection diffusion equation to
+       1 0.7512E-18
+       1 0.7512E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19940019E-02 0.73432199E-04 ) :: advection diffusion equation cl
+       1 0.8471E-21
+       1 0.8471E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82134320E-04 0.34446748E-02 ) :: advection diffusion equation k
+       1 0.4857E-16
+       1 0.4857E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19918270E-02 0.14647156E-03 ) :: advection diffusion equation na
+       1 0.2183E-21
+       1 0.2183E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.83258912E-04 0.42813870E-02 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.18733483e-01, iteration:    1 at point:     1
+            ac dt   Times           13.928809012738011                0   100.87535938308878     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   13.928809012738011     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.2711E-19
+       1 0.2711E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.87588899E-04 0.36334003E-02 ) :: advection diffusion equation cb
+       1 0.2969E-18
+       1 0.2969E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.3161E-18
+       1 0.3161E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.7512E-18
+       1 0.7512E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19940019E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.8470E-21
+       1 0.8470E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81983986E-04 0.18320179E-02 ) :: advection diffusion equation k
+       1 0.4603E-16
+       1 0.4603E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19919128E-02 0.43069416E-04 ) :: advection diffusion equation na
+       1 0.2183E-21
+       1 0.2183E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.83258912E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.95462533e-02, iteration:    2 at point:     4
+            ac dt   Times           13.928809012738011                0   100.87535938308878     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   13.928809012738011     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.6777E-20
+       1 0.6777E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.87902518E-04 0.35741727E-02 ) :: advection diffusion equation cb
+       1 0.2969E-18
+       1 0.2969E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.3161E-18
+       1 0.3161E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.7512E-18
+       1 0.7512E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19940019E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.8470E-21
+       1 0.8470E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.81977754E-04 0.76019435E-04 ) :: advection diffusion equation k
+       1 0.2687E-16
+       1 0.2687E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19919170E-02 0.21344023E-05 ) :: advection diffusion equation na
+       1 0.2183E-21
+       1 0.2183E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.83258912E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.89867418e-03, iteration:    3 at point:     4
+==>  Mpi Convergence error is:  0.00189867417791 , it. =  3  Mem.  (350856.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi  pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.1688e+02 , time step: 1.6000e+01 (time iteration # 21  )
+            ac dt   Times           16.000000000000028                0   116.87535938308881     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   16.000000000000028     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.6618E-23
+       1 0.6618E-23
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.88256806E-04 0.40223598E-02 ) :: advection diffusion equation cb
+       1 0.3429E-18
+       1 0.3429E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.53598621E-10 ) :: advection diffusion equation th
+       1 0.1533E-18
+       1 0.1533E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.10203659E-10 ) :: advection diffusion equation to
+       1 0.3253E-18
+       1 0.3253E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19938407E-02 0.80825996E-04 ) :: advection diffusion equation cl
+       1 0.8470E-21
+       1 0.8470E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82322794E-04 0.42001061E-02 ) :: advection diffusion equation k
+       1 0.3672E-16
+       1 0.3672E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19915957E-02 0.16130619E-03 ) :: advection diffusion equation na
+       1 0.2118E-21
+       1 0.2118E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.83673039E-04 0.49616274E-02 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.14992961e-01, iteration:    1 at point:     1
+            ac dt   Times           16.000000000000028                0   116.87535938308881     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   16.000000000000028     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.3311E-23
+       1 0.3311E-23
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.88605944E-04 0.39481245E-02 ) :: advection diffusion equation cb
+       1 0.3429E-18
+       1 0.3429E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.1533E-18
+       1 0.1533E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.3253E-18
+       1 0.3253E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19938407E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.6827E-23
+       1 0.6827E-23
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82139727E-04 0.22262459E-02 ) :: advection diffusion equation k
+       1 0.2944E-16
+       1 0.2944E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19916872E-02 0.45913593E-04 ) :: advection diffusion equation na
+       1 0.2118E-21
+       1 0.2118E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.83673039E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   2.15644582e-02, iteration:    2 at point:     5
+            ac dt   Times           16.000000000000028                0   116.87535938308881     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   16.000000000000028     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.9583E-20
+       1 0.9583E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.88950006E-04 0.38755310E-02 ) :: advection diffusion equation cb
+       1 0.3429E-18
+       1 0.3429E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.1533E-18
+       1 0.1533E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.3253E-18
+       1 0.3253E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19938407E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.2995E-21
+       1 0.2995E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82131113E-04 0.10487567E-03 ) :: advection diffusion equation k
+       1 0.3863E-16
+       1 0.3863E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19916923E-02 0.25807731E-05 ) :: advection diffusion equation na
+       1 0.2118E-21
+       1 0.2118E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.83673039E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   2.40299799e-03, iteration:    3 at point:     5
+            ac dt   Times           16.000000000000028                0   116.87535938308881     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   16.000000000000028     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.9621E-20
+       1 0.9621E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.89289082E-04 0.38047347E-02 ) :: advection diffusion equation cb
+       1 0.3429E-18
+       1 0.3429E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.1533E-18
+       1 0.1533E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.3253E-18
+       1 0.3253E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19938407E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.8487E-21
+       1 0.8487E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82130678E-04 0.52933470E-05 ) :: advection diffusion equation k
+       1 0.3606E-16
+       1 0.3606E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19916926E-02 0.13938934E-06 ) :: advection diffusion equation na
+       1 0.2118E-21
+       1 0.2118E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.83673039E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   2.21499267e-04, iteration:    4 at point:     4
+==>  Mpi Convergence error is:  0.000221499267024 , it. =  4  Mem.  (350856.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+ py_mpi_getMobileConcentrationc, end of the function 1
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.3525e+02 , time step: 1.8379e+01 (time iteration # 22  )
+            ac dt   Times           18.379173679952594                0   135.25453306304141     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   18.379173679952594     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.2711E-19
+       1 0.2711E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.89671505E-04 0.42738273E-02 ) :: advection diffusion equation cb
+       1 0.3253E-18
+       1 0.3253E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.59176844E-10 ) :: advection diffusion equation th
+       1 0.2600E-18
+       1 0.2600E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.11265769E-10 ) :: advection diffusion equation to
+       1 0.6181E-18
+       1 0.6181E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19936637E-02 0.88769098E-04 ) :: advection diffusion equation cl
+       1 0.1355E-19
+       1 0.1355E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82548048E-04 0.50688988E-02 ) :: advection diffusion equation k
+       1 0.3606E-16
+       1 0.3606E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19913393E-02 0.17738023E-03 ) :: advection diffusion equation na
+       1 0.7140E-28
+       1 0.7140E-28
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.84150097E-04 0.56852450E-02 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.11161686e-01, iteration:    1 at point:     1
+            ac dt   Times           18.379173679952594                0   135.25453306304141     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   18.379173679952594     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.2711E-19
+       1 0.2711E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.90047763E-04 0.41871711E-02 ) :: advection diffusion equation cb
+       1 0.3253E-18
+       1 0.3253E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.2600E-18
+       1 0.2600E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.6181E-18
+       1 0.6181E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19936637E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.4467E-29
+       1 0.4467E-29
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82327516E-04 0.26751312E-02 ) :: advection diffusion equation k
+       1 0.3399E-16
+       1 0.3399E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19914377E-02 0.49407571E-04 ) :: advection diffusion equation na
+       1 0.7140E-28
+       1 0.7140E-28
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.84150097E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   2.17561106e-02, iteration:    2 at point:     5
+            ac dt   Times           18.379173679952594                0   135.25453306304141     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   18.379173679952594     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.5294E-22
+       1 0.5294E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.90418017E-04 0.41033133E-02 ) :: advection diffusion equation cb
+       1 0.3253E-18
+       1 0.3253E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.2600E-18
+       1 0.2600E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.6181E-18
+       1 0.6181E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19936637E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.6617E-23
+       1 0.6617E-23
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82315972E-04 0.14022266E-03 ) :: advection diffusion equation k
+       1 0.5285E-16
+       1 0.5285E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19914429E-02 0.26058657E-05 ) :: advection diffusion equation na
+       1 0.7140E-28
+       1 0.7140E-28
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.84150097E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   4.00603165e-03, iteration:    3 at point:     5
+            ac dt   Times           18.379173679952594                0   135.25453306304141     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   18.379173679952594     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1187E-23
+       1 0.1187E-23
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.90782433E-04 0.40222497E-02 ) :: advection diffusion equation cb
+       1 0.3253E-18
+       1 0.3253E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.2600E-18
+       1 0.2600E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.6181E-18
+       1 0.6181E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19936637E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.1355E-19
+       1 0.1355E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82315309E-04 0.80643293E-05 ) :: advection diffusion equation k
+       1 0.3606E-16
+       1 0.3606E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19914429E-02 0.60101609E-08 ) :: advection diffusion equation na
+       1 0.7140E-28
+       1 0.7140E-28
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.84150097E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   9.25150047e-04, iteration:    4 at point:     5
+==>  Mpi Convergence error is:  0.00092515004668 , it. =  4  Mem.  (350856.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi  pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ mpi getmo the loop rank is over 
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+ py_mpi_getMobileConcentrationc, end of the function0 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.5637e+02 , time step: 2.1112e+01 (time iteration # 23  )
+            ac dt   Times           21.112126572366350                0   156.36665963540776     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   21.112126572366350     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.9583E-20
+       1 0.9583E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.91192942E-04 0.45116974E-02 ) :: advection diffusion equation cb
+       1 0.1757E-18
+       1 0.1757E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243     0.65175074E-10 ) :: advection diffusion equation th
+       1 0.4234E-18
+       1 0.4234E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217     0.12407503E-10 ) :: advection diffusion equation to
+       1 0.4337E-18
+       1 0.4337E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19934698E-02 0.97289755E-04 ) :: advection diffusion equation cl
+       1 0.1497E-21
+       1 0.1497E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82813946E-04 0.60393557E-02 ) :: advection diffusion equation k
+       1 0.3328E-16
+       1 0.3328E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19910554E-02 0.19459971E-03 ) :: advection diffusion equation na
+       1 0.6463E-26
+       1 0.6463E-26
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.84694315E-04 0.64463899E-02 ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   9.71450713e-01, iteration:    1 at point:     2
+            ac dt   Times           21.112126572366350                0   156.36665963540776     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   21.112126572366350     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.2799E-19
+       1 0.2799E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.91596343E-04 0.44138364E-02 ) :: advection diffusion equation cb
+       1 0.1757E-18
+       1 0.1757E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.4234E-18
+       1 0.4234E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.4337E-18
+       1 0.4337E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19934698E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.1498E-21
+       1 0.1498E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82550900E-04 0.31813939E-02 ) :: advection diffusion equation k
+       1 0.5375E-16
+       1 0.5375E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19911639E-02 0.54464510E-04 ) :: advection diffusion equation na
+       1 0.6463E-26
+       1 0.6463E-26
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.84694315E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   1.60490263e-02, iteration:    2 at point:     5
+            ac dt   Times           21.112126572366350                0   156.36665963540776     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   21.112126572366350     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1707E-20
+       1 0.1707E-20
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.91992872E-04 0.43197434E-02 ) :: advection diffusion equation cb
+       1 0.1757E-18
+       1 0.1757E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.4234E-18
+       1 0.4234E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.4337E-18
+       1 0.4337E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19934698E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.8536E-21
+       1 0.8536E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82536206E-04 0.17802479E-03 ) :: advection diffusion equation k
+       1 0.4443E-16
+       1 0.4443E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19911670E-02 0.15839080E-05 ) :: advection diffusion equation na
+       1 0.6463E-26
+       1 0.6463E-26
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.84694315E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   8.74759749e-03, iteration:    3 at point:     4
+            ac dt   Times           21.112126572366350                0   156.36665963540776     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   21.112126572366350     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.1872E-22
+       1 0.1872E-22
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.92382761E-04 0.42292897E-02 ) :: advection diffusion equation cb
+       1 0.1757E-18
+       1 0.1757E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.4234E-18
+       1 0.4234E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.4337E-18
+       1 0.4337E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19934698E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.1497E-21
+       1 0.1497E-21
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82535199E-04 0.12194662E-04 ) :: advection diffusion equation k
+       1 0.2301E-16
+       1 0.2301E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19911662E-02 0.40168667E-06 ) :: advection diffusion equation na
+       1 0.6463E-26
+       1 0.6463E-26
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.84694315E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   3.11562639e-03, iteration:    4 at point:     4
+            ac dt   Times           21.112126572366350                0   156.36665963540776     
+  dbg elmer_ac_onetimestep call to SolveEquations: dt=   21.112126572366350     
+  after allocation            1           7
+ c coupled            1           7
+       1 0.2711E-19
+       1 0.2711E-19
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.92766236E-04 0.41423338E-02 ) :: advection diffusion equation cb
+       1 0.1757E-18
+       1 0.1757E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  111.01243      0.0000000     ) :: advection diffusion equation th
+       1 0.4234E-18
+       1 0.4234E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): (  55.506217      0.0000000     ) :: advection diffusion equation to
+       1 0.4337E-18
+       1 0.4337E-18
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19934698E-02  0.0000000     ) :: advection diffusion equation cl
+       1 0.1654E-23
+       1 0.1654E-23
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.82535028E-04 0.20717969E-05 ) :: advection diffusion equation k
+       1 0.3025E-16
+       1 0.3025E-16
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.19911662E-02 0.37384807E-08 ) :: advection diffusion equation na
+       1 0.6463E-26
+       1 0.6463E-26
+ComputeChange: NS (ITER=1) (NRM,RELC): ( 0.84694315E-04  0.0000000     ) :: advection diffusion equation t
+  elmer_ac_onetimestep over           1           7           0           1
+ mpi environment py_mpi_reactionsc
+ mpi environment py_mpi_reactionsc
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+         Max error:   4.74108287e-04, iteration:    5 at point:     5
+==>  Mpi Convergence error is:  0.000474108286907 , it. =  5  Mem.  (350856.0, 'Kb') 
+ master collecting the list 0 mpi_getimmo
+ string received by 0 mpi_getimmo
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 0
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 0
+ py_mo myrank==0 1050
+ pdbg getMobileConcentrationField mpi 
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_rank
+ 22092011 py_mpi_getMobileConcentrationc MPI_Comm_size
+ 22092011 py_mpi_getMobileConcentrationc MPI_Barrier
+ 22092011 py_mpi_getMobileConcentrationc number of cells 301
+py_mpi_getMobileConcentrationc, iinternal 
+py_mpi_getMobileConcentrationc, iinternal 1
+py_mpi_getMobileConcentrationc 0
+py_mpi_getMobileConcentrationc 1
+ mpi getmo the loop rank is over 
+ py_mpi_getMobileConcentrationc, end of the function0 0
+py_mpi_getMobileConcentrationc 2
+ we have built up the conct vector 1
+ we send from node 1 to node 0 1050 1050
+ py_mo we have sent from node 1 1050 to node 0
+ py_mpi_getMobileConcentrationc, end of the function0 1
+ py_mpi_getMobileConcentrationc, end of the function 1
+ py_mpi_getMobileConcentrationc, end of the function 0
+ within the python call to getPermutation 
+  permutation          302
+  mesh permutation          300
+ out of the fortran
+domain <type 'str'>
+inlet <type 'str'>

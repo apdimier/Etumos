@@ -1,0 +1,5 @@
+Input File = cec.msh
+Output File = Cec
+Input Mode = Gmsh
+Output Mode = ElmerSolver
+

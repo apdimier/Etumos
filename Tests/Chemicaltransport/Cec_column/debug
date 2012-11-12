@@ -1,0 +1,13 @@
+aux = module.transport.getConcentrationValues()
+module.transport.setConcentrationValues(aux)
+module.transport.setTimeStep(10.)
+module.transport.iterate()
+aux[0]
+aux[149]
+print "c2 %15.10e %15.10e\n"%(aux[150],aux[299])
+print "c3 %15.10e %15.10e\n"%(aux[300],aux[449])
+print "c4 %15.10e %15.10e\n"%(aux[450],aux[599])
+print "c5 %15.10e %15.10e\n"%(aux[600],aux[749])
+print "c6 %15.10e %15.10e\n"%(aux[750],aux[899])
+print "c7 %15.10e %15.10e\n"%(aux[900],aux[1049])
+
