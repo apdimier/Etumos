@@ -7,6 +7,7 @@
 *.o
 *.out
 *.so
+*.pdf
 *.pyc
 #  ~ files
 *~
@@ -14,4 +15,7 @@
 phreeqc.log
 # initial files for phreeqC
 phreeqCFile
-
+# to avoid gzip files
+*.gz
+# wrapping file
+WPhreeqc.c
