@@ -1,0 +1,825 @@
+['__cmp__', '__div__', '__doc__', '__init__', '__module__', '__mul__', '__pow__', '__rdiv__', '__repr__', '__rmul__', '__str__', 'conversionFactorTo', 'conversionTupleTo', 'factor', 'isAngle', 'isCompatible', 'isDimensionless', 'name', 'names', 'offset', 'powers', 'setName']
+['__call__', '__class__', '__cmp__', '__delattr__', '__doc__', '__get__', '__getattribute__', '__hash__', '__init__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__str__', 'im_class', 'im_func', 'im_self']
+{'MolarMass': 1}
+ element array 202 202
+array (402,2) , type = d, has 804 elements
+402
+ self.elementArray  202 [1,1,3,2,2,0,2,3,0,0,]
+<mesh.Body instance at 0x9797fac>
+ self.elementArray  202 [1,1,3,2,2,0,2,3,0,0,]
+ self.elementArray  202 [1,1,3,2,2,0,2,3,0,0,]
+unit in Si mol/l
+unit in Si mol/l
+unit in Mineral mol/l
+ sp dbg name control Mineral
+sp dbg get charge  Mineral 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control Si
+sp dbg get charge  Si 0
+ class Species molar mass  None
+ class Species molar mass end
+MasterSpecies Species.__init__
+MasterSpecies Species.__init__ end
+ sp dbg name control Si
+sp dbg get charge  Si 0
+ class Species molar mass  None
+ class Species molar mass end
+Tensor value 7.9e-11 <PhysicalUnit EffectiveDiffusion>
+Tensor value 1.0 <PhysicalUnit Permeability>
+key porosity <type 'str'>
+prop <PhysicalProperties.Porosity instance at 0x9ed558c> ['__doc__', '__init__', '__module__', 'checkValue', 'getDefaultUnit', 'getUnit', 'getValue', 'setValue', 'unit', 'value']
+dbg property porosity PhysicalProperties.Porosity
+setproperty propClass is ok 
+dbg material changeProperty Porosity
+dbg material key porosity p   orosity
+key permeability <type 'str'>
+prop <tensors.IsotropicTensor instance at 0x9ed55ac> Permeability ['__abs__', '__add__', '__cmp__', '__div__', '__doc__', '__init__', '__module__', '__mul__', '__neg__', '__nonzero__', '__pos__', '__pow__', '__radd__', '__rdiv__', '__repr__', '__rmul__', '__rpow__', '__rsub__', '__str__', '__sub__', '_number', '_sum', 'convertToUnit', 'cos', 'getUnit', 'getUnitName', 'getValue', 'inBaseUnits', 'inUnitsOf', 'isCompatible', 'setValue', 'sin', 'sqrt', 'tan', 'unit', 'value', 'verifyValue']
+dbg property permeability PhysicalProperties.Permeability
+setproperty propClass is ok 
+dbg material changeProperty Permeability
+dbg material key permeability p   ermeability
+key effectiveDiffusion <type 'str'>
+prop <tensors.IsotropicTensor instance at 0x9ed542c> EffectiveDiffusion ['__abs__', '__add__', '__cmp__', '__div__', '__doc__', '__init__', '__module__', '__mul__', '__neg__', '__nonzero__', '__pos__', '__pow__', '__radd__', '__rdiv__', '__repr__', '__rmul__', '__rpow__', '__rsub__', '__str__', '__sub__', '_number', '_sum', 'convertToUnit', 'cos', 'getUnit', 'getUnitName', 'getValue', 'inBaseUnits', 'inUnitsOf', 'isCompatible', 'setValue', 'sin', 'sqrt', 'tan', 'unit', 'value', 'verifyValue']
+dbg property effectivediffusion PhysicalProperties.EffectiveDiffusion
+setproperty propClass is ok 
+dbg material changeProperty EffectiveDiffusion
+dbg material key effectiveDiffusion e   ffectiveDiffusion
+ we are here 
+verifyClass commonmodel.BoundaryCondition
+verifyClass commonmodel.BoundaryCondition
+verifyClass commonmodel.InitialCondition
+verifyClass commonmodel.Region
+verifyClass commonmodel.Region
+verifyClass commonmodel.Region
+verifyClass species.MineralSecondarySpecies
+verifyClass species.AqueousMasterSpecies
+verifyClass species.AqueousSecondarySpecies
+verifyClass chemistry.ReversibleKineticLaw
+verifyClass chemistry.ExpectedOutput
+verifyClass chemistry.ExpectedOutput
+verifyClass chemistry.ExpectedOutput
+chemicaltransport module 
+ mpiEnv:  None
+within getDarcyVelocity self.darcyVelocity V(0.0, 0.0, 0.0) Head/Time
+self.darcyVelocity V(0.0, 0.0, 0.0) Head/Time
+
+effective_diffusion:
+
+
+porosity
+
+
+effective diffusion
+
+ dbg fields getEntity is:
+   dbg fields getEntity is:
+  
+porosity
+
+
+effective diffusion
+
+ dbg fields getEntity is:
+  3
+ dbg fields getEntity over
+
+ dbg fields setZone: it was ok myEntity 3
+ dbg fields setZone ok
+ dbg fields getEntity is:
+  3
+ dbg fields getEntity over
+
+ dbg fields setZone: it was ok myEntity 3
+ dbg fields setZone ok
+
+porosity
+
+
+effective diffusion
+
+ dbg fields getEntity is:
+  3
+ dbg fields getEntity over
+
+ dbg fields setZone: it was ok myEntity 3
+ dbg fields setZone ok
+ dbg fields getEntity is:
+  3
+ dbg fields getEntity over
+
+ dbg fields setZone: it was ok myEntity 3
+ dbg fields setZone ok
+ctm dbg out of region loop: outlet
+ phreeqc init method  None
+ verbose settings
+py_definedatasetc wdefinedataset ok : /home/dimier/Wrapper/Phreeqc_dat/phreeqc.dat 
+py_definedatasetc defined dataset ok : /home/dimier/Wrapper/Phreeqc_dat/phreeqc.dat 
+ self.elementArray  202 [1,1,3,2,2,0,2,3,0,0,]
+ self.elementArray  202 [1,1,3,2,2,0,2,3,0,0,]
+ ctm dbg self.internalNodesNumber: 398
+ ctm dbg self.internalNodesNumber:dbg grid type  Body
+ self.elementArray  202 [1,1,3,2,2,0,2,3,0,0,]
+ self.elementArray  202 [1,1,3,2,2,0,2,3,0,0,]
+ phreeeqc dbg out of loop 398
+ phreeqc dbg states bound  {'column_region1': [[1, 398], <chemistry.ChemicalState instance at 0x9ed56cc>]}
+ p dbg  length of self.chemicalStateList 3
+ p dbg  ['Mineral']
+ string name of the species  SiO2
+ inFile  phreeqCFile
+ outFile  test.phout
+ dbg Wphreeqc MAX_LENGTH 256 
+ in  wioutdefinition opening output file test.phout
+ output file opening 
+ database file opening /home/dimier/Wrapper/Phreeqc_dat/phreeqc.dat
+ database file opened /home/dimier/Wrapper/Phreeqc_dat/phreeqc.dat
+ log file opening 
+ log file opened 
+*PHREEQC2.14* Input name : phreeqCFile
+*PHREEQC2.14* Output file: test.phout
+*PHREEQC2.14* Data file  : /home/dimier/Wrapper/Phreeqc_dat/phreeqc.dat
+ read input is ok 
+ tidy_model 
+ status 
+Reading input data for simulation 1. py_initialize value of the mpianz parameter 1
+ initialising phreeqC solutions
+initialising exchangers
+ we are in initial exchangers 
+ exchangers initialisation OK
+initialising  gas_phases
+gas_phases initialisation OK
+ chemistry reaction
+ chemistry reaction ok 400
+ dbg p py_porosity_initialisation
+  after memory transfer 1
+  dbg p  po after memory allocation for porositystructure_ptr 398
+ dbg p  po k value 0
+ vm 5.0927898983e-313 and name         Mineral
+ dbg p  po vm value 2.268796e-02 for ind. k 0
+ dbgpc wgetcompo 400
+ dbg wgetcompo 3 4
+Number of components in the solution :  4
+ Element n. 0 of old name CB new species name CB
+ Element n. 1 of old name TH new species name TH
+ Element n. 2 of old name TO new species name TO
+ Element n. 3 of old name Si new species name Si
+ number of ps 4
+rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+1592 [-1.9308476577239921e-07, -1.9308476577239921e-07, -1.9308476577239921e-07, -1.9308476577239921e-07, -1.9308476577239921e-07, -1.9308476577239921e-07, -1.9308476577239921e-07, -1.9308476577239921e-07, -1.9308476577239921e-07, -1.9308476577239921e-07]
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~Transport initialisation~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+ dbgpc wgetcompo 400
+ dbg wgetcompo 3 4
+Number of components in the solution :  4
+ Element n. 0 of old name CB new species name CB
+ Element n. 1 of old name TH new species name TH
+ Element n. 2 of old name TO new species name TO
+ Element n. 3 of old name Si new species name Si
+ number of ps 4
+ dbgpc wgetcompo 400
+ dbg wgetcompo 3 4
+Number of components in the solution :  4
+ Element n. 0 of old name CB new species name CB
+ Element n. 1 of old name TH new species name TH
+ Element n. 2 of old name TO new species name TO
+ Element n. 3 of old name Si new species name Si
+ number of ps 4
+ dbgpc wgetcompo 400
+ dbg wgetcompo 3 4
+Number of components in the solution :  4
+ Element n. 0 of old name CB new species name CB
+ Element n. 1 of old name TH new species name TH
+ Element n. 2 of old name TO new species name TO
+ Element n. 3 of old name Si new species name Si
+ number of ps 4
+ sp dbg name control None
+sp dbg get charge  CB 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control None
+sp dbg get charge  TH 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control None
+sp dbg get charge  TO 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control None
+sp dbg get charge  Si 0
+ class Species molar mass  None
+ class Species molar mass end
+~~~~~~~~~~~~~~~~~~~~~
+~ Elmer Boundaries: ~
+~~~~~~~~~~~~~~~~~~~~~
+ number_boundaries  2
+ dbgpc wgetcompo 400
+ dbg wgetcompo 3 4
+Number of components in the solution :  4
+ Element n. 0 of old name CB new species name CB
+ Element n. 1 of old name TH new species name TH
+ Element n. 2 of old name TO new species name TO
+ Element n. 3 of old name Si new species name Si
+ number of ps 4
+ dbg fields getEntity is:
+  setBoundaryConditionConcentrations  <fields.NumericBodyField instance at 0x9f0fd0c>
+ dbgpc wgetcompo 400
+ dbg wgetcompo 3 4
+Number of components in the solution :  4
+ Element n. 0 of old name CB new species name CB
+ Element n. 1 of old name TH new species name TH
+ Element n. 2 of old name TO new species name TO
+ Element n. 3 of old name Si new species name Si
+ number of ps 4
+ dbg fields getEntity is:
+  setBoundaryConditionConcentrations  <fields.NumericBodyField instance at 0x9f0fdec>
+array (402,2) , type = d, has 804 elements
+domain <type 'str'>
+inlet <type 'str'>
+outlet <type 'str'>
+zcell  [  3,  3,  3,  3,  6,  0,  1,  5,402,  4,]
+zcell  [  4,  3,  3,  3,  6,  0,  5,  6,401,402,]
+zcell  [  5,  3,  3,  3,  6,  0,  6,  7,400,401,]
+zcell  [  6,  3,  3,  3,  6,  0,  7,  8,399,400,]
+zcell  [  7,  3,  3,  3,  6,  0,  8,  9,398,399,]
+zcell  [  8,  3,  3,  3,  6,  0,  9, 10,397,398,]
+zcell  [  9,  3,  3,  3,  6,  0, 10, 11,396,397,]
+zcell  [ 10,  3,  3,  3,  6,  0, 11, 12,395,396,]
+zcell  [ 11,  3,  3,  3,  6,  0, 12, 13,394,395,]
+zcell  [ 12,  3,  3,  3,  6,  0, 13, 14,393,394,]
+zcell  [ 13,  3,  3,  3,  6,  0, 14, 15,392,393,]
+zcell  [ 14,  3,  3,  3,  6,  0, 15, 16,391,392,]
+zcell  [ 15,  3,  3,  3,  6,  0, 16, 17,390,391,]
+zcell  [ 16,  3,  3,  3,  6,  0, 17, 18,389,390,]
+zcell  [ 17,  3,  3,  3,  6,  0, 18, 19,388,389,]
+zcell  [ 18,  3,  3,  3,  6,  0, 19, 20,387,388,]
+zcell  [ 19,  3,  3,  3,  6,  0, 20, 21,386,387,]
+zcell  [ 20,  3,  3,  3,  6,  0, 21, 22,385,386,]
+zcell  [ 21,  3,  3,  3,  6,  0, 22, 23,384,385,]
+zcell  [ 22,  3,  3,  3,  6,  0, 23, 24,383,384,]
+zcell  [ 23,  3,  3,  3,  6,  0, 24, 25,382,383,]
+zcell  [ 24,  3,  3,  3,  6,  0, 25, 26,381,382,]
+zcell  [ 25,  3,  3,  3,  6,  0, 26, 27,380,381,]
+zcell  [ 26,  3,  3,  3,  6,  0, 27, 28,379,380,]
+zcell  [ 27,  3,  3,  3,  6,  0, 28, 29,378,379,]
+zcell  [ 28,  3,  3,  3,  6,  0, 29, 30,377,378,]
+zcell  [ 29,  3,  3,  3,  6,  0, 30, 31,376,377,]
+zcell  [ 30,  3,  3,  3,  6,  0, 31, 32,375,376,]
+zcell  [ 31,  3,  3,  3,  6,  0, 32, 33,374,375,]
+zcell  [ 32,  3,  3,  3,  6,  0, 33, 34,373,374,]
+zcell  [ 33,  3,  3,  3,  6,  0, 34, 35,372,373,]
+zcell  [ 34,  3,  3,  3,  6,  0, 35, 36,371,372,]
+zcell  [ 35,  3,  3,  3,  6,  0, 36, 37,370,371,]
+zcell  [ 36,  3,  3,  3,  6,  0, 37, 38,369,370,]
+zcell  [ 37,  3,  3,  3,  6,  0, 38, 39,368,369,]
+zcell  [ 38,  3,  3,  3,  6,  0, 39, 40,367,368,]
+zcell  [ 39,  3,  3,  3,  6,  0, 40, 41,366,367,]
+zcell  [ 40,  3,  3,  3,  6,  0, 41, 42,365,366,]
+zcell  [ 41,  3,  3,  3,  6,  0, 42, 43,364,365,]
+zcell  [ 42,  3,  3,  3,  6,  0, 43, 44,363,364,]
+zcell  [ 43,  3,  3,  3,  6,  0, 44, 45,362,363,]
+zcell  [ 44,  3,  3,  3,  6,  0, 45, 46,361,362,]
+zcell  [ 45,  3,  3,  3,  6,  0, 46, 47,360,361,]
+zcell  [ 46,  3,  3,  3,  6,  0, 47, 48,359,360,]
+zcell  [ 47,  3,  3,  3,  6,  0, 48, 49,358,359,]
+zcell  [ 48,  3,  3,  3,  6,  0, 49, 50,357,358,]
+zcell  [ 49,  3,  3,  3,  6,  0, 50, 51,356,357,]
+zcell  [ 50,  3,  3,  3,  6,  0, 51, 52,355,356,]
+zcell  [ 51,  3,  3,  3,  6,  0, 52, 53,354,355,]
+zcell  [ 52,  3,  3,  3,  6,  0, 53, 54,353,354,]
+zcell  [ 53,  3,  3,  3,  6,  0, 54, 55,352,353,]
+zcell  [ 54,  3,  3,  3,  6,  0, 55, 56,351,352,]
+zcell  [ 55,  3,  3,  3,  6,  0, 56, 57,350,351,]
+zcell  [ 56,  3,  3,  3,  6,  0, 57, 58,349,350,]
+zcell  [ 57,  3,  3,  3,  6,  0, 58, 59,348,349,]
+zcell  [ 58,  3,  3,  3,  6,  0, 59, 60,347,348,]
+zcell  [ 59,  3,  3,  3,  6,  0, 60, 61,346,347,]
+zcell  [ 60,  3,  3,  3,  6,  0, 61, 62,345,346,]
+zcell  [ 61,  3,  3,  3,  6,  0, 62, 63,344,345,]
+zcell  [ 62,  3,  3,  3,  6,  0, 63, 64,343,344,]
+zcell  [ 63,  3,  3,  3,  6,  0, 64, 65,342,343,]
+zcell  [ 64,  3,  3,  3,  6,  0, 65, 66,341,342,]
+zcell  [ 65,  3,  3,  3,  6,  0, 66, 67,340,341,]
+zcell  [ 66,  3,  3,  3,  6,  0, 67, 68,339,340,]
+zcell  [ 67,  3,  3,  3,  6,  0, 68, 69,338,339,]
+zcell  [ 68,  3,  3,  3,  6,  0, 69, 70,337,338,]
+zcell  [ 69,  3,  3,  3,  6,  0, 70, 71,336,337,]
+zcell  [ 70,  3,  3,  3,  6,  0, 71, 72,335,336,]
+zcell  [ 71,  3,  3,  3,  6,  0, 72, 73,334,335,]
+zcell  [ 72,  3,  3,  3,  6,  0, 73, 74,333,334,]
+zcell  [ 73,  3,  3,  3,  6,  0, 74, 75,332,333,]
+zcell  [ 74,  3,  3,  3,  6,  0, 75, 76,331,332,]
+zcell  [ 75,  3,  3,  3,  6,  0, 76, 77,330,331,]
+zcell  [ 76,  3,  3,  3,  6,  0, 77, 78,329,330,]
+zcell  [ 77,  3,  3,  3,  6,  0, 78, 79,328,329,]
+zcell  [ 78,  3,  3,  3,  6,  0, 79, 80,327,328,]
+zcell  [ 79,  3,  3,  3,  6,  0, 80, 81,326,327,]
+zcell  [ 80,  3,  3,  3,  6,  0, 81, 82,325,326,]
+zcell  [ 81,  3,  3,  3,  6,  0, 82, 83,324,325,]
+zcell  [ 82,  3,  3,  3,  6,  0, 83, 84,323,324,]
+zcell  [ 83,  3,  3,  3,  6,  0, 84, 85,322,323,]
+zcell  [ 84,  3,  3,  3,  6,  0, 85, 86,321,322,]
+zcell  [ 85,  3,  3,  3,  6,  0, 86, 87,320,321,]
+zcell  [ 86,  3,  3,  3,  6,  0, 87, 88,319,320,]
+zcell  [ 87,  3,  3,  3,  6,  0, 88, 89,318,319,]
+zcell  [ 88,  3,  3,  3,  6,  0, 89, 90,317,318,]
+zcell  [ 89,  3,  3,  3,  6,  0, 90, 91,316,317,]
+zcell  [ 90,  3,  3,  3,  6,  0, 91, 92,315,316,]
+zcell  [ 91,  3,  3,  3,  6,  0, 92, 93,314,315,]
+zcell  [ 92,  3,  3,  3,  6,  0, 93, 94,313,314,]
+zcell  [ 93,  3,  3,  3,  6,  0, 94, 95,312,313,]
+zcell  [ 94,  3,  3,  3,  6,  0, 95, 96,311,312,]
+zcell  [ 95,  3,  3,  3,  6,  0, 96, 97,310,311,]
+zcell  [ 96,  3,  3,  3,  6,  0, 97, 98,309,310,]
+zcell  [ 97,  3,  3,  3,  6,  0, 98, 99,308,309,]
+zcell  [ 98,  3,  3,  3,  6,  0, 99,100,307,308,]
+zcell  [ 99,  3,  3,  3,  6,  0,100,101,306,307,]
+zcell  [100,  3,  3,  3,  6,  0,101,102,305,306,]
+zcell  [101,  3,  3,  3,  6,  0,102,103,304,305,]
+zcell  [102,  3,  3,  3,  6,  0,103,104,303,304,]
+zcell  [103,  3,  3,  3,  6,  0,104,105,302,303,]
+zcell  [104,  3,  3,  3,  6,  0,105,106,301,302,]
+zcell  [105,  3,  3,  3,  6,  0,106,107,300,301,]
+zcell  [106,  3,  3,  3,  6,  0,107,108,299,300,]
+zcell  [107,  3,  3,  3,  6,  0,108,109,298,299,]
+zcell  [108,  3,  3,  3,  6,  0,109,110,297,298,]
+zcell  [109,  3,  3,  3,  6,  0,110,111,296,297,]
+zcell  [110,  3,  3,  3,  6,  0,111,112,295,296,]
+zcell  [111,  3,  3,  3,  6,  0,112,113,294,295,]
+zcell  [112,  3,  3,  3,  6,  0,113,114,293,294,]
+zcell  [113,  3,  3,  3,  6,  0,114,115,292,293,]
+zcell  [114,  3,  3,  3,  6,  0,115,116,291,292,]
+zcell  [115,  3,  3,  3,  6,  0,116,117,290,291,]
+zcell  [116,  3,  3,  3,  6,  0,117,118,289,290,]
+zcell  [117,  3,  3,  3,  6,  0,118,119,288,289,]
+zcell  [118,  3,  3,  3,  6,  0,119,120,287,288,]
+zcell  [119,  3,  3,  3,  6,  0,120,121,286,287,]
+zcell  [120,  3,  3,  3,  6,  0,121,122,285,286,]
+zcell  [121,  3,  3,  3,  6,  0,122,123,284,285,]
+zcell  [122,  3,  3,  3,  6,  0,123,124,283,284,]
+zcell  [123,  3,  3,  3,  6,  0,124,125,282,283,]
+zcell  [124,  3,  3,  3,  6,  0,125,126,281,282,]
+zcell  [125,  3,  3,  3,  6,  0,126,127,280,281,]
+zcell  [126,  3,  3,  3,  6,  0,127,128,279,280,]
+zcell  [127,  3,  3,  3,  6,  0,128,129,278,279,]
+zcell  [128,  3,  3,  3,  6,  0,129,130,277,278,]
+zcell  [129,  3,  3,  3,  6,  0,130,131,276,277,]
+zcell  [130,  3,  3,  3,  6,  0,131,132,275,276,]
+zcell  [131,  3,  3,  3,  6,  0,132,133,274,275,]
+zcell  [132,  3,  3,  3,  6,  0,133,134,273,274,]
+zcell  [133,  3,  3,  3,  6,  0,134,135,272,273,]
+zcell  [134,  3,  3,  3,  6,  0,135,136,271,272,]
+zcell  [135,  3,  3,  3,  6,  0,136,137,270,271,]
+zcell  [136,  3,  3,  3,  6,  0,137,138,269,270,]
+zcell  [137,  3,  3,  3,  6,  0,138,139,268,269,]
+zcell  [138,  3,  3,  3,  6,  0,139,140,267,268,]
+zcell  [139,  3,  3,  3,  6,  0,140,141,266,267,]
+zcell  [140,  3,  3,  3,  6,  0,141,142,265,266,]
+zcell  [141,  3,  3,  3,  6,  0,142,143,264,265,]
+zcell  [142,  3,  3,  3,  6,  0,143,144,263,264,]
+zcell  [143,  3,  3,  3,  6,  0,144,145,262,263,]
+zcell  [144,  3,  3,  3,  6,  0,145,146,261,262,]
+zcell  [145,  3,  3,  3,  6,  0,146,147,260,261,]
+zcell  [146,  3,  3,  3,  6,  0,147,148,259,260,]
+zcell  [147,  3,  3,  3,  6,  0,148,149,258,259,]
+zcell  [148,  3,  3,  3,  6,  0,149,150,257,258,]
+zcell  [149,  3,  3,  3,  6,  0,150,151,256,257,]
+zcell  [150,  3,  3,  3,  6,  0,151,152,255,256,]
+zcell  [151,  3,  3,  3,  6,  0,152,153,254,255,]
+zcell  [152,  3,  3,  3,  6,  0,153,154,253,254,]
+zcell  [153,  3,  3,  3,  6,  0,154,155,252,253,]
+zcell  [154,  3,  3,  3,  6,  0,155,156,251,252,]
+zcell  [155,  3,  3,  3,  6,  0,156,157,250,251,]
+zcell  [156,  3,  3,  3,  6,  0,157,158,249,250,]
+zcell  [157,  3,  3,  3,  6,  0,158,159,248,249,]
+zcell  [158,  3,  3,  3,  6,  0,159,160,247,248,]
+zcell  [159,  3,  3,  3,  6,  0,160,161,246,247,]
+zcell  [160,  3,  3,  3,  6,  0,161,162,245,246,]
+zcell  [161,  3,  3,  3,  6,  0,162,163,244,245,]
+zcell  [162,  3,  3,  3,  6,  0,163,164,243,244,]
+zcell  [163,  3,  3,  3,  6,  0,164,165,242,243,]
+zcell  [164,  3,  3,  3,  6,  0,165,166,241,242,]
+zcell  [165,  3,  3,  3,  6,  0,166,167,240,241,]
+zcell  [166,  3,  3,  3,  6,  0,167,168,239,240,]
+zcell  [167,  3,  3,  3,  6,  0,168,169,238,239,]
+zcell  [168,  3,  3,  3,  6,  0,169,170,237,238,]
+zcell  [169,  3,  3,  3,  6,  0,170,171,236,237,]
+zcell  [170,  3,  3,  3,  6,  0,171,172,235,236,]
+zcell  [171,  3,  3,  3,  6,  0,172,173,234,235,]
+zcell  [172,  3,  3,  3,  6,  0,173,174,233,234,]
+zcell  [173,  3,  3,  3,  6,  0,174,175,232,233,]
+zcell  [174,  3,  3,  3,  6,  0,175,176,231,232,]
+zcell  [175,  3,  3,  3,  6,  0,176,177,230,231,]
+zcell  [176,  3,  3,  3,  6,  0,177,178,229,230,]
+zcell  [177,  3,  3,  3,  6,  0,178,179,228,229,]
+zcell  [178,  3,  3,  3,  6,  0,179,180,227,228,]
+zcell  [179,  3,  3,  3,  6,  0,180,181,226,227,]
+zcell  [180,  3,  3,  3,  6,  0,181,182,225,226,]
+zcell  [181,  3,  3,  3,  6,  0,182,183,224,225,]
+zcell  [182,  3,  3,  3,  6,  0,183,184,223,224,]
+zcell  [183,  3,  3,  3,  6,  0,184,185,222,223,]
+zcell  [184,  3,  3,  3,  6,  0,185,186,221,222,]
+zcell  [185,  3,  3,  3,  6,  0,186,187,220,221,]
+zcell  [186,  3,  3,  3,  6,  0,187,188,219,220,]
+zcell  [187,  3,  3,  3,  6,  0,188,189,218,219,]
+zcell  [188,  3,  3,  3,  6,  0,189,190,217,218,]
+zcell  [189,  3,  3,  3,  6,  0,190,191,216,217,]
+zcell  [190,  3,  3,  3,  6,  0,191,192,215,216,]
+zcell  [191,  3,  3,  3,  6,  0,192,193,214,215,]
+zcell  [192,  3,  3,  3,  6,  0,193,194,213,214,]
+zcell  [193,  3,  3,  3,  6,  0,194,195,212,213,]
+zcell  [194,  3,  3,  3,  6,  0,195,196,211,212,]
+zcell  [195,  3,  3,  3,  6,  0,196,197,210,211,]
+zcell  [196,  3,  3,  3,  6,  0,197,198,209,210,]
+zcell  [197,  3,  3,  3,  6,  0,198,199,208,209,]
+zcell  [198,  3,  3,  3,  6,  0,199,200,207,208,]
+zcell  [199,  3,  3,  3,  6,  0,200,201,206,207,]
+zcell  [200,  3,  3,  3,  6,  0,201,202,205,206,]
+zcell  [201,  3,  3,  3,  6,  0,202,203,204,205,]
+zcell  [202,  3,  3,  3,  6,  0,203,  2,  3,204,]
+dbg vtkTyp 9 200
+dbg porosity dico setting [0.79000000000000004, 0.79000000000000004, 0.79000000000000004]
+['__add__', '__doc__', '__init__', '__module__', '__neg__', '__sub__', 'amult', 'appendZoneValues', 'bodies', 'components_names', 'depend', 'duplicate', 'entity', 'getBodies', 'getBody', 'getComponentsNames', 'getDepend', 'getEntity', 'getMaterial', 'getMaterials', 'getName', 'getNbBodies', 'getNbComponents', 'getNbZones', 'getValues', 'getZone', 'getZoneValues', 'getZones', 'materials', 'mesh', 'name', 'setComponentsNames', 'setDepend', 'setEntity', 'setName', 'setZone', 'type', 'values', 'verifyCompatible', 'zones'] ['CB', 'TH', 'TO', 'SI']
+~~~~~~~~~~~~~
+~ Elmer IC: ~
+~~~~~~~~~~~~~
+ self.elementArray  202 [1,1,3,2,2,0,2,3,0,0,]
+dbg set Darcy velocity  V(0.0, 0.0, 0.0) Head/Time
+ic dbg Set expected outputs
+
+ e dbg transport 402
+ctm dbg length of initialPorosityValues 402
+ctm dbg length of initialPorosityValues End of transport initialisation 
+ctm por variation 398
+ porosity init  ctm por variation  398 402
+ porosity has been initialised 
+ ctm dbg get over  1592
+1592
+ ctm dbg set over 
+ ctm dbg equi over 
+ ctm dbg get over 
+ ic dbg self.nbTimes 2
+
+self.problemType chemicaltransport
+dbg createSifFile
+ dbg temperature: None
+<type 'instance'> 7.9e-11
+<type 'instance'> 0.79
+None <type 'NoneType'>
+ v  V(0.0, 0.0, 0.0)
+ we write the difusion  7.9e-11 0.0
+<type 'instance'> 7.9e-11
+<type 'instance'> 0.79
+None <type 'NoneType'>
+ v  V(0.0, 0.0, 0.0)
+ we write the difusion  7.9e-11 0.0
+<type 'instance'> 7.9e-11
+<type 'instance'> 0.79
+None <type 'NoneType'>
+ v  V(0.0, 0.0, 0.0)
+ we write the difusion  7.9e-11 0.0
+<type 'instance'> 7.9e-11
+<type 'instance'> 0.79
+None <type 'NoneType'>
+ v  V(0.0, 0.0, 0.0)
+ we write the difusion  7.9e-11 0.0
+ dbg temperature: None
+<type 'instance'> 7.9e-11
+<type 'instance'> 0.79
+None <type 'NoneType'>
+ v  V(0.0, 0.0, 0.0)
+ we write the difusion  7.9e-11 0.0
+<type 'instance'> 7.9e-11
+<type 'instance'> 0.79
+None <type 'NoneType'>
+ v  V(0.0, 0.0, 0.0)
+ we write the difusion  7.9e-11 0.0
+<type 'instance'> 7.9e-11
+<type 'instance'> 0.79
+None <type 'NoneType'>
+ v  V(0.0, 0.0, 0.0)
+ we write the difusion  7.9e-11 0.0
+<type 'instance'> 7.9e-11
+<type 'instance'> 0.79
+None <type 'NoneType'>
+ v  V(0.0, 0.0, 0.0)
+ we write the difusion  7.9e-11 0.0
+ dbg temperature: None
+<type 'instance'> 7.9e-11
+<type 'instance'> 0.79
+None <type 'NoneType'>
+ v  V(0.0, 0.0, 0.0)
+ we write the difusion  7.9e-11 0.0
+<type 'instance'> 7.9e-11
+<type 'instance'> 0.79
+None <type 'NoneType'>
+ v  V(0.0, 0.0, 0.0)
+ we write the difusion  7.9e-11 0.0
+<type 'instance'> 7.9e-11
+<type 'instance'> 0.79
+None <type 'NoneType'>
+ v  V(0.0, 0.0, 0.0)
+ we write the difusion  7.9e-11 0.0
+<type 'instance'> 7.9e-11
+<type 'instance'> 0.79
+None <type 'NoneType'>
+ v  V(0.0, 0.0, 0.0)
+ we write the difusion  7.9e-11 0.0
+dbg stabil  False
+dbg stabil  False
+dbg stabil  False
+dbg stabil  False
+dbg createSifFile end 0
+MAIN: 
+MAIN: ==========================================
+MAIN:  E L M E R  S O L V E R  S T A R T I N G
+MAIN:  Library version: 5.4.1
+MAIN:  Wrapped version: 0.0.9
+MAIN: ==========================================
+  Model Name: ,test.sif                                                                                                                        
+MAIN: 
+MAIN: 
+MAIN: -----------------------
+MAIN: Reading Model ...
+Model Input:  Unlisted keyword: [cb diffusivity] in section: [material 101]
+Model Input:  Unlisted keyword: [th diffusivity] in section: [material 101]
+Model Input:  Unlisted keyword: [to diffusivity] in section: [material 101]
+Model Input:  Unlisted keyword: [si diffusivity] in section: [material 101]
+Model Input:  Unlisted keyword: [cb diffusivity] in section: [material 201]
+Model Input:  Unlisted keyword: [th diffusivity] in section: [material 201]
+Model Input:  Unlisted keyword: [to diffusivity] in section: [material 201]
+Model Input:  Unlisted keyword: [si diffusivity] in section: [material 201]
+Model Input:  Unlisted keyword: [cb diffusivity] in section: [material 301]
+Model Input:  Unlisted keyword: [th diffusivity] in section: [material 301]
+Model Input:  Unlisted keyword: [to diffusivity] in section: [material 301]
+Model Input:  Unlisted keyword: [si diffusivity] in section: [material 301]
+Model Input:  Unlisted keyword: [cb diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [th diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [to diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [si diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [namespace] in section: [solver 1]
+Model Input:  Unlisted keyword: [namespace] in section: [solver 2]
+Model Input:  Unlisted keyword: [namespace] in section: [solver 3]
+Model Input:  Unlisted keyword: [namespace] in section: [solver 4]
+Model Input:  Unlisted keyword: [cb] in section: [boundary condition 101]
+Model Input:  Unlisted keyword: [th] in section: [boundary condition 101]
+Model Input:  Unlisted keyword: [to] in section: [boundary condition 101]
+Model Input:  Unlisted keyword: [si] in section: [boundary condition 101]
+Model Input:  Unlisted keyword: [cb] in section: [boundary condition 201]
+Model Input:  Unlisted keyword: [th] in section: [boundary condition 201]
+Model Input:  Unlisted keyword: [to] in section: [boundary condition 201]
+Model Input:  Unlisted keyword: [si] in section: [boundary condition 201]
+Model Input:  Unlisted keyword: [cb] in section: [initial condition 1]
+Model Input:  Unlisted keyword: [th] in section: [initial condition 1]
+Model Input:  Unlisted keyword: [to] in section: [initial condition 1]
+Model Input:  Unlisted keyword: [si] in section: [initial condition 1]
+MAIN: Done
+MAIN: -----------------------
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver_Init]
+Loading user function library: [AdvectionDiffusionTimeStep]...[AdvectionDiffusionTimeStepSolver]
+ Check for transient case
+ Initialize the log file output system
+ what (flow,heat,stress,...) should be computed
+  dbg AddSolvers           4
+  dbg AddSolvers           1
+  dbg AddSolvers           1
+  dbg AddSolvers           1
+  dbg AddSolvers           1
+  dbg AddSolvers 2           4
+  dbg AddSolvers 3           1           4
+  dbg AddSolvers InitSolver           1           4
+  dbg AddSolvers CurrentModel % Solver => Solver
+  dbg AddSolvers CALL AddEquation T
+  dbg AddSolvers CALL AddEquation over
+  dbg AddSolvers 3           2           4
+  dbg AddSolvers InitSolver           2           4
+  dbg AddSolvers CurrentModel % Solver => Solver
+  dbg AddSolvers CALL AddEquation T
+  dbg AddSolvers CALL AddEquation over
+  dbg AddSolvers 3           3           4
+  dbg AddSolvers InitSolver           3           4
+  dbg AddSolvers CurrentModel % Solver => Solver
+  dbg AddSolvers CALL AddEquation T
+  dbg AddSolvers CALL AddEquation over
+  dbg AddSolvers 3           4           4
+  dbg AddSolvers InitSolver           4           4
+  dbg AddSolvers CurrentModel % Solver => Solver
+  dbg AddSolvers CALL AddEquation T
+  dbg AddSolvers CALL AddEquation over
+ Time integration and/or steady state steps
+ Get Output File Options
+ Initial Conditions
+  dbg initial condition            1
+  dbg BC          200           2         201
+  allocating BULKCONC         200         200  number of unknowns            4         402         402
+  element            1  node :           1           5         402           4         400         399
+  element            2  node :           5           6         401         402         398         397
+  element            3  node :           6           7         400         401         396         395
+  element            4  node :           7           8         399         400         394         393
+  element            5  node :           8           9         398         399         392         391
+  element            6  node :           9          10         397         398         390         389
+  element            7  node :          10          11         396         397         388         387
+  element            8  node :          11          12         395         396         386         385
+  element            9  node :          12          13         394         395         384         383
+  element           10  node :          13          14         393         394         382         381
+  element           11  node :          14          15         392         393         380         379
+  element           12  node :          15          16         391         392         378         377
+  element           13  node :          16          17         390         391         376         375
+  element           14  node :          17          18         389         390         374         373
+  element           15  node :          18          19         388         389         372         371
+  element           16  node :          19          20         387         388         370         369
+  element           17  node :          20          21         386         387         368         367
+  element           18  node :          21          22         385         386         366         365
+  element           19  node :          22          23         384         385         364         363
+  element           20  node :          23          24         383         384         362         361
+  element           21  node :          24          25         382         383         360         359
+  element           22  node :          25          26         381         382         358         357
+  element           23  node :          26          27         380         381         356         355
+  element           24  node :          27          28         379         380         354         353
+  element           25  node :          28          29         378         379         352         351
+  element           26  node :          29          30         377         378         350         349
+  element           27  node :          30          31         376         377         348         347
+  element           28  node :          31          32         375         376         346         345
+  element           29  node :          32          33         374         375         344         343
+  element           30  node :          33          34         373         374         342         341
+  element           31  node :          34          35         372         373         340         339
+  element           32  node :          35          36         371         372         338         337
+  element           33  node :          36          37         370         371         336         335
+  element           34  node :          37          38         369         370         334         333
+  element           35  node :          38          39         368         369         332         331
+  element           36  node :          39          40         367         368         330         329
+  element           37  node :          40          41         366         367         328         327
+  element           38  node :          41          42         365         366         326         325
+  element           39  node :          42          43         364         365         324         323
+  element           40  node :          43          44         363         364         322         321
+  element           41  node :          44          45         362         363         320         319
+  element           42  node :          45          46         361         362         318         317
+  element           43  node :          46          47         360         361         316         315
+  element           44  node :          47          48         359         360         314         313
+  element           45  node :          48          49         358         359         312         311
+  element           46  node :          49          50         357         358         310         309
+  element           47  node :          50          51         356         357         308         307
+  element           48  node :          51          52         355         356         306         305
+  element           49  node :          52          53         354         355         304         303
+  element           50  node :          53          54         353         354         302         301
+  element           51  node :          54          55         352         353         300         299
+  element           52  node :          55          56         351         352         298         297
+  element           53  node :          56          57         350         351         296         295
+  element           54  node :          57          58         349         350         294         293
+  element           55  node :          58          59         348         349         292         291
+  element           56  node :          59          60         347         348         290         289
+  element           57  node :          60          61         346         347         288         287
+  element           58  node :          61          62         345         346         286         285
+  element           59  node :          62          63         344         345         284         283
+  element           60  node :          63          64         343         344         282         281
+  element           61  node :          64          65         342         343         280         279
+  element           62  node :          65          66         341         342         278         277
+  element           63  node :          66          67         340         341         276         275
+  element           64  node :          67          68         339         340         274         273
+  element           65  node :          68          69         338         339         272         271
+  element           66  node :          69          70         337         338         270         269
+  element           67  node :          70          71         336         337         268         267
+  element           68  node :          71          72         335         336         266         265
+  element           69  node :          72          73         334         335         264         263
+  element           70  node :          73          74         333         334         262         261
+  element           71  node :          74          75         332         333         260         259
+  element           72  node :          75          76         331         332         258         257
+  element           73  node :          76          77         330         331         256         255
+  element           74  node :          77          78         329         330         254         253
+  element           75  node :          78          79         328         329         252         251
+  element           76  node :          79          80         327         328         250         249
+  element           77  node :          80          81         326         327         248         247
+  element           78  node :          81          82         325         326         246         245
+  element           79  node :          82          83         324         325         244         243
+  element           80  node :          83          84         323         324         242         241
+  element           81  node :          84          85         322         323         240         239
+  element           82  node :          85          86         321         322         238         237
+  element           83  node :          86          87         320         321         236         235
+  element           84  node :          87          88         319         320         234         233
+  element           85  node :          88          89         318         319         232         231
+  element           86  node :          89          90         317         318         230         229
+  element           87  node :          90          91         316         317         228         227
+  element           88  node :          91          92         315         316         226         225
+  element           89  node :          92          93         314         315         224         223
+  element           90  node :          93          94         313         314         222         221
+  element           91  node :          94          95         312         313         220         219
+  element           92  node :          95          96         311         312         218         217
+  element           93  node :          96          97         310         311         216         215
+  element           94  node :          97          98         309         310         214         213
+  element           95  node :          98          99         308         309         212         211
+  element           96  node :          99         100         307         308         210         209
+  element           97  node :         100         101         306         307         208         207
+  element           98  node :         101         102         305         306         206         205
+  element           99  node :         102         103         304         305         204         203
+  element          100  node :         103         104         303         304         202         201
+  element          101  node :         104         105         302         303         200         199
+  element          102  node :         105         106         301         302         198         197
+  element          103  node :         106         107         300         301         196         195
+  element          104  node :         107         108         299         300         194         193
+  element          105  node :         108         109         298         299         192         191
+  element          106  node :         109         110         297         298         190         189
+  element          107  node :         110         111         296         297         188         187
+  element          108  node :         111         112         295         296         186         185
+  element          109  node :         112         113         294         295         184         183
+  element          110  node :         113         114         293         294         182         181
+  element          111  node :         114         115         292         293         180         179
+  element          112  node :         115         116         291         292         178         177
+  element          113  node :         116         117         290         291         176         175
+  element          114  node :         117         118         289         290         174         173
+  element          115  node :         118         119         288         289         172         171
+  element          116  node :         119         120         287         288         170         169
+  element          117  node :         120         121         286         287         168         167
+  element          118  node :         121         122         285         286         166         165
+  element          119  node :         122         123         284         285         164         163
+  element          120  node :         123         124         283         284         162         161
+  element          121  node :         124         125         282         283         160         159
+  element          122  node :         125         126         281         282         158         157
+  element          123  node :         126         127         280         281         156         155
+  element          124  node :         127         128         279         280         154         153
+  element          125  node :         128         129         278         279         152         151
+  element          126  node :         129         130         277         278         150         149
+  element          127  node :         130         131         276         277         148         147
+  element          128  node :         131         132         275         276         146         145
+  element          129  node :         132         133         274         275         144         143
+  element          130  node :         133         134         273         274         142         141
+  element          131  node :         134         135         272         273         140         139
+  element          132  node :         135         136         271         272         138         137
+  element          133  node :         136         137         270         271         136         135
+  element          134  node :         137         138         269         270         134         133
+  element          135  node :         138         139         268         269         132         131
+  element          136  node :         139         140         267         268         130         129
+  element          137  node :         140         141         266         267         128         127
+  element          138  node :         141         142         265         266         126         125
+  element          139  node :         142         143         264         265         124         123
+  element          140  node :         143         144         263         264         122         121
+  element          141  node :         144         145         262         263         120         119
+  element          142  node :         145         146         261         262         118         117
+  element          143  node :         146         147         260         261         116         115
+  element          144  node :         147         148         259         260         114         113
+  element          145  node :         148         149         258         259         112         111
+  element          146  node :         149         150         257         258         110         109
+  element          147  node :         150         151         256         257         108         107
+  element          148  node :         151         152         255         256         106         105
+  element          149  node :         152         153         254         255         104         103
+  element          150  node :         153         154         253         254         102         101
+  element          151  node :         154         155         252         253         100          99
+  element          152  node :         155         156         251         252          98          97
+  element          153  node :         156         157         250         251          96          95
+  element          154  node :         157         158         249         250          94          93
+  element          155  node :         158         159         248         249          92          91
+  element          156  node :         159         160         247         248          90          89
+  element          157  node :         160         161         246         247          88          87
+  element          158  node :         161         162         245         246          86          85
+  element          159  node :         162         163         244         245          84          83
+  element          160  node :         163         164         243         244          82          81
+  element          161  node :         164         165         242         243          80          79
+  element          162  node :         165         166         241         242          78          77
+  element          163  node :         166         167         240         241          76          75
+  element          164  node :         167         168         239         240          74          73
+  element          165  node :         168         169         238         239          72          71
+  element          166  node :         169         170         237         238          70          69
+  element          167  node :         170         171         236         237          68          67
+  element          168  node :         171         172         235         236          66          65
+  element          169  node :         172         173         234         235          64          63
+  element          170  node :         173         174         233         234          62          61
+  element          171  node :         174         175         232         233          60          59
+  element          172  node :         175         176         231         232          58          57
+  element          173  node :         176         177         230         231          56          55
+  element          174  node :         177         178         229         230          54          53
+  element          175  node :         178         179         228         229          52          51
+  element          176  node :         179         180         227         228          50          49
+  element          177  node :         180         181         226         227          48          47
+  element          178  node :         181         182         225         226          46          45
+  element          179  node :         182         183         224         225          44          43
+  element          180  node :         183         184         223         224          42          41
+  element          181  node :         184         185         222         223          40          39
+  element          182  node :         185         186         221         222          38          37
+  element          183  node :         186         187         220         221          36          35
+  element          184  node :         187         188         219         220          34          33
+  element          185  node :         188         189         218         219          32          31
+  element          186  node :         189         190         217         218          30          29
+  element          187  node :         190         191         216         217          28          27
+  element          188  node :         191         192         215         216          26          25
+  element          189  node :         192         193         214         215          24          23
+  element          190  node :         193         194         213         214          22          21
+  element          191  node :         194         195         212         213          20          19
+  element          192  node :         195         196         211         212          18          17
+  element          193  node :         196         197         210         211          16          15
+  element          194  node :         197         198         209         210          14          13
+  element          195  node :         198         199         208         209          12          11
+  element          196  node :         199         200         207         208          10           9
+  element          197  node :         200         201         206         207           8  within the C 1 4 0 4 398
+ic_new dbg setSpeciesAnzahl:  0 4 <type 'int'>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ End of the elmer files writing phase
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ py setconcentration values for instance 0 0 4 1592
+ launch ended 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.1558e+05 , time step: 3.1558e+05 (time iteration # 1  )

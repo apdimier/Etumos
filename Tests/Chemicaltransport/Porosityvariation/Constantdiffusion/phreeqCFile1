@@ -1,0 +1,87 @@
+SOLUTION_MASTER_SPECIES
+              Si   H4SiO4    0.00000      SiO2   0.02808
+SOLUTION_SPECIES
+           + 1.0H4SiO4 = H4SiO4
+                    log_k   0.0000000000e+00
+           + 1.0H4SiO4 = H4SiO4
+                    log_k   0.0000000000e+00
+PHASES
+      Mineral
+          SiO2 =  + 1.0H4SiO4 - 2.0H2O
+                    log_k   -3.8728450000e+00
+RATES
+     Mineral
+	#	M : currrent amount of moles
+	#	M0 : initial amount of moles for Mineral
+	#	PARM(1), PARM(2), PARM(3) and PARM(4) are law parameters,
+	#	they are introduced with the KINETICS keyword, through -parms
+	#	A0 : initial surface of Mineral in contact with A0
+	#	V  : solution volume in contact with A0
+	#	PARM(1) : A/V, m2/l
+	#	PARM(2) : M/M0 exponent (-)
+	#	PARM(3) : kinetic rate (mol\m2\s)
+	#	PARM(4) : exponent for SR
+
+-start
+	30	t = 1.
+	40	if M0 > 0 then t = M/M0
+	50	if t = 0 then t = 1
+	70	rate = PARM(1)*PARM(3)*(1.-SR("Mineral"))
+	80	moles = rate*time
+	90	SAVE moles
+-end 
+
+SOLUTION                  201-201 bc_left
+   temp 2.5000000000e+01
+   pH    7.0000000000e+00 
+   units mol/l
+                       Si    2.1200000000e-03
+
+EXCHANGE                  201-201 bc_left
+               equilibrate     201
+
+EQUILIBRIUM_PHASES        201-201 bc_left
+	INCREMENTAL_REACTIONS true
+
+SOLUTION                  1-200 column_region
+   temp 2.5000000000e+01
+   pH    7.0000000000e+00 
+   units mol/l
+                       Si    1.3100000000e-04
+
+EXCHANGE                  1-200 column_region
+               equilibrate       1
+
+EQUILIBRIUM_PHASES        1-200 column_region
+
+KINETICS                  1-200 
+	Mineral
+	-m 0.0000000000e+00 0.0000000000e+00
+	-m0 0.0000000000e+00
+	-parms 1.6000000000e+02 0.0000000000e+00 6.5500000000e-15 1.0000000000e+00
+	-tol 5.e-7
+	-cvode true
+	-cvode_order 3
+	-cvode_steps 400
+	INCREMENTAL_REACTIONS true
+SELECTED_OUTPUT
+  -high_precision true
+KNOBS
+  -iterations 500
+  -diag true 
+  -tolerance 1.e-15
+SOLUTION 0
+PRINT
+  -reset	true
+# hereafter the -cells parameter is the 
+# only relevant parameter 
+TRANSPORT
+  -cells          201
+  -time_step          100.
+  -shifts          5
+  -lengths        0.1
+  -flow_direction diff
+  -boundary_conditions        closed closed
+  -print_frequency      1
+  -warnings False
+END

@@ -1,0 +1,75 @@
+PHASES
+      Mineral
+          SiO2 = H4SiO4  -2.0H2O 
+                    log_k   -3.87284e+00
+SOLUTION_MASTER_SPECIES
+              Si   H4SiO4    0.00000      SiO2  28.08430
+SOLUTION_SPECIES
+          H4SiO4  = H4SiO4
+                    log_k   0.0000000e+00
+          H4SiO4  = H4SiO4
+                    log_k   0.0000000e+00
+RATES
+                  Mineral
+
+-start
+	1	rem M = current number of moles
+	2	rem M0 = number of moles of Mineral initially present :
+	3	rem PARM(1), PARM(2), PARM(3) and PARM(4) are parameters, see -parm under KINETICS
+	4	rem PARM(1) = A/V, m2/l
+	5	rem PARM(2) = exponent for M/M0
+	6	rem PARM(3) = kinetic rate
+	7	rem PARM(4) = exponent for SI
+	10	sr_sh = SR("Mineral")
+	70	t = 1.
+	80	if M0 > 0 then t = M/M0
+	90	if t = 0 then t = 1
+	100	area = PARM(1)*(t)^PARM(2)
+	130	rate = area*PARM(3)*(1.-sr_sh^PARM(4))
+	138	rem print "rate" rate
+	140	moles = rate*time
+	200	SAVE moles
+-end
+SOLUTION 201-201 bc_left
+   temp        2.5E+01
+   pH          7.0E+00 
+   pe          4.0E+00
+   units mol/l
+                       Si            2.12E-03
+EXCHANGE 201 bc_left
+               equilibrate     201
+EQUILIBRIUM_PHASES 201 bc_left
+SOLUTION 1-200 column_region
+   temp        2.5E+01
+   pH          7.0E+00 
+   pe          4.0E+00
+   units mol/l
+                       Si            1.31E-04
+EXCHANGE 1-200 column_region
+               equilibrate       1
+EQUILIBRIUM_PHASES 1-200 column_region
+KINETICS 1-200
+	Mineral
+	-m 0.0000000000e+00 0.0000000000e+00
+	-parms 1.6000000000e+02 0.0000000000e+00 6.5500000000e-15 1.0000000000e+00
+SELECTED_OUTPUT
+-high_precision true
+KNOBS
+ -iterations 500
+  -diag true 
+-tolerance 1.e-15
+SOLUTION 0
+PRINT
+ -reset	true
+# the -cells parameter under TRANSPORT is the 
+# only relevant parameter 
+TRANSPORT
+  -cells          201
+  -time_step          100.
+  -shifts          5
+  -lengths        0.1
+  -flow_direction diff
+  -boundary_conditions        closed closed
+  -print_frequency      1
+  -warnings False
+END

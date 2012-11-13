@@ -1,0 +1,1080 @@
+unit in Si mol/l
+unit in Si mol/l
+unit in Mineral mol/l
+Tensor value 7.9e-11 <PhysicalUnit EffectiveDiffusion>
+Tensor value 1.0 <PhysicalUnit Permeability>
+keyword porosity
+dbg property:  porosity PhysicalProperties.Porosity
+setproperty propClass is ok 
+ dbg material key porosity
+keyword permeability
+dbg property:  permeability PhysicalProperties.Permeability
+setproperty propClass is ok 
+ dbg material key permeability
+keyword effectiveDiffusion
+dbg property:  effectivediffusion PhysicalProperties.EffectiveDiffusion
+setproperty propClass is ok 
+ dbg material key effectiveDiffusion
+ dbg material we are here 
+ gas phase  <type 'instance'>
+ gas phase  <chemistry.GasPhase instance at 0xab2662c>
+ gas phase  <type 'instance'>
+<chemistry.GasPhase instance at 0xab2662c>
+ gas phase  <type 'instance'>
+ gas phase  <chemistry.GasPhase instance at 0xa8f296c>
+ gas phase  <type 'instance'>
+<chemistry.GasPhase instance at 0xa8f296c>
+value:  <type 'str'> ChemicalState
+dbg bcdict  ['Flux', 'Dirichlet']
+valueeeee ChemicalState
+dbg argv  ['test.py']
+verifyClass commonmodel.BoundaryCondition verifyClass commonmodel.Region verifyClass commonmodel.Region verifyClass commonmodel.InitialCondition verifyClass species.MineralSecondarySpecies verifyClass species.AqueousMasterSpecies verifyClass species.AqueousSecondarySpecies verifyClass species.AqueousSecondarySpecies verifyClass chemistry.ReversibleKineticLaw verifyClass chemistry.ExpectedOutput verifyClass chemistry.ExpectedOutput verifyClass chemistry.ExpectedOutput environ  None
+chemicaltransport module 
+ ctm dbg mpiEnv:  None
+within getDarcyVelocity self.darcyVelocity V(0.0, 0.0, 0.0) Head/Time
+self.darcyVelocity V(0.0, 0.0, 0.0) Head/Time
+ self transportcomponent mt3d mpiEnv None
+ phreeqc init method  None
+ verbose settings
+py_definedatasetc wdefinedataset ok : /home/dimier/Wrapper/Phreeqc_dat/phreeqc.dat 
+py_definedatasetc defined dataset ok : /home/dimier/Wrapper/Phreeqc_dat/phreeqc.dat 
+dbg grid type  CartesianMesh2D
+speciesBaseAddenda  [<species.MineralSecondarySpecies instance at 0xa8f2b4c>, <species.AqueousMasterSpecies instance at 0xa8f2c8c>, <species.AqueousSecondarySpecies instance at 0xa8f2c6c>, <species.AqueousSecondarySpecies instance at 0xa8f2bcc>]
+ mineral treated:  SiO2
+[('Si', 1.0), ('O', 2.0)]
+ dbg molar mass list Si 1.0
+ dbg molar mass list O 2.0
+ ---------------
+ boolean  0
+formationReaction [('H4SiO4', 1)]
+symbol H4SiO4
+('H4SiO4', 1) H4SiO4 1
+ ---------------
+ boolean  0
+formationReaction [('H4SiO4', 1)]
+symbol H4SiO4
+('H4SiO4', 1) H4SiO4 1
+ ---------------
+ boolean  1
+formationReaction [('H4SiO4', 1.0), ('H2O', -2.0)]
+symbol SiO2
+('H4SiO4', 1.0) H4SiO4 1.0
+('H2O', -2.0) H2O -2.0
+bc_left
+[201, 201]
+column_region
+[1, 200]
+ pdbg init  phreeqCFile test.phout
+ pdbg inFile  phreeqCFile
+ pdbg outFile  test.phout
+ dbg Wphreeqc MAX_LENGTH 256 
+ in  wioutdefinition opening output file test.phout
+ output file opening 
+ database file opening /home/dimier/Wrapper/Phreeqc_dat/phreeqc.dat
+ database file opened /home/dimier/Wrapper/Phreeqc_dat/phreeqc.dat
+ log file opening 
+ log file opened 
+*PHREEQC2.17* Input name : phreeqCFile
+*PHREEQC2.17* Output file: test.phout
+*PHREEQC2.17* Data file  : /home/dimier/Wrapper/Phreeqc_dat/phreeqc.dat
+read_database 
+after tidy model call 1: 
+mpi_control is not null
+ py_initialize value of the mpianz parameter 1
+ initialising phreeqC solutions
+ after initial_solution
+initialising exchangers
+ exchangers initialisation OK
+initialising  gas_phases
+gas_phases initialisation OK
+ chemistry reaction
+ chemistry reaction ok 201
+ dbg p py_porosity_initialisation
+  dbg py_porosity after memory transfer 1
+  dbg p  po after memory allocation for porositystructure_ptr 200
+ dbgwp porosity k value 0 1
+ dbgwp porosity vm value Mineral 2.268796e-02 for ind. k 0
+ next mineral 1
+ dbgpc wgetcompo 201
+ dbg wgetcompo 3 4
+Number of components in the solution :  4
+ Element n. 0 of old name CB new species name CB
+ Element n. 1 of old name TH new species name TH
+ Element n. 2 of old name TO new species name TO
+ Element n. 3 of old name Si new species name Si
+wgetmobileconc   200   201 aqueous_component_number     4
+wgetmobileconc     0   200 aqueous_component_number     4
+rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+800 [-1.9308405641975234e-07, -1.9308405641975234e-07, -1.9308405641975234e-07, -1.9308405641975234e-07, -1.9308405641975234e-07, -1.9308405641975234e-07, -1.9308405641975234e-07, -1.9308405641975234e-07, -1.9308405641975234e-07, -1.9308405641975234e-07]
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~Transport initialisation~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+ dbgc sethydrporparameter call:
+  we are in set_hy param            0
+  we are in set_hy param            0
+ mt3d dbg within setHydraulicPorosityParameter fwel is kept to F
+unit in CB mol/l
+unit in TH mol/l
+unit in TO mol/l
+unit in Si mol/l
+ nrow ncol  1 201
+ mt3d dbg b.l. treat  1 1 1 1
+ btn file writing process is oK
+ i1 i2 j1 j2  2 201 1 1
+ i1 i2 j1 j2  1 1 1 1
+ porosity_region  0.79 2 201 1 1
+ porosity_region  0.79 1 1 1 1
+ mt3d dbg end of the dsp file
+  mt3d dbg ssm ouverture du fichier 2108
+  mt3d dbg ssm ecriture des booleens dont self.fwel F
+self.fwel == "F"
+ the setData method is over
+TVD 
+JACOBI
+mc dbg self.variablePorosityOption without wells
+grid dimensions x and y: 1 201 0.0
+domain length: 0.252 0.1
+ dbg Draht init 08/2010 launching modf.fil
+ Draht run 
+Child returned <subprocess.Popen object at 0xa8f9eac>
+ End of transport initialisation 
+ inv mineral cell cellPorosity 1 7.900000e-01 aux 0.000000e+00  c 0.0000000000e+00 vm  1.4300446112e-257
+ inv mineral cell cellPorosity 7.900000e-01 aux 0.000000e+00 invMin 0.000000e+00
+ porosity has been initialised 
+wgetmobileconc     0   200 aqueous_component_number     4
+ ctmdbg get over  800
+800
+ ctm dbg set over 
+ ctm dbg equi over 
+ ctm dbg get over  0.0
+ dbgc initialize mcomp : 4 nnrow : 1 nncol : 201 ActiveCellsNumber : 200 ierror : 0 
+self.transportSolver.setTimeStep 800
+self.transportSolver.setConcentrationValues
+ launch ended 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.1558e+04 , time step: 3.1558e+04 (time iteration # 1  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 0.0000000000e+00 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 0.0000000000e+00 2.2687960911e-02 fm 0.0000000000e+00 fm0 0.0000000000e+00
+ ////////dbg c/////// fm 0.0000000000e+00 fm0 0.0000000000e+00
+pdbg getPorosityfield 
+==>  Convergence error is:  1e-15 , it. =  1  Mem.  (284036.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+ ctmdbg oneTimeStep ended 
+ ctmdbg oneTimeStep untiltime 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  6.5641e+04 , time step: 3.4083e+04 (time iteration # 2  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 0.0000000000e+00 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 0.0000000000e+00 2.2687960911e-02 fm 0.0000000000e+00 fm0 0.0000000000e+00
+ ////////dbg c/////// fm 0.0000000000e+00 fm0 0.0000000000e+00
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.0245e+05 , time step: 3.6809e+04 (time iteration # 3  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 5.0216191551e-10 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 5.0216191551e-10 2.2687960911e-02 fm 1.1393029910e-11 fm0 0.0000000000e+00
+ ////////dbg c/////// fm 1.1393029910e-11 fm0 0.0000000000e+00
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.4220e+05 , time step: 3.9754e+04 (time iteration # 4  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 2.6947737506e-09 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 2.6947737506e-09 2.2687960911e-02 fm 6.1138921517e-11 fm0 1.1393029910e-11
+ ////////dbg c/////// fm 6.1138921517e-11 fm0 1.1393029910e-11
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.8514e+05 , time step: 4.2934e+04 (time iteration # 5  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 7.6194366684e-09 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 7.6194366684e-09 2.2687960911e-02 fm 1.7286948129e-10 fm0 6.1138921517e-11
+ ////////dbg c/////// fm 1.7286948129e-10 fm0 6.1138921517e-11
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.3151e+05 , time step: 4.6369e+04 (time iteration # 6  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.6517674329e-08 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.6517674329e-08 2.2687960911e-02 fm 3.7475234951e-10 fm0 1.7286948129e-10
+ ////////dbg c/////// fm 3.7475234951e-10 fm0 1.7286948129e-10
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.8159e+05 , time step: 5.0079e+04 (time iteration # 7  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 3.0814619184e-08 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 3.0814619184e-08 2.2687960911e-02 fm 6.9912087552e-10 fm0 3.7475234951e-10
+ ////////dbg c/////// fm 6.9912087552e-10 fm0 3.7475234951e-10
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.3567e+05 , time step: 5.4085e+04 (time iteration # 8  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 5.2116944249e-08 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 5.2116944249e-08 2.2687960911e-02 fm 1.1824271939e-09 fm0 6.9912087552e-10
+ ////////dbg c/////// fm 1.1824271939e-09 fm0 6.9912087552e-10
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.9408e+05 , time step: 5.8412e+04 (time iteration # 9  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 8.2222261120e-08 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 8.2222261120e-08 2.2687960911e-02 fm 1.8654554463e-09 fm0 1.1824271939e-09
+ ////////dbg c/////// fm 1.8654554463e-09 fm0 1.1824271939e-09
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  4.5717e+05 , time step: 6.3085e+04 (time iteration # 10  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.2313674325e-07 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.2313674325e-07 2.2687960911e-02 fm 2.7937216174e-09 fm0 1.8654554463e-09
+ ////////dbg c/////// fm 2.7937216174e-09 fm0 1.8654554463e-09
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  5.2530e+05 , time step: 6.8131e+04 (time iteration # 11  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.7709854319e-07 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.7709854319e-07 2.2687960911e-02 fm 4.0180048253e-09 fm0 2.7937216174e-09
+ ////////dbg c/////// fm 4.0180048253e-09 fm0 2.7937216174e-09
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  5.9888e+05 , time step: 7.3582e+04 (time iteration # 12  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 2.4660550933e-07 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 2.4660550933e-07 2.2687960911e-02 fm 5.5949761560e-09 fm0 4.0180048253e-09
+ ////////dbg c/////// fm 5.5949761560e-09 fm0 4.0180048253e-09
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  6.7835e+05 , time step: 7.9468e+04 (time iteration # 13  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 3.3444641850e-07 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 3.3444641850e-07 2.2687960911e-02 fm 7.5879072696e-09 fm0 5.5949761560e-09
+ ////////dbg c/////// fm 7.5879072696e-09 fm0 5.5949761560e-09
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  7.6417e+05 , time step: 8.5826e+04 (time iteration # 14  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 4.4373540304e-07 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 4.4373540304e-07 2.2687960911e-02 fm 1.0067451479e-08 fm0 7.5879072696e-09
+ ////////dbg c/////// fm 1.0067451479e-08 fm0 7.5879072696e-09
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  8.5687e+05 , time step: 9.2692e+04 (time iteration # 15  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 5.7794952847e-07 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 5.7794952847e-07 2.2687960911e-02 fm 1.3112496310e-08 fm0 1.0067451479e-08
+ ////////dbg c/////// fm 1.3112496310e-08 fm0 1.0067451479e-08
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  9.5697e+05 , time step: 1.0011e+05 (time iteration # 16  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 7.4096964033e-07 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 7.4096964033e-07 2.2687960911e-02 fm 1.6811090236e-08 fm0 1.3112496310e-08
+ ////////dbg c/////// fm 1.6811090236e-08 fm0 1.3112496310e-08
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.0651e+06 , time step: 1.0812e+05 (time iteration # 17  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 9.3712469257e-07 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 9.3712469257e-07 2.2687960911e-02 fm 2.1261448393e-08 fm0 1.6811090236e-08
+ ////////dbg c/////// fm 2.1261448393e-08 fm0 1.6811090236e-08
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.1819e+06 , time step: 1.1677e+05 (time iteration # 18  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.1712398266e-06 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.1712398266e-06 2.2687960911e-02 fm 2.6573043404e-08 fm0 2.1261448393e-08
+ ////////dbg c/////// fm 2.6573043404e-08 fm0 2.1261448393e-08
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.3080e+06 , time step: 1.2611e+05 (time iteration # 19  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.4486885066e-06 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.4486885066e-06 2.2687960911e-02 fm 3.2867788210e-08 fm0 2.6573043404e-08
+ ////////dbg c/////// fm 3.2867788210e-08 fm0 2.6573043404e-08
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284312.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.4442e+06 , time step: 1.3619e+05 (time iteration # 20  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.7754490426e-06 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.7754490426e-06 2.2687960911e-02 fm 4.0281318477e-08 fm0 3.2867788210e-08
+ ////////dbg c/////// fm 4.0281318477e-08 fm0 3.2867788210e-08
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.5912e+06 , time step: 1.4709e+05 (time iteration # 21  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 2.1581658549e-06 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 2.1581658549e-06 2.2687960911e-02 fm 4.8964382554e-08 fm0 4.0281318477e-08
+ ////////dbg c/////// fm 4.8964382554e-08 fm0 4.0281318477e-08
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.7501e+06 , time step: 1.5886e+05 (time iteration # 22  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 2.6042158538e-06 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 2.6042158538e-06 2.2687960911e-02 fm 5.9084347495e-08 fm0 4.8964382554e-08
+ ////////dbg c/////// fm 5.9084347495e-08 fm0 4.8964382554e-08
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.9217e+06 , time step: 1.7157e+05 (time iteration # 23  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 3.1217803265e-06 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 3.1217803265e-06 2.2687960911e-02 fm 7.0826830018e-08 fm0 5.9084347495e-08
+ ////////dbg c/////// fm 7.0826830018e-08 fm0 5.9084347495e-08
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.1070e+06 , time step: 1.8529e+05 (time iteration # 24  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 3.7199227451e-06 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 3.7199227451e-06 2.2687960911e-02 fm 8.4397461832e-08 fm0 7.0826830018e-08
+ ////////dbg c/////// fm 8.4397461832e-08 fm0 7.0826830018e-08
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.3071e+06 , time step: 2.0011e+05 (time iteration # 25  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 4.4086729322e-06 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 4.4086729322e-06 2.2687960911e-02 fm 1.0002379915e-07 fm0 8.4397461832e-08
+ ////////dbg c/////// fm 1.0002379915e-07 fm0 8.4397461832e-08
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.5232e+06 , time step: 2.1612e+05 (time iteration # 26  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 5.1991180400e-06 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 5.1991180400e-06 2.2687960911e-02 fm 1.1795738686e-07 fm0 1.0002379915e-07
+ ////////dbg c/////// fm 1.1795738686e-07 fm0 1.0002379915e-07
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.7566e+06 , time step: 2.3341e+05 (time iteration # 27  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 6.1035008286e-06 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 6.1035008286e-06 2.2687960911e-02 fm 1.3847598822e-07 fm0 1.1795738686e-07
+ ////////dbg c/////// fm 1.3847598822e-07 fm0 1.1795738686e-07
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.0087e+06 , time step: 2.5209e+05 (time iteration # 28  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 7.1353257514e-06 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 7.1353257514e-06 2.2687960911e-02 fm 1.6188599173e-07 fm0 1.3847598822e-07
+ ////////dbg c/////// fm 1.6188599173e-07 fm0 1.3847598822e-07
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.2810e+06 , time step: 2.7225e+05 (time iteration # 29  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 8.3094733885e-06 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 8.3094733885e-06 2.2687960911e-02 fm 1.8852500743e-07 fm0 1.6188599173e-07
+ ////////dbg c/////// fm 1.8852500743e-07 fm0 1.6188599173e-07
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.5750e+06 , time step: 2.9403e+05 (time iteration # 30  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 9.6423237958e-06 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 9.6423237958e-06 2.2687960911e-02 fm 2.1876466537e-07 fm0 1.8852500743e-07
+ ////////dbg c/////// fm 2.1876466537e-07 fm0 1.8852500743e-07
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.8925e+06 , time step: 3.1756e+05 (time iteration # 31  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.1151889373e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.1151889373e-05 2.2687960911e-02 fm 2.5301363017e-07 fm0 2.1876466537e-07
+ ////////dbg c/////// fm 2.5301363017e-07 fm0 2.1876466537e-07
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  4.2355e+06 , time step: 3.4296e+05 (time iteration # 32  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.2857957886e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.2857957886e-05 2.2687960911e-02 fm 2.9172084592e-07 fm0 2.5301363017e-07
+ ////////dbg c/////// fm 2.9172084592e-07 fm0 2.5301363017e-07
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  4.6059e+06 , time step: 3.7040e+05 (time iteration # 33  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.4782246332e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.4782246332e-05 2.2687960911e-02 fm 3.3537902695e-07 fm0 2.9172084592e-07
+ ////////dbg c/////// fm 3.3537902695e-07 fm0 2.9172084592e-07
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  5.0059e+06 , time step: 4.0003e+05 (time iteration # 34  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.6948566351e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.6948566351e-05 2.2687960911e-02 fm 3.8452841086e-07 fm0 3.3537902695e-07
+ ////////dbg c/////// fm 3.8452841086e-07 fm0 3.3537902695e-07
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  5.4380e+06 , time step: 4.3203e+05 (time iteration # 35  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.9383001968e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.9383001968e-05 2.2687960911e-02 fm 4.3976079098e-07 fm0 3.8452841086e-07
+ ////////dbg c/////// fm 4.3976079098e-07 fm0 3.8452841086e-07
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  5.9046e+06 , time step: 4.6660e+05 (time iteration # 36  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 2.2114103407e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 2.2114103407e-05 2.2687960911e-02 fm 5.0172391366e-07 fm0 4.3976079098e-07
+ ////////dbg c/////// fm 5.0172391366e-07 fm0 4.3976079098e-07
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  6.4085e+06 , time step: 5.0392e+05 (time iteration # 37  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 2.5167072557e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 2.5167072557e-05 2.2687960911e-02 fm 5.7098955840e-07 fm0 5.0172391366e-07
+ ////////dbg c/////// fm 5.7098955840e-07 fm0 5.0172391366e-07
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  6.9527e+06 , time step: 5.4424e+05 (time iteration # 38  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 2.8583692830e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 2.8583692830e-05 2.2687960911e-02 fm 6.4850570561e-07 fm0 5.7098955840e-07
+ ////////dbg c/////// fm 6.4850570561e-07 fm0 5.7098955840e-07
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  7.5405e+06 , time step: 5.8778e+05 (time iteration # 39  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 3.2398637373e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 3.2398637373e-05 2.2687960911e-02 fm 7.3505901827e-07 fm0 6.4850570561e-07
+ ////////dbg c/////// fm 7.3505901827e-07 fm0 6.4850570561e-07
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  8.1753e+06 , time step: 6.3480e+05 (time iteration # 40  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 3.6652337781e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 3.6652337781e-05 2.2687960911e-02 fm 8.3156680685e-07 fm0 7.3505901827e-07
+ ////////dbg c/////// fm 8.3156680685e-07 fm0 7.3505901827e-07
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (284684.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  8.8609e+06 , time step: 6.8558e+05 (time iteration # 41  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 4.1388840345e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 4.1388840345e-05 2.2687960911e-02 fm 9.3902839189e-07 fm0 8.3156680685e-07
+ ////////dbg c/////// fm 9.3902839189e-07 fm0 8.3156680685e-07
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285036.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  9.6013e+06 , time step: 7.4043e+05 (time iteration # 42  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 4.6656091240e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 4.6656091240e-05 2.2687960911e-02 fm 1.0585315743e-06 fm0 9.3902839189e-07
+ ////////dbg c/////// fm 1.0585315743e-06 fm0 9.3902839189e-07
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285036.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.0401e+07 , time step: 7.9966e+05 (time iteration # 43  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 5.2498928208e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 5.2498928208e-05 2.2687960911e-02 fm 1.1910936310e-06 fm0 1.0585315743e-06
+ ////////dbg c/////// fm 1.1910936310e-06 fm0 1.0585315743e-06
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285036.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.1265e+07 , time step: 8.6364e+05 (time iteration # 44  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 5.8979910790e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 5.8979910790e-05 2.2687960911e-02 fm 1.3381339105e-06 fm0 1.1910936310e-06
+ ////////dbg c/////// fm 1.3381339105e-06 fm0 1.1910936310e-06
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285036.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.2197e+07 , time step: 9.3273e+05 (time iteration # 45  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 6.6160321012e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 6.6160321012e-05 2.2687960911e-02 fm 1.5010427769e-06 fm0 1.3381339105e-06
+ ////////dbg c/////// fm 1.5010427769e-06 fm0 1.3381339105e-06
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285036.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.3205e+07 , time step: 1.0073e+06 (time iteration # 46  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 7.4106633174e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 7.4106633174e-05 2.2687960911e-02 fm 1.6813283967e-06 fm0 1.5010427769e-06
+ ////////dbg c/////// fm 1.6813283967e-06 fm0 1.5010427769e-06
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285036.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.4293e+07 , time step: 1.0879e+06 (time iteration # 47  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 8.2890907351e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 8.2890907351e-05 2.2687960911e-02 fm 1.8806256658e-06 fm0 1.6813283967e-06
+ ////////dbg c/////// fm 1.8806256658e-06 fm0 1.6813283967e-06
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285036.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.5468e+07 , time step: 1.1750e+06 (time iteration # 48  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 9.2591179054e-05 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 9.2591179054e-05 2.2687960911e-02 fm 2.1007050510e-06 fm0 1.8806256658e-06
+ ////////dbg c/////// fm 2.1007050510e-06 fm0 1.8806256658e-06
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285036.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.6737e+07 , time step: 1.2690e+06 (time iteration # 49  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.0329188518e-04 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.0329188518e-04 2.2687960911e-02 fm 2.3434822534e-06 fm0 2.1007050510e-06
+ ////////dbg c/////// fm 2.3434822534e-06 fm0 2.1007050510e-06
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285036.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.8107e+07 , time step: 1.3705e+06 (time iteration # 50  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.1508438321e-04 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.1508438321e-04 2.2687960911e-02 fm 2.6110299877e-06 fm0 2.3434822534e-06
+ ////////dbg c/////// fm 2.6110299877e-06 fm0 2.3434822534e-06
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285036.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.9587e+07 , time step: 1.4801e+06 (time iteration # 51  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.2806751124e-04 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.2806751124e-04 2.2687960911e-02 fm 2.9055906888e-06 fm0 2.6110299877e-06
+ ////////dbg c/////// fm 2.9055906888e-06 fm0 2.6110299877e-06
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285208.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.1186e+07 , time step: 1.5985e+06 (time iteration # 52  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.4234790173e-04 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.4234790173e-04 2.2687960911e-02 fm 3.2295836302e-06 fm0 2.9055906888e-06
+ ////////dbg c/////// fm 3.2295836302e-06 fm0 2.9055906888e-06
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285208.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.2912e+07 , time step: 1.7264e+06 (time iteration # 53  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.5804062977e-04 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.5804062977e-04 2.2687960911e-02 fm 3.5856196306e-06 fm0 3.2295836302e-06
+ ////////dbg c/////// fm 3.5856196306e-06 fm0 3.2295836302e-06
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285208.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.4777e+07 , time step: 1.8645e+06 (time iteration # 54  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.7526984994e-04 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.7526984994e-04 2.2687960911e-02 fm 3.9765155043e-06 fm0 3.5856196306e-06
+ ////////dbg c/////// fm 3.9765155043e-06 fm0 3.5856196306e-06
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285208.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.6790e+07 , time step: 2.0137e+06 (time iteration # 55  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 1.9416943176e-04 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 1.9416943176e-04 2.2687960911e-02 fm 4.4053084778e-06 fm0 3.9765155043e-06
+ ////////dbg c/////// fm 4.4053084778e-06 fm0 3.9765155043e-06
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285208.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.8965e+07 , time step: 2.1748e+06 (time iteration # 56  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 2.1488394604e-04 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 2.1488394604e-04 2.2687960911e-02 fm 4.8752785681e-06 fm0 4.4053084778e-06
+ ////////dbg c/////// fm 4.8752785681e-06 fm0 4.4053084778e-06
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285208.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.1314e+07 , time step: 2.3488e+06 (time iteration # 57  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 2.3756818926e-04 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 2.3756818926e-04 2.2687960911e-02 fm 5.3899377916e-06 fm0 4.8752785681e-06
+ ////////dbg c/////// fm 5.3899377916e-06 fm0 4.8752785681e-06
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285208.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.1558e+07 , time step: 2.4373e+05 (time iteration # 58  )
+ ctmdbg self.variablePorosityOption 1
+dbgc set porosity call
+pdbg getPorosityfield 
+ py_getCellPorosity porositystructure_ptr[im].name 0 Mineral 0 Mineral conc 2.3990791630e-04 2.2687960911e-02
+ py_getCellPorosity update Mineral quantity 2.3990791630e-04 2.2687960911e-02 fm 5.4430214272e-06 fm0 5.3899377916e-06
+ ////////dbg c/////// fm 5.4430214272e-06 fm0 5.3899377916e-06
+pdbg getPorosityfield 
+         Max error:   0.00000000e+00, iteration:    1 at point:     1
+==>  Convergence error is:  0.0 , it. =  1  Mem.  (285208.0, 'Kb') 
+ debug py_getselectedoutput 0 200 Si
+ debug py_getselectedoutput 0 200 Mineral
+wgetmobileconc     0   200 aqueous_component_number     4
+ mt3d_stop :
+ loop over times 
+============================ 
+Error estimation on porosity 
+============================ 
+0.00013101 0.00013101 8e-09 8.94427191 -0.00039924177894 0.00238850177894 3.14159265359
+ initial poro  0.79 8e-09 0.02268796 31557600.0 0.00013101 0.00212027
+ x 1.5000000000e-03 analytic 7.8999116457e-01 numeric 7.8999470000e-01 diff 3.5354306964e-06 
+ x 2.5000000000e-03 analytic 7.8999127427e-01 numeric 7.8999482000e-01 diff 3.5457288959e-06 
+ x 3.5000000000e-03 analytic 7.8999138328e-01 numeric 7.8999494000e-01 diff 3.5567205942e-06 
+ x 4.5000000000e-03 analytic 7.8999149160e-01 numeric 7.8999505000e-01 diff 3.5583952585e-06 
+ x 5.5000000000e-03 analytic 7.8999159926e-01 numeric 7.8999517000e-01 diff 3.5707424173e-06 
+ x 6.5000000000e-03 analytic 7.8999170625e-01 numeric 7.8999528000e-01 diff 3.5737516614e-06 
+ x 7.5000000000e-03 analytic 7.8999181259e-01 numeric 7.8999539000e-01 diff 3.5774126438e-06 
+ x 8.5000000000e-03 analytic 7.8999191828e-01 numeric 7.8999549000e-01 diff 3.5717150814e-06 
+ x 9.5000000000e-03 analytic 7.8999202335e-01 numeric 7.8999560000e-01 diff 3.5766487557e-06 
+ x 1.0500000000e-02 analytic 7.8999212780e-01 numeric 7.8999570000e-01 diff 3.5722035140e-06 
+ x 1.1500000000e-02 analytic 7.8999223163e-01 numeric 7.8999580000e-01 diff 3.5683692702e-06 
+ x 1.2500000000e-02 analytic 7.8999233486e-01 numeric 7.8999590000e-01 diff 3.5651360049e-06 
+ x 1.3500000000e-02 analytic 7.8999243751e-01 numeric 7.8999600000e-01 diff 3.5624937678e-06 
+ x 1.4500000000e-02 analytic 7.8999253957e-01 numeric 7.8999609000e-01 diff 3.5504326773e-06 
+ x 1.5500000000e-02 analytic 7.8999264106e-01 numeric 7.8999618000e-01 diff 3.5389429220e-06 
+ x 1.6500000000e-02 analytic 7.8999274199e-01 numeric 7.8999627000e-01 diff 3.5280147612e-06 
+ x 1.7500000000e-02 analytic 7.8999284236e-01 numeric 7.8999636000e-01 diff 3.5176385261e-06 
+ x 1.8500000000e-02 analytic 7.8999294220e-01 numeric 7.8999645000e-01 diff 3.5078046203e-06 
+ x 1.9500000000e-02 analytic 7.8999304150e-01 numeric 7.8999653000e-01 diff 3.4885035206e-06 
+ x 2.0500000000e-02 analytic 7.8999314027e-01 numeric 7.8999662000e-01 diff 3.4797257777e-06 
+ x 2.1500000000e-02 analytic 7.8999323854e-01 numeric 7.8999670000e-01 diff 3.4614620174e-06 
+ x 2.2500000000e-02 analytic 7.8999333630e-01 numeric 7.8999678000e-01 diff 3.4437029406e-06 
+ x 2.3500000000e-02 analytic 7.8999343356e-01 numeric 7.8999686000e-01 diff 3.4264393247e-06 
+ x 2.4500000000e-02 analytic 7.8999353034e-01 numeric 7.8999693000e-01 diff 3.3996620233e-06 
+ x 2.5500000000e-02 analytic 7.8999362664e-01 numeric 7.8999701000e-01 diff 3.3833619679e-06 
+ x 2.6500000000e-02 analytic 7.8999372247e-01 numeric 7.8999708000e-01 diff 3.3575301681e-06 
+ x 2.7500000000e-02 analytic 7.8999381784e-01 numeric 7.8999715000e-01 diff 3.3321577112e-06 
+ x 2.8500000000e-02 analytic 7.8999391276e-01 numeric 7.8999722000e-01 diff 3.3072357645e-06 
+ x 2.9500000000e-02 analytic 7.8999400724e-01 numeric 7.8999729000e-01 diff 3.2827555738e-06 
+ x 3.0500000000e-02 analytic 7.8999410129e-01 numeric 7.8999736000e-01 diff 3.2587084662e-06 
+ x 3.1500000000e-02 analytic 7.8999419491e-01 numeric 7.8999742000e-01 diff 3.2250858479e-06 
+ x 3.2500000000e-02 analytic 7.8999428812e-01 numeric 7.8999749000e-01 diff 3.2018792065e-06 
+ x 3.3500000000e-02 analytic 7.8999438092e-01 numeric 7.8999755000e-01 diff 3.1690801108e-06 
+ x 3.4500000000e-02 analytic 7.8999447332e-01 numeric 7.8999761000e-01 diff 3.1366802101e-06 
+ x 3.5500000000e-02 analytic 7.8999456533e-01 numeric 7.8999767000e-01 diff 3.1046712362e-06 
+ x 3.6500000000e-02 analytic 7.8999465695e-01 numeric 7.8999773000e-01 diff 3.0730450025e-06 
+ x 3.7500000000e-02 analytic 7.8999474821e-01 numeric 7.8999779000e-01 diff 3.0417934040e-06 
+ x 3.8500000000e-02 analytic 7.8999483909e-01 numeric 7.8999785000e-01 diff 3.0109084181e-06 
+ x 3.9500000000e-02 analytic 7.8999492962e-01 numeric 7.8999790000e-01 diff 2.9703821045e-06 
+ x 4.0500000000e-02 analytic 7.8999501979e-01 numeric 7.8999796000e-01 diff 2.9402066045e-06 
+ x 4.1500000000e-02 analytic 7.8999510963e-01 numeric 7.8999801000e-01 diff 2.9003741421e-06 
+ x 4.2500000000e-02 analytic 7.8999519912e-01 numeric 7.8999806000e-01 diff 2.8608770232e-06 
+ x 4.3500000000e-02 analytic 7.8999528829e-01 numeric 7.8999811000e-01 diff 2.8217076355e-06 
+ x 4.4500000000e-02 analytic 7.8999537714e-01 numeric 7.8999816000e-01 diff 2.7828584490e-06 
+ x 4.5500000000e-02 analytic 7.8999546568e-01 numeric 7.8999821000e-01 diff 2.7443220147e-06 
+ x 4.6500000000e-02 analytic 7.8999555391e-01 numeric 7.8999825000e-01 diff 2.6960909653e-06 
+ x 4.7500000000e-02 analytic 7.8999564184e-01 numeric 7.8999830000e-01 diff 2.6581580145e-06 
+ x 4.8500000000e-02 analytic 7.8999572948e-01 numeric 7.8999834000e-01 diff 2.6105159565e-06 
+ x 4.9500000000e-02 analytic 7.8999581684e-01 numeric 7.8999839000e-01 diff 2.5731576661e-06 
+ x 5.0500000000e-02 analytic 7.8999590392e-01 numeric 7.8999843000e-01 diff 2.5260760973e-06 
+ x 5.1500000000e-02 analytic 7.8999599074e-01 numeric 7.8999847000e-01 diff 2.4792642841e-06 
+ x 5.2500000000e-02 analytic 7.8999607728e-01 numeric 7.8999851000e-01 diff 2.4327153390e-06 
+ x 5.3500000000e-02 analytic 7.8999616358e-01 numeric 7.8999855000e-01 diff 2.3864224523e-06 
+ x 5.4500000000e-02 analytic 7.8999624962e-01 numeric 7.8999859000e-01 diff 2.3403788921e-06 
+ x 5.5500000000e-02 analytic 7.8999633542e-01 numeric 7.8999863000e-01 diff 2.2945780035e-06 
+ x 5.6500000000e-02 analytic 7.8999642099e-01 numeric 7.8999867000e-01 diff 2.2490132070e-06 
+ x 5.7500000000e-02 analytic 7.8999650632e-01 numeric 7.8999870000e-01 diff 2.1936779986e-06 
+ x 5.8500000000e-02 analytic 7.8999659143e-01 numeric 7.8999874000e-01 diff 2.1485659487e-06 
+ x 5.9500000000e-02 analytic 7.8999667633e-01 numeric 7.8999877000e-01 diff 2.0936707009e-06 
+ x 6.0500000000e-02 analytic 7.8999676101e-01 numeric 7.8999881000e-01 diff 2.0489859720e-06 
+ x 6.1500000000e-02 analytic 7.8999684549e-01 numeric 7.8999884000e-01 diff 1.9945055493e-06 
+ x 6.2500000000e-02 analytic 7.8999692978e-01 numeric 7.8999887000e-01 diff 1.9402232910e-06 
+ x 6.3500000000e-02 analytic 7.8999701387e-01 numeric 7.8999890000e-01 diff 1.8861331246e-06 
+ x 6.4500000000e-02 analytic 7.8999709777e-01 numeric 7.8999893000e-01 diff 1.8322290459e-06 
+ x 6.5500000000e-02 analytic 7.8999718149e-01 numeric 7.8999896000e-01 diff 1.7785051175e-06 
+ x 6.6500000000e-02 analytic 7.8999726504e-01 numeric 7.8999899000e-01 diff 1.7249554678e-06 
+ x 6.7500000000e-02 analytic 7.8999734843e-01 numeric 7.8999902000e-01 diff 1.6715742895e-06 
+ x 6.8500000000e-02 analytic 7.8999743164e-01 numeric 7.8999905000e-01 diff 1.6183558387e-06 
+ x 6.9500000000e-02 analytic 7.8999751471e-01 numeric 7.8999907000e-01 diff 1.5552944330e-06 
+ x 7.0500000000e-02 analytic 7.8999759762e-01 numeric 7.8999910000e-01 diff 1.5023844505e-06 
+ x 7.1500000000e-02 analytic 7.8999768038e-01 numeric 7.8999912000e-01 diff 1.4396203284e-06 
+ x 7.2500000000e-02 analytic 7.8999776300e-01 numeric 7.8999915000e-01 diff 1.3869965605e-06 
+ x 7.3500000000e-02 analytic 7.8999784549e-01 numeric 7.8999917000e-01 diff 1.3245076973e-06 
+ x 7.4500000000e-02 analytic 7.8999792785e-01 numeric 7.8999920000e-01 diff 1.2721483431e-06 
+ x 7.5500000000e-02 analytic 7.8999801009e-01 numeric 7.8999922000e-01 diff 1.2099131550e-06 
+ x 7.6500000000e-02 analytic 7.8999809220e-01 numeric 7.8999924000e-01 diff 1.1477968409e-06 
+ x 7.7500000000e-02 analytic 7.8999817421e-01 numeric 7.8999926000e-01 diff 1.0857941580e-06 
+ x 7.8500000000e-02 analytic 7.8999825610e-01 numeric 7.8999929000e-01 diff 1.0338999115e-06 
+ x 7.9500000000e-02 analytic 7.8999833789e-01 numeric 7.8999931000e-01 diff 9.7210895156e-07 
+ x 8.0500000000e-02 analytic 7.8999841958e-01 numeric 7.8999933000e-01 diff 9.1041617301e-07 
+ x 8.1500000000e-02 analytic 7.8999850118e-01 numeric 7.8999935000e-01 diff 8.4881651263e-07 
+ x 8.2500000000e-02 analytic 7.8999858270e-01 numeric 7.8999937000e-01 diff 7.8730494768e-07 
+ x 8.3500000000e-02 analytic 7.8999866412e-01 numeric 7.8999938000e-01 diff 7.1587649353e-07 
+ x 8.4500000000e-02 analytic 7.8999874547e-01 numeric 7.8999940000e-01 diff 6.5452620224e-07 
+ x 8.5500000000e-02 analytic 7.8999882675e-01 numeric 7.8999942000e-01 diff 5.9324916046e-07 
+ x 8.6500000000e-02 analytic 7.8999890796e-01 numeric 7.8999944000e-01 diff 5.3204048733e-07 
+ x 8.7500000000e-02 analytic 7.8999898910e-01 numeric 7.8999945000e-01 diff 4.6089533268e-07 
+ x 8.8500000000e-02 analytic 7.8999907019e-01 numeric 7.8999947000e-01 diff 3.9980887490e-07 
+ x 8.9500000000e-02 analytic 7.8999915122e-01 numeric 7.8999949000e-01 diff 3.3877631911e-07 
+ x 9.0500000000e-02 analytic 7.8999923221e-01 numeric 7.8999950000e-01 diff 2.6779289464e-07 
+ x 9.1500000000e-02 analytic 7.8999931315e-01 numeric 7.8999952000e-01 diff 2.0685385349e-07 
+ x 9.2500000000e-02 analytic 7.8999939405e-01 numeric 7.8999953000e-01 diff 1.3595446813e-07 
+ x 9.3500000000e-02 analytic 7.8999947491e-01 numeric 7.8999955000e-01 diff 7.5090028751e-08 
+ x 9.4500000000e-02 analytic 7.8999955574e-01 numeric 7.8999956000e-01 diff 4.2558423452e-09 
+ x 9.5500000000e-02 analytic 7.8999963655e-01 numeric 7.8999957000e-01 diff 6.6552770739e-08 
+ x 9.6500000000e-02 analytic 7.8999971734e-01 numeric 7.8999959000e-01 diff 1.2734047772e-07 
+ x 9.7500000000e-02 analytic 7.8999979811e-01 numeric 7.8999960000e-01 diff 1.9811193619e-07 
+ x 9.8500000000e-02 analytic 7.8999987887e-01 numeric 7.8999961000e-01 diff 2.6887179660e-07 
+ x 9.9500000000e-02 analytic 7.8999995962e-01 numeric 7.8999962000e-01 diff 3.3962470358e-07 
+ the maximum of the error is  3.47220351404e-06  at time  31557600.0
+Good agreement of analytical and numerical results for porosity, the error is  3.47220351404e-06
+
+ 
+ 1D porosity test with PHREEQC / MT3D coupling OK ********************
+ 
+
+ Print Contents of Flow-Transport Link File for Checking (y/n)? 

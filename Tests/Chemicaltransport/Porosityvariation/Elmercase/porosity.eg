@@ -1,0 +1,5 @@
+Input File = porosity.msh
+Output File = porosity
+Input Mode = Gmsh
+Output Mode = ElmerSolver
+
