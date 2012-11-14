@@ -1,0 +1,127 @@
+SOLUTION_MASTER_SPECIES
+                 Na   Na+    0.00000        Na  22.98980
+                Ca   Ca++    0.00000        Ca  40.08000
+                 Cl   Cl-    0.00000        Cl  35.45300
+                C   CO3-2    2.00000      HCO3  12.01110
+                  Tr   Tr    0.00000        Tr  20.00000
+SOLUTION_SPECIES
+          Na+  = Na+
+                    log_k   0.0000000e+00
+          Ca++  = Ca++
+                    log_k   0.0000000e+00
+          Cl-  = Cl-
+                    log_k   0.0000000e+00
+          CO3-2  = CO3-2
+                    log_k   0.0000000e+00
+          CO3-2 + H+  = HCO3-
+                    log_k   1.0328900e+01
+          CO3-2 + 2H+ -1H2O  = CO2
+                    log_k   1.6680700e+01
+          Na+ + CO3-- + H+  = NaHCO3
+                    log_k   1.0079000e+01
+          Ca++ + CO3-- + H+  = CaHCO3+
+                    log_k   1.1434700e+01
+          Ca++ + CO3--  = CaCO3
+                    log_k   3.2252800e+00
+          Na+ + H2O -1H+  = NaOH
+                    log_k   -1.4180000e+01
+          Na+ + CO3--  = NaCO3-
+                    log_k   1.2700000e+00
+          Ca++ + H2O -1H+  = CaOH+
+                    log_k   -1.2780000e+01
+          Tr  = Tr
+                    log_k   0.0000000e+00
+PHASES
+      Portlandite
+          Ca(OH)2 = Ca+2 + 2OH- 
+                    log_k   -5.44480e+00
+      Calcite
+          CaCO3 = Ca+2 + CO3-2 
+                    log_k   -8.47983e+00
+      Halite
+          NaCl = Na+ + Cl- 
+                    log_k   1.58200e+00
+      Aragonite
+          CaCO3 = Ca++ + CO3-- 
+                    log_k   -8.33606e+00
+      O2(g)
+          O2 = O2 
+                    log_k   -2.96000e+00
+      CO2(g)
+          CO2 = CO3-- + 2H+  -1H2O 
+                    log_k   -1.81487e+01
+      H2O(g)
+          H2O = H2O 
+                    log_k   1.51000e+00
+      H2(g)
+          H2 = H2 
+                    log_k   -3.15000e+00
+      Fix_H+
+          H+ = H+ 
+                    log_k   0.00000e+00
+SOLUTION 41-41 clay
+   temp        2.5E+01
+   pH          7.5E+00 
+   units mol/l
+                        C             4.5E-03
+                       Cl             1.0E-02
+                       Na             8.0E-03
+                       Tr             1.0E-02
+                       Ca             2.7E-03
+EQUILIBRIUM_PHASES 41 clay
+                  Calcite    0.00000e+00  2.89540e-03
+              Portlandite    0.00000e+00  0.00000e+00
+                Aragonite    0.00000e+00  0.00000e+00
+                   Halite    0.00000e+00  0.00000e+00
+                   CO2(g)    -2.54000e+00  1.00000e+00
+                   H2O(g)    -1.40000e+00  1.00000e+00
+                   Fix_H+    -7.50000e+00  HCl	7.50000e+00
+SOLUTION 1-37 cement
+   temp        2.5E+01
+   pH         1.25E+01 
+   units mol/l
+                       Cl             4.0E-02
+                        C             1.0E-10
+                       Na             8.0E-03
+                     O(0)             0.0E+00
+                       Ca             2.0E-02               Portlandite 
+EQUILIBRIUM_PHASES 1-37 cement
+              Portlandite    0.00000e+00  9.76700e-03
+                  Calcite    0.00000e+00  0.00000e+00
+                   Halite    0.00000e+00  0.00000e+00
+                Aragonite    0.00000e+00  0.00000e+00
+SOLUTION 38-40 cement_droit
+   temp        2.5E+01
+   pH         1.25E+01 
+   units mol/l
+                       Cl             4.0E-02
+                        C             1.0E-10
+                       Na             8.0E-03
+                     O(0)             0.0E+00
+                       Ca             2.0E-02               Portlandite 
+EQUILIBRIUM_PHASES 38-40 cement_droit
+              Portlandite    0.00000e+00  9.76700e-03
+                  Calcite    0.00000e+00  0.00000e+00
+                   Halite    0.00000e+00  0.00000e+00
+                Aragonite    0.00000e+00  0.00000e+00
+SELECTED_OUTPUT
+-high_precision true
+KNOBS
+ -iterations 500
+  -diag true 
+-tolerance 1.e-15
+SOLUTION 0
+PRINT
+ -reset	true
+# the -cells parameter under TRANSPORT is the 
+# only relevant parameter 
+TRANSPORT
+  -cells          41
+  -time_step          100.
+  -shifts          5
+  -lengths        0.1
+  -flow_direction diff
+  -boundary_conditions        closed closed
+  -print_frequency      1
+  -warnings False
+END

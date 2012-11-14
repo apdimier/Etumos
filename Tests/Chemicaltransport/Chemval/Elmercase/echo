@@ -1,0 +1,641 @@
+['__cmp__', '__div__', '__doc__', '__init__', '__module__', '__mul__', '__pow__', '__rdiv__', '__repr__', '__rmul__', '__str__', 'conversionFactorTo', 'conversionTupleTo', 'factor', 'isAngle', 'isCompatible', 'isDimensionless', 'name', 'names', 'offset', 'powers', 'setName']
+['__call__', '__class__', '__cmp__', '__delattr__', '__doc__', '__get__', '__getattribute__', '__hash__', '__init__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__str__', 'im_class', 'im_func', 'im_self']
+{'MolarMass': 1}
+1 "inlet"
+2 "domain"
+dbg self.physicalBodyNames {'domain': [2, []], 'inlet': [1, []]}
+ call of _calcCellVertexIDs
+dbg _calcCellVertexIDs 41
+ out of loop 
+{'domain': [2, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41]], 'inlet': [1, [1]]}
+dbg out of _calcCellVertexIDs
+dbg calling _calcBaseFaceVertexIDs
+dbg out of _calcBaseFaceVertexIDs
+dbg calling _calcFaceVertexIDs
+dbg out of _calcFaceVertexIDs
+dbg calling _calcCellFaceIDs
+dbg out of _calcCellFaceIDs
+ indPBN    [2]
+ internal points  [4, 1] 80
+ element array 41 41
+[[  0.  ,  0.  ,]
+ [ 10.  ,  0.  ,]
+ [ 10.  ,  0.1 ,]
+ [  0.  ,  0.1 ,]
+ [  0.25,  0.  ,]
+ [  0.5 ,  0.  ,]
+ [  0.75,  0.  ,]
+ [  1.  ,  0.  ,]
+ [  1.25,  0.  ,]
+ [  1.5 ,  0.  ,]
+ [  1.75,  0.  ,]
+ [  2.  ,  0.  ,]
+ [  2.25,  0.  ,]
+ [  2.5 ,  0.  ,]
+ [  2.75,  0.  ,]
+ [  3.  ,  0.  ,]
+ [  3.25,  0.  ,]
+ [  3.5 ,  0.  ,]
+ [  3.75,  0.  ,]
+ [  4.  ,  0.  ,]
+ [  4.25,  0.  ,]
+ [  4.5 ,  0.  ,]
+ [  4.75,  0.  ,]
+ [  5.  ,  0.  ,]
+ [  5.25,  0.  ,]
+ [  5.5 ,  0.  ,]
+ [  5.75,  0.  ,]
+ [  6.  ,  0.  ,]
+ [  6.25,  0.  ,]
+ [  6.5 ,  0.  ,]
+ [  6.75,  0.  ,]
+ [  7.  ,  0.  ,]
+ [  7.25,  0.  ,]
+ [  7.5 ,  0.  ,]
+ [  7.75,  0.  ,]
+ [  8.  ,  0.  ,]
+ [  8.25,  0.  ,]
+ [  8.5 ,  0.  ,]
+ [  8.75,  0.  ,]
+ [  9.  ,  0.  ,]
+ [  9.25,  0.  ,]
+ [  9.5 ,  0.  ,]
+ [  9.75,  0.  ,]
+ [  9.75,  0.1 ,]
+ [  9.5 ,  0.1 ,]
+ [  9.25,  0.1 ,]
+ [  9.  ,  0.1 ,]
+ [  8.75,  0.1 ,]
+ [  8.5 ,  0.1 ,]
+ [  8.25,  0.1 ,]
+ [  8.  ,  0.1 ,]
+ [  7.75,  0.1 ,]
+ [  7.5 ,  0.1 ,]
+ [  7.25,  0.1 ,]
+ [  7.  ,  0.1 ,]
+ [  6.75,  0.1 ,]
+ [  6.5 ,  0.1 ,]
+ [  6.25,  0.1 ,]
+ [  6.  ,  0.1 ,]
+ [  5.75,  0.1 ,]
+ [  5.5 ,  0.1 ,]
+ [  5.25,  0.1 ,]
+ [  5.  ,  0.1 ,]
+ [  4.75,  0.1 ,]
+ [  4.5 ,  0.1 ,]
+ [  4.25,  0.1 ,]
+ [  4.  ,  0.1 ,]
+ [  3.75,  0.1 ,]
+ [  3.5 ,  0.1 ,]
+ [  3.25,  0.1 ,]
+ [  3.  ,  0.1 ,]
+ [  2.75,  0.1 ,]
+ [  2.5 ,  0.1 ,]
+ [  2.25,  0.1 ,]
+ [  2.  ,  0.1 ,]
+ [  1.75,  0.1 ,]
+ [  1.5 ,  0.1 ,]
+ [  1.25,  0.1 ,]
+ [  1.  ,  0.1 ,]
+ [  0.75,  0.1 ,]
+ [  0.5 ,  0.1 ,]
+ [  0.25,  0.1 ,]]
+82
+ self.elementArray  41 [1,1,3,1,4,0,4,1,0,0,]
+ mesh dbg getBody nodes found  82
+<mesh.Body instance at 0x920c3ec>
+ self.elementArray  41 [1,1,3,1,4,0,4,1,0,0,]
+ mesh dbg getBody nodes found  2
+ script inletBoundary  inlet
+Tensor value 3e-10
+Tensor value : float ou int ?? 3e-10 <type 'float'>
+Tensor value ok 
+Tensor what value 0 1
+ at the end  <tensors.IsotropicTensor instance at 0x920c54c> <type 'instance'>
+Tensor self.value <tensors.IsotropicTensor instance at 0x920c54c>
+Tensor value 1.0
+Tensor value : float ou int ?? 1.0 <type 'float'>
+Tensor value ok 
+Tensor what value 0 1
+ at the end  <tensors.IsotropicTensor instance at 0x920c72c> <type 'instance'>
+Tensor self.value <tensors.IsotropicTensor instance at 0x920c72c>
+key kinematicDispersion <type 'str'>
+prop (1.0, 0) Head ['__abs__', '__add__', '__cmp__', '__div__', '__doc__', '__init__', '__module__', '__mul__', '__neg__', '__nonzero__', '__pos__', '__pow__', '__radd__', '__rdiv__', '__repr__', '__rmul__', '__rpow__', '__rsub__', '__str__', '__sub__', '_number', '_sum', 'convertToUnit', 'cos', 'getLongitudinal', 'getTransverse', 'getUnit', 'getUnitName', 'getValue', 'inBaseUnits', 'inUnitsOf', 'isCompatible', 'setValue', 'sin', 'sqrt', 'tan', 'unit', 'value', 'verifyValue']
+dbg property kinematicdispersion PhysicalProperties.KinematicDispersion
+setproperty propClass is ok 
+ dbg keyword  kinematicdispersion
+ dbg propClass  PhysicalProperties.KinematicDispersion
+ dbg propdict  PhysicalProperties.KinematicDispersion
+key porosity <type 'str'>
+prop <PhysicalProperties.Porosity instance at 0x920c70c> ['__doc__', '__init__', '__module__', 'checkValue', 'getDefaultUnit', 'getUnit', 'getValue', 'setValue', 'unit', 'value']
+dbg property porosity PhysicalProperties.Porosity
+setproperty propClass is ok 
+ dbg keyword  porosity
+ dbg propClass  PhysicalProperties.Porosity
+ dbg propdict  PhysicalProperties.Porosity
+key permeability <type 'str'>
+prop <tensors.IsotropicTensor instance at 0x920c72c> Permeability ['__abs__', '__add__', '__cmp__', '__div__', '__doc__', '__init__', '__module__', '__mul__', '__neg__', '__nonzero__', '__pos__', '__pow__', '__radd__', '__rdiv__', '__repr__', '__rmul__', '__rpow__', '__rsub__', '__str__', '__sub__', '_number', '_sum', 'convertToUnit', 'cos', 'getUnit', 'getUnitName', 'getValue', 'inBaseUnits', 'inUnitsOf', 'isCompatible', 'setValue', 'sin', 'sqrt', 'tan', 'unit', 'value', 'verifyValue']
+dbg property permeability PhysicalProperties.Permeability
+setproperty propClass is ok 
+ dbg keyword  permeability
+ dbg propClass  PhysicalProperties.Permeability
+ dbg propdict  PhysicalProperties.Permeability
+key effectiveDiffusion <type 'str'>
+prop <tensors.IsotropicTensor instance at 0x920c54c> Head**2/Time ['__abs__', '__add__', '__cmp__', '__div__', '__doc__', '__init__', '__module__', '__mul__', '__neg__', '__nonzero__', '__pos__', '__pow__', '__radd__', '__rdiv__', '__repr__', '__rmul__', '__rpow__', '__rsub__', '__str__', '__sub__', '_number', '_sum', 'convertToUnit', 'cos', 'getUnit', 'getUnitName', 'getValue', 'inBaseUnits', 'inUnitsOf', 'isCompatible', 'setValue', 'sin', 'sqrt', 'tan', 'unit', 'value', 'verifyValue']
+dbg property effectivediffusion PhysicalProperties.EffectiveDiffusion
+setproperty propClass is ok 
+ dbg keyword  effectivediffusion
+ dbg propClass  PhysicalProperties.EffectiveDiffusion
+ dbg propdict  PhysicalProperties.EffectiveDiffusion
+ we are here 
+ sp dbg name control Na
+sp dbg get charge  Na 1
+ class Species molar mass  None
+ class Species molar mass end
+MasterSpecies Species.__init__
+MasterSpecies Species.__init__ end
+ sp dbg name control C
+sp dbg get charge  C 0
+ class Species molar mass  None
+ class Species molar mass end
+MasterSpecies Species.__init__
+MasterSpecies Species.__init__ end
+ sp dbg name control Tr
+sp dbg get charge  Tr 0
+ class Species molar mass  None
+ class Species molar mass end
+MasterSpecies Species.__init__
+MasterSpecies Species.__init__ end
+ sp dbg name control Ca
+sp dbg get charge  Ca 2
+ class Species molar mass  None
+ class Species molar mass end
+MasterSpecies Species.__init__
+MasterSpecies Species.__init__ end
+ sp dbg name control Cl
+sp dbg get charge  Cl -1
+ class Species molar mass  None
+ class Species molar mass end
+MasterSpecies Species.__init__
+MasterSpecies Species.__init__ end
+ sp dbg name control NaHCO3
+sp dbg get charge  NaHCO3 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control C
+sp dbg get charge  C 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control CO2
+sp dbg get charge  CO2 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control NaCO3min
+sp dbg get charge  NaCO3min -1
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control NaOH
+sp dbg get charge  NaOH 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control Cl
+sp dbg get charge  Cl -1
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control HCO3min
+sp dbg get charge  HCO3min -1
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control Na
+sp dbg get charge  Na 1
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control Ca
+sp dbg get charge  Ca 2
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control CaHCO3
+sp dbg get charge  CaHCO3 1
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control CaCO3
+sp dbg get charge  CaCO3 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control HCO3
+sp dbg get charge  HCO3 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control Tr
+sp dbg get charge  Tr 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control CaOH+
+sp dbg get charge  CaOH+ 1
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control Fix_H+
+sp dbg get charge  Fix_H+ 1
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control H2(g)
+sp dbg get charge  H2(g) 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control O2(g)
+sp dbg get charge  O2(g) 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control H2O(g)
+sp dbg get charge  H2O(g) 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control Aragonite
+sp dbg get charge  Aragonite 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control CO2(g)
+sp dbg get charge  CO2(g) 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control Halite
+sp dbg get charge  Halite 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control Portlandite
+sp dbg get charge  Portlandite 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control Calcite
+sp dbg get charge  Calcite 0
+ class Species molar mass  None
+ class Species molar mass end
+unit in Calcite mol/l
+unit in Portlandite mol/l
+unit in Aragonite mol/l
+unit in Halite mol/l
+unit in CO2(g) mol/l
+unit in H2O(g) mol/l
+unit in Ca mol/l
+unit in Cl mol/l
+unit in C mol/l
+unit in Na mol/l
+unit in Tr mol/l
+unit in Portlandite mol/l
+unit in Calcite mol/l
+unit in Halite mol/l
+unit in Aragonite mol/l
+unit in Cl mol/l
+unit in C mol/l
+unit in Na mol/l
+unit in O(0) mol/l
+within getDarcyVelocity self.darcyVelocity V(0.0, 0.0, 0.0) Head/Time
+self.darcyVelocity V(0.0, 0.0, 0.0) Head/Time
+ ctm dbg body porosities  ['__add__', '__doc__', '__init__', '__module__', '__mul__', '__repr__', '_calcAdjacentCellIDs', '_calcAreaProjections', '_calcCellCenters', '_calcCellDistances', '_calcCellToCellDistances', '_calcCellToCellIDs', '_calcCellToCellIDsFilled', '_calcCellToFaceOrientations', '_calcCellVolumes', '_calcExteriorCellIDs', '_calcFaceAreas', '_calcFaceAspectRatios', '_calcFaceCellIDs', '_calcFaceNormals', '_calcFaceTangents', '_calcFaceToCellDistanceRatio', '_calcFaceToCellDistances', '_calcGeometry', '_calcInteriorAndExteriorCellIDs', '_calcInteriorAndExteriorFaceIDs', '_calcInteriorCellIDs', '_calcOrientedAreaProjections', '_calcOrientedFaceNormals', '_calcTopology', '_concatenate', '_connectFaces', '_equalExceptOrder', '_getAddedMeshValues', '_getAdjacentCellIDs', '_getAreaProjections', '_getCellAreaProjections', '_getCellAreas', '_getCellDistances', '_getCellFaceIDs', '_getCellFaceOrientations', '_getCellNormals', '_getCellToCellDistances', '_getCellToCellIDs', '_getCellToCellIDsFilled', '_getCellsByID', '_getConcatenableMesh', '_getExteriorCellIDs', '_getFaceAreas', '_getFaceAspectRatios', '_getFaceNormals', '_getFaceTangents1', '_getFaceTangents2', '_getFaceToCellDistanceRatio', '_getFaceToCellDistances', '_getFaceVertexIDs', '_getFaces', '_getInteriorCellIDs', '_getMaxFacesPerCell', '_getNumberOfFaces', '_getNumberOfVertices', '_getOrientedAreaProjections', '_getOrientedFaceNormals', '_translate', 'elementArray', 'fileName', 'getBody', 'getCellCenters', 'getCellVolumes', 'getCells', 'getConnectivity', 'getDim', 'getDimensionString', 'getElAnz', 'getExteriorFaces', 'getFaces', 'getInteriorFaces', 'getName', 'getNodesAnz', 'getNodesCoordinates', 'getNumberOfCells', 'getSpaceDimensions', 'getType', 'internalNodesAnz', 'internalNodesAnzList', 'numElements', 'physicalBodyNames', 'scale', 'spaceDimensions', 'vertexCoords', 'vertices']
+ ctm dbg body porosities  41
+
+effective_diffusion:
+
+
+porosity
+
+ctm dbg porosite ['__doc__', '__init__', '__module__', 'checkValue', 'getDefaultUnit', 'getUnit', 'getValue', 'setValue', 'unit', 'value'] 1.0
+
+effective diffusion
+ctm dbg: we try to affect the porosity through the setBody function 1.0
+ dbg fields getEntity is:
+  
+mesh dbg body getEntity function: inlet 
+ body number: 1 
+ entity list:  [1]
+ctm dbg setBodyOver 
+ dbg fields getEntity is:
+  
+mesh dbg body getEntity function: inlet 
+ body number: 1 
+ entity list:  [1]
+ctm dbg dispersivity 
+ dbg fields getEntity is:
+  
+mesh dbg body getEntity function: inlet 
+ body number: 1 
+ entity list:  [1]
+
+porosity
+
+ctm dbg porosite ['__doc__', '__init__', '__module__', 'checkValue', 'getDefaultUnit', 'getUnit', 'getValue', 'setValue', 'unit', 'value'] 1.0
+
+effective diffusion
+ctm dbg: we try to affect the porosity through the setBody function 1.0
+ dbg fields getEntity is:
+  1
+ dbg fields getEntity over
+
+ dbg fields setZone: it was ok myEntity 1
+ dbg fields setZone ok
+ctm dbg setBodyOver 
+ dbg fields getEntity is:
+  1
+ dbg fields getEntity over
+
+ dbg fields setZone: it was ok myEntity 1
+ dbg fields setZone ok
+ctm dbg dispersivity 
+ dbg fields getEntity is:
+  1
+ dbg fields getEntity over
+
+ dbg fields setZone: it was ok myEntity 1
+ dbg fields setZone ok
+ctm dbg out of region loop: domain
+ dbg meshFileName:  .msh
+ verbose settings
+py_definedatasetc wdefinedataset ok : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat 
+py_define_datasetc defined dataset ok : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat 
+ self.elementArray  41 [1,1,3,1,4,0,4,1,0,0,]
+ mesh dbg getBody nodes found  2
+
+mesh dbg body getEntity function: domain 
+ body number: 2 
+ entity list:  40
+ctm dbg debug index  40  :  80 domain
+ctm dbg debug ini_cond  <commonmodel.InitialCondition instance at 0x921078c>
+ctm dbg debug ini_cond  ['__doc__', '__init__', '__module__', 'body', 'getBody', 'getValue', 'getZone', 'value', 'value_property', 'value_species', 'zone']
+<chemistry.ChemicalState instance at 0x921088c>
+debug number before 80
+dbg grid type  Body
+ self.elementArray  41 [1,1,3,1,4,0,4,1,0,0,]
+ mesh dbg getBody nodes found  2
+ phreeeqc dbg out of loop 80
+ phreeqc dbg states bound  {'concrete1': [[1, 80], <chemistry.ChemicalState instance at 0x921088c>]}
+ phreeqc dbg states bound bc  ['__doc__', '__init__', '__module__', 'boundary', 'flowRate', 'getBoundary', 'getFlowRate', 'getTimeVariation', 'getType', 'getValue', 'getVelocity', 'timeVariation', 'type', 'value', 'value_property', 'value_species', 'velocity']
+inlet
+ctm dbg number of internal nodes:  80
+ ctm dbg self.StatesBounds dico	{'concrete1': [[1, 80], <chemistry.ChemicalState instance at 0x921088c>], 'inlet': [[81, 81], <chemistry.ChemicalState instance at 0x92104ec>]}
+## Warning: No kinetic law
+## Warning: No kinetic law
+ inFile  phreeqCFile
+ outFile  guitest.phout
+ dbg Wphreeqc MAX_LENGTH 256 
+ in  wioutdefinition opening output file guitest.phout
+ output file opening 
+ database file opening /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+ database file opened /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+ log file opening 
+ log file opened 
+*PHREEQC2.14* Input name : phreeqCFile
+*PHREEQC2.14* Output file: guitest.phout
+*PHREEQC2.14* Data file  : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+ read input is ok 
+ tidy_model 
+ status 
+Reading input data for simulation 1. py_initialize value of the mpianz parameter 0
+ initialising phreeqC solutions
+initialising exchangers
+ we are in initial exchangers 
+ exchangers initialisation OK
+initialising  gas_phases
+ gas_phases initialisation OK
+ chemistry reaction
+ chemistry reaction ok 81
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~Transport initialisation~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ctm dbg elmer body list 
+ sp dbg name control None
+sp dbg get charge  CB 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control None
+sp dbg get charge  TH 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control None
+sp dbg get charge  TO 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control None
+sp dbg get charge  C 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control None
+sp dbg get charge  Ca 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control None
+sp dbg get charge  Cl 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control None
+sp dbg get charge  Na 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control None
+sp dbg get charge  Tr 0
+ class Species molar mass  None
+ class Species molar mass end
+dbg elmer species names  0 CB
+dbg elmer species names  1 TH
+dbg elmer species names  2 TO
+dbg elmer species names  3 C
+dbg elmer species names  4 Ca
+dbg elmer species names  5 Cl
+dbg elmer species names  6 Na
+dbg elmer species names  7 Tr
+~~~~~~~~~~~~~~~~~~~~~
+~ Elmer Boundaries: ~
+~~~~~~~~~~~~~~~~~~~~~
+ number_boundaries  1
+ dbg fields getEntity is:
+  
+mesh dbg body getEntity function: inlet 
+ body number: 1 
+ entity list:  [1]
+
+self.dirichlet_zone.setZone
+
+mesh dbg body getEntity function: inlet 
+ body number: 1 
+ entity list:  [1]
+ the number of points on the boundary is  2
+dbg getNodesAnz 82
+[[  0.  ,  0.  ,]
+ [ 10.  ,  0.  ,]
+ [ 10.  ,  0.1 ,]
+ [  0.  ,  0.1 ,]
+ [  0.25,  0.  ,]
+ [  0.5 ,  0.  ,]
+ [  0.75,  0.  ,]
+ [  1.  ,  0.  ,]
+ [  1.25,  0.  ,]
+ [  1.5 ,  0.  ,]
+ [  1.75,  0.  ,]
+ [  2.  ,  0.  ,]
+ [  2.25,  0.  ,]
+ [  2.5 ,  0.  ,]
+ [  2.75,  0.  ,]
+ [  3.  ,  0.  ,]
+ [  3.25,  0.  ,]
+ [  3.5 ,  0.  ,]
+ [  3.75,  0.  ,]
+ [  4.  ,  0.  ,]
+ [  4.25,  0.  ,]
+ [  4.5 ,  0.  ,]
+ [  4.75,  0.  ,]
+ [  5.  ,  0.  ,]
+ [  5.25,  0.  ,]
+ [  5.5 ,  0.  ,]
+ [  5.75,  0.  ,]
+ [  6.  ,  0.  ,]
+ [  6.25,  0.  ,]
+ [  6.5 ,  0.  ,]
+ [  6.75,  0.  ,]
+ [  7.  ,  0.  ,]
+ [  7.25,  0.  ,]
+ [  7.5 ,  0.  ,]
+ [  7.75,  0.  ,]
+ [  8.  ,  0.  ,]
+ [  8.25,  0.  ,]
+ [  8.5 ,  0.  ,]
+ [  8.75,  0.  ,]
+ [  9.  ,  0.  ,]
+ [  9.25,  0.  ,]
+ [  9.5 ,  0.  ,]
+ [  9.75,  0.  ,]
+ [  9.75,  0.1 ,]
+ [  9.5 ,  0.1 ,]
+ [  9.25,  0.1 ,]
+ [  9.  ,  0.1 ,]
+ [  8.75,  0.1 ,]
+ [  8.5 ,  0.1 ,]
+ [  8.25,  0.1 ,]
+ [  8.  ,  0.1 ,]
+ [  7.75,  0.1 ,]
+ [  7.5 ,  0.1 ,]
+ [  7.25,  0.1 ,]
+ [  7.  ,  0.1 ,]
+ [  6.75,  0.1 ,]
+ [  6.5 ,  0.1 ,]
+ [  6.25,  0.1 ,]
+ [  6.  ,  0.1 ,]
+ [  5.75,  0.1 ,]
+ [  5.5 ,  0.1 ,]
+ [  5.25,  0.1 ,]
+ [  5.  ,  0.1 ,]
+ [  4.75,  0.1 ,]
+ [  4.5 ,  0.1 ,]
+ [  4.25,  0.1 ,]
+ [  4.  ,  0.1 ,]
+ [  3.75,  0.1 ,]
+ [  3.5 ,  0.1 ,]
+ [  3.25,  0.1 ,]
+ [  3.  ,  0.1 ,]
+ [  2.75,  0.1 ,]
+ [  2.5 ,  0.1 ,]
+ [  2.25,  0.1 ,]
+ [  2.  ,  0.1 ,]
+ [  1.75,  0.1 ,]
+ [  1.5 ,  0.1 ,]
+ [  1.25,  0.1 ,]
+ [  1.  ,  0.1 ,]
+ [  0.75,  0.1 ,]
+ [  0.5 ,  0.1 ,]
+ [  0.25,  0.1 ,]]
+domain <type 'str'>
+inlet <type 'str'>
+dbg vtkTyp  5
+dbg gmshType  2
+dbg vtkTyp 5 40
+ctm dbg elmer bound self.bodyPorosities  <fields.NumericBodyField instance at 0x921610c>
+dbg porosity dico setting [1.0, 1.0]
+['__add__', '__doc__', '__init__', '__module__', '__neg__', '__sub__', 'amult', 'appendZoneValues', 'bodies', 'components_names', 'depend', 'duplicate', 'entity', 'getBodies', 'getBody', 'getComponentsNames', 'getDepend', 'getEntity', 'getMaterial', 'getMaterials', 'getName', 'getNbBodies', 'getNbComponents', 'getNbZones', 'getValues', 'getZone', 'getZoneValues', 'getZones', 'materials', 'mesh', 'name', 'setComponentsNames', 'setDepend', 'setEntity', 'setName', 'setZone', 'type', 'values', 'verifyCompatible', 'zones'] ['CB', 'TH', 'TO', 'C', 'CA', 'CL', 'NA', 'TR']
+~~~~~~~~~~~~~
+~ Elmer IC: ~
+~~~~~~~~~~~~~
+ ctm dbg initialCondition  <commonmodel.InitialCondition instance at 0x921078c>
+ctm dbg initialCondition.getValue().name  concrete
+ self.elementArray  41 [1,1,3,1,4,0,4,1,0,0,]
+ mesh dbg getBody nodes found  2
+ic dbg Set expected outputs
+
+dbg getElAnz 41
+dbg getElAnz 41
+41
+porosityValue  1.0
+
+mesh dbg body getEntity function: inlet 
+ body number: 1 
+ entity list:  1
+porosityValue  1.0
+
+mesh dbg body getEntity function: domain 
+ body number: 2 
+ entity list:  40
+ ic dbg self.nbTimes 2
+
+majStorageCoefficient
+dbg elmer instance  0
+self.problemType chemicaltransport
+dbg createSifFile
+dbg stabil  False
+dbg stabil  False
+dbg stabil  False
+dbg stabil  False
+dbg stabil  False
+dbg stabil  False
+dbg stabil  False
+dbg stabil  False
+ dbg write BC  ['inlet', 1, [-0.00086777766531967167, 113.01943148805641, 56.51402936338939, 0.0017434101256370931, 0.0027812724296461754, 0.012784181893358903, 0.0080074575885317432, 0.010009321985664692]]
+dbg createSifFile end
+MAIN: 
+MAIN: ==========================================
+MAIN:  E L M E R  S O L V E R  S T A R T I N G
+MAIN:  Library version: 5.4.1
+MAIN:  Wrapped version: 0.0.7
+MAIN: ==========================================
+  Model Name: ,test.sif                                                                                                                        
+MAIN: 
+MAIN: 
+MAIN: -----------------------
+MAIN: Reading Model ...
+Model Input:  Unlisted keyword: [cb diffusivity] in section: [material 101]
+Model Input:  Unlisted keyword: [th diffusivity] in section: [material 101]
+Model Input:  Unlisted keyword: [to diffusivity] in section: [material 101]
+Model Input:  Unlisted keyword: [c diffusivity] in section: [material 101]
+Model Input:  Unlisted keyword: [ca diffusivity] in section: [material 101]
+Model Input:  Unlisted keyword: [cl diffusivity] in section: [material 101]
+Model Input:  Unlisted keyword: [na diffusivity] in section: [material 101]
+Model Input:  Unlisted keyword: [tr diffusivity] in section: [material 101]
+Model Input:  Unlisted keyword: [cb diffusivity] in section: [material 201]
+Model Input:  Unlisted keyword: [th diffusivity] in section: [material 201]
+Model Input:  Unlisted keyword: [to diffusivity] in section: [material 201]
+Model Input:  Unlisted keyword: [c diffusivity] in section: [material 201]
+Model Input:  Unlisted keyword: [ca diffusivity] in section: [material 201]
+Model Input:  Unlisted keyword: [cl diffusivity] in section: [material 201]
+Model Input:  Unlisted keyword: [na diffusivity] in section: [material 201]
+Model Input:  Unlisted keyword: [tr diffusivity] in section: [material 201]
+Model Input:  Unlisted keyword: [cb diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [th diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [to diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [c diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [ca diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [cl diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [na diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [tr diffusion source] in section: [body forces 1]
+Model Input:  Unlisted keyword: [cb] in section: [boundary condition 101]
+Model Input:  Unlisted keyword: [th] in section: [boundary condition 101]
+Model Input:  Unlisted keyword: [to] in section: [boundary condition 101]
+Model Input:  Unlisted keyword: [c] in section: [boundary condition 101]
+Model Input:  Unlisted keyword: [ca] in section: [boundary condition 101]
+Model Input:  Unlisted keyword: [cl] in section: [boundary condition 101]
+Model Input:  Unlisted keyword: [na] in section: [boundary condition 101]
+Model Input:  Unlisted keyword: [tr] in section: [boundary condition 101]
+Model Input:  Unlisted keyword: [cb] in section: [initial condition 1]
+Model Input:  Unlisted keyword: [th] in section: [initial condition 1]
+Model Input:  Unlisted keyword: [to] in section: [initial condition 1]
+Model Input:  Unlisted keyword: [c] in section: [initial condition 1]
+Model Input:  Unlisted keyword: [ca] in section: [initial condition 1]
+Model Input:  Unlisted keyword: [cl] in section: [initial condition 1]
+Model Input:  Unlisted keyword: [na] in section: [initial condition 1]
+Model Input:  Unlisted keyword: [tr] in section: [initial condition 1]
+ERROR:: LoadMesh:  Unable to load mesh: ./mesh 

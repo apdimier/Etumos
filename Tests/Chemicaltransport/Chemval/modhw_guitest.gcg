@@ -1,0 +1,2 @@
+         1        80         1         1   !mxiter,iter1,isolve,ncrs
+ 1.00000000E+00 1.00000000E-20         0  !accl, cclose, iprgcg
