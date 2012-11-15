@@ -1,0 +1,64 @@
+SOLUTION_MASTER_SPECIES
+                 Cs   Cs+    0.00000        Cs 135.00000
+                   T   T+    0.00000         T   1.00800
+SOLUTION_SPECIES
+          Cs+  = Cs+
+                    log_k   0.0000000000e+00
+          T+  = T+
+                    log_k   0.0000000000e+00
+EXCHANGE_MASTER_SPECIES
+          Z   Z-
+EXCHANGE_SPECIES
+                Z-  = Z-
+                    log_k   0.0000000000e+00
+                H+ + Z-  = HZ
+                    log_k   -9.9000000000e+01
+                Na+ + Z-  = NaZ
+                    log_k   0.0000000000e+00
+                Cs+ + Z-  = CsZ
+                    log_k   5.0000000000e-01
+
+SOLUTION                  101-101 boundary
+   temp 2.5000000000e+01
+   pH    7.0000000000e+00 
+   pe    4.0000000000e+00
+   units mol/l
+                       Cs    1.0000000000e-06
+                       Na    1.0000000000e-02
+                        T    1.0000000000e-06
+
+EXCHANGE                  101-101 boundary
+               equilibrate     101
+                      NaZ    0.0000000000e+00
+
+SOLUTION                  1-100 column
+   temp 2.5000000000e+01
+   pH    7.0000000000e+00 
+   pe    4.0000000000e+00
+   units mol/l
+                       Na    1.0000000000e-02
+
+EXCHANGE                  1-100 column
+               equilibrate       1
+                      NaZ    1.8000000000e-03
+SELECTED_OUTPUT
+  -high_precision true
+KNOBS
+  -iterations 500
+  -diag true 
+  -tolerance 1.e-15
+SOLUTION 0
+PRINT
+  -reset	true
+# thereafter the -cells parameter is the 
+# only relevant parameter 
+TRANSPORT
+  -cells          101
+  -time_step          100.
+  -shifts          5
+  -lengths        0.1
+  -flow_direction diff
+  -boundary_conditions        closed closed
+  -print_frequency      1
+  -warnings False
+END

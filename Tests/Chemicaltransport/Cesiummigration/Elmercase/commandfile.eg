@@ -1,0 +1,4 @@
+Input File = cesium.msh
+Output File = cesium
+Input Mode = Gmsh
+Output Mode = ElmerSolver

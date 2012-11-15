@@ -1,0 +1,348 @@
+Check Keywords Warn
+
+Header
+Mesh DB "." "cesium"
+Include Path "." 
+Results Directory ""
+End
+
+Simulation
+  Coordinate System = Cartesian 2D
+
+  Simulation Type = transient
+  Coordinate Mapping(3) = 1 2 3
+  Timestepping Method = BDF
+  BDF Order = 1
+  Solver Input File = test.sif
+  Timestep Sizes = 100
+  Timestep Intervals = 5
+
+  Output Intervals = 1
+!  Lumped Mass Matrix = False
+  Max Output Level = 3
+End
+
+! ~~
+! Constants
+! ~~
+Constants
+ Gravity(4) = 0 -1 0 9.780000e+00
+End
+
+! ~~
+! Body
+! ~~
+Body 1
+  Name = "body1"
+  Equation = 1
+  Material = 1
+End
+
+Body 2
+  Name = "body2"
+  Equation = 1
+  Material = 2
+End
+
+Body 3
+  Equation = 1 
+  Material = 3
+  Initial Condition = 3
+  Body Force = 1
+End
+
+! ~~
+! Material p29 ref. Manual
+! ~~
+Material 1
+ Density = Real 2.2750000000e+03
+ Water Density = Real 1.0000000000e+03
+ Viscosity = Real 1.0000000000e+00
+ Porosity = Real 2.5000000000e-01
+ Compressibility Model = Incompressible
+ CB Diffusivity
+     Size 3 3
+      Real    7.0000000000e-10 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+ End
+
+ TH Diffusivity
+     Size 3 3
+      Real    7.0000000000e-10 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+ End
+
+ TO Diffusivity
+     Size 3 3
+      Real    7.0000000000e-10 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+ End
+
+ CS Diffusivity
+     Size 3 3
+      Real    7.0000000000e-10 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+ End
+
+ NA Diffusivity
+     Size 3 3
+      Real    7.0000000000e-10 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+ End
+
+ Long Dispersivity = Real 2.0000000000e-03
+ Tran Dispersivity = Real 0.0000000000e+00
+ Convection Velocity 1 = 3.500000e-07
+ Convection Velocity 2 = 0.000000e+00
+ Convection Velocity 3 = 0.000000e+00
+
+End
+
+Material 2
+ Density = Real 2.2750000000e+03
+ Water Density = Real 1.0000000000e+03
+ Viscosity = Real 1.0000000000e+00
+ Porosity = Real 2.5000000000e-01
+ Compressibility Model = Incompressible
+ CB Diffusivity
+     Size 3 3
+      Real    7.0000000000e-10 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+ End
+
+ TH Diffusivity
+     Size 3 3
+      Real    7.0000000000e-10 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+ End
+
+ TO Diffusivity
+     Size 3 3
+      Real    7.0000000000e-10 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+ End
+
+ CS Diffusivity
+     Size 3 3
+      Real    7.0000000000e-10 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+ End
+
+ NA Diffusivity
+     Size 3 3
+      Real    7.0000000000e-10 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+ End
+
+ Long Dispersivity = Real 2.0000000000e-03
+ Tran Dispersivity = Real 0.0000000000e+00
+ Convection Velocity 1 = 3.500000e-07
+ Convection Velocity 2 = 0.000000e+00
+ Convection Velocity 3 = 0.000000e+00
+
+End
+
+Material 3
+ Density = Real 2.2750000000e+03
+ Water Density = Real 1.0000000000e+03
+ Viscosity = Real 1.0000000000e+00
+ Porosity = Real 2.5000000000e-01
+ Compressibility Model = Incompressible
+ CB Diffusivity
+     Size 3 3
+      Real    7.0000000000e-10 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+ End
+
+ TH Diffusivity
+     Size 3 3
+      Real    7.0000000000e-10 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+ End
+
+ TO Diffusivity
+     Size 3 3
+      Real    7.0000000000e-10 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+ End
+
+ CS Diffusivity
+     Size 3 3
+      Real    7.0000000000e-10 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+ End
+
+ NA Diffusivity
+     Size 3 3
+      Real    7.0000000000e-10 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+              0.0000000000e+00 0.0000000000e+00 0.0000000000e+00\
+ End
+
+ Long Dispersivity = Real 2.0000000000e-03
+ Tran Dispersivity = Real 0.0000000000e+00
+ Convection Velocity 1 = 3.500000e-07
+ Convection Velocity 2 = 0.000000e+00
+ Convection Velocity 3 = 0.000000e+00
+
+End
+
+! ~~~~~~~~~~
+! Body Force
+! ~~~~~~~~~~
+Body Forces 1
+ CB Diffusion Source = Real 0.0000000000e+00
+ TH Diffusion Source = Real 0.0000000000e+00
+ TO Diffusion Source = Real 0.0000000000e+00
+ CS Diffusion Source = Real 0.0000000000e+00
+ NA Diffusion Source = Real 0.0000000000e+00
+End
+
+! ~~
+! Equation p28 ref. Manual
+! ~~
+
+Equation 1
+  Active Solvers(5) = 1 2 3 4 5 
+  Convection = Constant
+  Concentration Units = Absolute Mass
+End
+
+! ~~
+! Solver p27 ref. Models Manual
+! ~~
+Solver 1
+  Equation = Advection Diffusion Equation CB
+  Variable = CB
+  Variable DOFs = 1
+
+  Procedure = "AdvectionDiffusionTimeStep" "AdvectionDiffusionTimeStepSolver"
+  Linear System Solver = Iterative
+  Linear System Iterative Method = GMRES
+  Linear System Max Iterations = 600
+  Linear System Convergence Tolerance = 1.000000e-09
+  Linear System Preconditioning = ILU0
+  Linear System ILUT Tolerance = 1.000000e-09
+  Linear System Symmetric = False
+  Lumped Mass Matrix = False
+  Bubbles = True
+  Namespace = string "CB"
+End
+
+Solver 2
+  Equation = Advection Diffusion Equation TH
+  Variable = TH
+  Variable DOFs = 1
+
+  Procedure = "AdvectionDiffusionTimeStep" "AdvectionDiffusionTimeStepSolver"
+  Linear System Solver = Iterative
+  Linear System Iterative Method = GMRES
+  Linear System Max Iterations = 600
+  Linear System Convergence Tolerance = 1.000000e-09
+  Linear System Preconditioning = ILU0
+  Linear System ILUT Tolerance = 1.000000e-09
+  Linear System Symmetric = False
+  Lumped Mass Matrix = False
+  Bubbles = True
+  Namespace = string "TH"
+End
+
+Solver 3
+  Equation = Advection Diffusion Equation TO
+  Variable = TO
+  Variable DOFs = 1
+
+  Procedure = "AdvectionDiffusionTimeStep" "AdvectionDiffusionTimeStepSolver"
+  Linear System Solver = Iterative
+  Linear System Iterative Method = GMRES
+  Linear System Max Iterations = 600
+  Linear System Convergence Tolerance = 1.000000e-09
+  Linear System Preconditioning = ILU0
+  Linear System ILUT Tolerance = 1.000000e-09
+  Linear System Symmetric = False
+  Lumped Mass Matrix = False
+  Bubbles = True
+  Namespace = string "TO"
+End
+
+Solver 4
+  Equation = Advection Diffusion Equation CS
+  Variable = CS
+  Variable DOFs = 1
+
+  Procedure = "AdvectionDiffusionTimeStep" "AdvectionDiffusionTimeStepSolver"
+  Linear System Solver = Iterative
+  Linear System Iterative Method = GMRES
+  Linear System Max Iterations = 600
+  Linear System Convergence Tolerance = 1.000000e-09
+  Linear System Preconditioning = ILU0
+  Linear System ILUT Tolerance = 1.000000e-09
+  Linear System Symmetric = False
+  Lumped Mass Matrix = False
+  Bubbles = True
+  Namespace = string "CS"
+End
+
+Solver 5
+  Equation = Advection Diffusion Equation NA
+  Variable = NA
+  Variable DOFs = 1
+
+  Procedure = "AdvectionDiffusionTimeStep" "AdvectionDiffusionTimeStepSolver"
+  Linear System Solver = Iterative
+  Linear System Iterative Method = GMRES
+  Linear System Max Iterations = 600
+  Linear System Convergence Tolerance = 1.000000e-09
+  Linear System Preconditioning = ILU0
+  Linear System ILUT Tolerance = 1.000000e-09
+  Linear System Symmetric = False
+  Lumped Mass Matrix = False
+  Bubbles = True
+  Namespace = string "NA"
+End
+
+! ~~
+! Boundary p30 ref. Manual
+! ~~
+Boundary Condition 1
+  Target Boundaries (1) = 1
+  CB = Real 1.000330e-02
+  TH = Real 1.110124e+02
+  TO = Real 5.550622e+01
+  CS = Real 1.000230e-06
+  NA = Real 1.000230e-02
+End
+
+Boundary Condition 2
+  Target Boundaries (1) = 2
+  CB = Real 1.000230e-02
+  TH = Real 1.110124e+02
+  TO = Real 5.550622e+01
+  CS = Real 0.000000e+00
+  NA = Real 1.000230e-02
+End
+
+! ~~
+! initial condition p8 ref. ElmersolverManual
+! ~~
+Initial Condition 3
+  CB = Real 1.000230e-02
+  TH = Real 1.110124e+02
+  TO = Real 5.550622e+01
+  CS = Real 0.000000e+00
+  NA = Real 1.000230e-02
+End
