@@ -1,0 +1,581 @@
+Tensor value 0.0 m**2/s
+Tensor value 1.0 <PhysicalUnit Permeability>
+keyword kinematicDispersion
+dbg property:  kinematicdispersion PhysicalProperties.KinematicDispersion
+setproperty propClass is ok 
+ dbg material key kinematicDispersion
+keyword porosity
+dbg property:  porosity PhysicalProperties.Porosity
+setproperty propClass is ok 
+ dbg material key porosity
+keyword permeability
+dbg property:  permeability PhysicalProperties.Permeability
+setproperty propClass is ok 
+ dbg material key permeability
+keyword effectiveDiffusion
+dbg property:  effectivediffusion PhysicalProperties.EffectiveDiffusion
+setproperty propClass is ok 
+ dbg material key effectiveDiffusion
+ dbg material we are here 
+C0  0.01
+value:  <type 'str'> ChemicalState
+dbg bcdict  ['Flux', 'Dirichlet']
+valueeeee ChemicalState
+dbg argv  ['2Dexample_ref.py']
+environ  None
+within getDarcyVelocity self.darcyVelocity None
+self.darcyVelocity None
+ self transportcomponent mt3d mpiEnv None
+ phreeqc init method  None
+ verbose settings
+ verbose settings over
+ debut de run
+ctmdbg launch method
+py_definedatasetc wdefinedataset ok : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat 
+py_definedatasetc defined dataset ok : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat 
+34 1 2 2
+34 34 21 2
+34 34 20 21
+34 34 20 2
+34 34 20 21
+35 34 2 20
+35 34 2 21
+ ---------------
+ boolean  0
+formationReaction [('Na+', 1)]
+symbol Na+
+('Na+', 1) Na+ 1
+within the gamma function 
+ ---------------
+ boolean  0
+formationReaction [('H4SiO4', 1)]
+symbol H4SiO4
+('H4SiO4', 1) H4SiO4 1
+within the gamma function 
+ ---------------
+ boolean  0
+formationReaction [('H4SiO4', 1), ('H+', -1)]
+symbol H3SiO4-
+('H4SiO4', 1) H4SiO4 1
+('H+', -1) H+ -1
+within the gamma function 
+ ---------------
+ boolean  1
+formationReaction [('H2O', -2), ('H4SiO4', 1)]
+symbol SiO2
+('H2O', -2) H2O -2
+('H4SiO4', 1) H4SiO4 1
+## Warning: No kinetic law within thecolumn state 
+## Warning: No kinetic law within thecolumn state 
+## Warning: No kinetic law within thecolumn state 
+## Warning: No kinetic law within thesoda state 
+## Warning: No kinetic law within thecolumn state 
+## Warning: No kinetic law within thecolumn state 
+ pdbg inFile  phreeqCFile
+ pdbg outFile  2Dexample.phout
+ dbg Wphreeqc MAX_LENGTH 256 2Dexample.phout
+ in  wioutdefinition opening output file 2Dexample.phout
+ output file opening 
+ database file opening /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+ database file opened /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+ log file opening 
+ log file opened 
+*PHREEQC2.17.5* Input name : phreeqCFile
+*PHREEQC2.17.5* Output file: 2Dexample.phout
+*PHREEQC2.17.5* Data file  : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+read_database 
+after tidy model call 1: 
+mpi_control is not null
+ initialising phreeqC solutions
+ after initial_solution
+initialising exchangers
+ exchangers initialisation OK
+initialising  gas_phases
+gas_phases initialisation OK
+ chemistry reaction
+ chemistry reaction ok 7070
+ reaction is over 1
+dbp getPrimarySpeciesNames
+ dg getPrimarySpeciesc -> wgetcompo  dbgpc wgetcompo 7070
+Number of components in the solution :  5
+ dwgetcompo Element n. 0 of old name CB new species name CB
+ dwgetcompo Element n. 1 of old name TH new species name TH
+ dwgetcompo Element n. 2 of old name TO new species name TO
+ dwgetcompo Element n. 3 of old name Si new species name Na
+ dwgetcompo Element n. 4 of old name Si new species name Si
+ over
+ctmdbg mpi 01
+ctmdbg mpi 02
+ ctmdbg Milestone: 
+
+35000 [-1.0817444833310225e-10, -1.0817444833310225e-10, -1.0817444833310225e-10, -1.0817444833310225e-10, -1.0817444833310225e-10, -1.0817444833310225e-10, -1.0817444833310225e-10, -1.0817444833310225e-10, -1.0817444833310225e-10, -1.0817444833310225e-10]
+ctmdbg mpi 1 None
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ None
+~ ctmdbg Transport initialisation~ None
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ None
+ dbgc sethydrporparameter call:
+  we are in set_hy param            0
+  we are in set_hy param            0
+ mt3d dbg within setHydraulicPorosityParameter fwel is kept to F
+ctmdbg setHydraulicPorosityParameter over
+ctmdbg setregions
+ctmdbg transportSolver.setBoundaryConditions
+ nrow ncol  70 101
+ mt3d dbg b.l. treat  1 1 1 70
+ btn file writing process is oK
+ i1 i2 j1 j2  2 19 34 34
+ i1 i2 j1 j2  21 101 34 34
+ i1 i2 j1 j2  2 101 35 70
+ i1 i2 j1 j2  20 20 34 34
+ i1 i2 j1 j2  1 1 1 70
+ i1 i2 j1 j2  2 101 1 33
+ porosity_region  1.0 2 19 34 34
+ porosity_region  1.0 21 101 34 34
+ porosity_region  1.0 2 101 35 70
+ porosity_region  1.0 20 20 34 34
+ porosity_region  1.0 1 1 1 70
+ porosity_region  1.0 2 101 1 33
+ mt3d dbg end of the dsp file
+  mt3d dbg ssm ouverture du fichier 2108
+  mt3d dbg ssm ecriture des booleens dont self.fwel F
+self.fwel == "F"
+ the setData method is over
+TVD 
+JACOBI
+7000
+ End of transport initialisation 
+ ctmdbg get MobileConcentration over  35000
+ ctm dbg set MobileConcentration over 
+ reaction is over 1
+ ctm dbg equi over 
+ ctmdbg getImmobileConcentrationField over  0.0
+ctm dbg transport init method
+ctmdbg transport init method
+ dbgc initialize mcomp : 5 nnrow : 70 nncol : 101 ActiveCellsNumber : 7000 ierror : 0 
+self.transportSolver.setTimeStep 35000
+self.transportSolver.setConcentrationValues
+ launch ended 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.0000e+03 , time step: 2.0000e+03 (time iteration # 1  )
+ reaction is over 1
+==>  Convergence error is:  1e-15 , it. =  1  Mem.  (681444.0, 'Kb') 
+ ctmdbg oneTimeStep ended 
+ ctmdbg oneTimeStep untiltime 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  4.1000e+03 , time step: 2.1000e+03 (time iteration # 2  )
+ reaction is over 1
+         Max error:   1.11066416e-03, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   2.13128204e-04, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   4.82608248e-05, iteration:     3 at point:  3319
+ reaction is over 1
+         Max error:   1.18907625e-05, iteration:     4 at point:  3319
+ reaction is over 1
+         Max error:   3.08103038e-06, iteration:     5 at point:  3319
+ reaction is over 1
+         Max error:   8.40888210e-07, iteration:     6 at point:  3320
+==>  Convergence error is:  8.40888209619e-07 , it. =  6  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  6.3050e+03 , time step: 2.2050e+03 (time iteration # 3  )
+ reaction is over 1
+         Max error:   9.25892355e-04, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   1.85384657e-04, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   4.36536087e-05, iteration:     3 at point:  3319
+ reaction is over 1
+         Max error:   1.11709299e-05, iteration:     4 at point:  3319
+ reaction is over 1
+         Max error:   3.00219670e-06, iteration:     5 at point:  3319
+ reaction is over 1
+         Max error:   8.49762296e-07, iteration:     6 at point:  3320
+==>  Convergence error is:  8.49762296418e-07 , it. =  6  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  8.6202e+03 , time step: 2.3152e+03 (time iteration # 4  )
+ reaction is over 1
+         Max error:   7.53318433e-04, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   1.56543233e-04, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   3.81985902e-05, iteration:     3 at point:  3319
+ reaction is over 1
+         Max error:   1.01193584e-05, iteration:     4 at point:  3319
+ reaction is over 1
+         Max error:   2.81804429e-06, iteration:     5 at point:  3319
+ reaction is over 1
+         Max error:   8.26360881e-07, iteration:     6 at point:  3320
+==>  Convergence error is:  8.26360880835e-07 , it. =  6  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.1051e+04 , time step: 2.4310e+03 (time iteration # 5  )
+ reaction is over 1
+         Max error:   6.04324388e-04, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   1.30169341e-04, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   3.28876070e-05, iteration:     3 at point:  3319
+ reaction is over 1
+         Max error:   9.01476704e-06, iteration:     4 at point:  3319
+ reaction is over 1
+         Max error:   2.59599841e-06, iteration:     5 at point:  3319
+ reaction is over 1
+         Max error:   7.85666662e-07, iteration:     6 at point:  3320
+==>  Convergence error is:  7.85666662284e-07 , it. =  6  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.3604e+04 , time step: 2.5526e+03 (time iteration # 6  )
+ reaction is over 1
+         Max error:   4.79172170e-04, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   1.06833369e-04, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   2.80302952e-05, iteration:     3 at point:  3319
+ reaction is over 1
+         Max error:   7.96607363e-06, iteration:     4 at point:  3319
+ reaction is over 1
+         Max error:   2.37550618e-06, iteration:     5 at point:  3319
+ reaction is over 1
+         Max error:   7.45530313e-07, iteration:     6 at point:  3320
+==>  Convergence error is:  7.45530312929e-07 , it. =  6  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.6284e+04 , time step: 2.6802e+03 (time iteration # 7  )
+ reaction is over 1
+         Max error:   3.75490169e-04, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   8.67228632e-05, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   2.34618411e-05, iteration:     3 at point:  3319
+ reaction is over 1
+         Max error:   6.92314035e-06, iteration:     4 at point:  3319
+ reaction is over 1
+         Max error:   2.36474014e-06, iteration:     5 at point:  3320
+ reaction is over 1
+         Max error:   8.56050318e-07, iteration:     6 at point:  3320
+==>  Convergence error is:  8.56050317855e-07 , it. =  6  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.9098e+04 , time step: 2.8142e+03 (time iteration # 8  )
+ reaction is over 1
+         Max error:   2.90794023e-04, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   6.95683433e-05, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   1.94674077e-05, iteration:     3 at point:  3319
+ reaction is over 1
+         Max error:   5.93512256e-06, iteration:     4 at point:  3319
+ reaction is over 1
+         Max error:   2.09383560e-06, iteration:     5 at point:  3320
+ reaction is over 1
+         Max error:   7.83206705e-07, iteration:     6 at point:  3320
+==>  Convergence error is:  7.83206704824e-07 , it. =  6  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.2053e+04 , time step: 2.9549e+03 (time iteration # 9  )
+ reaction is over 1
+         Max error:   2.22582061e-04, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   5.51545606e-05, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   1.59599762e-05, iteration:     3 at point:  3319
+ reaction is over 1
+         Max error:   5.02618232e-06, iteration:     4 at point:  3319
+ reaction is over 1
+         Max error:   1.82830333e-06, iteration:     5 at point:  3320
+ reaction is over 1
+         Max error:   7.05698433e-07, iteration:     6 at point:  3320
+==>  Convergence error is:  7.0569843269e-07 , it. =  6  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.5156e+04 , time step: 3.1027e+03 (time iteration # 10  )
+ reaction is over 1
+         Max error:   1.68429026e-04, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   4.32301980e-05, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   1.29336923e-05, iteration:     3 at point:  3319
+ reaction is over 1
+         Max error:   4.20626394e-06, iteration:     4 at point:  3319
+ reaction is over 1
+         Max error:   1.57726293e-06, iteration:     5 at point:  3320
+ reaction is over 1
+         Max error:   6.27938399e-07, iteration:     6 at point:  3320
+==>  Convergence error is:  6.27938398834e-07 , it. =  6  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.8414e+04 , time step: 3.2578e+03 (time iteration # 11  )
+ reaction is over 1
+         Max error:   1.20743993e-04, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   3.16249642e-05, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   1.48372089e-05, iteration:     3 at point:  3319
+ reaction is over 1
+         Max error:   5.38643330e-06, iteration:     4 at point:  3319
+ reaction is over 1
+         Max error:   1.78661761e-06, iteration:     5 at point:  3319
+ reaction is over 1
+         Max error:   6.79871272e-07, iteration:     6 at point:  3320
+==>  Convergence error is:  6.79871271503e-07 , it. =  6  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.1834e+04 , time step: 3.4207e+03 (time iteration # 12  )
+ reaction is over 1
+         Max error:   8.84582826e-05, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   2.39881785e-05, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   7.58760951e-06, iteration:     3 at point:  3319
+ reaction is over 1
+         Max error:   2.60783688e-06, iteration:     4 at point:  3319
+ reaction is over 1
+         Max error:   1.06518622e-06, iteration:     5 at point:  3320
+ reaction is over 1
+         Max error:   4.48226192e-07, iteration:     6 at point:  3320
+==>  Convergence error is:  4.48226192384e-07 , it. =  6  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.5426e+04 , time step: 3.5917e+03 (time iteration # 13  )
+ reaction is over 1
+         Max error:   6.43332605e-05, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   1.79818186e-05, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   5.87725522e-06, iteration:     3 at point:  3319
+ reaction is over 1
+         Max error:   2.08436552e-06, iteration:     4 at point:  3319
+ reaction is over 1
+         Max error:   8.81276331e-07, iteration:     5 at point:  3320
+==>  Convergence error is:  8.81276331466e-07 , it. =  5  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.9197e+04 , time step: 3.7713e+03 (time iteration # 14  )
+ reaction is over 1
+         Max error:   4.60280802e-05, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   1.33108278e-05, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   4.47432686e-06, iteration:     3 at point:  3319
+ reaction is over 1
+         Max error:   1.63086139e-06, iteration:     4 at point:  3319
+ reaction is over 1
+         Max error:   7.18411274e-07, iteration:     5 at point:  3320
+==>  Convergence error is:  7.18411274248e-07 , it. =  5  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  4.3157e+04 , time step: 3.9599e+03 (time iteration # 15  )
+ reaction is over 1
+         Max error:   3.23925228e-05, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   9.71136320e-06, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   3.37467549e-06, iteration:     3 at point:  3319
+ reaction is over 1
+         Max error:   1.26910577e-06, iteration:     4 at point:  3319
+ reaction is over 1
+         Max error:   5.79340516e-07, iteration:     5 at point:  3320
+==>  Convergence error is:  5.79340515561e-07 , it. =  5  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  4.7315e+04 , time step: 4.1579e+03 (time iteration # 16  )
+ reaction is over 1
+         Max error:   2.24359586e-05, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   6.97904294e-06, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   2.50825233e-06, iteration:     3 at point:  3319
+ reaction is over 1
+         Max error:   9.73385092e-07, iteration:     4 at point:  3319
+==>  Convergence error is:  9.73385092085e-07 , it. =  4  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  5.1681e+04 , time step: 4.3657e+03 (time iteration # 17  )
+ reaction is over 1
+         Max error:   1.21048440e-05, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   3.56342995e-06, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   1.23804650e-06, iteration:     3 at point:  3319
+ reaction is over 1
+         Max error:   5.20041210e-07, iteration:     4 at point:  3419
+==>  Convergence error is:  5.20041209873e-07 , it. =  4  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  5.6265e+04 , time step: 4.5840e+03 (time iteration # 18  )
+ reaction is over 1
+         Max error:   8.14366483e-06, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   2.49429112e-06, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   9.01692766e-07, iteration:     3 at point:  3319
+==>  Convergence error is:  9.01692766009e-07 , it. =  3  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  6.1078e+04 , time step: 4.8132e+03 (time iteration # 19  )
+ reaction is over 1
+         Max error:   5.46554232e-06, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   1.71977922e-06, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   6.38206366e-07, iteration:     3 at point:  3319
+==>  Convergence error is:  6.38206365755e-07 , it. =  3  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  6.6132e+04 , time step: 5.0539e+03 (time iteration # 20  )
+ reaction is over 1
+         Max error:   3.67187794e-06, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   1.18781776e-06, iteration:     2 at point:  3319
+ reaction is over 1
+         Max error:   4.52484012e-07, iteration:     3 at point:  3319
+==>  Convergence error is:  4.52484011815e-07 , it. =  3  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  7.1439e+04 , time step: 5.3066e+03 (time iteration # 21  )
+ reaction is over 1
+         Max error:   2.49510654e-06, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   8.31214414e-07, iteration:     2 at point:  3319
+==>  Convergence error is:  8.3121441441e-07 , it. =  2  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  7.7010e+04 , time step: 5.5719e+03 (time iteration # 22  )
+ reaction is over 1
+         Max error:   1.71251818e-06, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   5.87795847e-07, iteration:     2 at point:  3319
+==>  Convergence error is:  5.87795846663e-07 , it. =  2  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  8.2861e+04 , time step: 5.8505e+03 (time iteration # 23  )
+ reaction is over 1
+         Max error:   1.04324214e-06, iteration:     1 at point:  3319
+ reaction is over 1
+         Max error:   3.67220036e-07, iteration:     2 at point:  3319
+==>  Convergence error is:  3.67220036157e-07 , it. =  2  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  8.9004e+04 , time step: 6.1430e+03 (time iteration # 24  )
+ reaction is over 1
+         Max error:   6.22749182e-07, iteration:     1 at point:  3319
+==>  Convergence error is:  6.22749181778e-07 , it. =  1  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  9.5454e+04 , time step: 6.4502e+03 (time iteration # 25  )
+ reaction is over 1
+         Max error:   3.82362505e-07, iteration:     1 at point:  3319
+==>  Convergence error is:  3.82362505214e-07 , it. =  1  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.0223e+05 , time step: 6.7727e+03 (time iteration # 26  )
+ reaction is over 1
+         Max error:   2.30409190e-07, iteration:     1 at point:  3319
+==>  Convergence error is:  2.3040918995e-07 , it. =  1  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.0934e+05 , time step: 7.1113e+03 (time iteration # 27  )
+ reaction is over 1
+         Max error:   1.36216423e-07, iteration:     1 at point:  3319
+==>  Convergence error is:  1.36216423474e-07 , it. =  1  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.1681e+05 , time step: 7.4669e+03 (time iteration # 28  )
+ reaction is over 1
+         Max error:   7.89839782e-08, iteration:     1 at point:  3319
+==>  Convergence error is:  7.89839782467e-08 , it. =  1  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.2465e+05 , time step: 7.8403e+03 (time iteration # 29  )
+ reaction is over 1
+         Max error:   4.49116633e-08, iteration:     1 at point:  3319
+==>  Convergence error is:  4.49116632772e-08 , it. =  1  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.3288e+05 , time step: 8.2323e+03 (time iteration # 30  )
+ reaction is over 1
+         Max error:   2.50449228e-08, iteration:     1 at point:  3319
+==>  Convergence error is:  2.50449228023e-08 , it. =  1  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.4152e+05 , time step: 8.6439e+03 (time iteration # 31  )
+ reaction is over 1
+         Max error:   1.77149846e-08, iteration:     1 at point:  3632
+==>  Convergence error is:  1.77149845904e-08 , it. =  1  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.5060e+05 , time step: 9.0761e+03 (time iteration # 32  )
+ reaction is over 1
+         Max error:   1.76300999e-08, iteration:     1 at point:  3334
+==>  Convergence error is:  1.76300999355e-08 , it. =  1  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.6013e+05 , time step: 9.5299e+03 (time iteration # 33  )
+ reaction is over 1
+         Max error:   1.72994103e-08, iteration:     1 at point:  3033
+==>  Convergence error is:  1.72994103487e-08 , it. =  1  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.7013e+05 , time step: 1.0006e+04 (time iteration # 34  )
+ reaction is over 1
+         Max error:   1.71206604e-08, iteration:     1 at point:  3335
+==>  Convergence error is:  1.71206604449e-08 , it. =  1  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.8064e+05 , time step: 1.0507e+04 (time iteration # 35  )
+ reaction is over 1
+         Max error:   1.69267085e-08, iteration:     1 at point:  3034
+==>  Convergence error is:  1.69267084793e-08 , it. =  1  Mem.  (690732.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.9167e+05 , time step: 1.1032e+04 (time iteration # 36  )
+ reaction is over 1
+         Max error:   1.66741236e-08, iteration:     1 at point:  3336
+==>  Convergence error is:  1.66741236374e-08 , it. =  1  Mem.  (690736.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.0326e+05 , time step: 1.1584e+04 (time iteration # 37  )
+ reaction is over 1
+         Max error:   1.65664439e-08, iteration:     1 at point:  3035
+==>  Convergence error is:  1.65664438834e-08 , it. =  1  Mem.  (690736.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.1542e+05 , time step: 1.2163e+04 (time iteration # 38  )
+ reaction is over 1
+         Max error:   1.63136279e-08, iteration:     1 at point:  3337
+==>  Convergence error is:  1.6313627893e-08 , it. =  1  Mem.  (690736.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.2819e+05 , time step: 1.2771e+04 (time iteration # 39  )
+ reaction is over 1
+         Max error:   1.61703093e-08, iteration:     1 at point:  3036
+==>  Convergence error is:  1.61703093138e-08 , it. =  1  Mem.  (690736.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.4160e+05 , time step: 1.3410e+04 (time iteration # 40  )
+ reaction is over 1
+         Max error:   1.60062053e-08, iteration:     1 at point:  3338
+==>  Convergence error is:  1.60062052501e-08 , it. =  1  Mem.  (690736.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.5568e+05 , time step: 1.4080e+04 (time iteration # 41  )
+ reaction is over 1
+         Max error:   1.58827705e-08, iteration:     1 at point:  3104
+==>  Convergence error is:  1.58827705432e-08 , it. =  1  Mem.  (690736.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.7046e+05 , time step: 1.4784e+04 (time iteration # 42  )
+ reaction is over 1
+         Max error:   1.58388677e-08, iteration:     1 at point:  3303
+==>  Convergence error is:  1.58388676619e-08 , it. =  1  Mem.  (690736.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.8599e+05 , time step: 1.5523e+04 (time iteration # 43  )
+ reaction is over 1
+         Max error:   1.59753857e-08, iteration:     1 at point:  3303
+==>  Convergence error is:  1.5975385681e-08 , it. =  1  Mem.  (690736.0, 'Kb') 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.8800e+05 , time step: 2.0133e+03 (time iteration # 44  )
+ reaction is over 1
+         Max error:   2.18686225e-09, iteration:     1 at point:  3203
+==>  Convergence error is:  2.18686224684e-09 , it. =  1  Mem.  (690736.0, 'Kb') 
+ mt3d_stop :
+====================== 
+Error estimation on pH 
+====================== 
+inderr  0
+ max of error  0.127782502503 12.7782502503
+ maximal concentration  1.100005 1.7 9.73160591087
+maximal error for pH =  0.127782502503  and % of error is  12.7782502503
+
+ 
+ -- Test-case Alkaline 2D with MTMS/PHREEQC coupling OK -- 
+ 
+
+inderr  0
+ maximal concentration  1.100005 1.7 0.000126616518583
+maximal error for Na =  3.30515635645e-05  and % of error is  0.00330515635645
+
+ 
+ -- MTMS/PHREEQC coupling OK -- 
+ 
+
+~~~~~~~~~~~~~~~~~~~~~~~
+End of the 2D test case
+~~~~~~~~~~~~~~~~~~~~~~~
+ finalOutputsWriter
+
+"Auf preiset die Tage!"
+
+----------------------
+End of the computation
+total CPU time :  31.68
+----------------------
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        End of the 2Dexample case ~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ Print Contents of Flow-Transport Link File for Checking (y/n)? 

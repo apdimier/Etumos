@@ -1,0 +1,95 @@
+SOLUTION_MASTER_SPECIES
+                 Na   Na+    0.00000        Na   0.02299
+              Si   H4SiO4    0.00000      SiO2   0.02808
+SOLUTION_SPECIES
+          Na+  = Na+
+                    log_k   0.0000000000e+00
+          H4SiO4  = H4SiO4
+                    log_k   0.0000000000e+00
+          H4SiO4 -1H+  = H3SiO4-
+                    log_k   -9.8300000000e+00
+PHASES
+      Quartz
+          SiO2 =  -12H2O + H4SiO4 
+                    log_k   -3.6000000000e+00
+
+SOLUTION                  3401-7000 column
+   temp 2.5000000000e+01
+   pH    7.0000000000e+00 
+   pe    4.0000000000e+00
+   units mol/l
+                       Na    0.0000000000e+00
+
+EQUILIBRIUM_PHASES        3401-7000 column
+                   Quartz    0.00000e+00  1.00000e+00
+
+SOLUTION                  3320-3400 column
+   temp 2.5000000000e+01
+   pH    7.0000000000e+00 
+   pe    4.0000000000e+00
+   units mol/l
+                       Na    0.0000000000e+00
+
+EQUILIBRIUM_PHASES        3320-3400 column
+                   Quartz    0.00000e+00  1.00000e+00
+
+SOLUTION                  3301-3318 column
+   temp 2.5000000000e+01
+   pH    7.0000000000e+00 
+   pe    4.0000000000e+00
+   units mol/l
+                       Na    0.0000000000e+00
+
+EQUILIBRIUM_PHASES        3301-3318 column
+                   Quartz    0.00000e+00  1.00000e+00
+
+SOLUTION                  3319-3319 soda
+   temp 2.5000000000e+01
+   pH    1.2254500000e+01 
+   pe    4.0000000000e+00
+   units mol/l
+                       Na    2.0000000000e-02
+
+EQUILIBRIUM_PHASES        3319-3319 soda
+                   Quartz    0.00000e+00  0.00000e+00
+
+SOLUTION                  1-3300 column
+   temp 2.5000000000e+01
+   pH    7.0000000000e+00 
+   pe    4.0000000000e+00
+   units mol/l
+                       Na    0.0000000000e+00
+
+EQUILIBRIUM_PHASES        1-3300 column
+                   Quartz    0.00000e+00  1.00000e+00
+
+SOLUTION                  7001-7070 column
+   temp 2.5000000000e+01
+   pH    7.0000000000e+00 
+   pe    4.0000000000e+00
+   units mol/l
+                       Na    0.0000000000e+00
+
+EQUILIBRIUM_PHASES        7001-7070 column
+                   Quartz    0.00000e+00  1.00000e+00
+SELECTED_OUTPUT
+  -high_precision true
+KNOBS
+  -iterations 500
+  -diag true 
+  -tolerance 1.e-15
+SOLUTION 0
+PRINT
+  -reset	true
+# thereafter the -cells parameter is the 
+# only relevant parameter 
+TRANSPORT
+  -cells          7070
+  -time_step          100.
+  -shifts          5
+  -lengths        0.1
+  -flow_direction diff
+  -boundary_conditions        closed closed
+  -print_frequency      1
+  -warnings False
+END

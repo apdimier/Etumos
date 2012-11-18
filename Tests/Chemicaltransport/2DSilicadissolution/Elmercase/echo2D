@@ -1,0 +1,491 @@
+['__cmp__', '__div__', '__doc__', '__init__', '__module__', '__mul__', '__pow__', '__rdiv__', '__repr__', '__rmul__', '__str__', 'conversionFactorTo', 'conversionTupleTo', 'factor', 'isAngle', 'isCompatible', 'isDimensionless', 'name', 'names', 'offset', 'powers', 'setName']
+['__call__', '__class__', '__cmp__', '__delattr__', '__doc__', '__get__', '__getattribute__', '__hash__', '__init__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__str__', 'im_class', 'im_func', 'im_self']
+{'MolarMass': 1}
+dbg self.physicalBodyNames {'domain': [4, []], 'domain1': [5, []], 'inlet': [1, []], 'symmetry': [3, []], 'outlet': [2, []]}
+dbg _calcCellVertexIDs 117
+array (117,10) , type = l, has 1170 elements
+ out of loop 
+{'domain': [4, [37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117]], 'domain1': [5, [77]], 'inlet': [1, [10, 11, 12, 13, 14, 15, 16, 17, 18]], 'symmetry': [3, [1, 2, 3, 4, 5, 6, 7, 8, 9, 19, 20, 21, 22, 23, 24, 25, 26, 27]], 'outlet': [2, [28, 29, 30, 31, 32, 33, 34, 35, 36]]}
+dbg out of _calcCellVertexIDs
+dbg calling _calcBaseFaceVertexIDs
+dbg out of _calcBaseFaceVertexIDs
+dbg calling _calcFaceVertexIDs
+dbg out of _calcFaceVertexIDs
+dbg calling _calcCellFaceIDs
+dbg out of _calcCellFaceIDs
+ element array array (117,10) , type = l, has 1170 elements
+[ 1, 1, 3, 3, 1, 0, 1,17, 0, 0,]
+[ 2, 1, 3, 3, 1, 0,17,18, 0, 0,]
+[ 3, 1, 3, 3, 1, 0,18,19, 0, 0,]
+[ 4, 1, 3, 3, 1, 0,19, 2, 0, 0,]
+[5,1,3,3,2,0,2,3,0,0,]
+[ 6, 1, 3, 3, 3, 0, 3,20, 0, 0,]
+[ 7, 1, 3, 3, 3, 0,20,21, 0, 0,]
+[ 8, 1, 3, 3, 3, 0,21,22, 0, 0,]
+[ 9, 1, 3, 3, 3, 0,22, 4, 0, 0,]
+[10, 1, 3, 1, 4, 0, 4,23, 0, 0,]
+[11, 1, 3, 1, 4, 0,23,24, 0, 0,]
+[12, 1, 3, 1, 4, 0,24,25, 0, 0,]
+[13, 1, 3, 1, 4, 0,25, 5, 0, 0,]
+[14, 1, 3, 1, 5, 0, 5, 6, 0, 0,]
+[15, 1, 3, 1, 6, 0, 6,26, 0, 0,]
+[16, 1, 3, 1, 6, 0,26,27, 0, 0,]
+[17, 1, 3, 1, 6, 0,27,28, 0, 0,]
+[18, 1, 3, 1, 6, 0,28, 7, 0, 0,]
+[19, 1, 3, 3, 7, 0, 7,29, 0, 0,]
+[20, 1, 3, 3, 7, 0,29,30, 0, 0,]
+[21, 1, 3, 3, 7, 0,30,31, 0, 0,]
+[22, 1, 3, 3, 7, 0,31, 8, 0, 0,]
+[23, 1, 3, 3, 8, 0, 8, 9, 0, 0,]
+[24, 1, 3, 3, 9, 0, 9,32, 0, 0,]
+[25, 1, 3, 3, 9, 0,32,33, 0, 0,]
+[26, 1, 3, 3, 9, 0,33,34, 0, 0,]
+[27, 1, 3, 3, 9, 0,34,10, 0, 0,]
+[28, 1, 3, 2,10, 0,10,35, 0, 0,]
+[29, 1, 3, 2,10, 0,35,36, 0, 0,]
+[30, 1, 3, 2,10, 0,36,37, 0, 0,]
+[31, 1, 3, 2,10, 0,37,11, 0, 0,]
+[32, 1, 3, 2,11, 0,11,12, 0, 0,]
+[33, 1, 3, 2,12, 0,12,38, 0, 0,]
+[34, 1, 3, 2,12, 0,38,39, 0, 0,]
+[35, 1, 3, 2,12, 0,39,40, 0, 0,]
+[36, 1, 3, 2,12, 0,40, 1, 0, 0,]
+[37, 3, 3, 4,22, 0, 1,17,65,40,]
+[38, 3, 3, 4,22, 0,40,65,66,39,]
+[39, 3, 3, 4,22, 0,39,66,67,38,]
+[40, 3, 3, 4,22, 0,38,67,58,12,]
+[41, 3, 3, 4,22, 0,17,18,68,65,]
+[42, 3, 3, 4,22, 0,65,68,69,66,]
+[43, 3, 3, 4,22, 0,66,69,70,67,]
+[44, 3, 3, 4,22, 0,67,70,57,58,]
+[45, 3, 3, 4,22, 0,18,19,71,68,]
+[46, 3, 3, 4,22, 0,68,71,72,69,]
+[47, 3, 3, 4,22, 0,69,72,73,70,]
+[48, 3, 3, 4,22, 0,70,73,56,57,]
+[49, 3, 3, 4,22, 0,19, 2,41,71,]
+[50, 3, 3, 4,22, 0,71,41,42,72,]
+[51, 3, 3, 4,22, 0,72,42,43,73,]
+[52, 3, 3, 4,22, 0,73,43,13,56,]
+[53, 3, 3, 4,23, 0,12,58,64,11,]
+[54, 3, 3, 4,23, 0,58,57,63,64,]
+[55, 3, 3, 4,23, 0,57,56,62,63,]
+[56, 3, 3, 4,23, 0,56,13,16,62,]
+[57, 3, 3, 4,24, 0,11,64,74,37,]
+[58, 3, 3, 4,24, 0,37,74,75,36,]
+[59, 3, 3, 4,24, 0,36,75,76,35,]
+[60, 3, 3, 4,24, 0,35,76,34,10,]
+[61, 3, 3, 4,24, 0,64,63,77,74,]
+[62, 3, 3, 4,24, 0,74,77,78,75,]
+[63, 3, 3, 4,24, 0,75,78,79,76,]
+[64, 3, 3, 4,24, 0,76,79,33,34,]
+[65, 3, 3, 4,24, 0,63,62,80,77,]
+[66, 3, 3, 4,24, 0,77,80,81,78,]
+[67, 3, 3, 4,24, 0,78,81,82,79,]
+[68, 3, 3, 4,24, 0,79,82,32,33,]
+[69, 3, 3, 4,24, 0,62,16,50,80,]
+[70, 3, 3, 4,24, 0,80,50,51,81,]
+[71, 3, 3, 4,24, 0,81,51,52,82,]
+[72, 3, 3, 4,24, 0,82,52, 9,32,]
+[73, 3, 3, 4,25, 0, 2, 3,44,41,]
+[74, 3, 3, 4,25, 0,41,44,45,42,]
+[75, 3, 3, 4,25, 0,42,45,46,43,]
+[76, 3, 3, 4,25, 0,43,46,14,13,]
+[77, 3, 3, 5,26, 0,13,14,15,16,]
+[78, 3, 3, 4,27, 0,16,15,47,50,]
+[79, 3, 3, 4,27, 0,50,47,48,51,]
+[80, 3, 3, 4,27, 0,51,48,49,52,]
+[81, 3, 3, 4,27, 0,52,49, 8, 9,]
+[82, 3, 3, 4,28, 0, 3,20,83,44,]
+[83, 3, 3, 4,28, 0,44,83,84,45,]
+[84, 3, 3, 4,28, 0,45,84,85,46,]
+[85, 3, 3, 4,28, 0,46,85,53,14,]
+[86, 3, 3, 4,28, 0,20,21,86,83,]
+[87, 3, 3, 4,28, 0,83,86,87,84,]
+[88, 3, 3, 4,28, 0,84,87,88,85,]
+[89, 3, 3, 4,28, 0,85,88,54,53,]
+[90, 3, 3, 4,28, 0,21,22,89,86,]
+[91, 3, 3, 4,28, 0,86,89,90,87,]
+[92, 3, 3, 4,28, 0,87,90,91,88,]
+[93, 3, 3, 4,28, 0,88,91,55,54,]
+[94, 3, 3, 4,28, 0,22, 4,23,89,]
+[95, 3, 3, 4,28, 0,89,23,24,90,]
+[96, 3, 3, 4,28, 0,90,24,25,91,]
+[97, 3, 3, 4,28, 0,91,25, 5,55,]
+[98, 3, 3, 4,29, 0,14,53,59,15,]
+[99, 3, 3, 4,29, 0,53,54,60,59,]
+[100,  3,  3,  4, 29,  0, 54, 55, 61, 60,]
+[101,  3,  3,  4, 29,  0, 55,  5,  6, 61,]
+[102,  3,  3,  4, 30,  0, 15, 59, 92, 47,]
+[103,  3,  3,  4, 30,  0, 47, 92, 93, 48,]
+[104,  3,  3,  4, 30,  0, 48, 93, 94, 49,]
+[105,  3,  3,  4, 30,  0, 49, 94, 31,  8,]
+[106,  3,  3,  4, 30,  0, 59, 60, 95, 92,]
+[107,  3,  3,  4, 30,  0, 92, 95, 96, 93,]
+[108,  3,  3,  4, 30,  0, 93, 96, 97, 94,]
+[109,  3,  3,  4, 30,  0, 94, 97, 30, 31,]
+[110,  3,  3,  4, 30,  0, 60, 61, 98, 95,]
+[111,  3,  3,  4, 30,  0, 95, 98, 99, 96,]
+[112,  3,  3,  4, 30,  0, 96, 99,100, 97,]
+[113,  3,  3,  4, 30,  0, 97,100, 29, 30,]
+[114,  3,  3,  4, 30,  0, 61,  6, 26, 98,]
+[115,  3,  3,  4, 30,  0, 98, 26, 27, 99,]
+[116,  3,  3,  4, 30,  0, 99, 27, 28,100,]
+[117,  3,  3,  4, 30,  0,100, 28,  7, 29,]
+[[ 0.    , 0.    ,]
+ [ 1.5   , 0.    ,]
+ [ 1.55  , 0.    ,]
+ [ 3.    , 0.    ,]
+ [ 3.    , 1.5   ,]
+ [ 3.    , 1.55  ,]
+ [ 3.    , 3.    ,]
+ [ 1.55  , 3.    ,]
+ [ 1.5   , 3.    ,]
+ [ 0.    , 3.    ,]
+ [ 0.    , 1.55  ,]
+ [ 0.    , 1.5   ,]
+ [ 1.5   , 1.5   ,]
+ [ 1.55  , 1.5   ,]
+ [ 1.55  , 1.55  ,]
+ [ 1.5   , 1.55  ,]
+ [ 0.375 , 0.    ,]
+ [ 0.75  , 0.    ,]
+ [ 1.125 , 0.    ,]
+ [ 1.9125, 0.    ,]
+ [ 2.275 , 0.    ,]
+ [ 2.6375, 0.    ,]
+ [ 3.    , 0.375 ,]
+ [ 3.    , 0.75  ,]
+ [ 3.    , 1.125 ,]
+ [ 3.    , 1.9125,]
+ [ 3.    , 2.275 ,]
+ [ 3.    , 2.6375,]
+ [ 2.6375, 3.    ,]
+ [ 2.275 , 3.    ,]
+ [ 1.9125, 3.    ,]
+ [ 1.125 , 3.    ,]
+ [ 0.75  , 3.    ,]
+ [ 0.375 , 3.    ,]
+ [ 0.    , 2.6375,]
+ [ 0.    , 2.275 ,]
+ [ 0.    , 1.9125,]
+ [ 0.    , 1.125 ,]
+ [ 0.    , 0.75  ,]
+ [ 0.    , 0.375 ,]
+ [ 1.5   , 0.375 ,]
+ [ 1.5   , 0.75  ,]
+ [ 1.5   , 1.125 ,]
+ [ 1.55  , 0.375 ,]
+ [ 1.55  , 0.75  ,]
+ [ 1.55  , 1.125 ,]
+ [ 1.55  , 1.9125,]
+ [ 1.55  , 2.275 ,]
+ [ 1.55  , 2.6375,]
+ [ 1.5   , 1.9125,]
+ [ 1.5   , 2.275 ,]
+ [ 1.5   , 2.6375,]
+ [ 1.9125, 1.5   ,]
+ [ 2.275 , 1.5   ,]
+ [ 2.6375, 1.5   ,]
+ [ 1.125 , 1.5   ,]
+ [ 0.75  , 1.5   ,]
+ [ 0.375 , 1.5   ,]
+ [ 1.9125, 1.55  ,]
+ [ 2.275 , 1.55  ,]
+ [ 2.6375, 1.55  ,]
+ [ 1.125 , 1.55  ,]
+ [ 0.75  , 1.55  ,]
+ [ 0.375 , 1.55  ,]
+ [ 0.375 , 0.375 ,]
+ [ 0.375 , 0.75  ,]
+ [ 0.375 , 1.125 ,]
+ [ 0.75  , 0.375 ,]
+ [ 0.75  , 0.75  ,]
+ [ 0.75  , 1.125 ,]
+ [ 1.125 , 0.375 ,]
+ [ 1.125 , 0.75  ,]
+ [ 1.125 , 1.125 ,]
+ [ 0.375 , 1.9125,]
+ [ 0.375 , 2.275 ,]
+ [ 0.375 , 2.6375,]
+ [ 0.75  , 1.9125,]
+ [ 0.75  , 2.275 ,]
+ [ 0.75  , 2.6375,]
+ [ 1.125 , 1.9125,]
+ [ 1.125 , 2.275 ,]
+ [ 1.125 , 2.6375,]
+ [ 1.9125, 0.375 ,]
+ [ 1.9125, 0.75  ,]
+ [ 1.9125, 1.125 ,]
+ [ 2.275 , 0.375 ,]
+ [ 2.275 , 0.75  ,]
+ [ 2.275 , 1.125 ,]
+ [ 2.6375, 0.375 ,]
+ [ 2.6375, 0.75  ,]
+ [ 2.6375, 1.125 ,]
+ [ 1.9125, 1.9125,]
+ [ 1.9125, 2.275 ,]
+ [ 1.9125, 2.6375,]
+ [ 2.275 , 1.9125,]
+ [ 2.275 , 2.275 ,]
+ [ 2.275 , 2.6375,]
+ [ 2.6375, 1.9125,]
+ [ 2.6375, 2.275 ,]
+ [ 2.6375, 2.6375,]]
+Tensor value 3e-10
+Tensor value : float ou int ?? 3e-10 <type 'float'>
+Tensor value ok 
+Tensor what value 0 1
+ at the end  <tensors.IsotropicTensor instance at 0xab81c0c> <type 'instance'>
+Tensor self.value <tensors.IsotropicTensor instance at 0xab81c0c>
+key kinematicDispersion <type 'str'>
+prop (0.20000000000000001, 0.050000000000000003) Head ['__abs__', '__add__', '__cmp__', '__div__', '__doc__', '__init__', '__module__', '__mul__', '__neg__', '__nonzero__', '__pos__', '__pow__', '__radd__', '__rdiv__', '__repr__', '__rmul__', '__rpow__', '__rsub__', '__str__', '__sub__', '_number', '_sum', 'convertToUnit', 'cos', 'getLongitudinal', 'getTransverse', 'getUnit', 'getUnitName', 'getValue', 'inBaseUnits', 'inUnitsOf', 'isCompatible', 'setValue', 'sin', 'sqrt', 'tan', 'unit', 'value', 'verifyValue']
+dbg property kinematicdispersion PhysicalProperties.KinematicDispersion
+setproperty propClass is ok 
+ dbg keyword  kinematicdispersion
+ dbg propClass  PhysicalProperties.KinematicDispersion
+ dbg propdict  PhysicalProperties.KinematicDispersion
+key porosity <type 'str'>
+prop <PhysicalProperties.Porosity instance at 0xab81d2c> ['__doc__', '__init__', '__module__', 'checkValue', 'getDefaultUnit', 'getUnit', 'getValue', 'setValue', 'unit', 'value']
+dbg property porosity PhysicalProperties.Porosity
+setproperty propClass is ok 
+ dbg keyword  porosity
+ dbg propClass  PhysicalProperties.Porosity
+ dbg propdict  PhysicalProperties.Porosity
+key effectiveDiffusion <type 'str'>
+prop <tensors.IsotropicTensor instance at 0xab81c0c> Head**2/Time ['__abs__', '__add__', '__cmp__', '__div__', '__doc__', '__init__', '__module__', '__mul__', '__neg__', '__nonzero__', '__pos__', '__pow__', '__radd__', '__rdiv__', '__repr__', '__rmul__', '__rpow__', '__rsub__', '__str__', '__sub__', '_number', '_sum', 'convertToUnit', 'cos', 'getUnit', 'getUnitName', 'getValue', 'inBaseUnits', 'inUnitsOf', 'isCompatible', 'setValue', 'sin', 'sqrt', 'tan', 'unit', 'value', 'verifyValue']
+dbg property effectivediffusion PhysicalProperties.EffectiveDiffusion
+setproperty propClass is ok 
+ dbg keyword  effectivediffusion
+ dbg propClass  PhysicalProperties.EffectiveDiffusion
+ dbg propdict  PhysicalProperties.EffectiveDiffusion
+ we are here 
+ sp dbg name control H3SiO4
+sp dbg get charge  H3SiO4 -1
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control Na
+sp dbg get charge  Na 1
+ class Species molar mass  None
+ class Species molar mass end
+MasterSpecies Species.__init__
+MasterSpecies Species.__init__ end
+ sp dbg name control Si
+sp dbg get charge  Si 0
+ class Species molar mass  None
+ class Species molar mass end
+MasterSpecies Species.__init__
+MasterSpecies Species.__init__ end
+ sp dbg name control Na
+sp dbg get charge  Na 1
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control Si
+sp dbg get charge  Si 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control Quartz
+sp dbg get charge  Quartz 0
+ class Species molar mass  None
+ class Species molar mass end
+unit in Na mol/l
+unit in Quartz mol/l
+unit in Na mol/l
+within getDarcyVelocity self.darcyVelocity None
+self.darcyVelocity None
+ dbg meshFileName:  .msh
+ verbose settings
+py_definedatasetc wdefinedataset ok : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat 
+py_define_datasetc defined dataset ok : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat 
+ ini cond  [77]
+[77]
+ ini cond  [37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117]
+[37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117]
+dbg grid type  Body
+phreeqc dbg initial cond  77 77 1 1
+phreeqc dbg contigue  1 1
+ value of kboundary  77 1
+                    
+                    
+phreeqc dbg initial cond  37 117 2 82
+phreeqc dbg len list  37 117 80 81
+dbg phreeqc tempList.sort 1
+[37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117]
+phreeqc dbg kboundary 37 1
+ phreec dbg affectation  2 41
+ phreec dbg out of loop affectation  42 81
+ phreeeqc dbg out of loop 81
+ phreeqc dbg states bound  {'soda77': [[1, 1], <chemistry.ChemicalState instance at 0xab861ac>], 'column37': [[2, 41], <chemistry.ChemicalState instance at 0xab8634c>], 'column78': [[42, 81], <chemistry.ChemicalState instance at 0xab8634c>]}
+ phreeqc dbg states bound bc  ['__doc__', '__init__', '__module__', 'boundary', 'flowRate', 'getBoundary', 'getFlowRate', 'getTimeVariation', 'getType', 'getValue', 'getVelocity', 'timeVariation', 'type', 'value', 'value_property', 'value_species', 'velocity']
+inlet
+ phreeqc dbg states bound bc  ['__doc__', '__init__', '__module__', 'boundary', 'flowRate', 'getBoundary', 'getFlowRate', 'getTimeVariation', 'getType', 'getValue', 'getVelocity', 'timeVariation', 'type', 'value', 'value_property', 'value_species', 'velocity']
+symmetry
+## Warning: No kinetic law
+## Warning: No kinetic law
+## Warning: No kinetic law
+ inFile  phreeqCFile
+ outFile  2Dexample.phout
+ dbg Wphreeqc MAX_LENGTH 256 
+ in  wioutdefinition opening output file 2Dexample.phout
+ output file opening 
+ database file opening /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+ database file opened /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+ log file opening 
+ log file opened 
+*PHREEQC2.14* Input name : phreeqCFile
+*PHREEQC2.14* Output file: 2Dexample.phout
+*PHREEQC2.14* Data file  : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+ read input is ok 
+ tidy_model 
+ status 
+Reading input data for simulation 1. py_initialize value of the mpianz parameter 0
+ initialising phreeqC solutions
+initialising exchangers
+ we are in initial exchangers 
+ exchangers initialisation OK
+initialising  gas_phases
+ gas_phases initialisation OK
+ chemistry reaction
+ chemistry reaction ok 83
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~Transport initialisation~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ctm dbg body list 
+ sp dbg name control None
+sp dbg get charge  CB 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control None
+sp dbg get charge  TH 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control None
+sp dbg get charge  TO 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control None
+sp dbg get charge  Na 0
+ class Species molar mass  None
+ class Species molar mass end
+ sp dbg name control None
+sp dbg get charge  Si 0
+ class Species molar mass  None
+ class Species molar mass end
+dbg elmer species names  0 CB
+dbg elmer species names  1 TH
+dbg elmer species names  2 TO
+dbg elmer species names  3 Na
+dbg elmer species names  4 Si
+~~~~~~~~~~~~~~~~~~~~~
+~ Boundaries:       ~
+~~~~~~~~~~~~~~~~~~~~~
+ dbg getEntity is  body getEntity function  1 [10, 11, 12, 13, 14, 15, 16, 17, 18] inlet
+body getEntity function  1 [10, 11, 12, 13, 14, 15, 16, 17, 18] inlet
+
+self.dirichlet_zone.setZone
+body getEntity function  1 [10, 11, 12, 13, 14, 15, 16, 17, 18] inlet
+body getEntity function  3 [1, 2, 3, 4, 5, 6, 7, 8, 9, 19, 20, 21, 22, 23, 24, 25, 26, 27] symmetry
+dbg getNodesAnz 100
+[[ 0.    , 0.    ,]
+ [ 1.5   , 0.    ,]
+ [ 1.55  , 0.    ,]
+ [ 3.    , 0.    ,]
+ [ 3.    , 1.5   ,]
+ [ 3.    , 1.55  ,]
+ [ 3.    , 3.    ,]
+ [ 1.55  , 3.    ,]
+ [ 1.5   , 3.    ,]
+ [ 0.    , 3.    ,]
+ [ 0.    , 1.55  ,]
+ [ 0.    , 1.5   ,]
+ [ 1.5   , 1.5   ,]
+ [ 1.55  , 1.5   ,]
+ [ 1.55  , 1.55  ,]
+ [ 1.5   , 1.55  ,]
+ [ 0.375 , 0.    ,]
+ [ 0.75  , 0.    ,]
+ [ 1.125 , 0.    ,]
+ [ 1.9125, 0.    ,]
+ [ 2.275 , 0.    ,]
+ [ 2.6375, 0.    ,]
+ [ 3.    , 0.375 ,]
+ [ 3.    , 0.75  ,]
+ [ 3.    , 1.125 ,]
+ [ 3.    , 1.9125,]
+ [ 3.    , 2.275 ,]
+ [ 3.    , 2.6375,]
+ [ 2.6375, 3.    ,]
+ [ 2.275 , 3.    ,]
+ [ 1.9125, 3.    ,]
+ [ 1.125 , 3.    ,]
+ [ 0.75  , 3.    ,]
+ [ 0.375 , 3.    ,]
+ [ 0.    , 2.6375,]
+ [ 0.    , 2.275 ,]
+ [ 0.    , 1.9125,]
+ [ 0.    , 1.125 ,]
+ [ 0.    , 0.75  ,]
+ [ 0.    , 0.375 ,]
+ [ 1.5   , 0.375 ,]
+ [ 1.5   , 0.75  ,]
+ [ 1.5   , 1.125 ,]
+ [ 1.55  , 0.375 ,]
+ [ 1.55  , 0.75  ,]
+ [ 1.55  , 1.125 ,]
+ [ 1.55  , 1.9125,]
+ [ 1.55  , 2.275 ,]
+ [ 1.55  , 2.6375,]
+ [ 1.5   , 1.9125,]
+ [ 1.5   , 2.275 ,]
+ [ 1.5   , 2.6375,]
+ [ 1.9125, 1.5   ,]
+ [ 2.275 , 1.5   ,]
+ [ 2.6375, 1.5   ,]
+ [ 1.125 , 1.5   ,]
+ [ 0.75  , 1.5   ,]
+ [ 0.375 , 1.5   ,]
+ [ 1.9125, 1.55  ,]
+ [ 2.275 , 1.55  ,]
+ [ 2.6375, 1.55  ,]
+ [ 1.125 , 1.55  ,]
+ [ 0.75  , 1.55  ,]
+ [ 0.375 , 1.55  ,]
+ [ 0.375 , 0.375 ,]
+ [ 0.375 , 0.75  ,]
+ [ 0.375 , 1.125 ,]
+ [ 0.75  , 0.375 ,]
+ [ 0.75  , 0.75  ,]
+ [ 0.75  , 1.125 ,]
+ [ 1.125 , 0.375 ,]
+ [ 1.125 , 0.75  ,]
+ [ 1.125 , 1.125 ,]
+ [ 0.375 , 1.9125,]
+ [ 0.375 , 2.275 ,]
+ [ 0.375 , 2.6375,]
+ [ 0.75  , 1.9125,]
+ [ 0.75  , 2.275 ,]
+ [ 0.75  , 2.6375,]
+ [ 1.125 , 1.9125,]
+ [ 1.125 , 2.275 ,]
+ [ 1.125 , 2.6375,]
+ [ 1.9125, 0.375 ,]
+ [ 1.9125, 0.75  ,]
+ [ 1.9125, 1.125 ,]
+ [ 2.275 , 0.375 ,]
+ [ 2.275 , 0.75  ,]
+ [ 2.275 , 1.125 ,]
+ [ 2.6375, 0.375 ,]
+ [ 2.6375, 0.75  ,]
+ [ 2.6375, 1.125 ,]
+ [ 1.9125, 1.9125,]
+ [ 1.9125, 2.275 ,]
+ [ 1.9125, 2.6375,]
+ [ 2.275 , 1.9125,]
+ [ 2.275 , 2.275 ,]
+ [ 2.275 , 2.6375,]
+ [ 2.6375, 1.9125,]
+ [ 2.6375, 2.275 ,]
+ [ 2.6375, 2.6375,]]
+ dbg mesh elementId 4
+dbg vtkTyp  9
+dbg vtkTyp 9 0
+self.bodyPorosities 

@@ -1,0 +1,4 @@
+Input File = 2D.msh
+Output File = 2D
+Input Mode = Gmsh
+Output Mode = ElmerSolver

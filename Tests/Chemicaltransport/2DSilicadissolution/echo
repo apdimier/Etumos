@@ -1,0 +1,735 @@
+Tensor value 0.0 m**2/s
+Tensor value 0.0 m**2/s
+Tensor value 1.0 <PhysicalUnit Permeability>
+Tensor value 1.0 <PhysicalUnit Permeability>
+keyword kinematicDispersion
+dbg property:  kinematicdispersion PhysicalProperties.KinematicDispersion
+keyword kinematicDispersion
+dbg property:  kinematicdispersion PhysicalProperties.KinematicDispersion
+setproperty propClass is ok 
+ dbg material key kinematicDispersion
+keywordsetproperty propClass is ok 
+ dbg material key kinematicDispersion
+keyword porosity
+dbg property:  porosity PhysicalProperties.Porosity
+setproperty propClass is ok 
+ porosity
+dbg property:  porosity PhysicalProperties.Porosity
+setproperty propClass is ok 
+ dbg material key porosity
+ dbg material key porosity
+keyword permeability
+dbg property:  permeability PhysicalProperties.Permeability
+setproperty propClass is ok 
+ dbg material key permeability
+keyword effectiveDiffusionkeyword permeability
+dbg property:  permeability PhysicalProperties.Permeability
+setproperty propClass is ok 
+ dbg material key permeability
+keyword effectiveDiffusion
+dbg property:  effectivediffusion PhysicalProperties.EffectiveDiffusion
+setproperty propClass is ok 
+ dbg material key effectiveDiffusion
+
+dbg property:  effectivediffusion PhysicalProperties.EffectiveDiffusion
+setproperty propClass is ok 
+ dbg material key effectiveDiffusion
+ dbg material we are here 
+ dbg material we are here 
+C0  0.01
+C0  0.01
+value:  <type 'str'> ChemicalState
+dbg bcdict  value:  <type 'str'> ChemicalState
+['Flux', 'Dirichlet']
+valueeeee ChemicalState
+dbg bcdict  ['Flux', 'Dirichlet']
+valueeeee ChemicalState
+dbg argv  ['2Dexample_ref_mpi.dbg argv  ['2Dexample_ref_mpi.py']
+mpi is in argv  ['2Dexample_ref_mpi.py']py']
+mpi is in argv  ['2Dexample_ref_mpi.py']MPI
+ 0
+MPI
+ 0
+environ  None
+environ  None
+ the simulation is //, the communicator is launched on 2 processors
+within getDarcyVelocity self.darcyVelocity None
+self.darcyVelocity None
+ the simulation is //, the communicator is launched on 2 processors
+within getDarcyVelocity self.darcyVelocity None
+self.darcyVelocity None
+ self transportcomponent mt3d mpiEnv 1
+mpiEnv
+mpiEnv
+mpiEnv
+mpiEnv
+mpiEnv
+mpiEnv
+mpiEnv
+
+ phreeqc init method  2
+ self transportcomponent mt3d mpiEnv 1
+mpiEnv
+mpiEnv
+mpiEnv
+mpiEnv
+mpiEnv
+mpiEnv
+mpiEnv
+
+ phreeqc init method  2
+ verbose settings
+ verbose settings over
+<mt3d.Mt3d instance at 0x23bf3f8>
+ debut de run
+ctmdbg launch method
+ verbose settings
+ verbose settings over
+ debut de run
+py_definedatasetc wdefinedataset ok : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat 
+py_definedatasetc defined dataset ok : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat 
+ctmdbg launch method
+py_definedatasetc wdefinedataset ok : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat 
+py_definedatasetc defined dataset ok : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat 
+34 1 2 2
+34 34 21 2
+34 34 20 21
+34 34 20 2
+34 34 20 21
+35 34 2 20
+35 34 2 21
+34 1 2 2
+34 34 21 2
+34 34 20 21
+34 34 20 2
+34 34 20 21
+35 34 2 20
+35 34 2 21
+ ---------------
+ boolean  0
+formationReaction [('Na+', 1)]
+symbol Na+
+('Na+', 1) Na+ 1
+within the gamma function 
+ ---------------
+ boolean  0
+formationReaction [('H4SiO4', 1)]
+symbol H4SiO4
+('H4SiO4', 1) H4SiO4 1
+within the gamma function 
+ ---------------
+ boolean  0
+ ---------------
+ boolean  0
+formationReaction [('Na+', 1)]
+symbol Na+
+('Na+', 1) Na+formationReaction [('H4SiO4', 1), ('H+', -1)]
+symbol H3SiO4-
+('H4SiO4', 1) H4SiO4 1
+('H+', -1) H+ -1
+ 1
+within the gamma function 
+ ---------------
+ boolean  0
+formationReaction [('H4SiO4', 1)]
+symbol H4SiO4
+within the gamma function 
+ ---------------
+ boolean  1
+formationReaction [('H2O', -2), ('H4SiO4', 1)]
+symbol('H4SiO4', 1) H4SiO4 1
+within the gamma function 
+ ---------------
+ boolean  0
+formationReaction [('H4SiO4', 1), ('H SiO2
+('H2O', -2) H2O -2
+('H4SiO4', 1) H4SiO4 1
++', -1)]
+symbol H3SiO4-
+('H4SiO4', 1) H4SiO4 1
+('H+', -1) H+ -1
+within the gamma function 
+ ---------------
+ boolean  1
+formationReaction [('H2O', -2), ('H4SiO4', 1)]
+symbol SiO2
+('H2O', -2) H2O -2
+('H4SiO4', 1) H4SiO4 1
+## Warning: No kinetic law within thecolumn state 
+## Warning: No kinetic law within thecolumn state 
+## Warning: No kinetic law within thecolumn state 
+## Warning: No kinetic law within thecolumn state 
+## Warning: No kinetic law within thecolumn state 
+## Warning: No kinetic law within thesoda state 
+## Warning: No kinetic law within thecolumn state 
+## Warning: No kinetic law within thesoda state 
+## Warning: No kinetic law within thecolumn state 
+## Warning: No kinetic law within thecolumn state 
+## Warning: No kinetic law within thecolumn state 
+## Warning: No kinetic law within thecolumn state 
+ pdbg inFile  phreeqCFile0
+ pdbg outFile  2Dexample.phout
+ dbg Wphreeqc MAX_LENGTH 256 2Dexample.phout
+ in  wioutdefinition opening output file 2Dexample.phout
+ output file opening 
+ database file opening /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+ database file opened /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+ log file opening 
+ log file opened 
+*PHREEQC2.17.5* Input name : phreeqCFile0
+*PHREEQC2.17.5* Output file: 2Dexample.phout
+*PHREEQC2.17.5* Data file  : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+ pdbg inFile  phreeqCFile1
+ pdbg outFile  2Dexample.phout
+ dbg Wphreeqc MAX_LENGTH 256 2Dexample.phout
+ in  wioutdefinition opening output file 2Dexample.phout
+ output file opening 
+ database file opening /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+ database file opened /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+ log file opening 
+ log file opened 
+*PHREEQC2.17.5* Input name : phreeqCFile1
+*PHREEQC2.17.5* Output file: 2Dexample.phout
+*PHREEQC2.17.5* Data file  : /home/dimier/Wrapper/Phreeqc_dat/water_gui.dat
+read_database 
+read_database 
+after tidy model call 1: 
+mpi_control is not null
+ value of the size and rank parameter size 2 and rank 0
+ initialising phreeqC solutions
+after tidy model call 1: 
+mpi_control is not null
+ value of the size and rank parameter size 2 and rank 1
+ initialising phreeqC solutions
+ after initial_solution
+initialising exchangers
+ exchangers initialisation OK
+initialising  gas_phases
+gas_phases initialisation OK
+ chemistry reaction
+ chemistry reaction ok 7070
+ after initial_solution
+initialising exchangers
+ exchangers initialisation OK
+initialising  gas_phases
+gas_phases initialisation OK
+ chemistry reaction
+ chemistry reaction ok 7070
+dbp getPrimarySpeciesNames
+ dg getPrimarySpeciesc -> wgetcompo  dbgpc wgetcompo 7070
+Number of components in the solution :  5
+ dwgetcompo Element n. 0 of old name CB new species name CB
+ dwgetcompo Element n. 1 of old name TH new species name TH
+ dwgetcompo Element n. 2 of old name TO new species name TO
+ dwgetcompo Element n. 3 of old name Si new species name Na
+ dwgetcompo Element n. 4 of old name Si new species name Si
+ over
+ctmdbg mpiEnv ['CB', 'TH', 'TO', 'Na', 'Si'] 0
+ctmdbg mpi 01
+ py_mo myrank==0 17500
+dbp getPrimarySpeciesNames
+ dg getPrimarySpeciesc -> wgetcompo  dbgpc wgetcompo 7070
+Number of components in the solution :  5
+ dwgetcompo Element n. 0 of old name CB new species name CB
+ dwgetcompo Element n. 1 of old name TH new species name TH
+ dwgetcompo Element n. 2 of old name TO new species name TO
+ dwgetcompo Element n. 3 of old name Si new species name Na
+ dwgetcompo Element n. 4 of old name Si new species name Si
+ over
+ctmdbg mpiEnv ['CB', 'TH', 'TO', 'Na', 'Si'] 1
+ctmdbg mpi 01
+ctmdbg mpi 02
+ ctmdbg Milestone: 
+
+35000 [-1.0817444833310225e-10, -1.0817444833310225e-10, -1.0817444833310225e-10, -1.0817444833310225e-10, -1.0817444833310225e-10, -1.0817444833310225e-10, -1.0817444833310225e-10, -1.0817444833310225e-10, -1.0817444833310225e-10, -1.0817444833310225e-10]
+ctmdbg mpi 02
+ctmdbg mpi 1 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 1
+~ ctmdbg Transport initialisation~ 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 1
+ctmdbg mpi 1 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 1
+~ ctmdbg Transport initialisation~ 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 1
+ ctmdbg transportInitialisation for rank 0
+ mesh rank 0
+ dbgc sethydrporparameter call:
+  we are in set_hy param            0
+  we are in set_hy param            0
+ mt3d dbg within setHydraulicPorosityParameter fwel is kept to F
+ctmdbg setHydraulicPorosityParameter over
+ctmdbg setregions
+ctmdbg transportSolver.setBoundaryConditions
+ nrow ncol  70 101
+ mt3d dbg b.l. treat  1 1 1 70
+ btn file writing process is oK
+ i1 i2 j1 j2  2 19 34 34
+ i1 i2 j1 j2  21 101 34 34
+ i1 i2 j1 j2  2 101 35 70
+ i1 i2 j1 j2  20 20 34 34
+ i1 i2 j1 j2  1 1 1 70
+ i1 i2 j1 j2  2 101 1 33
+ porosity_region  1.0 2 19 34 34
+ porosity_region  1.0 21 101 34 34
+ porosity_region  1.0 2 101 35 70
+ porosity_region  1.0 20 20 34 34
+ porosity_region  1.0 1 1 1 70
+ porosity_region  1.0 2 101 1 33
+ mt3d dbg end of the dsp file
+  mt3d dbg ssm ouverture du fichier 2108
+  mt3d dbg ssm ecriture des booleens dont self.fwel F
+self.fwel == "F"
+ the setData method is over
+TVD 
+JACOBI
+ctmdbg rank of  communicator 0
+7000
+ End of transport initialisation 
+ ctmdbg azerty  1 1 1
+ ctmdbg azerty  1 1 1
+ ctmdbg azerty  1 1 1
+ ctmdbg azerty  1 1 1
+ ctmdbg azerty  1 1 1
+ ctmdbg azerty  1 1 1
+ ctmdbg azerty  1 1 1
+ ctmdbg azerty  1 1 1
+ ctmdbg azerty  1 1 1
+ ctmdbg azerty  1 1 1
+ py_mo myrank==0 17500
+ ctmdbg get MobileConcentration over  35000
+ ctmdbg get MobileConcentration over  35000
+ ctm dbg set MobileConcentration over  ctm dbg set MobileConcentration over 
+
+ ctm dbg equi over 
+ ctm dbg equi over 
+ ctmdbg getImmobileConcentrationField over  0.0
+ ctmdbg getImmobileConcentrationField over  0.0
+ctm dbg transport init method
+ctm dbg transport init method rank:  True
+ctm dbg transport init method
+ launch ended 
+ dbgc initialize mcomp : 5 nnrow : 70 nncol : 101 ActiveCellsNumber : 7000 ierror : 0 
+dbgc set porosity call
+ launch ended 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.0000e+03 , time step: 2.0000e+03 (time iteration # 1  )
+==>  Mpi Convergence error is:  1e-15 , it. =  1  Mem.  (689300.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+ ctmdbg oneTimeStep ended 
+ ctmdbg oneTimeStep untiltime 
+ ctmdbg oneTimeStep ended 
+ ctmdbg oneTimeStep untiltime 
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  4.1000e+03 , time step: 2.1000e+03 (time iteration # 2  )
+         Max error:   1.11066416e-03, iteration:     1 at point:  3319
+         Max error:   2.13128204e-04, iteration:     2 at point:  3319
+         Max error:   4.82608248e-05, iteration:     3 at point:  3319
+         Max error:   1.18907625e-05, iteration:     4 at point:  3319
+         Max error:   3.08103038e-06, iteration:     5 at point:  3319
+==>  Mpi Convergence error is:  3.08103038282e-06 , it. =  5  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  6.3050e+03 , time step: 2.2050e+03 (time iteration # 3  )
+         Max error:   9.25919398e-04, iteration:     1 at point:  3319
+         Max error:   1.85389976e-04, iteration:     2 at point:  3319
+         Max error:   4.36548473e-05, iteration:     3 at point:  3319
+         Max error:   1.11712443e-05, iteration:     4 at point:  3319
+         Max error:   3.00228071e-06, iteration:     5 at point:  3319
+==>  Mpi Convergence error is:  3.00228071404e-06 , it. =  5  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  8.6202e+03 , time step: 2.3152e+03 (time iteration # 4  )
+         Max error:   7.53367612e-04, iteration:     1 at point:  3319
+         Max error:   1.56553244e-04, iteration:     2 at point:  3319
+         Max error:   3.82010011e-05, iteration:     3 at point:  3319
+         Max error:   1.01199917e-05, iteration:     4 at point:  3319
+         Max error:   2.81821969e-06, iteration:     5 at point:  3319
+==>  Mpi Convergence error is:  2.8182196945e-06 , it. =  5  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.1051e+04 , time step: 2.4310e+03 (time iteration # 5  )
+         Max error:   6.04390486e-04, iteration:     1 at point:  3319
+         Max error:   1.30183262e-04, iteration:     2 at point:  3319
+         Max error:   3.28910738e-05, iteration:     3 at point:  3319
+         Max error:   9.01570851e-06, iteration:     4 at point:  3319
+==>  Mpi Convergence error is:  9.01570850975e-06 , it. =  4  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.3604e+04 , time step: 2.5526e+03 (time iteration # 6  )
+         Max error:   4.79343569e-04, iteration:     1 at point:  3319
+         Max error:   1.06870702e-04, iteration:     2 at point:  3319
+         Max error:   2.80399053e-05, iteration:     3 at point:  3319
+         Max error:   7.96877031e-06, iteration:     4 at point:  3319
+==>  Mpi Convergence error is:  7.96877030806e-06 , it. =  4  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.6284e+04 , time step: 2.6802e+03 (time iteration # 7  )
+         Max error:   3.75734057e-04, iteration:     1 at point:  3319
+         Max error:   8.67777250e-05, iteration:     2 at point:  3319
+         Max error:   2.34764196e-05, iteration:     3 at point:  3319
+         Max error:   6.92738785e-06, iteration:     4 at point:  3319
+==>  Mpi Convergence error is:  6.92738785046e-06 , it. =  4  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.9098e+04 , time step: 2.8142e+03 (time iteration # 8  )
+         Max error:   2.91081610e-04, iteration:     1 at point:  3319
+         Max error:   6.96351780e-05, iteration:     2 at point:  3319
+         Max error:   1.94857453e-05, iteration:     3 at point:  3319
+         Max error:   5.94063582e-06, iteration:     4 at point:  3319
+==>  Mpi Convergence error is:  5.94063582415e-06 , it. =  4  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.2053e+04 , time step: 2.9549e+03 (time iteration # 9  )
+         Max error:   2.22889601e-04, iteration:     1 at point:  3319
+         Max error:   5.52283649e-05, iteration:     2 at point:  3319
+         Max error:   1.59808729e-05, iteration:     3 at point:  3319
+         Max error:   5.03266235e-06, iteration:     4 at point:  3319
+==>  Mpi Convergence error is:  5.03266235152e-06 , it. =  4  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.5156e+04 , time step: 3.1027e+03 (time iteration # 10  )
+         Max error:   1.68737600e-04, iteration:     1 at point:  3319
+         Max error:   4.33066302e-05, iteration:     2 at point:  3319
+         Max error:   1.29560131e-05, iteration:     3 at point:  3319
+         Max error:   4.21339930e-06, iteration:     4 at point:  3319
+==>  Mpi Convergence error is:  4.21339930146e-06 , it. =  4  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.8414e+04 , time step: 3.2578e+03 (time iteration # 11  )
+         Max error:   1.21036820e-04, iteration:     1 at point:  3319
+         Max error:   3.16993100e-05, iteration:     2 at point:  3319
+         Max error:   1.55889470e-05, iteration:     3 at point:  3319
+         Max error:   4.86457163e-06, iteration:     4 at point:  3319
+==>  Mpi Convergence error is:  4.86457163262e-06 , it. =  4  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.1834e+04 , time step: 3.4207e+03 (time iteration # 12  )
+         Max error:   8.87372795e-05, iteration:     1 at point:  3319
+         Max error:   2.40612602e-05, iteration:     2 at point:  3319
+         Max error:   7.61017590e-06, iteration:     3 at point:  3319
+==>  Mpi Convergence error is:  7.61017590123e-06 , it. =  3  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.5426e+04 , time step: 3.5917e+03 (time iteration # 13  )
+         Max error:   6.46644065e-05, iteration:     1 at point:  3319
+         Max error:   1.80774489e-05, iteration:     2 at point:  3319
+         Max error:   5.90767242e-06, iteration:     3 at point:  3319
+==>  Mpi Convergence error is:  5.90767242148e-06 , it. =  3  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  3.9197e+04 , time step: 3.7713e+03 (time iteration # 14  )
+         Max error:   4.63688501e-05, iteration:     1 at point:  3319
+         Max error:   1.34046428e-05, iteration:     2 at point:  3319
+         Max error:   4.50480595e-06, iteration:     3 at point:  3319
+==>  Mpi Convergence error is:  4.50480594716e-06 , it. =  3  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  4.3157e+04 , time step: 3.9599e+03 (time iteration # 15  )
+         Max error:   3.87852385e-05, iteration:     1 at point:  3300
+         Max error:   9.80453130e-06, iteration:     2 at point:  3319
+==>  Mpi Convergence error is:  9.8045313035e-06 , it. =  2  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  4.7315e+04 , time step: 4.1579e+03 (time iteration # 16  )
+         Max error:   4.03393388e-05, iteration:     1 at point:  3300
+         Max error:   9.05072618e-06, iteration:     2 at point:   100
+==>  Mpi Convergence error is:  9.05072618274e-06 , it. =  2  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  5.1681e+04 , time step: 4.3657e+03 (time iteration # 17  )
+         Max error:   4.19410191e-05, iteration:     1 at point:  3300
+         Max error:   9.74623596e-06, iteration:     2 at point:   100
+==>  Mpi Convergence error is:  9.7462359625e-06 , it. =  2  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  5.6265e+04 , time step: 4.5840e+03 (time iteration # 18  )
+         Max error:   4.35906496e-05, iteration:     1 at point:  3300
+         Max error:   1.04867980e-05, iteration:     2 at point:   100
+         Max error:   2.96713831e-06, iteration:     3 at point:   100
+==>  Mpi Convergence error is:  2.96713831149e-06 , it. =  3  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  6.1078e+04 , time step: 4.8132e+03 (time iteration # 19  )
+         Max error:   4.52886581e-05, iteration:     1 at point:  3300
+         Max error:   1.12744597e-05, iteration:     2 at point:   100
+         Max error:   3.29569078e-06, iteration:     3 at point:   100
+==>  Mpi Convergence error is:  3.29569077695e-06 , it. =  3  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  6.6132e+04 , time step: 5.0539e+03 (time iteration # 20  )
+         Max error:   4.70351463e-05, iteration:     1 at point:  3300
+         Max error:   1.21112213e-05, iteration:     2 at point:   100
+         Max error:   3.65583816e-06, iteration:     3 at point:   100
+==>  Mpi Convergence error is:  3.65583815776e-06 , it. =  3  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  7.1439e+04 , time step: 5.3066e+03 (time iteration # 21  )
+         Max error:   4.88302443e-05, iteration:     1 at point:  3300
+         Max error:   1.29990946e-05, iteration:     2 at point:   100
+         Max error:   4.04995797e-06, iteration:     3 at point:   100
+==>  Mpi Convergence error is:  4.04995797454e-06 , it. =  3  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  7.7010e+04 , time step: 5.5719e+03 (time iteration # 22  )
+         Max error:   5.06739929e-05, iteration:     1 at point:  3300
+         Max error:   1.39400722e-05, iteration:     2 at point:   100
+         Max error:   4.48052294e-06, iteration:     3 at point:   100
+==>  Mpi Convergence error is:  4.48052294044e-06 , it. =  3  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  8.2861e+04 , time step: 5.8505e+03 (time iteration # 23  )
+         Max error:   5.25663396e-05, iteration:     1 at point:  3300
+         Max error:   1.49361176e-05, iteration:     2 at point:   100
+         Max error:   4.95009465e-06, iteration:     3 at point:   100
+==>  Mpi Convergence error is:  4.95009465262e-06 , it. =  3  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  8.9004e+04 , time step: 6.1430e+03 (time iteration # 24  )
+         Max error:   5.45071356e-05, iteration:     1 at point:  3300
+         Max error:   1.59891537e-05, iteration:     2 at point:   100
+         Max error:   5.46131593e-06, iteration:     3 at point:   100
+==>  Mpi Convergence error is:  5.46131592594e-06 , it. =  3  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  9.5454e+04 , time step: 6.4502e+03 (time iteration # 25  )
+         Max error:   5.64961329e-05, iteration:     1 at point:  3300
+         Max error:   1.71010509e-05, iteration:     2 at point:   100
+         Max error:   6.01690174e-06, iteration:     3 at point:   100
+==>  Mpi Convergence error is:  6.01690173641e-06 , it. =  3  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.0223e+05 , time step: 6.7727e+03 (time iteration # 26  )
+         Max error:   5.85329812e-05, iteration:     1 at point:  3300
+         Max error:   1.82736158e-05, iteration:     2 at point:   100
+         Max error:   6.61962877e-06, iteration:     3 at point:   100
+==>  Mpi Convergence error is:  6.61962876558e-06 , it. =  3  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.0934e+05 , time step: 7.1113e+03 (time iteration # 27  )
+         Max error:   6.06172264e-05, iteration:     1 at point:  3300
+         Max error:   1.95085783e-05, iteration:     2 at point:   100
+         Max error:   7.27232355e-06, iteration:     3 at point:   100
+==>  Mpi Convergence error is:  7.27232355224e-06 , it. =  3  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.1681e+05 , time step: 7.4669e+03 (time iteration # 28  )
+         Max error:   6.27483085e-05, iteration:     1 at point:  3300
+         Max error:   2.08075801e-05, iteration:     2 at point:   100
+         Max error:   7.97784927e-06, iteration:     3 at point:   100
+==>  Mpi Convergence error is:  7.97784927498e-06 , it. =  3  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.2465e+05 , time step: 7.8403e+03 (time iteration # 29  )
+         Max error:   6.49255606e-05, iteration:     1 at point:  3300
+         Max error:   2.21721619e-05, iteration:     2 at point:   100
+         Max error:   8.73909123e-06, iteration:     3 at point:   100
+==>  Mpi Convergence error is:  8.73909123e-06 , it. =  3  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.3288e+05 , time step: 8.2323e+03 (time iteration # 30  )
+         Max error:   6.71482084e-05, iteration:     1 at point:  3300
+         Max error:   2.36080272e-05, iteration:     2 at point:  6700
+         Max error:   9.55894107e-06, iteration:     3 at point:   100
+==>  Mpi Convergence error is:  9.55894107291e-06 , it. =  3  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.4152e+05 , time step: 8.6439e+03 (time iteration # 31  )
+         Max error:   6.94153709e-05, iteration:     1 at point:  3100
+         Max error:   2.51270060e-05, iteration:     2 at point:  6700
+         Max error:   1.04401900e-05, iteration:     3 at point:   100
+         Max error:   4.68301629e-06, iteration:     4 at point:   100
+==>  Mpi Convergence error is:  4.68301629231e-06 , it. =  4  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.5060e+05 , time step: 9.0761e+03 (time iteration # 32  )
+         Max error:   7.17263896e-05, iteration:     1 at point:  3000
+         Max error:   2.67190541e-05, iteration:     2 at point:  6700
+         Max error:   1.13840430e-05, iteration:     3 at point:   100
+         Max error:   5.23496688e-06, iteration:     4 at point:   100
+==>  Mpi Convergence error is:  5.23496688332e-06 , it. =  4  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.6013e+05 , time step: 9.5299e+03 (time iteration # 33  )
+         Max error:   7.40799016e-05, iteration:     1 at point:  3000
+         Max error:   2.83841272e-05, iteration:     2 at point:  6700
+         Max error:   1.23945267e-05, iteration:     3 at point:   100
+         Max error:   5.84034266e-06, iteration:     4 at point:   100
+==>  Mpi Convergence error is:  5.84034266393e-06 , it. =  4  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.7013e+05 , time step: 1.0006e+04 (time iteration # 34  )
+         Max error:   7.64747189e-05, iteration:     1 at point:  2900
+         Max error:   3.01231865e-05, iteration:     2 at point:  6700
+         Max error:   1.34745257e-05, iteration:     3 at point:   100
+         Max error:   6.50258698e-06, iteration:     4 at point:   100
+==>  Mpi Convergence error is:  6.50258697532e-06 , it. =  4  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.8064e+05 , time step: 1.0507e+04 (time iteration # 35  )
+         Max error:   7.89095540e-05, iteration:     1 at point:  2900
+         Max error:   3.19370310e-05, iteration:     2 at point:  6700
+         Max error:   1.46266835e-05, iteration:     3 at point:   100
+         Max error:   7.22530404e-06, iteration:     4 at point:   100
+==>  Mpi Convergence error is:  7.22530403618e-06 , it. =  4  Mem.  (699648.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  1.9167e+05 , time step: 1.1032e+04 (time iteration # 36  )
+         Max error:   8.13830215e-05, iteration:     1 at point:  2800
+         Max error:   3.38262760e-05, iteration:     2 at point:  6700
+         Max error:   1.58535184e-05, iteration:     3 at point:   100
+         Max error:   8.01212700e-06, iteration:     4 at point:   100
+==>  Mpi Convergence error is:  8.01212699697e-06 , it. =  4  Mem.  (699652.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.0326e+05 , time step: 1.1584e+04 (time iteration # 37  )
+         Max error:   8.38936433e-05, iteration:     1 at point:  2800
+         Max error:   3.57913447e-05, iteration:     2 at point:  6700
+         Max error:   1.71574221e-05, iteration:     3 at point:   100
+         Max error:   8.86669256e-06, iteration:     4 at point:   100
+==>  Mpi Convergence error is:  8.86669255618e-06 , it. =  4  Mem.  (699652.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.1542e+05 , time step: 1.2163e+04 (time iteration # 38  )
+         Max error:   8.64398529e-05, iteration:     1 at point:  2700
+         Max error:   3.78324617e-05, iteration:     2 at point:  6700
+         Max error:   1.85406385e-05, iteration:     3 at point:   100
+         Max error:   9.79261414e-06, iteration:     4 at point:   100
+==>  Mpi Convergence error is:  9.79261414047e-06 , it. =  4  Mem.  (699652.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.2819e+05 , time step: 1.2771e+04 (time iteration # 39  )
+         Max error:   8.90199982e-05, iteration:     1 at point:  2700
+         Max error:   3.99496548e-05, iteration:     2 at point:  6700
+         Max error:   2.00050844e-05, iteration:     3 at point:   100
+         Max error:   1.07932667e-05, iteration:     4 at point:   100
+         Max error:   6.47810164e-06, iteration:     5 at point:  6701
+==>  Mpi Convergence error is:  6.47810164101e-06 , it. =  5  Mem.  (699652.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.4160e+05 , time step: 1.3410e+04 (time iteration # 40  )
+         Max error:   9.16328814e-05, iteration:     1 at point:  2700
+         Max error:   4.21429671e-05, iteration:     2 at point:  6700
+         Max error:   2.15528192e-05, iteration:     3 at point:   100
+         Max error:   1.18724043e-05, iteration:     4 at point:   100
+         Max error:   7.15081843e-06, iteration:     5 at point:   201
+==>  Mpi Convergence error is:  7.15081842528e-06 , it. =  5  Mem.  (699652.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.5568e+05 , time step: 1.4080e+04 (time iteration # 41  )
+         Max error:   9.42762667e-05, iteration:     1 at point:  2600
+         Max error:   4.44118123e-05, iteration:     2 at point:  6700
+         Max error:   2.31855023e-05, iteration:     3 at point:   100
+         Max error:   1.30333344e-05, iteration:     4 at point:   100
+         Max error:   7.87237111e-06, iteration:     5 at point:  6701
+==>  Mpi Convergence error is:  7.87237110611e-06 , it. =  5  Mem.  (699652.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.7046e+05 , time step: 1.4784e+04 (time iteration # 42  )
+         Max error:   9.69482954e-05, iteration:     1 at point:  2600
+         Max error:   4.67555761e-05, iteration:     2 at point:  6700
+         Max error:   2.49046014e-05, iteration:     3 at point:   100
+         Max error:   1.42792974e-05, iteration:     4 at point:   100
+         Max error:   8.64369776e-06, iteration:     5 at point:   201
+==>  Mpi Convergence error is:  8.6436977641e-06 , it. =  5  Mem.  (699652.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.8599e+05 , time step: 1.5523e+04 (time iteration # 43  )
+         Max error:   9.96470531e-05, iteration:     1 at point:  4100
+         Max error:   4.91734305e-05, iteration:     2 at point:  6700
+         Max error:   2.67113609e-05, iteration:     3 at point:   100
+         Max error:   1.56133761e-05, iteration:     4 at point:   100
+         Max error:   9.48059659e-06, iteration:     5 at point:   100
+==>  Mpi Convergence error is:  9.48059659223e-06 , it. =  5  Mem.  (699652.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+------------------------------------------------------------------
+Chemical / transport simulation, Time:  2.8800e+05 , time step: 2.0133e+03 (time iteration # 44  )
+         Max error:   2.18795482e-05, iteration:     1 at point:  3000
+         Max error:   2.78054502e-06, iteration:     2 at point:   100
+==>  Mpi Convergence error is:  2.78054501823e-06 , it. =  2  Mem.  (699652.0, 'Kb') 
+ py_mo myrank==0 17500
+ py_mo myrank==0 17500
+====================== 
+Error estimation on pH 
+====================== 
+ mt3d_stop :
+====================== 
+Error estimation on pH 
+====================== 
+inderr  0
+ max of error  0.127782512796 12.7782512796
+ maximal concentration  1.100005 1.7 9.73160589498
+maximal error for pH =  0.127782512796  and % of error is  12.7782512796
+
+ 
+ -- Test-case Alkaline 2D with MTMS/PHREEQC coupling OK -- 
+ 
+
+inderr  0
+ maximal concentration  1.100005 1.7 0.000126616518583
+maximal error for Na =  3.30515635645e-05  and % of error is  0.00330515635645
+
+ 
+ -- MTMS/PHREEQC coupling OK -- 
+ 
+
+~~~~~~~~~~~~~~~~~~~~~~~
+End of the 2D test case
+~~~~~~~~~~~~~~~~~~~~~~~
+ finalOutputsWriter
+
+"Panta rhei"
+
+----------------------
+End of the computation
+total CPU time :  39.05
+----------------------
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        End of the 2Dexample case ~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ Print Contents of Flow-Transport Link File for Checking (y/n)? 

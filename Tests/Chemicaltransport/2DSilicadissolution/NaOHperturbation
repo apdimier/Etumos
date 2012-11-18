@@ -1,0 +1,94 @@
+PHASES
+      Quartz
+          SiO2 = H4SiO4  -2H2O 
+                    log_k   -3.60000e+00
+SOLUTION_MASTER_SPECIES
+              Si   H4SiO4    0.00000      SiO2  28.08430
+                 Na   Na+    0.00000        Na  22.98980
+SOLUTION_SPECIES
+          H4SiO4 -1H+  = H3SiO4-
+                    log_k   -9.8000000e+00
+          H4SiO4  = H4SiO4
+                    log_k   0.0000000e+00
+          Na+  = Na+
+                    log_k   0.0000000e+00
+SOLUTION 3320-3400 column3
+   temp        2.5E+01
+   pH          7.0E+00 
+   pe          4.0E+00
+   units mol/l
+                       Na             0.0E+00
+EXCHANGE 3320-3400 column3
+               equilibrate    3320
+EQUILIBRIUM_PHASES 3320-3400 column3
+                   Quartz    0.00000e+00  1.00000e+00
+SOLUTION 1-3300 column
+   temp        2.5E+01
+   pH          7.0E+00 
+   pe          4.0E+00
+   units mol/l
+                       Na             0.0E+00
+EXCHANGE 1-3300 column
+               equilibrate       1
+EQUILIBRIUM_PHASES 1-3300 column
+                   Quartz    0.00000e+00  1.00000e+00
+SOLUTION 3301-3318 column1
+   temp        2.5E+01
+   pH          7.0E+00 
+   pe          4.0E+00
+   units mol/l
+                       Na             0.0E+00
+EXCHANGE 3301-3318 column1
+               equilibrate    3301
+EQUILIBRIUM_PHASES 3301-3318 column1
+                   Quartz    0.00000e+00  1.00000e+00
+SOLUTION 3401-7000 column4
+   temp        2.5E+01
+   pH          7.0E+00 
+   pe          4.0E+00
+   units mol/l
+                       Na             0.0E+00
+EXCHANGE 3401-7000 column4
+               equilibrate    3401
+EQUILIBRIUM_PHASES 3401-7000 column4
+                   Quartz    0.00000e+00  1.00000e+00
+SOLUTION 3319-3319 column2
+   temp        2.5E+01
+   pH      1.22545E+01 
+   pe          4.0E+00
+   units mol/l
+                       Na             2.0E-02
+EXCHANGE 3319 column2
+               equilibrate    3319
+EQUILIBRIUM_PHASES 3319 column2
+                   Quartz    0.00000e+00  1.00000e+00
+SOLUTION 7001-7070 NaOH_bc0_bc0
+   temp        2.5E+01
+   pH          7.0E+00 
+   pe          4.0E+00
+   units mol/l
+                       Na             0.0E+00
+EXCHANGE 7001-7070 NaOH_bc0_bc0
+               equilibrate    7001
+EQUILIBRIUM_PHASES 7001-7070 NaOH_bc0_bc0
+SELECTED_OUTPUT
+-high_precision true
+KNOBS
+ -iterations 500
+  -diag true 
+-tolerance 1.e-15
+SOLUTION 0
+PRINT
+ -reset	true
+# the -cells parameter under TRANSPORT is the 
+# only relevant parameter 
+TRANSPORT
+  -cells          7070
+  -time_step          100.
+  -shifts          5
+  -lengths        0.1
+  -flow_direction diff
+  -boundary_conditions        closed closed
+  -print_frequency      1
+  -warnings False
+END
