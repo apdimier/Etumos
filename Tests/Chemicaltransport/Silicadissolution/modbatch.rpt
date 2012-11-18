@@ -1,0 +1,21 @@
+  USGS MODFLOW MODEL BATCH-MODE REPORT
+
+ LIST 6 modhw.lst                                                                
+  Specified name file does not exist.
+  Processing will continue with the next name file in modflow.bf.
+
+ BAS  5 modhw.bas                                                                
+  Specified name file does not exist.
+  Processing will continue with the next name file in modflow.bf.
+
+ SIP 13 modhw.sip                                                                
+  Specified name file does not exist.
+  Processing will continue with the next name file in modflow.bf.
+
+ OC  14 modhw.oc                                                                 
+  Specified name file does not exist.
+  Processing will continue with the next name file in modflow.bf.
+
+ BCF 11 modhw.bcf                                                                
+  Specified name file does not exist.
+  Processing will continue with the next name file in modflow.bf.

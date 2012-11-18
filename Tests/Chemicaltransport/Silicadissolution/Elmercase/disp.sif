@@ -1,0 +1,103 @@
+Check Keywords Warn
+
+Header
+Mesh DB "." "Gitter"
+End
+
+
+Simulation
+  Max Output level = 3
+  Coordinate System = Cartesian 2D
+  Simulation Type = Transient
+  Timestepping Method = Explicit Euler
+!  Timestepping Method = BDF
+  BDF Order = 2
+  Timestep Sizes(4) = 0.025 0.05 0.075 0.125
+  Timestep Intervals(4) = 20 20 20 28
+  Output Intervals(1) = 5
+!  Steady State Max Iterations = 200
+! Output File = "ad3.result"
+! Post File = "ad3.ep"
+End
+
+
+! ~~
+! Constants
+! ~~
+Constants
+  Gravity(4) = 0 -1 0 9.780000e+00
+End
+
+! ~~
+! Body
+! ~~
+Body 1
+  Equation = 1
+  Material = 1
+End
+
+! ~~
+! Equation p28 ref. Manual
+! ~~
+
+Equation 1
+  Active Solvers(1) = 1 
+  Concentration Units = String Absolute Mass
+  Convection = Constant
+End
+
+! ~~
+! Material p29 ref. Manual
+! ~~
+Material 1
+  Poison Diffusivity = Real 3.0e-5
+  Poison Maximum Solubility = Real 1.0
+  Convection Velocity 1 = 0.0
+  Convection Velocity 2 = 0.0
+  Convection Velocity 3 = 0.0
+  Density = Real 1.0
+End
+
+! ~~
+! Solver p27 ref. Manual
+! ~~
+Solver 1
+  Equation = Advection Diffusion
+  Variable = "Poison"
+  Variable DOFs = 1
+  Procedure = "AdvectionDiffusion" "AdvectionDiffusionSolver"
+  Linear System Solver = Direct
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations = 1000
+  Linear System Convergence Tolerance = 1.0e-5
+  Linear System Preconditioning = ILU1
+  Linear System ILUT Tolerance = 1.0e-04
+  Nonlinear System Max Iterations = 1
+  Nonlinear System Convergence Tolerance = 1.0e-5
+  Nonlinear System Newton After Tolerance = 1.0e-3
+  Nonlinear System Newton After Iterations = 20
+  Nonlinear System Relaxation Factor = 1
+  Steady State Convergence Tolerance = 1.0e-5
+!  Stabilize = True  ! tis is default
+!  Bubbles = True   ! is default also
+End
+Solver 2
+  Procedure = "ResultOutputSolve" "ResultOutputSolver"
+  Output File Name = "case"
+  Output Format = String VTK
+  Scalar Field 1 = String Poison
+End
+
+! ~~
+! Material p29 ref. Manual
+! ~~
+Boundary Condition 1
+  Target Boundaries (1) = 1
+  Poison = Real 1.0
+End
+
+Boundary Condition 2
+  Target Boundaries (1) = 2
+  Poison = Real 0.0
+End
+

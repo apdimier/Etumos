@@ -1,0 +1,49 @@
+SOLUTION_MASTER_SPECIES
+                 Na   Na+    0.00000        Na   0.02299
+              Si   H4SiO4    0.00000      SiO2   0.02808
+SOLUTION_SPECIES
+          Na+  = Na+
+                    log_k   0.0000000e+00
+          H4SiO4  = H4SiO4
+                    log_k   0.0000000e+00
+          H4SiO4 -1H+  = H3SiO4-
+                    log_k   -9.8000000e+00
+PHASES
+      Quartz
+          SiO2 = H4SiO4  -2H2O 
+                    log_k   -3.60000e+00
+SOLUTION 41-41  soude
+   temp        2.5E+01
+   pH      1.22545E+01 
+   pe          4.0E+00
+   units mol/l
+                       Na             2.0E-02
+SOLUTION 1-40  column
+   temp        2.5E+01
+   pH          7.0E+00 
+   pe          4.0E+00
+   units mol/l
+                       Na             0.0E+00
+EQUILIBRIUM_PHASES 1-40 column
+                   Quartz    0.00000e+00  1.00000e+01
+SELECTED_OUTPUT
+  -high_precision true
+KNOBS
+  -iterations 500
+  -diag true 
+  -tolerance 1.e-15
+SOLUTION 0
+PRINT
+  -reset	true
+# thereafter the -cells parameter is the 
+# only relevant parameter 
+TRANSPORT
+  -cells          41
+  -time_step          100.
+  -shifts          5
+  -lengths        0.1
+  -flow_direction diff
+  -boundary_conditions        closed closed
+  -print_frequency      1
+  -warnings False
+END

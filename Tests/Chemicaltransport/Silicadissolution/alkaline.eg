@@ -1,0 +1,5 @@
+Input File = alkaline.msh
+Output File = Alkaline
+Input Mode = Gmsh
+Output Mode = ElmerSolver
+

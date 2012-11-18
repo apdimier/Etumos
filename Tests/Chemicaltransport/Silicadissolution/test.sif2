@@ -1,0 +1,205 @@
+Check Keywords Warn
+
+Header
+Mesh DB "." "Gitter"
+End
+
+Simulation
+  Coordinate System = Cartesian 2D
+
+  Simulation Type = transient
+  Steady State Max Iterations =2
+
+  Coordinate Mapping(3) = 1 2 3
+  Timestepping Method = Explicit Euler
+  
+  Timestep Sizes = 0.1
+  Timestep Intervals = 5
+
+  Output Intervals = 1
+!  Lumped Mass Matrix = False
+  Max Output Level = 3
+End
+
+! ~~
+! Constants
+! ~~
+Constants
+  Gravity(4) = 0 -1 0 9.780000e+00
+End
+
+! ~~
+! Body
+! ~~
+Body 1
+  Equation = 1
+  Material = 101
+End
+Body 2
+  Equation = 1
+  Material = 101
+End
+Body 3
+  Equation = 1
+  Material = 101
+  Initial Condition = 1
+End
+
+
+! ~~
+! Material p29 ref. Manual
+! ~~
+Material 101
+ CB Diffusivity = Real 3.0000000000e-10
+ CB Soret Diffusivity = Real 1.0000000000e-03
+
+ TH Diffusivity = Real 3.0000000000e-10
+ TH Soret Diffusivity = Real 1.0000000000e-03
+
+ TO Diffusivity = Real 3.0000000000e-10
+ TO Soret Diffusivity = Real 1.0000000000e-03
+
+ NA Diffusivity = Real 3.0000000000e-10
+ NA Soret Diffusivity = Real 1.0000000000e-03
+
+ SI Diffusivity = Real 3.0000000000e-10
+ SI Soret Diffusivity = Real 1.0000000000e-03
+
+End
+
+! ~~
+! Equation p28 ref. Manual
+! ~~
+
+Equation 1
+  Active Solvers(5) = 1 2 3 4 5 
+  Concentration Units = Absolute Mass
+End
+
+! ~~
+! Solver p27 ref. Manual
+! ~~
+Solver 1
+  Equation = Advection Diffusion
+  Variable = CB
+  Variable DOFs = 1
+
+  Procedure = "AdvectionDiffusionTimeStep" "AdvectionDiffusionTimeStepSolver"
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations = 200
+  Linear System Convergence Tolerance = 1.000000e-08
+  Linear System Preconditioning = ILU1
+  Linear System ILUT Tolerance = 1.000000e-08
+  Linear System Symmetric = True
+  Linear System Direct Method = Direct
+!  Lumped Mass Matrix = False
+!  Stabilize False
+!  Bubbles False
+End
+
+Solver 2
+  Equation = Advection Diffusion
+  Variable = TH
+  Variable DOFs = 1
+
+  Procedure = "AdvectionDiffusionTimeStep" "AdvectionDiffusionTimeStepSolver"
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations = 200
+  Linear System Convergence Tolerance = 1.000000e-08
+  Linear System Preconditioning = ILU1
+  Linear System ILUT Tolerance = 1.000000e-08
+  Linear System Symmetric = True
+  Linear System Direct Method = Direct
+!  Lumped Mass Matrix = False
+!  Stabilize False
+!  Bubbles False
+End
+
+Solver 3
+  Equation = Advection Diffusion
+  Variable = TO
+  Variable DOFs = 1
+
+  Procedure = "AdvectionDiffusionTimeStep" "AdvectionDiffusionTimeStepSolver"
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations = 200
+  Linear System Convergence Tolerance = 1.000000e-08
+  Linear System Preconditioning = ILU1
+  Linear System ILUT Tolerance = 1.000000e-08
+  Linear System Symmetric = True
+  Linear System Direct Method = Direct
+!  Lumped Mass Matrix = False
+!  Stabilize False
+!  Bubbles False
+End
+
+Solver 4
+  Equation = Advection Diffusion
+  Variable = NA
+  Variable DOFs = 1
+
+  Procedure = "AdvectionDiffusionTimeStep" "AdvectionDiffusionTimeStepSolver"
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations = 200
+  Linear System Convergence Tolerance = 1.000000e-08
+  Linear System Preconditioning = ILU1
+  Linear System ILUT Tolerance = 1.000000e-08
+  Linear System Symmetric = True
+  Linear System Direct Method = Direct
+!  Lumped Mass Matrix = False
+!  Stabilize False
+!  Bubbles False
+End
+
+Solver 5
+  Equation = Advection Diffusion
+  Variable = SI
+  Variable DOFs = 1
+
+  Procedure = "AdvectionDiffusionTimeStep" "AdvectionDiffusionTimeStepSolver"
+  Linear System Solver = Iterative
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations = 200
+  Linear System Convergence Tolerance = 1.000000e-08
+  Linear System Preconditioning = ILU1
+  Linear System ILUT Tolerance = 1.000000e-08
+  Linear System Symmetric = True
+  Linear System Direct Method = Direct
+!  Lumped Mass Matrix = False
+!  Stabilize False
+!  Bubbles False
+End
+
+! ~~
+! Material p29 ref. Manual
+! ~~
+Boundary Condition 101
+  Target Boundaries (1) = 1
+  CB = Real -9.608246e-04
+  TH = Real 1.110338e+02
+  TO = Real 5.552778e+01
+  NA = Real 2.000014e-02
+  SI = Real 0.000014e-04
+End
+
+Boundary Condition 201
+  Target Boundaries (1) = 2
+  CB = Real -1.081744e-10
+  TH = Real 1.110124e+02
+  TO = Real 5.550672e+01
+  NA = Real 0.000000e+00
+  SI = Real 2.513627e-04
+End
+
+Initial Condition 1
+  CB = Real -9.608246e-04
+  TH = Real 1.110338e+02
+  TO = Real 5.552778e+01
+  NA = Real 2.000014e-02
+  SI = Real 0.000014e-04
+End
+

@@ -1,0 +1,90 @@
+  Nom du fichier Standard outputmodhw_cas2_NaOH_runfile.out                       
+  Nom du fichier Basic Transport Input Filemodhw_cas2_NaOH_runfile.btn                       
+  Nom du fichier source modhw_cas2_NaOH_runfile.ssm                       
+  Nom du fichier du GC modhw_cas2_NaOH_runfile.gcg                       
+  Nom du fichier Flow-Transport Link File           issu de Modflow Monod.umt                                         
+ FPRTn
+ -call to BTN3AL : Memory allocation- 
+ ------------------------------------- 
+ -end of BTN3AL : Memory allocation- 
+ ------------------------------------- 
+ ----------------------------------------- 
+ - variables initialisation              - 
+ ----------------------------------------- 
+ -Call of BTN3RP: lecture ISUMX value( 38073
+ -------------------------------------------- 
+ -Appel de BTN3RP: lecture			   - 
+ ---------------------------------------------- 
+ - Sortie de BTN3RP: lecture	           - 
+ ---------------------------------------------- 
+ -------------------------------------- 
+ - Out of ADV4RP: lecture	           - 
+ -------------------------------------- 
+ -------------------------------------- 
+ - Out of DSP3RP: lecture	           - 
+ -------------------------------------- 
+  dbg m3d_f LCDM value  1768
+ -------------------------------------- 
+ - Out of RCT3RP: lecture	           - 
+ -------------------------------------- 
+ -------------------------------------- 
+ - Out of GCG4RP: lecture	           - 
+ -------------------------------------- 
+ ---------------------------------------------- 
+ -Boucle Kper sur les stress periodes	   - 
+ ---------------------------------------------- 
+ ---------------------------------------------- 
+ -call to BTN3ST: information recoverysur les stress-
+ -READ AND PRINT OUT TIMING INFORMATION		 -
+ ---------------------------------------------- 
+ ----------------------------------- 
+ -loop Kstp for transport		- 
+ ----------------------------------- 
+
+ ----------------------------------------
+ - Passage a travers fmi4rp             -
+ ----------------------------------------
+
+ ----------------------------------------
+ - Appel de fmi4rp1                     -
+ ----------------------------------------
+ -----------------------------------------
+ - call of readhq with DH as parameter-
+ -----------------------------------------
+  Writing parameters via READHQ
+ -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111. -111.
+  Writing parameters via READHQ
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ NROW value 1
+
+ MAXIMUM STEPSIZE DURING WHICH ANY PARTICLE CANNOT MOVE MORE THAN ONE CELL
+ = 0.1000E+31(WHEN MIN. R.F.=1)  AT K=****, I=****, J=****
+
+ MAXIMUM STEPSIZE WHICH MEETS STABILITY CRITERION OF THE ADVECTION TERM
+ (FOR PURE FINITE-DIFFERENCE OPTION, MIXELM=0) 
+ = 0.1000E+31(WHEN MIN. R.F.=1)  AT K=****, I=****, J=****
+ ----------------------------------------
+ - Appel de fmi4rp2                     -
+ ----------------------------------------
+ On est dans READPS
+ initialisation end
+ WRITE IDENTIFYING INFORMATION
+
+                    "CNH             " FLOW TERMS FOR TIME STEP  1, STRESS PERIOD  1 READ UNFORMATTED ON UNIT 10
+                    --------------------------------------------------------------------------------------------
+ READ IDENTIFYING RECORD
+  CHECK INTERFACE
+  READ AN UNFORMATTED RECORD CONTAINING VALUE
+
+
+ TOTAL NUMBER OF POINT SOURCES/SINKS PRESENT IN THE FLOW MODEL =     0
+
+ MAXIMUM STEPSIZE WHICH MEETS STABILITY CRITERION OF THE SINK & SOURCE TERM
+ = 0.1000E+31(WHEN MIN. R.F.=1)  AT K=****, I=   1, J=   5
+ ----------------------------------------
+ - fin du Passage a travers fmi4rp      -
+ ----------------------------------------
+ --------------------------------------
+ - Out of  initialize                 -
+ --------------------------------------
+ integers to retrieve  5 41 1 40 38073

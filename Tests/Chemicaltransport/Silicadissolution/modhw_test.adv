@@ -1,0 +1,5 @@
+        -1       1.0         0         2   !mixelm,percel,mxpart,nadvfd
+         1         0  !itrack,wd
+000000E-20         1         0         0         0         0 !dceps,nplane,npl,nph,npmin,npmax
+         1         1         1 !interp,nlsink,npsink
+       1.0 !dchmoc

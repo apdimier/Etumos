@@ -1,0 +1,217 @@
+ LISTING FILE: modhw.lst
+                         UNIT   6
+
+ OPENING modhw.bas
+ FILE TYPE:BAS   UNIT   5
+
+ OPENING modhw.sip
+ FILE TYPE:SIP   UNIT  13
+
+ OPENING modhw.oc
+ FILE TYPE:OC   UNIT  14
+
+ OPENING modhw.bcf
+ FILE TYPE:BCF   UNIT  11
+1                                 MODFLOW
+      U.S. GEOLOGICAL SURVEY MODULAR FINITE-DIFFERENCE GROUND-WATER FLOW MODEL
+
+ Python Interface generated                                                      
+ Es war einmal ... nie vier                                                      
+    1 LAYERS         1 ROWS        51 COLUMNS
+   1 STRESS PERIOD(S) IN SIMULATION
+ MODEL TIME UNIT IS DAYS
+
+ BAS5 -- BASIC MODEL PACKAGE, VERSION 5, 1/1/95 INPUT READ FROM UNIT  5
+ ARRAYS RHS AND BUFF WILL SHARE MEMORY
+ INITIAL HEAD WILL BE KEPT THROUGHOUT THE SIMULATION
+        515 ELEMENTS IN X ARRAY ARE USED BY BAS
+        515 ELEMENTS OF X ARRAY USED OUT OF    1500000
+
+ BCF5 -- BLOCK-CENTERED FLOW PACKAGE, VERSION 5, 9/1/93 INPUT READ FROM UNIT 11
+ STEADY-STATE SIMULATION
+ HEAD AT CELLS THAT CONVERT TO DRY=   0.0000    
+ WETTING CAPABILITY IS NOT ACTIVE
+      LAYER  LAYER-TYPE CODE     INTERBLOCK T
+      --------------------------------------------
+         1            0          0 -- HARMONIC    
+          1 ELEMENTS IN X ARRAY ARE USED BY BCF
+        516 ELEMENTS OF X ARRAY USED OUT OF    1500000
+
+ SIP5 -- STRONGLY IMPLICIT PROCEDURE SOLUTION PACKAGE
+                    VERSION 5, 9/1/93 INPUT READ FROM UNIT 13
+ MAXIMUM OF8000 ITERATIONS ALLOWED FOR CLOSURE
+  5 ITERATION PARAMETERS
+      32209 ELEMENTS IN X ARRAY ARE USED BY SIP
+      32725 ELEMENTS OF X ARRAY USED OUT OF    1500000
+1
+ Python Interface generated                                                      
+ Es war einmal ... nie vier                                                      
+
+
+
+                     BOUNDARY ARRAY FOR LAYER   1
+ READING ON UNIT   5 WITH FORMAT:               (51I3)
+
+ AQUIFER HEAD WILL BE SET TO  999.99     AT ALL NO-FLOW NODES (IBOUND=0).
+
+
+
+                       INITIAL HEAD FOR LAYER   1
+ READING ON UNIT   5 WITH FORMAT: (51E15.8)           
+
+            1           2           3           4           5           6           7           8           9          10
+           11          12          13          14          15          16          17          18          19          20
+           21          22          23          24          25          26          27          28          29          30
+           31          32          33          34          35          36          37          38          39          40
+           41          42          43          44          45          46          47          48          49          50
+           51
+ ........................................................................................................................
+   1    0.000       0.000       0.000       0.000       0.000       0.000       0.000       0.000       0.000       0.000    
+        0.000       0.000       0.000       0.000       0.000       0.000       0.000       0.000       0.000       0.000    
+        0.000       0.000       0.000       0.000       0.000       0.000       0.000       0.000       0.000       0.000    
+        0.000       0.000       0.000       0.000       0.000       0.000       0.000       0.000       0.000       0.000    
+        0.000       0.000       0.000       0.000       0.000       0.000       0.000       0.000       0.000       0.000    
+        0.000    
+
+ OUTPUT CONTROL IS SPECIFIED EVERY TIME STEP
+ HEAD PRINT FORMAT CODE IS   6    DRAWDOWN PRINT FORMAT CODE IS   6
+ HEADS WILL BE SAVED ON UNIT   0    DRAWDOWNS WILL BE SAVED ON UNIT   0
+
+
+
+           COLUMN TO ROW ANISOTROPY
+ READING ON UNIT  11 WITH FORMAT: (51E15.8)           
+   1.0000    
+
+
+
+                               DELR
+ READING ON UNIT  11 WITH FORMAT: (51E15.8)           
+  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03
+  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03
+  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03
+  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03
+  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03  4.00000E-03
+  4.00000E-03
+
+
+
+                               DELC
+ READING ON UNIT  11 WITH FORMAT: (1E15.8)            
+   1.0000    
+
+
+
+               TRANSMIS. ALONG ROWS FOR LAYER   1
+ READING ON UNIT  11 WITH FORMAT: (51E15.8)           
+
+           1       2       3       4       5       6       7       8       9      10      11      12      13      14      15
+          16      17      18      19      20      21      22      23      24      25      26      27      28      29      30
+          31      32      33      34      35      36      37      38      39      40      41      42      43      44      45
+          46      47      48      49      50      51
+ ...........................................................................................................................
+   1     1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00
+         1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00
+         1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00    1.00
+         1.00    1.00    1.00    1.00    1.00    1.00
+  which ifrefm           0
+  which ifrefm           0
+  which ifrefm           0
+  which ifrefm           0
+  which ifrefm           0
+  which ifrefm           0
+  which ifrefm           0
+  which ifrefm           0
+
+
+
+          SOLUTION BY THE STRONGLY IMPLICIT PROCEDURE
+          -------------------------------------------
+ MAXIMUM ITERATIONS ALLOWED FOR CLOSURE =     8000
+                 ACCELERATION PARAMETER =    0.50000    
+      HEAD CHANGE CRITERION FOR CLOSURE =    0.10000E-15
+      SIP HEAD CHANGE PRINTOUT INTERVAL =      100
+
+     5 ITERATION PARAMETERS CALCULATED FROM SPECIFIED WSEED = 0.00000000 :
+
+  0.000000E+00 0.999944E+00 0.100000E+01 0.100000E+01 0.100000E+01
+1
+                            STRESS PERIOD NO.   1, LENGTH =  0.3000000E+10
+                            ----------------------------------------------
+
+                              NUMBER OF TIME STEPS =     1
+
+                               MULTIPLIER FOR DELT =    10.000
+
+                            INITIAL TIME STEP SIZE =  0.3000000E+10
+
+     1 ITERATIONS FOR TIME STEP   1 IN STRESS PERIOD  1
+
+ MAXIMUM HEAD CHANGE FOR EACH ITERATION:
+
+    HEAD CHANGE   HEAD CHANGE   HEAD CHANGE   HEAD CHANGE   HEAD CHANGE
+  LAYER,ROW,COL LAYER,ROW,COL LAYER,ROW,COL LAYER,ROW,COL LAYER,ROW,COL
+ ----------------------------------------------------------------------
+      0.000    
+  (  0,  0, 66)
+
+
+ HEAD/DRAWDOWN PRINTOUT FLAG = 1     TOTAL BUDGET PRINTOUT FLAG = 0
+ CELL-BY-CELL FLOW TERM FLAG = 1
+
+ OUTPUT FLAGS FOR ALL LAYERS ARE THE SAME:
+   HEAD    DRAWDOWN  HEAD  DRAWDOWN
+ PRINTOUT  PRINTOUT  SAVE    SAVE
+ ----------------------------------
+     1         0       1       0
+
+ SATURATED THICKNESS AND FLOW TERMS SAVED ON UNIT 32 FOR MT3D BY LINKMT3D PACKAGE 5.0
+  FNAME VALUE Monod.umt
+1
+              HEAD IN LAYER  1 AT END OF TIME STEP  1 IN STRESS PERIOD  1
+  -----------------------------------------------------------------------
+
+           1       2       3       4       5       6       7       8       9      10      11      12      13      14      15
+          16      17      18      19      20      21      22      23      24      25      26      27      28      29      30
+          31      32      33      34      35      36      37      38      39      40      41      42      43      44      45
+          46      47      48      49      50      51
+ ...........................................................................................................................
+   1   0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000
+       0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000
+       0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000
+       0.0000  0.0000  0.0000  0.0000  0.0000  0.0000
+1
+  VOLUMETRIC BUDGET FOR ENTIRE MODEL AT END OF TIME STEP  1 IN STRESS PERIOD  1
+  -----------------------------------------------------------------------------
+
+     CUMULATIVE VOLUMES      L**3       RATES FOR THIS TIME STEP      L**3/T
+     ------------------                 ------------------------
+
+           IN:                                      IN:
+           ---                                      ---
+       CONSTANT HEAD =           0.0000         CONSTANT HEAD =           0.0000
+
+            TOTAL IN =           0.0000              TOTAL IN =           0.0000
+
+          OUT:                                     OUT:
+          ----                                     ----
+       CONSTANT HEAD =           0.0000         CONSTANT HEAD =           0.0000
+
+           TOTAL OUT =           0.0000             TOTAL OUT =           0.0000
+
+            IN - OUT =           0.0000              IN - OUT =           0.0000
+
+ PERCENT DISCREPANCY =           0.00     PERCENT DISCREPANCY =           0.00
+
+
+
+
+
+
+          TIME SUMMARY AT END OF TIME STEP  1 IN STRESS PERIOD  1
+                    SECONDS     MINUTES      HOURS       DAYS        YEARS
+                    -----------------------------------------------------------
+   TIME STEP LENGTH 2.59200E+14 4.32000E+12 7.20000E+10 3.00000E+09 8.21355E+06
+ STRESS PERIOD TIME 2.59200E+14 4.32000E+12 7.20000E+10 3.00000E+09 8.21355E+06
+         TOTAL TIME 2.59200E+14 4.32000E+12 7.20000E+10 3.00000E+09 8.21355E+06
+1

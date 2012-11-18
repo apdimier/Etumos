@@ -1,0 +1,6 @@
+Input File = temperature.msh
+Output File = essai
+Input Mode = Gmsh
+Output Mode = ElmerSolver
+
+
