@@ -18,7 +18,7 @@ Freely inspired from some Fipy python files in the sense of the GPL license
 """
 import numpy
 
-import ma
+import numpy.ma as MA
 
 from generictools import Generic
 
@@ -31,7 +31,7 @@ def MeshReader(fileName):
     a = readFile.readline()
     while "PhysicalNames" not in  a:
         a = readFile.readline()
-        print a
+        #print a
         pass
     # 
     # gmsh 2.3 doesn't entail the entities dimension,
@@ -43,14 +43,15 @@ def MeshReader(fileName):
     while "EndPhysicalNames" not in a[0]:
         a = readFile.readline().split()
         print a
+        #print a
         #raw_input("dbd dimension: "+str(a))
         if len(a) == 3:
             dimension = max(int(a[0]),dimension)
-            print "dimension ",dimension
+    #raw_input("mesh dimension :"+str(dimension))
     readFile.close()
     while readFile.closed == False:
         pass
-    print "dimension",dimension
+    print " pmesh dimension",dimension
     #raw_input()
     if dimension == 2:
        mesh = Mesh2D(fileName)
@@ -120,6 +121,9 @@ class Body(Generic):
     def getSpaceDimension(self):
         return self.dim
 
+    def getMeshDimension(self):
+        return self.dim
+
 class DataGetter(Generic):
     """
     A class to retrieve the elements of the mesh.
@@ -138,8 +142,6 @@ class DataGetter(Generic):
 #        if (dimensions != 2 and dimensions != 3):
 #            raise MeshImportError, "Number of dimensions must be 2 or 3"
             
-        print dimensions
-#        raw_input("dbg dimensions")
         self.dimensions = dimensions
         self.dim = dimensions
         self.meshFileName = filename
@@ -168,16 +170,18 @@ class DataGetter(Generic):
         print "dbg self.physicalBodyNames",self.physicalBodyNames
         line = self.inFile.readline()	                                                                        ## $ skip the EndPhysicalNames
         self.vertexCoords = vertexCoords = self._calcVertexCoords(coordDimensions)
-        #print " vertex coordinates ",len(self.vertexCoords)
-        #print " vertex coordinates1 ",self.vertexCoords[0]
-        #raw_input("dbg vertex coordinates")
+        print " number of vertices ",len(self.vertexCoords)
+        print " vertex coordinates 1 ",self.vertexCoords[0]
+#        raw_input("dbg vertex coordinates")
         self.internalNodesAnz = self.numVertices
-#        print " call of _calcCellVertexIDs"
+        print " call of _calcCellVertexIDs"
         self._calcCellVertexIDs()
+        print " call of _calcCellVertexIDs over"
         #
         # we update the physicalBodyNames dictionnary with a list of elements bounded to the physical entity
         #
         self._associateElementIDs()
+        print " call of _associateElementIDs over"
         #
         #print " vertex coordinates ",self.vertexCoords[0]
         #raw_input("dbg vertex coordinates")
@@ -203,7 +207,12 @@ class DataGetter(Generic):
         #
         # element types belonging to Physical Body Names of dimension N
         #
-        if dimensions == 2:
+        if dimensions == 1:
+            #
+            # 1 : 2-node line
+            #
+            indPBN = [1]
+        elif dimensions == 2:
             #
             # 2 : 3 node triangle
             # 3 : 4 node quadrangle
@@ -219,23 +228,31 @@ class DataGetter(Generic):
             indPBN = [4,5,6,7]
 #        print " indPBN   ",indPBN,self.elementArray[0],self.elementArray[1]
 #
-# we identify nodes belonging to boundary
+# we identify nodes belonging to boundary 
 #
         frontN = []
-        print  "self.elementArray ",self.elementArray
-        for element in self.elementArray:
+        print  "self.elementArray \n",self.elementArray
+        
+        if self.dimensions != 1:
+            for element in self.elementArray:
             #
             # We consider boundaries and identify nodes belonging to
             #
-            if element[1] not in indPBN:        # we suppose boundaries being 1 dimension smaller as the problem dimension
-                indRef = 3 + element[2]
+                if element[1] not in indPBN:        # we suppose boundaries being 1 dimension smaller as the problem dimension
+                    indRef = 3 + element[2]
 #                for vertex in  range(indRef,len(element)):
-                for vertex in  range(indRef,indRef+_nodeElements(element[1])):
-                    if element[vertex] not in frontN and element[vertex]>0:
-                        frontN.append(element[vertex])
-                        
+                    for vertex in range(indRef,indRef+_nodeElements(element[1])):
+                        if element[vertex] not in frontN and element[vertex]>0:
+                            frontN.append(element[vertex])
+        else:
+        
+            for element in self.elementArray:
+                if element[1] not in indPBN:
+                    frontN.append(element[0])
+
+        #print " nodes on boundaries: ",frontN                      
         indPDO = []
-        print " vertex coordinates2 ",self.vertexCoords[0]
+        #print " vertex coordinates2 ",self.vertexCoords[0]
 #
 # we identify nodes belonging to the internal data
 #
@@ -247,21 +264,16 @@ class DataGetter(Generic):
                 indRef = 3 + element[2]
                 for ind in  range(indRef,indRef+_nodeElements(element[1])):
                     if element[ind] not in frontN and element[ind]>0:
-                        indPDO.append(element[ind])
-#                if element[6] not in frontN and element[6]!=0 and element[6] not in indPDO:
-#                  indPDO.append(element[6])
-#                if element[7] not in frontN and element[7]!=0 and element[7] not in indPDO:
-#                  indPDO.append(element[7])
-#                if element[8] not in frontN and element[8]!=0 and element[8] not in indPDO:
-#                  indPDO.append(element[8])
-#                if element[9] not in frontN and element[9]!=0 and element[9] not in indPDO:
-#                  indPDO.append(element[9])
+                        if element[ind] not in indPDO:
+                            indPDO.append(element[ind])
 
         #print frontN
         print " vertex coordinates3 ",self.vertexCoords[0]
         self.internalNodesAnz -= len(frontN)
         
-#        print " internal points ",frontN,self.internalNodesAnz
+        #print " internal points ",frontN,self.internalNodesAnz
+        #print indPDO
+        #raw_input()
         self.internalNodesAnzList = indPDO
         self.inFile.close()
         #
@@ -275,7 +287,6 @@ class DataGetter(Generic):
             #raw_input()
             self._nodesReordering()
         else:
-            print "mesh dbg we reorder the file",self.meshFileName[0:-4]
             if not subprocess.os.path.exists("commandfile.eg"):
                 raise Exception, " problem with the mesh handling"
         #
@@ -375,16 +386,18 @@ class DataGetter(Generic):
         
         .. note:: so far this only supports tetrahedral and triangular meshes.
         """
-        a = self.inFile.readline()                                                                              ## skip the $ENDNOD
-        a = self.inFile.readline()                                                                              ## skip the $ELM
+        a = self.inFile.readline()                                                          ## skip the $EndNodes
+        a = self.inFile.readline()                                                          ## skip the $Elements
         self.numElements = numElements = int(self.inFile.readline())
-        #print "dbg _calcCellVertexIDs",numElements
-        #raw_input()
+        #raw_input("dbg _calcCellVertexIDs, numElements: "+str(numElements))
         numCells = 0
 #
 # le parametre maxLength doit etre ajuste par une lecture prealable.
 #        
-        maxLength = (4*self.dimensions + self.dimensions)
+        if self.dimensions !=1:
+            maxLength = (4*self.dimensions + self.dimensions)
+        else:
+            maxLength = 8
         self.elementArray = numpy.zeros((numElements, maxLength),dtype=numpy.int )
 #        print " numElements:",numElements
         #raw_input()
@@ -398,7 +411,6 @@ class DataGetter(Generic):
 #        print " out of loop "
         validElementArray = numpy.compress(self.elementArray[:, 1] == ((2 * self.dimensions) - 2), self.elementArray, 0)
         cellNodeIDs = validElementArray[:, 5:]
-        print "dbg 401",cellNodeIDs
         if len(cellNodeIDs)!= 0:
             cellVertexIDs = numpy.take(self.nodeToVertexIDs, cellNodeIDs)
         else:
@@ -482,8 +494,8 @@ class DataGetter(Generic):
         if subprocess.os.path.exists("commandfile.eg"):
             try:
                 retcode = subprocess.Popen("rm -f ./commandfile.eg", shell = True)
-                print " retcode ",dir(retcode)
-                raw_input("retour de rm -f commandfile.eg")
+                #print " retcode ",dir(retcode)
+                #raw_input("retour de rm -f commandfile.eg")
                 
                 if retcode < 0:
                     print >>sys.stderr, "Child was terminated by signal", -retcode
@@ -491,7 +503,8 @@ class DataGetter(Generic):
                     print >>sys.stderr, "Child returned", retcode
             except OSError, e:
                 print >>sys.stderr, "Execution failed:", e
-        print  " we write commandfile.eg"
+        #print  " we write commandfile.eg"
+        #raw_input("writing the commandfile.eg file with "+str(self.meshFileName))
         commandfile = open("commandfile.eg","w")
         commandfile.write ("Input File = "+self.meshFileName+"\n")
         commandfile.write ("Output File = "+self.meshFileName[0:-4]+"\n")
@@ -507,7 +520,12 @@ class DataGetter(Generic):
         #
         # element types belonging to Physical Body Names of dimension N
         #
-        if self.dimensions == 2:
+        if self.dimensions == 1:
+            #
+            # 1 : 2 node line
+            #
+            elm_typePBN = [1]
+        elif self.dimensions == 2:
             #
             # 2 : 3 node triangle
             # 3 : 4 node quadrangle
@@ -526,25 +544,29 @@ class DataGetter(Generic):
 # we identify nodes belonging to boundary: frontN list
 #
         frontN = []
-        for element in self.elementArray:
+        if self.dimensions != 1:
+            for element in self.elementArray:
             #
             # We consider boundaries and identify nodes belonging to
             #
-            if element[1] not in elm_typePBN: # we suppose boundaries being 1 dimension smaller as the problem dimension
-                indRef = 3 + element[2]
-                for vertex in  range(indRef,indRef+_nodeElements(element[1])):
-                    if element[vertex] not in frontN and element[vertex]>0:
-                        frontN.append(element[vertex])
-        #print frontN
-        #raw_input("mdbg frontN")
-#
-# We build up the permutation
-#
+                if element[1] not in elm_typePBN: # we suppose boundaries being 1 dimension smaller as the problem dimension
+                    indRef = 3 + element[2]
+                    for vertex in  range(indRef,indRef+_nodeElements(element[1])):
+                        if element[vertex] not in frontN and element[vertex]>0:
+                            frontN.append(element[vertex])
+        else:
+         
+            for element in self.elementArray:
+                if element[1] not in elm_typePBN:
+                    frontN.append(element[0])
+        #
+        # We build up the permutation
+        #
         permutation = [-1]*(self.numVertices+1)
         #
         # indC is used to control the end of the loop
         #
-        indC = 1 # starting at 1 because nodes are indexed from 1 upwards
+        indC = 1                                # starting at 1 because nodes are indexed from 1 upwards
         #
         # keys are made of body names
         #
@@ -564,12 +586,15 @@ class DataGetter(Generic):
             #body = ibody[1:]
             body = ibody.split("_")[1]
             indPBN = self.physicalBodyNames[body][0]
-            
+            print "self.physicalBodyNames[body][0]: ",indPBN
+            #
+            print "self.physicalBodyNames[body][1]: ",self.physicalBodyNames[body][1]
             for elm_number in self.physicalBodyNames[body][1]:
             
                 #print body,indPBN,elm_number,self.elementArray[elm_number-1]
                 
                 element = self.elementArray[elm_number-1]
+                print "element", element
                 if element[1] in elm_typePBN:
                     indRef = 3 + element[2]
 
@@ -589,10 +614,19 @@ class DataGetter(Generic):
         for vertex in frontN:
             permutation[vertex] = indC
             indC+=1
+        
+        indt = 0
+        for i in permutation:
+            print indt,i
+            indt+=1
+        
+        #raw_input()
         #
         # Now we reindex the nodes using a temporary file
         #
         self.permutedVertexCoords = [[0.0]*len(self.vertexCoords[0])]*(len(self.vertexCoords)+1)
+        #raw_input(" dimension of self.vertexCoords[0]: "+str(len(self.vertexCoords[0])))
+        #raw_input(" dimension of self.vertexCoords: "+str(len(self.vertexCoords)))
 
         for vertex_index in range(1,len(self.vertexCoords)+1):
         
@@ -607,13 +641,19 @@ class DataGetter(Generic):
 #            coordFile.write(" %5d %15.10e %15.10e\n"%(vertex_index, tempCoordList[vertex_index][0], tempCoordList[vertex_index][1]))
             
 #        coordFile.write("CELLS %5d float\n"%(len(self.elementArray)))
+        #print self.elementArray
+        #raw_input("elementArray")
+        
         ind = 0
         for element in self.elementArray:
             indRef = 3 + element[2]
-            if ind == 0: print indRef
+            if ind == 0: print indRef, element[1], _nodeElements(element[1])
             for vertex_index in range( indRef, indRef+_nodeElements(element[1])):                
                 self.elementArray[ind][vertex_index] = permutation[self.elementArray[ind][vertex_index]]
             ind+= 1
+
+        #print self.elementArray
+        #raw_input("new elementArray")
 #        for i in self.elementArray:
 #            print i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8],i[9]
          #raw_input("reordering")
@@ -657,6 +697,8 @@ class DataGetter(Generic):
         reorderedMeshFile.write("%6d\n"%(self.numVertices))
         ind = 1
         for node in self.permutedVertexCoords[1:]: # node indexation beginning at 1
+            if len(node) == 1:
+                reorderedMeshFile.write ("%2d %15.8e 0 0\n"%(ind, node[0]))
             if len(node) == 2:
                 reorderedMeshFile.write ("%2d %15.8e %15.8e 0\n"%(ind, node[0], node[1]))
             elif len(node) == 3:
@@ -991,8 +1033,8 @@ class CommonMesh:
 	return self.numberOfCells
     
     def _getNumberOfVertices(self):
-        print " vertex Coord ", self.vertexCoords[0]
-        print " vertex Coord1 ", self.vertexCoords[1]
+        #print " dbg mesh vertex Coord ", self.vertexCoords[0]
+        #print " dbg mesh vertex Coord1 ", self.vertexCoords[1]
         return len(self.vertexCoords)
 	
     def _getAdjacentCellIDs(self):
@@ -1167,7 +1209,8 @@ class Mesh(CommonMesh):
     """
 
 #    def __init__(self, vertexCoords, faceVertexIDs, cellFaceIDs):
-    def __init__(self, vertexCoords = None, numElements = None, elementArray = None, physicalBodyNames = None,internalNodesAnzList = None):
+    def __init__(self, vertexCoords = None, numElements = None, elementArray = None, physicalBodyNames = None,\
+                 internalNodesAnzList = None):
         """
         faceVertexIds and cellFacesIds must be padded with minus ones.
         """
@@ -1180,13 +1223,13 @@ class Mesh(CommonMesh):
         if vertexCoords == None:
             self.dim = 2
         else:
-            print "1161 Mesh self.vertexCoords[0]:",self.vertexCoords
+            #print "1161 Mesh self.vertexCoords[0]:",self.vertexCoords
             self.dim = len(self.vertexCoords[0])
-#        print " class mesh",self.dim
-#        #raw_input(" class mesh")
+        #print " class mesh",self.dim
+        #raw_input(" class mesh")
         self.meshType = "unstructured"
-#        self.faceVertexIDs = MA.array(faceVertexIDs)
-#        self.cellFaceIDs = MA.array(cellFaceIDs)
+        #self.faceVertexIDs = MA.array(faceVertexIDs)
+        #self.cellFaceIDs = MA.array(cellFaceIDs)
 
         CommonMesh.__init__(self)
         
@@ -1510,7 +1553,7 @@ class Mesh1D(Mesh):
     getBodies = getPhysicalBodyNames
         
     def getDimensionString(self):
-        return "2D"
+        return "1D"
         
     def getElAnz(self):
         print "dbg getElAnz",self.numElements
@@ -1526,10 +1569,12 @@ class Mesh1D(Mesh):
         return self.spaceDimensions
         
     getDim = getSpaceDimensions
+    getMeshDimension = getSpaceDimensions
         
     def getType(self):
         """
-        We get only one element type. It means that the mesh topology must be uniform: only one element type is treated
+        We get only one element type. 
+        It means that the mesh topology must be uniform: only one element type is treated. In 1D it is the case.
         """
         gmshType = self.elementArray[self.physicalBodyNames.items()[0][1][1][0]][1]
        
@@ -1543,7 +1588,6 @@ class Mesh1D(Mesh):
 
 class Mesh2D(Mesh):
     def __init__(self, filename):
-        print "Mesh2D : ",filename
         vertices, numElements, elementArray,\
         physicalBodyNames, internalNodesAnz, internalNodesAnzList =\
         DataGetter().getData(filename, dimensions = 2)
@@ -1557,11 +1601,11 @@ class Mesh2D(Mesh):
 
         self.internalNodesAnz = internalNodesAnz
         self.internalNodesAnzList = internalNodesAnzList
-        print ' element array', len(elementArray), numElements
-#        print ' element array',physicalBodyNames, internalNodesAnz
+        print ' dbg mesh element array', len(elementArray), numElements
+        #print ' element array',physicalBodyNames, internalNodesAnz
         #raw_input()
-#        for i in elementArray:
-#            print i
+        #for i in elementArray:
+            #print i
         #print vertices["vertexCoords"]
         #raw_input("vertices")
         Mesh.__init__(self, vertices["vertexCoords"], numElements, elementArray, physicalBodyNames, internalNodesAnzList)
@@ -1612,10 +1656,12 @@ class Mesh2D(Mesh):
         return self.spaceDimensions
         
     getDim = getSpaceDimensions
+    getMeshDimension = getSpaceDimensions
         
     def getType(self):
         """
-        We get only one element type. It means that the mesh topology must be uniform: only one element type is treated
+        We get only one element type.
+        It means that the mesh topology must be uniform: only one element type is treated.
         """
         #print " dbg getType ",self.elementArray[self.physicalBodyNames.items()[0][1][1][0]][1],self.elementArray[self.physicalBodyNames["domain"][1][0]][1]
         #raw_input(" dbg getType ")
@@ -1704,7 +1750,9 @@ class Mesh3D(Mesh):
 
     def getSpaceDimensions(self):
         return self.spaceDimensions
-    pass
+        
+    getDim = getSpaceDimensions
+    getMeshDimension = getSpaceDimensions
 
     def getType(self):
         #print self.physicalBodyNames["domain"]
@@ -1718,7 +1766,9 @@ class Mesh3D(Mesh):
 class GmshImporter2D(Mesh2D):
 
     def __init__(self, filename):
-        vertices, numElements, self.elementArray, physicalBodyNames, internalNodesAnz , internalNodesAnzList = DataGetter().getData(filename, dimensions = 2)
+        vertices, numElements, self.elementArray, physicalBodyNames, internalNodesAnz , internalNodesAnzList =\
+        DataGetter().getData(filename, dimensions = 2)
+#
         Mesh.__init__(self, vertices["vertexCoords"], numElements, self.elementArray, physicalBodyNames, internalNodesAnz)
 
     def getCellVolumes(self):
@@ -1768,18 +1818,20 @@ def _nodeElements(element):
     That function is used to return the number of
     nodes associated to the element
     """
-    if element == 1:
+    if element == 1: # 2-node line
         return 2
-    if element == 2: # 3-node triangle
+    elif element == 2: # 3-node triangle
         return 3
-    if element == 3: # 4-node quadrangle
+    elif element == 3: # 4-node quadrangle
         return 4
-    if element == 4: # 4-node tetrahedron
+    elif element == 4: # 4-node tetrahedron
         return 4
-    if element == 5: # 8-node hexahedron
+    elif element == 5: # 8-node hexahedron
         return 8
-    if element == 6: # 6-node prism
+    elif element == 6: # 6-node prism
         return 6
-    if element == 7: # 5-node pyradim
+    elif element == 7: # 5-node pyradim
         return 5
+    elif element == 15: # point
+        return 1
 
