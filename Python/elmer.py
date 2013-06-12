@@ -3,30 +3,24 @@
 class Elmer, enables to handle elmer as a transport tool
 In fine should be able to launch elmer for linear and
 non linear transport
-
-The temperature is added as new.
-
-Introduction of the elasticity solver.
+The temperature is added as new, for the moment the last problem unknown.
 
 Velocity: saturated
 
         For the moment, the velocity can be:
-
+        
                 constant:
-
-                        In that case, the velocity is introduced as a Darcy velocity,
-                        there are two ways to introduce the porosity :
-
-                                1/ introducing the porosity coefficient in the effective diffusion coefficient,
-                                   the porosity being set to one.
-
+                
+                        In that case, the velocity is introduced as a Darcy velocity, There are two ways to introduce the porosity :
+                                1/ introducing the porosity coefficient in the effective diffusion coefficient, the porosity being set to one
                                 2/ introducing the real porosity.
                 
                 variable:
-
+                
                         In that case, the velocity is introduced as a Darcy velocity
-
-         If the porosity is varying 
+         
+         If the porosity is varying     
+                
 
 """
 
@@ -96,7 +90,7 @@ class Elmer(ElmerRoot):
         self.advConv                    = "No"
         self.saturation                 = "saturated"
         self.dirBCList                  = []
-        self.dirBCList1                 = []                                                # it should replace self.dirBCList
+        self.dirBCList1                 = []                                                        # it should replace self.dirBCList
         self.dirICList                  = []
 #        if meshFileName.getName()[-4:]  == ".msh":
 #            print "toto"
@@ -128,30 +122,20 @@ class Elmer(ElmerRoot):
         self.simulationType             = "transient"
         self.bdfOrder                   = "2"
         self.sorptionLawDico            = Dico()
-                                                                                            #
-                                                                                            # elasticity
-                                                                                            #
-        self.elasticity                = None
-                                                                                            #
-                                                                                            # temperature
-                                                                                            #
         self.temperature                = None
-
         self.zonePerCellDico            = Dico()
         self.charge                     = []
         self.velocity                   = []
         self.boundPlot                  = []
-                                                                                            # Young modulus is a
-                                                                                            # scalar in the isotropic case
-                                                                                            # scalar in the isotropic case
-                                                                                            # or a 6x6 (3D)
-                                                                                            # or a 4x4 (2D or axys. case) 
+                                                                                                        # young modulus is a
+                                                                                                        # scalar in the isotropic case
+                                                                                                        # or a 6x6 (3D)
+                                                                                                        # or a 4x4 (2D or axys. case) 
+        self.elasticity                 = None
         self.youngModulus               = []
-                                                                                            # a scalar in the isotropic case
+                                                                                                        # a scalar in the isotropic case
         self.poissonRatio               = []
-                                                                                            # to evaluate the thermal stresses 
         self.referenceTemperature       = None
-        self.heatExpansionCoef          = None
 
         self.elmerZonesNamesList = []
         self.timespec = 0
@@ -300,23 +284,18 @@ class Elmer(ElmerRoot):
             sifFile.write(" Water Density = Real %15.10e\n"%(self.waterDensity))
             sifFile.write(" Viscosity = Real %15.10e\n"%(1.0))
             sifFile.write(" Porosity = Real %15.10e\n"%(porosity))
-                                                                                            #
-                                                                                            # elasticity
-                                                                                            #
-                                                                                            # the material is supposed to be isotropic
-                                                                                            #
-            if self.elasticity == True:
-                sifFile.write(" Young Modulus = Real %15.10e\n"%(self.youngModulus[0]))
+            if (len(self.youngModulus) != 0):
+                sifFile.write(" Youngs Modulus = Real %15.10e\n"%(self.youngModulus[0]))
+                if len(self.youngModulus) > 1:
+                    raise Warning, " the elasticity model is supposed isotropic for the moment "
+            if (len(self.poissonRatio) != 0):
                 sifFile.write(" Poisson Ratio = Real %15.10e\n"%(self.poissonRatio[0]))
-                sifFile.write(" Heat Expansion Coefficient = Real %15.10e\n"%(self.heatExpansionCoef))
-                sifFile.write(" Reference Temperature = Real %15.10e\n"%(self.referenceTemperature))
-                pass
-                                                                                            #
-                                                                                            # temperature: 
-                                                                                            # specificHeatCapacity and
-                                                                                            # heatConductivity
-                                                                                            #            
-            if self.temperature == True:
+                
+                                                                                                                #
+                                                                                                                #       temperature: 
+                                                                                                                #       specificHeatCapacity and heatConductivity
+                                                                                                                #            
+            if self.temperature==True:
                 if self.bodies[indb].getMaterial().getSpecificHeat() :
                     specificHeatCapacity    = self.bodies[indb].getMaterial().getSpecificHeat().value
                     sifFile.write(" Heat Capacity = Real %15.10e\n"%(specificHeatCapacity))
@@ -334,9 +313,9 @@ class Elmer(ElmerRoot):
                     viscosity		= self.bodies[indb].getMaterial().getViscosity().value
                     sifFile.write(" Viscosity         = Real %15.10e\n"%(viscosity))
                 pass
-                                                                                            #
-                                                                                            #       computed velocity: saturated flow
-                                                                                            #
+                                                                                                                #
+                                                                                                                #       computed velocity: saturated flow
+                                                                                                                #
             if "computed" in str(self.darcyVelocity) and self.saturation == "saturated":
                 if self.bodies[indb].getMaterial().getViscosity() != None:
                     viscosity		= self.bodies[indb].getMaterial().getViscosity().value
@@ -351,9 +330,9 @@ class Elmer(ElmerRoot):
             elif "computed" in str("self.darcyVelocity") and self.saturation == "undersaturated":
                 raise Exception, " for the moment, no unsaturated flow can be bounded to chemical transport "
                                                                                                                            
-                                                                                            #
-                                                                                            #       compressibility
-                                                                                            #            
+                                                                                                                #
+                                                                                                                #       compressibility
+                                                                                                                #            
             sifFile.write(" Compressibility Model = Incompressible\n")
             tempcont = len(self.speciesNamesList)
             #sifFile.write(" Diffusivity = Real %15.10e\n"%(3.e-10))
@@ -415,19 +394,18 @@ class Elmer(ElmerRoot):
                 sifFile.write("\n")
             sifFile.write(" Long Dispersivity = Real %15.10e\n"%(longDisp))
             sifFile.write(" Tran Dispersivity = Real %15.10e\n"%(tranDisp))
-                                                                                            #
-                                                                                            # We treat the velocity, see page 22
-                                                                                            #
+                                                                                                                #
+                                                                                                                # We treat the velocity, see page 22
+                                                                                                                #
             #raw_input(" self.advConv value :"+self.advConv)
             if self.advConv == "Constant":
                 v = self.darcyVelocity.getValue()
                 sifFile.write(" Convection Velocity 1 = %e\n"%v[0])
                 sifFile.write(" Convection Velocity 2 = %e\n"%v[1])
                 sifFile.write(" Convection Velocity 3 = %e\n\n"%v[2])
-                                                                                            #
-                                                                                            # We read a velocity field:
-                                                                                            # for steady and t flows
-                                                                                            #
+                                                                                                                #
+                                                                                                                # We read a velocity field: for steady and t flows
+                                                                                                                #
             elif "Read" in self.advConv or self.advConv == "RComputed":
                 #
                 # The flow is issued from a previous flow run.
@@ -505,7 +483,7 @@ class Elmer(ElmerRoot):
         The body force section may be used to give additional force terms for the equations
         """
         sifFile = self.sifFile
-        sifFile.write("! ~~~~~~~~~~\n! Body Force\n! ~~~~~~~~~~\n")
+        sifFile.write("! ~~~~~~~~~~\n! Body Force\n! ~~~~~~~~~~\n")        
         for  indb in range(len(self.dirICList[0]["conc"])):
             if (indb==0):
                 sifFile.write("Body Forces %i\n"%(indb+1))
@@ -586,10 +564,10 @@ class Elmer(ElmerRoot):
         Variable String Variable_name
         """
         sifFile = self.sifFile
-        sifFile.write("! ~~\n! Solver p27 ref. Models Manual\n! ~~\n")
-                                                                                            #
-                                                                                            # aqueous chemical unknowns treatment
-                                                                                            #
+        sifFile.write("! ~~\n! Solver p27 ref. Manual\n! ~~\n")
+                                                                                                        #
+                                                                                                        # aqueous unknowns treatment
+                                                                                                        #
         for ind in range(len(self.speciesNamesList)):      
             sifFile.write("Solver %i\n"%(ind+1))
             sifFile.write("  Equation = Advection Diffusion Equation %s\n"%(self.speciesNamesList[ind]))
@@ -610,7 +588,7 @@ class Elmer(ElmerRoot):
                 sifFile.write("  Linear System Max Iterations = %s\n"%self.parameterDico["Linear System Max Iterations"])
                 sifFile.write("  Linear System Convergence Tolerance = %e\n"%self.parameterDico["Linear System Convergence Tolerance"])
                 sifFile.write("  Linear System Preconditioning = %s\n"%self.parameterDico["Linear System Preconditioning"])
-                sifFile.write("  Linear System ILUT Tolerance = %e\n"%self.parameterDico["Linear System Convergence Tolerance"])
+                #sifFile.write("  Linear System ILUT Tolerance = %e\n"%self.parameterDico["Linear System Convergence Tolerance"])
             elif self.parameterDico["algebraicResolution"] == "Multigrid":
             	raise Exception("Multigrid does not work for the moment.\nError:: LoadMesh: Unable to load mesh: ./mgrid2")
 #                sifFile.write("  Linear System Direct Method = %s\n"%self.parameterDico["Linear System Direct Method"])
@@ -626,18 +604,18 @@ class Elmer(ElmerRoot):
             #print "dbg stabil ",self.parameterDico['Stabilize']
             #print " self.darcyVelocity",self.darcyVelocity,self.parameterDico['Bubbles']
             if self.parameterDico["Bubbles"] and type(self.darcyVelocity) != None:
-                                                                                            #
-                                                                                            # bubbles is set to true
-                                                                                            # to stabilize the solver
-                                                                                            #
+                                                                                                        #
+                                                                                                        # bubbles is set to true
+                                                                                                        # to stabilize the solver
+                                                                                                        #
                 sifFile.write("  Bubbles = "+str(self.parameterDico['Bubbles'])+"\n")
             else:
                 sifFile.write("  Bubbles  = False\n")
             sifFile.write("  Namespace = string \"%s\"\n"%self.speciesNamesList[ind])
             sifFile.write("End\n\n")
-                                                                                            #
-                                                                                            # temperature treatment
-                                                                                            #
+                                                                                                        #
+                                                                                                        # temperature treatment
+                                                                                                        #
         ind +=1
         if self.temperature:
             sifFile.write("Solver %i\n"%(ind+1))
@@ -676,9 +654,9 @@ class Elmer(ElmerRoot):
             sifFile.write("  Namespace = string \"TEMPERATURE\"\n")
             
             sifFile.write("End\n\n")
-                                                                                            #
-                                                                                            # Darcy treatment
-                                                                                            #
+                                                                                                        #
+                                                                                                        # Darcy treatment
+                                                                                                        #
         ind+=1
         if "computed" in self.advConv.lower():
 #
@@ -711,10 +689,10 @@ class Elmer(ElmerRoot):
 
             sifFile.write("  Namespace = string \"charge\"\n")
             sifFile.write("End\n\n")
-                                                                                            #
-                                                                                            # charge has been treated,
-                                                                                            # now we extract the velocity
-                                                                                            #
+                                                                                                        #
+                                                                                                        # charge has been treated,
+                                                                                                        # now we extract the velocity
+                                                                                                        #
             ind+=1
             sifFile.write("Solver %i\n"%(ind))
             sifFile.write("  Equation = ComputeFlux\n")
@@ -728,63 +706,52 @@ class Elmer(ElmerRoot):
             sifFile.write("  Linear System Convergence Tolerance = %e\n"%(self.chargeParameterDico["Flux Parameter"]))
             sifFile.write("End\n\n")
             pass
-                                                                                            #
-                                                                                            # we treat the elasticity
-                                                                                            # p36 Models manual 13/01/2011
-                                                                                            #
         ind +=1
+                                                                                                        #
+                                                                                                        # Elasticity Solver
+                                                                                                        #
         if self.elasticity:
-            sifFile.write("Solver %i\n"%(ind))
+            sifFile.write("Solver %i\n"%(ind+1))
             sifFile.write("  Equation = Elasticity Solver\n")
-            sifFile.write("  Displace Mesh = Logical FALSE\n")
-            sifFile.write("  Linear System Solver = Iterative\n")
-            sifFile.write("  Linear System Iterative Method = BiCGStab\n")
-            sifFile.write("  Linear System Preconditioning = ILU1\n")
-            sifFile.write("  Linear System Max Iterations = 500\n")
-            sifFile.write("  Linear System Convergence Tolerance = 1.0e-8\n")
-            sifFile.write("  Nonlinear System Newton After Tolerance = 1.0e-3\n")
-            sifFile.write("  Nonlinear System Newton After Iterations = 20\n")
-            sifFile.write("  Nonlinear System Max Iterations = 1000\n")
+            
+            sifFile.write("  Variable = Displacement\n")
+            sifFile.write("  Variable DOFs = 2\n\n")
 
-            sifFile.write("  !\n")
-            sifFile.write("  Nonlinear System Convergence Tolerance = 1.0e-5\n")
-            sifFile.write("  Nonlinear System Relaxation Factor = 1.0\n")
-            sifFile.write("  Displace Mesh = Logical FALSE\n")
-            sifFile.write("  !\n")
-            sifFile.write("  Steady State Convergence Tolerance = 1.0e-4\n")
-            pass
-        """
-Solver 1
-  Equation = Elasticity Solver
-  Variable = Displacement
-  Variable DOFs = 2
-  Procedure = "ElasticSolve" "ElasticSolver"
-  
-  Calculate Loads = Logical True
-End
+#            sifFile.write("  Procedure = \"AdvectionDiffusionTimeStep\" \"AdvectionDiffusionTimeStepSolver\"\n")
+            sifFile.write("  Procedure = \"ElasticSolve\" \"ElasticSolver\"\n")
+            sifFile.write("  Linear System Solver = %s\n"%self.parameterDico["Linear System Solver"])
+            if self.parameterDico["algebraicResolution"] == "Direct":
+            	if self.parameterDico["Linear System Direct Method"] in ["Banded","Umfpack"] :
+            	    sifFile.write("  Linear System Direct Method = %s\n"%self.parameterDico["Linear System Direct Method"])
+            	else :
+            	    raise Exception("Linear System Direct Method is not correct.\nChoose between Banded and Umfpack") 
+            	sifFile.write("  Optimize Bandwidth = %s\n"%self.parameterDico["Optimize Bandwidth"])   
+            else:
+                                                                                                        #
+                                                                                                        # linear solver
+                                                                                                        #
+                if self.parameterDico["Linear System Iterative Method"] in ["CG","CGS","BICGStab","TFQMP","GMRES"] :
+                    sifFile.write("  Linear System Iterative Method = %s\n"%self.parameterDico["Linear System Iterative Method"])
 
-Solver 2
-  Equation = "Elasticity Analysis"
-  Procedure = "StressSolve" "StressSolver"
-  Variable = String "True Displacement"
-  Variable DOFs = Integer 2
-  Time Derivative Order = 2
-
-  Calculate Stresses = TRUE
-  Displace Mesh = Logical FALSE
- 
-
-  Optimize Bandwidth = True
-End
-
-Solver 3
-  Equation = "Compute Energy Release Rate"
-  Procedure = "EnergyRelease" "ReleaseRateSolver"
-End
-
-        """
-
-
+                sifFile.write("  Linear System Max Iterations = %s\n"%self.parameterDico["Linear System Max Iterations"])
+                sifFile.write("  Linear System Convergence Tolerance = %e\n"%(self.parameterDico["Linear System Convergence Tolerance"]*0.01))
+                sifFile.write("  Linear System Preconditioning = %s\n"%self.parameterDico["Linear System Preconditioning"])
+                sifFile.write("  Linear System ILUT Tolerance = %e\n"%(self.parameterDico["Linear System Convergence Tolerance"]*0.01))
+                sifFile.write("  Linear System Symmetric = %s\n"%self.parameterDico["Linear System Symmetric"])
+                                                                                                        #
+                                                                                                        # non linear solver
+                                                                                                        #
+            sifFile.write("  Nonlinear System Newton After Tolerance  = %s\n"%self.parameterDico["Linear System Symmetric"])
+            sifFile.write("  Nonlinear System Newton After Iterations = %s\n"%self.parameterDico["Linear System Symmetric"])
+            sifFile.write("  Nonlinear System Max Iterations = %s\n"%self.parameterDico["Linear System Symmetric"])
+            sifFile.write("  Nonlinear System Convergence Tolerance = %s\n"\
+                          %self.parameterDico["Nonlinear System Convergence Tolerance"])
+            sifFile.write("  Nonlinear System Relaxation Factor = %s\n"%self.parameterDico["Nonlinear System Relaxation Factor"])
+            sifFile.write("  Steady State Convergence Tolerance = %s\n"%self.parameterDico["Steady State Convergence Tolerance"])
+            
+            sifFile.write("  Calculate Loads = Logical = True")
+            
+            sifFile.write("End\n\n")
 
         return None
         
@@ -795,20 +762,20 @@ End
         """
         sifFile = self.sifFile
         sifFile.write("! ~~\n! Boundary p30 ref. Manual\n! ~~\n")
-                                                                                            #
-                                                                                            # Two kinds of boundary cond.:
-                                                                                            #
-                                                                                            # Dirichlet or Flux
-                                                                                            #
+                                                                                                        #
+                                                                                                        # Two kinds of boundary cond.:
+                                                                                                        # 
+                                                                                                        #    Dirichlet or Flux
+                                                                                                        #
         #print self.dirBCList
         for dirBC in self.dirBCList1:
             #print " dbg write BC ",dirBC,self.speciesNamesList
             #raw_input(" dbg ctm bc ")
             inds = 0
             #print " bc elmer ",dirBC[0],dirBC[1],dirBC[2],dirBC[3]," inds ",inds
-                                                                                            #
-                                                                                            # Dirichlet
-                                                                                            #
+                                                                                                        #
+                                                                                                        # Dirichlet
+                                                                                                        #
             #print " elmer dbg ",dirBC[2].lower()
             if (dirBC["type"].lower() == "dirichlet"):
                 stinds = _digit(inds)
@@ -822,22 +789,17 @@ End
                     stindb = str(dirBC["name"])+stinds
                     sifFile.write("  %s = Real %e\n"%(concName,dirBC["conc"][inds]))
                     inds+=1
-                                                                                            #
-                                                                                            # elasticity
-                                                                                            #
-                if self.elasticity:
-                    sifFile.write("! elasticity\n")
-                    for component in range(self.spaceDimensions):
-                        sifFile.write("Displacement %s = 0"%(component+1))
-
-                    pass
-                                                                                            #
-                                                                                            # temperature
-                                                                                            #
                 if self.temperature:
                     sifFile.write("! temperature\n")
                     sifFile.write("  %s = Real %e\n"%("temperature", dirBC["temperature"][0])) # we take the first element of the list. 
-                                                                                            # We keep a list because we can have a varying temp. Boundary
+                                                                                               # We keep a list because we can have a varying temp. Boundary
+                                                                                               
+                if self.elasticity:
+                                                                                                        #
+                                                                                                        # to be treated
+                                                                                                        #
+                    pass
+                    
                 if "computed" in str(self.advConv.lower()):
                     #print " dbg elmer charge ",self.advConv
                     sifFile.write("! charge\n")
@@ -852,9 +814,9 @@ End
                     sifFile.write("  %s = Real %e\n"%("Hydraulic Conductivity", hydrCond))
                 sifFile.write("End\n\n")
             elif (dirBC["type"].lower() == "flux"):
-                                                                                            #
-                                                                                            # Flux B. C.
-                                                                                            #
+                                                                                                        #
+                                                                                                        # Flux B. C.
+                                                                                                        #
 ###                stinds = _digit(inds)
 #                stindb = str(dirBC[1])+stinds
 #                sifFile.write("Boundary Condition %s\n"%stindb)
@@ -862,7 +824,7 @@ End
 #                sifFile.write("  Mass Transfer Coefficient = Real %e\n"%(dirBC[3]))
                 stinds = _digit(inds+1)
                 stindb = str(dirBC["index"])+stinds
-                sifFile.write("Boundary Condition %s\n"%stindb)
+                sifFile.write("Boundary Condition %s\n"%dirBC["index"])
                 sifFile.write("  Target Boundaries (1) = %s\n"%str(dirBC["index"]))
                 for spconc in dirBC["conc"]:
                     #stinds = _digit(inds+1)
@@ -892,12 +854,12 @@ End
                     inds+=1
                 sifFile.write("End\n\n")
             elif (dirBC["type"].lower() == "neumann"):
-                                                                                            #
-                                                                                            # Neumann boundary condition.
-                                                                                            # For the moment,
-                                                                                            # only a no flux 
-                                                                                            # boundary condition is considered
-                                                                                            #
+                                                                                                        #
+                                                                                                        # Neumann boundary condition.
+                                                                                                        # For the moment,
+                                                                                                        # only a no flux boundary
+                                                                                                        # condition is treated
+                                                                                                        #
                 stinds = _digit(inds)
                 stindb = str(dirBC[1])+stinds
                 sifFile.write("Boundary Condition %s\n"%stindb)
@@ -930,16 +892,25 @@ End
             for spconc in self.speciesNamesList:
                 sifFile.write("  %s = Real %e\n"%(self.speciesNamesList[ind], dirIC["conc"][ind]))
                 ind+=1
-                                                                                            #
-                                                                                            # Temperature
-                                                                                            #
+                                                                                                        #
+                                                                                                        # Temperature
+                                                                                                        #
             if (self.temperature==True):
                 sifFile.write("! temperature\n")
                 sifFile.write("  %s = Real %e\n"%("TEMPERATURE", dirIC["temperature"]))
                 pass
-                                                                                            #
-                                                                                            # Charge
-                                                                                            #
+                                                                                                        #
+                                                                                                        # elasticity
+                                                                                                        #
+            if self.elasticity:
+                sifFile.write("! elasticity\n")
+                for i in self.mesh.getMeshDimension():
+                    sifFile.write("  Displacement %d Real %e\n"%(i, 0))
+                pass
+
+                                                                                                        #
+                                                                                                        # Charge
+                                                                                                        #
             if ("computed" in self.advConv.lower()):
                 sifFile.write("! charge\n")
                 #print dirIC
@@ -1893,29 +1864,29 @@ End
 	    #raw_input(" cell ")
 	    vtkTyp = _vtkGmsh(cell[1])
 	    ind = cell[2]+3
-	    if (vtkTyp==3):                                                                 # 2-node line
+	    if (vtkTyp==3):                                                                                     # 2-node line
 	        self.file_mesh.write("%i %i %i\n"%(2,\
 		                                      cell[ind]-1,
 		                                      cell[ind+1]-1))
-	    elif (vtkTyp==5):                                                               # 3-node triangle
+	    elif (vtkTyp==5):                                                                                   # 3-node triangle
 	        self.file_mesh.write("%i %i %i %i\n"%(3,\
 		                                      cell[ind]-1,
 		                                      cell[ind+1]-1, 
 		                                      cell[ind+2]-1))
- 	    elif (vtkTyp==9):                                                               # 4-node quadr
+ 	    elif (vtkTyp==9):                                                                                   # 4-node quadr
  	        self.file_mesh.write("%i %i %i %i %i\n"%(4,\
 		                                         cell[ind  ]-1, 
 		                                         cell[ind+1]-1, 
 		                                         cell[ind+2]-1, 
 		                                         cell[ind+3]-1))
- 	    elif (vtkTyp==10):                                                              # 4-node tetra
+ 	    elif (vtkTyp==10):                                                                                  # 4-node tetra
  	        #print "zcell ",cell
  	        self.file_mesh.write("%i %i %i %i %i\n"%(4,\
 		                                         cell[ind  ]-1,
 		                                         cell[ind+1]-1,
 		                                         cell[ind+2]-1, 
 		                                         cell[ind+3]-1))
-  	    elif (vtkTyp==12):                                                              # 8-node hexahedron	
+  	    elif (vtkTyp==12):                                                                                  # 8-node hexahedron	
 	        self.file_mesh.write("%i %i %i %i %i %i %i %i %i\n"%(8,\
 		                                         cell[ind  ]-1,\
 		                                         cell[ind+1]-1,\
@@ -1925,7 +1896,7 @@ End
 		                                         cell[ind+5]-1,\
 		                                         cell[ind+6]-1,\
 		                                         cell[ind+7]-1))
-  	    elif (vtkTyp==13):                                                              # prism	: 6-nodes
+  	    elif (vtkTyp==13):                                                                                  # prism	: 6-nodes
 	        self.file_mesh.write("%i %i %i %i %i %i %i\n"%(6,\
 		                                         cell[ind  ]-1,\
 		                                         cell[ind+1]-1,\
@@ -1933,7 +1904,7 @@ End
 		                                         cell[ind+3]-1,\
 		                                         cell[ind+4]-1,\
 		                                         cell[ind+5]-1))
-  	    elif (vtkTyp==14):                                                              # pyramid : 5-nodes
+  	    elif (vtkTyp==14):                                                                                  # pyramid : 5-nodes
 	        self.file_mesh.write("%i %i %i %i %i %i %i\n"%(5,\
 		                                         cell[ind  ]-1,\
 		                                         cell[ind+1]-1,\

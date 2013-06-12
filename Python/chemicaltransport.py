@@ -102,7 +102,7 @@ class ChemicalTransportProblem:
                  calculationTimes,
                  chemistryDB,
                  sources = None,
-                 darcyVelocity = None,                                                      # darcy velocity
+                 darcyVelocity = None,                                                                          # darcy velocity
                  seepageVelocity = None,
                  speciesBaseAddenda = None,
                  kineticLaws =  None,
@@ -136,30 +136,30 @@ class ChemicalTransportProblem:
         else:
             system("unset MPIROOT")
         #raw_input("argv")
-                                                                                            #
-                                                                                            # the problem is saturated
-                                                                                            #
+                                                                                                                #
+                                                                                                                # the problem is saturated
+                                                                                                                #
         self.saturation = "saturated"
         # name
         if type(name) != types.StringType: raise TypeError, "the name of the ChemicalTransportProblem must be a string "
         self.name = name
 
         # boundary conditions
-        print " dbg bd",dir(boundaryConditions[0])
-        print " dbg bd",boundaryConditions[0].type
-        print " dbg bd",boundaryConditions[0].description
+        #print " dbg bd",dir(boundaryConditions[0])
+        #print " dbg bd",boundaryConditions[0].type
+        #print " dbg bd",boundaryConditions[0].value
         #print " dbg bd",boundaryConditions[0].headValue
         #raw_input()
         verifyClassList(boundaryConditions, BoundaryCondition)
         self.boundaryConditions = boundaryConditions
-                                                                                            #
-                                                                                            # regions
-                                                                                            #
+                                                                                                                #
+                                                                                                                # regions
+                                                                                                                #
         verifyClassList(regions, Region)
         self.regions = regions
-                                                                                            #
-                                                                                            # Darcy and seepage Velocity treatment :
-                                                                                            #
+                                                                                                                #
+                                                                                                                # Darcy and seepage Velocity treatment :
+                                                                                                                #
         if isinstance(darcyVelocity,Velocity):
             self.darcyVelocity = darcyVelocity 
         elif isinstance(seepageVelocity,Velocity):
@@ -169,16 +169,16 @@ class ChemicalTransportProblem:
                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")         
         elif type(darcyVelocity) == types.StringType:
             if darcyVelocity.lower() == "read":
-                                                                                            #
-                                                                                            # The Darcy velocity will be read from
-                                                                                            # the velocity.ep file
-                                                                                            #
+                                                                                                                #
+                                                                                                                # The Darcy velocity will be read from
+                                                                                                                # the velocity.ep file
+                                                                                                                #
                 self.darcyVelocity = "read"
-            elif darcyVelocity.lower() == "computed":                                       # the Darcy velocity is transient
+            elif darcyVelocity.lower() == "computed":                                                           # the Darcy velocity is transient
                 self.darcyVelocity = "computed"
-                                                                                            #
-                                                                                            # we check that materials contain relevant properties
-                                                                                            #
+                                                                                                                #
+                                                                                                                # we check that materials contain relevant properties
+                                                                                                                #
                 meshdim = self.regions[0].support.getSpaceDimension()
                 for region in self.regions:
                     meshdim = max(meshdim,region.support.getSpaceDimension())
@@ -205,20 +205,20 @@ class ChemicalTransportProblem:
 
         else:
             self.darcyVelocity = None
-                                                                                            #
-                                                                                            # data Base
-                                                                                            #
+                                                                                                                #
+                                                                                                                # data Base
+                                                                                                                #
         if type(chemistryDB) != types.StringType: raise TypeError,\
         " the chemistryDB argument of the ChemicalTransportProblem must be a string "
         self.chemistryDB = chemistryDB
-                                                                                            #
-                                                                                            # initial conditions
-                                                                                            #
+                                                                                                                #
+                                                                                                                # initial conditions
+                                                                                                                #
         verifyClassList(initialConditions, InitialCondition)
         self.initialConditions = initialConditions
-                                                                                            #
-                                                                                            # Sources
-                                                                                            #
+                                                                                                                #
+                                                                                                                # Sources
+                                                                                                                #
         if sources != None:
             verifyClassList(sources, Source)
             self.sources = sources
@@ -367,9 +367,9 @@ class ChemicalTransportProblem:
             self.temperatureField = temperatureField
 
         return None
-                                                                                            #
-                                                                                            # init method end
-                                                                                            #
+                                                                                                                #
+                                                                                                                # init method end
+                                                                                                                #
     def getOutputTimeStudy(self):
         """
         """

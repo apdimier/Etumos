@@ -101,6 +101,7 @@ class Region:
                 -support : unstructured or CartesianMesh
                 - material : object Material
         """
+        print support
         memberShip(material, Material)
         self.material = material
         memberShip(support,[CartesianMesh, Body])
@@ -147,12 +148,12 @@ class BoundaryCondition ( CommonBoundaryCondition):
 
             --> porosity :		a scalar.
 
-            --> flowRate :		object Flowrate
+            --> flowRate :		a Flowrate, see PhysicalQuantities
 
             --> timeVariation : 	a list of tuples [(time,chemical state)] or [(time,(list of species))]
 	"""
 #	raw_input(" make dico within the common model")
-        bcDico = makeDico(Dirichlet = [ChemicalState, Head], Flux = [ChemicalState, HeadGradient])
+        bcDico = makeDico(Dirichlet = [ChemicalState, Head], Flux = [ChemicalState, HeadGradient], Neumann = [ChemicalState, HeadGradient])
 #	raw_input (" make dico within the common model over")
 
         CommonBoundaryCondition.__init__(self,boundary, btype, value, bcDico, description)
@@ -230,8 +231,10 @@ class BoundaryCondition ( CommonBoundaryCondition):
         self.velocity = velocity
 
         if flowRate:
-            memberShip(flowRate,FlowRate)
-            pass
+            if flowRate.__class__.__name__=="FlowRate":
+                pass
+            else:
+                flowrate = FlowRate(flowrate,"m**3/s") # the flow rate is supposed to be in m**3/s
         self.flowRate = flowRate
 
         if timeVariation:
@@ -258,19 +261,27 @@ class BoundaryCondition ( CommonBoundaryCondition):
         return self.headValue.getValue()
 
     def getRegion (self):
-        """get boundary condition boundary"""
+        """
+        to get boundary condition boundary
+        """
         return self.boundary
 
     def getSupport (self):
-        """get boundary condition boundary"""
+        """
+        to get boundary condition boundary
+        """
         return self.boundary
 
     def getMTCoef (self):
-        """get the mass transfer coefficient"""
+        """
+        to get the mass transfer coefficient
+        """
         return self.massTCoef
         
     def getName(self):
-        """ to retrieve the name of the mesh part bounded to the boundary """
+        """
+        To retrieve the name of the mesh part bounded to the boundary
+        """
         return self.boundary.getName()
 
     def getTimeVariation (self):

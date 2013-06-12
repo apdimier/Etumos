@@ -141,15 +141,12 @@ def isInstance(x, klassenprobe):
 	if isinstance(x, klassenprobe):
 	    return 1
 	else:
-	    print " isInstance ",x
-	    print " isInstance "
-	    print " isInstance ",dir(x)
 	    raise Exception, " the x instance is not of the specified type %s"%(klassenprobe.__name__)
     else:
         for klasse in klassenprobe:
-            if isinstance(x, klasse):
-                return 1
-                pass
+	    if isinstance(x, klasse):
+	        return 1
+            pass
     return 0
 
 def verifyType(x, someTypes, message = None):
@@ -174,9 +171,9 @@ def verifyClass(x, someClass, message=None):
     Raises an exception if x is not an instance of one of some_classes
     """
     try:
-        print "verifyClass e",x.__class__,someClass.__class__
+        #print "verifyClass",x.__class__,someClass.__class__
         if x.__class__ == someClass.__class__:
-            print "verifyClass: it is ok"
+            print "verifyClass it is ok"
             return
         pass
     except:
@@ -196,7 +193,7 @@ def verifyClass(x, someClass, message=None):
             xstr = `type(x)`       
             message =_typeErrorMessage(xstr, _w_(someClass))
             pass
-        raise TypeError, message
+	raise TypeError, message
     return
 
 def verifyClasse(x, someClass, message=None):
@@ -213,14 +210,14 @@ def verifyClasse(x, someClass, message=None):
     
     if not isInstance(x, someClass):
         if message is None:
-            if hasattr(x, "__repr__"): 
+            if hasattr(x, "__repr__"):
                 xstr = x.__repr__()
             else:
                 xstr = `type(x)`
             xstr = `type(x)`       
             message = _typeErrorMessage(xstr, _w_(someClass))
             pass
-        raise TypeError, message
+	raise TypeError, message
     return
 
 def verifyClassList(liste, someClass):

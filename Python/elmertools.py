@@ -77,7 +77,7 @@ def interpolate(TimeGlobColumn,oneTable):
         l_flux = (1-lamda)*flux_l[pos-1]+lamda*flux_l[pos]
         interp_flux[i] = l_flux
     # transforme list to a numerical array
-    result_column = numpy.array(interp_flux)
+    result_column = Numeric.array(interp_flux)
     return result_column
 
 #-------------------------------------------------------------------------------

@@ -66,15 +66,16 @@ class SaturationLaw(PhysicalLaw):
 class BrooksCoreySaturation(SaturationLaw):
     """
     brookscoreysaturation hydraulic saturation law
-    sl = (referencesuction / suction)^lambdacoefficient si suction > referencesuction
-    sl = 1 si suction <= referencesuction
+    sl = (referencesuction / suction)^lambdacoefficient         if suction > referencesuction
+    
+    sl = 1                                                      if suction <= referencesuction
     """
     def __init__(self, lambdacoefficient, referencesuction, unit = None, interval = None, name = None):
         """
         Constructor with :
         - lambdacoefficient : real
         - referencesuction : real
-        ==> optinal :
+        ==> optional :
         - unit
         """
         self.lambdacoefficient = SET_NUMBER(lambdacoefficient)
@@ -86,14 +87,14 @@ class BrooksCoreySaturation(SaturationLaw):
             interval = interval(0.,0.,0.1)
         self.interval=interval
         
-    def eval(self, psi):
+    def eval(self, suction):
         """
         calculate liquid saturation value
         """
-        if psi <= self.referencesuction:
+        if suction <= self.referencesuction:
             return 1.
         else:
-            return pow((self.referencesuction / psi), self.lambdacoefficient)
+            return pow((self.referencesuction / suction), self.lambdacoefficient)
 
     def getlambdacoefficient(self):
         """
@@ -117,9 +118,9 @@ class VanGenuchtenSaturation(SaturationLaw):
     """
     Van Genuchten saturation hydraulic saturation law
     
-    Sl = 1. / (1. + (alpha*suction)^n)^m if suction > 0
+    Sl = 1. / (1. + (alpha*suction)^n)^m                if suction > 0
     
-    Sl = 1. otherwise
+    Sl = 1.                                             otherwise
     
     Two coefficients can be entered, but the definition can also conform to
     
@@ -153,26 +154,26 @@ class VanGenuchtenSaturation(SaturationLaw):
         self.name = "van Genuchten"
         SaturationLaw.__init__(self, alpha = alpha, n = n, m = m, interval = interval, unit = unit)
         
-    def eval(self, psi):
+    def eval(self, suction):
         """
         Evaluation of the liquid saturation
         """
-        if psi <= 0.:
+        if suction <= 0.:
             return 1.
         else:
-            return 1. / pow(1. + pow(self.alpha * psi, self.n), self.m) 
+            return 1. / pow(1. + pow(self.alpha * suction, self.n), self.m) 
         
-    def deriv_eval(self,psi):
+    def deriv_eval(self,suction):
         """
         evaluate liquid saturation derivative value
         """
-        if psi <= 0.:
+        if suction <= 0.:
             return 0.
         else:
             m=  self.m
             n=  self.n
             alpha =  self.alpha
-            return n*alpha*pow(alpha*psi,n-1)/(-m)*pow(1+pow(alpha*psi,n),m+1)
+            return n*alpha*pow(alpha*suction,n-1)/(-m)*pow(1+pow(alpha*suction,n),m+1)
 
     def getN(self):
         """
@@ -211,7 +212,7 @@ class MaloideSaturation1(SaturationLaw):
         ==> OPTIONAL :
         - unit
         
-            res = self.alpha* pow( psi, self.n)
+            res = self.alpha* pow( suction, self.n)
 
         """
         SaturationLaw.__init__(self,alpha=alpha,n=n,fonction=self,interval=interval)
@@ -225,28 +226,28 @@ class MaloideSaturation1(SaturationLaw):
             interval = Interval(0.,0.,0.)
         self.interval = interval 
         
-    def eval(self, psi):
+    def eval(self, suction):
         """
         Calculate liquid saturation value
         input   suction
         output  saturation
         """
-        if psi <= 0.:
+        if suction <= 0.:
             return 1.
         else:
-            res = self.alpha* pow( psi, self.n)
+            res = self.alpha* pow( suction, self.n)
             return res
         
-    def deriv_eval(self,psi):
+    def deriv_eval(self,suction):
         """
         Calculate liquid saturation derivative value
         """
-        if psi <= 0.:
+        if suction <= 0.:
             return 0.
         else:
             n = self.n
             alpha = self.alpha
-            res = self.n*self.alpha* pow( psi, (self.n-1))
+            res = self.n*self.alpha* pow( suction, (self.n-1))
             return res
 
     def getN(self):
@@ -287,25 +288,24 @@ class MaloideSaturation2(SaturationLaw):
             from functions import Interval
             interval =Interval(0.,0.,0.) 
         self.interval =interval
-    def eval(self, psi):
+    def eval(self, suction):
         """
         Calculate liquid saturation value
         """
-        if psi <= 0.:
+        if suction <= 0.:
             return 1.
         else:
-            res =self.beta* pow( psi, self.m - self.n)
-            return res
+            return self.beta* pow( suction, self.m - self.n)
         
-    def deriv_eval(self,psi):
+    def deriv_eval(self,suction):
         """
         Calculate liquid saturation derivative value
         """
-        if psi <= 0.:
+        if suction <= 0.:
             return 0.
         else:
             n=  self.n
-            res = -self.n*self.beta* pow( psi, (-self.n-1))
+            res = -self.n*self.beta* pow( suction, (-self.n-1))
             return res
 
     def getN(self):
@@ -362,14 +362,14 @@ class ExponentialSaturation(SaturationLaw):
             
         self.description = description
 
-    def eval(self, psi):
+    def eval(self, suction):
         """
-        Calculate relative permeability value with suction = psi
+
         """
-        if psi <= 0.:
+        if suction <= 0.:
             return 1.
         else:
-            return self.c/(self.c -1. + pow(math.exp(self.alpha * psi), self.n))
+            return self.c/(self.c -1. + pow(math.exp(self.alpha * suction), self.n))
 
     def getAlpha(self):
         """
@@ -404,8 +404,10 @@ class ExponentialSaturation(SaturationLaw):
 class LogarithmicSaturation(SaturationLaw):
     """
     LogarithmicSaturation hydraulic saturation law
-    Sl = c / (c + (ln(alpha*suction))^n) si suction > 1/alpha
-    Sl = 1 si suction <= 1/alpha
+    
+    Sl = c / (c + (ln(alpha*suction))^n)                if suction > 1/alpha
+    
+    Sl = 1                                              if suction <= 1/alpha
     """
     def __init__(self, alpha, c, n, unit = None,interval = None):
         """construction with :
@@ -425,15 +427,15 @@ class LogarithmicSaturation(SaturationLaw):
             interval = Interval(0.,0.,0.)
         self.interval=interval
 
-    def eval(self, psi):
+    def eval(self, suction):
         """
-        Calculate relative permeability value with suction = psi
+
         """
-        unsuralpha=1./self.alpha
-        if psi <= unsuralpha:
+        oneoveralpha=1./self.alpha
+        if suction <= oneoveralpha:
             return 1.
         else:
-            per = self.c/(self.c + pow(math.log(self.alpha * psi), self.n))
+            per = self.c/(self.c + pow(math.log(self.alpha * suction), self.n))
             return per
 
     def getAlpha(self):
@@ -1003,8 +1005,9 @@ class ExponentialPermeability(PermeabilityLaw):
     """
     Exponential permeability law:
     
-        kr = c / (c + (exp(alpha*suction))^n -1) si suction > 0
-        kr = 1 if suction <=0
+        kr = c / (c + (exp(alpha*suction))^n -1)                if suction > 0
+        
+        kr = 1                                                  otherwise
     """
     def __init__(self,  alpha, c, n, unit=None,interval=None):
         """
@@ -1025,15 +1028,15 @@ class ExponentialPermeability(PermeabilityLaw):
         if ((not self.c and not self.alpha) or
             (not self.c and not self.n)):
             raise Exception("You define an Exponential law with c and alpha = 0 or wich c and n = 0!!!!")
-    def eval(self, psi):
+            
+    def eval(self, suction):
         """
-        Calculate relative permeability value with suction = psi
+        Calculate relative permeability value
         """
-        if psi <= 0.:
+        if suction <= 0.:
             return 1.
         else:
-            per = self.c/(self.c + pow(math.exp(self.alpha * psi), self.n) - 1.)
-            return per
+            return self.c/(self.c + pow(math.exp(self.alpha * suction), self.n) - 1.)
 
     def getAlpha(self):
         """
@@ -1083,16 +1086,16 @@ class LogarithmicPermeability(PermeabilityLaw):
             interval = Interval(0.,0.,0.)
         self.interval=interval 
 
-    def eval(self, psi):
+    def eval(self, suction):
         """
-        Calculate relative permeability value with suction = psi
+        Calculate relative permeability value
         """
         unsuralpha = 1./self.alpha
-        if psi <= unsuralpha:
+        
+        if suction <= unsuralpha:
             return 1.
         else:
-            per = self.c/(self.c + pow(math.log(self.alpha * psi), self.n))
-            return per
+            return self.c/(self.c + pow(math.log(self.alpha * suction), self.n))
 
     def getAlpha(self):
         """

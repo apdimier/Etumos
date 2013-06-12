@@ -117,7 +117,7 @@ except:
         import numarray as _Numeric  #if numarray is used it is renamed Numeric
     except:
         try:
-            import Numeric as _Numeric
+            import numpy as _Numeric
         except:
             msg= """
             This module requires the Numeric/numarray or NumPy module,
