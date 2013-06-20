@@ -161,7 +161,7 @@ module.run()
 #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 points, charge, velocity = module.getOutput("velocity")
-print velocity
+#print velocity
 eps = 1.e-3
 ok = 1
 for v in velocity:

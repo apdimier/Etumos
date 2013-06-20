@@ -127,7 +127,9 @@ problem = HydraulicProblem( name                     = "SteadyHydraulic",
                             boundaryConditions       = [ABBoundary, BCBoundary, CDBoundary, DABoundary],
                             initialConditions        = [columnInit],
                             source                   = None,
-                            outputs                  = [])
+                            outputs                  = [],
+                            viscosity                = Viscosity(1.0e+0,"kg*m/s" ),
+                            density                  = Density  (1.0e+0,"kg/m**3"))
 
 #---------------------------------------------------------------------
 #  Define the calculation module and set problem data into
@@ -159,12 +161,13 @@ module.run()
 #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 points, charge, velocity = module.getOutput("velocity")
+#print velocity
 eps = 1.e-3
 ok = 1
 for v in velocity:
     norml2 = ((v[0]-45.)**2+(v[1]-80.)**2)**0.5
     if norml2> eps:
-        raise Exception, " The test on an isotropic velocity field failed"
+        raise Exception, " The test on an isotropic velocity field failed: "+str(norml2)
 if ok:
     print "\n \n ~~~~~~~~~~~~~~~~~~~ The test case on isotropic velocity is ok ~~~~~~~~~~~~~~~\n"
     pass

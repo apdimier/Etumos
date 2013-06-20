@@ -173,7 +173,7 @@ stabilize                       = True
 module.setParameter(linearSystemSolver = "iterative",\
                     linearSystemIterativeMethod = "BiCGStab",\
                     linearSystemMaxIterations = 100,\
-                    linearSystemConvergenceTolerance = 1.e-15,\
+                    linearSystemConvergenceTolerance = 1.e-14,\
                     linearSystemPreconditioning = "ILU0",\
                     steadyStateConvergenceTolerance = 1.0e-08,\
                     stabilize = True)
@@ -191,11 +191,14 @@ ok = 1
 # The three first elements of the velocity are compared with previously obtained ones
 #
 #
-prev = [1.9711231866e-09, 1.0329601084e-09, 0.0], [3.7274883058e-10, -2.7540410988e-10, 0.0], [3.7224700379e-10, -2.7653964319e-10, 0.0]
-if prev[0] == velocity[0] and prev[1] == velocity[1] and prev[2] == velocity[2]:
+prev = [1.9711231866e-09, 1.0329601084e-09, 0.0][0], [3.7274883058e-10, -2.7540410988e-10, 0.0][0], [3.7224700379e-10, -2.7653964319e-10, 0.0][0]
+if abs(prev[0]- velocity[0][0])< 1.e-6 and abs(prev[1]- velocity[1][0])< 1.e-6 and abs(prev[2]- velocity[2][0])<1.e-6:
     pass
 else:
     ok = 0
+    print prev[0], velocity[0]
+    print prev[1], velocity[1]
+    print prev[2], velocity[2]
 #print "points  ",points
 print '~~~~~~~~~~~'
 print 'Velocities:'
