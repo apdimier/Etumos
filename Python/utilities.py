@@ -145,6 +145,44 @@ def waterViscosity(temperature):
     t = temperature
     return 2.414e-5*(10**(247.8/(t + 133.15)))
     
+def salineWaterViscosity(temperature,salinity):
+    """
+    Desalination and Water Treatment, 2009
+    Sharqawy M. H., Lienhard J. H., and Zubair, S. M., 
+
+    IAPWS release on the viscosity of ordinary water substance 2008
+    
+    viscosity of water:          [kg/m-s]
+    
+    1 Pa.s = 1 N s m** -2 = 1 kg/m-s
+    
+    Temperature is entered here in Celcius degrees
+    
+    salinity in kg per kg
+    
+    """
+    T = temperature
+    s = salinity
+    a1 = 1.5700386464E-01
+    a2 = 6.4992620050E+01
+    a3 = -9.1296496657E+01
+    a4 = 4.2844324477E-05
+    #
+    a5 = 1.5409136040E+00
+    a6 = 1.9981117208E-02
+    a7 = -9.5203865864E-05
+    a8 = 7.9739318223E+00
+    a9 = -7.5614568881E-02
+    a10 = 4.7237011074E-04
+    #
+    # viscosity with salinity equals to zero
+    #
+    mu = a4 + 1/(a1*(T+a2)**2+a3)
+    A = a5 + a6 * T + a7 * T**2
+    B = a8 + a9 * T + a10* T**2
+    
+    return mu*(1+ A*s + B*s**2)
+
 
 def freshWaterSpecificHeat(temperature):
     """
@@ -376,8 +414,9 @@ def contactV1(density, porosity = None):
     
     volume of water in contact with 1kg soil = volume of 1kg soil * porosity / (1. - porosity)
     
-    """       
-    return 1. 
+    """
+    return 1.
+
 def contactV2(density, porosity = None, percent = None):
     """
     that function is used to determine volume of water in contact with 1kg soil
@@ -385,15 +424,15 @@ def contactV2(density, porosity = None, percent = None):
     volume in m3 of 1 kg soil is 1./density ((density in kg/m3)
     
     volume of water in m3 in contact with 1kg soil = volume of 1kg soil * porosity / (1. - porosity)
-    
-    
+       
     Specific surface area is a material property of solids which measures the total surface area per unit of mass,
     solid or bulk volume[2], or cross-sectional area, the unit is m2/kg.
     
     """        
 #    radius = 3./density/surface
 #    print radius
-
+    if percent == None:
+        percent = 1.
     
     return percent*(1./density)*(porosity/(1.-porosity))
 
@@ -430,6 +469,7 @@ def km(k25, Ea, temperature, referenceTemperature = None):
     the Arrhenius equation gives "the dependence of the rate constant k of chemical reactions on the temperature T
     (in    absolute temperature kelvins) and activation energy Ea", as shown below:[1]
 
+
     
     Ea: energy of activation in J/mol
     
@@ -440,5 +480,4 @@ def km(k25, Ea, temperature, referenceTemperature = None):
     if referenceTemperature == None:
         referenceTemperature = 298.15
     return k25*exp(-Ea*((1./temperature) - (1./referenceTemperature))/8.314)
-    
 
