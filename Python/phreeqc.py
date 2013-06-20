@@ -10,6 +10,7 @@ from chemistry import ActivityLaw,\
                       Davies,\
                       DebyeHuckel,\
                       ExchangeBindingSpecies,\
+                      FreeKineticLaw,\
                       MineralConcentration,\
                       MineralTotalConcentration,\
                       ReversibleKineticLaw,\
@@ -427,11 +428,14 @@ def mineralSolution (State, batchBeg, batchEnd, inFile, kineticLaws, gasOption, 
                 for spezien in mineralPhase.minerals:
 	            if kineticLaws == []:
 		        boolean =1
-		    for kineticLaw in kineticLaws:
-		        if (spezien.symbol!=kineticLaw.symbol):
-		            boolean = 1
+		    else:
+		        for kineticLaw in kineticLaws:
+                            if (spezien.symbol == kineticLaw.symbol):
+		                break
+		            else:
+		                boolean = 1
 		            pass
-		        pass
+		#raw_input("value of boolean "+str( boolean))
             pass
         except Warning:
             print "##Warning: No mineral phase in contact with the aqueous phase within that solution"
@@ -538,26 +542,7 @@ def mineralSolution (State, batchBeg, batchEnd, inFile, kineticLaws, gasOption, 
 			    
 #
                             if integrationMethod[0] == "cvode":
-                                inFile.write("    -cvode true\n")
-                                if type(intParamDict).__name__ == "dict":
-                                    if intParamDict.has_key(kineticLaw.symbol):
-                                        inFile.write("     -tol %15.10e\n"%(intParamDict[kineticLaw.symbol]["cvodetol"]))
-                                        inFile.write("     -cvode_order %d\n"%(intParamDict[kineticLaw.symbol]["cvodeOrder"]))
-                                        inFile.write("     -cvode_steps %d\n\n"%(intParamDict[kineticLaw.symbol]["cvodeStep"]))
-                                    else:
-                                        inFile.write("     -tol %15.10e\n"%(integrationMethod[2]))                # default: 1.-8
-                                        inFile.write("     -cvode_order %d\n"%(integrationMethod[1]))  
-                                        inFile.write("     -cvode_steps %d\n\n"%(integrationMethod[3]))
-                                #inFile.write("	-step_divide 2.0\n\n")
-                            elif integrationMethod[0] == "rungekutta":
-                                inFile.write("    -runge_kutta %s\n"%(3))                                   # default: 3
-                            else:
-                                inFile.write("	-cvode true\n")							# default values
-                                inFile.write("	-tol %e\n"%(integrationMethod[2]))                              # 
-                                inFile.write("	-cvode_order %d\n"%(integrationMethod[1]))    
-                                inFile.write("	-cvode_steps %d\n\n"%(integrationMethod[3]))
-                                #inFile.write("	-step_divide 10.0\n\n")
-                                pass
+                                cvodewriter(inFile, kineticLaw, integrationMethod, intParamDict)
                                    
                     elif isInstance(kineticLaw,WYMEKineticLaw):
 		        if (spezien.symbol == kineticLaw.name):
@@ -582,11 +567,52 @@ def mineralSolution (State, batchBeg, batchEnd, inFile, kineticLaws, gasOption, 
                             inFile.write("	-tol 1.e-7\n")        
                             inFile.write("	-cvode_order 3\n")    
                             inFile.write("	-cvode_steps 400\n")        
+                    elif isInstance(kineticLaw,FreeKineticLaw):
+                        #raw_input("kinetic law free")
+		        if (spezien.symbol == kineticLaw.symbol):
+                            #raw_input(spezien.symbol+"   "+kineticLaw.symbol)
+	                    if kineticBoolean == 1 :
+                                _keywordWriter(inFile,"KINETICS", batchBeg, batchEnd,"")
+				kineticBoolean = 0
+                            form = "	%s\n"
+                            inFile.write(form%(spezien.symbol))
+                            length = len(kineticLaw.lawParameter)
+                            form = "    -parms"
+                            for fl in kineticLaw.lawParameter:
+                                form += " %15.10e"%fl
+                            inFile.write("%s\n"%(form))
+                            form = "    -m0 %15.10e\n"
+                            inFile.write(form%(spezien.value))
+                            kineticLaw.imp = 1
+		            pass
+		            
 	    if kineticBoolean ==0: inFile.write("	INCREMENTAL_REACTIONS true\n")
 	    pass
 		
         except Warning:
             print "## Warning: No kinetic law within the"+State.name+" state "
+    if kineticLaws != []:
+        for kineticLaw in kineticLaws:
+            #raw_input(" free kinetic law 1")
+            if isInstance(kineticLaw,FreeKineticLaw):
+                #raw_input(" free kinetic law 2")
+                if (kineticLaw.imp == 0):
+                    #raw_input(" free kinetic law 3")
+                    #_keywordWriter(inFile,"KINETICS", batchBeg, batchEnd,"")
+                    form = "	%s\n"
+                    inFile.write(form%(kineticLaw.symbol))
+                    if kineticLaw.formula != None:
+                        inFile.write(form%(kineticLaw.formula))
+                    length = len(kineticLaw.lawParameter)
+                    form = "    -parms"
+                    for fl in kineticLaw.lawParameter:
+                        form += " %15.10e"%fl
+                    inFile.write("%s\n"%(form))
+#
+                    if integrationMethod[0] == "cvode":
+                        cvodewriter(inFile, kineticLaw, integrationMethod, intParamDict)
+                else:
+                    kineticLaw.imp = 0
     elif mineralPhase != None:
         print "## Warning: No kinetic law within the"+State.name+" state "
         
@@ -867,9 +893,10 @@ class Phreeqc:
         """ 
                 Used to define user defined kinetic laws
                 See the manual page 41 NUMERICAL METHOD AND RATE EXPRESSIONS FOR CHEMICAL KINETICS
+                See also page 121 of the manual.
                 
-                ReversibleKineticLaw
-                
+                ReversibleKineticLaw,
+                FreeKineticLaw
         """
         if isInstance(kineticLaw,ReversibleKineticLaw): # Reversible Kinetic law
             mineralFormula = kineticLaw.symbol
@@ -894,6 +921,9 @@ class Phreeqc:
             self.inFile.write("\n-start\n")
             #self.inFile.write("	 5	if (m <= 0) then goto 81\n")
             #self.inFile.write(" #	20	sr_sh = SR(\"%s\")\n"%(mineralFormula))
+            # 
+            # sr : saturation ratio : IAP/K
+            #
             sr_sh = "SR(\"%s\")"%(mineralFormula)
             #self.inFile.write("	20	if (M<= 0 and si_sh < 0) then goto 90\n")
             #
@@ -1110,34 +1140,37 @@ class Phreeqc:
             self.inFile.write("	%s	SAVE moles\n"%(self.basicLineId))
             self.inFile.write("-end\n")
             pass
+        elif isInstance(kineticLaw,FreeKineticLaw): # Reversible Kinetic law
+            if kineticLaw.rate != None:
+                self.inFile.write("%s"%(kineticLaw.rate))
         else:	
             raise Exception, "Wrong definition of the kinetic law type"
         return None
 
     def getCellPorosity(self,cell,ite):
         """
-	   porosity estimation within a cell
-        """
-        if ite == 0:
-            cellPorosity = self.cellPorosity[cell]
-            newCellPorosity = self.solver.getCellPorosity(cell,0)
+	porosity estimation within a cell
+	"""
+	if ite == 0:
+	    cellPorosity = self.cellPorosity[cell]
+	    newCellPorosity = self.solver.getCellPorosity(cell,0)
 #	    print cell,cellPorosity,newCellPorosity
-            epsP = abs(1.0-newCellPorosity/cellPorosity)
-            ind = 0
+	    epsP = abs(1.0-newCellPorosity/cellPorosity)
+	    ind = 0
 #
 # ind <2 to be considered as optimal.
 #
-            while epsP > epsFP and ind<2:
-                self.solver.einzellequilibrium(cell)
-                cellPorosity = newCellPorosity
-                newCellPorosity = self.solver.getCellPorosity(cell,2)
-                epsP = abs(1. - newCellPorosity/cellPorosity)
-                ind+=1
-            self.cellPorosity[cell] = newCellPorosity
+	    while epsP > epsFP and ind<2:
+	        self.solver.einzellequilibrium(cell)
+	        cellPorosity = newCellPorosity
+	        newCellPorosity = self.solver.getCellPorosity(cell,2)
+		epsP = abs(1. - newCellPorosity/cellPorosity)
+	        ind+=1
+	    self.cellPorosity[cell] = newCellPorosity
         else:
-            self.cellPorosity[cell] = self.solver.getCellPorosity(cell,1)
-        if cell == 1:
-            print " ph.py within getCellPorosity %d ite %d %e"%(cell,ite,self.cellPorosity[cell])
+	    self.cellPorosity[cell] = self.solver.getCellPorosity(cell,1)
+	if cell == 1:
+	    print " ph.py within getCellPorosity %d ite %d %e"%(cell,ite,self.cellPorosity[cell])
 	return None
 ##
     def modifyKineticLaws(self,kineticLaws,index=None):
@@ -1177,9 +1210,10 @@ class Phreeqc:
     def getPorosityField(self,ite = None):
         #print "pdbg getPorosityfield "
         if (ite == None):
-            ite = 0
+   	    ite = 0
         for node in range(self.internalNodesNumber):
-            self.getCellPorosity(node,ite)
+   	    self.getCellPorosity(node,ite)
+            #print "pdbg getPorosityfield ",node ,ite
    	    
         return self.cellPorosity
 	
@@ -2409,7 +2443,7 @@ class Phreeqc:
 	    pass
 	elif self.kineticLaws != []:
 	    for kineticLaw in self.kineticLaws:
-	        if boolean_kinetics==0:
+	        if boolean_kinetics==0 and kineticLaw.__class__.__name__ != "FreeKineticLaw":
 	            self.inFile.write("RATES\n")
 		    boolean_kinetics=1
 		self.kinetics(kineticLaw)
@@ -2660,4 +2694,26 @@ def _ascDi(elem):
         di=1
     return (asc,float(di))
     
+def cvodewriter(inFile, kineticLaw, integrationMethod, intParamDict):
+    """
+    used to write within the phreeqc file the elements bounded to the cvode solver.
+    """
+    inFile.write("    -cvode true\n")
+    if type(intParamDict).__name__ == "dict":
+        if intParamDict.has_key(kineticLaw.symbol):
+            inFile.write("     -tol %15.10e\n"%(intParamDict[kineticLaw.symbol]["cvodetol"]))
+            inFile.write("     -cvode_order %d\n"%(intParamDict[kineticLaw.symbol]["cvodeOrder"]))
+            inFile.write("     -cvode_steps %d\n\n"%(intParamDict[kineticLaw.symbol]["cvodeStep"]))
+        else:
+            inFile.write("     -tol %15.10e\n"%(integrationMethod[2]))                      # default: 1.-8
+            inFile.write("     -cvode_order %d\n"%(integrationMethod[1]))  
+            inFile.write("     -cvode_steps %d\n\n"%(integrationMethod[3]))
+                                #inFile.write("	-step_divide 2.0\n\n")
+    elif integrationMethod[0] == "rungekutta":
+        inFile.write("    -runge_kutta %s\n"%(3))                                           # default: 3
+    else:
+        inFile.write("	-cvode true\n")							    # default values
+        inFile.write("	-tol %e\n"%(integrationMethod[2]))                                  # 
+        inFile.write("	-cvode_order %d\n"%(integrationMethod[1]))    
+        inFile.write("	-cvode_steps %d\n\n"%(integrationMethod[3]))
     
