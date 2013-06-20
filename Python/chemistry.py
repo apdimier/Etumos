@@ -267,8 +267,10 @@ class Fugacity(ChemicalQuantity):
     Chemical fugacity for gaseous species
       Unit type = None
       Init as ChemicalQuantity
-      Fugacity is a measure of chemical potential in the form of 'adjusted pressure.' It reflects the tendency of a substance 
-      to prefer one phase (liquid, solid, or gas) over another, and can be literally defined as 'the tendency to flee or escape'.
+      Fugacity is a measure of chemical potential in the form of 'adjusted pressure.'
+      It reflects the tendency of a substance 
+      to prefer one phase (liquid, solid, or gas) over another,
+      and can be literally defined as 'the tendency to flee or escape'.
 
       Fugacity / Fugacity coefficient:
 
@@ -419,6 +421,74 @@ class KineticLaw(PhysicalLaw):
     Generic kinetic law
     """
     pass
+    
+
+class FreeKineticLaw(KineticLaw):
+    """
+    
+    kinetic law with a free format
+    
+    """
+    def __init__(self, symbol,
+                 rate = None,
+                 formula = None,
+                 lawParameter = None,
+                 m = None,
+                 m0 = None
+                ):
+        """
+        Init
+          Input :
+            symbol (string)
+            formula: Chemical formula or the name of a phase to be added by the kinetic reaction
+
+            
+	    m (float, OPTIONAL) : default 0, represents current moles of reactant.
+
+            parameter : a list of floats which are used in the rate definition
+	    
+	    m0 (float, OPTIONAL) : default 0, Initial moles of reactant.
+   
+        """        
+        self.symbol = symbol
+
+        _typecontrol(rate,[StringType]," string expressing the rate programmed in basic; that class is specific to phreeqC ")
+        self.rate = rate 
+
+        if formula != None:
+            _typecontrol(formula,[StringType]," string expressing the reaction to be used ")
+        self.formula  = formula
+        
+        if lawParameter != None:
+            for parm in lawParameter:
+                _typecontrol(parm,[FloatType,IntType]," power within ReversibleKineticLaw should be a float or at least an int ")
+            self.lawParameter = lawParameter
+        else:
+            self.lawParameter = None
+	    
+	self.m = m
+	
+	self.m0 = m0
+	
+	self.imp = 0
+
+    def getSymbol(self):
+        """
+        Get Reversible kinetic rate Law symbol
+          Output :
+            (string)
+        """
+        return self.symbol
+    
+
+    def getFormula(self):
+        """
+        Chemical formula or the name of a phase to be added by the kinetic reactio
+          Output :
+            (string)
+        """
+        return self.formula
+    
 
 class ReversibleKineticLaw(KineticLaw):
     """
@@ -483,6 +553,9 @@ class ReversibleKineticLaw(KineticLaw):
         else:
             self.specificSurfaceArea  = 0.0
             pass
+            
+        self.parameter = parameter
+        
         return
 
     def getSymbol(self):
