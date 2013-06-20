@@ -10,6 +10,8 @@
 """
 from listtools import toList
 
+from platform import architecture
+
 from types import ListType
 
 import resource
@@ -200,4 +202,9 @@ def SET_NUMBER(x):
     if IS_NUMBER(x):
         return x
     else: raise Exception, " is not a number" 
-        
+
+def c_archi():
+    if '32' in architecture()[0]:
+        return '32'
+    elif '64' in architecture()[0]:
+        return '64'        
