@@ -1,0 +1,702 @@
+###### Geoi Parameter Set Save File generated on 2011-07-27#####
+#AqueousSolutionToEquilibrate_list : 
+AqueousSolutionToEquilibrate_list = []
+#AqueousStates_Default_Eh : 
+AqueousStates_Default_Eh = 0.23668639
+#AqueousStates_Default_Temperature : 
+AqueousStates_Default_Temperature = 25.0
+#AqueousStates_Default_pH : 
+AqueousStates_Default_pH = 7.0
+#AqueousStates_Default_pe : 
+AqueousStates_Default_pe = 4.0
+#AqueousStates_ExchangeSpecies_Properties_list : 
+AqueousStates_ExchangeSpecies_Properties_list = [[], [], [], [], [], [], [], []]
+#AqueousStates_ExchangeSpecies_list : 
+AqueousStates_ExchangeSpecies_list = [[], [], [], [], [], [], [], []]
+#AqueousStates_Gas_Properties_list : 
+AqueousStates_Gas_Properties_list = []
+#AqueousStates_Gas_list : 
+AqueousStates_Gas_list = []
+#AqueousStates_KineticRates_Properties_list : 
+AqueousStates_KineticRates_Properties_list = []
+#AqueousStates_KineticRates_list : 
+AqueousStates_KineticRates_list = []
+#AqueousStates_MineralPhases_Properties_list : 
+AqueousStates_MineralPhases_Properties_list = [[(u'0.0', u'0.249822625936', 0), (u'0.0', u'0.0121095634551', 0), (u'0.0', u'0.0340643832486', 0), (u'0.0', u'0.00581143970283', 0), (u'0.0', u'0.00260528117067', 0), (u'0.0', u'0.0832313748991', 0), (u'0.0', u'0.0110196885101', 0), (u'0.0', u'0.00833479192192', 0), (u'6e-4', u'0.0', 0), (u'-0.23', u'0.0', 0), (u'-1.24', u'0.0', 0), (u'-0.8', u'0.0', 0)], [(u'0.0', u'0.249822625936', 0), (u'-0.99', u'0.0121095634551', 0), (u'0.77', u'0.0340643832486', 0), (u'0.13', u'0.00581143970283', 0), (u'0.0', u'0.00260528117067', 0), (u'0.23', u'0.0832313748991', 0), (u'-0.47', u'0.0110196885101', 0), (u'0.0', u'0.00833479192192', 0), (u'-2.65', u'0.0', 0), (u'0.0', u'0.0', 0), (u'0.0', u'0.0', 0), (u'-2.78', u'0.0', 0)], [('1.919', '10', 0), (u'0.0', u'0.249822625936', 0), (u'0.0', u'0.0', 0), (u'0.0', u'0.0', 0), (u'0.0', u'0.00260528117067', 0), (u'0.0', u'0.00833479192192', 0), (u'-0.99', u'0.0121095634551', 0), (u'0.77', u'0.0340643832486', 0), (u'0.13', u'0.00581143970283', 0), (u'0.23', u'0.0832313748991', 0), (u'-0.47', u'0.0110196885101', 0), (u'-2.65', u'0.0', 0), (u'-2.78', u'0.0', 0)], [(u'0.0', u'0.224840363342', 0), (u'0.0', u'0.0193714656761', 0), (u'0.0', u'0.0169343276094', 0), (u'0.0', u'0.0832313748991', 0), (u'0.0', u'0.0183661475169', 0), (u'0.0', u'0.0166695838438', 0), (u'0.0', u'0.00813585798046', 0), (u'0.0', u'0.0040986022605', 0), (u'0.0', u'0.00863259668508', 0)], [('1.919', '10', 0)], [(u'0.0', u'0.224840363342', 0), (u'0.0', u'0.00813585798046', 0), (u'0.0', u'0.0183661475169', 0)], [(u'0.0', u'74.94678', 0), (u'0.0', u'3.632869', 0), (u'0.0', u'10.2193149', 0), (u'0.0', u'1.74343191', 0), ('0.0', '0.78158435', 0), (u'0.0', u'24.9694124', 0), (u'0.0', u'3.30590655303', 0), (u'0.0', u'2.50043757', 0), (u'6e-4', u'0.0', 0), (u'-0.23', u'0.0', 0), (u'-1.24', u'0.0', 0), (u'-0.8', u'0.0', 0)], [(u'0.0', u'74.94678', 0), (u'0.0', u'3.632869', 0), (u'0.0', u'10.2193149', 0), (u'0.0', u'1.74343191', 0), (u'0.0', u'0.78158435', 0), (u'0.0', u'24.9694124', 0), (u'0.0', u'3.30590655303', 0), (u'0.0', u'2.50043757', 0), (u'6e-4', u'0.0', 0), (u'-0.23', u'0.0', 0), (u'-1.24', u'0.0', 0), (u'-0.8', u'0.0', 0)]]
+#AqueousStates_MineralPhases_list : 
+AqueousStates_MineralPhases_list = [['Calcite', 'Ankerite', 'Montmor-Na', 'Kaolinite', 'Illite', 'Quartz', 'Anhydrite', 'Pyrite', 'Goethite', 'Chalcedony', 'Dolomite-dis', 'Siderite'], ['Calcite', 'Ankerite', 'Montmor-Na', 'Kaolinite', 'Illite', 'Quartz', 'Anhydrite', 'Pyrite', 'Goethite', 'Chalcedony', 'Dolomite-dis', 'Siderite'], ['CO2(g)', 'Calcite', 'Dolomite-dis', 'Chalcedony', 'Illite', 'Pyrite', 'Ankerite', 'Montmor-Na', 'Kaolinite', 'Quartz', 'Anhydrite', 'Goethite', 'Siderite'], ['Calcite', 'Kaolinite', 'Illite', 'Quartz', 'Anhydrite', 'Pyrite', 'Dolomite-dis', 'Montmor-Ca', 'Siderite'], ['CO2(g)'], ['Calcite', 'Dolomite-dis', 'Anhydrite'], ['Calcite', 'Ankerite', 'Montmor-Na', 'Kaolinite', 'Illite', 'Quartz', 'Anhydrite', 'Pyrite', 'Goethite', 'Chalcedony', 'Dolomite-dis', 'Siderite'], ['Calcite', 'Ankerite', 'Montmor-Na', 'Kaolinite', 'Illite', 'Quartz', 'Anhydrite', 'Pyrite', 'Goethite', 'Chalcedony', 'Dolomite-dis', 'Siderite']]
+#AqueousStates_Properties_list : 
+AqueousStates_Properties_list = [[['pH', '6.55'], ['T', '80'], ['pe', '4'], ['0', ('', '')], ['0', ('', '')]], [['pH', '6.24'], ['T', '80'], ['pe', '4'], ['0', ('', '')], ['0', ('', '')]], [['pH', '6.24'], ['T', '80'], ['pe', '4'], ['0', ('', '')], ['0', ('', '')]], [['pH', '4.63'], ['T', '80'], ['pe', '4'], ['0', ('', '')], ['0', ('', '')]], [['pH', '3.36'], ['T', '80'], ['pe', '4'], ['0', ('', '')], ['0', ('', '')]], [['pH', '6.20'], ['T', '80'], ['pe', '4'], ['0', ('', '')], ['0', ('', '')]], [['pH', '6.55'], ['T', '80'], ['pe', '4'], ['0', ('', '')], ['0', ('', '')]], [['pH', '6.55'], ['T', '80'], ['pe', '4'], ['0', ('', '')], ['0', ('', '')]]]
+#AqueousStates_Species_list : 
+AqueousStates_Species_list = [[['Al', '1.531e-7'], ['C', '2.180e-3'], ['Ca', '1.528e-2'], ['Cl', '2.601e-1'], ['Fe', '1.534e-5'], ['K', '1.190e-2'], ['Mg', '8.937e-4'], ['Na', '2.543e-1'], ['S', '1.841e-2'], ['Si', '5.371e-4']], [['Al', '5.622e-8'], ['C', '4.895e-3'], ['Ca', '1.612e-2'], ['Cl', '3.014e-1'], ['Fe', '2.137e-7'], ['K', '2.374e-3'], ['Mg', '1.282e-2'], ['Na', '2.594e-1'], ['S', '7.642e-3'], ['Si', '8.994e-4']], [['Al', '5.622e-8'], ['C', '4.895e-3'], ['Ca', '1.612e-2'], ['Cl', '3.014e-1'], ['Fe', '2.137e-7'], ['K', '2.374e-3'], ['Mg', '1.282e-2'], ['Na', '2.594e-1'], ['S', '7.642e-3'], ['Si', '8.994e-4']], [['Al', '1.21e-8'], ['C', '1.02'], ['Ca', '5.50e-2'], ['Cl', '1.92e-1'], ['Fe', '9.30e-6'], ['K', '1.85e-2'], ['Mg', '1.52e-2'], ['Na', '8.00e-2'], ['S', '5.86e-3'], ['Si', '2.48e-4']], [['Al', '2.18e-8'], ['C', '1.00'], ['Ca', '4.22e-2'], ['Cl', '1.92e-1'], ['Fe', '1.22e-5'], ['K', '1.85e-2'], ['Mg', '1.12e-2'], ['Na', '8.00e-2'], ['S', '6.16e-3'], ['Si', '6.55e-4']], [['Al', '2.18e-8'], ['C', '2.00e-3'], ['Ca', '4.22e-2'], ['Cl', '1.92e-1'], ['Fe', '1.22e-5'], ['K', '1.85e-2'], ['Mg', '1.12e-2'], ['Na', '8.00e-2'], ['S', '6.16e-3'], ['Si', '6.55e-4']], [['Al', '1.531e-7'], ['C', '2.180e-3'], ['Ca', '1.528e-2'], ['Cl', '2.601e-1'], ['Fe', '1.534e-5'], ['K', '1.190e-2'], ['Mg', '8.937e-4'], ['Na', '2.543e-1'], ['S', '1.841e-2'], ['Si', '5.371e-4']], [['Al', '1.531e-7'], ['C', '2.180e-3'], ['Ca', '1.528e-2'], ['Cl', '2.601e-1'], ['Fe', '1.534e-5'], ['K', '1.190e-2'], ['Mg', '8.937e-4'], ['Na', '2.543e-1'], ['S', '1.841e-2'], ['Si', '5.371e-4']]]
+#AqueousStates_SurfaceSpecies_Properties_list : 
+AqueousStates_SurfaceSpecies_Properties_list = [[], [], [], [], [], [], [], []]
+#AqueousStates_SurfaceSpecies_list : 
+AqueousStates_SurfaceSpecies_list = [[], [], [], [], [], [], [], []]
+#AqueousStates_list : 
+AqueousStates_list = ['Initial', 'Dogger', 'Acidified', 'Acidified_and_carbonates', 'Acidified_max', 'Charmotte', 'InitialF300']
+#Available_Databases_list : ?? - useless ? 
+Available_Databases_list = ['water_gui.dat']
+#Available_ExchangeSpecies_Output_List_Old : Save of the Available Exchange Species List in alphabetic order
+Available_ExchangeSpecies_Output_List_Old = []
+#Available_Minerals_Output_List_Old : Save of the Available Mineral Output List in alphabetic order
+Available_Minerals_Output_List_Old = []
+#Available_Output_List_Old : Save of the Available Output List in alphabetic order
+Available_Output_List_Old = []
+#Available_SurfaceSpecies_Output_List_Old : Save of the Available Surface Species List in alphabetic order
+Available_SurfaceSpecies_Output_List_Old = []
+#BCValues_list : 
+BCValues_list = []
+#BoundaryConditionTimeVariation_dict : 
+BoundaryConditionTimeVariation_dict = {}
+#BoundaryConditions_list : 
+BoundaryConditions_list = ['inlet']
+#Boundary_Condition_Head : 
+Boundary_Condition_Head = []
+#CUSTOM_CHEMISTRY_DB : the custom chemistry database instance, user edited
+CUSTOM_CHEMISTRY_DB = ChemistryDB({ 'EXCHANGE_MASTER_SPECIES': { },
+  'EXCHANGE_SPECIES': { },
+  'PHASES': { 'Anhydrite': { 'DENSITY': '',
+                             'EQUATION': 'CaSO4 = Ca++ + SO4--',
+                             'FORMULA': 'CaSO4',
+                             'LOGK': -5.05,
+                             'NAME': 'Anhydrite'},
+              'Ankerite': { 'DENSITY': '',
+                            'EQUATION': 'CaMg0.3Fe0.7C2O6 + 4H+ = Ca++ + 0.3Mg++ + 0.7Fe++ + 2H2O + 2CO2',
+                            'FORMULA': 'CaMg0.3Fe0.7C2O6',
+                            'LOGK': 12.14,
+                            'NAME': 'Ankerite'},
+              'CO2(g)': { 'DENSITY': '',
+                          'EQUATION': 'CO2 = CO2',
+                          'FORMULA': 'CO2',
+                          'LOGK': -1.89865961392,
+                          'NAME': 'CO2(g)'},
+              'Calcite': { 'DENSITY': '',
+                           'EQUATION': 'CaCO3 + H+ = Ca++ + HCO3-',
+                           'FORMULA': 'CaCO3',
+                           'LOGK': 1.05,
+                           'NAME': 'Calcite'},
+              'Chalcedony': { 'DENSITY': '',
+                              'EQUATION': 'SiO2 = SiO2',
+                              'FORMULA': 'SiO2',
+                              'LOGK': -3.02,
+                              'NAME': 'Chalcedony'},
+              'Dolomite-dis': { 'DENSITY': '',
+                                'EQUATION': 'CaMg(CO3)2 + 2H+ = Ca++ + Mg++ + 2HCO3-',
+                                'FORMULA': 'CaMg(CO3)2',
+                                'LOGK': 1.92,
+                                'NAME': 'Dolomite-dis'},
+              'Goethite': { 'DENSITY': '',
+                            'EQUATION': 'FeOOH + 3H+ = Fe+++ + 2H2O',
+                            'FORMULA': 'FeOOH',
+                            'LOGK': -1.13,
+                            'NAME': 'Goethite'},
+              'Illite': { 'DENSITY': '',
+                          'EQUATION': 'K0.6Mg0.25Al1.8Al0.5Si3.5O10(OH)2 + 8H+ = 0.25Mg++ + 0.6K+ + 2.3Al+3 + 3.5SiO2 + 5H2O',
+                          'FORMULA': 'K0.6Mg0.25Al1.8Al0.5Si3.5O10(OH)2',
+                          'LOGK': 3.8,
+                          'NAME': 'Illite'},
+              'Kaolinite': { 'DENSITY': '',
+                             'EQUATION': 'Al2Si2O5(OH)4 + 6H+ = 2Al+++ + 2SiO2 + 5H2O',
+                             'FORMULA': 'Al2Si2O5(OH)4',
+                             'LOGK': 2.38,
+                             'NAME': 'Kaolinite'},
+              'Montmor-Ca': { 'DENSITY': '',
+                              'EQUATION': 'Ca.165Mg.33Al1.67Si4O10(OH)2 + 6H+ = 0.165Ca+2 + 0.33Mg+2 + 1.67Al+3 + 4H2O + 4SiO2',
+                              'FORMULA': 'Ca.165Mg.33Al1.67Si4O10(OH)2',
+                              'LOGK': -0.830933464616,
+                              'NAME': 'Montmor-Ca'},
+              'Montmor-Na': { 'DENSITY': '',
+                              'EQUATION': 'Na.33Mg.33Al1.67Si4O10(OH)2 + 6H+ = 0.33Mg++ + 0.33Na+ + 1.67Al+++ + 4H2O + 4SiO2',
+                              'FORMULA': 'Na.33Mg.33Al1.67Si4O10(OH)2',
+                              'LOGK': -0.65,
+                              'NAME': 'Montmor-Na'},
+              'Pyrite': { 'DENSITY': '',
+                          'EQUATION': 'FeS2 + H2O = 0.25H+ + 0.25SO4-- + Fe++ + 1.75HS-',
+                          'FORMULA': 'FeS2',
+                          'LOGK': -21.91,
+                          'NAME': 'Pyrite'},
+              'Quartz': { 'DENSITY': '',
+                          'EQUATION': 'SiO2 = SiO2',
+                          'FORMULA': 'SiO2',
+                          'LOGK': -3.24,
+                          'NAME': 'Quartz'},
+              'Siderite': { 'DENSITY': '',
+                            'EQUATION': 'FeCO3 + H+ = Fe++ + HCO3-',
+                            'FORMULA': 'FeCO3',
+                            'LOGK': -1.17,
+                            'NAME': 'Siderite'}},
+  'RATES': { },
+  'SOLUTION_MASTER_SPECIES': { 'Al': { 'ELEMENT': 'Al',
+                                       'FORMULA': 'Al+++',
+                                       'GFW': 26.9815,
+                                       'LOGK': 0,
+                                       'SPECIES': 'Al+++'},
+                               'C': { 'ELEMENT': 'C',
+                                      'FORMULA': 'HCO3-',
+                                      'GFW': 12.011,
+                                      'LOGK': 1,
+                                      'SPECIES': 'HCO3-'},
+                               'C(+4)': { 'ELEMENT': 'C(+4)',
+                                          'FORMULA': 'HCO3-',
+                                          'GFW': 12.011,
+                                          'LOGK': 0,
+                                          'SPECIES': 'HCO3-'},
+                               'C(-3)': { 'ELEMENT': 'C(-3)',
+                                          'FORMULA': 'C2H6',
+                                          'GFW': 12.011,
+                                          'LOGK': 0,
+                                          'SPECIES': 'C2H6'},
+                               'Ca': { 'ELEMENT': 'Ca',
+                                       'FORMULA': 'Ca++',
+                                       'GFW': 40.078,
+                                       'LOGK': 0,
+                                       'SPECIES': 'Ca++'},
+                               'Cl': { 'ELEMENT': 'Cl',
+                                       'FORMULA': 'Cl-',
+                                       'GFW': 35.4527,
+                                       'LOGK': 0,
+                                       'SPECIES': 'Cl-'},
+                               'Fe': { 'ELEMENT': 'Fe',
+                                       'FORMULA': 'Fe+2',
+                                       'GFW': 55.847,
+                                       'LOGK': 0,
+                                       'SPECIES': 'Fe+2'},
+                               'Fe(+2)': { 'ELEMENT': 'Fe(+2)',
+                                           'FORMULA': 'Fe',
+                                           'GFW': 55.847,
+                                           'LOGK': 0,
+                                           'SPECIES': 'Fe++'},
+                               'Fe(+3)': { 'ELEMENT': 'Fe(+3)',
+                                           'FORMULA': 'Fe',
+                                           'GFW': 55.847,
+                                           'LOGK': -2,
+                                           'SPECIES': 'Fe+3'},
+                               'K': { 'ELEMENT': 'K',
+                                      'FORMULA': 'K+',
+                                      'GFW': 39.0983,
+                                      'LOGK': 0,
+                                      'SPECIES': 'K+'},
+                               'Mg': { 'ELEMENT': 'Mg',
+                                       'FORMULA': 'Mg++',
+                                       'GFW': 24.305,
+                                       'LOGK': 0,
+                                       'SPECIES': 'Mg++'},
+                               'Na': { 'ELEMENT': 'Na',
+                                       'FORMULA': 'Na+',
+                                       'GFW': 22.9898,
+                                       'LOGK': 0,
+                                       'SPECIES': 'Na+'},
+                               'S': { 'ELEMENT': 'S',
+                                      'FORMULA': 'S04--',
+                                      'GFW': 32.066,
+                                      'LOGK': 0,
+                                      'SPECIES': 'SO4--'},
+                               'S(+6)': { 'ELEMENT': 'S(+6)',
+                                          'FORMULA': 'SO4',
+                                          'GFW': 32.066,
+                                          'LOGK': 0,
+                                          'SPECIES': 'SO4-2'},
+                               'S(-2)': { 'ELEMENT': 'S(-2)',
+                                          'FORMULA': 'S',
+                                          'GFW': 32.066,
+                                          'LOGK': 1,
+                                          'SPECIES': 'HS-'},
+                               'Si': { 'ELEMENT': 'Si',
+                                       'FORMULA': 'SiO2',
+                                       'GFW': 28.0855,
+                                       'LOGK': 0,
+                                       'SPECIES': 'SiO2'}},
+  'SOLUTION_SPECIES': { 'Al+3': { 'ELEMENT': 'Al+3',
+                                  'EQUATION': 'Al+3 = Al+3',
+                                  'FORMULA': 'Al+3',
+                                  'LOGK': 0},
+                        'AlO2-': { 'ELEMENT': 'AlO2-',
+                                   'EQUATION': '2H2O + Al+3 = AlO2- + 4H+',
+                                   'FORMULA': 'AlO2-',
+                                   'LOGK': -17.9888941868},
+                        'AlO2H2+': { 'ELEMENT': 'AlO2H2+',
+                                     'EQUATION': '2.0000H2O + 1.0000Al+++ = Al(OH)2+ + 2.0000H+',
+                                     'FORMULA': 'Al(OH)2+',
+                                     'LOGK': -7.82750693541},
+                        'C2H6': { 'ELEMENT': 'C2H6',
+                                  'EQUATION': '2H+ + 2HCO3- + H2O = C2H6 + 3.5O2',
+                                  'FORMULA': 'C2H6',
+                                  'LOGK': -190.328178147},
+                        'CO2': { 'ELEMENT': 'CO2',
+                                 'EQUATION': 'HCO3- + H+ = CO2 + H2O',
+                                 'FORMULA': 'CO2',
+                                 'LOGK': 6.30229680369},
+                        'CO3-2': { 'ELEMENT': 'CO3-2',
+                                   'EQUATION': 'HCO3- = CO3-2 + H+',
+                                   'FORMULA': 'CO3-2',
+                                   'LOGK': -10.0847264775},
+                        'Ca++': { 'ELEMENT': 'Ca++',
+                                  'EQUATION': 'Ca++ = Ca++',
+                                  'FORMULA': 'Ca++',
+                                  'LOGK': 0},
+                        'CaCO3': { 'ELEMENT': 'CaCO3',
+                                   'EQUATION': 'HCO3- + Ca+2 = CaCO3 + H+',
+                                   'FORMULA': 'CaCO3',
+                                   'LOGK': -6.19805423401},
+                        'CaHCO3+': { 'ELEMENT': 'CaHCO3+',
+                                     'EQUATION': 'HCO3- + Ca+2 = CaHCO3+',
+                                     'FORMULA': 'CaHCO3+',
+                                     'LOGK': 1.27037886237},
+                        'CaSO4': { 'ELEMENT': 'CaSO4',
+                                   'EQUATION': '1.0000SO4-- + 1.0000Ca++ = CaSO4',
+                                   'FORMULA': 'CaSO4',
+                                   'LOGK': 2.38766577473},
+                        'Cl-': { 'ELEMENT': 'Cl-',
+                                 'EQUATION': 'Cl- = Cl-',
+                                 'FORMULA': 'Cl-',
+                                 'LOGK': 0},
+                        'Fe+2': { 'ELEMENT': 'Fe+2',
+                                  'EQUATION': 'Fe+2 = Fe+2',
+                                  'FORMULA': 'Fe+2',
+                                  'LOGK': 0},
+                        'Fe+3': { 'ELEMENT': 'Fe+3',
+                                  'EQUATION': ' H+ + Fe+2 + 0.25O2  = Fe+3 + 0.5H2O',
+                                  'FORMULA': 'Fe+3',
+                                  'LOGK': 5.75769296065},
+                        'FeCO3': { 'ELEMENT': 'FeCO3',
+                                   'EQUATION': 'HCO3- + Fe+2 = FeCO3 + H+',
+                                   'FORMULA': 'FeCO3',
+                                   'LOGK': -5.5988},
+                        'FeCO3+': { 'ELEMENT': 'FeCO3+',
+                                    'EQUATION': 'HCO3- + Fe+3 = FeCO3+ + H+',
+                                    'FORMULA': 'FeCO3+',
+                                    'LOGK': -1.71081325409},
+                        'FeHCO3+': { 'ELEMENT': 'FeHCO3+',
+                                     'EQUATION': 'HCO3- + Fe++ = FeHCO3+',
+                                     'FORMULA': 'FeHCO3+',
+                                     'LOGK': 2.72},
+                        'FeSO4': { 'ELEMENT': 'FeSO4',
+                                   'EQUATION': 'SO4-2 + Fe+2 = FeSO4',
+                                   'FORMULA': 'FeSO4',
+                                   'LOGK': 2.2},
+                        'HAlO2': { 'ELEMENT': 'HAlO2',
+                                   'EQUATION': '2H2O + Al+3 = HAlO2 + 3H+',
+                                   'FORMULA': 'HAlO2',
+                                   'LOGK': -12.3935736616},
+                        'HCO3-': { 'ELEMENT': 'HCO3-',
+                                   'EQUATION': 'HCO3- = HCO3-',
+                                   'FORMULA': 'HCO3-',
+                                   'LOGK': 0},
+                        'HS-': { 'ELEMENT': 'HS-',
+                                 'EQUATION': 'SO4-- + H+  = HS- + 2O2',
+                                 'FORMULA': 'HS-',
+                                 'LOGK': -114.216697752},
+                        'K+': { 'ELEMENT': 'K+',
+                                'EQUATION': 'K+ = K+',
+                                'FORMULA': 'K+',
+                                'LOGK': 0},
+                        'Mg++': { 'ELEMENT': 'Mg++',
+                                  'EQUATION': 'Mg++ = Mg++',
+                                  'FORMULA': 'Mg++',
+                                  'LOGK': 0},
+                        'MgCO3': { 'ELEMENT': 'MgCO3',
+                                   'EQUATION': 'Mg+2 + HCO3- = MgCO3 + H+',
+                                   'FORMULA': 'MgCO3',
+                                   'LOGK': -6.73391939216},
+                        'MgCl+': { 'ELEMENT': 'MgCl+',
+                                   'EQUATION': 'Mg+2 + Cl- = MgCl+',
+                                   'FORMULA': 'MgCl+',
+                                   'LOGK': 0.043022426443},
+                        'MgHCO3+': { 'ELEMENT': 'MgHCO3+',
+                                     'EQUATION': 'HCO3- + Mg+2 = MgHCO3+',
+                                     'FORMULA': 'MgHCO3+',
+                                     'LOGK': 1.28060426324},
+                        'MgSO4': { 'ELEMENT': 'MgSO4',
+                                   'EQUATION': 'Mg+2 + SO4-2 = MgSO4',
+                                   'FORMULA': 'MgSO4',
+                                   'LOGK': 3.08132980277},
+                        'Na+': { 'ELEMENT': 'Na+',
+                                 'EQUATION': 'Na+ = Na+',
+                                 'FORMULA': 'Na+',
+                                 'LOGK': 0},
+                        'NaAlO2': { 'ELEMENT': 'NaAlO2',
+                                    'EQUATION': '2H2O + Na+ + Al+3 = NaAlO2 + 4H+',
+                                    'FORMULA': 'NaAlO2',
+                                    'LOGK': -18.3804563569},
+                        'NaCO3-': { 'ELEMENT': 'NaCO3-',
+                                    'EQUATION': 'Na+ + HCO3- = NaCO3- + H+',
+                                    'FORMULA': 'NaCO3-',
+                                    'LOGK': -10.3336440843},
+                        'NaHCO3': { 'ELEMENT': 'NaHCO3',
+                                    'EQUATION': 'HCO3- + Na+ = NaHCO3',
+                                    'FORMULA': 'NaHCO3',
+                                    'LOGK': -0.262432112033},
+                        'SO4--': { 'ELEMENT': 'SO4--',
+                                   'EQUATION': 'SO4-- = SO4--',
+                                   'FORMULA': 'SO4--',
+                                   'LOGK': 0},
+                        'SiO2': { 'ELEMENT': 'SiO2',
+                                  'EQUATION': 'SiO2 = SiO2',
+                                  'FORMULA': 'SiO2',
+                                  'LOGK': 0}},
+  'SURFACE_MASTER_SPECIES': { },
+  'SURFACE_SPECIES': { }})
+
+#CUSTOM_MATERIAL_DB : the custom material database instance, user edited
+CUSTOM_MATERIAL_DB = MaterialDB({ 'MATERIAL': { 'Caprock': { 'EffectiveDiffusion': 6.67e-09,
+                             'EffectivePorosity': 0.15,
+                             'HydraulicConductivity': 0,
+                             'LongitudinalDispersivity': 0.0,
+                             'MaterialConductivity': 0.0,
+                             'MaterialName': 'Caprock',
+                             'SpecificHeatCapacity': 0,
+                             'TransverseDispersivity': 0.0}}})
+
+#ChemistryTool : the chemistry software to use
+ChemistryTool = 'PhreeqC'
+#Concentration_Unit : unit for concentration
+Concentration_Unit = 'moles/l'
+#CurrentDatabasePath : Full path of the current Thermochemical Database
+CurrentDatabasePath = u'/home/dimier/Wrapper/Phreeqc_dat/water_gui.dat'
+#DarcyVelocityHeadElmer : 
+DarcyVelocityHeadElmer = 'False'
+#DarcyVelocityStaticElmer : 
+DarcyVelocityStaticElmer = 'False'
+#DarcyVelocityStatic_list_elmer : 
+DarcyVelocityStatic_list_elmer = ['0.0', '0.0', '0.0']
+#DarcyVelocity_kind : 
+DarcyVelocity_kind = 'By Component'
+#DarcyVelocity_list : 
+DarcyVelocity_list = ['0.0', '0.0', '0.0']
+#DebyeHuckel_a : 
+DebyeHuckel_a = 4.0
+#DebyeHuckel_b : 
+DebyeHuckel_b = 0.0
+#DefaultConductivity : 
+DefaultConductivity = 1.0
+#DefaultDatabase : Default Thermochemical Database name
+DefaultDatabase = 'llnl.dat'
+#DefaultEffectiveDiffusion : 
+DefaultEffectiveDiffusion = 4e-10
+#DefaultEffectivePorosity : 
+DefaultEffectivePorosity = 1.0
+#DefaultKxPermeability : 
+DefaultKxPermeability = 1.0
+#DefaultKyPermeability : 
+DefaultKyPermeability = 1.0
+#DefaultKzPermeability : 
+DefaultKzPermeability = 1.0
+#DefaultLongitudinalDispersivity : 
+DefaultLongitudinalDispersivity = 0.0
+#DefaultMaterialName : 
+DefaultMaterialName = ''
+#DefaultTransverseDispersivity : 
+DefaultTransverseDispersivity = 0.0
+#Default_Density : 
+Default_Density = 3000.0
+#Default_Enthalpy : 
+Default_Enthalpy = 0.0
+#Default_log_k : 
+Default_log_k = 0.0
+#Density_Unit : unit for density
+Density_Unit = 'kg/m3'
+#DiffusionLaws_dict : 
+DiffusionLaws_dict = {}
+#DiffusionState : 
+DiffusionState = 'Constant'
+#Dispersivity_Unit : unit for dispersitivity (Longitudinal Dispersivity
+Dispersivity_Unit = 'm'
+#EffectiveDiffusion : 
+EffectiveDiffusion = 4e-10
+#EffectiveDiffusion_Unit : unit for effective diffusion
+EffectiveDiffusion_Unit = 'm2/s'
+#EffectivePorosity : 
+EffectivePorosity = 1.0
+#Elmer_BDF_Order : BDF Order
+Elmer_BDF_Order = u'1'
+#Elmer_Convergence_Tolerance : Convergence Tolerance
+Elmer_Convergence_Tolerance = 1e-10
+#Elmer_Direct_Method : Direct Method
+Elmer_Direct_Method = u'Banded'
+#Elmer_GMRES_Restart : Linear System GMRES Restart
+Elmer_GMRES_Restart = 0
+#Elmer_ILUT_Tolerance : ILUT Tolerance
+Elmer_ILUT_Tolerance = 1e-08
+#Elmer_Iterate_InitialTime : Elmer Initial Time
+Elmer_Iterate_InitialTime = 0.0
+#Elmer_Iterate_InitialTimeStep : Elmer Step Size
+Elmer_Iterate_InitialTimeStep = 126230400.0
+#Elmer_Iterate_SimulationTime : Elmer Simulation Time
+Elmer_Iterate_SimulationTime = 315923133600.0
+#Elmer_Iterative_Method : Iterative Method
+Elmer_Iterative_Method = u'GMRES'
+#Elmer_Linear_Solver : Linear System Solver
+Elmer_Linear_Solver = u'Iterative'
+#Elmer_Max_Time_Step : Elmer Max Time Step
+Elmer_Max_Time_Step = 31557600.0
+#Elmer_Min_Time_Step : Elmer Min Time Step
+Elmer_Min_Time_Step = 3155760.0
+#Elmer_Optimize_Bandwidth : Optimize Bandwidth
+Elmer_Optimize_Bandwidth = u'False'
+#Elmer_Preconditioning : Preconditioning
+Elmer_Preconditioning = u'ILU1'
+#Elmer_Time_Stepping_Method : Time Stepping Method
+Elmer_Time_Stepping_Method = u'BDF'
+#Enthalpy_Unit : unit for enthalpy (of formation)
+Enthalpy_Unit = 'J/kg'
+#ExpectedOutputsQuantity_list : ??
+ExpectedOutputsQuantity_list = [['pH', u'Concentration'], ['porosity', u'Concentration'], ['Ca', u'AqueousConcentration'], ['S', u'AqueousConcentration'], ['Mg', u'AqueousConcentration'], ['Si', u'AqueousConcentration']]
+#ExpectedOutputs_list : ??
+ExpectedOutputs_list = ['pH', 'porosity', 'Ca', 'S', 'Mg', 'Si']
+#GlobalDates_list : Dates for outputs plot
+GlobalDates_list = [u'500 year', u'1000 year', u'5000 year', u'10000 year']
+#GlobalOutputs_list : Global ploted outputs
+GlobalOutputs_list = [u'pH', u'porosity', u'Ca', u'S']
+#GlobalPlotUnits_list : Dates units for outputs plot
+GlobalPlotUnits_list = ['day', 'year']
+#Gmsh_Name_File2 : Gmsh Name File
+Gmsh_Name_File2 = '/home/delateub/Wrapper/Tests/Chemicaltransport/Caprockintegrity/1a_v2/essai.msh'
+#GridLineInI : 
+GridLineInI = 'New'
+#GridLineInJ : 
+GridLineInJ = 'New'
+#Head_Unit : 
+Head_Unit = 'm'
+#HydraulicConductivity : 
+HydraulicConductivity = 0.0
+#IFrequency : Display frequency
+IFrequency = 25
+#IOutputFormat : Outputs Format
+IOutputFormat = u'png'
+#IOutputFormat_List : List of Outputs Format
+IOutputFormat_List = ['png', 'ps']
+#IOutputs_list : Interactively ploted outputs
+IOutputs_list = ['pH', 'porosity', 'Ca', 'Mg', 'S', 'Si']
+#IRotate : Axis directions
+IRotate = False
+#ISave : Saving Outputs
+ISave = True
+#ISaveFrequency : Frequency of the ouputs save
+ISaveFrequency = 125
+#ISubTitle : under the title (new line)
+ISubTitle = 'Porosity 15% | Diffusivity 6.e-10'
+#ITitle : Set the title
+ITitle = 'Case 1b pH 3.36'
+#InitialConditions_list : 
+InitialConditions_list = ['domain', 'inlet']
+#InitialExchangeSurface : 
+InitialExchangeSurface = 1.0
+#InteractiveContours_AqueousComponentsToPlot_list : ??
+InteractiveContours_AqueousComponentsToPlot_list = []
+#InteractiveContours_AvailableAqueousComponents_list : ??
+InteractiveContours_AvailableAqueousComponents_list = []
+#InteractiveContours_Parameters_list : ??
+InteractiveContours_Parameters_list = []
+#InteractiveXYPlot_AqueousComponentsToPlot_list : ??
+InteractiveXYPlot_AqueousComponentsToPlot_list = []
+#InteractiveXYPlot_AvailableAqueousComponents_list : ??
+InteractiveXYPlot_AvailableAqueousComponents_list = []
+#InteractiveXYPlot_Parameters_list : ??
+InteractiveXYPlot_Parameters_list = [0, 0, 1]
+#InteractiveXYPlot_Space_and_Time_ElementsToPlot_list : ??
+InteractiveXYPlot_Space_and_Time_ElementsToPlot_list = []
+#InteractiveXYPlot_Space_and_Time_Parameters_list : ??
+InteractiveXYPlot_Space_and_Time_Parameters_list = ['I', 10]
+#Iterate_Algorithm : 
+Iterate_Algorithm = 'NI'
+#Iterate_CouplingPrecision : 
+Iterate_CouplingPrecision = '2e-03'
+#Iterate_Default_Algorithm : coupling algorithm 
+Iterate_Default_Algorithm = 'NI'
+#Iterate_InitialTime : 
+Iterate_InitialTime = 0
+#Iterate_InitialTimeStepSize : 
+Iterate_InitialTimeStepSize = 1
+#Iterate_MaxTimeStep : 
+Iterate_MaxTimeStep = '31557600'
+#Iterate_MinTimeStep : 
+Iterate_MinTimeStep = u'3155760'
+#Iterate_PicardMaxOfIterations : 
+Iterate_PicardMaxOfIterations = '40'
+#Iterate_PicardTargetNumber : 
+Iterate_PicardTargetNumber = '20'
+#Iterate_RelaxationMaxFactor : 
+Iterate_RelaxationMaxFactor = '1.05'
+#Iterate_RelaxationMinFactor : 
+Iterate_RelaxationMinFactor = '0.5'
+#Iterate_SimulationTime : 
+Iterate_SimulationTime = 10.0
+#KineticConstant : 
+KineticConstant = 1.0
+#KineticRates_list : 
+KineticRates_list = []
+#KxPermeability : 
+KxPermeability = 1.0
+#KyPermeability : 
+KyPermeability = 1.0
+#KzPermeability : 
+KzPermeability = 1.0
+#Length_Unit : 
+Length_Unit = 'm'
+#LineNumberInI : 
+LineNumberInI = 0
+#LineNumberInJ : 
+LineNumberInJ = 0
+#LongitudinalDispersivity : 
+LongitudinalDispersivity = 1.0
+#MaterialConductivity : 
+MaterialConductivity = 0.0
+#MaterialName : 
+MaterialName = ''
+#Materials_Properties_list : 
+Materials_Properties_list = []
+#Materials_list : 
+Materials_list = []
+#MeshLineInIGeometricRatio : 
+MeshLineInIGeometricRatio = 1
+#MeshLineInILength : 
+MeshLineInILength = 0
+#MeshLineInINumberOfCells : 
+MeshLineInINumberOfCells = 0
+#MeshLineInJGeometricRatio : 
+MeshLineInJGeometricRatio = 1
+#MeshLineInJLength : 
+MeshLineInJLength = 0
+#MeshLineInJNumberOfCells : 
+MeshLineInJNumberOfCells = 0
+#MeshLine_Direction : 
+MeshLine_Direction = 'I'
+#Mesh_list_InI : 
+Mesh_list_InI = [(1, 1.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0)]
+#Mesh_list_InJ : 
+Mesh_list_InJ = [(1, 1.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0), (0, 0.0, 1.0)]
+#Mode_is_structured : main mode of the geoi software
+Mode_is_structured = False
+#Modflow_Default_accl : Modflow acceleration Under Relaxation Factor
+Modflow_Default_accl = 1.0
+#Modflow_Default_hclose : Modflow: Residual Convergence
+Modflow_Default_hclose = 1e-11
+#Modflow_Default_mxiter : Modflow: Number Of Iterations
+Modflow_Default_mxiter = 200
+#Modflow_accl : Modflow acceleration Under Relaxation Factor
+Modflow_accl = 1.0
+#Modflow_hclose : Modflow: Residual Convergence
+Modflow_hclose = 1e-11
+#Modflow_mxiter : Modflow: Number Of Iterations
+Modflow_mxiter = 200
+#Mt3d_ConjugateGradientPreconditioner : 
+Mt3d_ConjugateGradientPreconditioner = 'Jacobi'
+#Mt3d_Default_CGPreconditioner : 
+Mt3d_Default_CGPreconditioner = 'Jacobi'
+#Mt3d_Default_Discretisation : advection spatial discretisation
+Mt3d_Default_Discretisation = 'T.V.D.'
+#Mt3d_Default_accl : 
+Mt3d_Default_accl = 1.0
+#Mt3d_Default_advection : 
+Mt3d_Default_advection = 'T.V.D.'
+#Mt3d_Default_cclose : 
+Mt3d_Default_cclose = 1e-16
+#Mt3d_Default_iter1 : 
+Mt3d_Default_iter1 = 30
+#Mt3d_Default_mxiter : Mt3d: Number Of Iterations
+Mt3d_Default_mxiter = 1
+#Mt3d_accl : 
+Mt3d_accl = 1.0
+#Mt3d_advection : 
+Mt3d_advection = 'T.V.D.'
+#Mt3d_cclose : 
+Mt3d_cclose = 1e-15
+#Mt3d_iter1 : 
+Mt3d_iter1 = 30
+#Mt3d_mxiter : Mt3d: Number Of Iterations
+Mt3d_mxiter = 1
+#NumberOfLinesInI : 
+NumberOfLinesInI = 0
+#NumberOfLinesInJ : 
+NumberOfLinesInJ = 0
+#Parallel_NumberOfNodes : 
+Parallel_NumberOfNodes = 1
+#Permeability_Unit : unit for permeability_Unit
+Permeability_Unit = 'm/s'
+#PhreeqC_ConvergenceCriterion : 
+PhreeqC_ConvergenceCriterion = 1e-15
+#PhreeqC_Default_ConvergenceCriterion : 
+PhreeqC_Default_ConvergenceCriterion = 1e-15
+#PhreeqC_Default_KNOBS : 
+PhreeqC_Default_KNOBS = ''
+#PhreeqC_Default_NumberOfIterations : Number Of Iterations
+PhreeqC_Default_NumberOfIterations = 500
+#PhreeqC_Default_pe_step_size_list : 
+PhreeqC_Default_pe_step_size_list = ['0', '']
+#PhreeqC_KNOBS : 
+PhreeqC_KNOBS = ''
+#PhreeqC_NumberOfIterations : Number Of Iterations
+PhreeqC_NumberOfIterations = 500
+#PhreeqC_pe_step_size_list : 
+PhreeqC_pe_step_size_list = ['0', '']
+#PorosityState : ?
+PorosityState = 'variable porosity'
+#Postprocessing1_Parameters_list : 
+Postprocessing1_Parameters_list = []
+#Postprocessing2_VariablesToPlot_list : 
+Postprocessing2_VariablesToPlot_list = []
+#Postprocessing2_tmax : 
+Postprocessing2_tmax = 1
+#Postprocessing2_tmin : 
+Postprocessing2_tmin = 0
+#PostprocessingContours_AqueousComponentsToPlot_list : ??
+PostprocessingContours_AqueousComponentsToPlot_list = []
+#PostprocessingContours_AvailableAqueousComponents_list : ??
+PostprocessingContours_AvailableAqueousComponents_list = []
+#PostprocessingContours_Parameters_list : ??
+PostprocessingContours_Parameters_list = ['200', 'years']
+#PostprocessingVariablesToPlot_list : 
+PostprocessingVariablesToPlot_list = []
+#PostprocessingXYPlot_Parameters_list : ??
+PostprocessingXYPlot_Parameters_list = []
+#Postprocessing_ElementsToPlot_list : ??
+Postprocessing_ElementsToPlot_list = []
+#PyOutputHandler : 
+PyOutputHandler = ''
+#Quantity_list : ??
+Quantity_list = ['', 'AqueousConcentration', 'Concentration']
+#Rate : 
+Rate = 'Standard'
+#ResultDirectory : Directory in which the results will be written
+ResultDirectory = ''
+#Solver : the solver software to use
+Solver = 'Modflow_Mt3d_PhreeqC'
+#SpecificHeatCapacity : 
+SpecificHeatCapacity = 0.0
+#SphereModelExponent : 
+SphereModelExponent = 0.6666
+#SphereModelExponent_On : 
+SphereModelExponent_On = False
+#TemkinNumber : 
+TemkinNumber = 1.0
+#TemperatureVariable : Temperature variable or constant
+TemperatureVariable = 'False'
+#Temperature_Unit : unit for temperature
+Temperature_Unit = 'Celcius'
+#Thermal : set if thermal mode is on
+Thermal = False
+#TimeStudy : List of the points and the parameters
+TimeStudy = []
+#TimeUnit : Elmer Times Unit
+TimeUnit = 'year'
+#Time_Unit : unit of time
+Time_Unit = 's'
+#Times_list : ??
+Times_list = []
+#Title : Title of the study/case
+Title = 'Caprock_integrite'
+#TransverseDispersivity : 
+TransverseDispersivity = 0.1
+#UnstructuredHydraulicBC_list : 
+UnstructuredHydraulicBC_list = []
+#Unstructured_Zone_Material_list : 
+Unstructured_Zone_Material_list = []
+#Zone_BCKind_list : 
+Zone_BCKind_list = []
+#Zone_Material_AqueousState_list : 
+Zone_Material_AqueousState_list = [['Caprock', 'Initial'], ['Caprock', 'Acidified_max']]
+#Zones_list : 
+Zones_list = ['domain', 'inlet']
+#var_diff_list : 
+var_diff_list = []
