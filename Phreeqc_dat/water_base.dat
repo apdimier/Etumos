@@ -1,0 +1,212 @@
+SOLUTION_MASTER_SPECIES
+#
+#element species        alk     gfw_formula     element_gfw
+#
+H        H+             -1.     H               1.008
+H(0)     H2             0.0     H
+H(1)     H+             -1.     0.0
+E        e-             0.0     0.0             0.0
+O        H2O            0.0     O               16.00
+O(0)     O2             0.0     O
+O(-2)    H2O            0.0     0.0
+
+SOLUTION_SPECIES
+
+H+ = H+
+        log_k           0.000
+        -gamma          9.0000    0.0000
+
+e- = e-
+        log_k           0.000
+
+H2O = H2O
+        log_k           0.000
+
+2 H2O = O2 + 4 H+ + 4 e-
+        log_k           -86.08
+        delta_h 134.79 kcal
+
+2 H+ + 2 e- = H2
+        log_k           -3.15
+        delta_h -1.759 kcal
+
+H2O = OH- + H+
+        log_k           -14.000
+        delta_h 13.362  kcal
+        -analytic       -283.971       -0.05069842  13323.0    102.24447      -1119669.0
+        -gamma    3.5000    0.0000
+PHASES
+
+EXCHANGE_MASTER_SPECIES
+        X       X-
+EXCHANGE_SPECIES
+        X- = X-
+        log_k           0.0
+SURFACE_MASTER_SPECIES
+        Hfo_s  Hfo_sOH
+        Hfo_w  Hfo_wOH
+SURFACE_SPECIES
+#   All surface data from
+#   Dzombak and Morel, 1990
+#
+#
+#   Acid-base data from table 5.7
+#
+#   strong binding site--Hfo_s,
+
+        Hfo_sOH = Hfo_sOH
+        log_k  0.0
+
+        Hfo_sOH  + H+ = Hfo_sOH2+
+        log_k  7.29    # = pKa1,int
+
+        Hfo_sOH = Hfo_sO- + H+
+        log_k  -8.93   # = -pKa2,int
+
+#   weak binding site--Hfo_w
+
+        Hfo_wOH = Hfo_wOH
+        log_k  0.0
+
+        Hfo_wOH  + H+ = Hfo_wOH2+
+        log_k  7.29    # = pKa1,int
+
+        Hfo_wOH = Hfo_wO- + H+
+        log_k  -8.93   # = -pKa2,int
+
+###############################################
+#             CATIONS                         #
+###############################################
+#
+#   Cations from table 10.1 or 10.5
+#
+#   Calcium
+        Hfo_sOH + Ca+2 = Hfo_sOHCa+2
+        log_k  4.97
+
+        Hfo_wOH + Ca+2 = Hfo_wOCa+ + H+
+        log_k -5.85
+#   Strontium
+        Hfo_sOH + Sr+2 = Hfo_sOHSr+2
+        log_k  5.01
+
+        Hfo_wOH + Sr+2 = Hfo_wOSr+ + H+
+        log_k -6.58
+
+        Hfo_wOH + Sr+2 + H2O = Hfo_wOSrOH + 2H+
+        log_k -17.60
+#   Barium
+        Hfo_sOH + Ba+2 = Hfo_sOHBa+2
+        log_k  5.46
+
+        Hfo_wOH + Ba+2 = Hfo_wOBa+ + H+
+        log_k  -7.2                     # table 10.5
+#
+#   Cations from table 10.2
+#
+#   Cadmium
+        Hfo_sOH + Cd+2 = Hfo_sOCd+ + H+
+        log_k  0.47
+
+        Hfo_wOH + Cd+2 = Hfo_wOCd+ + H+
+        log_k   -2.91
+#   Zinc
+        Hfo_sOH + Zn+2 = Hfo_sOZn+ + H+
+        log_k  0.99
+
+        Hfo_wOH + Zn+2 = Hfo_wOZn+ + H+
+        log_k   -1.99
+#   Copper
+        Hfo_sOH + Cu+2 = Hfo_sOCu+ + H+
+        log_k  2.89
+
+        Hfo_wOH + Cu+2 = Hfo_wOCu+ + H+
+        log_k  0.6                      # table 10.5
+#   Lead
+        Hfo_sOH + Pb+2 = Hfo_sOPb+ + H+
+        log_k  4.65
+
+        Hfo_wOH + Pb+2 = Hfo_wOPb+ + H+
+        log_k  0.3                      # table 10.5
+#
+#   Derived constants table 10.5
+#
+#   Magnesium
+        Hfo_wOH + Mg+2 = Hfo_wOMg+ + H+
+        log_k -4.6
+#   Manganese
+        Hfo_sOH + Mn+2 = Hfo_sOMn+ + H+
+        log_k  -0.4                     # table 10.5
+
+        Hfo_wOH + Mn+2 = Hfo_wOMn+ + H+
+        log_k -3.5                      # table 10.5
+# Iron
+#        Hfo_sOH + Fe+2 = Hfo_sOFe+ + H+
+#        log_k   0.7     # LFER using table 10.5
+
+#        Hfo_wOH + Fe+2 = Hfo_wOFe+ + H+
+#        log_k -2.5      # LFER using table 10.5
+
+# Iron, strong site: Appelo, Van der Weiden, Tournassat & Charlet, subm.
+         Hfo_sOH + Fe+2 = Hfo_sOFe+ + H+
+         log_k   -0.95
+# Iron, weak site: Liger et al., GCA 63, 2939, re-optimized for D&M
+         Hfo_wOH + Fe+2 = Hfo_wOFe+ + H+
+         log_k -2.98
+
+         Hfo_wOH + Fe+2 + H2O = Hfo_wOFeOH + 2H+
+         log_k -11.55
+
+###############################################
+#             ANIONS                          #
+###############################################
+#
+#   Anions from table 10.6
+#
+#   Phosphate
+        Hfo_wOH + PO4-3 + 3H+ = Hfo_wH2PO4 + H2O
+        log_k   31.29
+
+        Hfo_wOH + PO4-3 + 2H+ = Hfo_wHPO4- + H2O
+        log_k   25.39
+
+        Hfo_wOH + PO4-3 + H+ = Hfo_wPO4-2 + H2O
+        log_k   17.72
+#
+#   Anions from table 10.7
+#
+#   Borate
+        Hfo_wOH + H3BO3 = Hfo_wH2BO3 + H2O
+        log_k   0.62
+#
+#   Anions from table 10.8
+#
+#   Sulfate
+        Hfo_wOH + SO4-2 + H+ = Hfo_wSO4- + H2O
+        log_k   7.78
+
+        Hfo_wOH + SO4-2 = Hfo_wOHSO4-2
+        log_k   0.79
+#
+#   Derived constants table 10.10
+#
+        Hfo_wOH + F- + H+ = Hfo_wF + H2O
+        log_k   8.7
+
+        Hfo_wOH + F- = Hfo_wOHF-
+        log_k   1.6
+#
+# Carbonate: Van Geen et al., 1994 reoptimized for HFO
+# 0.15 g HFO/L has 0.344 mM sites == 2 g of Van Geen's Goethite/L
+#
+#        Hfo_wOH + CO3-2 + H+ = Hfo_wCO3- + H2O
+#        log_k   12.56
+# 
+#        Hfo_wOH + CO3-2 + 2H+= Hfo_wHCO3 + H2O
+#        log_k   20.62
+
+# 9/19/96
+#       Added analytical expression for H2S, NH3, KSO4.
+#       Added species CaHSO4+.
+#       Added delta H for Goethite.
+       

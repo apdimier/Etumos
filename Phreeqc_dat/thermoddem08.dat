@@ -1,0 +1,2160 @@
+# PHREEQC database, data from THERMODDEM/THERMOCHIMIE				
+# Data prepared and compiled by Ph. Blanc, A. Lassin, P. Piantone and C. Nowak					
+# Created: 21/01/2008 14:33:53					
+# from the BRGM institute (french geological survey)					
+# it is the user's responsibility to remain in the					
+#valid temperature range for all the data used.					
+						
+#Kindly send comments or corrections to Philippe Blanc at p.blanc@brgm.fr					
+						
+LLNL_AQUEOUS_MODEL_PARAMETERS					
+ -temperatures					
+         0.0100   25.0000   60.0000  100.0000					
+       150.0000  200.0000  250.0000  300.0000					
+#debye huckel a (adh)					
+ -dh_a					
+         0.4939    0.5114    0.5465    0.5995					
+         0.6855    0.7994    0.9593    1.2180					
+#debye huckel b (bdh)					
+ -dh_b					
+         0.3253    0.3288    0.3346    0.3421					
+         0.3525    0.3639    0.3766    0.3925					
+ -bdot					
+         0.0374    0.0410    0.0438    0.0460					
+         0.0470    0.0470    0.0340    0.0000					
+#cco2   (coefficients for the Drummond (1981) polynomial)					
+ -co2_coefs					
+        -1.0312              0.0012806					
+          255.9                 0.4445					
+	-0.00161				
+NAMED_EXPRESSIONS					
+#					
+# formation of O2 from H2O 					
+# 2H2O =  O2 + 4H+ + 4e-  					
+#					
+	Log_K_O2				
+		log_k	-85.988
+		delta_H	0.000  kJ/mol
+#					
+	 -analytic	2.1434e+02	3.0027e-02	-4.2124e+04	-7.2117e+01	9.2923e+05		
+#Range:  0-300				
+					# Calculated enthalpy of reaction
+						
+SOLUTION_MASTER_SPECIES					
+						
+#element species        alk     gfw_formula     element_gfw					
+Alkalinity	HCO3-	 1	Ca0.5(CO3)0.5	 50.05
+E	e-	 0	 0	 0
+Al	Al+++	 0	Al	 26.9815
+C	HCO3-	 1	C	 12.01115
+C(4)	HCO3-	 1	C	
+C(-4)	CH4	 0	C	
+C(2)	CO	 0	C	 
+Ca	Ca++	 0	Ca	 40.078
+Cl	Cl-	 0	Cl	 35.453
+Cl(-1)	Cl-	 0	Cl	
+Cl(1)	ClO-	 0	Cl	
+Cl(3)	ClO2-	 0	Cl	
+Cl(4)	ClO2	 0	Cl	
+Cl(5)	ClO3-	 0	Cl	
+Cl(7)	ClO4-	 0	Cl	 
+Fe	Fe++	 0	Fe	 55.847
+Fe(2)	Fe++	-2	Fe	
+Fe(3)	Fe+++	-2	Fe	 
+H	H+	-1	H	 1.00797
+H(1)	H+	-1	 0	
+H(0)	H2	 0	H	 
+K	K+	 0	K	 39.102
+Mg	Mg++	 0	Mg	 24.312
+N	NH3	 1	N	 14.0067
+N(-3)	NH3	 1	N	
+N(0)	N2	 0	N	
+N(-5)	CN-	 0	N	
+N(3)	NO2-	 0	N	
+N(5)	NO3-	 0	N	 
+Na	Na+	 0	Na	 22.9898
+O	H2O	 0	O	 15.9994
+O(-2)	H2O	 0	O	
+O(0)	O2	 2	 0	 
+S	SO4--	 0	S	 32.064
+S(6)	SO4--	 0	S	 
+S(8)	HSO5-	 0	S	
+S(2)	S2O3--	 0	S	
+S(3)	S2O4--	 0	S	
+S(5)	S2O6--	 0	S	
+S(7)	S2O8--	 0	S	
+S(4)	SO3--	 0	S	
+S(-2)	HS-	 0	S	 
+Si	H4SiO4	 0	Si	 28.086
+Sr	Sr++	 0	Sr	 87.62
+
+SOLUTION_SPECIES
+
+H2O = H2O
+	-llnl_gamma	3.0
+	log_k 0.0
+	-delta_H    0.0   kJ/mol  # Convention
+#	References DGf or LogK 89cox/wag ; DHf 89cox/wag ; S° 89cox/wag ; Cp slop98
+
+H+ = H+
+	-llnl_gamma	9.0
+	log_k 0.0
+	-delta_H    0.0   kJ/mol  # Convention
+#	References DGf or LogK By convention ; DHf By convention ; S° By convention ; Cp 97asho/sas
+
+Al+++ = Al+++
+	-llnl_gamma	9.0
+	log_k 0.0
+	-delta_H    0.0   kJ/mol  # Convention
+#	References DGf or LogK 89cox/wag ; DHf 06bla/pia ; S° n/a ; Cp 95pok/hel
+
+Ca++ = Ca++
+	-llnl_gamma	6.0
+	log_k 0.0
+	-delta_H    0.0   kJ/mol  # Convention
+#	References DGf or LogK 89cox/wag ; DHf n/a ; S° 89cox/wag ; Cp 97asho/sas
+
+Cl- = Cl-
+	-llnl_gamma	3.0
+	log_k 0.0
+	-delta_H    0.0   kJ/mol  # Convention
+#	References DGf or LogK 89cox/wag ; DHf n/a ; S° 89cox/wag ; Cp 97asho/sas
+
+Fe++ = Fe++
+	-llnl_gamma	6.0
+	log_k 0.0
+	-delta_H    0.0   kJ/mol  # Convention
+#	References DGf or LogK 04chi ; DHf n/a ; S° 04chi ; Cp 88sho/hel,85hel,89bsho/hel,97asho/sas
+
+H4SiO4 = H4SiO4
+	-llnl_gamma	3.0
+	log_k 0.0
+	-delta_H    0.0   kJ/mol  # Convention
+#	References DGf or LogK n/a ; DHf 06bla/pia ; S° 06bla/pia ; Cp 06bla/pia
+
+HCO3- = HCO3-
+	-llnl_gamma	4.0
+	log_k 0.0
+	-delta_H    0.0   kJ/mol  # Convention
+#	References DGf or LogK 89cox/wag ; DHf n/a ; S° 89cox/wag ; Cp 97asho/sas
+
+K+ = K+
+	-llnl_gamma	3.0
+	log_k 0.0
+	-delta_H    0.0   kJ/mol  # Convention
+#	References DGf or LogK 89cox/wag ; DHf n/a ; S° 89cox/wag ; Cp 97asho/sas
+
+Mg++ = Mg++
+	-llnl_gamma	8.0
+	log_k 0.0
+	-delta_H    0.0   kJ/mol  # Convention
+#	References DGf or LogK 89cox/wag ; DHf n/a ; S° 89cox/wag ; Cp 97asho/sas
+
+Na+ = Na+
+	-llnl_gamma	4.0
+	log_k 0.0
+	-delta_H    0.0   kJ/mol  # Convention
+#	References DGf or LogK 89cox/wag ; DHf n/a ; S° 89cox/wag ; Cp 97asho/sas
+
+
+NH3 = NH3
+	-llnl_gamma	3.0
+	log_k 0.0
+	-delta_H    0.0   kJ/mol  # Convention
+#	References DGf or LogK 89bsho/hel, 01sch/sho ; DHf 89bsho/hel, 01sch/sho ; S° 89bsho/hel, 01sch/sho ; Cp 89bsho/hel, 01sch/sho
+
+
+SO4-- = SO4--
+	-llnl_gamma	4.0
+	log_k 0.0
+	-delta_H    0.0   kJ/mol  # Convention
+#	References DGf or LogK 89cox/wag ; DHf n/a ; S° 89cox/wag ; Cp 97asho/sas
+
+Sr++ = Sr++
+	-llnl_gamma	5.0
+	log_k 0.0
+	-delta_H    0.0   kJ/mol  # Convention
+#	References DGf or LogK 97asho/sas ; DHf n/a ; S° 97asho/sas ; Cp 97asho/sas
+
+
+e- = e-
+	log_k 0.0
+	-delta_H    0.0   kJ/mol  # Convention
+#	References : Convention
+
+  2 H2O = O2 + 4 H+ + 4 e-
+	-CO2_llnl_gamma
+	log_k	-85.988
+	delta_H	0.000  kJ/mol
+	 -analytic	2.1434e+02	3.0027e-02	-4.2124e+04	-7.2117e+01	9.2923e+05		
+
+ 4H4SiO4 = (SiO2)4(OH)4---- + 4H2O + 4H+
+	-llnl_gamma	4.0
+	log_k		-39.200
+	-delta_H		4701.457	kJ/mol	# References :n/a
+	-analytic	-3.92000e+01	0.00000e+00	0.00000e+00	0.00000e+00	0.00000e+00
+#	References DGf or LogK 01fel/cho ; DHf n/a ; S° n/a ; Cp n/a
+
+
+ 1Al+++ + 2H2O = Al(OH)2+ + 2H+
+	-llnl_gamma	4.0
+	log_k		-10.584
+	-delta_H		98.264	kJ/mol	# References :95pok/hel
+	-analytic	3.00160e+02	5.41526e-02	-2.07434e+04	-1.08328e+02	9.54011e+05
+#	References DGf or LogK n/a ; DHf 95pok/hel ; S° 95pok/hel ; Cp 95pok/hel
+
+
+ 1Al+++ + 1H4SiO4 = AlH3SiO4++ + 1H+
+	-llnl_gamma	4.5
+	log_k		-2.380
+	-delta_H		77.382	kJ/mol	# References :n/a
+	-analytic	-3.75313e+02	-2.92372e-02	2.72955e+04	1.28953e+02	-2.57662e+06
+#	References DGf or LogK 01tag/sch, d'après 98sal/pok ; DHf n/a ; S° 01tag/sch, d'après 98sal/pok ; Cp 01tag/sch, d'après 98sal/pok
+
+
+ 1Al+++ + 2H2O = AlO2- + 4H+
+	-llnl_gamma	4.0
+	log_k		-22.873
+	-delta_H		180.881	kJ/mol	# References :95pok/hel
+	-analytic	-1.78065e+02	-2.68922e-02	1.86724e+03	6.68385e+01	-7.50500e+05
+#	References DGf or LogK n/a ; DHf 95pok/hel ; S° 95pok/hel ; Cp 95pok/hel
+
+ 1Al+++ + 1H2O = AlOH++ + 1H+
+	-llnl_gamma	4.5
+	log_k		-4.950
+	-delta_H		49.759	kJ/mol	# References :n/a
+	-analytic	1.61456e+02	3.01851e-02	-1.15056e+04	-5.80546e+01	6.07667e+05
+#	References DGf or LogK 95pok/hel ; DHf n/a ; S° 95pok/hel ; Cp 95pok/hel
+
+
+ 1Al+++ + 1SO4-- = AlSO4+
+	-llnl_gamma	4.5
+	log_k		3.170
+	-delta_H		18.869	kJ/mol	# References :n/a
+	-analytic	2.31931e+03	3.61431e-01	-1.34935e+05	-8.35858e+02	8.61887e+06
+#	References DGf or LogK 01tag/sch ; DHf n/a ; S° 01tag/sch ; Cp 01tag/sch
+
+
+
+ 1HCO3- + 1Ca++ = Ca(HCO3)+
+	-llnl_gamma	4.5
+	log_k		1.103
+	-delta_H		-8.894	kJ/mol	# References :n/a
+	-analytic	8.68609e+02	1.45834e-01	-4.82814e+04	-3.16733e+02	3.08324e+06
+#	References DGf or LogK 82plu/bus ; DHf n/a ; S° 99aki/zot ; Cp 99aki/zot
+
+ 1Ca++ + 1Cl- = CaCl+
+	-llnl_gamma	4.0
+	log_k		-0.290
+	-delta_H		7.150	kJ/mol	# References :n/a
+	-analytic	7.84304e+02	1.29811e-01	-4.34926e+04	-2.85725e+02	2.63001e+06
+#	References DGf or LogK 97sve/sho ; DHf n/a ; S° 97sve/sho ; Cp 97sve/sho
+
+ 1Ca++ + 2Cl- = CaCl2
+	-llnl_gamma	3.0
+	log_k		-0.640
+	-delta_H		-5.857	kJ/mol	# References :n/a
+	-analytic	1.56212e+03	2.55796e-01	-8.58012e+04	-5.69819e+02	5.22119e+06
+#	References DGf or LogK 97sve/sho ; DHf n/a ; S° 97sve/sho ; Cp 97sve/sho
+
+ 1HCO3- + 1Ca++ = CaCO3 + 1H+
+	-llnl_gamma	3.0
+	log_k		-7.107
+	-delta_H		29.530	kJ/mol	# References :82plu/bus
+	-analytic	6.95433e+02	1.16330e-01	-3.61525e+04	-2.56844e+02	1.74027e+06
+#	References DGf or LogK 82plu/bus ; DHf 82plu/bus ; S° n/a ; Cp 97sve/sho
+
+
+ 1Ca++ + 1H2O = CaOH+ + 1H+
+	-llnl_gamma	4.0
+	log_k		-12.780
+	-delta_H		77.207	kJ/mol	# References :n/a
+	-analytic	1.31296e+02	2.14182e-02	-1.01897e+04	-4.82243e+01	2.70321e+05
+#	References DGf or LogK 87gar/par ; DHf n/a ; S° 97asho/sas ; Cp 97asho/sas
+
+ 1Ca++ + 1SO4-- = CaSO4
+	-llnl_gamma	3.0
+	log_k		2.310
+	-delta_H		4.292	kJ/mol	# References :n/a
+	-analytic	1.72034e+03	2.65735e-01	-9.42554e+04	-6.23564e+02	5.49730e+06
+#	References DGf or LogK 53bell/geo ; DHf n/a ; S° 97sve/sho ; Cp n/a
+
+
+ 1HCO3- + 1H+ + 1H2O = CH4 + 2O2
+	-llnl_gamma	3.0
+	log_k		-144.116
+	-delta_H		863.587	kJ/mol	# References :01sch/sho
+	-analytic	1.12998e+03	1.82310e-01	-1.12412e+05	-4.05513e+02	4.62149e+06
+#	References DGf or LogK 01sch/sho ; DHf 01sch/sho ; S° 01sch/sho ; Cp 01sch/sho
+
+ 1Cl- + 1ClO- + 2H+ = Cl2 + 1H2O
+	-llnl_gamma	3.0
+	log_k		10.874
+	-delta_H		-35.040	kJ/mol	# References :82wag/eva
+	-analytic	1.25714e+03	2.11334e-01	-6.62374e+04	-4.57961e+02	4.09635e+06
+#	References DGf or LogK n/a ; DHf 82wag/eva ; S° 82wag/eva ; Cp 01sch/sho
+
+ 0.5O2 + 1Cl- = ClO-
+	-llnl_gamma	4.0
+	log_k		-15.089
+	-delta_H		66.036	kJ/mol	# References :97asho/sas
+	-analytic	-1.27182e+02	-1.75488e-02	4.91743e+03	4.36329e+01	-6.34148e+05
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+ 1O2 + 1Cl- = ClO2-
+	-llnl_gamma	4.0
+	log_k		-23.095
+	-delta_H		112.688	kJ/mol	# References :97asho/sas
+	-analytic	-1.61808e+02	-2.41055e-02	5.18549e+03	5.59816e+01	-8.90223e+05
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+ 1.25O2 + 1Cl- + 1H+ = ClO2 + 0.5H2O
+	-llnl_gamma	3.0
+	log_k		-19.630
+	-delta_H		114.226	kJ/mol	# References :01sch/sho
+	-analytic	1.72049e+02	4.24307e-02	-9.64311e+03	-6.85214e+01	-2.16313e+05
+#	References DGf or LogK 01sch/sho ; DHf 01sch/sho ; S° 01sch/sho ; Cp 01sch/sho
+
+ 1.5O2 + 1Cl- = ClO3-
+	-llnl_gamma	3.5
+	log_k		-17.248
+	-delta_H		81.308	kJ/mol	# References :97asho/sas
+	-analytic	-1.73543e+02	-2.71880e-02	8.41489e+03	5.99938e+01	-1.09094e+06
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+ 2O2 + 1Cl- = ClO4-
+	-llnl_gamma	3.5
+	log_k		-15.809
+	-delta_H		63.247	kJ/mol	# References :89cox/wag
+	-analytic	-2.64670e+02	-4.03050e-02	1.54460e+04	9.16006e+01	-1.56335e+06
+#	References DGf or LogK 97asho/sas ; DHf 89cox/wag ; S° 89cox/wag ; Cp 97asho/sas
+
+ 1HCO3- + 1NH3 = CN- + 0.5O2 + 2H2O
+	-llnl_gamma	3.0
+	log_k		-56.048
+	-delta_H		344.164	kJ/mol	# References :97asho/sas
+	-analytic	1.18527e+02	1.72569e-02	-2.63240e+04	-4.01205e+01	6.97619e+05
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+ 1HCO3- + 1H+ = CO + 0.5O2 + 1H2O
+	-llnl_gamma	3.0
+	log_k		-41.718
+	-delta_H		277.074	kJ/mol	# References :93sho/mck, 01sch/sho
+	-analytic	8.53548e+02	1.39334e-01	-6.46270e+04	-3.06481e+02	3.40650e+06
+#	References DGf or LogK n/a ; DHf 93sho/mck, 01sch/sho ; S° 82wag/eva ; Cp 93sho/mck, 01sch/sho
+
+
+ 1HCO3- + 1H+ = CO2 + 1H2O
+	-CO2_llnl_gamma
+	log_k		6.353
+	-delta_H		-9.160	kJ/mol	# References :89cox/wag
+	-analytic	6.82172e+02	1.14322e-01	-3.81658e+04	-2.46590e+02	2.51368e+06
+#	References DGf or LogK n/a ; DHf 89cox/wag ; S° 89cox/wag ; Cp 89bsho/hel, 01sch/sho
+
+
+ 1HCO3- = CO3-- + 1H+
+	-llnl_gamma	4.5
+	log_k		-10.327
+	-delta_H		14.700	kJ/mol	# References :89cox/wag
+	-analytic	-7.70584e+02	-1.24335e-01	4.20388e+04	2.77395e+02	-2.67274e+06
+#	References DGf or LogK n/a ; DHf 89cox/wag ; S° 89cox/wag ; Cp 97asho/sas
+
+ 2HCO3- + 1Fe+++ = Fe(CO3)2- + 2H+
+	-llnl_gamma	4.5
+	log_k		-1.053
+	-delta_H		20.240	kJ/mol	# References :n/a
+	-analytic	-1.05340e+00	0.00000e+00	0.00000e+00	0.00000e+00	0.00000e+00
+#	References DGf or LogK 04chi ; DHf n/a ; S° n/a ; Cp n/a
+
+ 2HCO3- + 1Fe++ = Fe(CO3)2-- + 2H+
+	-llnl_gamma	4.5
+	log_k		-13.203
+	-delta_H		87.402	kJ/mol	# References :n/a
+	-analytic	1.80425e+03	2.77339e-01	-1.02246e+05	-6.54809e+02	5.60717e+06
+#	References DGf or LogK 04chi ; DHf n/a ; S° 04chi ; Cp n/a
+
+ 0.25O2 + 1Fe++ + 1H+ = Fe+++ + 0.5H2O
+	-llnl_gamma	9.0
+	log_k		8.492
+	-delta_H		-98.882	kJ/mol	# References :04chi
+	-analytic	-2.12373e+02	-3.53011e-02	1.60599e+04	7.47000e+01	-6.50245e+05
+#	References DGf or LogK 06bla/pia ; DHf 04chi ; S° 04chi ; Cp 88sho/hel,89bsho/hel,97asho/sas
+
+ 1Cl- + 1Fe++ = FeCl+
+	-llnl_gamma	4.0
+	log_k		-0.160
+	-delta_H		4.035	kJ/mol	# References :n/a
+	-analytic	8.08653e+02	1.31822e-01	-4.50883e+04	-2.94240e+02	2.77260e+06
+#	References DGf or LogK 04chi ; DHf n/a ; S° 04chi ; Cp 97sve/sho
+
+ 1Cl- + 1Fe+++ = FeCl++
+	-llnl_gamma	4.5
+	log_k		1.480
+	-delta_H		4.373	kJ/mol	# References :n/a
+	-analytic	8.11249e+02	1.32447e-01	-4.47740e+04	-2.94810e+02	2.70260e+06
+#	References DGf or LogK 04chi ; DHf n/a ; S° 04chi ; Cp 97sve/sho
+
+ 2Cl- + 1Fe++ = FeCl2
+	-llnl_gamma	3.0
+	log_k		-8.170
+	-delta_H		99.070	kJ/mol	# References :n/a
+	-analytic	1.61441e+03	2.61126e-01	-9.35048e+04	-5.84789e+02	5.35214e+06
+#	References DGf or LogK 04chi ; DHf n/a ; S° 04chi ; Cp 97sve/sho
+
+ 2Cl- + 1Fe+++ = FeCl2+
+	-llnl_gamma	4.5
+	log_k		2.400
+	-delta_H		30.961	kJ/mol	# References :n/a
+	-analytic	1.77732e+03	2.87477e-01	-9.75018e+04	-6.45416e+02	5.63905e+06
+#	References DGf or LogK 04chi ; DHf n/a ; S° 04chi ; Cp n/a
+
+ 1HCO3- + 1Fe++ = FeCO3 + 1H+
+	-llnl_gamma	3.0
+	log_k		-4.637
+	-delta_H		11.192	kJ/mol	# References :n/a
+	-analytic	9.47036e+02	1.48162e-01	-5.17353e+04	-3.45654e+02	2.93091e+06
+#	References DGf or LogK 04chi ; DHf n/a ; S° 04chi ; Cp n/a
+
+ 1HCO3- + 1Fe+++ = FeCO3+ + 1H+
+	-llnl_gamma	4.5
+	log_k		-0.607
+	-delta_H		11.192	kJ/mol	# References :n/a
+	-analytic	-6.06700e-01	0.00000e+00	0.00000e+00	0.00000e+00	0.00000e+00
+#	References DGf or LogK 04chi ; DHf n/a ; S° n/a ; Cp n/a
+
+ 1HCO3- + 1Fe++ + 1H2O = FeCO3OH- + 2H+
+	-llnl_gamma	4.5
+	log_k		-14.358
+	-delta_H		11.192	kJ/mol	# References :n/a
+	-analytic	-1.43577e+01	0.00000e+00	0.00000e+00	0.00000e+00	0.00000e+00
+#	References DGf or LogK 04chi ; DHf n/a ; S° n/a ; Cp n/a
+
+ 1HCO3- + 1Fe++ = FeHCO3+
+	-llnl_gamma	4.5
+	log_k		1.440
+	-delta_H		5.889	kJ/mol	# References :n/a
+	-analytic	9.52184e+02	1.48162e-01	-5.14583e+04	-3.45654e+02	2.93091e+06
+#	References DGf or LogK 04chi ; DHf n/a ; S° 04chi ; Cp n/a
+
+
+ 1Fe++ + 1H2O = FeO + 2H+
+	-llnl_gamma	3.0
+	log_k		-20.600
+	-delta_H		121.919	kJ/mol	# References :04chi
+	-analytic	2.98017e+02	4.80333e-02	-2.10476e+04	-1.09346e+02	7.31117e+05
+#	References DGf or LogK 04chi ; DHf 04chi ; S° n/a ; Cp 97asho/sas
+
+ 1Fe+++ + 1H2O = FeO+ + 2H+
+	-llnl_gamma	4.5
+	log_k		-5.670
+	-delta_H		71.546	kJ/mol	# References :04chi
+	-analytic	2.42936e+02	3.98115e-02	-1.28957e+04	-8.86096e+01	1.80800e+05
+#	References DGf or LogK 04chi ; DHf 04chi ; S° n/a ; Cp 97asho/sas
+
+ 1Fe+++ + 2H2O = FeO2- + 4H+
+	-llnl_gamma	4.5
+	log_k		-21.600
+	-delta_H		133.471	kJ/mol	# References :04chi
+	-analytic	-1.70982e+02	-2.93161e-02	6.00065e+03	6.09738e+01	-1.14511e+06
+#	References DGf or LogK 04chi ; DHf 04chi ; S° n/a ; Cp 97asho/sas
+
+ 1Fe++ + 2H2O = FeO2-- + 4H+
+	-llnl_gamma	4.0
+	log_k		-46.300
+	-delta_H		162.718	kJ/mol	# References :n/a
+	-analytic	-4.63000e+01	0.00000e+00	0.00000e+00	0.00000e+00	0.00000e+00
+#	References DGf or LogK 04chi ; DHf n/a ; S° n/a ; Cp n/a
+
+ 1Fe++ + 1H2O = FeOH+ + 1H+
+	-llnl_gamma	4.0
+	log_k		-9.500
+	-delta_H		57.486	kJ/mol	# References :04chi
+	-analytic	2.00435e+02	3.00512e-02	-1.39473e+04	-7.25037e+01	6.47998e+05
+#	References DGf or LogK 04chi ; DHf 04chi ; S° n/a ; Cp 97asho/sas
+
+ 1Fe+++ + 1H2O = FeOH++ + 1H+
+	-llnl_gamma	4.5
+	log_k		-2.190
+	-delta_H		43.510	kJ/mol	# References :04chi
+	-analytic	1.83895e+02	2.84777e-02	-1.10914e+04	-6.55415e+01	4.26867e+05
+#	References DGf or LogK 04chi ; DHf 04chi ; S° n/a ; Cp 97asho/sas
+
+
+ 1Fe++ + 1SO4-- = FeSO4
+	-llnl_gamma	3.0
+	log_k		2.210
+	-delta_H		4.613	kJ/mol	# References :n/a
+	-analytic	1.72360e+03	2.70847e-01	-9.48765e+04	-6.25340e+02	5.63887e+06
+#	References DGf or LogK 04chi ; DHf n/a ; S° 04chi ; Cp n/a
+
+ 1Fe+++ + 1SO4-- = FeSO4+
+	-llnl_gamma	4.5
+	log_k		4.150
+	-delta_H		25.940	kJ/mol	# References :04chi
+	-analytic	1.89052e+03	3.00364e-01	-1.04311e+05	-6.84892e+02	6.10316e+06
+#	References DGf or LogK 04chi ; DHf 04chi ; S° n/a ; Cp n/a
+
+
+ 1H2O = H2 + 0.5O2
+	-CO2_llnl_gamma
+	log_k		-46.070
+	-delta_H		275.563	kJ/mol	# References :82wag/eva
+	-analytic	1.92664e+02	3.37230e-02	-2.64928e+04	-6.88278e+01	9.22381e+05
+#	References DGf or LogK 82wag/eva ; DHf 82wag/eva ; S° 82wag/eva ; Cp 89bsho/hel, 01sch/sho
+
+
+ 0.666666666666667N2 + 0.666666666666667NO2- + 0.666666666666667H2O + 0.666666666666667H+ = H2N2O2
+	-llnl_gamma	3.0
+	log_k		-35.639
+	-delta_H		209.925	kJ/mol	# References :97asho/sas
+	-analytic	5.51348e+02	8.32199e-02	-4.10157e+04	-1.99481e+02	1.72193e+06
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+ 1HS- + 1H+ = H2S
+	-llnl_gamma	3.0
+	log_k		6.989
+	-delta_H		-22.300	kJ/mol	# References :89cox/wag
+	-analytic	7.48406e+02	1.19818e-01	-4.13470e+04	-2.70323e+02	2.70545e+06
+#	References DGf or LogK n/a ; DHf 89cox/wag ; S° 89cox/wag ; Cp 89bsho/hel, 01sch/sho
+
+ 1S2O3-- + 2H+ = H2S2O3
+	-llnl_gamma	3.0
+	log_k		2.320
+	-delta_H		22.917	kJ/mol	# References :n/a
+	-analytic	1.49785e+03	2.38143e-01	-8.40489e+04	-5.42066e+02	5.03796e+06
+#	References DGf or LogK 04chi ; DHf n/a ; S° 97asho/sas ; Cp 97asho/sas
+
+ 1S2O4-- + 2H+ = H2S2O4
+	-llnl_gamma	3.0
+	log_k		2.800
+	-delta_H		20.194	kJ/mol	# References :n/a
+	-analytic	1.52382e+03	2.41879e-01	-8.55041e+04	-5.51336e+02	5.14655e+06
+#	References DGf or LogK 04chi ; DHf n/a ; S° 97asho/sas ; Cp 97asho/sas
+
+ 1H4SiO4 = H2SiO4-- + 2H+
+	-llnl_gamma	4.5
+	log_k		-23.270
+	-delta_H		75.000	kJ/mol	# References :92gre/fug
+	-analytic	8.51733e+01	-1.19772e-03	-8.30428e+03	-3.24759e+01	1.12041e+04
+#	References DGf or LogK 01fel/cho ; DHf 92gre/fug ; S° n/a ; Cp 88phi
+
+ 1SO3-- + 2H+ = H2SO3
+	-llnl_gamma	3.0
+	log_k		9.030
+	-delta_H		21.453	kJ/mol	# References :n/a
+	-analytic	1.29476e+03	2.18164e-01	-7.30298e+04	-4.67718e+02	4.57804e+06
+#	References DGf or LogK 04chi ; DHf n/a ; S° 04chi ; Cp 04chi
+
+ 1Al+++ + 2H2O = HAlO2 + 3H+
+	-llnl_gamma	3.0
+	log_k		-16.422
+	-delta_H		144.686	kJ/mol	# References :95pok/hel
+	-analytic	3.45610e+02	6.03107e-02	-2.57878e+04	-1.23756e+02	1.12923e+06
+#	References DGf or LogK n/a ; DHf 95pok/hel ; S° 95pok/hel ; Cp 95pok/hel
+
+ 1Cl- + 1H+ = HCl
+	-llnl_gamma	3.0
+	log_k		-0.710
+	-delta_H		-12.297	kJ/mol	# References :n/a
+	-analytic	4.76805e+02	9.08132e-02	-2.54571e+04	-1.77024e+02	1.67351e+06
+#	References DGf or LogK 97tag/zot ; DHf n/a ; S° 99aki/zot, d'après 97tag/zot ; Cp 99aki/zot, d'après 97tag/zot
+
+ 1ClO- + 1H+ = HClO
+	-llnl_gamma	3.0
+	log_k		7.550
+	-delta_H		-13.807	kJ/mol	# References :97asho/sas
+	-analytic	7.25218e+02	1.14764e-01	-3.91213e+04	-2.61748e+02	2.40081e+06
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+ 1ClO2- + 1H+ = HClO2
+	-llnl_gamma	3.0
+	log_k		1.979
+	-delta_H		14.644	kJ/mol	# References :97asho/sas
+	-analytic	7.88235e+02	1.24334e-01	-4.45918e+04	-2.84503e+02	2.68641e+06
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+ 1Fe++ + 2H2O = HFeO2- + 3H+
+	-llnl_gamma	4.5
+	log_k		-31.800
+	-delta_H		140.327	kJ/mol	# References :04chi
+	-analytic	-1.76510e+02	-3.47558e-02	4.90853e+02	6.37165e+01	-3.76796e+05
+#	References DGf or LogK 04chi ; DHf 04chi ; S° n/a ; Cp 97asho/sas
+
+ 1Fe+++ + 2H2O = HFeO2 + 3H+
+	-llnl_gamma	3.0
+	log_k		-12.560
+	-delta_H		103.764	kJ/mol	# References :04chi
+	-analytic	3.22063e+02	5.03574e-02	-1.66961e+04	-1.18898e+02	5.02999e+04
+#	References DGf or LogK 04chi ; DHf 04chi ; S° n/a ; Cp 97asho/sas
+
+
+ 0.666666666666667N2 + 0.666666666666667NO2- + 0.666666666666667H2O = HN2O2- + 0.333333333333333H+
+	-llnl_gamma	4.5
+	log_k		-42.676
+	-delta_H		227.916	kJ/mol	# References :97asho/sas
+	-analytic	-2.28584e+02	-3.91024e-02	7.08316e+02	8.25607e+01	-8.09003e+05
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+
+ 1NO2- + 1H+ = HNO2
+	-llnl_gamma	3.0
+	log_k		3.225
+	-delta_H		-14.644	kJ/mol	# References :97asho/sas
+	-analytic	6.44020e+02	1.01967e-01	-3.47712e+04	-2.33817e+02	2.13283e+06
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+ 1NO3- + 1H+ = HNO3
+	-llnl_gamma	3.0
+	log_k		-1.303
+	-delta_H		16.815	kJ/mol	# References :97asho/sas
+	-analytic	7.14697e+02	1.12289e-01	-4.04547e+04	-2.58904e+02	2.38671e+06
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+
+ 1H+ + 1SO4-- = HS- + 2O2
+	-llnl_gamma	3.5
+	log_k		-138.285
+	-delta_H		868.773	kJ/mol	# References :89cox/wag
+	-analytic	1.04420e+03	1.68673e-01	-1.06999e+05	-3.72414e+02	4.23267e+06
+#	References DGf or LogK 89cox/wag ; DHf 89cox/wag ; S° 89cox/wag ; Cp 97asho/sas
+
+ 1S2O3-- + 1H+ = HS2O3-
+	-llnl_gamma	4.0
+	log_k		1.720
+	-delta_H		8.254	kJ/mol	# References :n/a
+	-analytic	7.63746e+02	1.22828e-01	-4.33499e+04	-2.76238e+02	2.69177e+06
+#	References DGf or LogK 04chi ; DHf n/a ; S° 97asho/sas ; Cp 97asho/sas
+
+ 1S2O4-- + 1H+ = HS2O4-
+	-llnl_gamma	4.5
+	log_k		2.500
+	-delta_H		3.818	kJ/mol	# References :n/a
+	-analytic	7.67863e+02	1.23354e-01	-4.35111e+04	-2.77609e+02	2.73089e+06
+#	References DGf or LogK 04chi ; DHf n/a ; S° 97asho/sas ; Cp 97asho/sas
+
+ 1H4SiO4 = HSiO3- + 1H2O + 1H+
+	-llnl_gamma	4.0
+	log_k		-9.820
+	-delta_H		29.249	kJ/mol	# References :n/a
+	-analytic	-6.46750e+02	-1.07291e-01	3.40000e+04	2.34223e+02	-2.19440e+06
+#	References DGf or LogK 01fel/cho ; DHf n/a ; S° 97sve/sho ; Cp 97sve/sho
+
+
+ 1SO3-- + 1H+ = HSO3-
+	-llnl_gamma	4.0
+	log_k		7.170
+	-delta_H		3.668	kJ/mol	# References :n/a
+	-analytic	8.10377e+02	1.30677e-01	-4.53602e+04	-2.91738e+02	2.83198e+06
+#	References DGf or LogK 04chi ; DHf n/a ; S° 04chi ; Cp 97asho/sas
+
+ 1SO4-- + 1H+ = HSO4-
+	-llnl_gamma	4.0
+	log_k		1.982
+	-delta_H		22.440	kJ/mol	# References :04chi
+	-analytic	8.16984e+02	1.29499e-01	-4.74376e+04	-2.94022e+02	2.93644e+06
+#	References DGf or LogK n/a ; DHf 04chi ; S° 04chi ; Cp 97asho/sas
+
+ 0.5O2 + 1H+ + 1SO4-- = HSO5-
+	-llnl_gamma	4.0
+	log_k		-17.220
+	-delta_H		139.777	kJ/mol	# References :97asho/sas
+	-analytic	8.92767e+02	1.40423e-01	-5.78293e+04	-3.20834e+02	3.19924e+06
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+ 1Al+++ + 1K+ + 2H2O = KAlO2 + 4H+
+	-llnl_gamma	3.0
+	log_k		-24.222
+	-delta_H		211.675	kJ/mol	# References :97apok/hel
+	-analytic	6.48972e+02	9.81957e-02	-4.46804e+04	-2.31700e+02	1.84110e+06
+#	References DGf or LogK n/a ; DHf 97apok/hel ; S° 97apok/hel ; Cp 97apok/hel
+
+
+ 1Cl- + 1K+ = KCl
+	-llnl_gamma	3.0
+	log_k		-0.500
+	-delta_H		4.180	kJ/mol	# References :97mar/smi
+	-analytic	7.89547e+02	1.20470e-01	-4.47224e+04	-2.85535e+02	2.71764e+06
+#	References DGf or LogK 97smi/mar ; DHf 97mar/smi ; S° n/a ; Cp 97bpok/hel
+
+
+ 1K+ + 1H2O = KOH + 1H+
+	-llnl_gamma	3.0
+	log_k		-14.460
+	-delta_H		66.439	kJ/mol	# References :n/a
+	-analytic	1.42384e+02	1.63604e-02	-1.13130e+04	-5.17795e+01	3.86363e+05
+#	References DGf or LogK 76bae/mes ; DHf n/a ; S° 97apok/hel ; Cp 97apok/hel
+
+ 1K+ + 1SO4-- = KSO4-
+	-llnl_gamma	4.0
+	log_k		0.880
+	-delta_H		2.949	kJ/mol	# References :n/a
+	-analytic	9.15254e+02	1.43488e-01	-5.12538e+04	-3.31519e+02	3.11783e+06
+#	References DGf or LogK 97sve/sho ; DHf n/a ; S° 97sve/sho ; Cp 97sve/sho
+
+ 1HCO3- + 1Mg++ = Mg(HCO3)+
+	-llnl_gamma	4.5
+	log_k		1.038
+	-delta_H		1.842	kJ/mol	# References :n/a
+	-analytic	8.77196e+02	1.38125e-01	-5.03249e+04	-3.17051e+02	3.19785e+06
+#	References DGf or LogK 06bla/pia ; DHf n/a ; S° 74rea/lan ; Cp 95sho/kor
+
+ 4Mg++ + 4H2O = Mg4(OH)4++++ + 4H+
+	-llnl_gamma	5.5
+	log_k		-39.750
+	-delta_H		229.188	kJ/mol	# References :n/a
+	-analytic	1.52521e+03	2.22192e-01	-9.25885e+04	-5.53196e+02	4.28299e+06
+#	References DGf or LogK 76bae/mes ; DHf n/a ; S° 99yun/glu ; Cp n/a
+
+ 1Cl- + 1Mg++ = MgCl+
+	-llnl_gamma	4.0
+	log_k		0.350
+	-delta_H		-1.728	kJ/mol	# References :n/a
+	-analytic	8.36252e+02	1.34226e-01	-4.68335e+04	-3.03733e+02	2.90909e+06
+#	References DGf or LogK 96bou ; DHf n/a ; S° 97sve/sho ; Cp 97sve/sho
+
+ 1HCO3- + 1Mg++ = MgCO3 + 1H+
+	-llnl_gamma	3.0
+	log_k		-7.347
+	-delta_H		23.505	kJ/mol	# References :n/a
+	-analytic	7.76983e+02	1.26514e-01	-4.07179e+04	-2.86278e+02	2.03515e+06
+#	References DGf or LogK 06bla/pia ; DHf n/a ; S° 74rea/lan ; Cp 97sve/sho
+
+
+ 1Mg++ + 1H2O = MgOH+ + 1H+
+	-llnl_gamma	4.5
+	log_k		-11.680
+	-delta_H		62.834	kJ/mol	# References :n/a
+	-analytic	2.43555e+02	3.49076e-02	-1.77879e+04	-8.75035e+01	9.36843e+05
+#	References DGf or LogK 97sve/sho ; DHf n/a ; S° 97asho/sas ; Cp 97asho/sas
+
+
+ 1Mg++ + 1S2O3-- = MgS2O3
+	-llnl_gamma	3.0
+	log_k		1.820
+	-delta_H		31.170	kJ/mol	# References :n/a
+	-analytic	1.82000e+00	0.00000e+00	0.00000e+00	0.00000e+00	0.00000e+00
+#	References DGf or LogK 76smi/mar ; DHf n/a ; S° n/a ; Cp n/a
+
+ 1Mg++ + 1SO4-- = MgSO4
+	-llnl_gamma	3.0
+	log_k		2.230
+	-delta_H		5.860	kJ/mol	# References :76smi/mar
+	-analytic	1.69230e+03	2.66884e-01	-9.18462e+04	-6.14813e+02	5.30920e+06
+#	References DGf or LogK 76smi/mar ; DHf 76smi/mar ; S° n/a ; Cp 97mcc/sho
+
+
+ 1.5O2 + 2NH3 = N2 + 3H2O
+	-llnl_gamma	3.0
+	log_k		116.439
+	-delta_H		-687.055	kJ/mol	# References :89bsho/hel, 01sch/sho
+	-analytic	7.05822e+01	1.09582e-03	3.02218e+04	-2.43236e+01	3.87339e+05
+#	References DGf or LogK 89bsho/hel, 01sch/sho ; DHf 89bsho/hel, 01sch/sho ; S° 89bsho/hel, 01sch/sho ; Cp 89bsho/hel, 01sch/sho
+
+ 1.33333333333333NH3 + 0.333333333333333N2 + 1H+ = N2H5+
+	-llnl_gamma	4.5
+	log_k		-19.616
+	-delta_H		104.398	kJ/mol	# References :97asho/sas
+	-analytic	5.85633e+01	-2.64097e-03	-9.63803e+03	-1.92028e+01	2.17776e+05
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+ 1.33333333333333NH3 + 0.333333333333333N2 + 2H+ = N2H6++
+	-llnl_gamma	4.5
+	log_k		-20.643
+	-delta_H		95.193	kJ/mol	# References :97asho/sas
+	-analytic	-9.71471e+01	-2.89011e-02	-1.47842e+03	3.72434e+01	-1.84580e+05
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+ 0.666666666666667N2 + 0.666666666666667NO2- + 0.666666666666667H+ = N2O + 0.333333333333333H2O
+	-llnl_gamma	3.0
+	log_k		-7.655
+	-delta_H		42.753	kJ/mol	# References :01sch/sho
+	-analytic	1.78641e+02	3.80821e-02	-9.24335e+03	-6.83779e+01	2.26619e+05
+#	References DGf or LogK 01sch/sho ; DHf 01sch/sho ; S° 01sch/sho ; Cp 01sch/sho
+
+ 0.666666666666667N2 + 0.666666666666667NO2- + 0.666666666666667H2O = N2O2-- + 1.33333333333333H+
+	-llnl_gamma	4.5
+	log_k		-53.671
+	-delta_H		256.409	kJ/mol	# References :97asho/sas
+	-analytic	-1.02240e+03	-1.66835e-01	4.38750e+04	3.68652e+02	-3.63523e+06
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+ 1Al+++ + 1Na+ + 2H2O = NaAlO2 + 4H+
+	-llnl_gamma	3.0
+	log_k		-23.629
+	-delta_H		190.348	kJ/mol	# References :95pok/hel
+	-analytic	7.04223e+02	1.11345e-01	-4.74887e+04	-2.53139e+02	2.18701e+06
+#	References DGf or LogK n/a ; DHf 95pok/hel ; S° 95pok/hel ; Cp 95pok/hel
+
+ 1Cl- + 1Na+ = NaCl
+	-llnl_gamma	3.0
+	log_k		-0.500
+	-delta_H		2.000	kJ/mol	# References :04smi/mar
+	-analytic	7.60519e+02	1.20254e-01	-4.17744e+04	-2.76616e+02	2.46299e+06
+#	References DGf or LogK 04smi/mar ; DHf 04smi/mar ; S° n/a ; Cp 97sve/sho
+
+ 1HCO3- + 1Na+ = NaCO3- + 1H+
+	-llnl_gamma	4.5
+	log_k		-9.057
+	-delta_H		52.076	kJ/mol	# References :n/a
+	-analytic	8.87112e+02	1.31444e-01	-5.11097e+04	-3.21239e+02	2.75112e+06
+#	References DGf or LogK 90nor/plu ; DHf n/a ; S° 90nor/plu ; Cp n/a
+
+
+ 1HCO3- + 1Na+ = NaHCO3
+	-llnl_gamma	3.0
+	log_k		-0.247
+	-delta_H		-11.425	kJ/mol	# References :n/a
+	-analytic	7.69790e+02	1.14620e-01	-4.14361e+04	-2.79679e+02	2.38366e+06
+#	References DGf or LogK 09nor/plu ; DHf n/a ; S° 82wag/eva ; Cp n/a
+
+ 1Na+ + 1H2O = NaOH + 1H+
+	-llnl_gamma	3.0
+	log_k		-14.750
+	-delta_H		53.396	kJ/mol	# References :n/a
+	-analytic	5.63344e+02	8.50749e-02	-3.41073e+04	-2.05917e+02	1.81919e+06
+#	References DGf or LogK 95pok/hel ; DHf n/a ; S° 95pok/hel ; Cp 95pok/hel
+
+ 1Na+ + 1S2O3-- = NaS2O3-
+	-llnl_gamma	4.5
+	log_k		0.608
+	-delta_H		4.656	kJ/mol	# References :82wag/eva
+	-analytic	1.60478e+03	2.46830e-01	-8.86525e+04	-5.81598e+02	5.21827e+06
+#	References DGf or LogK n/a ; DHf 82wag/eva ; S° 82wag/eva ; Cp n/a
+
+ 1Na+ + 1SO4-- = NaSO4-
+	-llnl_gamma	4.0
+	log_k		0.936
+	-delta_H		-2.787	kJ/mol	# References :n/a
+	-analytic	9.35875e+02	1.44386e-01	-5.30229e+04	-3.38398e+02	3.30639e+06
+#	References DGf or LogK 95pok/sch ; DHf n/a ; S° 95pok/sch ; Cp 95pok/sch
+
+ 1NH3 + 1H+ = NH4+
+	-llnl_gamma	2.5
+	log_k		9.241
+	-delta_H		-51.923	kJ/mol	# References :97asho/sas
+	-analytic	3.74946e+01	-1.54524e-03	-6.95604e+02	-1.14964e+01	2.65551e+05
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+ 0.166666666666667N2 + 0.666666666666667NO2- + 0.666666666666667H+ = NO + 0.333333333333333H2O
+	-llnl_gamma	3.0
+	log_k		-7.261
+	-delta_H		54.647	kJ/mol	# References :01sch/sho
+	-analytic	5.42715e+02	8.82677e-02	-3.44772e+04	-1.95732e+02	2.10425e+06
+#	References DGf or LogK 01sch/sho ; DHf 01sch/sho ; S° 01sch/sho ; Cp 01sch/sho
+
+ 1.5O2 + 1NH3 = NO2- + 1H+ + 1H2O
+	-llnl_gamma	3.0
+	log_k		46.858
+	-delta_H		-290.893	kJ/mol	# References :97asho/sas
+	-analytic	-7.80342e+02	-1.31251e-01	6.03156e+04	2.82084e+02	-3.01919e+06
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+ 2O2 + 1NH3 = NO3- + 1H+ + 1H2O
+	-llnl_gamma	3.0
+	log_k		62.093
+	-delta_H		-387.037	kJ/mol	# References :97asho/sas
+	-analytic	-8.29821e+02	-1.39902e-01	6.88016e+04	2.99153e+02	-3.32174e+06
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+ 1H2O = OH- + 1H+
+	-llnl_gamma	3.5
+	log_k		-14.001
+	-delta_H		55.815	kJ/mol	# References :89cox/wag
+	-analytic	-7.01965e+02	-1.12741e-01	3.61687e+04	2.53604e+02	-2.42330e+06
+#	References DGf or LogK n/a ; DHf 89cox/wag ; S° 89cox/wag ; Cp 97asho/sas
+
+ 1HS- = S-- + 1H+
+	-llnl_gamma	4.5
+	log_k		-17.100
+	-delta_H		73.278	kJ/mol	# References :n/a
+	-analytic	7.59909e+02	1.03325e-01	-4.46242e+04	-2.75650e+02	2.12751e+06
+#	References DGf or LogK 04chi ; DHf n/a ; S° 04chi ; Cp 74nau/ryz
+
+ 1.5HS- + 0.25S2O3-- = S2-- + 0.75H2O
+	-llnl_gamma	4.0
+	log_k		-3.333
+	-delta_H		8.189	kJ/mol	# References :04chi
+	-analytic	-6.74935e+01	-8.30497e-03	3.58412e+03	2.32529e+01	-2.59679e+05
+#	References DGf or LogK n/a ; DHf 04chi ; S° 04chi ; Cp 88sho/hel
+
+ 2H+ + 2SO4-- = S2O3-- + 2O2 + 1H2O
+	-llnl_gamma	4.0
+	log_k		-133.412
+	-delta_H		856.297	kJ/mol	# References :04chi
+	-analytic	1.73328e+03	2.79220e-01	-1.44725e+05	-6.21877e+02	6.60133e+06
+#	References DGf or LogK 06bla/pia ; DHf 04chi ; S° 97asho/sas ; Cp 97asho/sas
+
+ 2H+ + 2SO4-- = S2O4-- + 1.5O2 + 1H2O
+	-llnl_gamma	5.0
+	log_k		-118.281
+	-delta_H		761.150	kJ/mol	# References :04chi
+	-analytic	1.68947e+03	2.71203e-01	-1.36622e+05	-6.06791e+02	6.31906e+06
+#	References DGf or LogK 06bla/pia ; DHf 04chi ; S° 97asho/sas ; Cp 97asho/sas
+
+ 2SO3-- + 2H+ = S2O5-- + 1H2O
+	-llnl_gamma	4.0
+	log_k		12.850
+	-delta_H		2.606	kJ/mol	# References :n/a
+	-analytic	1.43985e+03	2.32072e-01	-7.97804e+04	-5.18921e+02	4.92764e+06
+#	References DGf or LogK 04chi ; DHf n/a ; S° 04chi ; Cp 97asho/sas
+
+ 2H+ + 2SO4-- = S2O6-- + 0.5O2 + 1H2O
+	-llnl_gamma	4.0
+	log_k		-50.823
+	-delta_H		353.590	kJ/mol	# References :97asho/sas
+	-analytic	1.56083e+03	2.48323e-01	-1.06529e+05	-5.62141e+02	5.56427e+06
+#	References DGf or LogK 06bla/pia ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+ 0.5O2 + 2H+ + 2SO4-- = S2O8-- + 1H2O
+	-llnl_gamma	4.0
+	log_k		-22.381
+	-delta_H		194.179	kJ/mol	# References :97asho/sas
+	-analytic	1.52754e+03	2.40604e-01	-9.48781e+04	-5.50368e+02	5.19300e+06
+#	References DGf or LogK 06bla/pia ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+ 2HS- + 0.5S2O3-- + 1H+ = S3-- + 1.5H2O
+	-llnl_gamma	4.0
+	log_k		7.904
+	-delta_H		-44.062	kJ/mol	# References :04chi
+	-analytic	6.09458e+02	1.01315e-01	-3.12534e+04	-2.22278e+02	2.05142e+06
+#	References DGf or LogK n/a ; DHf 04chi ; S° 04chi ; Cp 88sho/hel
+
+ 1.00000000000001S2O4-- + 0.99999999999999SO3-- + 1.99999999999999H+ = S3O6-- + 0.99999999999999H2O
+	-llnl_gamma	4.0
+	log_k		18.881
+	-delta_H		-68.606	kJ/mol	# References :97asho/sas
+	-analytic	1.39152e+03	2.24109e-01	-7.34434e+04	-5.03668e+02	4.72596e+06
+#	References DGf or LogK n/a ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+ 2.5HS- + 0.75S2O3-- + 2H+ = S4-- + 2.25H2O
+	-llnl_gamma	4.0
+	log_k		18.037
+	-delta_H		-90.143	kJ/mol	# References :04chi
+	-analytic	1.28520e+03	2.10863e-01	-6.63227e+04	-4.67412e+02	4.35576e+06
+#	References DGf or LogK n/a ; DHf 04chi ; S° 04chi ; Cp 88sho/hel
+
+ 1S2O3-- + 1S2O4-- + 2H+ = S4O6-- + 1H2O
+	-llnl_gamma	4.0
+	log_k		27.056
+	-delta_H		-104.282	kJ/mol	# References :97asho/sas
+	-analytic	1.48816e+03	2.38920e-01	-7.69903e+04	-5.37946e+02	5.06684e+06
+#	References DGf or LogK n/a ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+ 3HS- + 1S2O3-- + 3H+ = S5-- + 3H2O
+	-llnl_gamma	4.0
+	log_k		27.950
+	-delta_H		-134.964	kJ/mol	# References :04chi
+	-analytic	1.96401e+03	3.20846e-01	-1.01625e+05	-7.13656e+02	6.66939e+06
+#	References DGf or LogK n/a ; DHf 04chi ; S° 04chi ; Cp 88sho/hel
+
+ 2.5S2O3-- + 3H+ = S5O6-- + 1.5H2O
+	-llnl_gamma	4.0
+	log_k		0.872
+	-delta_H		26.266	kJ/mol	# References :97asho/sas
+	-analytic	2.06895e+03	3.32588e-01	-1.16108e+05	-7.50387e+02	7.02004e+06
+#	References DGf or LogK n/a ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+
+ 1CH4 + 1NO3- + 1HS- + 1H+ = SCN- + 3H2O
+	-llnl_gamma	3.5
+	log_k		85.071
+	-delta_H		-470.031	kJ/mol	# References :97asho/sas
+	-analytic	3.28710e+02	6.04959e-02	7.96169e+03	-1.20818e+02	9.40509e+05
+#	References DGf or LogK 97asho/sas ; DHf 97asho/sas ; S° 97asho/sas ; Cp 97asho/sas
+
+
+
+
+ 2H4SiO4 = Si2O2(OH)5- + 1H2O + 1H+
+	-llnl_gamma	4.0
+	log_k		-8.500
+	-delta_H		548.930	kJ/mol	# References :n/a
+	-analytic	-8.50000e+00	0.00000e+00	0.00000e+00	0.00000e+00	0.00000e+00
+#	References DGf or LogK 01fel/cho ; DHf n/a ; S° n/a ; Cp n/a
+
+ 2H4SiO4 = Si2O3(OH)4-- + 1H2O + 2H+
+	-llnl_gamma	4.0
+	log_k		-19.400
+	-delta_H		548.930	kJ/mol	# References :n/a
+	-analytic	-1.94000e+01	0.00000e+00	0.00000e+00	0.00000e+00	0.00000e+00
+#	References DGf or LogK 01fel/cho ; DHf n/a ; S° n/a ; Cp n/a
+
+ 3H4SiO4 = Si3O5(OH)5--- + 2H2O + 3H+
+	-llnl_gamma	3.5
+	log_k		-29.400
+	-delta_H		548.930	kJ/mol	# References :n/a
+	-analytic	-2.94000e+01	0.00000e+00	0.00000e+00	0.00000e+00	0.00000e+00
+#	References DGf or LogK 01fel/cho ; DHf n/a ; S° n/a ; Cp n/a
+
+ 3H4SiO4 = Si3O6(OH)3--- + 3H2O + 3H+
+	-llnl_gamma	3.5
+	log_k		-29.400
+	-delta_H		548.930	kJ/mol	# References :n/a
+	-analytic	-2.94000e+01	0.00000e+00	0.00000e+00	0.00000e+00	0.00000e+00
+#	References DGf or LogK lassin, 27/11/2007 ; DHf n/a ; S° n/a ; Cp n/a
+
+ 4H4SiO4 = Si4O6(OH)6-- + 4H2O + 2H+
+	-llnl_gamma	4.0
+	log_k		-15.200
+	-delta_H		4701.457	kJ/mol	# References :n/a
+	-analytic	-1.52000e+01	0.00000e+00	0.00000e+00	0.00000e+00	0.00000e+00
+#	References DGf or LogK lassin, 27/11/2007 ; DHf n/a ; S° n/a ; Cp n/a
+
+ 4H4SiO4 = Si4O7(OH)6---- + 3H2O + 4H+
+	-llnl_gamma	4.0
+	log_k		-39.100
+	-delta_H		4987.287	kJ/mol	# References :n/a
+	-analytic	-3.91000e+01	0.00000e+00	0.00000e+00	0.00000e+00	0.00000e+00
+#	References DGf or LogK 01fel/cho ; DHf n/a ; S° n/a ; Cp n/a
+
+ 4H4SiO4 = Si4O8(OH)4---- + 4H2O + 4H+
+	-llnl_gamma	4.0
+	log_k		-39.100
+	-delta_H		4987.287	kJ/mol	# References :n/a
+	-analytic	-3.91000e+01	0.00000e+00	0.00000e+00	0.00000e+00	0.00000e+00
+#	References DGf or LogK 01fel/cho ; DHf n/a ; S° n/a ; Cp n/a
+
+ 6H4SiO4 = Si6O15------ + 9H2O + 6H+
+	-llnl_gamma	2.5
+	log_k		-61.500
+	-delta_H		6194.695	kJ/mol	# References :n/a
+	-analytic	-6.15000e+01	0.00000e+00	0.00000e+00	0.00000e+00	0.00000e+00
+#	References DGf or LogK lassin, 27/11/2007 ; DHf n/a ; S° n/a ; Cp n/a
+
+ 1SO3-- + 2H+ = SO2 + 1H2O
+	-llnl_gamma	3.0
+	log_k		9.030
+	-delta_H		21.450	kJ/mol	# References :04chi
+	-analytic	1.33944e+03	2.20380e-01	-7.56806e+04	-4.83033e+02	4.70729e+06
+#	References DGf or LogK n/a ; DHf 04chi ; S° 04chi ; Cp 89bsho/hel, 01sch/sho
+
+ 1SO4-- = SO3-- + 0.5O2
+	-llnl_gamma	4.5
+	log_k		-46.614
+	-delta_H		272.213	kJ/mol	# References :04chi
+	-analytic	9.67192e+01	1.41608e-02	-2.07947e+04	-3.37931e+01	5.16323e+05
+#	References DGf or LogK 06bla/pia ; DHf 04chi ; S° 04chi ; Cp 97asho/sas
+
+ 1HCO3- + 1Sr++ = Sr(CO3) + 1H+
+	-llnl_gamma	3.0
+	log_k		-7.522
+	-delta_H		36.524	kJ/mol	# References :n/a
+	-analytic	7.18008e+02	1.17132e-01	-3.81457e+04	-2.64051e+02	1.85479e+06
+#	References DGf or LogK 84bus/plu ; DHf n/a ; S° 84bus/plu ; Cp 97sve/sho
+
+ 1HCO3- + 1Sr++ = Sr(HCO3)+
+	-llnl_gamma	4.5
+	log_k		1.180
+	-delta_H		25.316	kJ/mol	# References :n/a
+	-analytic	9.60063e+02	1.51995e-01	-5.51225e+04	-3.46332e+02	3.34753e+06
+#	References DGf or LogK 84bus/plu ; DHf n/a ; S° 84bus/plu ; Cp 95sho/kor
+
+ 1Cl- + 1Sr++ = SrCl+
+	-llnl_gamma	4.0
+	log_k		-0.230
+	-delta_H		7.551	kJ/mol	# References :n/a
+	-analytic	8.14834e+02	1.32393e-01	-4.53573e+04	-2.96301e+02	2.73517e+06
+#	References DGf or LogK 96bou ; DHf n/a ; S° 97sve/sho ; Cp 97sve/sho
+
+ 1Sr++ + 1H2O = SrOH+ + 1H+
+	-llnl_gamma	4.0
+	log_k		-13.290
+	-delta_H		82.609	kJ/mol	# References :n/a
+	-analytic	1.61505e+02	2.38511e-02	-1.21074e+04	-5.86711e+01	3.44800e+05
+#	References DGf or LogK 76bae/mes ; DHf n/a ; S° 97asho/sas ; Cp 97asho/sas
+
+
+ 1SO4-- + 1Sr++ = SrSO4
+	-llnl_gamma	3.0
+	log_k		2.300
+	-delta_H		7.029	kJ/mol	# References :06bla/ign
+	-analytic	1.77335e+03	2.66704e-01	-9.74980e+04	-6.41317e+02	5.63007e+06
+#	References DGf or LogK 06bla/ign ; DHf 06bla/ign ; S° n/a ; Cp 06bla/ign
+
+PHASES
+
+
+Albite_high
+	NaAlSi3O8 + 4H+ + 4H2O = 1Al+++ + 1Na+ + 3H4SiO4
+	log_k		4.143
+	-delta_H		-95.623	kJ/mol	# References :06bla/pia
+	-analytic	-5.84198e+02	-9.04771e-02	3.49136e+04	2.08753e+02	-1.62985e+06
+#      Temperature range (°K) :  623- 273
+#	References DGf or LogK n/a ; DHf 06bla/pia ; S° 06bla/pia ; Cp 06bla/pia
+
+Albite_low
+	NaAlSi3O8 + 4H+ + 4H2O = 1Al+++ + 1Na+ + 3H4SiO4
+	log_k		2.745
+	-delta_H		-82.813	kJ/mol	# References :06bla/pia
+	-analytic	-5.75198e+02	-9.45004e-02	3.35400e+04	2.06831e+02	-1.61525e+06
+#      Temperature range (°K) :  1400- 273
+#	References DGf or LogK n/a ; DHf 06bla/pia ; S° 06bla/pia ; Cp 06bla/pia
+
+Amorphous_silica
+	SiO2 + 2H2O = 1H4SiO4
+	log_k		-2.700
+	-delta_H		13.616	kJ/mol	# References :00gun/arn
+	-analytic	1.46802e+01	3.94646e-03	-1.03485e+03	-6.02555e+00	-1.58628e+04
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 00gun/arn ; S° 00gun/arn ; Cp 00gun/arn
+
+
+Anorthite
+	Ca(Al2Si2)O8 + 8H+ = 2Al+++ + 1Ca++ + 2H4SiO4
+	log_k		25.305
+	-delta_H		-314.358	kJ/mol	# References :06bla/pia
+	-analytic	-1.22145e+03	-1.92659e-01	7.71361e+04	4.36927e+02	-3.17053e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 06bla/pia ; S° 06bla/pia ; Cp 06bla/pia
+
+Aragonite
+	CaCO3 + 1H+ = 1HCO3- + 1Ca++
+	log_k		2.014
+	-delta_H		-25.150	kJ/mol	# References :87gar/par
+	-analytic	-8.59031e+02	-1.39091e-01	4.76864e+04	3.12469e+02	-2.72108e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 87gar/par ; S° 87gar/par ; Cp 87gar/par
+
+
+BeidelliteCa
+	Ca0.17Al2.34Si3.66O10(OH)2 + 7.36H+ + 2.64H2O = 2.34Al+++ + 0.17Ca++ + 3.66H4SiO4
+	log_k		5.917
+	-delta_H		-200.871	kJ/mol	# References :n/a
+	-analytic	-1.01626e+03	-1.76916e-01	6.30233e+04	3.63362e+02	-3.16224e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+BeidelliteK
+	K0.33Al2.33Si3.67O10(OH)2 + 7.32H+ + 2.68H2O = 2.33Al+++ + 0.33K+ + 3.67H4SiO4
+	log_k		4.344
+	-delta_H		-196.257	kJ/mol	# References :n/a
+	-analytic	-1.00508e+03	-1.72802e-01	6.22167e+04	3.58594e+02	-3.11550e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+BeidelliteMg
+	Mg0.17Al2.34Si3.66O10(OH)2 + 7.36H+ + 2.64H2O = 2.34Al+++ + 0.17Mg++ + 3.66H4SiO4
+	log_k		5.264
+	-delta_H		-200.873	kJ/mol	# References :n/a
+	-analytic	-1.03109e+03	-1.78484e-01	6.38300e+04	3.68388e+02	-3.20630e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+BeidelliteNa
+	Na0.33Al2.33Si3.67O10(OH)2 + 7.32H+ + 2.68H2O = 2.33Al+++ + 0.33Na+ + 3.67H4SiO4
+	log_k		4.551
+	-delta_H		-196.265	kJ/mol	# References :n/a
+	-analytic	-1.02373e+03	-1.74716e-01	6.32234e+04	3.65290e+02	-3.16164e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+Boehmite
+	AlO(OH) + 3H+ = 1Al+++ + 2H2O
+	log_k		7.623
+	-delta_H		-113.660	kJ/mol	# References :95rob/hem
+	-analytic	-4.78459e+02	-7.89256e-02	2.97385e+04	1.71481e+02	-1.28426e+06
+#      Temperature range (°K) :  600- 273
+#	References DGf or LogK n/a ; DHf 95rob/hem ; S° 95rob/hem ; Cp 95rob/hem
+
+
+Brucite
+	Mg(OH)2 + 2H+ = 1Mg++ + 2H2O
+	log_k		17.100
+	-delta_H		-114.160	kJ/mol	# References :95rob/hem
+	-analytic	-3.56350e+02	-5.31654e-02	2.42983e+04	1.28726e+02	-9.52817e+05
+#      Temperature range (°K) :  900- 273
+#	References DGf or LogK 03alt/met ; DHf 95rob/hem ; S° n/a ; Cp 95rob/hem
+
+
+
+Calcite
+	CaCO3 + 1H+ = 1HCO3- + 1Ca++
+	log_k		1.847
+	-delta_H		-25.325	kJ/mol	# References :n/a
+	-analytic	-8.50102e+02	-1.39471e-01	4.68810e+04	3.09649e+02	-2.65915e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/pia ; DHf n/a ; S° 82plu/bus ; Cp 95rob/hem
+
+
+Celadonite
+	K(MgAl)Si4O10(OH)2 + 6H+ + 4H2O = 1Al+++ + 1K+ + 1Mg++ + 4H4SiO4
+	log_k		7.324
+	-delta_H		-114.517	kJ/mol	# References :98hol/pow
+	-analytic	-8.66370e+02	-1.31276e-01	5.04243e+04	3.11270e+02	-2.35662e+06
+#      Temperature range (°K) :  1000- 273
+#	References DGf or LogK n/a ; DHf 98hol/pow ; S° 78hel/del ; Cp 78hel/del
+
+Celestite
+	SrSO4 = 1SO4-- + 1Sr++
+	log_k		-6.620
+	-delta_H		-2.451	kJ/mol	# References :n/a
+	-analytic	-1.63827e+03	-2.61343e-01	9.08484e+04	5.92925e+02	-5.53761e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/ign ; DHf n/a ; S° 06bla/ign ; Cp 06bla/ign
+
+
+CH4,g
+	CH4 + 2O2 = 1HCO3- + 1H+ + 1H2O
+	log_k		141.258
+	-delta_H		-876.620	kJ/mol	# References :98cha
+	-analytic	-9.44265e+02	-1.49389e-01	1.00635e+05	3.36892e+02	-3.65188e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 98cha ; S° 98cha ; Cp 98cha
+
+
+Chalcedony
+	SiO2 + 2H2O = 1H4SiO4
+	log_k		-3.453
+	-delta_H		19.574	kJ/mol	# References :78hel/del
+	-analytic	1.67446e+01	2.75239e-03	-1.92988e+03	-6.12245e+00	5.34821e+04
+#      Temperature range (°K) :  848- 273
+#	References DGf or LogK n/a ; DHf 78hel/del ; S° 78hel/del ; Cp 78hel/del
+
+Chlorite_Cca-2
+	(Mg2.964Fe1.927Al1.116Ca0.011)(Si2.633Al1.367)O10(OH)8 + 17.253H+ = 0.05375O2 + 2.483Al+++ + 0.011Ca++ + 1.927Fe++ + 2.964Mg++ + 7.3605H2O + 2.633H4SiO4
+	log_k		59.405
+	-delta_H		-611.577	kJ/mol	# References :07gai/bla
+	-analytic	-2.93261e+03	-4.44367e-01	1.83992e+05	1.05091e+03	-8.26745e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 07gai/bla ; S° 07gal/bla ; Cp 07gal/bla
+
+Chloritoid
+	FeAl2SiO5(OH)2 + 8H+ = 2Al+++ + 1Fe++ + 3H2O + 1H4SiO4
+	log_k		21.777
+	-delta_H		-292.184	kJ/mol	# References :87woo/gar
+	-analytic	-1.23660e+03	-2.02234e-01	7.72042e+04	4.43515e+02	-3.35330e+06
+#      Temperature range (°K) :  1000- 273
+#	References DGf or LogK n/a ; DHf 87woo/gar ; S° 78hel/del ; Cp 78hel/del
+
+Chloromagnesite
+	MgCl2 = 2Cl- + 1Mg++
+	log_k		22.025
+	-delta_H		-159.540	kJ/mol	# References :98cha
+	-analytic	-1.58739e+03	-2.56067e-01	9.49208e+04	5.76134e+02	-5.17468e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 98cha ; S° 98cha ; Cp 98cha
+
+
+
+CO2,g
+	CO2 + 1H2O = 1HCO3- + 1H+
+	log_k		-7.825
+	-delta_H		-10.590	kJ/mol	# References :89cox/wag
+	-analytic	-5.93145e+02	-9.60750e-02	3.25471e+04	2.12792e+02	-1.93248e+06
+#      Temperature range (°K) :  2500- 273
+#	References DGf or LogK n/a ; DHf 89cox/wag ; S° 89cox/wag ; Cp 89cox/wag
+
+
+Cristobalite,alpha
+	SiO2 + 2H2O = 1H4SiO4
+	log_k		-3.161
+	-delta_H		16.496	kJ/mol	# References :04fab/sax
+	-analytic	1.36229e+01	2.67080e-03	-1.54859e+03	-5.17811e+00	3.77533e+04
+#      Temperature range (°K) :  523- 273
+#	References DGf or LogK n/a ; DHf 04fab/sax ; S° 04fab/sax ; Cp 04fab/sax
+
+Cronstedtite_7A,alpha
+	Fe2Fe(FeSi)O5(OH)4 + 8H+ = 0.5O2 + 4Fe++ + 4H2O + 1H4SiO4
+	log_k		-1.169
+	-delta_H		-52.622	kJ/mol	# References :92wol
+	-analytic	-1.21345e+03	-1.87915e-01	6.43554e+04	4.39802e+02	-3.18240e+06
+#      Temperature range (°K) :  950- 273
+#	References DGf or LogK n/a ; DHf 92wol ; S° 78hel/del ; Cp 78hel/del
+
+Daphnite_14A
+	Fe5Al(AlSi3)O10(OH)8 + 16H+ = 2Al+++ + 5Fe++ + 6H2O + 3H4SiO4
+	log_k		51.017
+	-delta_H		-531.700	kJ/mol	# References :78hel/del
+	-analytic	-2.57327e+03	-4.06491e-01	1.59334e+05	9.25843e+02	-7.09838e+06
+#      Temperature range (°K) :  1000- 273
+#	References DGf or LogK 78hel/del ; DHf 78hel/del ; S° 78hel/del ; Cp 78hel/del
+
+Diaspore
+	AlO(OH) + 3H+ = 1Al+++ + 2H2O
+	log_k		6.864
+	-delta_H		-108.760	kJ/mol	# References :95rob/hem
+	-analytic	-4.82015e+02	-7.79308e-02	2.99647e+04	1.72374e+02	-1.32573e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 95rob/hem ; S° 95rob/hem ; Cp 95rob/hem
+
+Dolomite
+	CaMg(CO3)2 + 2H+ = 2HCO3- + 1Ca++ + 1Mg++
+	log_k		3.533
+	-delta_H		-65.360	kJ/mol	# References :95rob/hem
+	-analytic	-1.79236e+03	-2.89635e-01	9.95945e+04	6.51145e+02	-5.60084e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 95rob/hem ; S° 95rob/hem ; Cp 95rob/hem
+
+Dolomite,disordered
+	CaMg(CO3)2 + 2H+ = 2HCO3- + 1Ca++ + 1Mg++
+	log_k		4.299
+	-delta_H		-73.162	kJ/mol	# References :78hel/del,92ajoh
+	-analytic	-1.78145e+03	-2.88528e-01	9.92642e+04	6.47143e+02	-5.55342e+06
+#      Temperature range (°K) :  1000- 273
+#	References DGf or LogK n/a ; DHf 78hel/del,92ajoh ; S° 78hel/del,92ajoh ; Cp 78hel/del,92ajoh
+
+Dolomite,ordered
+	CaMg(CO3)2 + 2H+ = 2HCO3- + 1Ca++ + 1Mg++
+	log_k		2.754
+	-delta_H		-60.916	kJ/mol	# References :78hel/del,92ajoh
+	-analytic	-1.79238e+03	-2.89638e-01	9.93633e+04	6.51151e+02	-5.60089e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 78hel/del,92ajoh ; S° 78hel/del,92ajoh ; Cp 95rob/hem
+
+
+Fe(OH)2
+	Fe(OH)2 + 2H+ = 1Fe++ + 2H2O
+	log_k		12.761
+	-delta_H		-87.620	kJ/mol	# References :04chi
+	-analytic	-3.49498e+02	-5.27878e-02	2.28702e+04	1.26258e+02	-9.88888e+05
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 04chi ; S° 04chi ; Cp 04chi
+
+Fe(OH)3
+	Fe(OH)3 + 2H+ = 0.25O2 + 1Fe++ + 2.5H2O
+	log_k		-4.595
+	-delta_H		25.012	kJ/mol	# References :04chi
+	-analytic	-2.71127e+02	-3.87139e-02	1.21249e+04	9.87158e+01	-6.09486e+05
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 04chi ; S° 04chi ; Cp 04chi
+
+Fe-MontmorilloniteCa
+	Ca0.17Fe0.33Al1.68Si3.99O10(OH)2 + 6.04H+ + 3.96H2O = 1.68Al+++ + 0.17Ca++ + 0.33Fe++ + 3.99H4SiO4
+	log_k		3.748
+	-delta_H		-140.759	kJ/mol	# References :n/a
+	-analytic	-7.96060e+02	-1.39999e-01	4.90443e+04	2.85275e+02	-2.56428e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+Fe-MontmorilloniteK
+	K0.33Fe0.33Al1.67Si4O10(OH)2 + 6H+ + 4H2O = 1.67Al+++ + 0.33Fe++ + 0.33K+ + 4H4SiO4
+	log_k		1.973
+	-delta_H		-136.149	kJ/mol	# References :n/a
+	-analytic	-7.85084e+02	-1.35884e-01	4.82378e+04	2.80507e+02	-2.51755e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+Fe-MontmorilloniteMg
+	Mg0.17Fe0.33Al1.68Si3.99O10(OH)2 + 6.04H+ + 3.96H2O = 1.68Al+++ + 0.33Fe++ + 0.17Mg++ + 3.99H4SiO4
+	log_k		3.120
+	-delta_H		-140.752	kJ/mol	# References :n/a
+	-analytic	-8.10870e+02	-1.41567e-01	4.98506e+04	2.90303e+02	-2.60835e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+Fe-MontmorilloniteNa
+	Na0.33Fe0.33Al1.67Si4O10(OH)2 + 6H+ + 4H2O = 1.67Al+++ + 0.33Fe++ + 0.33Na+ + 4H4SiO4
+	log_k		2.244
+	-delta_H		-136.151	kJ/mol	# References :n/a
+	-analytic	-8.03669e+02	-1.37798e-01	4.92441e+04	2.87204e+02	-2.56369e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+
+Fe-SaponiteCa
+	Ca0.17Fe3Al0.34Si3.66O10(OH)2 + 7.36H+ + 2.64H2O = 0.34Al+++ + 0.17Ca++ + 3Fe++ + 3.66H4SiO4
+	log_k		20.283
+	-delta_H		-200.436	kJ/mol	# References :n/a
+	-analytic	-1.01496e+03	-1.73276e-01	6.50977e+04	3.66323e+02	-3.36752e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+Fe-SaponiteK
+	K0.33Fe3Al0.33Si3.67O10(OH)2 + 7.32H+ + 2.68H2O = 0.33Al+++ + 3Fe++ + 0.33K+ + 3.67H4SiO4
+	log_k		18.707
+	-delta_H		-195.827	kJ/mol	# References :n/a
+	-analytic	-1.00014e+03	-1.68689e-01	6.40752e+04	3.60260e+02	-3.30738e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+Fe-SaponiteMg
+	Mg0.17Fe3Al0.34Si3.66O10(OH)2 + 7.36H+ + 2.64H2O = 0.34Al+++ + 3Fe++ + 0.17Mg++ + 3.66H4SiO4
+	log_k		19.631
+	-delta_H		-200.439	kJ/mol	# References :n/a
+	-analytic	-1.02813e+03	-1.74628e-01	6.58056e+04	3.70758e+02	-3.40545e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+Fe-SaponiteNa
+	Na0.33Fe3Al0.33Si3.67O10(OH)2 + 7.32H+ + 2.68H2O = 0.33Al+++ + 3Fe++ + 0.33Na+ + 3.67H4SiO4
+	log_k		18.914
+	-delta_H		-195.829	kJ/mol	# References :n/a
+	-analytic	-1.01916e+03	-1.70651e-01	6.51035e+04	3.67088e+02	-3.35488e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+
+Gibbsite
+	Al(OH)3 + 3H+ = 1Al+++ + 3H2O
+	log_k		7.735
+	-delta_H		-102.760	kJ/mol	# References :n/a
+	-analytic	-4.93747e+02	-8.08994e-02	2.97136e+04	1.77901e+02	-1.26764e+06
+#      Temperature range (°K) :  600- 273
+#	References DGf or LogK 95pok/hel ; DHf n/a ; S° 95pok/hel ; Cp 95pok/hel
+
+Gibbsite_am
+	Al(OH)3 + 3H+ = 1Al+++ + 3H2O
+	log_k		10.575
+	-delta_H		-119.770	kJ/mol	# References :93bar
+	-analytic	-5.34762e+02	-7.96263e-02	3.30024e+04	1.91381e+02	-1.34839e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 93bar ; S° 93bar ; Cp n/a
+
+Gibbsite_mc
+	Al(OH)3 + 3H+ = 1Al+++ + 3H2O
+	log_k		9.350
+	-delta_H		-102.510	kJ/mol	# References :90nor/plu
+	-analytic	-5.32963e+02	-7.96263e-02	3.21008e+04	1.91381e+02	-1.34839e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 90nor/plu ; DHf 90nor/plu ; S° n/a ; Cp n/a
+
+
+Goethite
+	FeOOH + 2H+ = 0.25O2 + 1Fe++ + 1.5H2O
+	log_k		-8.762
+	-delta_H		41.122	kJ/mol	# References :04chi
+	-analytic	-2.64508e+02	-4.01271e-02	1.09970e+04	9.61703e+01	-6.34669e+05
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 04chi ; S° 04chi ; Cp 04chi
+
+
+Greenalite
+	Fe3Si2O5(OH)4 + 6H+ = 3Fe++ + 1H2O + 2H4SiO4
+	log_k		23.508
+	-delta_H		-187.185	kJ/mol	# References :78hel/del
+	-analytic	-9.47939e+02	-1.45813e-01	5.85630e+04	3.42570e+02	-2.59275e+06
+#      Temperature range (°K) :  1000- 273
+#	References DGf or LogK 78hel/del ; DHf 78hel/del ; S° 78hel/del ; Cp 78hel/del
+
+
+Gypsum
+	CaSO4:2H2O = 1Ca++ + 2H2O + 1SO4--
+	log_k		-4.607
+	-delta_H		-1.054	kJ/mol	# References :CODATA87
+	-analytic	-1.62020e+03	-2.57233e-01	8.91497e+04	5.87380e+02	-5.34730e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf CODATA87 ; S° CODATA87 ; Cp 74nau/ryz
+
+
+H2,g
+	H2 + 0.5O2 = 1H2O
+	log_k		42.994
+	-delta_H		-279.763	kJ/mol	# References :By convention
+	-analytic	-1.07168e+02	-1.50135e-02	2.10622e+04	3.60584e+01	-4.64613e+05
+#      Temperature range (°K) :  2500- 273
+#	References DGf or LogK n/a ; DHf By convention ; S° 89cox/wag ; Cp 89cox/wag
+
+H2O,g
+	H2O = 1H2O
+	log_k		1.499
+	-delta_H		-44.004	kJ/mol	# References :89cox/wag
+	-analytic	-2.32252e+01	-4.70826e-04	3.05726e+03	5.92730e+00	-4.89899e+03
+#      Temperature range (°K) :  2500- 273
+#	References DGf or LogK n/a ; DHf 89cox/wag ; S° 89cox/wag ; Cp 89cox/wag
+
+H2S,g
+	H2S + 2O2 = 2H+ + 1SO4--
+	log_k		130.281
+	-delta_H		-864.473	kJ/mol	# References :89cox/wag
+	-analytic	-1.70021e+03	-2.72510e-01	1.42426e+05	6.08477e+02	-6.36417e+06
+#      Temperature range (°K) :  2500- 273
+#	References DGf or LogK n/a ; DHf 89cox/wag ; S° 89cox/wag ; Cp 89cox/wag
+
+Halite
+	NaCl = 1Cl- + 1Na+
+	log_k		1.594
+	-delta_H		3.700	kJ/mol	# References :78hel/del, 98cha
+	-analytic	-7.52250e+02	-1.19050e-01	4.13857e+04	2.74179e+02	-2.48091e+06
+#      Temperature range (°K) :  1073- 273
+#	References DGf or LogK n/a ; DHf 78hel/del, 98cha ; S° 98cha ; Cp 78hel/del
+
+Halloysite
+	Al2Si2O5(OH)4 + 6H+ = 2Al+++ + 1H2O + 2H4SiO4
+	log_k		10.323
+	-delta_H		-192.418	kJ/mol	# References :06bla/pia
+	-analytic	-9.35050e+02	-1.47337e-01	5.75208e+04	3.33616e+02	-2.58986e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 06bla/pia ; S° 06bla/pia ; Cp 06bla/pia
+
+HCl,g
+	HCl = 1Cl- + 1H+
+	log_k		6.293
+	-delta_H		-74.770	kJ/mol	# References :89cox/wag
+	-analytic	-6.37211e+02	-1.02696e-01	3.85708e+04	2.29667e+02	-2.09266e+06
+#      Temperature range (°K) :  600- 273
+#	References DGf or LogK n/a ; DHf 89cox/wag ; S° 89cox/wag ; Cp 89cox/wag
+
+Hematite,alpha
+	Fe2O3 + 4H+ = 0.5O2 + 2Fe++ + 2H2O
+	log_k		-17.027
+	-delta_H		68.504	kJ/mol	# References :95rob/hem
+	-analytic	-5.26888e+02	-8.33076e-02	2.22030e+04	1.91664e+02	-1.24705e+06
+#      Temperature range (°K) :  950- 273
+#	References DGf or LogK n/a ; DHf 95rob/hem ; S° 95rob/hem ; Cp 95rob/hem
+
+
+I/S_ISCz-1_2.966H2O
+	(Na0.134K0.53)(Si3.565Al0.435)(Al1.717Fe0.067Mg0.218)O10(OH)2:2.966H2O + 7.69H+ = 0.0125O2 + 2.152Al+++ + 0.067Fe++ + 0.53K+ + 0.218Mg++ + 0.134Na+ + 0.681H2O + 3.565H4SiO4
+	log_k		11.567
+	-delta_H		-211.922	kJ/mol	# References :07gai/bla
+	-analytic	-1.13953e+03	-1.76803e-01	7.00504e+04	4.06499e+02	-3.28891e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 07gai/bla ; S° 07gai/bla ; Cp 07gai/bla
+
+I/S_ISCz-1_des
+	(Na0.134K0.53)(Si3.565Al0.435)(Al1.717Fe0.067Mg0.218)O10(OH)2 + 7.69H+ + 2.285H2O = 0.0125O2 + 2.152Al+++ + 0.067Fe++ + 0.53K+ + 0.218Mg++ + 0.134Na+ + 3.565H4SiO4
+	log_k		12.431
+	-delta_H		-227.290	kJ/mol	# References :07gai/bla
+	-analytic	-1.13658e+03	-1.77279e-01	7.02590e+04	4.05177e+02	-3.23291e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 07gai/bla ; S° 07gai/bla ; Cp 07gai/bla
+
+Illite_IMt-2
+	(Na0.044K0.762)(Si3.387Al0.613)(Al1.427Fe0.376Mg0.241)O10(OH)2 + 8.16H+ + 1.694H2O = 0.073O2 + 2.04Al+++ + 0.376Fe++ + 0.762K+ + 0.241Mg++ + 0.044Na+ + 3.387H4SiO4
+	log_k		8.325
+	-delta_H		-200.253	kJ/mol	# References :07gai/bla
+	-analytic	-1.18304e+03	-1.84050e-01	7.11897e+04	4.22336e+02	-3.34059e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 07gai/bla ; S° 07gai/bla ; Cp 07gai/bla
+
+Illite-Al
+	K0.85Al2.85Si3.15O10(OH)2 + 9.4H+ + 0.6H2O = 2.85Al+++ + 0.85K+ + 3.15H4SiO4
+	log_k		12.534
+	-delta_H		-266.111	kJ/mol	# References :n/a
+	-analytic	-1.28540e+03	-2.19968e-01	8.02885e+04	4.60087e+02	-3.93167e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+Illite-FeII
+	K0.85Fe0.25Al2.35Si3.4O10(OH)2 + 8.4H+ + 1.6H2O = 2.35Al+++ + 0.25Fe++ + 0.85K+ + 3.4H4SiO4
+	log_k		10.249
+	-delta_H		-219.101	kJ/mol	# References :n/a
+	-analytic	-1.11878e+03	-1.91987e-01	6.96127e+04	4.00865e+02	-3.47848e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+Illite-FeIII
+	K0.85Fe0.25Al2.6Si3.15O10(OH)2 + 9.15H+ + 0.725H2O = 0.0625O2 + 2.6Al+++ + 0.25Fe++ + 0.85K+ + 3.15H4SiO4
+	log_k		8.812
+	-delta_H		-232.716	kJ/mol	# References :n/a
+	-analytic	-1.22973e+03	-2.10454e-01	7.56761e+04	4.40400e+02	-3.75794e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+Illite-Mg
+	K0.85Mg0.25Al2.35Si3.4O10(OH)2 + 8.4H+ + 1.6H2O = 2.35Al+++ + 0.85K+ + 0.25Mg++ + 3.4H4SiO4
+	log_k		10.844
+	-delta_H		-224.086	kJ/mol	# References :n/a
+	-analytic	-1.12970e+03	-1.92745e-01	7.04402e+04	4.04593e+02	-3.50116e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+K_Feldspar
+	K(AlSi3)O8 + 4H+ + 4H2O = 1Al+++ + 1K+ + 3H4SiO4
+	log_k		0.577
+	-delta_H		-59.400	kJ/mol	# References :78hel/del
+	-analytic	-4.81238e+02	-8.03000e-02	2.68147e+04	1.73710e+02	-1.24611e+06
+#      Temperature range (°K) :  1400- 273
+#	References DGf or LogK n/a ; DHf 78hel/del ; S° 78hel/del ; Cp 78hel/del
+
+Kaolinite
+	Al2Si2O5(OH)4 + 6H+ = 2Al+++ + 1H2O + 2H4SiO4
+	log_k		6.471
+	-delta_H		-169.718	kJ/mol	# References :06bla/pia
+	-analytic	-9.16789e+02	-1.50208e-01	5.42404e+04	3.28660e+02	-2.41129e+06
+#      Temperature range (°K) :  800- 273
+#	References DGf or LogK n/a ; DHf 06bla/pia ; S° 06bla/pia ; Cp 95rob/hem
+
+
+Kyanite
+	Al2SiO5 + 6H+ = 2Al+++ + 1H2O + 1H4SiO4
+	log_k		15.930
+	-delta_H		-242.727	kJ/mol	# References :78hel/del
+	-analytic	-9.26834e+02	-1.54763e-01	5.87546e+04	3.31477e+02	-2.52227e+06
+#      Temperature range (°K) :  466- 273
+#	References DGf or LogK 78hel/del ; DHf 78hel/del ; S° 78hel/del ; Cp 78hel/del
+
+
+Lepidocrocite
+	FeOOH + 2H+ = 0.25O2 + 1Fe++ + 1.5H2O
+	log_k		-7.733
+	-delta_H		34.622	kJ/mol	# References :04chi
+	-analytic	-2.63148e+02	-3.99888e-02	1.12665e+04	9.56447e+01	-6.32541e+05
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 04chi ; S° 04chi ; Cp 04chi
+
+
+Maghemite_disordered
+	Fe2O3 + 4H+ = 0.5O2 + 2Fe++ + 2H2O
+	log_k		-13.657
+	-delta_H		48.073	kJ/mol	# References :04chi
+	-analytic	-5.28653e+02	-8.15693e-02	2.37332e+04	1.91665e+02	-1.29301e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 04chi ; S° 04chi ; Cp n/a
+
+Maghemite_ordered
+	Fe2O3 + 4H+ = 0.5O2 + 2Fe++ + 2H2O
+	log_k		-13.448
+	-delta_H		48.073	kJ/mol	# References :04chi
+	-analytic	-5.26241e+02	-8.15693e-02	2.36351e+04	1.90907e+02	-1.29301e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 04chi ; S° 04chi ; Cp n/a
+
+Magnetite,alpha
+	Fe3O4 + 6H+ = 0.5O2 + 3Fe++ + 3H2O
+	log_k		-6.827
+	-delta_H		-18.009	kJ/mol	# References :04chi
+	-analytic	-8.51028e+02	-1.34269e-01	4.33735e+04	3.08343e+02	-2.15241e+06
+#      Temperature range (°K) :  900- 273
+#	References DGf or LogK n/a ; DHf 04chi ; S° 04chi ; Cp 78hel/del
+
+
+Mg-Montmorillonite-Ca
+	Ca0.17Mg0.33Al1.68Si3.99O10(OH)2 + 6.04H+ + 3.96H2O = 1.68Al+++ + 0.17Ca++ + 0.33Mg++ + 3.99H4SiO4
+	log_k		4.505
+	-delta_H		-147.179	kJ/mol	# References :n/a
+	-analytic	-8.10548e+02	-1.41001e-01	5.01314e+04	2.90220e+02	-2.59425e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+Mg-Montmorillonite-K
+	K0.33Mg0.33Al1.67Si4O10(OH)2 + 6H+ + 4H2O = 1.67Al+++ + 0.33K+ + 0.33Mg++ + 4H4SiO4
+	log_k		2.729
+	-delta_H		-142.566	kJ/mol	# References :n/a
+	-analytic	-7.99573e+02	-1.36886e-01	4.93247e+04	2.85452e+02	-2.54752e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+Mg-Montmorillonite-Mg
+	Mg0.17Mg0.33Al1.68Si3.99O10(OH)2 + 6.04H+ + 3.96H2O = 1.68Al+++ + 0.5Mg++ + 3.99H4SiO4
+	log_k		3.877
+	-delta_H		-147.173	kJ/mol	# References :n/a
+	-analytic	-8.25355e+02	-1.42568e-01	5.09375e+04	2.95247e+02	-2.63831e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+Mg-Montmorillonite-Na
+	Na0.33Mg0.33Al1.67Si4O10(OH)2 + 6H+ + 4H2O = 1.67Al+++ + 0.33Mg++ + 0.33Na+ + 4H4SiO4
+	log_k		2.999
+	-delta_H		-142.564	kJ/mol	# References :n/a
+	-analytic	-8.18158e+02	-1.38800e-01	5.03309e+04	2.92149e+02	-2.59365e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+Microcline
+	K(AlSi3)O8 + 4H+ + 4H2O = 1Al+++ + 1K+ + 3H4SiO4
+	log_k		0.048
+	-delta_H		-56.463	kJ/mol	# References :06bla/pia
+	-analytic	-5.25109e+02	-8.38570e-02	2.98395e+04	1.88615e+02	-1.47933e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 06bla/pia ; S° 06bla/pia ; Cp 06bla/pia
+
+
+Muscovite_desord
+	KAl2(AlSi3)O10(OH)2 + 10H+ = 3Al+++ + 1K+ + 3H4SiO4
+	log_k		13.023
+	-delta_H		-276.123	kJ/mol	# References :95has/new
+	-analytic	-1.46395e+03	-2.40189e-01	8.78173e+04	5.24950e+02	-3.99203e+06
+#      Temperature range (°K) :  1000- 273
+#	References DGf or LogK n/a ; DHf 95has/new ; S° 06bla/pia ; Cp 06bla/pia
+
+Muscovite_ord
+	KAl2(AlSi3)O10(OH)2 + 10H+ = 3Al+++ + 1K+ + 3H4SiO4
+	log_k		11.337
+	-delta_H		-260.923	kJ/mol	# References :06bla/pia
+	-analytic	-1.46298e+03	-2.40189e-01	8.70234e+04	5.24950e+02	-3.99203e+06
+#      Temperature range (°K) :  1000- 273
+#	References DGf or LogK n/a ; DHf 06bla/pia ; S° 06bla/pia ; Cp 06bla/pia
+
+NontroniteCa
+	Ca0.17Fe2Al0.34Si3.66O10(OH)2 + 5.36H+ + 3.64H2O = 0.5O2 + 0.34Al+++ + 0.17Ca++ + 2Fe++ + 3.66H4SiO4
+	log_k		-20.743
+	-delta_H		73.434	kJ/mol	# References :n/a
+	-analytic	-5.49113e+02	-1.01865e-01	2.50116e+04	2.00033e+02	-1.78867e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+NontroniteK
+	K0.33Fe2Al0.33Si3.67O10(OH)2 + 5.32H+ + 3.68H2O = 0.5O2 + 0.33Al+++ + 2Fe++ + 0.33K+ + 3.67H4SiO4
+	log_k		-22.309
+	-delta_H		78.044	kJ/mol	# References :n/a
+	-analytic	-5.37928e+02	-9.77503e-02	2.42051e+04	1.95265e+02	-1.74194e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+NontroniteMg
+	Mg0.17Fe2Al0.34Si3.66O10(OH)2 + 5.36H+ + 3.64H2O = 0.5O2 + 0.34Al+++ + 2Fe++ + 0.17Mg++ + 3.66H4SiO4
+	log_k		-21.395
+	-delta_H		73.435	kJ/mol	# References :n/a
+	-analytic	-5.63948e+02	-1.03433e-01	2.58182e+04	2.05061e+02	-1.83274e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+NontroniteNa
+	Na0.33Fe2Al0.33Si3.67O10(OH)2 + 5.32H+ + 3.68H2O = 0.5O2 + 0.33Al+++ + 2Fe++ + 0.33Na+ + 3.67H4SiO4
+	log_k		-22.101
+	-delta_H		78.036	kJ/mol	# References :n/a
+	-analytic	-5.56581e+02	-9.96642e-02	2.52119e+04	2.01963e+02	-1.78808e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+O2,g
+	O2 = 1O2
+	log_k		-2.898
+	-delta_H		-12.134	kJ/mol	# References :By convention
+	-analytic	1.74061e+02	2.96178e-02	-1.12745e+04	-6.40400e+01	9.32198e+05
+#      Temperature range (°K) :  2500- 273
+#	References DGf or LogK n/a ; DHf By convention ; S° 89cox/wag ; Cp 89cox/wag
+
+
+Pyrite
+	FeS2 + 3.5O2 + 1H2O = 1Fe++ + 2H+ + 2SO4--
+	log_k		217.786
+	-delta_H		-1412.732	kJ/mol	# References :04chi
+	-analytic	-3.59065e+03	-5.80474e-01	2.78096e+05	1.29212e+03	-1.32014e+07
+#      Temperature range (°K) :  1000- 273
+#	References DGf or LogK n/a ; DHf 04chi ; S° 78hel/del ; Cp 78hel/del
+
+Pyrrhotite,alpha
+	FeS + 2O2 = 1Fe++ + 1SO4--
+	log_k		134.360
+	-delta_H		-874.657	kJ/mol	# References :78hel/del
+	-analytic	-2.01296e+03	-3.25406e-01	1.59579e+05	7.23956e+02	-7.31338e+06
+#      Temperature range (°K) :  411- 273
+#	References DGf or LogK n/a ; DHf 78hel/del ; S° 78hel/del ; Cp 78hel/del
+
+
+Quartz,alpha
+	SiO2 + 2H2O = 1H4SiO4
+	log_k		-3.738
+	-delta_H		21.166	kJ/mol	# References :82ric
+	-analytic	1.45844e+01	2.48382e-03	-1.88433e+03	-5.35743e+00	4.55019e+04
+#      Temperature range (°K) :  847- 273
+#	References DGf or LogK n/a ; DHf 82ric ; S° 82ric ; Cp 82ric
+
+
+
+S,alpha
+	S + 1.5O2 + 1H2O = 2H+ + 1SO4--
+	log_k		93.146
+	-delta_H		-605.310	kJ/mol	# References :By convention
+	-analytic	-1.56765e+03	-2.55730e-01	1.21103e+05	5.64359e+02	-5.83222e+06
+#      Temperature range (°K) :  368.54- 273
+#	References DGf or LogK n/a ; DHf By convention ; S° 89cox/wag ; Cp 89cox/wag
+
+S2,g
+	S2 + 3O2 + 2H2O = 4H+ + 2SO4--
+	log_k		200.253
+	-delta_H		-1339.219	kJ/mol	# References :89cox/wag
+	-analytic	-3.19897e+03	-5.17068e-01	2.52238e+05	1.14806e+03	-1.18597e+07
+#      Temperature range (°K) :  2500- 273
+#	References DGf or LogK n/a ; DHf 89cox/wag ; S° 89cox/wag ; Cp 89cox/wag
+
+SaponiteCa
+	Ca0.17Mg3Al0.34Si3.66O10(OH)2 + 7.36H+ + 2.64H2O = 0.34Al+++ + 0.17Ca++ + 3Mg++ + 3.66H4SiO4
+	log_k		31.312
+	-delta_H		-282.266	kJ/mol	# References :n/a
+	-analytic	-1.13184e+03	-1.80737e-01	7.53635e+04	4.06031e+02	-3.59391e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+SaponiteK
+	K0.33Mg3Al0.33Si3.67O10(OH)2 + 7.32H+ + 2.68H2O = 0.33Al+++ + 0.33K+ + 3Mg++ + 3.67H4SiO4
+	log_k		29.728
+	-delta_H		-277.661	kJ/mol	# References :n/a
+	-analytic	-1.11704e+03	-1.76150e-01	7.43412e+04	3.99967e+02	-3.53377e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+SaponiteMg
+	Mg0.17Mg3Al0.34Si3.66O10(OH)2 + 7.36H+ + 2.64H2O = 0.34Al+++ + 3.17Mg++ + 3.66H4SiO4
+	log_k		30.659
+	-delta_H		-282.269	kJ/mol	# References :n/a
+	-analytic	-1.14501e+03	-1.82089e-01	7.60713e+04	4.10465e+02	-3.63183e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+SaponiteNa
+	Na0.33Mg3Al0.33Si3.67O10(OH)2 + 7.32H+ + 2.68H2O = 0.33Al+++ + 3Mg++ + 0.33Na+ + 3.67H4SiO4
+	log_k		29.936
+	-delta_H		-277.669	kJ/mol	# References :n/a
+	-analytic	-1.13606e+03	-1.78112e-01	7.53699e+04	4.06796e+02	-3.58127e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 06bla/gal ; DHf n/a ; S° 06bla/gal ; Cp 06bla/gal
+
+Siderite
+	FeCO3 + 1H+ = 1HCO3- + 1Fe++
+	log_k		-0.473
+	-delta_H		-26.726	kJ/mol	# References :n/a
+	-analytic	-9.15524e+02	-1.47685e-01	5.05603e+04	3.32122e+02	-2.87218e+06
+#      Temperature range (°K) :  885- 273
+#	References DGf or LogK 04chi ; DHf n/a ; S° 04chi ; Cp 78hel/del,85hel
+
+
+SmectiteMX80_4.183H2O
+	(Ca0.01Na0.434K0.026)(Si3.612Al0.388)(Al1.608Fe0.222Mg0.228)O10(OH)2:4.183H2O + 7.368H+ = 0.046O2 + 1.996Al+++ + 0.01Ca++ + 0.222Fe++ + 0.026K+ + 0.228Mg++ + 0.434Na+ + 1.643H2O + 3.612H4SiO4
+	log_k		5.079
+	-delta_H		-180.976	kJ/mol	# References :07gai/bla
+	-analytic	-1.09680e+03	-1.69054e-01	6.61082e+04	3.90389e+02	-3.15041e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 07gai/bla ; S° 07gai/bla ; Cp 07gai/bla
+
+SmectiteMX80_5.441H2O
+	(Ca0.01Na0.434K0.026)(Si3.612Al0.388)(Al1.608Fe0.222Mg0.228)O10(OH)2:5.441H2O + 7.368H+ = 0.046O2 + 1.996Al+++ + 0.01Ca++ + 0.222Fe++ + 0.026K+ + 0.228Mg++ + 0.434Na+ + 2.901H2O + 3.612H4SiO4
+	log_k		5.442
+	-delta_H		-176.170	kJ/mol	# References :07gai/bla
+	-analytic	-1.09882e+03	-1.69357e-01	6.60016e+04	3.91549e+02	-3.15353e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 07gai/bla ; S° 07gai/bla ; Cp 07gai/bla
+
+SmectiteMX80_des
+	(Ca0.01Na0.434K0.026)(Si3.612Al0.388)(Al1.608Fe0.222Mg0.228)O10(OH)2 + 7.368H+ + 2.54H2O = 0.046O2 + 1.996Al+++ + 0.01Ca++ + 0.222Fe++ + 0.026K+ + 0.228Mg++ + 0.434Na+ + 3.612H4SiO4
+	log_k		6.626
+	-delta_H		-196.939	kJ/mol	# References :07gai/bla
+	-analytic	-1.10904e+03	-1.72005e-01	6.71750e+04	3.94821e+02	-3.13945e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK n/a ; DHf 07gai/bla ; S° 07gai/bla ; Cp 07gai/bla
+
+Strontianite
+	SrCO3 + 1H+ = 1HCO3- + 1Sr++
+	log_k		1.057
+	-delta_H		-15.067	kJ/mol	# References :n/a
+	-analytic	-8.64485e+02	-1.39497e-01	4.81740e+04	3.14234e+02	-2.84413e+06
+#      Temperature range (°K) :  0- 273
+#	References DGf or LogK 84bus/plu ; DHf n/a ; S° 84bus/plu ; Cp 06bla/ign
+References
+
+#	01aki/zot		Akinfiev N. N. and Zotov A. V., 2001. Thermodynamic Description of Chloride, Hydrosulfide, and Hydroxo Complexes of Ag(I), Cu(I), and Au(I) at Temperatures of 25-500oC and Pressures of 1-2000 bar. Geochem. Intern., v. 39, No 10, p. 990-1006. Abstract
+#	01aya/mad		Ayati M., and Madsen H.E.L., 2001. Solubility Product of the Cadmium Phosphate Cd5H2(PO4)4.4H2O at 37 °C. J. Chem. Eng. Data, 46, p. 113 116.
+#	01ben/jem		Ben Cherifa A., and Jemal M., 2001. Synthése et thermochimie de phosphates au cadmium: Partie I: Cas du phosphate tricadmique et de la chlorapatite cadmiée. Thermochimica Acta, 366, p. 1 6.
+#	01ben/pal		Bénézeth P., Palmer D.A., and Wesolowski D.J., 2001. Aqueous high temperature solubility studies. II. The solubility of boehmite at 0.03 m ionic strength as a function of temperature and pH as determined by in situ measurements. Geochimica et Cosmochimica
+#	01per/hef		Pererra N.W., Hefter G., and Sipos P.M., 2001. An Investigation of the Lead(II)-Hydroxide System. Inorg. Chem., 40, p. 3974-3978.
+#	01pre/gam		Preis W., and Gamsjäger H., 2001. Invited Review Thermodynamic Investigation of Phase Equilibria in Metal Carbonate Water Carbon Dioxide Systems. Monatshefte für Chemie, 132, p. 1327 1346.
+#	01sch/sho		Schulte M.D., Shock E.L. and Wood R.H., 2001. The temperature dependence of the standard-state thermodynamic properties of aqueous nonelectrolytes. Geochimica et Cosmochimica Acta, 65, 3919-3930
+#	01ste		A. Stefánsson, 2001Dissolution of primary minerals of basalt in natural waters: I. Calculation of mineral solubilities from 0°C to 350°C. Chemical Geology, Volume 172, Issues 3-4, 225-250
+#	01tag/sch		Tagirov B., and Schott J., 2001. Aluminum speciation in crustal fluids revisited Geochim. Cosmochim. Acta (Helgeson's special issue), 65, p. 3965 3992.
+#	01wen/mus		Wentzel M.C., Musvoto E.V. and Ekama G.A., 2001. Application of integrated chemical - physical processes modelling to aeration treatment of anaerobic digester liquors. Environmental Technology, 22, 1287-1293
+#	02dut		Dutrizac J.E., 2002. Calcium sulphate solubilities in simulated zinc processing solutions. Hydrometallurgy, 65, p. 109-135.
+#	02hum/ber		NAGRA   Hummel W., Berner U., Curti E., Pearson F.J., and Thoenen T., 2002. Nagra/PSI Chemical Thermodynamic Data Base 01/01. Universal Publishers (uPUBL.com), 600 pp.
+#	02mig/will		Migdisov Art A. and Williams-Jones A. E. 2002. A spectrophotometric study of neodymium(III) complexation in chloride solutions. Geochimica et Cosmochimica Acta,  66, 4311-4323
+#	02ogo/mel		Ogorodova L.P., Melchakova L.V.,  Kiseleva I.A. 2002 Enthalpies of formation of formation of natural zeolites - gismondine, garronite and amicite. Experimental mineralogy, petrology and geochemistry annual seminar 2002, April 16-17, 2002, Moscow
+#	03alt/met		Altamaier M., Metz V., Neck V., Müller R.and Fanghänel Th., 2003. Solid liquid equilibria of Mg(OH)2(cr) and Mg2(OH)3Cl.4H2O(cr) in the system Mg Na H OH Cl H2O at 25°C. Geochimica et Cosmochimica Acta, 67, p. 3595-3601.
+#	03bes/app		Bessinger, B. and Apps, J.A., 2003. The Hydrothermal Chemistry of Gold, Arsenic, Antimony, Mercury and Silver. Report LBNL-57395, 52 p.
+#	03bou		Bourbon X., 2003. Chemical conceptual model for cement based materials ~ mineral phases and thermodynamic data. Technical report C.NT.ASCM.03.026, 14 p.
+#	03chr		Christov C., 2003. Thermodynamic study of the aqueous sodium, potassium, and chromium chloride systems at the temperature 298.15K. J. Chem. Thermodynamics, 35, p. 909-917.
+#	03fre/voi		Freyer D., and Voigt W., 2003. Invited Review : Crystallization and Phase Stability of CaSO4 and CaSO4 - Based Salts. Monatshefte für Chemie, 134, p. 693-719.
+#	03web/hun		Weber C.F., and Hunt R.D., 2003. Modeling Alkaline Silicate Solutions at 25 °C. Ind. Eng. Chem. Res., 42, p. 6970 6976.
+#	03zot/shi		Zotov A. V., Shikina N. D. and  Akinfiev N. N., 2003. Thermodynamic properties of the Sb(III) hydroxide complex Sb(OH)3(aq) at hydrothermal conditions. Geochimica et Cosmochimica Acta, Volume 67, 1821-1836
+#	04chi		Chivot J., 2004. Thermodynamique des produits de corrosion. Fonctions thermodynamiques de solubilité, diagrammes E-pH des systèmes Fe-H2O, Fe-CO2-H2O, Fe-S-H2O, Cr-H2O et Ni-H2O en fonction de la température. Document ANDRA, Collection Sciences et Techniq
+#	04chr		Christov C., 2004. "Pitzer ion-interaction parameters for Fe(II) and Fe(III) in the quinary {Na + K + Mg + Cl + SO4 + H2O} system at T = 298.15 K." J. Chem. Thermod. 36: 223-235.
+#	04ess/fos		Essington M.E., Foss J.E. and Roh Y., 2004. The soil mineralogy of lead at Horace's Villa. Soil Sci. Soc. Am. J., 68, p. 979 993.
+#	04fab/sax		Fabrichnaya O., Saxena S.K., Richet P. and Westrum E.F. (Eds), 2004. Thermodynamic data, models, and phase diagrams in multicomponent oxide systems. ISBN 3-540-14018-2 Springer Verlag Berlin Heidelberg New York, 198 p. 
+#	04loo/pas		Loos D., Pasel C., Luckas M., Schmidt Klaus G., and Herbell J.D., 2004. Experimental investigation and modelling of the solubility of calcite and gypsum in aqueous systems at higher ionic strength. Fluid Phase Equilibria, 219, p. 219-229.
+#	04roi		Roine A., 2004. HSC Chemistry: v5.0, Outokompu Research Oy: Pori.
+#	04smi/mar		Smith R.M., and Martell A.E., 2004. NIST Critically Selected Stability Constants of Metals Complexes Database, V 8.0. National Institute of Standards and Technology (NIST); Texas A & M University.
+#	05liu/mcp		Liu W. and McPhail D.C., 2005. Thermodynamic properties of copper chloride complexes and copper transport in magmatic-hydrothermal solutions. Chemical Geology, 221, 21-39
+#	05pok/rou		Pokrovski G.S., Roux J., Hazemann J.L. and Testemale D. , 2005. An X-ray absorption spectroscopy study of argutite solubility and aqueous Ge(IV) speciation in hydrothermal fluids to 500 °C and 400 bar. Chemical Geology, 217, 127-145
+#	06bla/gau		Blanc P., Gaucher E.C., Lassin A., Piantone P., Tournassat C., Burnol A., Bourbon X. and Jacquot E., 2006. Modelling concrete clay interaction: the concrete system, in prep
+#	06bla/ign		Blanc P., Ignatadis I., Lassin A. et Burnol A., 2006. Thermochimie : Sélection de constantes thermodynamiques pour le chrome, le cobalt et le strontium. Rapport final. Rapport BRGM 55083-FR.
+#	06bla/las		Blanc P., Lassin A., Gaucher E.C. et Jacquot E., 2006. Un modèle thermodynamique et minéralogique de béton : prise en compte de l'influence de la température. Rapport final. Rapport BRGM 55084-FR.
+#	06bla/pia		Blanc P., Piantone P., Lassin A. et Burnol A., 2006. Thermochimie : Sélection de constantes thermodynamiques pour les éléments majeurs, le plomb et le cadmium. Rapport final. Rapport BRGM 54902-FR
+#	06bod/las		Bodénan F., Lassin A., Hottier M., Filippov L. et Piantone P., 2006. Projet Decalco - Piégeage et valorisation de déchet alcalin par passivation au CO2 industriel. Rapport BRGM/RP-55015-FR, 140 p.
+#	06deo/nav		Deore S., and Navrotsky A., 2006. Oxide melt solution calorimetry of sulfides: Enthalpy of formation of sphalerite, galena, greenockite, and hawleyite. American Mineralogist, 91, p. 400 403.   
+#	06gai/bla		Gailhanou H., et Blanc P., 2006. Thermochimie - Estimation des entropies, capacités calorifiques et volumes molaires des phyllosilicates 2 :1 déshydratés. BRGM/RP-55095-FR
+#	06gau/bla		Gaucher E. C., Blanc P., Bardot F., Braibant G., Buschaert S., Crouzet C., Gautier A., Girard J.-P., Jacquot E., Lassin A., Negrel G., Tournassat C., Vinsot A., Altmann S. (2006) Modelling the porewater chemistry of the Callovian-Oxfordian formation at a 
+#	06las/bla		Lassin A. et Blanc P., 2006. Considérations sur les contraintes liées à la gestion des données thermodynamiques en vue de la création de la base de données THERMODDEM. Rapport BRGM/RP-55118-FR, 120 p.
+#	06mes/bou		Messnaoui B., and Bounahmidi T., 2006. On the modeling of calcium sulfate solubility in aqueous solutions. Fluid Phase Equilibria, 244, p. 117-127.
+#	06pia/bod		Piantone P., Bodénan F. et Lassin A., 2006. Projet NOVOSOL - Evaluation environnementale de sédiments phosphatés et calcinés. Rapport BRGM/RP-54845-FR, 133 p.
+#	06pia/now		Piantone P., Nowak C., Blanc P., Lassin A. et Burnol A., 2006. Themoddem : THERmodynamique et MOdélisation de la Dégradation DEchets Minéraux. Rapport d'avancement. Rapport BRGM n° BRGM/RP- 54547-FR, 52 p.
+#	07bla/bou		Blanc P., Bourbon X., Lassin A. et Gaucher E., 2007. Chemical conceptual model for cement-based materials : Thermodynamic data assessment for stoichiometric and non stoichiometric CSH phases, in prep.
+#	33dan		D'Ans J., 1933. Die Losegleichgewichte der Systeme der Salze ozeanischer Salzablagerungen. Kaliorschungs Anstalt GmbH, Berlin Verlagsgesellschaft fur Ackerbau MBH, Berlin SW11
+#	37hil		Hill A.E., 1937. J. Am. Chem. Soc., 59, p. 2242.
+#	37kie		Kielland J., 1937. Individual Activity Coefficients of Ions in Aqueous Solutions. Journal of the American Chemical Society, 59, p. 1675 1678.
+#	40rol/erv		Roller P.S., and Ervin G., 1940. The system calcium oxide silicawater at 30°C. The association of silicate ion in dilute alkaline solution. J. Amer. Chem. Soc., 62, p. 461 471.
+#	40sbo/bia		Sborgi U., and Bianchi C., 1940. Gazz. Chim. Ital., 70, p. 823.
+#	41cor		Correns C.W., 1941. Beitrage zur Petrographie und Genesis der Lydite (Kieselschiefer): Preuss. Geol. Ladesanstalt, Mitt. d. Abt. f. Gesteins , Erz , Kohle und  Salz Untersuchungen, 1, p. 18 38.
+#	42kol/per		Koltoff I.M., Perlich R.W. and Weiblen D., 1942. Solubility of lead sulfate and lead oxalate in various media. J. Phys. Chem, 46, p. 561.
+#	50ken		Kennedy G.C., 1950. A portion of the system silica water. Econ. Geol., 45, p. 629 653.
+#	51sch/mul		Schwarz V.R., and Muller W.D., 1951. Die wasserlosliche monokieselsaure. Z. Anorg. Allg. Chemie., 2296, p. 273 279.
+#	51zha		Zharovskii F.G., 1951, The solubility of phosphates. Trudy. Kom. Anal. Khim. Akad. Nauk. SSSR, 3, 101-115 (in russian)
+#	52lat		Latimer W.M., 1952. Oxidation states of the elements and their potentials in aqueous solution, Prentice Hall, New Jersey,.392 pp.
+#	52meg		Megaw D., 1952, The structure of afwillite, Ca3(SiO3OH)2*2H2O, Locality: Scawt Hill, Northern Ireland, Acta Cryst., v. 5, p. 477-495.
+#	53bell/geo		Bell R.P. et George J.H.B., 1953. Trans. Faraday Soc., 49, pp. 619-627
+#	53hem		Hemley J.J., 1953. A study of lead sulfide solubility and its relation to ore deposition. Econ. Geol., 48, p. 113 138.
+#	53pag		Page F.M., 1953. The dissociation constants of thiosulphuric acid. J. Chem. Soc., p. 1719 1724.
+#	54ale/hes		Alexander G.B., Heston W.M. and Iler R.K., 1954. The Solubility of Amorphous Silica in Water. J. Phys. Chem., 58, p. 453.
+#	54dan		D'Ans J., Bredtschneider D., Eick H., and Freund H E., 1954. Kali u Steinsalz, 9, p. 17.
+#	56den/tay		Dent, L. S., and Taylor, H. F. W., 1956, The dehydration of Xonotlite: Acta Crystallographica, v. 9, p. 1002-1004.
+#	56new		Newman, E., 1956., Heats. of Formation of Xonotlite, Hillebrandite, and Foshagite: Journal of Research of the National Bureau of. Standards, v. 57, p. 27-30.
+#	57gre/pri		Greenberg S.A., and Price E.W., 1957. The solubility of silica in solutions of electrolytes. J. Phys. Chem., 61, p. 1539 1541.
+#	57oka/oku		Okamoto G., Okura T., and Goto K., 1957. Properties of silica in water. Geochimica et Cosmochimica Acta, 12, p. 123 132.
+#	59ing		Ingri N., 1959. Equilibrium studies of polyanions IV. Silicate ions in NaC1 medium. Acta Chem. Scand. 13, p. 758 775.
+#	59lag		Lagerstrom G., 1959. Equilibrium studies of polyanions III. Silicate ions in NaCIO4 medium. Acta Chem. Scand., 13, p. 722 736.
+#	60gar/tho		Garrels R.M., Thompson M.E., and Siever R., 1960. Stability of some carbonates at 25 degrees C and one atmosphere total pressure. Am. J. Sci., 258, p. 402 418.
+#	60kel		Kelley, K.K., 1960, Contributions to the Data in Theoretical Metallurgy XIII: High Temperature Heat Content, Heat Capacities and Entropy Data for the Elements and Inorganic Compounds. U.S. Bureau of Mines Bulletin 584, 232 p.
+#	60kit		Kitahara S., 1960. The solubility of quartz in water at high temperatures and high pressures. Rev. Phys. Chem. Japan, 30, p. 109 137.
+#	60lin/mor		Lindsay W.L., Moreno E.C., 1960, Phosphate phase equilibria in soils. Soil Sci. Am. Proc., 24, 177-182
+#	60pou		Pourbaix M., 1960. Standard free energies of formation at 25°C, CEBELCOR Report, 684, Brussels, 57 pp.
+#	60van/bru		Van Lier J.A., de Bruyn P.L., and Overbeek J.T.G., 1960. The solubility of quartz. J. Phys. Chem., 64, p. 1675 1682.
+#	61bchu/aly		Chukhlantsev V.G., Alyamovskaya K.V., 1961b, Solubility product of copper, cobalt, nickel, and cadmium phosphates. Izvest. Vyss. Uch. Zaved. Khim. Khim. Tekh., 4, 706-709 (in russian)
+#	61boc		Bock E., 1961. Can. J. Chem., 39, p. 1746.
+#	61tru/hos		Truesdell A.H., and Hostetler P.B., 1961. Dissociation constants of KSO4 from 10° 500C. Geochim. Cosmochim. Acta, 32, p. 1019 1022.
+#	62gar/tho		Garrels R.M., and Thompson M.E., 1962. A chemical model for sea water at 25 degrees C and one atmosphere total pressure. Am. J. Sci., 260, p. 57 66.
+#	62mor/fou		Morey G.W., Foumier R.O., and Rowe J.J., 1962. The solubility of quartz in water in the temperature interval from 25° to 300°C. Geochim. Cusmochim. Acta, 26, p. 1029  1043.
+#	62sie		Siever R., 1962. Silica Solubility, 0 200°C, and the diagenesis of siliceous sediments. J. Geol., 70, p. 127  150.
+#	63fis		Fischer K. (1963) Amer. Mineral., 48, 664-672
+#	63hos		Hostetler P.B., 1963. The stability and surface energy of Brucite in water at 25°C. Am. J. Sci., 261, p. 238-258.
+#	63oet/mdo		Oetting F.L., Mac Donald R.A., 1963, The thermodynamic properties of magnesium orthophosphate and magnesium pyrophosphate. J. Phys. Chem., 63, 2737-2743
+#	63tay/fra		Taylor A.W., Frazier A.W., Gurney E.L. and Smith J.P., 1963. Solubility product of di- and tri-magnesium phosphates and the dissociation of magnesium phosphate solutions. Trans. Farad. Soc., 59, 1585-1589
+#	63wyc		Wyckoff, R.W.G., 1963, Crystal Structures, Second edition, tome 4, Interscience Publishers, New York, p. 320-322.
+#	64aega/wak		Egan E.P., Wakefield Z.T., 1964a, Low temperature, heat capacity and entropy of anhydrous dicalcium phosphate 10° to 310°K. J. Chem. Engl. Data, 4, 541-544
+#	64atay/gur		Taylor A.W., Gurney E.L., 1964a, The dissolution of calcium aluminum phosphate CaAlH(PO4)2.6H2O. Soil Sci. Soc. Am. Proc., 28, 63-64
+#	64bega/wak		Egan E.P., Wakefield Z.T., 1964b, Low temperature, heat capacity and entropy of dicalcium phosphate dihydrate 10° to 310°K. J. Chem. Engl. Data, 9, 544-545
+#	65gam/stu		Gamsjäger H., Stuber H.U., and Schindler P., 1965. Helv. Chim. Acta, 48, p. 723.
+#	65grè/bas		Grèzes G., and Bassett M., 1965. Contribution a l'etude de 1s eolubilite du carbonate de calcium. Compt. Rend. Accad. Sci., 260, p. 869 872.
+#	65lah		Lahiri S.C., 1965, Ferric-phosphoric acid system. J. Ind. Chem. Soc., 42, 715-724
+#	65wyc		Wyckoff R.W.G., 1965. Crystal Structures, v.3
+#	66ega/wak		Egan E.P., Wakefield Z.T., 1966, Low temperature, heat capacity and entropy of variscite, AlPO4.2H2O, 10° to 310°K. J. Chem. Engl. Data, 11, 610-611
+#	66spi/mik		Spitsyn V.I., Mikheev H.B., Khermann A., 1966, Thermodynamic study of the distribution of micro quantities of strontium between barium hydrogen phosphate and a solution. Dokl. Akad. Nauk. SSSR, 166, 658-659 (in russian)
+#	67and/cou		Andon R.J.L., Counsell J.F., Martin J.F., and Mash C.J., 1967. Thermodynamic properties of phosphorus compounds: II. Low temperature heat capacity and entropy of sodium mono-, di-, and triphosphates. J. Appl. Chem., 17, 65-70
+#	68chu/mar		Chughtai A., Marshall R., Nancollas G.H., 1968, Complexes in calcium phosphate solutions. J. Phys. Chem., 72, 208-211
+#	68dan		D'Ans J., 1968. Kali Steinsalz, 5, p. 109.
+#	68mca		Mac Cann H.G., 1968, The solubility of fluorapatite and its relationships to that of calcium fluoride. Arch. Oral Biol., 13, 987-1001
+#	68nak		Nakayama M., 1968. Calcium activity, complex and ion pair in saturated CaCO, solutions. Soil sci., 106, p. 429 434.
+#	68rac/sop		Racz G.J., Soper R.J., 1968, Solubility of dimagnesium phosphate trihydrate and trimagnesium phosphate. Can. J. Soil Sci., 48, 265-269
+#	68val/kog		Valyashko V.M., Kogarko L.N., Khodakovsky I.L., 1968, Stability of fluorapatite, chlorapatite, and hydroxylapatite in aqueous solutions at different temperature. Geoch. Inter., 5, 21-30
+#	68wag/eva		Wagman D.D., Evans W.H., Parker V.B., Halow I., Bailey S.M., Schumm R.H., 1968. Selected values of chemical thermodynamic properties. Natl. Bur. Stand. Tech. Note, 270-3, 264 p.
+#	69qui/mar		Quist A.S., and Marshall W.L., 1969. The electrical conductances of some alkali metal halides in aqueous solutions from 0 to 800° and pressures to 4000 bars. J. Phys. Chem., 73, p. 978 985.
+#	69wag/eva		Wagman D.D., Evans W.H., Parker V.B., Halow I., Bailey S.M., Schumm R.H., 1969. Selected values of chemical thermodynamic properties. Natl. Bur. Stand. Tech. Note, 270-4, 152 p.
+#	70gre/mor		Gregory T.M., Moreno E.C., Brown W.E., 1970, Solubility of CaHPO4.2H2O in the system Ca(OH)2-H3PO4-H2O at 5, 15, 25, and 37°C. J. Res. NBS, 74A, 461-475
+#	70moo/tay		Moore A.E., Taylor H.F.W., 1970.  Acta Cryst., B26, 386-393
+#	70pan		Pankratz, L.B., 1970, Thermodynamic Data for Silver Chloride and Silver Bromide: U.S. Bureau of Mines Report of Investigations #7430, 12 p.
+#	70pan/kin		Pankratz, L.B., and King, E.G., 1970, High-Temperature Enthalpies and entropies of chalcopyrite and bornite: U.S. Bureau of Mines Report of Investigations #7435, 10 p.
+#	70web/rac		Webber M.D., Racz G.J., 1970, Soluble complexes in the systems dicalcium phosphate dihydrate or dimagnesium phosphate trihydrate equilibrated with aqueous salt solutions. Can. J. Soil Sci., 50, 243-253
+#	71aduf		Duff E.J., 1971a, Orthophosphates. II. The transformation Brushite -> Fluorapatite and Monetite -> Fluorapatite in aqueous potassium fluoride solution. J. Chem. Soc. A, 33-38
+#	71bduf		Duff E.J., 1971b, Orthophosphates. III. The hydrolysis of secondary calcium orthophosphates. J. Chem. Soc. A, 917-921
+#	71cre/and		Crerar D.A., and Anderson G.M., 1971. Solubility and solvation reactions of quartz in dilute hydrothermal solutions. Chem. Geol., 8, p. 107  122.
+#	71ell/gig		Ellis A.J., and Giggenbach W., 1971. Hydrogen sulphide ionization and sulphur hydrolysis in high temperature solution. Geochim. Cosmochim. Acta, 35, p. 247 260.
+#	71mac/gee		Mackenzie F.T., and Gees R., 1971. Quartz: Synthesis at earthsurface conditions. Science, 173, p. 533 535.
+#	71nri		Nriagu J.O., 1971. Experimental investigation of a portion of the system PbS NaCl HCl H 2 O at elevated temperatures. American Journal of Science, 271, p.157 169.
+#	71par/wag		Parker V.B., Wagman D.D., Evans W.H., 1971, Selected values of chemical thermodynamic properties. Natl. Bur. Stand. Tech. Note, 270-6 - 270-119
+#	71sil/mar		Sillen L G and Martell A E 1971 Stability constant of metal ion complexes, Special publications 17 and 25 (London: The Chemical Society)
+#	71wag/eva		Wagman D.D., Evans W.H., Parker V.B., Halow I., Bailey S.M., Schumm R.H., Churney K.L., 1971. Selected values of chemical thermodynamic properties. Natl. Bur. Stand. Tech. Note, 270-5, 49 p.
+#	72anri		Nriagu J.O., 1972a, Lead orthophosphates. I. Solubility and hydrolysis of secondary lead orthophosphates. Inorg. Chem., 11, 2499-2503
+#	72bduf		Duff E.J., 1972b, Orthophosphates. IX. Chlorapatite: Phase relationships under aqueous conditions along Ca5F(PO4)3-Ca5(OH)(PO4)3-Ca5Cl(PO4)3 joins of the system CaO-CaCl2-CaF2-P2O5-H2O. J. Inorg. Nucl. Chem., 34, 859-871
+#	72bnri		Nriagu J.O., 1972b, Stability of vivianite and ion-pair formation in the system Fe3(PO4)2-H3PO4-H2O. Geochim. Cosmochim. Acta, 36, 459-470
+#	72cnri		Nriagu J.O., 1972c, Solubility equilibrium constant of strengite. Am. J. Sci., 272, 476-484
+#	72hem/rob		Hemingway B.S. and Robie R.A., 1972. The heat capacities at low temperatures and entropies at 298.15 K of huntite, CaMg3(CO3)4, and artinite, Mg2(OH)2CO3 z 3 H2O. Am. Mineral., 57, pp. 1754–1767.
+#	72rob/hem		Robie R.A. and Hemingway B.S., 1972. The heat capacities at low-temperatures and entropies at 298.15 K of nesquehonite, MgCO3 :3H2O, and hydromagnesite. Am. Mineral., 57, pp. 1768–1781.
+#	72vol/kho		Volosov A.G., Khodakovskiy I.L., and Ryzhenko B.N., 1972. Equilibria in the system SiO2 H20 at elevated temperatures along the lower three phase curve. Geochem. Intl., 9, p. 362 377.
+#	73anri		Nriagu J.O., 1973a, Lead orthophosphates. II. Stability of chloropyromorphite at 25°C. Geochim. Cosmochim. Acta, 37, 367-377
+#	73bar/kna		Barin I. and Knacke O., 1973, Thermochemical Properties of Inorganic Substances. Berlin: Springer-Verlag.
+#	73bnri		Nriagu J.O., 1973b, Solubility equilibrium constant of a-hopeite. Geochim. Cosmochim. Acta, 37, 2357-2361
+#	73hem/rob		Hemingway B. S. and Robie R. A., 1973. A calorimetric determination of the standard enthalpies of formation of huntite, CaMg3(CO3)4, and artinite, Mg2(OH)2CO3 z 3 H2O, and their standard Gibbs free energies of formation. J. Res. U.S. Geol. Survey, 1, pp. 535–541.
+#	73hul/tur		Hull H. and Turnbull A.J., 1973, A thermochemical study of monohydrocalcite. Geochim. Cosmochim. Acta, 37, 685-694
+#	73rob/hem		Hemingway B. S. and Robie R. A., 1973. A calorimetric determination of the standard enthalpies of formation of huntite, CaMg3(CO3)4, and artinite, Mg2(OH)2CO3 z 3 H2O, and their standard Gibbs free energies of formation. J. Res. U.S. Geol. Survey, 1, pp. 535–541.
+#	74avol/yag		Volkov A.I., Yaglov V.N., Novikov G.I.,1974a, Heat of formation of trizinc diorthophosphate. Russ. J. Phys. Chem., 48, 1697
+#	74ham		Hamann S.D., 1974. Electrolyte solutions at high pressure. In Modern Aspects of Electrachemistry, Plenum, No. 9 (ed. Conway B.E. and Bockris J. O.), p. 47 158.
+#	74jac/lan		Jacobson R.L., and Langmuir D., 1974. Dissociation constants of calcite and CaHCO3+ from 0 to 50°C. Geochimica et Cosmochimica Acta, 88, p. 301 318.
+#	74mil		Mills K.C., 1974, Thermodynamic data for inorganic sulfides, selenides, and tellurides. Butterworths, London, 845 p.
+#	74nau/ryz		Naumov G.B., Ryzhenko B.N., and Khodakovsky I.L., 1974. Handbook of Thermodynamic Data. U.S. Geol. Surv.WRD 74 001, 328 pp.
+#	74nri		Nriagu J.O., 1974. Lead orthophosphates-IV Formation and stability in the environment. Geochimica et Cosmochimica Acta, 38, p. 887 898.
+#	74rea/lan		Reardon E.J., and Langmuir D., 1974. Thermodynamic properties of the ion pairs CaCO3 and MgCO3 from 10 to 50°C. Am. J. Sci., 274, p. 599-612.
+#	74sew		Seward T.M., 1974. Determination of the first ionization constant of silicic acid from quartz soIubility in borate buffer soIutions to 350°C. Geochimica et Cosmochimica Acta, 38, p. 1651 1664.    
+#	74tru/jon		Truesdell A.H., Jones B.F., 1974, WATEQ, a computer program for calculating chemical equilibria of natural waters. J. Res. US Geol. Surv., 2, 233-248
+#	76ale/mas		Aleshchkina A.E., Masalovich V.M., Agasyan P.K., Sereda B.P., 1976, Chromium (III) phosphate-complexes. Russ. J. Inorg. Chem., 21, 973-975
+#	76bae/mes		Baes Jr. C.F., and Mesmer R.E., 1976. The Hydrolysis of Cations. Wiley Interscience, 489 pp.
+#	76fer/stu		Ferrante M.J., Stuve J.M. and Richardson D.W., 1976. Thermodynamic data for synthetic dawsonite. U.S. Bur. Mines Rept. Inv., 5, 577-582
+#	76nri		Nriagu J.O., 1976, Phosphate-clay mineral relations in soils and sediments. Can. J. Earth Sci., 13, 717-736
+#	76plu/jon		Plummer L.N., Jones B.F. and Truesdell A.H., 1976, WATEQF - A FORTRAN IV version of WATEQ, a computer program for calculating chemical equilibrium of natural waters:  U.S.G.S. Water Resources Inv. 76-13., 63 p.
+#	76smi/mar		Smith R.M., Martell A.E., 1976, Critical stability constants, Vol. 4: Inorganic complexes. Plenum, New York, 257 p.
+#	76tso		Tsonopoulos C., Coulson D.M., and Inman L.B., 1976. Ionization constants of water pollutants. J. Chem. Eng. Data, 21, p. 190 193.
+#	76wag/eva		Wagman D.D., Evans W.H., Parker V.B., Schumm R.H., 1976. Chemical thermodynamic properties of compounds of sodium, potassium, and rubidium, an interim tabulation of selected values. Natl. Bur. Stand. Tech. Note, 270, 73 p.
+#	77bar/kna		Barin I., Knacke O., and Kubaschewski I., 1977: Thermochemical properties of inorganic substances. Springer Verlag, Berlin.
+#	77bus/mes		Busey R.H., and Mesmer R.E., 1977. Ionization equilibria of silicic acid and polysilicate formation in aqueous sodium chloride solutions to 300°C. Inorg. Chem., 16, p. 2444 2450.
+#	77fou/row		Fournier R.O., and Rowe J.J., 1977. The solubility of amorphous silica in water at high temperatures and high pressures. Amer. Mineral., 62, p. 1052  1056.
+#	77hem/rob		Hemingway B.S., Robie R.A., Fisher J.R., et Wilson W.H., 1977. Heat capacity of gibbsite, Al(OH)3, between 13 and 480 K and magnesite, MgCO3, between 13 and 380 K and their standard entropies at 289.15 K, and the heat capacities of calorimetry conference
+#	77mac/hos		MacGee K.A., and Hostetler P.B., 1977. Studies in the system MgO SiO2 CO2 H2O (IV): The stability of MgOH+ from 10° to 90°C., Am. J. Sci., 275, p. 304 317.
+#	77rie/gam		Riesen W., Gamsjäger H., and Schindler P.W., 1977. Complex formation in the ternary system Mg(II) CO2 H2O . Geochimica et Cosmochimica Acta, 41, p. 1193 1200.  
+#	77sre		Sretenskaya N.G., 1977. Dissociation of hydrogen sulfide acid under pressure. Geokhimiya, 3, p. 430 438 (in Russian).
+#	78hel/del		Helgeson, H.C., Delany, J.M, Nesbitt, H.W., and Bird, D.K., 1978. Summary and Critique of the Thermodynamic Properties of Rock Forming Minerals: Amer. J. Sci., 278A, 229 pp.
+#	78kru/sta		Kruykov P.A., and Starostina L.I., 1978. The first ionization constants of hydrogen sulfide at temperature to 150°C. lzvestija Sibirskogo Otdeleniya AN SSSR, 14, p. 87 93.
+#	78ric/nri		Rickard D.T., Nriagu J.O., 1978, Aqueous environmental chemistry of lead. In: The biochemistry of lead in the environment. Part A. Ecological Cycles, J.O. Nriagu (Ed), Elsevier/North-Holland Biomedical Press, 219-284
+#	78rob/hem		Robie R.A., Hemingway B.S., and Fisher J.R., 1978. Thermodynamic properties of minerals and related substances at 298.15K and 1 bar 105 Pascals pressure and at higher temperatures. US Geol. Survey Bull., 1452, 456 pp.
+#	78yag		Yaglov V.N., 1978, Some characteristics of dehydration of hydrates of 3d elements orthophosphates. Khim. Khim. Tekhnol. (Minsk), 13, 7-14 (in russian)
+#	79lan		Langmuir D., 1979, Techniques of estimating thermodynamic properties for some aqueous complexes of geochemical interest, in Jenne, E.A., ed., Chemical Modeling in Aqueous systems: Speciation, Sorption, Solubility, and Kinetics: ACS Symp. Ser. 93, Amer. Ch
+#	79lle		Iler R.K., 1979. The Chemistry of Silica: Solubility, Polymerization, Colloid and Surface Properties, and Biochemistry. Wiley, New York.
+#	79mat/spo		Mattigod S.V., and Sposito G., 1979, Chemical modeling of trace metal equilibria in contaminated soil solutions using the computer program GEOCHEM. In: Chemical Modeling in Aqueous Systems: Speciation, Sorption, Solubility, and Kinetics, E.A. Jenne (Ed), 
+#	79may/hel		May H.M., Helmke P.A., and Jackson M.L., 1979. Gibbsite solubility and thermodynamic properties of hydroxy aluminum ions in aqueous solution at 25°C. Geochimica et Cosmochimica Acta, 43, 861 868.
+#	79rob/hem		Robie, R.A., Hemingway, B.S., and Fisher, J.S., 1979, Thermodynamic Properties of Minerals and Related Substances at 298.15 K and 1 Bar (10 5 Pascals) Pressure and at Higher Temperatures: U.S. Geol. Surv. Bull. 1452, 456 p.
+#	79vie/tar		Vieillard P., Tardy Y., Nahon D., 1979, Stability field of clays and aluminum phosphates: Parageneses in lateritic weathering of argillaceous phosphatic sediments. Am. Miner., 64, 626-634
+#	79vol		Volkov A.I., 1979, Thermochemical study of 3d element orthophosphates. Khim. Khim. Tekhnol. (Minsk), 14, 58-64 (in russian)
+#	80bal/nor		Ball J.W., Nordstrom D.K., Everett A.J., 1980, Additional and revised thermochemical data and computer code for WATEQ 2. A computerized chemical model for trace and major element speciation and mineral equilibria of natural waters. US Geol. Surv. Wat. Res
+#	80cle/joh		Clever H.L. and Johnston F.J., 1980. The solubility of some sparingly soluble lead salts: An evaluation of the solubility in water and aqueous electrolyte solutions, J. Phys. Chem. Ref. Data, 9, p. 751 784.
+#	80har/wea		Harvie C.E., and Weare J.H., 1980. The prediction of mineral soluhilities in natural waters: the Na K Mg Ca Cl SO4 H2O system from zero to high concentration at 25°C. Geochimica et Cosmochimica Acta, 44, p. 981 997.
+#	80hem/mon		Hemley J.J., Montoya J.W., Marinenko J.W., and Lute R.W., 1980. Equilibria in the system Al2O3 SiO2 H2O and some general implications for alteration/mineralization processes. Econ. Geol., 75, p. 210 228.
+#	81bae/mes		Baes Jr. C.F., and Mesmer R.E., 1981. The thermodynamics of cation hydrolysis. Am. J. Sci., 281, p. 935-962.
+#	81tur/whi		Turner D.R., Whitfield M. and Dickson A.G., 1981. The equilibrium speciation of dissolved components in freshwater and seawater at 25 C and 1 atm. pressure. Geochim. Cosmochim. Acta, 45, p. 855 881.
+#	82bar/mcc		Barbero J.A., McCurdy K.G., and Tremaine P.R., 1982. Apparent molal heat capacities and volumes of aqueous hydrogen sulphide and sodium hydrogen sulfide near 25°C: The temperature dependence of H2S ionization. Canadian J. Chem., 60, p. 1872 1880.
+#	82bil/sch		Bilinski H., and Schindler P., 1982. Solubility and equilibrium constants of lead in carbonate solutions (25°C, I = 0.3 mol dm 3). Geochimica et Cosmochimica Acta, 46, p. 921 928.
+#	82cox/wag		Cox J.D., Wagman D.D., et Medvedev V.A., 1989. CODATA Key Values for Thermodynamics.: editors. Hemisphere Publishing Corp.: New York. 279 pp.
+#	82dek		DeKock, C.W., 1982, Thermodynamic properties of selected transition metal sulfates and their hydrates: U.S. Bur. Mines Info. Circ. 8910, 45 p.
+#	82pat/slo		Patterson C.S., Slocum G.H., Busey R.H., and Mesmer R.E., 1982. Carbonate equilibria in hydrothermal systems: first ionization of carbonic acid in NaCl media to 300°C. Geochimica and Cosmochimica Acta, 46, p. 1653
+#	82plu/bus		Plummer, L.N. and Busenberg, E., 1982. The Solubilities of Calcite, Aragonite, and Vaterite in CO2-H2O Solutions Between 0 and 90 C and an Evaluation of the Aqueous Model of the System CaCO3-CO2-H2O. Geochimica et Cosmochimica Acta, Vol. 46, p. 1011-1040.
+#	82ric		Richet P., Bottinga Y., Denielon L., Petitet J.P., and Tequi C., 1982. Thermodynamics properties of quartz, cristobalite and amorphous SiO2: Drop calorimetry measurements between 1000 and 1800 K and a review from 0 to 2000 K. Geochimica et Cosmochimica Ac
+#	82van		Vanderzee C.E., 1982. Thermodynamic relations and equilibria in (Na2CO3 + NaHCO3 + H2O): Standard Gibbs energies of formation and other properties of sodium hydrogen carbonate, sodium carbonate heptahydrate, sodium carbonate decahydrate, trona: (Na2CO3CNaHCO3C2H2O), and Wegscheider's salt: (Na2CO3C3NaHCO3). J. Chem. Thermodynamics, 14, 219-238
+#	82wag/eva		Wagman D.D., Evans W.H., Parker V.B., Schumm R.H., Halow I., Bailey S.M., Churney K.L., and Nutall R.L., 1982. The NBS Tables of Chemical Thermodynamic Properties. J. Phys. Chem. Ref. Data, 11, Suppl. 2.
+#	83bow/hel		Bowers, T.S., and Helgeson, H.C., 1983, Calculation of the thermodynamic and geochemical consequences of nonideal mixing in the system H2O-CO2-NaCl on phase relations in geologic systems: Equation of state for H2O-CO2-NaCl fluids at high pressures and tem
+#	83san/bar		Sangameshwar S.R., and Barnes H.L., 1983. Supergene processes in zinc lead silver sulfide ores in carbonates, Econ. Geol., 78, p 1379 1397.
+#	84bus/plu		Busenberg E., Plummer L.N. and Parker V.B., 1984. The solubility of strontianite (SrCO3) in CO2-H2O solutions between 2 and 91°C, the association constants of SrHCO3+(aq) and SrCO3O(aq) between 5 and 80°C, and an evaluation of the thermodynamic properties
+#	84har/mol		Harvie C.E., Moller N., and Weare J.H.. 1984, The prediction of mineral solubilities in natural waters: The Na-K-Mg-Ca-H-Cl-SO4-OH-HCO3-CO3-CO2-H2O system to high ionic strengths at 25 C. Geochimica Cosmochimica Acta, 48, pp. 723-751.
+#	84mak		Makarov, T.I., Sidorov, Y.I., and Naumov, V.B. (1984) Formation conditions for iron minerals in ultrabasic-alkali metasomites. Geochemistry International, 21, 148-160.
+#	84nan		Nancollas G.H., 1984, The nucleation and growth of phosphate minerals, Chap. 2. In: Phosphate Minerals, J.O. Nriagu and P.B. Moore (Eds), Springer-Verlag, ISBN 3-540-12757-7, 318-329
+#	84nri		Nriagu J.O., 1984, Formation and stability of base metal phosphates in soils and sediments, Chap. 10. In: Phosphate Minerals, J.O. Nriagu and P.B. Moore (Eds), Springer-Verlag, ISBN 3-540-12757-7, 318-329
+#	84sew		Seward T. M., 1984. The formation of lead (II) chloride complexes to 300°C. A spectrophotometric study. Geochim. Cosmochim. Acta, 48, p. 121 134.
+#	84tay/lop		Taylor P., and Lopata V.J., 1984. Stability and solubility relationships between some solids in the system PbO CO2 H2O. Can. J. Chem., 62, p. 395 402.
+#	84vie/tar		Vieillard P., Tardy Y., 1984, Thermochemical properties of phosphates, Chap. 4. In: Phosphate Minerals, J.O. Nriagu and P.B. Moore (Eds), Springer-Verlag, New York, ISBN 3-540-12757-7, 171-198
+#	85bab/mat		Babushkin, V.I., Matveyev, G.M., and Mchedlov-Petrossyan, O.P. 1985. Thermodynamics of Silicates. New York, New York: Springer-Verlag. NNA.19920401.0112
+#	85cha/dav		Chase, M. W., Jr., C. A. Davies, J. R. Downey, Jr., D. J. Frurip, R. A. McDonald, and A. N. Syverud 1985. JANAF Thermochemical Tables, 3rd. ed., J. Phys. Chem. Ref. Data 14, Suppl. 1, Am. Chem. Soc. and Am. Inst. of Physics, Washington, D. C.
+#	85gol/par		Goldberg R.N., and Parker V.B., 1985. Thermodynamics of solution of SO2(g) in water and of aqueous sulfur dioxide solutions. J. Res. Natl. Bur. Stand., 90, p. 341 358.
+#	85hel		Helgeson, H.C., 1985, Errata II. Thermodynamics of minerals, reactions, and aqueous solutions at high pressures and temperatures: Amer. Jour. Sci., v. 285, pp. 845-855.
+#	85jac/hel		Jackson, K.J., and Helgeson, H.C., 1985, Chemical and thermodynamic constraints on the hydrothermal transport and deposition of tin: II. Interpretation of phase relations in the Southeast Asian tin belt: Econ. Geol., v. 80, no. 5, pp. 1365-1378.
+#	87fer		Fernández Guillermet A. (1987) Critical evaluation of the thermodynamic properties of cobalt. Int. J. Thermophys., 8 (4), 481-510
+#	87gar/par		CODATA87   Garvin D., Parker V.B and White H.J., 1987. CODATA Series on Thermodynamic Properties, Hemisphere, Washington, DC.
+#	87sve		Sverjensky, D.A., 1987, Calculations of the thermodynamic properties of aqueous species and the solubilities of minerals in supercritical electrolyte solutions, in Carmichael, I.S.E. and H.P. Eugster, eds., Thermodynamic Modeling of Geologic Materials: Mi
+#	87woo/gar		Woods T. L. and Garrels R. M. (1987) Thermodynamic values at low temperature for natural inorganic materials. An uncritical summary. Oxford University Press, New York.
+#	88cha/new		Chandratillake M.R., Newton G.W.A. and Robinson V.J., 1988. Chemval project EUR11891 EN. Comparison of thermodynamic databases used in geochemical modelling., 19 p.
+#	88mer		Merlino, S., 1988, Gyrolite: its crystal structure and crystal chemistry. Mineralogical Magazine, v. 52, p. 377-387.
+#	88møl		Møller N., 1988. The prediction of mineral solubilities in natural waters: A chemical equilibrium model for the Na Ca Cl SO4 H2O system, to high temperature and concentration. Geochirmica et Cosmochimica Acta, 52, p. 821 837.
+#	88phi/hal		Phillips, S.L., Hale, F.V., Silvester, L.F., and Siegel, M.D. (1988) Thermodynamic tables for nuclear waste isolation, an aqueous solutions database. vol 1, 181 p. Report NUREG/CR-4864, LBL-22860, SAND87-0323, Lawrence Berkeley Laboratory, Berkeley, Calif
+#	88rea		Reardon E. (1988) J. Phys. Chem., 92, 6426-6431
+#	88rua		Ruaya J.R., 1988. Estimation of instability constants of metal chloride complexes in hydrothermal solutions up to 300°C. Geochimica et Cosmochimica Acta, 52, p. 1983 1996.
+#	88sac/pas		Sacerdoti M., Passaglia E. (1988) Neues Jb. Miner., Mh., H.10, 462-475
+#	88sho/hel		Shock, E.L., and Helgeson, H.C., 1988, Calculation of the thermodynamic and transport properties of aqueous species at high pressures and temperatures: Correlation algorithms for ionic species and equation of state predictions to 5 kb and 1000 C: Geochim.
+#	89asho/hel		Shock, E.L., and Helgeson, H.C., 1989, Corrections to Shock and Helgeson (1988): Geochim. Cosmo. Acta, v. 53, p. 215.
+#	89bar/sau		Barin, I., F. Sauert, et al. (1989). Thermochemical Data of Pure Substances. Germany, VCH, Verlagsgesellschaft.
+#	89bsho/hel		Shock, E.L., Helgeson, H.C., and Sverjensky, D.A., 1989, Calculation of the thermodynamic and transport properties of aqueous species at high pressures and temperatures: Standard partial molal properties of inorganic neutral species: Geochim. Cosmo. Acta,
+#	89cox/wag		Cox J.D., Wagman D.D., and Medvedev V.A., 1989. CODATA Key Values for Thermodynamics. Hemisphere Publishing Corp., New York, 279 p.
+#	89mar/smi		Martell A.E., and Smith R.M., 1989, Critical Stability Constants, Vol. 3: Other Organic Ligands (2nd printing).  Plenum, New York, 495 p.
+#	89smi/mar		Smith R.M., and Martell A.E., 1989. Critical Stability Constants, Vols 1 6. Plenum Press, New York.
+#	90kun/kih		Kuniaki Kihara (1990) Eur. J. Mineral., 2, 63-77
+#	90nor/plu		Nordstrom D.K., Plummer L.N., Langmuir D., Busenberg E., May H.M., Jones B.F., and Parkhurst D.L., 1990. Revised chemical equilibrium data for major water - mineral reactions and their limitations, in: Chemical modeling in aqueous systems II. Chap. 31, Ba
+#	90rin/sac		Rinaldi R., Sacerdoti M., Passaglia E. (1990) Eur. J. Mineral., 2, 841-849
+#	90sho/hel		Shock, E.L., and Helgeson, H.C., 1990, Calculation of the thermodynamic and transport properties of aqueous species at high pressures and temperatures: Standard partial molal properties of organic species: Geochim. Cosmo. Acta, v. 54, pp. 915-945.
+#	91atk/gla		Atkins, M., Glasser, F.P., Kindness, A., and MacPhee, D.E. 1991. Solubility Data for Cement Hydrate Phases (25°C). Washington, District of Columbia: U.S. Department of Energy. (DOE/HMIP/RR/91/032)
+#	91din		Dinsdale A.T., 1991. SGTE Data for Pure Elements, CALPHAD, 15(4), p. 317-425.
+#	91hem/rob		Hemingway B.S., Robie R.A., and Apps J.A., 1991. Revised values for the thermodynamic properties of boehmite, AlO(OH), and related species and phases in the system Al O H. Am. Mineral., 76, p. 445-457.
+#	91kna		Knacke, O., Kubaschewski, O. & Hesselmann, K. (1991)  Thermochemical Properties of Inorganic Substances, 2nd ed.  Springer-Verlag, 2 vol., 2412 p. 
+#	91kna/kub		O. Knacke, K, Kubaschewski and K. Hesslemann (Eds.)(1991): Thermochemical properties of inorganic substances. Springer, Berlin (2 vols), 2412 pp.
+#	91kön/hau		Königsberger E., Hausner R., and Gamsjäger H., 1991. Solid solute phase equilibria in aqueous solution. V: The system CdC03 CaC03 C02 H20. Geochimica and Cosmochimica Acta, 55, p. 3505 3514.
+#	91nag/las		Nagy K.L., and Lasaga A.C., 1991. Dissolution and precipitation kinetics of gibbsite at 80°C and pH 3: The dependence on solution saturation state. Geochimica et Cosmochimica Acta, 56, p. 3093 3111.
+#	91pab/pit		Pabalan R., Pitzer K. (1991) in: K. Pitzer (Ed.), Activity Coefficients in Electrolyte Solutions, Chapter 7. CRC Press, Boca Ration, FL
+#	91rai/fel		Rai D., Felmy A.R., and Szelmeczka R.W., 1991. Hydrolysis Constants and Ion Interaction Parameters For Cd(II) in Zero to High Concentrations of NaOH KOH, and the Solubility Product of Crystalline Cd(OH)2. Journal of Solution Chemistry, 20, p. 375 390.
+#	91sve/hem		Sverjensky, D.A., Hemley, J.J., and D'Angelo, W.M., 1991, Thermodynamic assessment of hydrothermal alkali feldspar- mica-aluminosilicate equilibria: Geochim. Cosmo. Acta, v. 55, pp. 989-1004.
+#	92ajoh		Ref. 1+19 in slop98.dat: GEOPIG., 1998. Slop98.dat, http://geopig.asu.edu/supcrt_data.html, Washington University.
+#	92bal/nor 		Ball J.W., and Nordstrom D.K., 1992. User's manual for WATEQ4F, with revised thermodynamic data base and test cases for calculating speciation of major, trace and redox elements in natural waters. U.S. Geol. Survey Open File Report 91 183 (revised and rep
+#	92bjoh		Ref. 17 in slop98.dat: GEOPIG., 1998. Slop98.dat, http://geopig.asu.edu/supcrt_data.html, Washington University.
+#	92cjoh		Ref. 7+9+19 in slop98.dat: GEOPIG., 1998. Slop98.dat, http://geopig.asu.edu/supcrt_data.html, Washington University.
+#	92cle/der		Clever L.H., Derrick E.M., and Johnson S.A., 1992. The solubility of Some Sparingly Soluble Salts on Zinc and Cadmium In water and in aqueous electrolyte solutions. J. Phys. Chem. Ref. Data, 21, p. 941 966.
+#	92gre/fug		Grenthe I., Fuger J., Konings R.J.M., Lemire R.J., Muller A.B., Nguyen Trung C., and Wanner H., 1992. Chemical Thermodynamics, Volume 1: Chemical Thermodynamics of Uranium. North Holland, Amsterdam, 1, 714 pp.
+#	92joh/oel		Johnson J.W., Oelkers E.H. and Helgeson H.C., 1992. SUPCRT92: A software package for calculating the standard molal thermodynamic properties of minerals, gases, aqueous species, and reactions from 1 to 5000 bar and 0 to 1000'C. Comput.Geosci., 18, p. 899
+#	92pal/wes		Palmer D.A., and Wesolowski D.J., 1992. Aluminum speciation and equilibria in aqueous solution: II. The solubility of gibbsite in acidic sodium chloride solutions from 30 to 70°C. Geochimica et Cosmochimica Acta, 56, p. 1093 1111.
+#	92plo/wic		Plodinec M. J. and Wicks G. G. (1992) Applications of hydration thermodynamics to in-situ tests results.In: Proc. Workshop on In Situ Testiong of Radioactive Waste Forms and Engineered Barriers.
+#	92sea/rob		Seal R.R., Robie R.A., Barton P.B., and Hemingway B.S. (1992) Superambient heat capacities of synthetic stibnite, berthierite, and chalcostibnite: Revised thermodynamic properties and implications for phase equilibria. Econ. Geol. 87, 1911-1918.
+#	92sho		Shock, E.L., 1992, Stability of peptides in high-temperature aqueous solutions: Geochim. Cosmo. Acta, v. 56, pp. 3481-3491.
+#	92sti/par		Stipp S.L.S., Parks G.A., Nordstrom K.D., and Leckie J.O., 1992. Solubility product constant and thermodynamic properties for synthetic otavite, CdC03(s) and aqueous association constants for the Cd( II) C02 H20 system. Geochimica et Cosmochimica Acta, 57
+#	92tay		Taylor, H. F. W., 1992, Cement Chemistry, third edition: London, Thomas Telford, 475 p.
+#	92wol		Wolery T.J., 1992. EQ3/6: A software Package for Geochemical Modelling of Aqueous Systems: Package Overview and Installation Guide. Technical Report UCRL-MA-110662 PT I ed., Lawrence Livermore National Laboratory (USA).
+#	93bal/chr		Balarew C., Christov C., Valyashko V., Petrenko S. (1993) J. Solution Chem., 22, 173-181
+#	93bar		Barin, I. (1993) Thermochemical Data of Pure Substances, Weinheim, FRG, VCH.
+#	93pal/wel		Palmer D.A., and Wesolowski D.J., 1993. Aluminum speciation and equilibrium in aqueous solution: III. Potentiometric determination of the first hydrolysis constant of aluminum (III) in sodium chloride solutions to 125°C. Geochim. Cosmochim. Acta, 57, p. 2
+#	93sch/sho		Schulte, M.D., and Shock, E.L., 1993, Aldehydes in hydrothermal solution: Standard partial molal thermodynamic properties and relative stabilities at high temperatures and pressures: Geochim. Cosmo. Acta, v. 57, pp. 3835-3846.
+#	93sho		Shock, E.L., 1993, Hydrothermal dehydration of aqueous organic compounds: Geochim. Cosmo. Acta, v. 57, pp. 3341-2249.
+#	93sho/kor		Shock, E.L., and Koretsky, C.M., 1993, Metal-organic complexes in geochemical processes: Calculation of standard partial molal thermodynamic properties of aqueous acetate complexes at high pressures and temperatures: Geochim. Cosmo. Acta, v.57, pp. 4899-4
+#	93sho/mck		Shock, E.L., and McKinnon, W.B., 1993, Hydrothermal Processing of Cometary Volatiles--Applications to Triton: Icarus, v. 106, pp. 464-477.
+#	94aki/zot		Akinfiev N.N., Zotov A.V., and Shikina N.D. (1994) Experimental investigation and thermodynamic correlation in the Sb(III)-S(II)-O-H system. Geochem. Intern. 31, 27-40.
+#	94dam/str		Damidot, D., Stronach, S., Kindness, A., Atkins, M., and Glasser, F.P. 1994. Thermodynamic investigation of the CaO-Al2O3-CaCO3-H2O closed system at 25°C and influence of Na2O. Cem. Concr. Res. 24(3):563-572.
+#	95ant/bid		Anthony J.W., Bideaux R.A., Bladh K.W. and Nichols M.C., 1995. Handbook of Mineralogy, Volume II. Silica, Silicates. Mineral Data Publishing, Tucson, 904 pp., 2 vols.
+#	95dai/pos		Dai, Y., and Post, J. E,. 1995, Crystal structure of hillebrandite: a natural analogue of calcium silicate hydrate (CSH) phases in Portland cement: American Mineralogist, v. 80, p. 841-844.
+#	95haa/sho		Haas, J.R., Shock, E.L., and Sassani, D.C., 1995, Rare earth elements in hydrothermal systems: Estimates of standard partial molal thermodynamic properties of aqueous complexes of the rare earth elements at high pressures and temperatures: Geochim. Cosmo.
+#	95mar/mac		Marani D., Macchi G., and Pagano M., 1995. Lead precipitation in the presence of sulphate and carbonate : testing of thermodynamic predictions. Water Research, 29, p. 1085 1092.
+#	95pan		Pankratz L.B., 1995. Thermodynamic properties of carbides, nitrides, and other selected substances, US Bureau of Mines, Bulletin 696 
+#	95pok/hel		Pokrovskii, V.A., and Helgeson, H.C., 1995, Thermodynamic properties of aqueous species and the solubilities of minerals at high pressures and temperatures: The system Al2O3-H2O-NaCl:  Amer. J. Sci., 295, 1255-1342.
+#	95pok/sch		Pokrovski G.S., Schott J. and Sergeyev A.S., 1995. Experimental determination of the stability constants of NaSO4- and NaB (OH)40 in hydrothermal solutions using a new high-temperature sodium-selective glass electrode - Implications for boron isotopic fra
+#	95rob/hem		Robie R.A., and Hemingway B.S., 1995. Thermodynamic properties of minerals and related substances at 298.15 K and 1 Bar (105 Pascals) pressure and at higher temperatures. U.S. Geol. Survey Bull., 2131, 461 pp.
+#	95sho		Shock, E.L., 1995, Organic acids in hydrothermal solution: Standard molal thermodynamic properties of carboxylic acids and estimates of dissociation constants at high temperatures and pressures: Amer. Jour. Science, v. 295, pp. 496-580.
+#	95sho/kor		Shock, E.L., and Koretsky, C.M., 1995, Metal-organic complexes in geochemical processes: Estimation of standard partial molal thermodynamic properties of aqueous complexes between metal cations and monovalent organic acid ligands at high pressures and tem
+#	95sil/bid		Silva R.J., Bidoglio G., Rand M.H, Robouch P.B., Wanner H., and Puigdomènech I., 1995. Chemical Thermodynamics Vol.2. Chemical Thermodynamics of Americium. NEA, Elsevier.
+#	96arc		Archer D.G., 1996. Thermodynamic Properties of Synthetic Otavite, CdCO3(cr): Enthalpy Increment Measurements from 4.5 K to 350 K. J. Chem. Eng. Data, 41, p. 852 858.
+#	96bou		Bourbon X., 1996. Sélection de données thermodynamiques afférentes aux corrections de Température sur les équilibres chimiques (Sodium, Potassium, césium, Magnésium, Calcium, Strontium, Cobalt, Nickel, Paladium). ANDRA Report, CRP OHEM 96.001.
+#	96gal/boll		Gal J.Y., Bollingerb J.C., Tolosa H., and Gache N., 1996. Calcium carbonate solubility: a reappraisal of scale formation and inhibition. Talanta, 43, p. 1497 1509.
+#	96gem		GEMBOCHS, 1996, THERMODYNAMIC DATABASE: thermo.com.V8.R6.full, generated by GEMBOCHS.V2-Jewel.src.R6 03-dec-1996 16:55:04
+#	96hud/str		Hudson Lamb D.L., Strydom C.A., and Potgieter J.H., 1996. The thermal dehydration of natural gypsum and pure calcium sulphate dihydrate (gypsum). Thermochimica Acta, 282/283, p. 483 492.
+#	96pok/gou		Pokrovski G., Gout R., Schott J., Zotov A. and Harrichoury J.C., 1996. Thermodynamic properties and stoichiometry of As (III) hydroxide complexes at hydrothermal conditions. Geochimica et Cosmochimica Acta, 60, 737-749
+#	97all/dol		Allal K. M., Dolinger J.-C., and Martin G. (1997) Determination of thermodynamical data of calcium hydroxichloride. Revue de l'Institut Français du Pétrole 52(3), 361-368.
+#	97apok/hel		Pokrovskii V.A., and Helgeson H.C., 1997a. Thermodynamic properties of aqueous species and the solubilities of minerals at high pressures and temperatures: the system Al2O3 H2O KOH. Chemical Geology, 137, p. 221 242.
+#	97asho/sas		Shock, E.L., Sassani, D.C., Willis, M., and Sverjensky, D.A., 1997, Inorganic species in geologic fluids: Correlations among standard molal thermodynamic properties of aqueous ions and hydroxide complexes: Geochim. Cosmo. Acta, v. 61, no. 5, pp. 907-950.
+#	97ben/dia		Benézéth P., Diakonov I.I., Pokrovski G.S., Dandurand J.L., Schott J. and Khodakovsky I.L., 1997. Gallium speciation in aqueous solution. Experimental study and modelling: Part 2. Solubility of alpha-GaOOH in acidic solutions from 150 to 250°C and hydroly
+#	97bon/hea		Bond K. A., Heath T. G. and Tweed C. J., 1997. HATCHES: A Referenced Thermodynamic Database for Chemical Equilibrium Studies.  Nirex Report NSS/R379
+#	97bpok/hel		Pokrovskii V., and Helgeson H.C., 1997b. Calculation of the standard partial molal thermodynamic properties of KCl0 and activity coefficients of aqueous KC1 at temperatures and pressures to 1000°C and 5 kbar. Geochimica et Cosmochimica Acta, 61, p. 2175 2
+#	97bsho/sas		Shock, E.L., Sassani, D.C., and Betz, H., 1997, Uranium in geologic fluids: Estimates of standard partial molal properties, oxidation potentials, and hydrolysis constants at high temperatures and pressures: Geohim. Cosmo. Acta, v. 61, no. 20, pp. 4245-426
+#	97csho/sas		Shock, E.L., Sassani, D.C., and Betz, H., 1997, Uranium in geologic fluids:  Estimates of standard partial molal properties, oxidation potentials, and hydrolysis constants at high temperatures and pressures:  Geohim. Cosmo. Acta, v. 61, no. 20, pp. 4245-4
+#	97dal/sho		Dale, J.D., Shock, E.L., MacLeod, G., Aplin, A.C., and Larter, S.R., 1997, Standard partial molal properties of aqueous alkylphenols at high pressures and temperatures: Geochim. Cosmo. Acta, v. 61, no. 19, pp. 4017-4024.
+#	97got		Gottschalk M. (1997) Internally consistent thermodynamic data set for rock forming minerals in the system SiO2-TiO2-Al2O3-Fe2O3-CaO-MgO-FeO-K2O-Na2O-H2O-CO2: an alternative approach. European Journal of Mineralogy, 9, p. 175-223.
+#	97mcc/sho		McCollom, T.M., and Shock, E.L., 1997, Geochemical constraints on chemolithoautotrophic metabolism by microorganisms in seafloor hydrothermal systems: Geochim. Cosmo. Acta, v. 61, no. 20, pp. 4375-4391.
+#	97pal/wes		Palmer D.A., and Wesolowski D.J., 1997. Potentiometric measurements of the first hydrolysis quotient of magnesium(II) to 250°C and 5 molal ionic strength. J. Sol. Chem., 26, p. 217-232.
+#	97rim		Rimstidt D.J., 1997. Quartz solubility at low temperatures. Geochimica et Cosmochimica Acta, 61, p. 2553 2558.
+#	97sho/sas		Shock E.L., Sassani D.C., Willis M., and Sverjensky D.A., 1997. Inorganic species in geologic fluids: Correlations among standard molal thermodynamic properties of aqueous ions and hydroxide complexes. Geochim. Cosmo. Acta, 61, p. 907 950.
+#	97sul/sew		Suleimenov O.M., and Seward T.M., 1997. A spectrophotometric study of hydrogen sulphide ionisation in aqueous solutions to 350°C. Geochimica et Cosmochimica Acta, 61, p. 5187 5198.
+#	97sve/sho		Sverjensky, D.A., Shock, E.L., and Helgeson, H.C., 1997 Prediction of the thermodynamic properties of aqueous metal complexes to 1000 C and 5 kb: Geochim. Cosmo. Acta, v. 61, No. 7, pp. 1359-1412.
+#	97tag/zot		Tagirov B. R., Zotov A. V. and Akinfiev N. N., 1997. Experimental study of dissociation of HCl from 350 to 500°C and from 500 to 2500 bars: Thermodynamic properties of HCl°(aq). Geochimica et Cosmochimica Acta, 61, 4267-4280
+#	97tay		Taylor H.F.W. , 1997 Cement Chemistry, 2nd. Ed., Thomas Telford, London.
+#	98arc		Archer D.G., 1998. Thermodynamic Properties of Import to Environmental Processes and Remediation. I. Previous Thermodynamic Property Values for Cadmium and Some of Its Compounds. Journal of Physical and Chemical Reference Data, 27, p. 915
+#	98cha		Chase, M.W.J., 1998. NIST-JANAF Thermochemical Tables, Journal of Physical Chemistry Reference Data, Vol. 9, 4th Edition. National Institute of Standards and Technology, Washington DC, 1951 pp.
+#	98gam/kön		Gamsjäger H., Königsberger E., and Preis W., 1998. Solubilities of metal carbonates. Pure & Appl. Chem., 70, p. 1913 1920.
+#	98gla/tyr		Glasser, F.P., Tyrer, M., Quillin, K., Ross, D., Pedersen, J., Goldthorpe, K., Bennett, D., and Atkins, M., 1998. The chemistry of blended cements and backfills intended for use in radioactive waste disposal. Research and development Technical Report P98,
+#	98hol/pow		Holland T.J.B., and Powell R., 1998. An internally consistent thermodynamic data set for phases of petrological interest. Journal of Metamorphic Geology, 16, p. 309 343.
+#	98mer/roc		Mercy M.A., Rock P.A., Casey W.H., and Mokarram M.M., 1998. Gibbs energies of formation for hydrocerussite [Pb(OH)2.(PbCO3)2(s)] and hydrozincite {[Zn(OH)2]3.(ZnCO3)2(s)} at 298 K and 1 bar from electrochemical cell measurements. American Mineralogist, 83
+#	98ply/zha		Plyasunova N. V., Zhang Y., and Muhammed M. (1998) Critical evaluation of thermodynamics of complex formation of metal ions in aqueous solutions. V. hydrolysis and hydroxo-complexes of Co2+ at 298.15 K. Hydrometallurgy 48(2), 153-169.
+#	98pok/sch		Pokrovski G.S. and Schott J., 1998. Thermodynamic properties of aqueous Ge(IV) hydroxide complexes from 25 to 350°C: Implications for the behavior of germanium and the Ge/Si ratio in hydrothermal fluids. Geochimica et Cosmochimica Acta, 62, 1631-1642
+#	98sal/pok		Salvi S, Pokrovski G.S. and Schott J. 1998. Experimental investigation of aluminum-silica aqueous complexing at 300°C. Chemical Geology, 151, 51-67
+#	98sas/sho		Sassani, D.C., and Shock, E.L., Solubility and Transport of Platinum-Group Elements in Supercritical Fluids: Summary and Estimates of Thermodynamic Properties for Ru, Rh, Pd, and Pt Solids, Aqueous Ions, and Complexes to 1000 C and 5 kbar: Geochim. Cosmo.
+#	98sav		Savage, D., 1998, Zeolite occurrence, stability and behaviour, in Maqarin, analogue study, Phase III, Smellie, J. A. T., editor, SKB Report TR 98-04, v. 1, p. 281-307.
+#	99aki/zot		Akinfiev N. and Zotov A., 1999. Thermodynamic description of equilibria in mixed fluids (H2O-non-polar gas) over a wide range of temperature (25-700°C) and pressure (1-5000 bars). Geochimica et Cosmochimica Acta, 63, 2025-2041
+#	99all		Allison Geoscience Consultants, Inc., HydroGeoLogic, Inc., 1999, MINTEQA2/PRODEFA2, a geochemical assessment model for environmental systems: User manual supplement for version 4.0., U.S. Environmental Protection Agency, 76 p.
+#	99dia/sch		Diakonov I.I., Schott J., Martin F., Harrichourry J.C. and Escalier J., 1999. Iron(III) solubility and speciation in aqueous solutions. experimental study and modelling: part 1. hematite solubility from 60 to 300°C in NaOH-NaCl solutions and thermodynamic
+#	99gra		Grauer R., 1999. Solubility products of M(II) carbonates. Waste Management laboratory, PSI Bericht Nr. 99-04 January 1999 ISSN 1019-0643.
+#	99kön/kön		Königsberger E., Könisberger L.C., and Gamsjäger H., 1999. Low temperature thermodynamic model for the system Na2CO3 MgCO3 CaCO3 H2O. Geochimica et Cosmochimica Acta, 63, p. 3105-3119.
+#	99lot/och		Lothenbach B., Ochs M., Wanner H., and Yui M., 1999. Thermodynamic data for the speciation and solubility of Pd, Pb, Sn, Sb, Nb and Bi in aqueous solution. JNC TN8400 99 011.
+#	99par/app		Parkhurst D.L., and Appelo C.A.J., 1999. User's guide to Phreeqc (version 2)- a computer program for speciation, batch-reaction, one-dimensional transport, and inverse geochemical calculation. USGS WRI Report 99-4259, 312 pp.
+#	99sav/sav		Savenko V. S. and Savenko A. V. (1999) Solubility of cobalt(III) and the stability constant of the hydroxo complex Co(OH)30 in aqueous solution. Geochemistry International 37(4), 385-387.
+#	99sch/bar		Schoonen M.A.A, and Barnes H.L., 1988. An approximation of the second dissociation constant for H2S. Geochim. Cosmo. Acta, 52, p. 649-654.
+#	99wan/tes		Wang F., and Tessier A., 1999. Cadmium Complexation with Bisulfide. Environ. Sci. Technol., 33, p. 4270 4277.
+#	99yun/glu		Yungman V.S., and Glusko V.P., 1999. Thermal constants of substances. Wiley, Begell House, New York.
+#	CODATA87		Garvin D., Parker V.B and White H.J., 1987. CODATA Series on Thermodynamic Properties, Hemisphere, Washington, DC.
+#	NIST46.4		NIST (1997) Critical stability constants of metal complexes database, NIST Standard Reference Database 46, v4.0. Website: http://www.nist.gov/srd/nist46.htm
+#	Piantone, pers. Comm.		Piantone, pers. Comm., 2005
+#	slop98		GEOPIG., 1998. Slop98.dat, http://geopig.asu.edu/supcrt_data.html, Washington University.
+#	00tag/dia 		Tagirov B. R., Diakonov I. I., Devina O. A., and Zotov A. V. (2000) Standard ferric-ferrous potential and stability of FeCl2+ to 90°C. Thermodynamic properties of Fe(aq)3+ and ferric-chloride species. Chemical Geology 162(3-4), 193-219.
+#	69iza/eat		Izatt R.M., Eatough D.E., Christensen J.J., Bartholomew C.H. (1969) Calorimetrically determined log K, ?H° and ?S° values for the inter-action of sulphate ion with several bi- and ter-valent metal ions. J. Chem. Soc. (A), 47-53.
+#	63wil 		Willix R. L. S. (1963) Ferrous-ferric redox reaction in the presence of sulphate ion, Trans. Faraday Soc., 59, 1315-1324
+#	90hem 		Hemingway B. S. (1990) Thermodynamic properties for bunsenite, NiO, magnetite, Fe3O4, and hematite, Fe2O3, with comments on selected oxygen buffer reactions. American Mineralogist 75(7-8), 781-790.
+#	93sax/cha 		Saxena S.K., Chaterjee N., Fei Y., Shen G. (1993) Thermodynamic data on oxides and silicates. Springer. New-York.
+#	88haa		Haas J.L., Jr. (1988) Recommended standard electrochemical potentials and fugacities of oxygen for the solid buffers and thermodynamic data in the systems iron-silicon-oxygen, nickel-oxygen, and copper-oxygen. Preliminary report of January 17, 1988 to the CODATA Task Group on Chemical Thermodynamic Tables, U.S. Geological Survey, Reston, Virginia.
+#	98adia 		I.I. Diakonov (1998) Thermodynamic properties of iron oxides and hydroxides. II. Estimation of the surface and bulk thermodynamic properties of ordered and disordered maghemite (gamma-Fe2O3). Eur. J. Mineral., 10(1), 17-29.
+#	94dia/kho 		I. Diakonov, I. Khodakovsky, J. Schott, E. Sergeeva (1994) Thermodynamic properties of iron oxides and hydroxides. I. Surface and bulk thermodynamic properties of goethite (alpha-FeOOH) up to 500 K. Eur. J. Mineral., 6(6), 967-983.
+#	98bdia 		I.I. Diakonov (1998) Thermodynamic properties of iron oxides and hydroxides. III. Surface and bulk thermodynamic properties of lepidocrocite (gamma-FeOOH) to 500 K. Eur. J. Mineral., 10(1), 31-41.
+#	95bou		Bourbon X., 1995. Sélection de données thermodynamiques afférentes aux corrections de Température sur les équilibres chimiques. I/II Analyse de bases de données. ANDRA Report, C RP O. HEM 95.001.
+#	92bru/stu		Bruno J., Stumm W., Wersin P., and Brandberg F. (1992) On the influence of carbonate in mineral dissolution: I. The thermodynamics and kinetics of hematite dissolution in bicarbonate solutions at T = 25°C. Geochimica et Cosmochimica Acta 56(3), 1139-1147.
+#	90hol/pow		Holland T. J. B. and Powell R. (1990) An enlarged and updated internally consistent thermodynamic dataset with uncertainties and correlations: the system K2O-Na2O-CaO-MgO-MnO-FeO-Fe2O3-Al2O3-TiO2-SiO2-C-H2-O2. Journal of Metamorphic Geology 8(1), 89-124.
+#	92bru/wer		Bruno J., Wersin P., and Stumm W. (1992) On the influence of carbonate in mineral dissolution: II. The solubility of FeCO3 (s) at 25°C and 1 atm total pressure. Geochimica et Cosmochimica Acta 56(3), 1149-1155.
+#	98kin		King D. W. (1998) Role of Carbonate Speciation on the Oxidation Rate of Fe(II) in Aquatic Systems. Environ. Sci. Technol. 32(19), 2997-3003.
+#	00bru/dur 		Bruno J. and Duro L. (2000) Reply to W. Hummel's comment on and correction to "On the influence of carbonate in mineral dissolution: 1. The thermodynamics and kinetics of hematite dissolution in bicarbonate solutions at T = 25°C" by J. Bruno, W. Stumm, P. Wersin, and F. Brandberg. Geochimica et Cosmochimica Acta 64(12), 2173-2176.
+#	95tro 		Trotignon L. (1995) Critique et sélection de données thermodynamiques en vue de modéliser les équilibres minéral-solution. Rapport annuel 1995 SESD95/49
+#	99dav/phi		Davison W., Phillips N., and Tabner B. J. (1999) Soluble iron sulfide species in natural waters: Reappraisal of their stoichiometry and stability constants. Aquatic Sciences - Research Across Boundaries 61(1), 23-43.
+#	01fel/cho		Felmy A. R., Cho H., Rustad J. R., and Mason M. J. (2001) An aqueous thermodynamic model for polymerized silica species to high ionic strength. Journal of Solution Chemistry 30(6), 509-525.
+#	07avie		Vieillard P., 2007. Estimation des entropies et capacités calorifiques des zeolithes. Rapport CNRS-Hydrasa 2007-2, 30 p.
+#	07bvie		Vieillard P., 2007. THERMOCHIMIE : Estimation des enthalpies de formation des Phyllosilicates (7, 10 et 14Å) anhydres.  Rapport final.  CNRS-Hydrasa 2007-1, 21 p.
+#	07bla/bou		Blanc P., Bourbon X., Lassin A., 2007. Un modèle thermodynamique et minéralogique de béton : sélection de constantes thermodynamiques. Rapport final, BRGM/RP-55967-FR, 110 p.
+#	07gai/bla		Gailhanou H. et Blanc P., 2007. Thermochimie : Acquisition des propriétés thermodynamiques sur une saponite et révision des données sur les minéraux argileux. Rapport final BRGM/RP-55925-FR
+#	07bla/gai		Blanc P. et Gailhanou H. (2007) Thermochimie : Estimation des entropies, capacités calorifiques et volumes molaires des phyllosilicates déshydratés et hydratés. Rapport final. Rapport BRGM/RP-55966-FR.
+#	08aza/bla		Azaroual M., Blanc P., Jacquemet N. et André L., 2008. Rapport Gaciment
+END
