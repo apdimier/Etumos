@@ -1,0 +1,38 @@
+top_builddir=$(WRAPPER)
+srcdir=$(WRAPPER)/PhreeqC/Exec/Wrap
+
+vpath %.py $(srcdir)
+
+EXPORT_PYSCRIPTS = phreeqccomponent.py
+
+CC=mpicc 
+CFLAGS= -O2 -fno-strict-aliasing -pthread -Wall -Wstrict-prototypes
+LIB_PHREEQC=$(WRAPPER)/PhreeqC/Exec/Phreeqc_source/libPhreeqc2.18_mws.a
+#
+#OBJECTS= $(wildcard C/*.o)
+OBJECTS= $(patsubst %.c,%.o, $(addprefix $(srcdir)/C/,$(notdir $(wildcard $(srcdir)/C/*.c))))
+#
+bin: all
+all: dirC lib WPhreeqc_mpi.so 
+
+inc depend depend_idl lib resources :;
+
+dirC:
+	cd Wrap/C; $(MAKE) -f Makefile_mpi
+
+lib:
+	cd Phreeqc_source; $(MAKE)
+
+WPhreeqc_mpi.so: $(OBJECTS) $(LIB_PHREEQC)
+	$(CC) $(CFLAGS) -shared $(OBJECTS) $(LIB_PHREEQC) $(LIB_NCURSES) $(LIB_G2C) -L/usr/lib/mpich2 -o $@
+	cp  $@  $(top_builddir)/Wlib/.
+#	cd Wrap/C; $(MAKE) clean
+
+lclean:
+	rm -f core *~ *.so fort.* *.pyc
+	rm -f *.dat
+	rm -f *.pqi
+
+clean: lclean 
+	cd C; make clean
+
