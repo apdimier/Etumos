@@ -1,0 +1,4 @@
+Input File = mesh.msh
+Output File = mesh
+Input Mode = Gmsh
+Output Mode = ElmerSolver
