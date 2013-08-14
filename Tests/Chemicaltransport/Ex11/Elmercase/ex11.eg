@@ -1,0 +1,5 @@
+Input File = ex11.msh
+Output File = ex11
+Input Mode = Gmsh
+Output Mode = ElmerSolver
+

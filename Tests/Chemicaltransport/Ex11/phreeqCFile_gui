@@ -1,0 +1,99 @@
+
+SOLUTION_MASTER_SPECIES
+
+                 Cl   Cl-    0.00000         Cl   35.45320
+                 Na   Na+    0.00000         Na   22.98980
+                Ca   Ca++    0.00000         Ca   40.08000
+             N(-3)   NH4+    0.00000          N   14.06700
+                 N   NO3-    0.00000          N   14.06700
+               N(+3)   N2    0.00000          N   14.06700
+             N(+5)   NO3-    0.00000          N   14.06700
+                N(0)   N2    0.00000          N   14.00670
+                   K   K+    0.00000          K   39.10200
+
+SOLUTION_SPECIES
+
+           + 1.0Cl- = Cl-
+                    log_k   0.0000000000e+00
+#
+           + 1.0Na+ = Na+
+                    log_k   0.0000000000e+00
+#
+           + 1.0Ca++ = Ca++
+                    log_k   0.0000000000e+00
+#
+           + 1.0NO3- = NO3-
+                    log_k   0.0000000000e+00
+#
+           + 1.0NH4+ - 1.0H+ = NH3
+                    log_k   -9.2520000000e+00
+#
+           + 1.0NO3- + 10.0H+ + 8.0e- - 3.0H2O = NH4+
+                    log_k   1.1907700000e+02
+#
+           + 2.0NO3- + 12.0H+ + 10.0e- - 6.0H2O = N2
+                    log_k   2.0708000000e+02
+#
+           + 1.0K+ = K+
+                    log_k   0.0000000000e+00
+#
+           + 1.0NO3- + 2.0H+ + 2.0e- - 1.0H2O = NO2-
+                    log_k   2.8570000000e+01
+#
+
+EXCHANGE_MASTER_SPECIES
+
+          X   X-
+
+EXCHANGE_SPECIES
+
+                X-  = X-
+                    log_k   0.0000000000e+00
+                Na+ + X-  = NaX
+                    log_k   0.0000000000e+00
+                K+ + X-  = KX
+                    log_k   7.0000000000e-01
+                Ca++ + 2X-  = CaX2
+                    log_k   8.0000000000e-01
+
+SOLUTION                  41-41 boundary
+   temp 2.5000000000e+01
+   pH    7.0000000000e+00 
+   pe    1.2500000000e+01
+   units mol/l
+                       Ca    6.0000000000e-04
+                       Cl    1.2000000000e-03
+
+SOLUTION                  1-40 column
+   temp 2.5000000000e+01
+   pH    7.0000000000e+00 
+   pe    1.2500000000e+01
+   units mol/l
+                        K    2.0000000000e-04
+                       Na    1.0000000000e-03
+                     N(5)    1.2000000000e-03
+
+EXCHANGE                  1-40 column
+               equilibrate       1
+                        X    1.1000000000e-03
+SELECTED_OUTPUT
+  -high_precision true
+KNOBS
+  -iterations 500
+  -diag true 
+  -tolerance 1.e-15
+SOLUTION 0
+PRINT
+  -reset	true
+# hereafter the -cells parameter is the 
+# only relevant parameter 
+TRANSPORT
+  -cells          41
+  -time_step          100.
+  -shifts          5
+  -lengths        0.1
+  -flow_direction diff
+  -boundary_conditions        closed closed
+  -print_frequency      1
+  -warnings False
+END

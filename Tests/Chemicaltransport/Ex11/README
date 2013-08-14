@@ -1,0 +1,1 @@
+For that test case, the no diffusion advection scheme of phreeqc implies we have to introduce a large error managment (epsilon)

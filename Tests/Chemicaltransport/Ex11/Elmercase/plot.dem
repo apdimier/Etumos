@@ -1,0 +1,14 @@
+#
+#
+
+set title "Fsteps plot\nwith date and time as x-values"
+set xlabel "Date\nTime"
+set yrange [ 0 : ]
+set xrange [ 0:0.06 ]
+set ylabel "Concentration\nmg/l"
+plot '1.dat' using 1:2 with points, \
+     '1.dat' using 1:3 with points
+pause -1 "Hit return to continue"
+
+reset
+
