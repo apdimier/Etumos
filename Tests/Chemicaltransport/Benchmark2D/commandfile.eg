@@ -1,0 +1,4 @@
+Input File = benchmark.msh
+Output File = benchmark
+Input Mode = Gmsh
+Output Mode = ElmerSolver

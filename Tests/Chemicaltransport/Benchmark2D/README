@@ -1,0 +1,10 @@
+Case issued from an ANR project
+
+meshing :
+
+
+ElmerGrid  commandfile.eg
+
+the meshing command is automatically inserted in the python
+
+For the mesh, we use two different meshes for the velocity and the chemical transport. The gridding is the same but a boundary condition is introduce for the velocity, whereas that boundary disappears for the chemicaltransport
