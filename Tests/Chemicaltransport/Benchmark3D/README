@@ -1,0 +1,8 @@
+Case issued from an ANR project
+
+meshing :
+
+
+ElmerGrid  commandfile.eg
+
+the meshing command is automatically inserted in the python
