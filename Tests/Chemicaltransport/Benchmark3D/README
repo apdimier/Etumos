@@ -6,3 +6,5 @@ meshing :
 ElmerGrid  commandfile.eg
 
 the meshing command is automatically inserted in the python
+
+To make the 3D case generate the mesh : gmsh benchmark3D1.geo; save the mesh: benchmark3D1.msh and launch the python kriegage.py
