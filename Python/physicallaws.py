@@ -2,7 +2,10 @@
 #/usr/bin/python
 """
 Physical laws, to be used in material and then for a transient simulation
+Eventually refer to the etuser module to introduce your own laws 
 """
+from __future__ import absolute_import
+from __future__ import print_function
 from generictools import isInstance, listTypeCheck, memberShip, SET_NUMBER
 from listtools import toList
 import exceptions
@@ -26,6 +29,8 @@ from PhysicalProperties import Density,\
                                SolubilityLimit,\
                                Viscosity
 from numpy import *
+from six.moves import map
+from six.moves import range
 #
 #
 #
@@ -44,8 +49,8 @@ class PhysicalLaw:
         return self
         
     def getHelp(self):
-        print self.__doc__
-    pass
+        print(self.__doc__)
+        pass
 
 # ~~~~~~~~~~~~~~~
 # Saturation laws
@@ -85,6 +90,7 @@ class BrooksCoreySaturation(SaturationLaw):
         if interval == None:
             from functions import interval
             interval = interval(0.,0.,0.1)
+            pass
         self.interval=interval
         
     def eval(self, suction):
@@ -142,13 +148,17 @@ class VanGenuchtenSaturation(SaturationLaw):
         self.n = SET_NUMBER(n)
         if m != None:
             self.m = SET_NUMBER(m)
+            pass
         else:
             self.m = 1. - 1./self.n
+            pass
         if unit!=None:
             self.unit = _findUnit(unit)
+            pass
         if interval == None:
             from functions import Interval
             interval = Interval(0.,0.,0.)
+            pass
 
         self.interval=interval
         self.name = "van Genuchten"
@@ -220,10 +230,12 @@ class MaloideSaturation1(SaturationLaw):
         self.n = SET_NUMBER(n)
         if unit != None:
             self.unit = _findUnit(unit)
+            pass
         self.name = "Maloide"
         if interval == None:
             from functions import Interval
             interval = Interval(0.,0.,0.)
+            pass
         self.interval = interval 
         
     def eval(self, suction):
@@ -284,9 +296,11 @@ class MaloideSaturation2(SaturationLaw):
         self.m = SET_NUMBER(m)
         if unit!=None:
             self.unit = _findUnit(unit)
+            pass
         if interval == None:
             from functions import Interval
-            interval =Interval(0.,0.,0.) 
+            interval =Interval(0.,0.,0.)
+            pass
         self.interval =interval
     def eval(self, suction):
         """
@@ -347,18 +361,22 @@ class ExponentialSaturation(SaturationLaw):
         self.n = SET_NUMBER(n)
         if name == None:
             self.name = "exponential"
+            pass
         else:
             self.name = name
+            pass
         if unit!=None:
             self.unit = _findUnit(unit)
+            pass
         if interval == None:
             from functions import Interval
             interval = Interval(0.,0.,0.)
+            pass
         self.interval=interval
         
         if ((not self.c and not self.alpha) or
             (not self.c and not self.n)):
-            raise Exception, " Check the coefficients of the exponential law"
+            raise Exception(" Check the coefficients of the exponential law")
             
         self.description = description
 
@@ -418,13 +436,14 @@ class LogarithmicSaturation(SaturationLaw):
         """
         self.alpha = SET_NUMBER(alpha)        
         if not self.alpha:
-            raise Exception, "You have defined a Logarithmic law with alpha =0!!!!!!!"
+            raise Exception("You have defined a Logarithmic law with alpha =0!!!!!!!")
         self.c = SET_NUMBER(c)
         self.n = SET_NUMBER(n)
         self.unit = _findUnit(unit)
         if interval == None:
             from functions import Interval
             interval = Interval(0.,0.,0.)
+            pass
         self.interval=interval
 
     def eval(self, suction):
@@ -517,24 +536,28 @@ class WinsauerDiffusionLaw(EffectiveDiffusionLaw):
 
     def __init__(self,**args):
         lexikon = args
-        if lexikon.has_key("cementationCoefficient"):
+        if "cementationCoefficient" in lexikon:
             cementationCoefficient = lexikon["cementationCoefficient"]
             if type(cementationCoefficient) != FloatType:
-                raise Warning, " the cementationCoeficient must be a float it has been set to zero"
+                raise Warning(" the cementationCoeficient must be a float it has been set to zero")
                 self.cementationCoefficient = 0.0
+                pass
             else:
                 self.cementationCoefficient = cementationCoefficient
+                pass
         else:
             raise Exception(" the cementation coefficient is mandatory for the WinsauerDiffusionLaw definition")
             pass
-        if lexikon.has_key("percolationPorosity"):
+        if "percolationPorosity" in lexikon:
             percolationPorosity = lexikon["percolationPorosity"]
             if type(percolationPorosity) != FloatType:
-                raise Warning, " the percolationPorosity must be a float"
+                raise Warning(" the percolationPorosity must be a float")
                 self.percolationPorosity = 0.0
                 pass           
             else:
                 self.percolationPorosity = percolationPorosity
+                pass
+            pass
         else:
             self.percolationPorosity = 0.0
             pass
@@ -575,9 +598,8 @@ class ExpDiffusionLaw(EffectiveDiffusionLaw):
         Input: expCoefficient : float
         """
         if type(exponentialCoefficient) != FloatType:
-            raise Exception, "exponentialCoefficient must be a float "
+            raise Exception("exponentialCoefficient must be a float ")
         self.exponentialCoefficient = exponentialCoefficient
-        pass
 
     def getExponentialCoefficient(self):
         """
@@ -612,7 +634,7 @@ class LinearDiffusionLaw(EffectiveDiffusionLaw):
         """
 
         if type(linearCoefficient) != FloatType:
-            raise Exception, "the linear coefficient must be a float"
+            raise Exception("the linear coefficient must be a float")
         self.linearCoefficient = linearCoefficient
         pass
 
@@ -681,8 +703,8 @@ class FickVapeurLaw(PhysicalLaw):
         dict['fickv_pv']='fvpv'
         from functions import DerivableFunction,DerivableFunctionconst,Interval
         import types
-        if(not args.has_key('fickv_t')):
-            raise Exception,"fickv_t doit etre present"
+        if('fickv_t' not in args):
+            raise Exception("fickv_t doit etre present")
         self.func = []
         for k in args.keys():
             if isinstance(args[k],FloatType) or isinstance(args[k],IntType ):
@@ -694,43 +716,57 @@ class FickVapeurLaw(PhysicalLaw):
                     else:
                         if isinstance(args[k][1],Interval):
                             argument = DerivableFunction(args[k][0], args[k][1])
+                            pass
                         elif isinstance(args[k][2],Interval):
                             argument = DerivableFunction(args[k][0], args[k][2])
+                            pass
                         else:
-                             raise Exception("Erreur Fickv_s ou fick_pv  triplet fourni")
+                            raise Exception("Erreur Fickv_s ou fick_pv  triplet fourni")
+                        pass
+                    pass
                 elif len(args[k]) == 1 :
                     if k == 'fickv_t' or k == 'fickv_pg':
                         raise Exception("fickv_pg ou fickv_t, You have to define the slope",k)
                     argument = DerivableFunction(args[k][0])
+                    pass
                 elif len(args[k]) == 2:
                     if isinstance(args[k][1],Interval):
                         if k == 'fickv_t' or k == 'fickv_pg':
                             raise Exception("fickv_pg ou fickv_t, Vous devez fournir la derivee")
                         else:
                             argument = DerivableFunction(args[k][0],interval=args[k][1])
+                            pass
                     else:
                         argument = DerivableFunction(args[k][0],derivee=args[k][1])
+                        pass
+                    pass
                 else:
                     pass
             elif  isinstance(args[k],DerivableFunction):
                 if (k == 'fickv_t' or k == 'fickv_pg') and args[k].derivee == None :
                     raise Exception("fickv_pg ou fickv_t, Vous devez fournir la derivee")
-                if  (k == 'fickv_s' or k == 'fickv_pv')  and args[k].derivee <> None:
-                    print " derivee devrait etre nulle ",k,args[k].derivee 
+                if  (k == 'fickv_s' or k == 'fickv_pv')  and args[k].derivee != None:
+                    print(" derivee devrait etre nulle ",k,args[k].derivee) 
                     if args[k].interval == None:
                         fonc =  DerivableFunction(args[k])
+                        pass
                     else:
                         fonc =DerivableFunction(args[k].fonction, interval= args[k].interval)
+                        pass
                     args[k]=fonc
+                    pass
                 argument = args[k]
+                pass
             else:
                 raise Exception("On attend une DerivableFunction, ou une constante ou un tuple")
             self.func.append((argument,dict[k]))
 #traitement des donnees manquantes
         for k in dict.keys():
-            if(not args.has_key(k)):
+            if(k not in args):
                 argument = DerivableFunctionconst(1.)
                 self.func.append((argument,dict[k]))
+                pass
+            pass
     def getArgs(self):
         return self.Args
 
@@ -772,16 +808,19 @@ class IntrinsicPermeabilityLaw(PhysicalLaw):
         #print 'IntrinsicPermeabilityLaw arg ',kargs
         lexikon = kargs
         self.args = kargs
-        print lexikon
-        if lexikon.has_key("initialPorosity"):
+        print(lexikon)
+        if "initialPorosity" in lexikon:
             self.initialPorosity = lexikon["initialPorosity"]
+            pass
         else:
             self.initialPorosity = 0.1
-        if lexikon.has_key("k0"):
+            pass
+        if "k0" in lexikon:
             self.k0 = lexikon["k0"]
+            pass
         else:
             self.k0 = 1.0
-            raise Warning, " Due to the lack of k0, k0 constant has been set to one"
+            raise Warning(" Due to the lack of k0, k0 constant has been set to one")
     pass
 #
 # Kozeny Carman Law
@@ -802,7 +841,7 @@ class KozenyCarmanLaw(IntrinsicPermeabilityLaw):
         
     """
     def __init__(self,**kargs):
-        print " args ",kargs
+        print(" args ",kargs)
         IntrinsicPermeabilityLaw.__init__(self,**kargs)
         #
         # the cst is evaluated once
@@ -828,10 +867,11 @@ class VermaPruessLaw(IntrinsicPermeabilityLaw):
         
     """
     def __init__(self,**args):
-        print " args ",args
+        print(" args ",args)
         IntrinsicPermeabilityLaw.__init__(self,**args)
-        if args.has_key("criticalPorosity"):
+        if "criticalPorosity" in args:
             self.criticalPorosity = args["criticalPorosity"]
+            pass
         else: 
             raise Exception(" the critical porosity is mandatory for the Verma Pruess law definition")
         #
@@ -839,12 +879,14 @@ class VermaPruessLaw(IntrinsicPermeabilityLaw):
         #    
         self.denominator = 1.0/(self.initialPorosity -self.criticalPorosity)
         
-        if args.has_key("exponentLaw"):
+        if "exponentLaw" in args:
             self.exponentLaw = args["exponentLaw"]
+            pass
         else: 
             self.exponentLaw = 2
+            pass
     def eval(self,currentPorosityValue):
-        print currentPorosityValue,self.k0,self.initialPorosity,self.exponentLaw
+        print(currentPorosityValue,self.k0,self.initialPorosity,self.exponentLaw)
         return self.k0*pow((currentPorosityValue-self.criticalPorosity)*self.denominator, self.exponentLaw)
 
 class MualemPermeability(PermeabilityLaw):
@@ -864,11 +906,13 @@ class MualemPermeability(PermeabilityLaw):
         """
         self.m = SET_NUMBER(m) 
         if not self.m:
-            raise Warning, "You have defined a Mualem law without defining the m exponent, it has been set to 2"
+            raise Warning("You have defined a Mualem law without defining the m exponent, it has been set to 2")
             self.m = 2.
+            pass
         if interval == None:
             from functions import Interval
             interval =Interval(0.,0.,0.)
+            pass
         self.interval =interval
 
     def eval(self, sat):
@@ -912,6 +956,7 @@ class BurdinePermeability(PermeabilityLaw):
         if interval == None:
             from functions import Interval
             interval = Interval(0.,0.,0.)
+            pass
         self.interval=interval
     def eval(self, sat):
         """calculate relative permeability value with S = sat"""
@@ -946,6 +991,7 @@ class BrooksCoreyPermeability(PermeabilityLaw):
         if interval == None:
             from functions import Interval
             interval = Interval(0.,0.,0.)
+            pass
         self.interval=interval
         if not self.lambdaCoefficient:
             raise Exception("You have defined a  BrooksCoreyPermeability law with lambdaCoefficient =0!!")
@@ -1024,6 +1070,7 @@ class ExponentialPermeability(PermeabilityLaw):
         if interval == None:
             from functions import Interval
             interval = Interval(0.,0.,0.)
+            pass
         self.interval=interval
         if ((not self.c and not self.alpha) or
             (not self.c and not self.n)):
@@ -1084,6 +1131,7 @@ class LogarithmicPermeability(PermeabilityLaw):
         if interval == None:
             from functions import Interval
             interval = Interval(0.,0.,0.)
+            pass
         self.interval=interval 
 
     def eval(self, suction):
@@ -1138,7 +1186,8 @@ class MaloidePermeabilite1(PermeabilityLaw):
         self.unit = _findUnit(unit)
         if interval == None:
             from functions import Interval
-            interval =Interval(0.,0.,0.) 
+            interval =Interval(0.,0.,0.)
+            pass
         self.interval =interval
     def eval(self, sat):
         """
@@ -1204,6 +1253,7 @@ class SolubilityByIsotope(SolubilityLaw):
         self.solubilityLimit=solubilityLimit
         if kineticTimeConstant:
             memberShip(kineticTimeConstant, KineticTimeConstant)
+            pass
         else:
             kineticTimeConstant=KineticTimeConstant(1.0e+4)
             pass
@@ -1242,8 +1292,11 @@ class SolubilityByElement(SolubilityLaw):
                         listbid=1
                         pass
                     pass
+                pass
             else:
                 memberShip(kineticTimeConstant, KineticTimeConstant)
+                pass
+            pass
         else:
             kineticTimeConstant=KineticTimeConstant(1.0e+4)
             pass
@@ -1387,9 +1440,10 @@ class StateLaw(PhysicalLaw):
         listRefClasses=[RefPressure,RefConcentration,RefTemperature]
         if len(varCoeffs):
             self.law=[]
+            pass
         for vc in varCoeffs:
             if type(vc) not in [TupleType,ListType]:
-                raise Exception, "vc must be a list"
+                raise Exception("vc must be a list")
             varIsSpecified=0
             refIsSpecified=0
             for i in range(len(vc)):
@@ -1398,6 +1452,8 @@ class StateLaw(PhysicalLaw):
                         varIsSpecified=1
                         varindex=i
                         indexvar=listVarClasses.index(vc[i])
+                        pass
+                    pass
                 if isInstance(vc[i],listRefClasses):
                     refIsSpecified=1
                     refindex=i
@@ -1421,6 +1477,7 @@ class StateLaw(PhysicalLaw):
             coeffs=[]
             for x in vc:
                 coeffs.append(x)
+                pass
             law={}
             law['variable']=var
             coeffs.remove(p0)
@@ -1431,17 +1488,20 @@ class StateLaw(PhysicalLaw):
                 raise Exception(msg)
             law['variableRef']=p0
             listTypeCheck(coeffs,[FloatType,IntType])
-            map(lambda x:float(x),coeffs)
+            list(map(lambda x:float(x),coeffs))
             law['coefficients']=coeffs
             law['lawType']=self.getLawType(var)
             self.law.append(law)
+            pass
 
     def getLawType(self,lawvar):
         """get LawType : polynomial or exponential"""
         if lawvar in [Temperature,Concentration]:
             lawtype='polynomial'
+            pass
         elif lawvar==Pressure:
             lawtype='exponential'
+            pass
         else:
             raise Exception('Unknown variable for waterLaw')
         return lawtype
@@ -1455,6 +1515,7 @@ class StateLaw(PhysicalLaw):
         for law in self.law:
             if law['variable']==variable_class:
                 return law['coefficients']
+            pass
         
 
     def getDepend(self):
@@ -1469,6 +1530,7 @@ class StateLaw(PhysicalLaw):
         liste=[]
         for law in self.law:
             liste.append(law['variable'].__name__)
+            pass
         return liste
 
 class DensityLaw(StateLaw):
@@ -1490,6 +1552,8 @@ class ViscosityLaw(StateLaw):
                    isInstance(vc[i], no):
                     msg='Viscosity cannot depend on Pressure.'
                     raise Exception(msg)
+                pass
+            pass
                 
                 
 class FickAirDissousLaw(PhysicalLaw):
@@ -1511,7 +1575,7 @@ class FickAirDissousLaw(PhysicalLaw):
         dict['ficka_pl']='fapl'
         from functions import DerivableFunction,DerivableFunctionconst,Interval
         import types
-        if(not args.has_key('ficka_t')):
+        if('ficka_t' not in args):
             raise Exception("FickAirDissousLaw, ficka_t(emperature) doit etre present")
 
         self.func = []
@@ -1546,22 +1610,29 @@ class FickAirDissousLaw(PhysicalLaw):
             elif  isinstance(args[k],DerivableFunction):
                 if k == ('ficka_t' ) and args[k].derivee == None :
                     raise Exception(" ficka_t, Vous devez fournir la derivee")
-                if  (k == 'ficka_s' or k == 'ficka_pa' or k == 'ficka_pl' )  and args[k].derivee <> None:
-                    print " derivee devrait etre nulle ",k,args[k].derivee 
+                if  (k == 'ficka_s' or k == 'ficka_pa' or k == 'ficka_pl' )  and args[k].derivee != None:
+                    print(" derivee devrait etre nulle ",k,args[k].derivee) 
                     if args[k].interval == None:
                         fonc =  DerivableFunction(args[k])
+                        pass
                     else:
                         fonc =DerivableFunction(args[k].fonction, interval= args[k].interval)
+                        pass
                     args[k]=fonc
+                    pass
                 argument = args[k]
+                pass
             else:
                 raise Exception("On attend une DerivableFunction, ou une constante ou un tuple")
             self.func.append((argument,dict[k]))
+            pass
 #traitement des donnees manquantes
         for k in dict.keys():
-            if(not args.has_key(k)):
+            if(k not in args):
                 argument = DerivableFunctionconst(1.)
                 self.func.append((argument,dict[k]))
+                pass
+            pass
     def getArgs(self):
         return self.Args
             
@@ -1569,7 +1640,7 @@ class FickAirDissousLaw(PhysicalLaw):
 class ThermalconductivityLaw(PhysicalLaw):
     """    
     Thm thermal conductivity based on the product of 3 functions, each having one variable
-    			     as unknown ( temperature, saturation, porosity) plus a constant.
+                     as unknown ( temperature, saturation, porosity) plus a constant.
     Only the function with temperature as unknown is mandatory.
     """
     def __init__(self, **args):
@@ -1581,42 +1652,51 @@ class ThermalconductivityLaw(PhysicalLaw):
         dict['lamb_ct']='laco' 
         from functions import DerivableFunction, DerivableFunctionconst, Interval
         import types      
-        if(not args.has_key('lamb_t')):
+        if('lamb_t' not in args):
             raise Exception("lamb_t doit etre present")
-        if(args.has_key('lamb_ct')):
+        if('lamb_ct' in args):
             if( not isinstance(args['lamb_ct'],FloatType) and  not isinstance(args['lamb_ct'],IntType)):
                 raise Exception("lamb_ct doit etre constant")
         self.func = []
         for k in args.keys():
             if isinstance(args[k],FloatType) or isinstance(args[k],IntType ):
                 argument = DerivableFunctionconst(args[k])
+                pass
             elif isinstance(args[k],TupleType):
                 if len(args[k]) == 3 :
                     argument = DerivableFunction(args[k][0], args[k][1], args[k][2])
+                    pass
                 elif len(args[k]) == 1 :
                     if k == 'lamb_t' or k == 'lamb_phi' or k == 'lamb_s':
                         raise Exception("lamb Vous devez fournir la derivee",k)
                     argument = DerivableFunction(args[k][0])
+                    pass
                 elif len(args[k]) == 2:
                     if isinstance(args[k][1],Interval):
                         if k == 'lamb_t' or k == 'lamb_phi' or k == 'lamb_s':
                             raise Exception("lamb, Vous devez fournir la derivee")
                         else:
                             argument = DerivableFunction(args[k][0],interval=args[k][1])
+                            pass
+                        pass
                     else:
                         argument = DerivableFunction(args[k][0],derivee=args[k][1])
+                        pass
+                    pass
                 else:
                     pass
+                pass
             elif  isinstance(args[k],DerivableFunction):
                 if ( k == 'lamb_t' or k == 'lamb_phi' or k == 'lamb_s') and args[k].derivee == None :
                     raise Exception(", Vous devez fournir la derivee")
                 argument = args[k]
+                pass
             else:
                 raise Exception("On attend une DerivableFunction, ou une constante ou un tuple")
             self.func.append((argument,dict[k]))
 #traitement des donnees manquantes
         for k in dict.keys():
-            if(not args.has_key(k)):
+            if(k not in args):
                 if k == 'lamb_ct' :
                     argument = DerivableFunctionconst(0.)
                 else:
@@ -1640,26 +1720,30 @@ class MeanThermalConductivityLaw(PhysicalLaw):
     """
     def __init__(self, meanLaw = None):
         if (meanLaw == None) or meanLaw not in ["geometric","harmonic"]:
-            print "The mean law for thermal conductivity is defined by default as an arithmetic law"
-	    self.meanLaw = "arithmetic"
-	else:
-	    self.meanLaw = meanLaw
-	self.solidThermalConductivity = solidThermalConductivity
-	if fluidThermalConductivity == None:
-	    self.fluidThermalConductivity = 0.
-	    self.meanLaw = "arithmetic"
-	else:    
-	    self.fluidThermalConductivity = fluidThermalConductivity
-	self.porosity = porosity
-	
+            print("The mean law for thermal conductivity is defined by default as an arithmetic law")
+            self.meanLaw = "arithmetic"
+            pass
+        else:
+            self.meanLaw = meanLaw
+            pass
+        self.solidThermalConductivity = solidThermalConductivity
+        if fluidThermalConductivity == None:
+            self.fluidThermalConductivity = 0.
+            self.meanLaw = "arithmetic"
+            pass
+        else:    
+            self.fluidThermalConductivity = fluidThermalConductivity
+            pass
+        self.porosity = porosity
+    
     def eval(self,porosity, solidThermalConductivity, fluidThermalConductivity = None):
         if self.meanLaw == "geometric":
-	    return self.solidThermalConductivity**(1.-self.porosity) + self.fluidThermalConductivity**self.porosity
+            return self.solidThermalConductivity**(1.-self.porosity) + self.fluidThermalConductivity**self.porosity
         elif self.meanLaw == "harmonic":
-	    return (1.-self.porosity)/self.solidThermalConductivity + self.porosity/self.fluidThermalConductivity
-	else:
+            return (1.-self.porosity)/self.solidThermalConductivity + self.porosity/self.fluidThermalConductivity
+        else:
             return (1.-self.porosity)*self.solidThermalConductivity + self.porosity*self.fluidThermalConductivity
-	    
+        
     def getLaw(self):
         return self.meanLaw
 
@@ -1669,10 +1753,12 @@ class MeanThermalConductivityLaw(PhysicalLaw):
         aux = 1.
         from functions import DerivableFunction
         for k in self.Args.keys():
-	    if isinstance(self.Args[k],DerivableFunction):
-	        aux = aux*self.Args[k].eval(x)
-	    else:
-	        aux = aux*self.Args[k]
+            if isinstance(self.Args[k],DerivableFunction):
+                aux = aux*self.Args[k].eval(x)
+                pass
+            else:
+                aux = aux*self.Args[k]
+                pass
         return aux
     pass
 
@@ -1687,18 +1773,18 @@ class MeanHeatCapacityLaw(PhysicalLaw):
 
     def __init__(self, porosity, solidHeatCapacity, fluidHeatCapacity, solidDensity, fluidDensity):
 
-	if type(porosity) != FloatType:
-	    raise Exception, "porosity must be a float"
-	self.porosity = porosity
-	memberShip(solidHeatCapacity, HeatCapacity)
-	self.solidHeatCapacity = solidHeatCapacity
-	memberShip(fluidHeatCapacity, HeatCapacity)
-	self.fluidHeatCapacity = fluidHeatCapacity
-	memberShip(solidDensity, Density)
-	self.solidDensity = solidDensity
-	memberShip(fluidDensity, Density)
-	self.fluidDensity = fluidDensity
-	
+        if type(porosity) != FloatType:
+            raise Exception("porosity must be a float")
+        self.porosity = porosity
+        memberShip(solidHeatCapacity, HeatCapacity)
+        self.solidHeatCapacity = solidHeatCapacity
+        memberShip(fluidHeatCapacity, HeatCapacity)
+        self.fluidHeatCapacity = fluidHeatCapacity
+        memberShip(solidDensity, Density)
+        self.solidDensity = solidDensity
+        memberShip(fluidDensity, Density)
+        self.fluidDensity = fluidDensity
+    
     def eval(self):
         """
         evaluation of the mean heat capacity
@@ -1706,7 +1792,7 @@ class MeanHeatCapacityLaw(PhysicalLaw):
         auxf = self.porosity*self.fluidDensity
         auxs = (1.-self.porosity)*self.solidDensity
         return (auxf*self.fluidHeatCapacity+auxs*self.solidHeatCapacity)/(auxf+auxs)
-	    
+        
     ## To get the mean law
     # @return a string corrsesponding of the mean law used
     def getLaw(self):

@@ -2,13 +2,15 @@
 """
 common problem
 
-We define here the ground for all problems to be defined within
+We define here the base of all problems to be defined within
 the coupling.
 
 """
 
 # -- __init__
 
+from __future__ import absolute_import
+from __future__ import print_function
 from generictools import isInstance, memberShip
 
 from listtools import toList
@@ -17,12 +19,14 @@ from cartesianmesh import CartesianMesh
 
 from mesh import Body
 
-from PhysicalQuantities import Head, Pressure
+from PhysicalQuantities import Head, Pressure, Displacement, NormalForce
 
 from types import ListType, StringType, TupleType
 
 from typechecktools import verifyClass, verifyClassList
 
+from types import DictType
+from six.moves import range
 
 ## - Specific Problem class definition
 class CommonBoundaryCondition_old:
@@ -43,8 +47,8 @@ class CommonBoundaryCondition_old:
 #        verifyClass(boundary,[CartesianMesh,Body])
         self.boundary = boundary
         if type(kind) != StringType:
-            raise TypeError," type should be a string"
-        if kind not in bcdict.keys(): raise Exception, " check the boundary condition type "
+            raise TypeError(" type should be a string")
+        if kind not in list(bcdict.keys()): raise Exception(" check the boundary condition type ")
         self.type = kind
 
         value = toList(value)
@@ -64,16 +68,20 @@ class CommonBoundaryCondition_old:
                     memberShip(checked, bcdict[kind])
                     pass
                 pass
+            pass
         if not self.value_species:
             from PhysicalQuantities import PhysicalQuantity
             from species import createList
-            print value
+            print(value)
             self.value_species, self.value_property = createList(value, PhysicalQuantity)
             pass
+
         if description == None:
             self.description = ""
+            pass
         else:
             self.description = description
+            pass
         return
 
 class CommonBoundaryCondition:
@@ -92,36 +100,85 @@ class CommonBoundaryCondition:
         
         - bcdict : a dictionnary with key = type of boundary condition and value = Possible class of boundary condition value
         
-        All boundary conditions satisfy that format. It enables the lecture of hydraulic and chemical-transport boundary conditions.
+        All boundary conditions satisfy that format. It should enable the lecture of hydraulic, mechanical and chemical-transport boundary conditions.
         
-        """          
+        Exemple: bcdict = {'Flux': [class chemistry.ChemicalState , class PhysicalQuantities.HeadGradient],
+                   'Dirichlet': [class chemistry.ChemicalState, class PhysicalQuantities.Head,\
+                         class PhysicalQuantities.Displacement, class PhysicalQuantities.NormalForce], 
+                   'Neumann': [class chemistry.ChemicalState, class PhysicalQuantities.HeadGradient]}
+        
+        """   
+        self.value = None       
         self.value_species = None
         #print " here we are 1, bcdict ", bcdict
         #print " here we are 2, bcdict ", bcdict.keys()
         #print value
         #raw_input()
+        #print("dbg bcdict ",list(bcdict.keys()))
         if isInstance(boundary,[CartesianMesh, Body]):
             pass
         else:
             memberShip(boundary.support,[CartesianMesh, Body])
+            pass
 
-#        verifyClass(boundary,[CartesianMesh,Body])
         self.boundary = boundary
-        if type(btype) != StringType:
-            raise TypeError," type should be a string "
-        if btype not in bcdict.keys(): raise Exception, " check the boundary condition type "
+        if type(btype) != StringType: raise TypeError(" type should be a string ")
+        if btype not in list(bcdict.keys()): 
+            print("bcdict.keys():",list(bcdict.keys()))
+            print("btype : ",btype)
+            raise Exception(" check the boundary condition type ")
         self.type = btype
-        print "value: ",type(value.__class__.__name__),value.__class__.__name__
-        print "dbg bcdict ",bcdict.keys()
+        print("value: ",type(value.__class__.__name__),value.__class__.__name__)
+        #print "dbg bcdict ",bcdict.keys()
         #raw_input( "valuefffffffff     fff")
-        if value.__class__.__name__=='Head':
-            print "valueeeee Head",value.__class__.__name__
-        else:
-            print "valueeeee",value.__class__.__name__
-        #raw_input("value: ")
-        if isinstance(value,Head):
-            #raw_input( "valuefffffffff")
-            print value
+        #if value.__class__.__name__ == 'Head':
+        #    print "valueeeee Head",value.__class__.__name__
+        #else:
+        #    print "valueeeef",value.__class__.__name__
+        if isinstance(value,ListType):
+            print(" value is of type ListType")
+            for val in value:
+                if isinstance(val,Displacement):
+                    self.value = {"Displacement":val.getValue()}
+                    pass
+                elif isinstance(val,NormalForce):
+                    if self.value != None:
+                        self.value["NormalForce"] = val.getValue()
+                        pass
+                    else:
+                        self.value = {"NormalForce":val.getValue()}
+                        pass
+                elif isinstance(value,Head):
+                    valeurs=toList (val)
+                    for vale in valeurs:
+                        if type(val) is TupleType:
+                            checked = val[0] 
+                            for i in range(1,len(val)):
+                                memberShip(val[i], Species)
+                                pass
+                            pass
+                        else:
+                            checked = val
+                            pass
+                        pass
+                    pass
+
+        elif isinstance(value,Displacement):
+            print(" value is of type Displacement")
+            self.value = {"Displacement":value.getValue()}
+            pass
+        elif isinstance(value,NormalForce):
+            print(" value is of type NormalForce")
+            if self.value != None:
+                self.value["NormalForce"] = value.getValue()
+                pass
+            else:
+                self.value = {"NormalForce":value.getValue()}
+                pass
+            pass
+            
+        elif isinstance(value,Head):
+            print(" value is of type Head")
             from datamodel import Species
             value=toList (value)
             for val in value:
@@ -140,13 +197,20 @@ class CommonBoundaryCondition:
                         #raw_input("here we are")
                         pass
                     pass
+                pass
             if not self.value_species:
                 from PhysicalQuantities import PhysicalQuantity
                 from species import createList
-                print value
+                print(value)
                 self.value_species, self.value_property = createList(value, PhysicalQuantity)
                 pass
-        self.description = description
+
+        if description == None:
+            self.description = None
+            pass
+        else:
+            self.description = description
+            pass
         return None
 
     def getBoundary (self):
@@ -167,11 +231,39 @@ class CommonBoundaryCondition:
         """
         return self.boundary.support
 
+    def getDisplacementValue(self, displacement = None):
+        """
+        get the displacement components, if any. Value can be a dictionary or a 
+        """
+        print("getDisplacementValue",self.value)
+        if type(self.value) == DictType:
+            if "Displacement" in list(self.value.keys()):
+                return self.value["Displacement"]
+        elif isinstance(self.value,Displacement):
+            return self.value
+        else:
+            return None
+
+    def getNormalForceValue(self, normalForce = None):
+        """
+        get the normal force value, if any
+        """
+        if type(self.value) == DictType:
+            if "NormalForce" in list(self.value.keys()):
+                return self.value["NormalForce"]
+            pass
+        elif isinstance(self.value,NormalForce):
+            return self.value
+        else:
+            return None
+
     def getValue(self, species = None):
         """
         get boundary conditions value
         """
         return _getValue(species, self.value_species, self.value_property)
+        
+    getChemicalValue = getValue
 
     def getType(self):
         """
@@ -184,9 +276,9 @@ class CommonBoundaryCondition:
 class CommonInitialCondition:
     """
     Common InitialCondition definition. 
-    It means we can use that class for any kind of problem, hydraulic, chemical/transport ...
+    It means we should use that class for any kind of problem, hydraulic, chemical/transport ...
     """    
-    def __init__(self, body = None, value = None):
+    def __init__(self, body = None, value = None, description = None):
         """
         domain can be a region of the domain, it could also be a simple body associated to .
         """
@@ -194,7 +286,9 @@ class CommonInitialCondition:
             pass
         else:
             memberShip(body.support,[CartesianMesh, Body])
+            pass
         self.body   = body
+        self.zone = body
         self.domain = body
         
 #        if domain !=None:
@@ -211,13 +305,44 @@ class CommonInitialCondition:
         if not isinstance(value,(Head,Pressure)):
             pass
         else:
-            print "dbg CommonInitialCondition",value
+            #print "dbg CommonInitialCondition",value
             if type(value) == None:
                 self.value = Head(0.0,"m")
+                pass
             elif isinstance(value,Head):
                 self.value = value
+                pass
             else:
-                raise Exception, " to modify, the pressure must be scaled to be entered as a head"
+                raise Exception(" to modify, the pressure must be scaled to be entered as a head")
+        if not isinstance(value,(Displacement)):
+            pass
+        else:
+            #print "dbg CommonInitialCondition",value
+            if type(value) == None:
+                self.value = Displacement(0.0,"m")
+                pass
+            elif isinstance(value,Displacement):
+                self.value = value
+                pass
+            else:
+                raise Exception(" to modify, the pressure must be scaled to be entered as a head")
+        if description == None:
+            self.description = None
+            pass
+        else:
+            self.description = description
+            pass
+        return None
+
+    def getBody(self):
+        """
+        to retrieve the domain
+        
+        """
+        if isInstance(self.body,Body):
+            return self.body
+        else:
+            return None
 
     def getDomain(self):
         """
@@ -229,7 +354,7 @@ class CommonInitialCondition:
         """
         syntaxic equivalence
         """
-        return self.domain
+        return self.body
 
     def getSupport(self):
         """
@@ -243,6 +368,16 @@ class CommonInitialCondition:
         get initial conditions Value
         """
         return self.value.getValue()
+
+    def getZone(self):
+        """
+        to retrieve the domain
+        
+        """
+        if isInstance(self.body,Body):
+            return self.body
+        else:
+            return None
 
 class CommonSource:
     """Common Source definition"""
@@ -273,7 +408,7 @@ class CommonSource:
          if a species is specified,
                 return the associated source value
          else return the default value"""
-         return _getValue(species,self.value_species, self.value_property)
+         return _getValue(species, self.value_species, self.value_property)
     pass
 
 class CommonExpectedOutput:
@@ -324,10 +459,11 @@ class CommonExpectedOutput:
                  name = None, unit = None, timeSpecification = None,
                  where = None, unknown = [],save = 'memory',chemical = 0):
         if type(quantity) != StringType:
-            raise TypeError, " the quantity must be a string "
+            raise TypeError(" the quantity must be a string ")
         alltypeupper = [q.upper() for q in alltype]
+        #print "alltypeupper",alltypeupper
         quantityupper = quantity.upper()
-        if quantityupper not in alltypeupper: raise Exception, "the quantity must be checked in Output"
+        if quantityupper not in alltypeupper: raise Exception("the quantity "+quantityupper+" must be checked in Output")
         self.quantity = quantity
 
         mecanic = ( chemical == 2)
@@ -338,15 +474,16 @@ class CommonExpectedOutput:
         if quantityupper in hydrau_transport_type and not chemical:
             supports=toList(support)
             if len(supports) != 1:
-                raise Exception, "The support hans not the good length"
+                raise Exception("The support hans not the good length")
             # Support should be Point or Zone
             verifyClassList(supports, [CartesianMesh])
+            pass
         elif (quantityupper == 'FLUX'):
             # Support should be TupleType of Boundary, Zone
             if type(support) != TupleType:
-                raise TypeError, " support should be a tuple "
+                raise TypeError(" support should be a tuple ")
             if (len(support) !=2):
-                raise Exception, "support must have a length of 2"
+                raise Exception("support must have a length of 2")
             fzone = support[1]
             fbound =  support[0]
             fbounds = toList(fbound)
@@ -360,44 +497,48 @@ class CommonExpectedOutput:
         elif quantityupper in ['TOTALFLUX','TOTALINFLUX']:
             supports=toList(support)
             if len(supports) != 1:
-                raise Exception, "the support has not the good length"
+                raise Exception("the support has not the good length")
             # Support should be Zone
             verifyClassList(supports, [CartesianMesh])
+            pass
         else:
-	    if support and chemical:
+            if support and chemical:
                 # chemical transport quantity : support is optionnal
-		memberShip(support, [CartesianMesh])
-		pass
-	    elif mecanic:
-		# mecanic quantity :    support class is verified by XData      
-            	pass
+                memberShip(support, [CartesianMesh])
+                pass
+            elif mecanic:
+                # mecanic quantity :    support class is verified by XData      
+                pass
+            pass
         self.support = support
 
         if name:
             if type(name) != StringType:
-                raise TypeError, "the name of a CommonExpectedOutput must be a string"
+                raise TypeError("the name of a CommonExpectedOutput must be a string")
             self.name = name
             pass
         else:
             self.name = self.quantity
+            pass
         #
         if unit:
             if type(unit) != StringType:
-                raise TypeError," unit should be a string "
+                raise TypeError(" unit should be a string ")
         self.unit = unit
 
-	if timeSpecification:
+        if timeSpecification:
             from timespecification import TimeSpecification
             memberShip(timeSpecification, TimeSpecification)
             mode=timeSpecification.getSpecification()
-            if mode not in ['frequency','period','times']: raise Exception, " check the mode argument in CommonExpectedOutput"
+            if mode not in ['frequency','period','times']: raise Exception(" check the mode argument in CommonExpectedOutput")
             pass
         self.timeSpecification = timeSpecification
 
         self.where=where
 
         if save:
-            if save not in ['memory','file']: raise Exception, " check the save argument in CommonExpectedOutput"
+            if save not in ['memory','file']: raise Exception(" check the save argument in CommonExpectedOutput")
+            pass
         self.save = save
 
         if unknown:
@@ -405,24 +546,27 @@ class CommonExpectedOutput:
                 if type(unknown) is ListType:
                     for unbekannte in unknown:
                         if type(unbekannte) != StringType:
-                            raise TypeError, " unknown should be a string "
+                            raise TypeError(" unknown should be a string ")
                             pass
                         pass
                     pass
                 else:
                     if type(unknown) != StringType:
-                        raise TypeError, " the unknown must be a string "
+                        raise TypeError(" the unknown must be a string ")
                     pass
                 pass
             elif mecanic:
                 unknown=toList(unknown)
                 for u in unknown:
                     if type(u) != StringType:
-                        raise TypeError, " u should be a string "
+                        raise TypeError(" u should be a string ")
                     pass
+                pass
             else:
                 from datamodel import  Species
                 verifyClassList(unknown,Species)
+                pass
+            pass
         self.unknown=unknown
 
     def getTimeSpecification(self):
@@ -458,8 +602,6 @@ class CommonExpectedOutput:
         except:
             return self
 
-    pass
-
 class CommonExpectedOutput_old:
     """Common ExpectedOutput definition. A field, a set of fields or a value"""
     def __init__(self, alltype,facetype,quantity, support, name = None, unit=None,
@@ -485,8 +627,8 @@ class CommonExpectedOutput_old:
         """
 
         if type(quantity) != StringType:
-            raise TypeError, " quantity for CommonExpectedOutput_old should be a string"
-        if quantity not in alltype: raise Exception, "check the quantity you want to plot "
+            raise TypeError(" quantity for CommonExpectedOutput_old should be a string")
+        if quantity not in alltype: raise Exception("check the quantity you want to plot ")
         self.quantity = quantity
 
         partialtype = alltype[:]
@@ -497,7 +639,7 @@ class CommonExpectedOutput_old:
         if self.quantity in partialtype:
             supports=toList(support)
             if len(supports) != 1:
-                raise Exception, " the support has not the good length"
+                raise Exception(" the support has not the good length")
             verifyClassList(supports, [CartesianMesh])
             for sup in supports:                    
                 pass
@@ -505,9 +647,9 @@ class CommonExpectedOutput_old:
         elif (self.quantity == 'Flux'):
             # Support should be TupleType of Boundary, Zone
             if type(support) != TupleType:
-                raise TypeError, " support should be a tuple "
+                raise TypeError(" support should be a tuple ")
             if (len(support) !=2):
-                Message = `len(support[sup])` + ' MedSupport given, 2 wanted for a flux expected output'
+                Message = repr(len(support[sup])) + ' MedSupport given, 2 wanted for a flux expected output'
                 raise Message
             fzone = support[1]
             fbound =  support[0]
@@ -519,7 +661,7 @@ class CommonExpectedOutput_old:
         elif self.quantity in ['TotalFlux','TotalInflux']:
             supports=toList(support)
             if len(supports) !=1:
-                raise Exception, " the support has not the good length "
+                raise Exception(" the support has not the good length ")
             # Support should be Zone
             verifyClassList(supports, [MedSupport, CartesianMesh])
             for sup in supports:                    
@@ -529,7 +671,7 @@ class CommonExpectedOutput_old:
 
         if name:
             if type(name) != StringType:
-                raise TypError, "name should be a string  within CommonExpectedOutput_old"
+                raise TypError("name should be a string  within CommonExpectedOutput_old")
             self.name = name
             pass
         else:
@@ -537,14 +679,14 @@ class CommonExpectedOutput_old:
         #
         if unit: 
             if type(unit)  != StringType:
-                raise typeError, " unit should be a string "
+                raise typeError(" unit should be a string ")
         self.unit = unit
 
-	if timeSpecification:
+        if timeSpecification:
             from timespecification import TimeSpecification
             memberShip(timeSpecification, TimeSpecification)
             mode=timeSpecification.getSpecification()
-            if mode not in ['frequency','period','times']: raise Exception, " check the mode argument in CommonExpectedOutput"
+            if mode not in ['frequency','period','times']: raise Exception(" check the mode argument in CommonExpectedOutput")
             pass
         self.timespecification = timeSpecification
 
@@ -704,6 +846,7 @@ class CommonInitialConditionOld:
             from datamodel import createList
             from datamodel import PhysicalQuantity
             self.value_species, self.value_property = createList(val_solub, PhysicalQuantity)
+            pass
         if val_solid:
             from datamodel import createList
             from datamodel import PhysicalQuantity
@@ -746,13 +889,13 @@ class CommonInitialCondition_old:
         #
         #
         #
-        print "dbg CommonInitialCondition",value
+        print("dbg CommonInitialCondition",value)
         if type(value) == None:
             self.value = Head(0.0,"m")
         elif isinstance(value,Head):
             self.value = value
         else:
-            raise Exception, " to modify, the pressure must be scaled "
+            raise Exception(" to modify, the pressure must be scaled ")
 
     def getDomain(self):
         """get initial conditions  zones"""

@@ -72,8 +72,6 @@ class SaturatedHydraulicProblem(HydraulicProblem):
 
 
     
-    pass
-
 ## - Specific Problem class definition
 class BoundaryCondition(CommonBoundaryCondition):
     """
@@ -94,19 +92,17 @@ class BoundaryCondition(CommonBoundaryCondition):
                                          Neumann=[HeadGradient,PressureGradient],
                                          Flux=[HydraulicFlux])
 
-        CommonBoundaryCondition.__init__(self,boundary, btype, value, boundaryConditionDico, porosity = None, description = None)
-        pass
-    pass
-
+        CommonBoundaryCondition.__init__(self,boundary, btype, value,\
+                                         boundaryConditionDico, porosity = None, description = None)
 
 
 class ExpectedOutput(CommonExpectedOutput):
     """
-    Specific SaturatedHydraulicProblem ExpectedOutput definition. 
+    Specific SaturatedHydraulicProblem ExpectedOutput definition.
     """
     def __init__(self, quantity, support, name = None, unit=None,where=None):
         """
-        ExpectedOutput initialisation with :
+          ExpectedOutput initialisation with :
         - an expected output quantity.
           It can be Head, Flowrate, Pressure, Flux, DarcyVelocity, TotalFlux or
           TotalInflux

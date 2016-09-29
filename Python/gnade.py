@@ -105,9 +105,13 @@ Zooming controls with mouse (when enabled):
     Right mouse click - zoom out centred on click location.
 """
 
+from __future__ import absolute_import
+from __future__ import print_function
 import  string as _string
 import  time as _time
 import  wx
+from six.moves import map
+from six.moves import range
 
 # Needs Numeric or numarray or numpy
 try:
@@ -125,7 +129,7 @@ except:
             (it's not part of the standard Python distribution). See the
             Numeric Python site (http://numpy.scipy.org) for information on
             downloading source or binaries."""
-            raise ImportError, "Numeric,numarray or NumPy not found. \n" + msg
+            raise ImportError("Numeric,numarray or NumPy not found. \n" + msg)
 
 
 
@@ -146,9 +150,10 @@ class PolyPoints:
         self.attributes = {}
         self.attributes.update(self._attributes)
         for name, value in attr.items():   
-            if name not in self._attributes.keys():
-                raise KeyError, "Style attribute incorrect. Should be one of %s" % self._attributes.keys()
+            if name not in list(self._attributes.keys()):
+                raise KeyError("Style attribute incorrect. Should be one of %s" % list(self._attributes.keys()))
             self.attributes[name] = value
+            pass
         
     def setLogScale(self, logscale):
         self._logscale = logscale
@@ -159,13 +164,15 @@ class PolyPoints:
                 data = _Numeric.array(self._points,copy=True)
                 if self._logscale[0]:
                     data = self.log10(data, 0)
+                    pass
                 if self._logscale[1]:
                     data = self.log10(data, 1)
+                    pass
                 return data
             else:
                 return self._points
         else:
-            raise AttributeError, name
+            raise AttributeError(name)
             
     def log10(self, data, ind):
         data = _Numeric.compress(data[:,ind]>0,data,0)
@@ -178,9 +185,11 @@ class PolyPoints:
             # defaults to (-1,-1) and (1,1) but axis can be set in Draw
             minXY= _Numeric.array([-1.0,-1.0])
             maxXY= _Numeric.array([ 1.0, 1.0])
+            pass
         else:
             minXY= _Numeric.minimum.reduce(self.points)
             maxXY= _Numeric.maximum.reduce(self.points)
+            pass
         return minXY, maxXY
 
     def scaleAndShift(self, scale=(1,1), shift=(0,0)):
@@ -192,10 +201,11 @@ class PolyPoints:
             self.scaled = scale*self.points+shift
             self.currentScale= scale
             self.currentShift= shift
+            pass
         # else unchanged use the current scaling
         
     def getLegend(self):
-        print " polyline legend ",self.attributes['legend']
+        print(" polyline legend ",self.attributes['legend'])
         return self.attributes['legend']
 
     def getClosestPoint(self, pntXY, pointScaled= True):
@@ -208,10 +218,12 @@ class PolyPoints:
             #Using screen coords
             p = self.scaled
             pxy = self.currentScale * _Numeric.array(pntXY)+ self.currentShift
+            pass
         else:
             #Using user coords
             p = self.points
             pxy = _Numeric.array(pntXY)
+            pass
         #determine distance for each point
         d= _Numeric.sqrt(_Numeric.add.reduce((p-pxy)**2,1)) #sqrt(dx^2+dy^2)
         pntIndex = _Numeric.argmin(d)
@@ -252,8 +264,10 @@ class PolyLine(PolyPoints):
         dc.SetPen(pen)
         if coord == None:
             dc.DrawLines(self.scaled)
+            pass
         else:
             dc.DrawLines(coord) # draw legend line
+            pass
 
     def getSymExtent(self, printerScale):
         """Width and Height of Marker"""
@@ -310,18 +324,24 @@ class PolyMarker(PolyPoints):
 
         if colour and not isinstance(colour, wx.Colour):
             colour = wx.NamedColour(colour)
+            pass
         if fillcolour and not isinstance(fillcolour, wx.Colour):
             fillcolour = wx.NamedColour(fillcolour)
+            pass
             
         dc.SetPen(wx.Pen(colour, width))
         if fillcolour:
             dc.SetBrush(wx.Brush(fillcolour,fillstyle))
+            pass
         else:
             dc.SetBrush(wx.Brush(colour, fillstyle))
+            pass
         if coord == None:
             self._drawmarkers(dc, self.scaled, marker, size)
+            pass
         else:
             self._drawmarkers(dc, coord, marker, size) # draw legend marker
+            pass
 
     def getSymExtent(self, printerScale):
         """Width and Height of Marker"""
@@ -374,6 +394,7 @@ class PolyMarker(PolyPoints):
         for f in [[-fact,0,fact,0],[0,-fact,0,fact]]:
             lines= _Numeric.concatenate((coords,coords),axis=1)+f
             dc.DrawLineList(lines.astype(_Numeric.Int32))
+            pass
 
 class PlotGraphics:
     """Container to hold PolyXXX objects and graph labels
@@ -388,7 +409,7 @@ class PlotGraphics:
         yLabel - label shown on y-axis
         """
         if type(objects) not in [list,tuple]:
-            raise TypeError, "objects argument should be list or tuple"
+            raise TypeError("objects argument should be list or tuple")
         self.objects = objects
         self.title= title
         self.xLabel= xLabel
@@ -396,11 +417,11 @@ class PlotGraphics:
 
     def setLogScale(self, logscale):
         if type(logscale) != tuple:
-            raise TypeError, 'logscale must be a tuple of bools, e.g. (False, False)'
+            raise TypeError('logscale must be a tuple of bools, e.g. (False, False)')
         if len(self.objects) == 0:
             return
-        for o in self.objects:
-            o.setLogScale(logscale)
+        for obj in self.objects:
+            obj.setLogScale(logscale)
         
     def boundingBox(self):
         p1, p2 = self.objects[0].boundingBox()
@@ -408,11 +429,12 @@ class PlotGraphics:
             p1o, p2o = o.boundingBox()
             p1 = _Numeric.minimum(p1, p1o)
             p2 = _Numeric.maximum(p2, p2o)
+            pass
         return p1, p2
 
     def scaleAndShift(self, scale=(1,1), shift=(0,0)):
-        for o in self.objects:
-            o.scaleAndShift(scale, shift)
+        for obj in self.objects:
+            obj.scaleAndShift(scale, shift)
 
     def setPrinterScale(self, scale):
         """Thickens up lines and markers only for printing"""
@@ -443,17 +465,17 @@ class PlotGraphics:
         return self.title
 
     def draw(self, dc):
-        for o in self.objects:
+        for obj in self.objects:
             #t=_time.clock()          # profile info
-            o.draw(dc, self.printerScale)
+            obj.draw(dc, self.printerScale)
             #dt= _time.clock()-t
             #print o, "time=", dt
 
     def getSymExtent(self, printerScale):
         """Get max width and height of lines and markers symbols for legend"""
         symExt = self.objects[0].getSymExtent(printerScale)
-        for o in self.objects[1:]:
-            oSymExt = o.getSymExtent(printerScale)
+        for obj in self.objects[1:]:
+            oSymExt = obj.getSymExtent(printerScale)
             symExt = _Numeric.maximum(symExt, oSymExt)
         return symExt
     
@@ -692,6 +714,7 @@ class PlotCanvas(wx.Panel):
         print_ok = printer.Print(self.parent, out)
         if print_ok:
             self.print_data = wx.PrintData(printer.GetPrintDialogData().GetPrintData())
+            pass
         out.Destroy()
 
     def PrintPreview(self):
@@ -708,6 +731,7 @@ class PlotCanvas(wx.Panel):
         frameInst= self
         while not isinstance(frameInst, wx.Frame):
             frameInst= frameInst.GetParent()
+            pass
         frame = wx.PreviewFrame(self.preview, frameInst, "Preview")
         frame.Initialize()
         frame.SetPosition(self.GetPosition())
@@ -717,11 +741,12 @@ class PlotCanvas(wx.Panel):
 
     def setLogScale(self, logscale):
         if type(logscale) != tuple:
-            raise TypeError, 'logscale must be a tuple of bools, e.g. (False, False)'
+            raise TypeError('logscale must be a tuple of bools, e.g. (False, False)')
         if self.last_draw is not None:
             graphics, xAxis, yAxis= self.last_draw
             graphics.setLogScale(logscale)
             self.last_draw = (graphics, None, None)
+            pass
         self.SetXSpec('min')
         self.SetYSpec('min')
         self._logscale = logscale
@@ -756,7 +781,7 @@ class PlotCanvas(wx.Panel):
     def SetShowScrollbars(self, value):
         """Set True to show scrollbars"""
         if value not in [True,False]:
-            raise TypeError, "Value should be True or False"
+            raise TypeError("Value should be True or False")
         if value == self.GetShowScrollbars():
             return
         self.sb_vert.Show(value)
@@ -776,13 +801,16 @@ class PlotCanvas(wx.Panel):
     def SetEnableDrag(self, value):
         """Set True to enable drag."""
         if value not in [True,False]:
-            raise TypeError, "Value should be True or False"
+            raise TypeError("Value should be True or False")
         if value:
             if self.GetEnableZoom():
                 self.SetEnableZoom(False)
+                pass
             self.SetCursor(self.HandCursor)
+            pass
         else:
             self.SetCursor(wx.CROSS_CURSOR)
+            pass
         self._dragEnabled = value
     
     def GetEnableDrag(self):
@@ -791,13 +819,16 @@ class PlotCanvas(wx.Panel):
     def SetEnableZoom(self, value):
         """Set True to enable zooming."""
         if value not in [True,False]:
-            raise TypeError, "Value should be True or False"
+            raise TypeError("Value should be True or False")
         if value:
             if self.GetEnableDrag():
                 self.SetEnableDrag(False)
+                pass
             self.SetCursor(self.MagCursor)
+            pass
         else:
             self.SetCursor(wx.CROSS_CURSOR)
+            pass
         self._zoomEnabled= value
 
     def GetEnableZoom(self):
@@ -807,7 +838,7 @@ class PlotCanvas(wx.Panel):
     def SetEnableGrid(self, value):
         """Set True to enable grid."""
         if value not in [True,False,'Horizontal','Vertical']:
-            raise TypeError, "Value should be True, False, Horizontal or Vertical"
+            raise TypeError("Value should be True, False, Horizontal or Vertical")
         self._gridEnabled= value
         self.Redraw()
 
@@ -818,7 +849,7 @@ class PlotCanvas(wx.Panel):
     def SetEnableLegend(self, value):
         """Set True to enable legend."""
         if value not in [True,False]:
-            raise TypeError, "Value should be True or False"
+            raise TypeError("Value should be True or False")
         self._legendEnabled= value 
         self.Redraw()
 
@@ -829,7 +860,7 @@ class PlotCanvas(wx.Panel):
     def SetEnableTitle(self, value):
         """Set True to enable title."""
         if value not in [True,False]:
-            raise TypeError, "Value should be True or False"
+            raise TypeError("Value should be True or False")
         self._titleEnabled= value 
         self.Redraw()
 
@@ -840,7 +871,7 @@ class PlotCanvas(wx.Panel):
     def SetEnablePointLabel(self, value):
         """Set True to enable pointLabel."""
         if value not in [True,False]:
-            raise TypeError, "Value should be True or False"
+            raise TypeError("Value should be True or False")
         self._pointLabelEnabled= value 
         self.Redraw()  #will erase existing pointLabel if present
         self.last_PointLabel = None
@@ -872,6 +903,7 @@ class PlotCanvas(wx.Panel):
             graphics, xAxis, yAxis= self.last_draw
             xAxis= (xAxis[0]+units, xAxis[1]+units)
             self._Draw(graphics,xAxis,yAxis)
+            pass
 
     def ScrollUp(self, units):
         """Move view up number of axis units."""
@@ -880,14 +912,17 @@ class PlotCanvas(wx.Panel):
              graphics, xAxis, yAxis= self.last_draw
              yAxis= (yAxis[0]+units, yAxis[1]+units)
              self._Draw(graphics,xAxis,yAxis)
+             pass
 
     def GetXY(self, event):
         """Wrapper around _getXY, which handles log scales"""
         x,y = self._getXY(event)
         if self.getLogScale()[0]:
             x = _Numeric.power(10,x)
+            pass
         if self.getLogScale()[1]:
             y = _Numeric.power(10,y)
+            pass
         return x,y
         
     def _getXY(self,event):
@@ -950,6 +985,7 @@ class PlotCanvas(wx.Panel):
         yAxis = self._getYMaxRange()
         if self.getLogScale()[1]:
             yAxis = _Numeric.power(10,yAxis)
+            pass
         return yAxis
 
     def _getYMaxRange(self):
@@ -963,6 +999,7 @@ class PlotCanvas(wx.Panel):
         xAxis = self._getXCurrentRange()
         if self.getLogScale()[0]:
             xAxis = _Numeric.power(10,xAxis)
+            pass
         return xAxis
 
     def _getXCurrentRange(self):
@@ -973,6 +1010,7 @@ class PlotCanvas(wx.Panel):
         yAxis = self._getYCurrentRange()
         if self.getLogScale()[1]:
             yAxis = _Numeric.power(10,yAxis)
+            pass
         return yAxis
 
     def _getYCurrentRange(self):
@@ -986,9 +1024,9 @@ class PlotCanvas(wx.Panel):
         
         # check Axis is either tuple or none
         if type(xAxis) not in [type(None),tuple]:
-            raise TypeError, "xAxis should be None or (minX,maxX)"+str(type(xAxis))
+            raise TypeError("xAxis should be None or (minX,maxX)"+str(type(xAxis)))
         if type(yAxis) not in [type(None),tuple]:
-            raise TypeError, "yAxis should be None or (minY,maxY)"+str(type(xAxis))
+            raise TypeError("yAxis should be None or (minY,maxY)"+str(type(xAxis)))
              
         # check case for axis = (a,b) where a==b caused by improper zooms
         if xAxis != None:
@@ -996,6 +1034,7 @@ class PlotCanvas(wx.Panel):
                 return
             if self.getLogScale()[0]:
                 xAxis = _Numeric.log10(xAxis)
+                pass
         if yAxis != None:
             if yAxis[0] == yAxis[1]:
                 return
@@ -1017,6 +1056,7 @@ class PlotCanvas(wx.Panel):
             # sets new dc and clears it 
             dc = wx.BufferedDC(wx.ClientDC(self.canvas), self._Buffer)
             dc.Clear()
+            pass
             
         dc.BeginDrawing()
         # dc.Clear()
@@ -1035,32 +1075,38 @@ class PlotCanvas(wx.Panel):
             # Adjust bounding box for axis spec
             p1[0],p1[1] = xAxis[0], yAxis[0]     # lower left corner user scale (xmin,ymin)
             p2[0],p2[1] = xAxis[1], yAxis[1]     # upper right corner user scale (xmax,ymax)
+            pass
         else:
             # Both axis specified in Draw
             p1= _Numeric.array([xAxis[0], yAxis[0]])    # lower left corner user scale (xmin,ymin)
             p2= _Numeric.array([xAxis[1], yAxis[1]])     # upper right corner user scale (xmax,ymax)
-
+            pass
         self.last_draw = (graphics, _Numeric.array(xAxis), _Numeric.array(yAxis))       # saves most recient values
 
         # Get ticks and textExtents for axis if required
         if self._xSpec is not 'none':        
             xticks = self._xticks(xAxis[0], xAxis[1])
             xTextExtent = dc.GetTextExtent(xticks[-1][1])# w h of x axis text last number on axis
+            pass
         else:
             xticks = None
             xTextExtent= (0,0) # No text for ticks
+            pass
         if self._ySpec is not 'none':
             yticks = self._yticks(yAxis[0], yAxis[1])
             if self.getLogScale()[1]:
                 yTextExtent = dc.GetTextExtent('-2e-2')
+                pass
             else:
                 yTextExtentBottom = dc.GetTextExtent(yticks[0][1])
                 yTextExtentTop = dc.GetTextExtent(yticks[-1][1])
                 yTextExtent= (max(yTextExtentBottom[0],yTextExtentTop[0]),
                               max(yTextExtentBottom[1],yTextExtentTop[1]))
+                pass
         else:
             yticks = None
             yTextExtent= (0,0) # No text for ticks
+            pass
 
         # TextExtents for Title and Axis Labels
         titleWH, xLabelWH, yLabelWH= self._titleLablesWH(dc, graphics)
@@ -1082,6 +1128,7 @@ class PlotCanvas(wx.Panel):
             titlePos= (self.plotbox_origin[0]+ lhsW + (self.plotbox_size[0]-lhsW-rhsW)/2.- titleWH[0]/2.,
                        self.plotbox_origin[1]- self.plotbox_size[1])
             dc.DrawText(graphics.getTitle(),titlePos[0],titlePos[1])
+            pass
 
         # draw label text
         dc.SetFont(self._getFont(self._fontSizeAxis))
@@ -1230,7 +1277,7 @@ class PlotCanvas(wx.Panel):
             self._drawRubberBand(self._zoomCorner1, self._zoomCorner2) # add new
         elif self._dragEnabled and event.LeftIsDown():
             coordinates = event.GetPosition()
-            newpos, oldpos = map(_Numeric.array, map(self.PositionScreenToUser, [coordinates, self._screenCoordinates]))
+            newpos, oldpos = list(map(_Numeric.array, list(map(self.PositionScreenToUser, [coordinates, self._screenCoordinates]))))
             dist = newpos-oldpos
             self._screenCoordinates = coordinates
 
@@ -1388,7 +1435,7 @@ class PlotCanvas(wx.Panel):
                 pnt2= (trhc[0]+legendLHS+legendSymExt[0], trhc[1]+s+lineHeight/2.)
                 o.draw(dc, self.printerScale, coord= _Numeric.array([pnt1,pnt2]))
             else:
-                raise TypeError, "object is neither PolyMarker or PolyLine instance"
+                raise TypeError("object is neither PolyMarker or PolyLine instance")
             # draw legend txt
             pnt= (trhc[0]+legendLHS+legendSymExt[0], trhc[1]+s+lineHeight/2.-legendTextExt[1]/2)
             dc.DrawText(o.getLegend(),pnt[0],pnt[1])
@@ -1502,7 +1549,7 @@ class PlotCanvas(wx.Panel):
             else:
                 return upper, lower
         else:
-            raise ValueError, str(spec) + ': illegal axis specification'
+            raise ValueError(str(spec) + ': illegal axis specification')
 
     def _drawAxes(self, dc, p1, p2, scale, shift, xticks, yticks):
         
@@ -1615,10 +1662,10 @@ class PlotCanvas(wx.Panel):
             format = '%+7.1e'        
         elif power >= 0:
             digits = max(1, int(power))
-            format = '%' + `digits`+'.0f'
+            format = '%' + repr(digits)+'.0f'
         else:
             digits = -int(power)
-            format = '%'+`digits+2`+'.'+`digits`+'f'
+            format = '%'+repr(digits+2)+'.'+repr(digits)+'f'
         ticks = []
         t = -grid*_Numeric.floor(-lower/grid)
         while t <= upper:
@@ -1940,7 +1987,7 @@ def _draw6Objects():
 def _draw7Objects():
     # Empty graph with axis defined but no points/lines
     x = _Numeric.arange(1,1000,1)
-    print " within _draw7Objects ",type(x)
+    print(" within _draw7Objects ",type(x))
     y1 = 4.5*x**2
     y2 = 2.2*x**3
     points1 = _Numeric.transpose([x,y1])
@@ -2014,7 +2061,7 @@ class TestFrame(wx.Frame):
         self.mainmenu.Append(menu, '&Plot')
 
         menu = wx.Menu()
-	
+    
         menu.Append(211, '&Redraw', 'Redraw plots')
         self.Bind(wx.EVT_MENU,self.OnPlotRedraw, id=211)
         menu.Append(212, '&Clear', 'Clear canvas')

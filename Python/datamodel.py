@@ -11,6 +11,7 @@ _moduleDict = {
     For the moment only these 3 problems are treated.
 
 """
+from __future__ import absolute_import
 from functions import *
 #from tabulatedfunctions import makeHistogram, makeConstantFunction, ConstantFunction, makePWLinearFunction
 
@@ -25,9 +26,9 @@ from posttables import Table,makeTableFromFile
 from material import Material
 
 from commonmodel import Cylinder,\
-			DiscreteEdge, \
-			Edge,\
-			Region
+                        DiscreteEdge, \
+                        Edge,\
+                        Region
 #
 from PhysicalQuantities import MolesAmount
 
@@ -42,16 +43,20 @@ from PhysicalProperties import AquiferProperty,\
                                Density,\
                                EffectiveDiffusion,\
                                KinematicDispersion,\
-                               SpecificHeat,\
                                MolarMass,\
                                Permeability,\
+                               PoissonRatio,\
+                               PoreCompressibility,\
                                PoreDiffusion,\
                                Porosity,\
-                               RetardationFactor,\
                                ReactionRate,\
+                               RetardationFactor,\
                                SolidDensity,\
+                               SpecificHeat,\
                                ThermalConductivity,\
-                               Velocity
+                               Tortuosity,\
+                               Velocity,\
+                               YoungModulus
 
 from PhysicalQuantities import Mass
 
@@ -60,17 +65,17 @@ from PhysicalQuantities import Mass
 from species import AqueousMasterSpecies,\
                     AqueousSecondarySpecies,\
                     Element,\
-		    GaseousSecondarySpecies,\
-		    MasterSpecies,\
-		    MineralSecondarySpecies,\
-		    RedoxCouple,\
-		    SecondarySpecies, \
-		    SorbedSecondarySpecies,\
-		    SorbingMasterSpecies, \
-		    SorbingSiteMasterSpecies,\
-		    Species,\
-		    SurfaceSecondarySpecies,\
-		    SurfaceSiteMasterSpecies
+                    GaseousSecondarySpecies,\
+                    MasterSpecies,\
+                    MineralSecondarySpecies,\
+                    RedoxCouple,\
+                    SecondarySpecies, \
+                    SorbedSecondarySpecies,\
+                    SorbingMasterSpecies, \
+                    SorbingSiteMasterSpecies,\
+                    Species,\
+                    SurfaceSecondarySpecies,\
+                    SurfaceSiteMasterSpecies
 
 from tensors import Tensor2D, Tensor3D
 from chemistry import ChemicalQuantity,Activity, SpeciesConcentration, \
@@ -91,6 +96,7 @@ from chemistry import ChemicalProblem
 from chemicaltransport import ChemicalTransportProblem
 import chemistry
 import chemicaltransport
+import coupledTHMCmodule
 import hydraulicproblem
 from hydraulicproblem import HydraulicProblem
 
@@ -99,6 +105,7 @@ _problemType = None
 _moduleDict = {
     "chemistry"            : chemistry,
     "chemicaltransport"    : chemicaltransport,
+    "chemicalmechanics"    : coupledTHMCmodule,
     "saturatedhydraulic"   : hydraulicproblem,
     }
 
@@ -113,11 +120,12 @@ def setProblemType(name):
     """ This method sets the current type of the problem """
     from types import StringType
     if type(name) != StringType:
-        raise TypeError, " the name within set probletype should be a string "
+        raise TypeError(" the name within set probletype should be a string ")
     _name = name.lower()
     global _problemType
-    if _moduleDict.has_key(_name):
+    if _name in _moduleDict:
         _problemType = _name
+        pass
     else:
         message  = "\n\n"
         message += "ProblemType : "+name+" ... unknown !"
@@ -140,8 +148,8 @@ def BoundaryCondition(*liste, **dico):
 def InitialCondition(*liste, **dico):
     checkIfProblemTypeIsSet()
     module = _moduleDict[_problemType]
-#    print "type of ",type(module.InitialCondition(*list, **dict))
-#    raw_input()
+    #print "type of ",type(module.InitialCondition(*list, **dict))
+    #raw_input()
     return module.InitialCondition(*liste, **dico)
 
 def Source(*list, **dict):

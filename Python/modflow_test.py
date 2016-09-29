@@ -4,7 +4,8 @@ from ModflowSaturatedHydro import *
 
 from material import Material
 
-from physicalquantities import Permeability, Head
+from PhysicalQuantities import Head
+from PhysicalProperties import Permeability
 
 from commonmodel import Region
 
@@ -21,7 +22,7 @@ class modflowcomponenttest(unittest.TestCase):
 #
 # Definition of the mesh
 #
-        self.mesh = StructuredMesh2D("global","XY")
+        self.mesh = CartesianMesh2D("global","XY")
         self.nx = 42
         self.ny = 1
         self.nb_of_intervals = [self.nx,self.ny]
@@ -46,19 +47,19 @@ class modflowcomponenttest(unittest.TestCase):
         print "-"*20
         print " Definition of materials :"
         print "-"*20
-        self. clay_material = Material(name="clay",permeability=Permeability(value=1.0))
-        self.cement_material = Material(name="Cement",permeability=Permeability(value=2.0e-7))
+        self. clay_material = Material(name =  "clay",   permeability = Permeability(1.0,"m/s"))
+        self.cement_material = Material(name = "Cement", permeability = Permeability(2.0e-7,"m/s"))
 #
         print "-"*20
         print " Definition of meshes :"
         print "-"*20
-        self.clay_reg_m   = StructuredMesh2D("Clay Region","XY")
+        self.clay_reg_m   = CartesianMesh2D("Clay Region","XY")
         self.clay_reg_m.setZone("Clay Region",index_min = Index2D(2,1),index_max = Index2D(self.nx-1,1))
 #
         print "-"*20
         print " Definition of meshes :"
         print "-"*20
-        self.east_bo_m   = StructuredMesh2D("boundary east","XY")
+        self.east_bo_m   = CartesianMesh2D("boundary east","XY")
         self.east_bo_m.setZone("boundary east",index_min = Index2D(1,1),index_max = Index2D(1,1))
 #
 # Definition of regions
@@ -95,14 +96,14 @@ class modflowcomponenttest(unittest.TestCase):
         print " east_bo_m :"
         print "-"*10
 
-        self.east_bo_m   = StructuredMesh2D("boundary east","XY")
+        self.east_bo_m   = CartesianMesh2D("boundary east","XY")
         self.east_min = Index2D(1,1)
         self.east_max = Index2D(1,1)
 #east_bo_m.setZone("boundary east",index_min = Index2D(1,1),index_max = Index2D(1,1))
 #east_bo_m.setZone("boundary east",index_min = Index2D(1,1),index_max = Index2D(1,1))
         self.east_bo_m.setZone("boundary east",self.east_min,self.east_max)
         self.Boundary=self.east_bo_m
-        self.head_value=Head(value=2.2e-7)
+        self.head_value=Head(2.2e-7,"m")
         print " class name ",self.head_value.__class__.__name__
 
         self.bc_east = BoundaryCondition(self.Boundary,'Dirichlet',self.head_value)
@@ -117,10 +118,10 @@ class modflowcomponenttest(unittest.TestCase):
         print " west_bo_w :"
         print "-"*10
 
-        self.west_bo_m   = StructuredMesh2D("boundary west","XY")
+        self.west_bo_m   = CartesianMesh2D("boundary west","XY")
         self.west_bo_m.setZone("boundary west",index_min = Index2D(41,1),index_max = Index2D(41,1))
         self.Boundary=self.west_bo_m
-        self.Value=Head(value = 0.0)
+        self.Value=Head(0.0,"m")
         self.bc_west = BoundaryCondition(self.Boundary,'Dirichlet',self.Value)
         print " east_bo_m : append"
         self.boundaryconditions_list.append(self.bc_west)
@@ -129,7 +130,7 @@ class modflowcomponenttest(unittest.TestCase):
 # Definition of initial conditions
 #
         self.initialconditions_list = []
-        self.reg1_ic = InitialCondition(self.clay_reg_m,value=Head(value=1.e-8))
+        self.reg1_ic = InitialCondition(self.clay_reg_m,value=Head(1.e-8,"m"))
         self.initialconditions_list.append(self.reg1_ic)
 # ----------------
 # Darcy Resolution

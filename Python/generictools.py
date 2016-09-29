@@ -8,23 +8,78 @@
          M -> Mechanics
 
 """
+#
+#
+#
+from __future__ import absolute_import
+from __future__ import print_function
+from six.moves import input
+try: 
+    from docx import Document
+    from docx.shared import Inches,Cm
+    from docx.shared import Pt
+    from docx.enum.text import WD_ALIGN_PARAGRAPH
+    from docx.enum.style import WD_STYLE_TYPE
+    from docx.enum.section import WD_ORIENTATION
+except:
+    raise Warning("You won't be able to handle report documents")
+#
+# The Python Imaging Library: This script can be used to change one image to another or remove an image.
+#
+import Image
+#
+# Return a list of paths matching a pathname pattern
+#
+from glob import glob
+
 from listtools import toList
 
-from platform import architecture
+from platform import architecture, uname
 
-from types import ListType
+from types import ListType,\
+                  MethodType,\
+                  ModuleType
 
 import resource
 
+import subprocess
+
 from sys import version_info
 
+global pyversion
+
+global plotId
+
+pyversion = version_info[0] + version_info[1]*0.1
+
+plotId = 0
+
+class Color:
+    """
+    to print colors; example : print color.bold+"what you want to print" + color.end
+    """
+    purple = '\033[95m'
+    cyan = '\033[96m'
+    darkcyan = '\033[36m'
+    blue = '\033[94m'
+    green = '\033[92m'
+    yellow = '\033[93m'
+    red = '\033[91m'
+    bold = '\033[1m'
+    underline = '\033[4m'
+    end = '\033[0m'
+
+color = Color()
+    
 class Generic:
     """
     That class is only used as a generic container
     to provide help on class and associated methods to the user
     """
     def __init__(self):
-        self.pyversion = version_info[0] + version_info[1]*0.1
+        #self.pyversion = version_info[0] + version_info[1]*0.1
+        global pyversion
+        self.pyversion = pyversion
         pass
 
     def getHelp(self,method = None):
@@ -34,13 +89,20 @@ class Generic:
             getHelp(a.method)        
         """
         if method == None or type(method) != MethodType:
-            print self.__doc__
+            print(self.__doc__)
         else:
-            print method.__doc__
+            print(method.__doc__)
         pass
         
+
+    def getModule(self):
+        """
+        To obtain the module name, the class is coming from
+        """
+        return self.__module__
+        
     def rawInput(self,arg):
-        return raw_input("dbg"+self.__class__.__name__ +" "+str(arg))
+        return input("dbg"+self.__class__.__name__ +" "+str(arg))
 
 class GenericModule(Generic):
     """
@@ -106,59 +168,80 @@ class GenericWD_CTModule(GenericModule):
         """
         GenericModule.__init__(self)
 
+def currentDirectory():
+    return os.getcwd()
 
-def listTypeCheck(liste, typ):
-    if type(liste) != ListType:
-        raise TypeError, " the supposed list is not of type list"
-    if type(typ) != ListType:
-        typ = [typ]
-    for unb in liste:
-        if type(unb) not in typ:
-            print type(unb),typ
-            raise TypeError, " the listed components are not all of the right type"
-        pass
-    return None
     
 def checkClass(x, classes, message=None):
-    """to check if x is not an instance of one of the classes list """
+    """
+    to check if x is not an instance of one of the classes list 
+    """
     try:
-        if x.__class__ == classes.__class__:
-            return
+        for klasse in classes:
+            if x.__class__ == klasse.__class__:
+                return
         pass
     except:
         pass
     if not isInstance(x, classes):
         if message is None:
             if hasattr(x, "__repr__"): xstr = x.__repr__()
-            else: xstr = `type(x)`
-            xstr = `type(x)`       
-	raise TypeError, " x of type "+xstr+" is not within ["+_classesNameVerbose(classes)+"]"
+            else: xstr = repr(type(x))
+            xstr = repr(type(x))       
+	raise TypeError(" x of type "+xstr+" is not within ["+_classesNameVerbose(classes)+"]")
     return
 
 def checkClassList(liste, classes):
-    """to check if elements of liste  are instances of classes list classes"""
+    """
+    to check if elements of liste  are instances of classes list classes
+    """
     liste = list(liste)
-    for x in liste: checkClass(x, classes)
+    for x in liste:
+        checkClass(x, classes)
     return None
     
 def checkList(x, liste):
     """
-    x should be an element of the liste list
+    x should be an element of the list argument: liste
     Raises an exception if x is not in liste.
     """
     if x not in liste :
         l = liste.__str__()
-        raise Exception, x + " not in list argument "+ l
+        raise Exception(x + " not in list argument "+ l)
     pass
     
 listCheck = checkList
     
 def checkDict (x, dictionnary):
     """Raises an exception if an item is not a dictionnary key."""
-    if x not in dictionary.keys() :
-        raise "key " + `x` + " not included in given dictionary"
+    if x not in list(dictionary.keys()) :
+        raise "key " + repr(x) + " not included in given dictionary"
 
 dictCheck = checkDict
+    
+def fileAOpening(fileName):
+
+    try:
+        meshFile = open(fileName,"a")
+    except IOError: " file opening error "
+    return meshFile
+        
+def fileROpening(fileName):
+
+    try:
+        meshFile = open(fileName,"r")
+    except IOError: " file opening for readind error "
+    return meshFile
+
+def fileWOpening(fileName):
+
+    try:
+        meshFile = open(fileName,"w")
+        meshFile.write("##")
+    except IOError:
+        " file opening error "
+    print(type(meshFile))
+    return meshFile
 
 def isInstance(x, klassenprobe):
     """Returns true if x is an instance of one of the classes within the testclasses, false otherwise"""
@@ -172,18 +255,119 @@ def isInstance(x, klassenprobe):
             pass
     return 0
     
+def kafka():
+    """
+    Enables to retrieve some elements of the Kafka bibliography
+    a snapshot of the knowledge of the creator of the platform 
+    """
+    print("the process\nthe castle\nthe metamorphosis\n")
+    return None
+
+def listTypeCheck(liste, typ):
+    if type(liste) != ListType:
+        raise TypeError(" the supposed list is not of type list")
+    if type(typ) != ListType:
+        typ = [typ]
+    for unb in liste:
+        if type(unb) not in typ:
+            print(type(unb),typ)
+            raise TypeError(" the listed components are not all of the right type")
+        pass
+    return None
+    
 def memberShip(x,liste,message = None):
     if not isinstance(x,tuple(toList(liste))):
         if message == None: message = "of "+x.__class__.__name__
-        print x
-        raw_input("membership")
-        raise Exception, "check instantiation %s %s"%(message, x)
+        raise Exception("check instantiation %s %s"%(message, x))
         
 def makeDict(**options):
+    """
+    Example: makeDico(a=1,b=2) -> {'a': 1, 'b': 2}
+    """
     return options
 
 makeDico = makeDict
-        
+
+def postPlotter(dataTobePlotted, plotTitle = None, subTitle = None, time = None, gnuplotVersion = None, screen = None):
+    """
+    That function is used to save results in a png format.
+    It is linked to the automatic insertion of simulation results in a doc like formatted file.
+    gnuplot before the 5th version doesn't really support png format, even though those versions claim it.
+    It means the plot generated is transformed in a png file through the image module.
+    
+    the entry should be a list od tuples (abs, ord)
+    """
+    global plotId, pyversion
+    if gnuplotVersion == None:
+        outputFormat = "eps"
+    elif int(gnuplotVersion[0]) > 5:
+       outputFormat = "png"
+    fileName = "toto"
+    gnuplot = open(fileName, "w")
+    gnuplot.write("reset\n")
+    gnuplot.write("set terminal %s\n"%(outputFormat))
+    gnuplot.write("set style data linespoints\n")
+    output = "output"
+    if time != None:
+        output = output+"_"+str("%i"%(plotId))+".png"
+        plotId+=1
+    gnuplot.write("set output \"%s\"\n"%(output))
+    if plotTitle != None:
+        gnuplot.write("set title \"" + str(plotTitle) + " (time = + %9.2e + years)\\n"%(time/3.15576e+7))
+        if subTitle != None:
+            gnuplot.write(str(subTitle)+"\" font \"Times-Roman,10\"\n")
+        else:
+            gnuplot.write("\" font \"Times-Roman,10\"\n")
+    gnuplot.write("plot '-' using 1:2 title \"%s\" with linespoints \n"%(plotTitle))
+    for point in dataTobePlotted:
+        gnuplot.write("%f %f\n" % (point[0],point[1]))
+    gnuplot.write("e\n")
+    if screen != None:
+        gnuplot.write("unset output\n")
+        gnuplot.write("set terminal  dumb 79 25\n")
+        gnuplot.write("replot\n")
+    gnuplot.write("exit\n")
+    gnuplot.flush()
+    subprocess.Popen("gnuplot " + str(fileName), shell = True).wait()
+    #gnuplot.close()
+    img=Image.open(output)
+    img.save(output)
+    gnuplot.close()
+    return output
+
+def reportAddendum(reportFile,listofOutputsTobeAdded,listOfComments = None):
+    """
+    Enables to  add figures to a report in an automated way.
+    The changes intervine after the last chapter of the report.
+    """
+    if ".docx" in reportFile:
+        document = Document(reportFile)
+    else:
+        raise Warning(" problem with the format of the file")
+    paragraph_styles = [s for s in document.styles if s.type == WD_STYLE_TYPE.PARAGRAPH]
+
+    postProcessingHeader = document.add_paragraph("PostProcessing", style=paragraph_styles[1])
+    postProcessingText = document.add_paragraph(style=paragraph_styles[0])
+    postProcessingText.add_run("\rWord format postprocessing generated through the ")
+    postProcessingText.add_run("etumos ").bold = True
+    postProcessingText.add_run("coupling tool\r\r")
+    #document.add_heading('Outputs', level=1)
+    ind = 0
+    for picture in listofOutputsTobeAdded:
+        document.add_picture(picture, width=Cm(7.00))
+        document.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
+        newParagraph = document.add_paragraph("\r")
+        newParagraph.add_run("Figure n. "+str(ind)+":   ").bold = True
+        if listOfComments!= None:
+            newParagraph.add_run(str(listOfComments[ind]))
+        ind+=1
+        newParagraph.add_run(" \r \r")
+        newParagraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    reportFile = reportFile.replace(".docx","")
+    filenameToBeSaved = reportFile+"_pp.docx"
+    document.save(filenameToBeSaved)
+    return None
+
 def _classesNameVerbose(liste):
     """returns a string made of the different classes names within a list,
        so it supposes each element has __name__ as attribute.
@@ -201,10 +385,19 @@ def IS_NUMBER(x):
 def SET_NUMBER(x):
     if IS_NUMBER(x):
         return x
-    else: raise Exception, " is not a number" 
+    else: raise Exception(" is not a number") 
 
 def c_archi():
     if '32' in architecture()[0]:
         return '32'
     elif '64' in architecture()[0]:
-        return '64'        
+        return '64'
+
+def c_uname():
+    """
+        Returns a tuple
+        of strings (system,node,release,version,machine,processor)
+        identifying the underlying platform.
+    """
+    return uname
+

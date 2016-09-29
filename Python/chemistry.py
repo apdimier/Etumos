@@ -4,6 +4,8 @@ All that is needed to define a chemical problem
 and the specific part of a  ChemicalTransport problem
 """
 
+from __future__ import absolute_import
+from __future__ import print_function
 from generictools import checkClassList, Generic, isInstance
 
 from PhysicalProperties import ReactionRate,\
@@ -38,17 +40,19 @@ class ChemicalQuantity(Scalar):
     Generic definition of a chemical quantity :
     a value and a unit associed to a chemical species or element
     """
-    def __init__(self, symbol, value, unit):
+    def __init__(self, symbol, value, unit = None):
         """
         Init
           Input :
-            symbol (string)
-            value (float)
-            unit (string)
+            symbol  has to be a string
+            value   is a float
+            unit    is a string
         
         """
         _typecontrol(symbol,[StringType]," the symbol must be a string ")
         self.symbol = symbol
+        if type(unit) == NoneType:
+            unit = "mol/l"
         Scalar.__init__(self,value,unit)
 
     def getSymbol(self):
@@ -57,10 +61,14 @@ class ChemicalQuantity(Scalar):
 
     def getHelp(self):
         
-        print self.__doc__
+        print(self.__doc__)
     
     def getUnit(self):
         return self.unit
+    
+    def setValue(self, value):
+        self.value = value
+        return
 
     pass
 
@@ -88,7 +96,6 @@ class SpeciesConcentration(ChemicalQuantity):
       Quartz = SpeciesConcentration('Quartz',0.1,'mmol/l')
     """
     default_unit = _findUnit('Concentration')
-    pass
     
 class SpeciesMassConcentration(ChemicalQuantity):
     """
@@ -102,7 +109,6 @@ class SpeciesMassConcentration(ChemicalQuantity):
       Quartz = SpeciesMassConcentration('Quartz',0.1,'g/l')
     """
     default_unit = _findUnit('MassConcentration')
-    pass
     
 class SpeciesMolalConcentration(ChemicalQuantity):
     """
@@ -116,7 +122,6 @@ class SpeciesMolalConcentration(ChemicalQuantity):
       Quartz = SpeciesMolalConcentration('Quartz',0.1,'molal')
     """
     default_unit = _findUnit('MolalConcentration')
-    pass
 
 class ElementConcentration(ChemicalQuantity):
     """
@@ -128,8 +133,17 @@ class ElementConcentration(ChemicalQuantity):
       Na = ElementConcentration('Na',0.1,'mol/l')
       Na = ElementConcentration('Na',0.1,'mmol/l')
     """
+    def __init__(self, symbol, value, unit, initialGuess = None):
+        ChemicalQuantity.__init__(self, symbol, value, unit)
+        if initialGuess == None:
+            self.initialGuess = value
+            pass
+        else:
+            self.initialGuess = initialGuess
+            pass
+    
+        self.icon = 1
     default_unit = _findUnit('Concentration')
-    pass
     
 class ElementMassConcentration(ChemicalQuantity):
     """
@@ -206,15 +220,16 @@ class MineralConcentration(ChemicalQuantity):
     Examples
       Quartz = MineralTotalConcentration('Quartz',0.1,'mmol/l',saturationIndex=0.0)
     """
-    def __init__(self,symbol, value, unit=None,saturationIndex = None):
+    def __init__(self, symbol, value, unit=None, saturationIndex = None):
         if symbol[0].upper() != symbol[0]:
-            raise Exception, " check the mineral name, the first letter should be capitalized"
+            raise Exception(" check the mineral name, the first letter should be capitalized")
         ChemicalQuantity.__init__(self,symbol, value, unit=unit)
         if saturationIndex!=None:
             self.saturationIndex = saturationIndex
+            pass
         else:
             self.saturationIndex = 0.
-            
+            pass
     default_unit = _findUnit('Concentration')
     pass
 
@@ -227,11 +242,11 @@ class ToDissolveMineralTotalConcentration(ChemicalQuantity):
       Init as ChemicalQuantity
       Enables to specify a mineral that can't precipitate
     Examples
-      Quartz = toDissolveMineralTotalConcentration('Quartz',0.1,'mmol/l')
+      Quartz = ToDissolveMineralTotalConcentration('Quartz',0.1,'mmol/l')
     """
         
-## 	if self.saturationIndex == None:
-## 	    self.saturationIndex = 0.
+##  if self.saturationIndex == None:
+##      self.saturationIndex = 0.
 
     default_unit = _findUnit('Concentration')
     pass
@@ -409,9 +424,9 @@ class RelativeTotalConcentration(ChemicalQuantity):
           Output :
             (string)
         """
-	return self.mineral
+        return self.mineral
 
-    pass
+        pass
 
 #-------------
 # Kinetics law
@@ -421,12 +436,13 @@ class KineticLaw(PhysicalLaw):
     Generic kinetic law
     """
     pass
-    
 
 class FreeKineticLaw(KineticLaw):
     """
     
     kinetic law with a free format
+    as a default, I used it with surface and exponent.
+    It should be enhanced; but the fact it is a free format...
     
     """
     def __init__(self, symbol,
@@ -434,22 +450,29 @@ class FreeKineticLaw(KineticLaw):
                  formula = None,
                  lawParameter = None,
                  m = None,
-                 m0 = None
+                 m0 = None,
+                 description = None
                 ):
         """
         Init
           Input :
             symbol (string)
             formula: Chemical formula or the name of a phase to be added by the kinetic reaction
+            
+                Example : formula = "Urea  -1.0   H2O -2  AmmH+  2  CO3-2  1"
+                          formula = "CaCO3 -1.0   Ca+2 1 CO3-2  1"
 
             
-	    m (float, OPTIONAL) : default 0, represents current moles of reactant.
+        m (float, OPTIONAL) : default 0, represents current moles of reactant.
 
             parameter : a list of floats which are used in the rate definition
-	    
-	    m0 (float, OPTIONAL) : default 0, Initial moles of reactant.
+        
+        m0 (float, OPTIONAL) : default 0, Initial moles of reactant. It can be defined through an Aqueous solution
+        
+        description : a string to describe the source of the model
    
         """        
+        _typecontrol(symbol,[StringType]," for a free kinetic law, the symbol attribute should be a string ")
         self.symbol = symbol
 
         _typecontrol(rate,[StringType]," string expressing the rate programmed in basic; that class is specific to phreeqC ")
@@ -462,15 +485,27 @@ class FreeKineticLaw(KineticLaw):
         if lawParameter != None:
             for parm in lawParameter:
                 _typecontrol(parm,[FloatType,IntType]," power within ReversibleKineticLaw should be a float or at least an int ")
+                pass
             self.lawParameter = lawParameter
         else:
             self.lawParameter = None
-	    
-	self.m = m
-	
-	self.m0 = m0
-	
-	self.imp = 0
+            pass
+        
+        self.m = m
+                                                                            #
+                                                                            # m0 set to None; it is the way a kinetic law is applied only to specific domains.
+                                                                            # otherwise the kinetic material will be applied on each zone with a mineral phase
+        if m0 == None:
+            print(" the initial amount is not defined for the FreeKineticLaw: "+self.symbol,\
+                  " the initial amount should be defined via the mineral phase")
+            m0 = 0
+            pass
+                                                                            #
+        self.m0 = m0
+    
+        self.imp = 0
+    
+        self.description = description
 
     def getSymbol(self):
         """
@@ -509,12 +544,12 @@ class ReversibleKineticLaw(KineticLaw):
             symbol (string)
             rate (specific rate) : specific rate in mol/m2/s 
             
-	    sphereModelExponent (float, OPTIONAL) : default 0
-	    
-	    specificSurfaceArea (float, OPTIONAL) : default 1.0 represents the ration A/V with:
-	    
-	        A surface area of 1kg soil
-	        V volume of water in contact with 1 kg soil
+        sphereModelExponent (float, OPTIONAL) : default 0
+        
+        specificSurfaceArea (float, OPTIONAL) : default 1.0 represents the ration A/V with:
+        
+            A surface area of 1kg soil
+            V volume of water in contact with 1 kg soil
 
             SRExponent (float, OPTIONAL) : default is 1
             
@@ -530,26 +565,29 @@ class ReversibleKineticLaw(KineticLaw):
         self.symbol = symbol
 
         if not isinstance(rate, ReactionRate):
-            raise Exception, " rate instance has to be redefined"
+            raise Exception(" rate instance has to be redefined")
         self.rate = rate 
 
         if SRExponent:
             _typecontrol(SRExponent,[FloatType,IntType]," power within ReversibleKineticLaw should be a float or an int ")
             self.SRExponent  = float(SRExponent)
+            pass
         else:
             self.SRExponent  = 1.0
             pass
-	    
+        
         if sphereModelExponent:
             _typecontrol(sphereModelExponent,[FloatType,IntType]," the sphereModelExponent for ReversibleKineticLaw is of the wrong type ")
             self.sphereModelExponent  = float(sphereModelExponent)
+            pass
         else:
             self.sphereModelExponent  = 0.0
             pass
-	    
+        
         if specificSurfaceArea:
             _typecontrol(specificSurfaceArea,[FloatType,IntType]," specificSurfaceArea within ReversibleKineticLaw should be a float")
             self.specificSurfaceArea  = float(specificSurfaceArea)
+            pass
         else:
             self.specificSurfaceArea  = 0.0
             pass
@@ -581,7 +619,7 @@ class ReversibleKineticLaw(KineticLaw):
             (None or float)
         """
         return self.power
-	
+    
     def getSpecificSurfaceArea(self):
         """
         Get the specific surface area 
@@ -589,7 +627,7 @@ class ReversibleKineticLaw(KineticLaw):
             (None or float)
         """
         return self.SpecificSurfaceArea
-	
+    
     def getSphereModelExponent(self):
         """
         Get the exponent of the sphere model 
@@ -617,8 +655,9 @@ class ActivityLaw(PhysicalLaw):
         if A:
             _typecontrol(A,[FloatType,IntType],"A coef within activitylaw should be a float or an int ")
             self.A = float(A)
+            pass
         else:
-            self.A = 0.5114
+            self.A = 0.509
             pass
 
         return
@@ -692,6 +731,7 @@ class DebyeHuckel(ActivityLaw):
         if (B!=None):
             _typecontrol(B,[FloatType,IntType],"B coef within Debye Huckel should be a float or an int ")
             self.B = float(B)
+            pass
         else:
             self.B = 0.328
             pass
@@ -724,12 +764,13 @@ class Bdot(ActivityLaw):
             A (float, OPTIONAL) : default is 0.509 for PhreeqC
             B (float, OPTIONAL) : default is 3.283e-01 for PhreeqC
         """
-        print "bddddddddddddddddddddddddddddddddddot"
+        print("bddddddddddddddddddddddddddddddddddot")
         ActivityLaw.__init__(self,A)
         
         if (B!=None):
             _typecontrol(B,[FloatType,IntType],"B coef within Debye Huckel should be a float")
             self.B = float(B)
+            pass
         else:
             self.B = 0.328
             pass
@@ -741,6 +782,7 @@ class Bdot(ActivityLaw):
                 return None
             _typecontrol(Bbot,[FloatType,IntType],"the Bdot coef. within Debye huckel should be a float")
             self.Bdot = float(Bdot)
+            pass
         else:
             self.Bdot = 0.0410
             pass
@@ -813,25 +855,30 @@ class YKineticTerm:
     ## @brief Constuctor of the class
     def __init__(self,symbol,type = None,power1 = None,power2 = None):
         if type(symbol) != StringType:
-            raise TypeError, " symbol for the Y kinetic term should be a string "
+            raise TypeError(" symbol for the Y kinetic term should be a string ")
         if type != None:
             if type(type) != StringType:
-                raise TypeError, " type for the Y kinetic term should be a string "
+                raise TypeError(" type for the Y kinetic term should be a string ")
         if type not in ['polynomial','logarithmic']:
             self.type = "polynomial"
+            pass
         else:
             self.type = type
+            pass
         if power1!= None:
             if type(power1) != FloatType:
-                raise TypeError, " power1 for the W kinetic term should be a float "
+                raise TypeError(" power1 for the W kinetic term should be a float ")
             self.power1 = power1
+            pass
         else:
             self.power1 = 1.
+            pass
         if power2!= None:
             if type(power2) != FloatType:
-                raise TypeError, " power2 for the W kinetic term should be a float "
+                raise TypeError(" power2 for the W kinetic term should be a float ")
         else:
             self.power2 = 1.
+            pass
         self.symbol = symbol
         return
     
@@ -851,13 +898,13 @@ class MKineticTerm:
     ## @brief Constructor of the class  
     def __init__(self,symbol,halfSat,power1,power2):
         if type(symbol) != StringType:
-            raise TypeError, " symbol for the M kinetic term should be a string "
+            raise TypeError(" symbol for the M kinetic term should be a string ")
         if type(halfSat) != FloatType:
-            raise TypeError, " halfSat for the M kinetic term should be a float "
+            raise TypeError(" halfSat for the M kinetic term should be a float ")
         if type(power1) != FloatType:
-            raise TypeError, " power1 for the M kinetic term should be a float "
+            raise TypeError(" power1 for the M kinetic term should be a float ")
         if type(power2) != FloatType:
-            raise TypeError, " power2 for the M kinetic term should be a float "
+            raise TypeError(" power2 for the M kinetic term should be a float ")
         self.symbol = symbol
         self.halfSat = halfSat
         self.power1 = power1
@@ -878,11 +925,11 @@ class EKineticTerm:
 
     def __init__(self,symbol,power1,power2):
         if type(symbol) != StringType:
-            raise TypeError, " symbol for the E kinetic term should be a string "
+            raise TypeError(" symbol for the E kinetic term should be a string ")
         if type(power1) != FloatType:
-            raise TypeError, " power1 for the E kinetic term should be a float "
+            raise TypeError(" power1 for the E kinetic term should be a float ")
         if type(power2) != FloatType:
-            raise TypeError, " power2 for the E kinetic term should be a float "
+            raise TypeError(" power2 for the E kinetic term should be a float ")
         self.symbol = symbol
         self.power1 = power1
         self.power2 = power2
@@ -896,8 +943,7 @@ class WYMEKineticLaw(KineticLaw):
     def __init__(self,symbol, rate, surface = None,WTerm = None,YTerm = None,MTerm = None, ETerm = None,name = None,
                  nucleus = None,lawType = None):
 
-        if not StringType(symbol):
-            raise "Error with the WYME declaration"
+        if not StringType(symbol): raise Exception("Error with the WYME declaration")
         
         if surface.__class__.__name__  not in ["VolumicSurfaceArea",\
                             "SpecificSurfaceArea",\
@@ -905,7 +951,7 @@ class WYMEKineticLaw(KineticLaw):
                             "SugarSurfaceArea",\
                             "CompositeSurfaceArea",\
                             "LatticeSurfaceArea",None]:
-            raise " Error for surface "
+            raise Exception(" Error for surface ")
         else:
             self.surface = surface
             
@@ -924,30 +970,33 @@ class WYMEKineticLaw(KineticLaw):
                 checkClassList(self.rate,[ReactionRate,SpecificReactionRate,MolalSpecificReactionRate])
 
             except:
-                raise TypeError, "In case of Composite surface law, the rate should be given with unit mol/l/s or molal/s"
+                raise TypeError("In case of Composite surface law, the rate should be given with unit mol/l/s or molal/s")
             pass
         elif (isInstance(self.surface,LatticeSurfaceArea) and self.nucleus is None):
-            raise TypeError, "For a lattice surface law, you have to define a nucleus attribute (minimum surface) for the reaction"
+            raise TypeError("For a lattice surface law, you have to define a nucleus attribute (minimum surface) for the reaction")
         if ((self.nucleus is not None) and (self.surface is None)):
-            raise TypeError, "You specified a minimum surface but no surface!!"
+            raise TypeError("You specified a minimum surface but no surface!!")
         pass
 
 class ChemicalState:
     """
-    Chemical state definition     
-    """
 
-    def __init__(self,name,aqueousSolution,
-                 mineralPhase = None,
-                 gasPhase = None,
-                 ionicExchanger = None,
-                 surfaceComplexation = None,
-                 solidSolution = None,
-                 phFixed = None,
-		 chargeBalance = None,
-		 mineralEquilibrium = None,
-		 charge = None,
-		 gasMassBalance = None):
+    Chemical state definition
+    
+    """
+    def __init__(self,\
+                 name,\
+                 aqueousSolution,\
+                 mineralPhase = None,\
+                 gasPhase = None,\
+                 ionicExchanger = None,\
+                 surfaceComplexation = None,\
+                 solidSolution = None,\
+                 phFixed = None,\
+         chargeBalance = None,\
+         mineralEquilibrium = None,\
+         charge = None,\
+         gasMassBalance = None):
         """
         Init
           Input :
@@ -957,22 +1006,22 @@ class ChemicalState:
             gasPhase (GasPhase)
             ionicExchanger (IonicExchangers)
             surfaceComplexation (SurfaceComplexation)
-            phFixed :	tuple . 	
-	    		The first component is the species to add to reach this value.           
-	    		The second component is the available amount to add to reach this value.
-	    		
-	    		Ex: phFixed = ("HCl", 10)
-	    		         
-            chargeBalance :	a 2 component tuple, 
+            phFixed :   tuple .     
+                The first component is the species to add to reach this value.           
+                The second component is the available amount to add to reach this value.
+                
+                Ex: phFixed = ("HCl", 10)
+                         
+            chargeBalance : a 2 component tuple, 
             
                         Ex: balance = ("Cl", 1.e-3)
             
-	    		the first being the element to consider to achieve charge balance and           
-	    		the second, the maximum of the adjustable amount to reach it.           
-            mineralEquilibrium :	tuple . 	
-	    		The first component is the ion to consider to reach the equilibrium in.           
-	    		association with the second component which is a mineral.   
-	    charge enables to use the pH as variable for balance achievement, see the phreeqC manual p. 149        
+                the first being the element to consider to achieve charge balance and           
+                the second, the maximum of the adjustable amount to reach it.           
+            mineralEquilibrium :    tuple .     
+                The first component is the ion to consider to reach the equilibrium in.           
+                association with the second component which is a mineral.   
+        charge enables to use the pH as variable for balance achievement, see the phreeqC manual p. 149        
         """
 
 #        ChemicalState.__init__(self,name)
@@ -982,26 +1031,32 @@ class ChemicalState:
         self.name = name
 
         if aqueousSolution.__class__.__name__ != "AqueousSolution":
-            raise Exception, " aqueous solution is not of the right type "
+            raise Exception(" aqueous solution is not of the right type ")
         self.aqueousSolution = aqueousSolution
 
         if mineralPhase:
             mineralien = [mineralPhase]
+            print(type(mineralien))
             for minerals in mineralien:
-                if not isinstance(minerals,MineralPhase):
-                    raise Exception, " minerals should be instances of MineralPhase "
+                dir(minerals)
+                print("minerals",type(minerals))
+                print("~"*20)
+                if not isinstance(minerals,(MineralPhase, MSConc)):
+                    raise Exception(" minerals should be instances of MineralPhase ")
+                pass
             pass
         self.mineralPhase  = mineralPhase
 
         if gasPhase:
-            print " gas phase ",type(gasPhase)
-            print " gas phase ",gasPhase
+            #print " gas phase ",type(gasPhase)
+            #print " gas phase ",gasPhase
             gazen = [gasPhase]
             for gas in gazen:
-                print " gas phase ",type(gas)
-                print gas
+                print(" gas phase ",type(gas))
+                print(gas)
                 if not isinstance(gas,GasPhase):
-                    raise Exception, " gas phase has to be redefined "
+                    raise Exception(" gas phase has to be redefined ")
+                pass
             pass
         self.gasPhase  = gasPhase
 
@@ -1009,7 +1064,8 @@ class ChemicalState:
             ionen = [ionicExchanger]
             for ion in ionen:
                 if not isinstance(ion,IonicExchangers):
-                    raise Exception, " ionic exchanger has to be redefined "
+                    raise Exception(" ionic exchanger has to be redefined ")
+                pass
             pass
         self.ionicExchanger =ionicExchanger
 
@@ -1017,7 +1073,8 @@ class ChemicalState:
             flaechen = [surfaceComplexation]
             for flaeche in flaechen:
                 if not isinstance(flaeche,SurfaceComplexation):
-                    raise Exception, " surface complexation has to be redefined "
+                    raise Exception(" surface complexation has to be redefined ")
+                pass
             pass
         self.surfaceComplexation = surfaceComplexation
 
@@ -1025,13 +1082,13 @@ class ChemicalState:
 
         _typecontrol(phFixed,[TupleType]," the pH fixed option necessitates a tuple as argument ")
         self.phFixed = phFixed
-	
+    
         _typecontrol(chargeBalance,[TupleType]," the chargeBalance option must have a tuple as argument ")
         self.chargeBalance = chargeBalance
 
         _typecontrol(mineralEquilibrium,[ListType]," the mineralEquilibrium option should be a list ")
         self.mineralEquilibrium = mineralEquilibrium
-	
+    
         _typecontrol(charge,[BooleanType,IntType,StringType]," the charge argument has a wrong type ")          
         self.charge = charge
         #
@@ -1039,8 +1096,7 @@ class ChemicalState:
         # OK -> GAS_PHASE otherwise EQUILIBRIUM_PHASES
         #
         self.gasMassBalance = gasMassBalance
-        if self.gasMassBalance == None:
-            self.gasMassBalance = "no"
+        if self.gasMassBalance == None: self.gasMassBalance = "no"
         return None
 
     def getAqueousSolution(self):
@@ -1111,46 +1167,82 @@ class ChemicalState:
 class AqueousSolution:
     """ 
     That class enables to define a ChemicalState, that means a  a pH, a pe,
-    envetually a temperature and a list of Concentrations.
+    eventually a temperature and a list of Concentrations.
     Temperature default is 25 Celcius degrees.
+    units is the global concentration unit
     """
     
     def __init__(self,elementConcentrations,
                  pH=None,pe=None,Eh=None,
-                 balance=None,temperature = None):
+                 balance=None,temperature = None, units = None):
 
         for spezien in list(elementConcentrations):
             if spezien.__class__.__name__ != "ElementConcentration":
-                raise Exception, " problem within the aqueous solution definition "
+                raise Exception(" problem within the aqueous solution definition ")
         self.elementConcentrations = elementConcentrations
         
         _typecontrol(pH,[FloatType,IntType]," the pH type is wrong it should be a float ")
-        self.pH = pH
-	
+        self.pH = float(pH)
+    #
+    # pe can be not mentioned, therefore we don't impose the type eventhough we control it
+    #
         _typecontrol(pe,[FloatType,IntType]," the pe type is wrong it should be a float ")            
+        #print pe
         self.pe = pe
         
         if Eh:
             if not isinstance(Eh, ElectricPotential):
-                raise Exception, " Eh must be redefined "
+                raise Exception(" Eh must be redefined ")
         self.Eh = Eh
         
         _typecontrol(balance,[StringType]," balance should be a string ")            
         self.balance = balance
-	
+    
         if temperature:
             _typecontrol(temperature,[FloatType,IntType]," temperature of the solution should be a float ")            
             self.temperature = float(temperature)
-	else:
+            pass
+        else:
             self.temperature = temperature
+            pass
             
-        return
+        if units == None:
+            self.units = "mol/l"
+            pass
+        elif units == "mol/kgw":
+            self.units = units
+            pass
+        elif units in ["mg/l","g/l","mmol/l","mol/l"]:
+            self.units = "mol/l" # the unit conversion will occur when the state is written
+            pass
+        else:
+            raise Warning(" check the chemical state default unit,\n"\
+                          "it should be one of those units: "\
+                          " mg/l g/l mmol/l mol/l mol/kgw")
+            
+        return None
     
     def getBalance(self):
         return self.balance    
+
+    def getConstraints(self):
+        return self.constraints
+
+    def getEh(self):
+        return self.Eh
     
     def getElementConcentrations(self):
         return self.elementConcentrations
+
+    def getListOfIons(self):
+        listOfIons = []
+        for species in self.elementConcentrations: listOfIons.append(species.symbol)
+        return listOfIons
+
+    def getListOfIons(self):
+        listOfIons = []
+        for species in self.elementConcentrations: listOfIons.append(species.symbol)
+        return listOfIons
 
     def getpH(self):
         return self.pH
@@ -1158,50 +1250,69 @@ class AqueousSolution:
     def getpe(self):
         return self.pe
 
-    def getEh(self):
-        return self.Eh
-
-    def getConstraints(self):
-        return self.constraints
+    def getSpecificConc(self,ionName):
+        ionConc = None
+        for spezien in self.elementConcentrations:
+            if spezien.symbol == ionName:
+                return spezien.value
+            pass
+        if ionConc == None:
+            print("Warning the ion %s is not present in the system"%(ionName))
+            return 0.0
 
     def getSurfaceAreas(self):
         return self.SurfaceAreas
 
     def getTemperature(self):
         return self.temperature
-    pass
+    
+    def AddConc(self, elementConcentration):
+        """
+        enables to add a ion and its concentration or a list of ... to the
+        list of ions defining the aqueous solution.
+        
+        """
+        listOfIons = self.getListOfIons()
+        for spezien in list(elementConcentration):
+            if spezien.__class__.__name__ != "ElementConcentration":
+                raise Exception(" problem within the aqueous solution definition ")
+            if spezien.symbol not in listOfIons:
+                self.elementConcentrations.append(spezien)
+                listOfIons.append(spezien.symbol)
+                pass
+            pass
 
 class SolidSolution(Generic):
     """
     Used to define a solid solution
     """
     def __init__(self,name,minerals,
-		 gugg=None,temperature = None):
+         gugg=None,temperature = None):
         Generic.__init__(self)
-	self.name = name	 
+        self.name = name     
         checkClassList(minerals,[MineralTotalConcentration,MineralConcentration,TotalConcentration])
         self.mineralAmounts = minerals
-	
-	if gugg:
-          _typecontrol(gugg,[ListType]," gugg should be a list ")            
-          _typecontrol(gugg[0],[FloatType]," gugg[0] should be a float ")            
-	      
-	  if len(gugg)>1:
-              _typecontrol(gugg[1],[FloatType]," gugg[1] should be a float ")            
-	      
-	  self.gugg = gugg
+    
+        if gugg:
+            _typecontrol(gugg,[ListType]," gugg should be a list ")
+            _typecontrol(gugg[0],[FloatType]," gugg[0] should be a float ")            
+          
+            if len(gugg)>1:
+                _typecontrol(gugg[1],[FloatType]," gugg[1] should be a float ")            
+          
+            self.gugg = gugg
         _typecontrol(temperature,[FloatType]," the solidSolution temperature should be a float ")            
-	self.temperature = temperature
-	         
+        self.temperature = temperature
+             
     def getMinerals(self):
         return self.minerals
-	         
+             
     def getGuggenheim(self):
         return self.gugg
-	         
+             
     def getTemperature(self):
         return self.temp
-	
+    
     pass
 
 class MineralPhase(Generic):
@@ -1211,13 +1322,27 @@ class MineralPhase(Generic):
     
     example = MineralPhase ([   TotalConcentration("quartz", 16.64, "mol/l"),
                                 TotalConcentration("calcite", 9.99, "mol/l")], phFixed=("HCl",10.0))
+                                
+    The option phFixed is specific to phreeqC:          pH_Fix -5.0 HCl 10.0 would maintain a pH of 5.0 by adding HCl
+    provided a phase named "pH_Fix" were defined with reaction H+ = H+ and logK = 0.0.
+    
+    
+    
     """
     def __init__(self,minerals,
-		 phFixed=None):
+         phFixed=None):
         Generic.__init__(self)
-        checkClassList(minerals,[MineralTotalConcentration,TotalConcentration])
+        msTrue = True
+        for mineral in minerals:
+            if mineral.__class__.__name__ != "MSConc":
+                msTrue = False
+                pass
+            pass
+        if msTrue == False:
+            checkClassList(minerals,[MineralTotalConcentration,TotalConcentration])
+            pass
         self.minerals = minerals
-	
+    
         _typecontrol(phFixed,[TupleType]," the pH fixed option requires a tuple element and quantity as option ")            
         self.phFixed  = phFixed
       
@@ -1226,26 +1351,91 @@ class MineralPhase(Generic):
         to get the list of mineral phases associated to the chemical state
         """
         return self.minerals
-	
+    
     def getphFixed(self):
         return self.pHfixed
 
     pass
+                                                                                #
+                                                                                # that class is used for toughreact 1.2. Over time a single mineral phase
+                                                                                # should enable to make a generic declaration of the mineral phase.
+                                                                                #
+class MSConc(ChemicalQuantity):
+    """
+    Used to introduce minerals in the system
+    First, the name of the mineral is given, included among those previously listed
+    in the definition of the system, although the order may change.
+    The mineral: *, indicates the end of the list of minerals.
+    Then, the initial volume fraction of the mineral, excluding liquid (mineral
+    volume divided by total volume of solids).
+    The sum of VOL arguments need not add up to 1.
+    The remaining solid volume fraction is considered un-reactive.
+    Last, a flag (ikin) for the type of mineral: 0 for minerals at equilibrium, and 1 for those
+    under kinetic constraints.
+    When IKIN=1, the grain Radius of the mineral, the specific surface area and its unit must be introduced,.
+    otherwise, default values are taken: rad = 0.0
+    """
+    def __init__(self, mineral, inVolFrac = 0.0, ikin = 0, grainRad = None, reacSur = None,reacSurUnit = None):
+        default_unit = ""
+        #PhysicalQuantity.__init__(self,inVolFrac,default_unit)
+        self.name       = mineral.name
+        self.mineral    = mineral
+        self.inVolFrac  = inVolFrac
+        self.value      = inVolFrac
+        self.ikin = ikin
+        self.unit = "m3/m3"
+        #
+        #
+        #
+        if (self.ikin == 1):
+            if (grainRad == None):
+                grainRad            = 0.001
+                pass
+            else:
+                self.grainRad       = grainRad
+                pass
+            if reacSur == None:
+                raise Exception(" a reactive surface area should be introduced ")
+            else:
+                self.reacSur        = reacSur
+                pass
+            if reacSurUnit != None:
+                self.reacSurUnit    = reacSurUnit
+                pass
+            else:
+                self.reacSurUnit    = "m2/kg"
+                pass
+    pass
+
+    def getHelp(self):
+        print(self.__doc__)
+        pass
+
+
 
 class GasPhase:
     """
     Definition of a gaseous phase
     """
-    def __init__(self,gas):
+    def __init__(self, gas, fixedpressure = None, pressure = None, volume = None):
         checkClassList(gas, Fugacity)
         self.gas = gas
-        return None
+        self.fixedpressure = True
+        self.pressure = 1.
+        self.volume = 1.
+        if fixedpressure == False: self.fixedpressure = False
+        if pressure != None: self.pressure = pressure
+        
+        self.volume = volume
 
     def append(self,aGas):
         self.gas.append(aGas)
 
     def getGas(self):
         return self.gas
+            
+    def getHelp(self):
+        print(self.__doc__)
 
     pass
 
@@ -1254,8 +1444,8 @@ class IonicExchangers:
     def __init__(self,exchangers):
         for ionicexchangers in exchangers:
             if not isInstance(ionicexchangers,[ExchangeBindingSpecies,ExchangeMineralBindingSpecies]):
-                raise Exception, "ExchangeBindingSpecies must be redefined"
-	    pass
+                raise Exception("ExchangeBindingSpecies must be redefined")
+        pass
         self.exchangers = exchangers
         return
 
@@ -1286,7 +1476,8 @@ class ExchangeBindingSpecies(Species):
 
         if not isinstance(exchangeAmount,MolesAmount):
             if not isinstance(exchangeAmount,Moles):
-                raise Exception, "exchange amount must be redefined "
+                raise Exception("exchange amount must be redefined ")
+            pass
         self.exchangeAmount = exchangeAmount
     
     def getExchangeAmount(self):
@@ -1320,19 +1511,19 @@ class SurfaceBindingSpecies(Species):
     def __init__(self,symbol,sites,specificAreaPerGram=None,mass=None):
 
         Species.__init__(self,symbol)
-	
-	if not isinstance(sites,MolesAmount):
-	    raise Exception, " SurfaceBindingSpecies must be redefined"
-	self.sites = sites
-	
-	if specificAreaPerGram:
-	    if not isinstance(specificAreaPerGram,SpecificAreaPerGram):
-	        raise Exception, "specificAreaPerGram must be redefined"
-	self.specificAreaPerGram = specificAreaPerGram
-	
-	if mass:
-	    if not isinstance(mass,Mass):
-	        raise Exception, "mass for %smust be redefined" %(symbol)
+    
+        if not isinstance(sites,MolesAmount):
+            raise Exception(" SurfaceBindingSpecies must be redefined")
+        self.sites = sites
+    
+        if specificAreaPerGram:
+            if not isinstance(specificAreaPerGram,SpecificAreaPerGram):
+                raise Exception("specificAreaPerGram must be redefined")
+        self.specificAreaPerGram = specificAreaPerGram
+    
+        if mass:
+            if not isinstance(mass,Mass):
+                raise Exception("mass for %smust be redefined" %(symbol))
         self.mass = mass
     
     def getSites(self):
@@ -1358,9 +1549,9 @@ class SurfaceMineralBindingSpecies(Species):
         _typecontrol(sitesPerMole,[FloatType]," sitesPerMole arg within SurfaceMineralBindingSpecies should be a float ")            
         self.sitesPerMole = sitesPerMole
 
-	if specificAreaPerMole:
+        if specificAreaPerMole:
             if not isinstance(specificAreaPerMole,SpecificAreaPerMole):
-                raise Exception, " specificAreaPerMole must be redefined "
+                raise Exception(" specificAreaPerMole must be redefined ")
         self.specificAreaPerMole = specificAreaPerMole
 
     def getmineralphasename(self):
@@ -1387,11 +1578,12 @@ class ChemicalProblem:
                  name,
                  chemistryDB,
                  chemicalState,
-                 speciesBaseAddenda=None,
+                 speciesBaseAddenda = None,
                  kineticLaws =  None,
                  activityLaw = None,
-                 timeStep=None,
-                 outputs=None):
+                 timeStep = None,
+                 simulationTime = None,
+                 outputs = None):
         """
         Init
         
@@ -1402,7 +1594,8 @@ class ChemicalProblem:
             speciesBaseAddenda (list of Species, OPTIONAL)
             kineticLaws (list of KineticLaw, OPTIONAL)
             activityLaw (list of ActivityLaw, OPTIONAL)
-            timeStep (Time, OPTIONAL) : only if kinetic
+            timeStep (Time, OPTIONAL) : only if kinetic and for a batch reaction
+            simulationTime (Time, OPTIONAL) : only if kinetic and for a batch reaction
             outputs (list of ExpectedOutput, OPTIONAL)
 
           Examples :
@@ -1415,28 +1608,31 @@ class ChemicalProblem:
         self.dtb = chemistryDB
         
         if not isinstance(chemicalState,ChemicalState):
-            raise Exception, "the chemical state must be redefined"
+            raise Exception("the chemical state must be redefined")
         self.chemicalState = chemicalState
                  
-        if speciesBaseAddenda:
-            checkClassList(speciesBaseAddenda, [Salt,Species])    
+        if speciesBaseAddenda: checkClassList(speciesBaseAddenda, [Salt,Species])    
         self.speciesBaseAddenda = speciesBaseAddenda
-
-        if kineticLaws:
-            checkClassList(kineticLaws,KineticLaw)
+        
+        if kineticLaws: checkClassList(kineticLaws,KineticLaw)
         self.kineticLaws = kineticLaws
          
         if activityLaw:
             if not isinstance(activityLaw,ActivityLaw):
-                raise Exception, " problem with the default activity law definition"
+                raise Exception(" problem with the default activity law definition")
         self.activityLaw = activityLaw
 ##        else:
 ##            self.activityLaw = Davies()
  
         if timeStep:
             if not isinstance(timeStep,Time):
-                raise Exception, " timeStep instance has to be redefined"
+                raise Exception(" timeStep instance has to be redefined")
         self.timeStep = timeStep
+ 
+        if simulationTime:
+            if not isinstance(simulationTime,Time):
+                raise Exception(" simulationTime instance has to be redefined")
+        self.simulationTime = simulationTime
 
         if outputs:
             checkClassList(outputs,ExpectedOutput)
@@ -1469,6 +1665,9 @@ class ChemicalProblem:
     def getTimeStep(self):
         return self.timeStep
         
+    def getSimulationTime(self):
+        return self.simulationTime
+        
     def getOutputs(self):
         return self.outputs
    
@@ -1481,7 +1680,6 @@ class ChemicalProblem:
 class ExpectedOutput(CommonExpectedOutput):
     """
     ExpectedOutput definition
-    
     
       Input :
       
@@ -1512,19 +1710,21 @@ class ExpectedOutput(CommonExpectedOutput):
                    'Activity','TotalConcentration', 'AqueousTotalConcentration','AqueousConcentration','MineralPhaseConcentration'
                    'FixedTotalConcentration', 'numerics', 'porosity']
         facetype = []
-	
+    
         if quantity == None:
-	    quantity = 'Concentration'
-	elif quantity == 'concentration':
-	    quantity = 'Concentration'
-	    pass
+            quantity = 'Concentration'
+            pass
+        elif quantity == 'concentration':
+            quantity = 'Concentration'
+            pass
 
-        CommonExpectedOutput.__init__(self, alltype, facetype,quantity, support,
+        CommonExpectedOutput.__init__(self, alltype, facetype, quantity, support,
                                       name , unit, timeSpecification, None, unknown, save, 1)
-	    
+        
         if format:
-            if format not in ['field',"table",]: raise Exception, "the ExpectedOutput format must be of type \"field\" or \"table\""
+            if format not in ['field',"table",]: raise Exception("the ExpectedOutput format must be of type \"field\" or \"table\"")
             self.format = format
+            pass
         else:
             self.format = 'field'
             pass
@@ -1567,6 +1767,6 @@ class ExpectedOutput(CommonExpectedOutput):
     
 def _typecontrol(obj,typListe,message):
     if obj:
-            if type(obj) not in  typListe:
-                raise TypeError, message
+        if type(obj) not in  typListe:
+            raise TypeError(message)
 

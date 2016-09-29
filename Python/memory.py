@@ -1,6 +1,7 @@
 #
 # source ASPN Cookbook : http://aspn.activestate.com/ASPN/Cookbook/Python
 #
+from __future__ import absolute_import
 import os
 
 _proc_status = '/proc/%d/status' % os.getpid()
@@ -35,7 +36,7 @@ def memory(since=0.0):
 
 
 def getMemory(since=0.0):
-    '''Return memory usage in bytes.
+    '''Return memory usage in kbytes.
     '''
     return _VmB('VmSize:')/1024, "Kb"
 

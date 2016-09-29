@@ -3,17 +3,19 @@
 Tensors Module
 """
 
+from __future__ import absolute_import
 from generictools import isInstance
 
 from wrappertools import verifyEqualFloats
 import types
 #from utilities import *
 from vector import V as Vector
+from six.moves import range
 
 def _verifyIndices(i, j):
     """Internal method to verifying whether i and j are in range of 0 and 2."""
     if i > 2 or i < 0 or j > 2 or j < 0:
-	raise "Tensor indices must be in range of 0 and 2."
+        raise Warning("Tensor indices must be in range of 0 and 2.")
 
 
 
@@ -24,68 +26,73 @@ class Tensor:
 
     def __init__(self):
         """Initialization will be executed for 2D and 3D anisotropic tensors, here nothing is done."""
-	self.value = None
+        self.value = None
 
     def getValue(self, i, j):
         """Returns the value[i][j] of the tensor."""
-	_verifyIndices(i, j)
-	return self._get(i,j)
+        _verifyIndices(i, j)
+        return self._get(i,j)
 
     def tolist(self):
         """Returns a list of tensor values."""
         return [self.value]
 
     def isIsotropic(self):
-	return 0
+        return 0
 
     def _get(self, i, j):
         """Returns the value[i][j]"""
-	if j > i:
-	    t = i; i = j; j = t
-	return self.value[i][j]
+        if j > i:
+            t = i; i = j; j = t
+            pass
+        return self.value[i][j]
 
     def TensorMalVector(self,V):
         """
         returns the vector product of the tensor by the vector V.
-	"""
+    """
         dim = V.getDims()
         if self.getDimension() != dim:
-            raise Exception,"Vector and Tensor have not the same dimension"
+            raise Exception("Vector and Tensor have not the same dimension")
         vector = []
         for i in range(dim):
             value = 0
             for j in range(dim):
                 value = value + self._get(i,j)*V.comps[j]
+                pass
             vector.append(value)
+            pass
         return Vector(list(vector))
 
     def VectorMalTensor(self,V):
         """Multiplication of the vector V by the tensor self.
-	Returns a list result of this operation."""
+    Returns a list result of this operation."""
         dim = V.getDims()
         if self.getDimension() != dim:
-            raise Exception,"Vector and Tensor have not the same dimension"
+            raise Exception("Vector and Tensor have not the same dimension")
         val = []
         for i in range(dim):
             value = 0
             for j in range(dim):
                 value = value + self._get(i,j)*V.comps[j]
+                pass
             val.append(value)
+            pass
         return val
         
 
     def VectorTensorVector(self,Va,Vb):
         """Multiplication:
-	Va * self * Vb, returns a scalar value."""
+    Va * self * Vb, returns a scalar value."""
         if isinstance(Va,V) and isinstance(Vb,V):
             if Va.__len__ != Vb.__len__:
-                raise " dimension error on vectors "
+                raise Warning(" dimension error on vectors ")
         else:
-            raise " Va, Vb type mismatch "
+            raise Warning(" Va, Vb type mismatch ")
                 
         dim = Va.getDims()
         if self.getDimension() != dim:
-            raise Exception, "Vector and Tensor have not the same dimension"
+            raise Exception("Vector and Tensor have not the same dimension")
         la = Va.getValues()
         vectb = self.TensorMalVector(Vb)
         som = 0
@@ -104,8 +111,8 @@ class Tensor2D(Tensor):
 
     def __init__(self,alpha,beta, V1 = None, V2= None):
         """Constructor of the class."""
-        verifyType(alpha,types.FloatType)
-        verifyType(beta,types.FloatType)
+        verifyType(alpha,float)
+        verifyType(beta,float)
         if (not V1 and (not V2)):
             # case of two scalars
             self.value = [[alpha],[0., beta]]
@@ -113,11 +120,11 @@ class Tensor2D(Tensor):
         elif ((V1 and (not V2)) or ((not V1) and V2)):
             #case of 3 scalars
             if V1:
-                verifyType(V1,types.FloatType)
+                verifyType(V1,float)
                 self.value = [[alpha],[V1, beta]]
                 pass
             else:
-                verifyType(V2,types.FloatType)
+                verifyType(V2,float)
                 self.value = [[alpha],[V2, beta]]
                 pass
             pass
@@ -125,7 +132,7 @@ class Tensor2D(Tensor):
               (isInstance(V2,Vector))):
              #case of 4 scalars
              if V1.__len__ != V2.__len__:
-                 raise Exception, " vectors defing a 2D tensor have not the same dimension"
+                 raise Exception(" vectors defing a 2D tensor have not the same dimension")
              
              V1.verifyUnitary()
              V2.verifyUnitary()
@@ -138,7 +145,7 @@ class Tensor2D(Tensor):
              self.value = [[Kxx],[Kxy, Kyy]]
              pass
         else:
-             raise Exception, " defining a 2D tensor, you have to enter scalars or vectors"
+             raise Exception(" defining a 2D tensor, you have to enter scalars or vectors")
         return
      
     def getNbComponents(self):
@@ -159,7 +166,8 @@ class Tensor2D(Tensor):
     
     def amult(self,scalar):
         """Multiplication of the tensor by the given scalar value.
-	Returns a new tensor = scalar * self."""
+           Returns a new tensor = scalar * self.
+        """
         alpha = scalar*self.value[0][0]
         beta = scalar*self.value[1][1]
         V1 = scalar*self.value[1][0]
@@ -172,7 +180,8 @@ class Tensor2D(Tensor):
     
     def __add__(self,other):
         """Addition of two given tensors.
-	Returns a new tensor = self + other."""
+           Returns a new tensor = self + other.
+        """
         alpha = self.value[0][0] + other.value[0][0]
         beta = self.value[1][1] + other.value[1][1]
         V1 = self.value[1][0] + other.value[1][0]
@@ -180,7 +189,8 @@ class Tensor2D(Tensor):
 
     def __sub__(self,other):
         """Substraction of the given tensors.
-	Returns a new tensor = self - other."""
+           Returns a new tensor = self - other.
+        """
         alpha = self.value[0][0] - other.value[0][0]
         beta = self.value[1][1] - other.value[1][1]
         V1 = self.value[1][0] - other.value[1][0]
@@ -191,46 +201,48 @@ class Tensor3D(Tensor):
        could be initialized by :
        - 3 scalars (main directions are x, y and z)
        - 6 scalars
-       - 3 scalars and 3 vectors (three directions). The constructor calcultates the coefficients to translate the tensor into the main direction x, y and z"""
+       - 3 scalars and 3 vectors (three directions). The constructor calcultates the coefficients to translate the tensor into the main direction x, y and z
+    """
 
     def __init__(self,alpha,beta,gamma, V1 = None, V2= None, V3 = None):
         """Constructor of the class."""
 
-        verifyType(alpha,types.FloatType)
+        verifyType(alpha,float)
         
-        verifyType(beta,types.FloatType)
+        verifyType(beta,float)
         
-        verifyType(gamma,types.FloatType)
-        
+        verifyType(gamma,float)
+                                                                                            #
+                                                                                            # Diagonal terms
+                                                                                            #        
         if (not V1 and (not V2) and (not V3)):
-#
-#                                                                                                               Diagonal terms
-#
             self.value = [[alpha],[0., beta], [0.,0.,gamma]]
+            pass
+                                                                                            #
+                                                                                            # vector terms
+                                                                                            #
         elif ((V1 and (not V2) and (not V3)) or
-#
-#                                                                                                               vector terms
-#
-            (V1 and V2 and (not V3)) or
-            ((not V1) and V2 and V3) or
-            ((not V1) and (not V2) and V3) or
-            (V1 and (not V2) and V3) or
-            ((not V1) and V2 and (not V3))):
-            raise Exception, "to define a tensor you give 3 diagonal terms or 6 for an isotropic one"
+             (V1 and V2 and (not V3)) or
+             ((not V1) and V2 and V3) or
+             ((not V1) and (not V2) and V3) or
+             (V1 and (not V2) and V3) or
+             ((not V1) and V2 and (not V3))):
+                raise Exception("to define a tensor you give 3 diagonal terms or 6 for an isotropic one")
         if V1 : 
-            if ((type(V1) is types.FloatType) and
-                (type(V2) is types.FloatType) and
-                (type(V3) is types.FloatType)):
+            if ((type(V1) is float) and
+                (type(V2) is float) and
+                (type(V3) is float)):
                 #case of 6 scalars
                 self.value = [[alpha],[V1, beta], [V2,V3,gamma]]
+                pass
             elif ((isInstance(V1,Vector)) and
                   (isInstance(V2,Vector)) and
                   (isInstance(V3,Vector))):
                 # case of 3 scalars and 3 vectors
                 if V1.__len != V2.__len:
-                    raise " dimensionality error in Tensor3D "
+                    raise Warning(" dimensionality error in Tensor3D ")
                 if V2.__len != V3.__len:
-                    raise " dimensionality error in Tensor3D "
+                    raise Warning(" dimensionality error in Tensor3D ")
                 
                 V1.verifyUnitary()
                 V2.verifyUnitary()
@@ -245,8 +257,9 @@ class Tensor3D(Tensor):
                 Kyz = t.VectorTensorVector(V2, V3)
                 Kzz = t.VectorTensorVector(V3,V3)
                 self.value = [[Kxx],[Kxy, Kyy], [Kxz,Kyz, Kzz] ]
+                pass
             else:
-                raise Exception, " defining a 3D tensor, you have to enter scalars or vectors"
+                raise Exception(" defining a 3D tensor, you have to enter scalars or vectors")
 
 
     def getNbComponents(self):
@@ -269,7 +282,8 @@ class Tensor3D(Tensor):
 
     def amult(self,scalar):
         """Multiplication of the tensor by the given scalar value.
-	Returns a new tensor = scalar * self"""
+           Returns a new tensor = scalar * self
+        """
         alpha = scalar*self.value[0][0]
         beta = scalar*self.value[1][1]
         gamma = scalar*self.value[2][2]
@@ -285,7 +299,8 @@ class Tensor3D(Tensor):
 
     def __add__(self,other):
         """Addition of two given tensors.
-	Returns a new tensor = self + other"""
+           Returns a new tensor = self + other
+        """
         alpha = self.value[0][0] + other.value[0][0]
         beta = self.value[1][1] + other.value[1][1]
         gamma = self.value[2][2] + other.value[2][2]
@@ -296,7 +311,8 @@ class Tensor3D(Tensor):
 
     def __sub__(self,other):
         """Substraction of the given tensors.
-	Returns a new tensor = self - other"""
+           Returns a new tensor = self - other
+        """
         alpha = self.value[0][0] - other.value[0][0]
         beta = self.value[1][1] - other.value[1][1]
         gamma = self.value[2][2] - other.value[2][2]
@@ -312,14 +328,14 @@ class IsotropicTensor(Tensor):
     def __init__(self, value):
         """Constructor. The value is of float type."""
         try:
-            type(value) is types.FloatType
+            type(value) is float
         except:
-            raise TypeError, " value is not of float type for the Isotropic Tensor Construction "  
-	self.value = value
+            raise TypeError(" value is not of float type for the Isotropic Tensor Construction ")  
+        self.value = value
 
     def isIsotropic(self):
         """Returns True, because this tensor is isotropic."""
-	return 1
+        return 1
 
     def getValues(self):
         """Returns the values of this tensor."""
@@ -331,10 +347,10 @@ class IsotropicTensor(Tensor):
 
     def _get(self, i, j):
         """Returns the value if i = j, else 0"""
-	if i == j:
-	    return self.value
-	else:
-	    return 0.
+        if i == j:
+            return self.value
+        else:
+            return 0.
 
     def getNbComponents(self):
         """Gets the number of tensor components (1)"""
@@ -350,7 +366,7 @@ class IsotropicTensor(Tensor):
 
     def amult(self,scalar):
         """Multiplication of the tensor by the given scalar value.
-	Returns a new tensor = scalar * self"""
+    Returns a new tensor = scalar * self"""
         return IsotropicTensor(scalar*self.value)
 
     def __neg__(self):
@@ -360,12 +376,14 @@ class IsotropicTensor(Tensor):
     
     def __add__(self,other):
         """Addition of two given tensors.
-	Returns a new tensor = self + other"""
+           Returns a new tensor = self + other
+        """
         return IsotropicTensor(self.value + other.value)
     
     def __sub__(self,other):
         """Substraction of the given tensors.
-	Returns a new tensor = self - other"""
+           Returns a new tensor = self - other
+        """
         return IsotropicTensor(self.value - other.value)
 
 

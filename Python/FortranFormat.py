@@ -53,6 +53,8 @@ Examples::
     '3.14159D+00    2.71828D+00'
 """
 
+from __future__ import absolute_import
+from __future__ import print_function
 import string
 
 #
@@ -100,18 +102,24 @@ class FortranLine:
         if type(line) == type(''):
             self.text = line
             self.data = None
+            pass
         else:
             self.text = None
             self.data = line
+            pass
         if type(format) == type(''):
             self.format = FortranFormat(format)
+            pass
         else:
             self.format = format
+            pass
         self.length = length
         if self.text is None:
             self._output()
+            pass
         if self.data is None:
             self._input()
+            pass
 
     def __len__(self):
         """
@@ -164,10 +172,12 @@ class FortranLine:
             value = None
             if type == 'A':
                 value = s
+                pass
             elif type == 'I':
                 s = string.strip(s)
                 if len(s) == 0:
                     value = 0
+                    pass
                 else:
                     # by AP
                     # sometimes a line does not match to expected format, 
@@ -177,6 +187,8 @@ class FortranLine:
                         value = string.atoi(s)
                     except:
                         value = None
+                    pass
+                pass
             elif type == 'D' or type == 'E' or type == 'F' or type == 'G':
                 s = string.lower(string.strip(s))
                 n = string.find(s, 'd')
@@ -184,13 +196,16 @@ class FortranLine:
                     s = s[:n] + 'e' + s[n+1:]
                 if len(s) == 0:
                     value = 0.
+                    pass
                 else:
                     try:
                         value = string.atof(s)
                     except:
                         value = None
+                pass
             if value is not None:
                 self.data.append(value)
+                pass
 
     def _output(self):
         data = self.data
@@ -199,8 +214,10 @@ class FortranLine:
             type = field[0]
             if type == "'":
                 self.text = self.text + field[1]
+                pass
             elif type == 'X':
                 self.text = self.text + field[1]*' '
+                pass
             else: # fields that use input data
                 length = field[1]
                 if len(field) > 2: fraction = field[2]
@@ -208,25 +225,33 @@ class FortranLine:
                 data = data[1:]
                 if type == 'A':
                     self.text = self.text + (value+length*' ')[:length]
+                    pass
                 else: # numeric fields
                     if value is None:
                         s = ''
+                        pass
                     elif type == 'I':
-                        s = `value`
+                        s = repr(value)
+                        pass
                     elif type == 'D':
-                        s = ('%'+`length`+'.'+`fraction`+'e') % value
+                        s = ('%'+repr(length)+'.'+repr(fraction)+'e') % value
                         n = string.find(s, 'e')
                         s = s[:n] + 'D' + s[n+1:]
+                        pass
                     elif type == 'E':
-                        s = ('%'+`length`+'.'+`fraction`+'e') % value
+                        s = ('%'+repr(length)+'.'+repr(fraction)+'e') % value
+                        pass
                     elif type == 'F':
-                        s = ('%'+`length`+'.'+`fraction`+'f') % value
+                        s = ('%'+repr(length)+'.'+repr(fraction)+'f') % value
+                        pass
                     elif type == 'G':
-                        s = ('%'+`length`+'.'+`fraction`+'g') % value
+                        s = ('%'+repr(length)+'.'+repr(fraction)+'g') % value
+                        pass
                     else:
                         raise ValueError('Not yet implemented')
                     s = string.upper(s)
                     self.text = self.text + ((length*' ')+s)[-length:]
+            pass
         self.text = string.rstrip(self.text)
 
 #
@@ -258,14 +283,17 @@ class FortranFormat:
             while format[0] in string.digits:
                 n = 10*n + string.atoi(format[0])
                 format = format[1:]
+                pass
             if n == 0: n = 1
             type = string.upper(format[0])
             if type == "'":
                 eof = string.find(format, "'", 1)
                 text = format[1:eof]
                 format = format[eof+1:]
+                pass
             else:
                 format = string.strip(format[1:])
+                pass
             if type == '(':
                 subformat = FortranFormat(format, 1)
                 fields = fields + n*subformat.fields
@@ -273,6 +301,8 @@ class FortranFormat:
                 eof = string.find(format, ',')
                 if eof >= 0:
                     format = format[eof+1:]
+                    pass
+                pass
             else:
                 eof = string.find(format, ',')
                 if eof >= 0:
@@ -283,24 +313,34 @@ class FortranFormat:
                     if eof >= 0:
                         field = format[:eof]
                         format = format[eof+1:]
+                        pass
                     else:
                         field = format
                         format = ''
+                        pass
+                    pass
                 if type == "'":
                     field = (type, text)
+                    pass
                 else:
                     dot = string.find(field, '.')
                     if dot > 0:
                         length = string.atoi(field[:dot])
                         fraction = string.atoi(field[dot+1:])
                         field = (type, length, fraction)
+                        pass
                     else:
                         if field:
                             length = string.atoi(field)
+                            pass
                         else:
                             length = 1
+                            pass
                         field = (type, length)
+                        pass
+                    pass
                 fields = fields + n*[field]
+                pass
         self.fields = fields
         if nested:
             self.rest = format
@@ -317,7 +357,7 @@ class FortranFormat:
 if __name__ == '__main__':
     f = FortranFormat("'!!',D10.3,F10.3,G10.3,'!!'")
     l = FortranLine([1.5707963, 3.14159265358, 2.71828], f)
-    print str(l)
+    print(str(l))
     f = FortranFormat("F12.0")
     l = FortranLine('2.1D2', f)
-    print l[0]
+    print(l[0])

@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+from __future__ import print_function
 import types
 from generictools import isInstance
 
@@ -12,13 +14,16 @@ from PhysicalQuantities import PhysicalQuantity,\
 from exceptions import Exception
 from time import time
 from memory import getMemory
+import six
 
 
 def getPhysicalQuantityName(physicalQuantity):
-    if type(physicalQuantity) is types.StringType:
+    if type(physicalQuantity) is bytes:
         key=physicalQuantity
+        pass
     elif issubclass(physicalQuantity,PhysicalQuantity):
         key=physicalQuantity.__name__
+        pass
     else:
         raise Exception
         pass
@@ -42,9 +47,10 @@ def verifySomeOfPhysicalQuantitiesExists(listOfPhysicalQuantities,regions,specie
     for reg in regions:
         regPhysicalQuantityAnz = 0
         for physicalQuantity in listOfPhysicalQuantities:
-            print "dbg verifyPhysicalQuantityOnRegion",verifyPhysicalQuantityOnRegion(physicalQuantity,reg)
+            print("dbg verifyPhysicalQuantityOnRegion",verifyPhysicalQuantityOnRegion(physicalQuantity,reg))
             regPhysicalQuantityAnz +=\
                 verifyPhysicalQuantityOnRegion(physicalQuantity,reg)
+            pass
         if not regPhysicalQuantityAnz:
             msg='no physical quantity of \n('
             msg+=  affichage%listOfNames
@@ -56,9 +62,10 @@ def verifySomeOfPhysicalQuantitiesExists(listOfPhysicalQuantities,regions,specie
             msg+=  affichage%listOfNames
             msg+="\nis defined for material : '%s'."\
                   %reg.getMaterial().getName()
-            raise Exception, msg
+            raise Exception(msg)
         else:
             pass
+        pass
             
 def regionPhysicalQuantitiesCheck(physicalQuantitiesList,regions,species=None):
     """
@@ -81,11 +88,12 @@ def regionPhysicalQuantitiesCheck(physicalQuantitiesList,regions,species=None):
         anzPhysQuant=0
         for PhysQuant in physicalQuantitiesList:
             anzPhysQuant+= verifyPhysicalQuantityOnRegion(PhysQuant,reg,species,option='boolean')
+            pass
         if anzPhysQuant == 0:
             verbose = "no physical quantity of "
             verbose+= "is defined for material  '%s'."%reg.getMaterial().getName()
-            raise Exception, verbose
-        
+            raise Exception(verbose)
+        pass
 
 def setDefaultPhysicalQuantity(physicalQuantity,value,regions,species=None):
     key=getPhysicalQuantityName(physicalQuantity)
@@ -93,6 +101,8 @@ def setDefaultPhysicalQuantity(physicalQuantity,value,regions,species=None):
         if not species:
             if not verifyPhysicalQuantityOnRegion(physicalQuantity,reg,option='boolean'):
                 reg.getMaterial().setProperty(key,value)
+                pass
+            pass
         else:
             for spe in species:
                 if not verifyPhysicalQuantityOnRegion(physicalQuantity,\
@@ -100,6 +110,10 @@ def setDefaultPhysicalQuantity(physicalQuantity,value,regions,species=None):
                     #print "AFFECTATION !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
                     #reg.getMaterial().setProperty(key,(value,spe))
                     reg.getMaterial().changeProperty(physicalQuantity,[(value,spe)])
+                    pass
+                pass
+            pass
+        pass
                     #print "AFFECTATION TERMINEE"
 
 ## def setDefaultDependPhysicalQuantity(physicalQuantity,value,regions,species=None):
@@ -129,9 +143,10 @@ def verifyPhysicalQuantityOnRegion(physicalQuantitiesList, region, species = Non
         
         if material.hasProperty(key) == 0:
             message = " the material "%material.getName()+" has not the property named "%key
-            raise Exception, message
+            raise Exception(message)
         else:
             return len(physicalQuantitiesList)
+        pass
             
 
 def verifyUnknownTypeBoundaryCondition(unknown_list,boundaries) :
@@ -142,7 +157,7 @@ def verifyUnknownTypeBoundaryCondition(unknown_list,boundaries) :
     for boundary in boundaries:
         value= boundary.getValue()
         for unknown in unknown_list:
-            if type(unknown) is types.TypeType :
+            if type(unknown) is type :
                 if type(value) == type(unknown):
                     found = 1
                     pass
@@ -152,8 +167,9 @@ def verifyUnknownTypeBoundaryCondition(unknown_list,boundaries) :
                 pass
             pass
         if not found:
-            raise "Given boundary condition is not of correct type"
-        found = 0
+            raise Warning("Given boundary condition is not of correct type")
+#        found = 0
+        pass
 
 def verifyZoneBoundaryConditionisUnique(boundaryConditions):
     """
@@ -196,8 +212,8 @@ def verifyZoneBoundaryConditionisUnique(boundaryConditions):
                                 msg+="defined on boundaries with common elements.\n"
                                 msg+="Boundaries with common elements are named %s"%boundname + " and %s"%bouname + "."
                                 t1 = time()
-                                print 'temps de verifyZoneBoundaryConditionisUnique : ' + str(t1- t0) +'s'
-                                print 'used memory :', getMemory() , 'Ko \n'
+                                print('temps de verifyZoneBoundaryConditionisUnique : ' + str(t1- t0) +'s')
+                                print('used memory :', getMemory() , 'Ko \n')
                             raise msg
                         for var in vars1:
                             if (var in vars2) or var=='ALL' or vars2==['ALL']:
@@ -213,9 +229,10 @@ def verifyZoneBoundaryConditionisUnique(boundaryConditions):
                                     msg+=" defined on boundaries with common elements.\n"
                                     msg+="Boundaries with common elements are named %s"%boundname + " and %s"%bouname
                                     t1 = time()
-                                    print 'temps de verifyZoneBoundaryConditionisUnique : ' + str(t1- t0) +'s'
-                                    print 'used memory :', getMemory() , 'Ko \n'
-                                raise msg
+                                    print('temps de verifyZoneBoundaryConditionisUnique : ' + str(t1- t0) +'s')
+                                    print('used memory :', getMemory() , 'Ko \n')
+                                    pass
+                                raise Warning(msg)
                             pass
                         pass
                     pass
@@ -224,8 +241,8 @@ def verifyZoneBoundaryConditionisUnique(boundaryConditions):
         i = i+1
         pass
     t1 = time()
-    print 'temps de verifyZoneBoundaryConditionisUnique : ' + str(t1- t0) +'s'
-    print 'used memory :', getMemory() , 'Ko \n'
+    print('temps de verifyZoneBoundaryConditionisUnique : ' + str(t1- t0) +'s')
+    print('used memory :', getMemory() , 'Ko \n')
     return
 
 
@@ -240,7 +257,7 @@ def verifyPressureBoundaryConditions(boundaryConditions, density,
         if (isInstance(value,[Pressure,PressureGradient])):
             if ((density is None) or
                 (gravity is None)):
-                raise "Pressure or PressureGradient boundary condition used without set density and gravity"
+                raise Warning("Pressure or PressureGradient boundary condition used without set density and gravity")
             pass
         pass
     pass
@@ -256,15 +273,15 @@ def intrinsicPermeabilityCheck(regions, check):
             if (check == 6):
                 pass
             elif (check ==-6):
-                raise "intrinsic permeability has been set without defining gravity",reg.getMaterial().getName()
+                six.reraise(Warning, "intrinsic permeability has been set without defining gravity", reg.getMaterial().getName())
             elif (check ==-3):
-                raise "intrinsic permeability has been set without defining gravity and viscosity"
+                raise Warning("intrinsic permeability has been set without defining gravity and viscosity")
             elif (check ==-2):
-                raise "intrinsic permeability has been set without defining gravity and density"
+                raise Warning("intrinsic permeability has been set without defining gravity and density")
             elif (check == 2):
-                raise "intrinsic permeability has been set without defining density"
+                raise Warning("intrinsic permeability has been set without defining density")
             elif (check == 3):
-                raise "intrinsic permeability has been set without defining viscosity"
+                raise Warning("intrinsic permeability has been set without defining viscosity")
             pass
         pass
     pass

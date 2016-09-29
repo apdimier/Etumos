@@ -4,14 +4,14 @@
  
  The case to be run are in the ~/Wrapper/Tests/Chemicaltransport/Caprockintegrity/2d1 directory
                               
-                              /home/dimier/Wrapper/Tests/Chemicaltransport/FlowComp1:
+                              ~/Wrapper/Tests/Chemicaltransport/FlowComp1:
                               
                                 test.py     coupling hydraulic and chemistry
                                 
                                 verma.py    coupling hydraulic and chemistry with a Verma-pruess law
                               
                               
- the file is Tests/Chemicaltransport/Caprockintegrity/testpv2d1.py
+ The file is Tests/Chemicaltransport/Caprockintegrity/testpv2d1.py
  
  For the moment, only an aqueous saturated phase is considered.
  
@@ -80,8 +80,8 @@ class WDcoupledCT(ChemicalTransportModule):
         But we can also introduce a user permeability law. The permeability law
         
         can be :    None or
-        	        "userdefined" or 
-        	        a permeability law predefined through python modules, Kozeny or Verma-Pruess
+                    "userdefined" or 
+                    a permeability law predefined through python modules, Kozeny or Verma-Pruess
 
         """
         self.ChemicalTransportModule = ChemicalTransportModule
@@ -92,7 +92,7 @@ class WDcoupledCT(ChemicalTransportModule):
         #
         #
         self.userPermeabilityLaw = None
-        self.waterDynamicViscosity = 1.e-3	# kg/(m*s)
+        self.waterDynamicViscosity = 1.e-3  # kg/(m*s)
         ind= -1
         #
         # We check if a permeability law has been introduced by the user.
@@ -104,12 +104,13 @@ class WDcoupledCT(ChemicalTransportModule):
                     self.userPermeabilityLaw = method
                     print " WD dbg user permeability law", method
                     break
+                pass
             self.permeabilityLaw = method
             self.userPermeabilityLaw = True
             if ind>=0:
                 del(self.processingList[ind])
                 pass
-                
+            pass               
         elif permeabilityLaw != None and isinstance(permeabilityLaw, IntrinsicPermeabilityLaw):
             self.permeabilityLaw = permeabilityLaw
             pass
@@ -122,24 +123,27 @@ class WDcoupledCT(ChemicalTransportModule):
         #
         if hydraulicFrequency == None:
             self.hydraulicFrequency = 0
+            pass
         else:
             if type(hydraulicFrequency) == IntType:
                 self.hydraulicFrequency = hydraulicFrequency
+                pass
             else:
                 raise Warning, " check the hydraulicFrequency setting,\n"\
                               +"it should be None or an integer"
 
         print " WD dbg self.userPermeabilityLaw", self.userPermeabilityLaw
-        print dir(permeabilityLaw)
-        if (self.userPermeabilityLaw) or (self.userPermeabilityLaw != None):
+        if (permeabilityLaw.lower() == "userdefined") or (self.userPermeabilityLaw != None):
             if (self.userPermeabilityLaw == None):
                 if self.userProcessing == True:
                     raise Warning, " You have to set or to define a permeability law"
+                pass
+            pass
         elif (permeabilityLaw != None):
-                                                                                                            #
-                                                                                                            # available laws are described
-                                                                                                            # in physicalaws.py
-                                                                                                            #
+                                                                                            #
+                                                                                            # available laws are described
+                                                                                            # in physicalaws.py
+                                                                                            #
             if isinstance(permeabilityLaw, IntrinsicPermeabilityLaw):
                 self.permeabilityLaw = permeabilityLaw
                 print " WD permeabilityLaw ", self.permeabilityLaw
@@ -157,8 +161,10 @@ class WDcoupledCT(ChemicalTransportModule):
         """
         if algorithm.lower() in ["cc","ni"]:
             self.algorithm = algorithm.upper()
+            pass
         else:
             self.algorithm = "NI"
+            pass
 
     def setHydraulicFrequency(self, newHydraulicFrequency):
         """
@@ -170,8 +176,10 @@ class WDcoupledCT(ChemicalTransportModule):
 
         if self.hydraulicFrequency != 0:
             print "self.hydraulicFrequency",self.hydraulicFrequency
+            pass
         else:
             self.hydraulicFrequency = -1
+            pass
 
     def setPermeabilityLaw(self, permeabilityLaw = None):
         """
@@ -189,8 +197,10 @@ class WDcoupledCT(ChemicalTransportModule):
                                                                                             # has fixed coefficients and is a
                                                                                             # function of porosity
             self.permeabilityLaw = "KozenyCarmanLaw"
+            pass
         elif isinstance (permeabilityLaw, IntrinsicPermeabilityLaw):
             self.permeabilityLaw = permeabilityLaw
+            pass
         
     def getOutput (self, name):
         """
@@ -203,13 +213,13 @@ class WDcoupledCT(ChemicalTransportModule):
         print "dbg getOutput\n",
         if "velocity" == name.lower():
             return self.transportSolver.getVelocity ()
-            print " velocity end "
         elif "charge" == name.lower():
             return self.transportSolver.getCharge ()
         elif "permeability" == name.lower():
             return self.transportSolver.getCharge ()
         else:    
             self.getOutput(name)
+            pass
         
     def initialise (self):
         """
@@ -236,7 +246,7 @@ class WDcoupledCT(ChemicalTransportModule):
             dthydr += dt
             self.oneChemicalTransportTimeStep ()
             print "self.hydraulicFrequency",self.hydraulicFrequency,\
-            				    self.timeStepNumber,self.timeStepNumber % self.hydraulicFrequency
+                                self.timeStepNumber,self.timeStepNumber % self.hydraulicFrequency
             #raw_input("self.hydraulicFrequency")
             if self.hydraulicFrequency  != 0:
                 if self.timeStepNumber % self.hydraulicFrequency == 0 or self.timeStepNumber == 1:
@@ -250,18 +260,19 @@ class WDcoupledCT(ChemicalTransportModule):
                     # and is pointed by the userPermeabilityLaw.
                     #
                     if self.permeabilityLaw != None and self.userProcessing:
-                        print " WDcoupledCT dbg permeabilityLaw", self.permeabilityLaw
+                        print " dbg WDcoupledCT dbg permeabilityLaw", self.permeabilityLaw
+                        print " dbg WDcoupledCT dbg permeabilityLaw", self.userPermeabilityLaw
                         #raw_input("we evaluate the userPermeabilityLaw")
-            		#for method in self.processingList:
-                	#    print " method ",method,self.timeStepNumber
-                	#    #raw_input("user processing ")
-                	#    exec (method)
+                    #for method in self.processingList:
+                    #    print " method ",method,self.timeStepNumber
+                    #    #raw_input("user processing ")
+                    #    exec (method)
                         exec(self.userPermeabilityLaw)
                         #raw_input("we have evaluated the userPermeabilityLaw")
                     elif (self.permeabilityLaw != None):
                         newPermeability = [self.permeabilityLaw.eval(porosity ) \
-                		           for porosity in \
-                		           self.chemicalSolver.getPorosityField()]
+                                   for porosity in \
+                                   self.ChemicalTransportModule.chemicalSolver.getPorosityField()]
                         self.transportSolver.setPermeabilityField(newPermeability)
                         pass
 
@@ -273,6 +284,9 @@ class WDcoupledCT(ChemicalTransportModule):
                     self.oneSHTimeStep ()
 
                     dthydr = 0.
+                    pass
+                pass
+            passs
 
     def oneSHTimeStep (self):
         """
@@ -307,14 +321,14 @@ class WDcoupledCT(ChemicalTransportModule):
                 #porosityField = self.ChemicalTransportModule.chemicalSolver.getPorosityField()
                 print " length of the porosityfield oneCoupledTimeStep",\
                 len(self.ChemicalTransportModule.chemicalSolver.getPorosityField())
-		#
-		# updating of the permeability 
-		#
+        #
+        # updating of the permeability 
+        #
                 newPermeability = [self.permeabilityLaw(porosity ) \
-                		   for porosity in self.ChemicalTransportModule.chemicalSolver.getPorosityField()]
-		#
-		#
-		#
+                           for porosity in self.ChemicalTransportModule.chemicalSolver.getPorosityField()]
+        #
+        #
+        #
                 print " length of the permeabilityfield ", len(newPermeability)
                 print " WDcoupledCT dbg -> permeability update"
                 #

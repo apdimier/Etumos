@@ -102,7 +102,7 @@ class InitialCondition(CommonInitialCondition):
           or list of Support)
         - a value of type Head, Pressure or SaturationDegree
         """
-        from datamodel import Head,Pressure,SaturationDegree
+        #from datamodel import Head,Pressure,SaturationDegree
         CommonInitialCondition.__init__(self,zone, value,[Head,Pressure,SaturationDegree])
         return
 

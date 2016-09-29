@@ -17,6 +17,8 @@ Included are:
     Q(...) - hypercomplex number, also known as a quaternion
     M(...) - a fixed 4x4 matrix commonly used in graphics
 
+This module works under python 2 and python 3 with no changes.
+
 SYNOPSIS
 
     >>> import vectors ; from vectors import *
@@ -41,7 +43,7 @@ SYNOPSIS
 
 AUTHOR
 
-    Ed Halley (ed@halley.cc) 12 February 2005
+    Ed Halley (ed@halley.cc) 12 February 2005 (Updated February 2015)
 
 REFERENCES
 
@@ -64,7 +66,7 @@ __all__ = [ 'V', 'C', 'Q', 'M',
 import math
 import random
 
-EPSILON = 1.e-10
+EPSILON = 1.e-8
 
 __deg2rad = math.pi / 180.0
 __rad2deg = 180.0 / math.pi
@@ -120,12 +122,12 @@ class V:
             self._l = 0.
             return
         if l > 1:
-            self._v = map(float, args)
+            self._v = list(map(float, args))
             self._l = None
             return
         arg = args[0]
         if isinstance(arg, (list, tuple)):
-            self._v = map(float, arg)
+            self._v = list(map(float, arg))
             self._l = None
         elif isinstance(arg, V):
             self._v = list(arg._v[:])
@@ -137,7 +139,7 @@ class V:
 
     def __len__(self):
         '''The length of a vector is the dimensionality.'''
-        print self._v
+        print(self._v)
         return len(self._v)
 
     def __list__(self):
@@ -187,7 +189,7 @@ class V:
         v._l = self._l
         return v
 
-    def __nonzero__(self):
+    def __bool__(self):
         '''A vector is nonzero if any of its elements are nonzero.'''
         for i in range(len(self._v)):
             if self._v[i]: return True
@@ -201,7 +203,7 @@ class V:
     def random(cls, order=3):
         '''Returns a unit vector in a random direction.'''
         # distribution is not without bias, need to use polar coords?
-        v = V(range(order))
+        v = V(list(range(order)))
         v._l = None
         short = True
         while short:
@@ -212,12 +214,12 @@ class V:
 
     # Vector or scalar addition.
     def __add__(self, other): return self.__class__(self).__iadd__(other)
-    def __radd__(self, other): return self.__class__(self).__iadd__(other)
+    __radd__ = __add__
     def __iadd__(self, other):
         '''Vectors can be added to each other, or a scalar added to them.'''
         if isinstance(other, V):
             if len(other._v) != len(self._v):
-                raise ValueError, 'mismatched dimensions'
+                raise ValueError('mismatched dimensions')
             for i in range(len(self._v)):
                 self._v[i] += other._v[i]
         else:
@@ -226,14 +228,14 @@ class V:
         self._l = None
         return self
 
-    # Vector or scalar substraction.
+    # Vector or scalar subtraction.
     def __sub__(self, other): return self.__class__(self).__isub__(other)
     def __rsub__(self, other): return (-self.__class__(self)).__iadd__(other)
     def __isub__(self, other):
-        '''Vectors can be substracted, or a scalar subtracted from them.'''
+        '''Vectors can be subtracted, or a scalar subtracted from them.'''
         if isinstance(other, V):
             if len(other._v) != len(self._v):
-                raise ValueError, 'mismatched dimensions'
+                raise ValueError('mismatched dimensions')
             for i in range(len(self._v)):
                 self._v[i] -= other._v[i]
         else:
@@ -259,10 +261,13 @@ class V:
         self._l = None
         return self
 
-    def __div__(self, other): return self.__class__(self).__idiv__(other)
+    # Vector over scalars. Note __div__ for python2, __truediv__ for python3.
+    def __truediv__(self, other):
+        return self.__class__(self).__itruediv__(other)
+    __div__ = __truediv__
     def __rdiv__(self, other):
-        raise TypeError, 'cannot divide scalar by non-scalar value'
-    def __idiv__(self, other):
+        raise TypeError('cannot divide scalar by non-scalar value')
+    def __itruediv__(self, other):
         '''Vectors can be divided by scalars; each element is divided.'''
         other = 1.0 / other
         for i in range(len(self._v)):
@@ -273,7 +278,7 @@ class V:
     def cross(self, other):
         '''Find the vector cross product between two 3d vectors.'''
         if len(self._v) != 3 or len(other._v) != 3:
-            raise ValueError, 'cross multiplication only for 3d vectors'
+            raise ValueError('cross multiplication only for 3d vectors')
         p, q = self._v, other._v
         r = [ p[1] * q[2] - p[2] * q[1],
               p[2] * q[0] - p[0] * q[2],
@@ -303,13 +308,15 @@ class V:
         mag = self.__mag()
         if value is None: return mag
         if zero(mag):
-            raise ValueError, 'Zero-magnitude vector cannot be scaled.'
+            raise ValueError('Zero-magnitude vector cannot be scaled.')
         v = self.__class__(self)
         v.__imul__(value / mag)
         v._l = value
         return v
 
     def dsquared(self, other):
+        '''Compare this vector with another, for distance squared.'''
+        # Avoids _mag for the sqrt() and for the self._l complexity.
         m = 0
         for i in range(len(self._v)):
             d = self._v[i] - other._v[i]
@@ -325,10 +332,11 @@ class V:
         return self.magnitude(1.0)
 
     def order(self, order):
-        '''Remove elements from the end, or extend with new elements.'''
+        '''Specify the dimensionality of the vector.
+        Removes elements from the end, or extends with new 1.0 elements.'''
         order = int(order)
         if order < 1:
-            raise ValueError, 'cannot reduce a vector to zero elements'
+            raise ValueError('cannot reduce a vector to zero elements')
         v = V(self)
         while order < len(v._v):
             v._v.pop()
@@ -362,21 +370,21 @@ class C (V):
         if isinstance(a, complex):
             a = (a.real, a.imag)
         if isinstance(a, V):
-            if len(a) != 2: raise TypeError, 'C() takes exactly 2 elements'
+            if len(a) != 2: raise TypeError('C() takes exactly 2 elements')
             self._v = list(a._v[:])
         elif isseq(a):
-            if len(a) != 2: raise TypeError, 'C() takes exactly 2 elements'
-            self._v = map(float, a)
+            if len(a) != 2: raise TypeError('C() takes exactly 2 elements')
+            self._v = list(map(float, a))
         else:
-            if len(args) != 2: raise TypeError, 'C() takes exactly 2 elements'
-            self._v = map(float, args)
+            if len(args) != 2: raise TypeError('C() takes exactly 2 elements')
+            self._v = list(map(float, args))
 
     #def __repr__(self):
     #    return 'C(%s+%sj)' % (repr(self._v[0]), repr(self._v[1]))
 
     # addition and subtraction of C() work the same as V()
 
-    def dot(self): raise AttributeError, "C instance has no attribute 'dot'"
+    def dot(self): raise AttributeError("C instance has no attribute 'dot'")
 
     def __imul__(self, other):
         if isinstance(other, C):
@@ -411,19 +419,19 @@ class Q (V):
             args = (0, 0, 0, 1)
         a = args[0]
         if isinstance(a, V):
-            if len(a) != 4: raise TypeError, 'Q() takes exactly 4 elements'
+            if len(a) != 4: raise TypeError('Q() takes exactly 4 elements')
             self._v = list(a._v[:])
         elif isseq(a):
-            if len(a) != 4: raise TypeError, 'Q() takes exactly 4 elements'
-            self._v = map(float, a)
+            if len(a) != 4: raise TypeError('Q() takes exactly 4 elements')
+            self._v = list(map(float, a))
         else:
-            if len(args) != 4: raise TypeError, 'Q() takes exactly 4 elements'
-            self._v = map(float, args)
+            if len(args) != 4: raise TypeError('Q() takes exactly 4 elements')
+            self._v = list(map(float, args))
         self._l = None
 
     # addition and subtraction of Q() work the same as V()
 
-    def dot(self): raise AttributeError, "Q instance has no attribute 'dot'"
+    def dot(self): raise AttributeError("Q instance has no attribute 'dot'")
 
     #TODO: extra methods to convert euler vectors and quaternions
 
@@ -495,14 +503,14 @@ class M (V):
         if len(args) == 4: args = collapse(*args)
         a = args[0]
         if isinstance(a, V):
-            if len(a) != 16: raise TypeError, 'M() takes exactly 16 elements'
+            if len(a) != 16: raise TypeError('M() takes exactly 16 elements')
             self._v = list(a._v[:])
         elif isseq(a):
-            if len(a) != 16: raise TypeError, 'M() takes exactly 16 elements'
-            self._v = map(float, a)
+            if len(a) != 16: raise TypeError('M() takes exactly 16 elements')
+            self._v = list(map(float, a))
         else:
-            if len(args) != 16: raise TypeError, 'M() takes exactly 16 elements'
-            self._v = map(float, args)
+            if len(args) != 16: raise TypeError('M() takes exactly 16 elements')
+            self._v = list(map(float, args))
 
     @classmethod
     def rotate(cls, axis, theta=0.0):
@@ -529,7 +537,7 @@ class M (V):
             axis = Q.rotate(axis, theta)
         if isinstance(axis, Q):
             return cls.twist(axis)
-        raise ValueError, 'unknown rotation axis'
+        raise ValueError('unknown rotation axis')
 
     @classmethod
     def twist(cls, torsion):
@@ -602,10 +610,10 @@ class M (V):
         # prettier on multiple lines
         n = self.__class__.__name__
         ns = ' '*len(n)
-        t = n+'('+', '.join([ repr(self._v[i]) for i in 0,1,2,3 ])+',\n'
-        t += ns+' '+', '.join([ repr(self._v[i]) for i in 4,5,6,7 ])+',\n'
-        t += ns+' '+', '.join([ repr(self._v[i]) for i in 8,9,10,11 ])+',\n'
-        t += ns+' '+', '.join([ repr(self._v[i]) for i in 12,13,14,15 ])+')'
+        t = n+'('+', '.join([ repr(self._v[i]) for i in (0,1,2,3) ])+',\n'
+        t += ns+' '+', '.join([ repr(self._v[i]) for i in (4,5,6,7) ])+',\n'
+        t += ns+' '+', '.join([ repr(self._v[i]) for i in (8,9,10,11) ])+',\n'
+        t += ns+' '+', '.join([ repr(self._v[i]) for i in (12,13,14,15) ])+')'
         return t
 
     def __getitem__(self, rc):
@@ -624,18 +632,18 @@ class M (V):
         if not isinstance(rc, tuple): return V.__getitem__(self, rc)
         self._v[rc[0]*4+rc[1]] = float(value)
 
-    def dot(self): raise AttributeError, "M instance has no attribute 'dot'"
-    def magnitude(self): raise AttributeError, "M instance has no attribute 'magnitude'"
+    def dot(self): raise AttributeError("M instance has no attribute 'dot'")
+    def magnitude(self): raise AttributeError("M instance has no attribute 'magnitude'")
 
     def row(self, r, v=None):
         '''Returns or replaces a vector representing a row of the matrix.
         Rows are counted 0-3. If given, new vector must be four numbers.
         '''
-        if r < 0 or r > 3: raise IndexError, 'row index out of range'
+        if r < 0 or r > 3: raise IndexError('row index out of range')
         if v is None: return V(self._v[r*4:(r+1)*4])
         e = v
         if isinstance(v, V): e = v._v
-        if len(e) != 4: raise ValueError, 'new row must include 4 values'
+        if len(e) != 4: raise ValueError('new row must include 4 values')
         self._v[r*4:(r+1)*4] = e
         return v
 
@@ -643,11 +651,11 @@ class M (V):
         '''Returns or replaces a vector representing a column of the matrix.
         Columns are counted 0-3. If given, new vector must be four numbers.
         '''
-        if c < 0 or c > 3: raise IndexError, 'column index out of range'
+        if c < 0 or c > 3: raise IndexError('column index out of range')
         if v is None: return V([ self._v[c+4*i] for i in range(4) ])
         e = v
         if isinstance(v, V): e = v._v
-        if len(e) != 4: raise ValueError, 'new row must include 4 values'
+        if len(e) != 4: raise ValueError('new row must include 4 values')
         for i in range(4): self._v[c+4*i] = e[i]
         return v
 
@@ -791,7 +799,7 @@ class M (V):
                         oC*s2 + oD*s6 + oE*sA + oF*sE,
                         oC*s3 + oD*s7 + oE*sB + oF*sF ]
         else:
-            raise ValueError, 'multiply by 4d matrix or 4d vector or scalar'
+            raise ValueError('multiply by 4d matrix or 4d vector or scalar')
         return self
 
 #----------------------------------------------------------------------------
@@ -859,208 +867,173 @@ def farthest(point, neighbors):
 
 #----------------------------------------------------------------------------
 
-def __test__():
-    from testing import __ok__, __report__
+if __name__ == '__main__':
 
-    print 'Testing basic math...'
+    assert equal(1.0, 1.0)
+    assert not equal(1.0, 1.01)
+    assert not equal(1.0, 1.0001)
+    assert not equal(1.0, 0.9999)
+    assert not equal(1.0, 1.0000001)
+    assert not equal(1.0, 0.9999999)
+    assert equal(1.0, 1.0000000001)
+    assert equal(1.0, 0.9999999999)
 
-    __ok__(equal(1.0, 1.0), True)
-    __ok__(equal(1.0, 1.01), False)
-    __ok__(equal(1.0, 1.0001), False)
-    __ok__(equal(1.0, 0.9999), False)
-    __ok__(equal(1.0, 1.0000001), False)
-    __ok__(equal(1.0, 0.9999999), False)
-    __ok__(equal(1.0, 1.0000000001), True)
-    __ok__(equal(1.0, 0.9999999999), True)
+    assert equal(degrees(0), 0.0)
+    assert equal(degrees(math.pi/2), 90.0)
+    assert equal(degrees(math.pi), 180.0)
+    assert equal(radians(0.0), 0.0)
+    assert equal(radians(90.0), math.pi/2)
+    assert equal(radians(180.0), math.pi)
 
-    __ok__(equal(degrees(0), 0.0))
-    __ok__(equal(degrees(math.pi/2), 90.0))
-    __ok__(equal(degrees(math.pi), 180.0))
-    __ok__(equal(radians(0.0), 0.0))
-    __ok__(equal(radians(90.0), math.pi/2))
-    __ok__(equal(radians(180.0), math.pi))
-
-    print 'Testing V vector class...'
+    # Testing V vector class...
 
     # structural construction
-    __ok__(V.O is not None, True)
-    __ok__(V.O._v is not None, True)
-    __ok__(V.O._v, (0., 0., 0.)) ; __ok__(V.O._l, 0.)
-    __ok__(V.X._v, (1., 0., 0.)) ; __ok__(V.X._l, 1.)
-    __ok__(V.Y._v, (0., 1., 0.)) ; __ok__(V.Y._l, 1.)
-    __ok__(V.Z._v, (0., 0., 1.)) ; __ok__(V.Z._l, 1.)
-    a = V(3., 2., 1.) ; __ok__(a._v, [3., 2., 1.])
-    a = V((1., 2., 3.)) ; __ok__(a._v, [1., 2., 3.])
-    a = V([1., 1., 1.]) ; __ok__(a._v, [1., 1., 1.])
-    a = V(0.) ; __ok__(a._v, [0.]) ; __ok__(a._l, 0.)
-    a = V(3.) ; __ok__(a._v, [3.]) ; __ok__(a._l, 3.)
+    assert V.O is not None
+    assert V.O._v is not None
+    assert V.O._v == (0., 0., 0.) ; assert V.O._l == 0.
+    assert V.X._v == (1., 0., 0.) ; assert V.X._l == 1.
+    assert V.Y._v == (0., 1., 0.) ; assert V.Y._l == 1.
+    assert V.Z._v == (0., 0., 1.) ; assert V.Z._l == 1.
+    a = V(3., 2., 1.) ; assert a._v == [3., 2., 1.]
+    a = V((1., 2., 3.)) ; assert a._v == [1., 2., 3.]
+    a = V([1., 1., 1.]) ; assert a._v == [1., 1., 1.]
+    a = V(0.) ; assert a._v == [0.] ; assert a._l == 0.
+    a = V(3.) ; assert a._v == [3.] ; assert a._l == 3.
 
     # constants and direct comparisons
-    __ok__(V.O, V(0.,0.,0.))
-    __ok__(V.X, V(1.,0.,0.))
-    __ok__(V.Y, V(0.,1.,0.))
-    __ok__(V.Z, V(0.,0.,1.))
+    assert V.O == V(0.,0.,0.)
+    assert V.X == V(1.,0.,0.)
+    assert V.Y == V(0.,1.,0.)
+    assert V.Z == V(0.,0.,1.)
 
     # formatting and elements
-    __ok__(repr(V.X), 'V(1.0, 0.0, 0.0)')
-    __ok__(V.X[0], 1.)
-    __ok__(V.X[1], 0.)
-    __ok__(V.X[2], 0.)
+    assert repr(V.X) == 'V(1.0, 0.0, 0.0)'
+    assert V.X[0] == 1.
+    assert V.X[1] == 0.
+    assert V.X[2] == 0.
 
     # simple addition
-    __ok__(V.X + V.Y, V(1.,1.,0.))
-    __ok__(V.Y + V.Z, V(0.,1.,1.))
-    __ok__(V.X + V.Z, V(1.,0.,1.))
+    assert V.X + V.Y == V(1.,1.,0.)
+    assert V.Y + V.Z == V(0.,1.,1.)
+    assert V.X + V.Z == V(1.,0.,1.)
 
     # didn't overwrite our constants, did we?
-    __ok__(V.X, V(1.,0.,0.))
-    __ok__(V.Y, V(0.,1.,0.))
-    __ok__(V.Z, V(0.,0.,1.))
+    assert V.X == V(1.,0.,0.)
+    assert V.Y == V(0.,1.,0.)
+    assert V.Z == V(0.,0.,1.)
 
     a = V(3.,2.,1.)
     b = a.normalize()
-    __ok__(a != b)
-    __ok__(a == V(3.,2.,1.))
-    __ok__(b.magnitude(), 1)
+    assert a != b
+    assert a == V(3.,2.,1.)
+    assert b.magnitude() == 1
     b = a.magnitude(5)
-    __ok__(a == V(3.,2.,1.))
-    __ok__(b.magnitude(), 5)
-    __ok__(equal(b.dsquared(V.O), 25))
+    assert a == V(3.,2.,1.)
+    assert b.magnitude() == 5
+    assert equal(b.dsquared(V.O), 25)
 
     a = V(3.,2.,1.).normalize()
-    __ok__(equal(a[0], 0.80178372573727319))
+    assert equal(a[0], 0.80178372573727319)
     b = V(1.,3.,2.).normalize()
-    __ok__(equal(b[2], 0.53452248382484879))
+    assert equal(b[2], 0.53452248382484879)
     d = a.dot(b)
-    __ok__(equal(d, 0.785714285714), True)
+    assert equal(d, 0.785714285714)
 
-    __ok__(V(2., 2., 1.) * 3, V(6, 6, 3))
-    __ok__(3 * V(2., 2., 1.), V(6, 6, 3))
-    __ok__(V(2., 2., 1.) / 2, V(1, 1, 0.5))
+    assert V(2., 2., 1.) * 3 == V(6, 6, 3)
+    assert 3 * V(2., 2., 1.) == V(6, 6, 3)
+    assert V(2., 2., 1.) / 2 == V(1, 1, 0.5)
 
     v = V(1,2,3)
     w = V(4,5,6)
-    __ok__(v.cross(w), V(-3,6,-3))
-    __ok__(v.cross(w), v*w)
-    __ok__(v*w, -(w*v))
-    __ok__(v.dot(w), 32)
-    __ok__(v.dot(w), w.dot(v))
+    assert v.cross(w) == V(-3,6,-3)
+    assert v.cross(w) == v*w
+    assert v*w == -(w*v)
+    assert v.dot(w) == 32
+    assert v.dot(w) == w.dot(v)
 
-    __ok__(zero(angle(V(1,1,1), V(2,2,2))), True)
-    __ok__(equal(90.0, degrees(angle(V(1,0,0), V(0,1,0)))), True)
-    __ok__(equal(180.0, degrees(angle(V(1,0,0), V(-1,0,0)))), True)
+    assert zero(angle(V(1,1,1), V(2,2,2)))
+    assert equal(90.0, degrees(angle(V(1,0,0), V(0,1,0))))
+    assert equal(180.0, degrees(angle(V(1,0,0), V(-1,0,0))))
 
-    __ok__(equal(  0.0, degrees(track(V( 1, 0)))), True)
-    __ok__(equal( 90.0, degrees(track(V( 0, 1)))), True)
-    __ok__(equal(180.0, degrees(track(V(-1, 0)))), True)
-    __ok__(equal(270.0, degrees(track(V( 0,-1)))), True)
+    assert equal(  0.0, degrees(track(V( 1, 0))))
+    assert equal( 90.0, degrees(track(V( 0, 1))))
+    assert equal(180.0, degrees(track(V(-1, 0))))
+    assert equal(270.0, degrees(track(V( 0,-1))))
 
-    __ok__(equal( 45.0, degrees(track(V( 1, 1)))), True)
-    __ok__(equal(135.0, degrees(track(V(-1, 1)))), True)
-    __ok__(equal(225.0, degrees(track(V(-1,-1)))), True)
-    __ok__(equal(315.0, degrees(track(V( 1,-1)))), True)
+    assert equal( 45.0, degrees(track(V( 1, 1))))
+    assert equal(135.0, degrees(track(V(-1, 1))))
+    assert equal(225.0, degrees(track(V(-1,-1))))
+    assert equal(315.0, degrees(track(V( 1,-1))))
 
-    print 'Testing C complex number class...'
+    # Testing C complex number class...
 
-    __ok__(C(1,2) is not None, True)
-    __ok__(C(1,2)[0], 1.0)
-    __ok__(C(1+2j)[0], 1.0)
-    __ok__(C((1,2))[1], 2.0)
-    __ok__(C(V([1,2]))[1], 2.0)
+    assert C(1, 2) is not None
+    assert C(1,2)[0] == 1.0
+    assert C(1+2j)[0] == 1.0
+    assert C((1,2))[1] == 2.0
+    assert C(V([1,2]))[1] == 2.0
 
-    __ok__(C(3+2j) * C(1+4j), C(-5+14j))
-
-    try:
-        __ok__(C(1,2,3) is not None, True)
-    except TypeError: # takes exactly 2 elements
-        __ok__(True, True)
+    assert C(3+2j) * C(1+4j) == C(-5+14j)
 
     try:
-        __ok__(C([1,2,3]) is not None, True)
+        assert C(1,2,3) is not None
     except TypeError: # takes exactly 2 elements
-        __ok__(True, True)
+        assert True
+
+    try:
+        assert C([1,2,3]) is not None
+    except TypeError: # takes exactly 2 elements
+        assert True
 
     except TypeError: # takes exactly 2 elements
-        __ok__(True, True)
+        assert True
 
-    print 'Testing Q quaternion class...'
+    # Testing Q quaternion class...
 
-    __ok__(Q(1,2,3,4) is not None, True)
-    __ok__(Q(1,2,3,4)[1], 2.0)
-    __ok__(Q((1,2,3,4))[2], 3.0)
-    __ok__(Q(V(1,2,3,4))[3], 4.0)
+    assert Q(1,2,3,4) is not None
+    assert Q(1,2,3,4)[1] == 2.0
+    assert Q((1,2,3,4))[2] == 3.0
+    assert Q(V(1,2,3,4))[3] == 4.0
 
-    __ok__(Q(), Q(0,0,0,1))
-    __ok__(Q(1,2,3,4).conjugate(), Q(-1,-2,-3,4))
+    assert Q() == Q(0,0,0,1)
+    assert Q(1,2,3,4).conjugate() == Q(-1,-2,-3,4)
 
-    print 'Testing M matrix class...'
+    # Testing M matrix class...
 
     m = M()
-    __ok__(V(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1), m)
-    __ok__(m.row(0), V(1,0,0,0))
-    __ok__(m.row(2), V(0,0,1,0))
-    __ok__(m.col(1), V(0,1,0,0))
-    __ok__(m.col(3), V(0,0,0,1))
-    __ok__(m[5], 1.0)
-    __ok__(m[1,1], 1.0)
-    __ok__(m[6], 0.0)
-    __ok__(m[1,2], 0.0)
-    __ok__(m * V(1,2,3,4), V(1,2,3,4))
-    __ok__(V(1,2,3,4) * m, V(1,2,3,4))
+    assert V(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1) == m
+    assert m.row(0) == V(1,0,0,0)
+    assert m.row(2) == V(0,0,1,0)
+    assert m.col(1) == V(0,1,0,0)
+    assert m.col(3) == V(0,0,0,1)
+    assert m[5] == 1.0
+    assert m[1,1] == 1.0
+    assert m[6] == 0.0
+    assert m[1,2] == 0.0
+    assert m * V(1,2,3,4) == V(1,2,3,4)
+    assert V(1,2,3,4) * m == V(1,2,3,4)
     mm = m * m
-    __ok__(mm.__class__, M)
-    __ok__(mm, M.I)
+    assert mm.__class__ == M
+    assert mm == M.I
     mm = m * 2
-    __ok__(mm.__class__, M)
-    __ok__(mm, 2.0 * m)
-    __ok__(mm[3,3], 2)
-    __ok__(mm[3,2], 0)
+    assert mm.__class__ == M
+    assert mm == 2.0 * m
+    assert mm[3,3] == 2
+    assert mm[3,2] == 0
 
-    __ok__(M.rotate('X',radians(90)),
-           M.twist(Q.rotate('X',radians(90))))
-    __ok__(M.twist(Q(0,0,0,1)), M.I)
-    __ok__(M.twist(Q(.5,0,0,1)),
-           M.twist(Q(.5,0,0,1).normalize()))
-    __ok__(V.O * M.translate(V(1,2,3)),
-           V(1,2,3,1))
-    __ok__((V.X+V.Y+V.Z) * M.translate(V(1,2,3)),
-           V(2,3,4,1))
+    assert M.rotate('X',radians(90)) == M.twist(Q.rotate('X',radians(90)))
+    assert M.twist(Q(0,0,0,1)) == M.I
+    assert M.twist(Q(.5,0,0,1)) == M.twist(Q(.5,0,0,1).normalize())
+    assert V.O * M.translate(V(1,2,3)) == V(1,2,3,1)
+    assert (V.X+V.Y+V.Z) * M.translate(V(1,2,3)) == V(2,3,4,1)
 
     # need some tests on m.determinant()
 
     m = M()
     m = m.translate(V(1,2,3))
-    __ok__(m.inverse(), M().translate(-V(1,2,3)))
+    assert m.inverse() == M().translate(-V(1,2,3))
     m = m.rotate('Y', radians(30))
-    __ok__(m * m.inverse(), M.I)
+    assert m * m.inverse() == M.I
 
-    __report__()
-
-def __time__():
-    from testing import __time__
-    __time__("(V.X+V.Y).magnitude() memo",
-             "import vectors; x=(vectors.V.X+vectors.V.Y)",
-             "x._l = x._l ; x.magnitude()")
-    __time__("(V.X+V.Y).magnitude() unmemo",
-             "import vectors; x=(vectors.V.X+vectors.V.Y)",
-             "x._l = None ; x.magnitude()")
-    import psyco
-    psyco.full()
-    __time__("(V.X+V.Y).magnitude() memo [psyco]",
-             "import vectors; x=(vectors.V.X+vectors.V.Y)",
-             "x._l = x._l ; x.magnitude()")
-    __time__("(V.X+V.Y).magnitude() unmemo [psyco]",
-             "import vectors; x=(vectors.V.X+vectors.V.Y)",
-             "x._l = None ; x.magnitude()")
-
-if __name__ == '__main__':
-    import sys
-    if 'test' in sys.argv:
-        __test__()
-    elif 'time' in sys.argv:
-        __time__()
-    else:
-        raise Exception, \
-            'This module is not a stand-alone script.  Import it in a program.'
-
+    print('vectors.py: all internal tests on this module passed.')
 

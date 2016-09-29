@@ -1,7 +1,9 @@
 #!/usr/bin/env python
+from __future__ import absolute_import
 from generictools import Generic
 
 from types import StringType
+from six.moves import range
 
 class XmlVtkUnstructured(Generic):
     """
@@ -23,11 +25,13 @@ class XmlVtkUnstructured(Generic):
     def __init__(self,fileName):
         Generic.__init__(self)
         if type(fileName) not in [StringType,noneType]:
-            raise Exception, " the XmlVtkUnstructured class argument has to be a String "
+            raise Exception(" the XmlVtkUnstructured class argument has to be a String ")
         else:
             if ".vtu" not in fileName:
                 if "." in fileName:
                     fileName.replace(".","").append(".vtu")
+                    pass
+                pass
             self.fileName = fileName
                 
                 
@@ -51,14 +55,14 @@ class XmlVtkUnstructured(Generic):
         x                array of x coordinates of particle centers
         y                array of y coordinates of particle centers
         z                array of z coordinates of particle centers
-        NumberOfCells	 number of cells 
-        Connectivity	 array of connectivity for each cell
-        Offsets		 array of number of points of each cells 
-        TypeCells	 array of type number of each cells
-        NameScalarPoint	 array of scalar name for a scalar on the points
+        NumberOfCells    number of cells 
+        Connectivity     array of connectivity for each cell
+        Offsets      array of number of points of each cells 
+        TypeCells    array of type number of each cells
+        NameScalarPoint  array of scalar name for a scalar on the points
         ScalarValuePoint array of scalar value of each points (first all the points with the value of the first scalar,
-        		 then all the points with the value of the second scalar...)
-        NameScalarCell	 idem for the cells 
+                 then all the points with the value of the second scalar...)
+        NameScalarCell   idem for the cells 
         ScalarValueCell  idem for the cells
         """
         import xml.dom.minidom
@@ -97,6 +101,7 @@ class XmlVtkUnstructured(Generic):
         for i in range(len(x)-1):
             string = string + repr(x[i]) + ' ' + repr(y[i]) \
                     + ' ' + repr(z[i]) + "\n"
+            pass
         string = string + repr(x[len(x)-1]) + ' ' + repr(y[len(x)-1]) \
                     + ' ' + repr(z[len(x)-1]) 
         point_coords_data = doc.createTextNode(string)
@@ -120,17 +125,23 @@ class XmlVtkUnstructured(Generic):
         k=0
         for i in range(1,len(Offsets)):
             if i!=1 :
-       	        for j in range(1,Offsets[i-1]-Offsets[i-2]+1):
+                for j in range(1,Offsets[i-1]-Offsets[i-2]+1):
                     string = string + repr(Connectivity[k]) + ' '
                     k=k+1
+                    pass
+                pass
             else :
                 for j in range(1,Offsets[i-1]+1):
                     string = string + repr(Connectivity[k]) + ' '
                     k=k+1
+                    pass
+                pass
             string = string + "\n"
+            pass
         for j in range(1,Offsets[len(Offsets)-1]-Offsets[len(Offsets)-2]+1):
-                    string = string + repr(Connectivity[k]) + ' '
-                    k=k+1
+            string = string + repr(Connectivity[k]) + ' '
+            k=k+1
+            pass
                     
         connectivity = doc.createTextNode(string)
         cell_connectivity.appendChild(connectivity)
@@ -143,7 +154,8 @@ class XmlVtkUnstructured(Generic):
         
         string = str()
         for i in range(len(Offsets)-1):
-            string = string + repr(Offsets[i]) + "\n"        
+            string = string + repr(Offsets[i]) + "\n"
+            pass
         string = string + repr(Offsets[len(Offsets)-1])
           
         offsets = doc.createTextNode(string)
@@ -157,7 +169,8 @@ class XmlVtkUnstructured(Generic):
         
         string = str()
         for i in range(len(TypeCells)-1):
-            string = string + repr(TypeCells[i]) + "\n"       
+            string = string + repr(TypeCells[i]) + "\n"
+            pass      
         string = string + repr(TypeCells[len(TypeCells)-1]) 
         
         types = doc.createTextNode(string)
@@ -176,9 +189,9 @@ class XmlVtkUnstructured(Generic):
                 piece.appendChild(point_data)
         
 
-	# Data at Points location data
-	
-	        point_data_coords = doc.createElementNS("VTK", "DataArray")
+    # Data at Points location data
+    
+                point_data_coords = doc.createElementNS("VTK", "DataArray")
                 point_data_coords.setAttribute("type", "Float32")
                 point_data_coords.setAttribute("Name", NameScalarPoint[l])
                 point_data_coords.setAttribute("format", "ascii")
@@ -186,21 +199,22 @@ class XmlVtkUnstructured(Generic):
         
                 string = str()
                 for i in range(len(x)):
-                    string = string + repr(ScalarValuePoint[i+l*len(x)]) + "\n"        
+                    string = string + repr(ScalarValuePoint[i+l*len(x)]) + "\n"
+                    pass
                 string = string + repr((l+1)*len(x)-1)    
         
                 point_data_coords_data = doc.createTextNode(string)
                 point_data_coords.appendChild(point_data_coords_data)
-         
-        else :
-         
-	    point_data = doc.createElementNS("VTK", "PointData")
+                pass    
+        else:  
+            point_data = doc.createElementNS("VTK", "PointData")
             piece.appendChild(point_data)
+            pass
                
 
         #### Cell data (dummy) ####
         
-        if len(ScalarValueCell)>0 :
+        if len(ScalarValueCell)>0:
             
             NumberOfScalar = len (NameScalarCell)
             cell_data = doc.createElementNS("VTK", "CellData")
@@ -210,9 +224,9 @@ class XmlVtkUnstructured(Generic):
                 piece.appendChild(cell_data)
         
 
-	# Data at Cells location data
-	
-	        cell_data_coords = doc.createElementNS("VTK", "DataArray")
+    # Data at Cells location data
+    
+                cell_data_coords = doc.createElementNS("VTK", "DataArray")
                 cell_data_coords.setAttribute("type", "Float32")
                 cell_data_coords.setAttribute("Name", NameScalarCell)
                 cell_data_coords.setAttribute("format", "ascii")
@@ -220,20 +234,22 @@ class XmlVtkUnstructured(Generic):
         
                 string = str()
                 for i in range(NumberOfCells-1):
-                    string = string + repr(ScalarValueCell[i]) + "\n"        
+                    string = string + repr(ScalarValueCell[i]) + "\n"
+                    pass
                 string = string + repr(ScalarValueCell[NumberOfCells-1])   
                    
                 cell_data_coords_data = doc.createTextNode(string)
                 cell_data_coords.appendChild(cell_data_coords_data)
-         
-        else :
-         
-	    cell_data = doc.createElementNS("VTK", "CellData")
+                pass
+            pass 
+        else:
+            cell_data = doc.createElementNS("VTK", "CellData")
             piece.appendChild(cell_data)
+            pass
 
         # Write to file and exit
         outFile = open(fileName, 'w')
-	#xml.dom.ext.PrettyPrint(doc, file)
+    #xml.dom.ext.PrettyPrint(doc, file)
         doc.writexml(outFile, newl='\n')
         outFile.close()
         self.fileNames.append(fileName)
@@ -259,6 +275,7 @@ class XmlVtkUnstructured(Generic):
             dataSet.setAttribute("part", "0")
             dataSet.setAttribute("file", str(self.fileNames[i]))
             collection.appendChild(dataSet)
+            pass
 
         outFile = open(fileName, 'w')
         pvd.writexml(outFile, newl='\n')

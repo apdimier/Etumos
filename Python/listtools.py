@@ -24,7 +24,7 @@ def toList(x):
 
 def _checkListLength(lst1, lst2):
     if len(lst1) != len(lst2):
-	raise Exception, "check arguments length"
+        raise Exception, "check arguments length"
 
 def isListOfLists(x):
     if not isinstance(x, ListType): return False
@@ -36,7 +36,9 @@ def printList(lst,str):
     for i in lst : 
         print str,ind,i
         ind+=1
+        pass
     print "end of printlist ",len(lst)
+    return None
 
 def _add(x, y):
     return x + y
@@ -112,6 +114,7 @@ def extractIndex(l,index):
     for i in index:
         if i<=len_l:
             new_l.append(l[i])
+            pass
         else:
             mess = "index %i output of range of list l"%i
             raise IncorrectValue(mess)

@@ -8,9 +8,12 @@ including:
 """
 
 
+from __future__ import absolute_import
 from bisect import bisect_left, bisect_right
 from numpy import *
 from numpy import float as Float
+from six.moves import range
+
 class TabulatedFunction:
     def __call__(self, x):
         raise NotImplementedError
@@ -62,6 +65,7 @@ class PiecewisePolynomialFunction(TabulatedFunction):
             while j > 0:
                 j -= 1
                 val = val * h + coeffs[j,i]
+                pass
             return val
         elif xi < breaks[0]:
             return self.outer_left
@@ -79,6 +83,7 @@ class PiecewisePolynomialFunction(TabulatedFunction):
             while j > 1:
                 j -= 1
                 d = d * h + j * coeffs[j,i]
+                pass
             return d
         else:
             return 0.
@@ -137,6 +142,7 @@ def makePWLinearFunction(breaks, values):
             der = float(values[i+1] - values[i]) / \
                   float(breaks[i+1] - breaks[i])
             _coeffs.append([values[i], der])
+            pass
         else:
             pass
         pass

@@ -6,13 +6,16 @@
 
 # workaround to suppress deprecated module warnings in python2.6
 # see https://trac.mcs.anl.gov/projects/mpich2/ticket/362 for tracking
+from __future__ import absolute_import
+from __future__ import print_function
 import warnings
+from six.moves import map
 warnings.filterwarnings('ignore', '.*the md5 module is deprecated.*', DeprecationWarning)
 warnings.filterwarnings('ignore', '.*the popen2 module is deprecated.*', DeprecationWarning)
 
 import sys, os, signal, popen2, socket, select, inspect
 
-from  cPickle   import  dumps, loads
+from  six.moves.cPickle   import  dumps, loads
 from  types     import  TupleType
 from  traceback import  extract_tb, extract_stack, format_list
 from  re        import  sub, split
@@ -56,7 +59,7 @@ mpd_my_hostname = ''
 # NOTE: mpd_handle_signal must be called by the user, e.g. in his own signal handler
 mpd_signum = 0
 mpd_zc = 0
-if os.environ.has_key('MPD_TMPDIR'):
+if 'MPD_TMPDIR' in os.environ:
     mpd_tmpdir = os.environ['MPD_TMPDIR']
 else:
     mpd_tmpdir = '/tmp'
@@ -104,19 +107,19 @@ def mpd_print(*args):
     # We've seen an EINTR on the flush here
     while 1:
         try:
-            print printLine
+            print(printLine)
             break
-        except os.error, errinfo:
+        except os.error as errinfo:
             if errinfo[0] != EINTR:
-                raise os.error, errinfo
+                raise os.error(errinfo)
     # end of while
     while 1:
         try:
             sys.stdout.flush()
             break
-        except os.error, errinfo:
+        except os.error as errinfo:
 	    if errinfo[0] != EINTR:
-                raise os.error, errinfo
+                raise os.error(errinfo)
     # end of while
     if syslog_module_available:
         syslog.syslog(syslog.LOG_INFO,printLine)
@@ -145,7 +148,7 @@ def mpd_print_tb(*args):
     if mpd_cli_app:    # debug mpich apps in nightly tests
         printLine += '    mpd_cli_app=%s\n' % (mpd_cli_app)
         printLine += '    cwd=%s' % (os.getcwd())
-    print printLine
+    print(printLine)
     sys.stdout.flush()
     if syslog_module_available:
         syslog.syslog(syslog.LOG_INFO,printLine)
@@ -167,7 +170,7 @@ def mpd_uncaught_except_tb(arg1,arg2,arg3):
     if mpd_cli_app:    # debug mpich apps in nightly tests
         errstr += '    mpd_cli_app=%s\n' % (mpd_cli_app)
         errstr += '    cwd=%s' % (os.getcwd())
-    print errstr,
+    print(errstr, end=' ')
     if syslog_module_available:
         syslog.syslog(syslog.LOG_ERR, errstr)
 
@@ -179,17 +182,17 @@ def mpd_trace_calls(frame,event,args):
     global mpd_my_id, mpd_procedures_to_trace
     if frame.f_code.co_name not in mpd_procedures_to_trace:
         return None
-    args_info = apply(inspect.formatargvalues,inspect.getargvalues(frame))
+    args_info = inspect.formatargvalues(*inspect.getargvalues(frame))
     # Be VERY careful here; under AIX, it looked like EINTR is 
     # possible within print (!).  
     while (1):
         try:
-            print '%s: ENTER %s in %s at line %d; ARGS=%s' % \
-          (mpd_my_id,frame.f_code.co_name,frame.f_code.co_filename,frame.f_lineno,args_info)
+            print('%s: ENTER %s in %s at line %d; ARGS=%s' % \
+          (mpd_my_id,frame.f_code.co_name,frame.f_code.co_filename,frame.f_lineno,args_info))
             break
-        except os.error, errinfo:
+        except os.error as errinfo:
             if errinfo[0] != EINTR:
-                raise os.error, errinfo
+                raise os.error(errinfo)
     # end of while
     return mpd_trace_returns
 
@@ -200,11 +203,11 @@ def mpd_trace_returns(frame,event,args):
         # possible within print (!).  
         while (1):
             try:
-                print '%s: EXIT %s at line %d ' % (mpd_my_id,frame.f_code.co_name,frame.f_lineno)
+                print('%s: EXIT %s at line %d ' % (mpd_my_id,frame.f_code.co_name,frame.f_lineno))
                 break
-            except os.error, errinfo:
+            except os.error as errinfo:
                 if errinfo[0] != EINTR:
-                    raise os.error, errinfo
+                    raise os.error(errinfo)
         # end of while
         return None
     else:
@@ -227,7 +230,7 @@ def mpd_sockpair():
             try:
                 rc = sock2.sock.connect(('localhost',port1))
                 break
-            except socket.error, errinfo:
+            except socket.error as errinfo:
                 # In some cases, connect will return EINTR and then on the
                 # next iteration, returns EISCONN.
                 if errinfo[0] == EISCONN:
@@ -238,9 +241,9 @@ def mpd_sockpair():
                     sleep(random())
                 elif errinfo[0] != EINTR:
                     mpd_print(1,"connect %d %s" % (errinfo[0],errinfo[1]))
-                    raise socket.error, errinfo
+                    raise socket.error(errinfo)
 	# End of the while
-    except socket.error, errinfo:
+    except socket.error as errinfo:
         # we have seen at least one machine that needs it this way
         # We've seen a failure here; it could be EINPROGRESS, EALREADY, 
         # or EADDRINUSE.  In that case, we may need to do something else
@@ -251,22 +254,22 @@ def mpd_sockpair():
             try:  
                 rc = sock2.sock.connect(('',port1))
                 break
-            except socket.error, errinfo:
+            except socket.error as errinfo:
                 if errinfo[0] == EISCONN:
                     break
                 elif errinfo[0] != EINTR:
                     mpd_print(1,"connect %d %s" % (errinfo[0],errinfo[1]))
-                    raise socket.error, errinfo
+                    raise socket.error(errinfo)
         # end of while
     # Accept can fail on EINTR, so we handle that here
     while (1):
         try:
             (sock3,addr) = sock1.sock.accept()
             break
-        except socket.error, errinfo:
+        except socket.error as errinfo:
             if errinfo[0] != EINTR:
                 mpd_print(1,"connect %d %s" % (errinfo[0],errinfo[1]))
-                raise socket.error, errinfo
+                raise socket.error(errinfo)
     # end of while
     sock3 = MPDSock(sock=sock3)
     sock1.close()
@@ -274,7 +277,7 @@ def mpd_sockpair():
 
 def mpd_which(execName,user_path=None):
     if not user_path:
-        if os.environ.has_key('PATH'):
+        if 'PATH' in os.environ:
             user_path = os.environ['PATH']
         else:
             return ''
@@ -299,9 +302,9 @@ def mpd_version():
 def mpd_get_my_username():
     if pwd_module_available:
         username = pwd.getpwuid(os.getuid())[0]    # favor this over env
-    elif os.environ.has_key('USER'):
+    elif 'USER' in os.environ:
         username = os.environ['USER']
-    elif os.environ.has_key('USERNAME'):
+    elif 'USERNAME' in os.environ:
         username = os.environ['USERNAME']
     else:
         username = 'unknown_username'
@@ -340,7 +343,7 @@ def mpd_read_nbytes(fd,nbytes):
             mpd_signum = 0
             rv = os.read(fd,nbytes)
             break
-        except os.error, errinfo:
+        except os.error as errinfo:
             if errinfo[0] == EINTR:
                 if mpd_signum == signal.SIGINT  or  mpd_signum == signal.SIGALRM:
                     break
@@ -351,9 +354,9 @@ def mpd_read_nbytes(fd,nbytes):
             else:
                 mpd_print(1, 'read error: %s' % os.strerror(errinfo[0]))
                 break
-        except KeyboardInterrupt, errinfo:
+        except KeyboardInterrupt as errinfo:
             break
-        except Exception, errinfo:
+        except Exception as errinfo:
             mpd_print(1, 'other error after read %s :%s:' % ( errinfo.__class__, errinfo) )
             break
     return rv
@@ -401,14 +404,14 @@ class MPDSock(object):
                 mpd_signum = 0
                 self.sock.connect(*args)
                 break
-            except socket.error, errinfo:
+            except socket.error as errinfo:
                 if errinfo[0] == EINTR:   # sigchld, sigint, etc.
                     if mpd_signum == signal.SIGINT  or  mpd_signum == signal.SIGALRM:
                         break
                     else:
                         continue
                 else:
-                    raise socket.error, errinfo
+                    raise socket.error(errinfo)
         # end of while
 
     def accept(self,name='accepter'):
@@ -420,7 +423,7 @@ class MPDSock(object):
                 mpd_signum = 0
                 (newsock,newaddr) = self.sock.accept()
                 break
-            except socket.error, errinfo:
+            except socket.error as errinfo:
                 if errinfo[0] == EINTR:   # sigchld, sigint, etc.
                     if mpd_signum == signal.SIGINT  or  mpd_signum == signal.SIGALRM:
                         break
@@ -429,11 +432,11 @@ class MPDSock(object):
                 elif errinfo[0] == ECONNRESET:   # connection reset (treat as eof)
                     break
                 else:
-                    print '%s: accept error: %s' % (mpd_my_id,os.strerror(errinfo[0]))
+                    print('%s: accept error: %s' % (mpd_my_id,os.strerror(errinfo[0])))
                     break
-            except Exception, errinfo:
-                print '%s: failure doing accept : %s : %s' % \
-                      (mpd_my_id,errinfo.__class__,errinfo)
+            except Exception as errinfo:
+                print('%s: failure doing accept : %s : %s' % \
+                      (mpd_my_id,errinfo.__class__,errinfo))
                 break
         if newsock:
             newsock = MPDSock(sock=newsock,name=name)    # turn new socket into an MPDSock
@@ -446,7 +449,7 @@ class MPDSock(object):
                 mpd_signum = 0
                 data = self.sock.recv(nbytes)
                 break
-            except socket.error, errinfo:
+            except socket.error as errinfo:
                 if errinfo[0] == EINTR:   # sigchld, sigint, etc.
                     if mpd_signum == signal.SIGINT  or  mpd_signum == signal.SIGALRM:
                         break
@@ -455,11 +458,11 @@ class MPDSock(object):
                 elif errinfo[0] == ECONNRESET:   # connection reset (treat as eof)
                     break
                 else:
-                    print '%s: recv error: %s' % (mpd_my_id,os.strerror(errinfo[0]))
+                    print('%s: recv error: %s' % (mpd_my_id,os.strerror(errinfo[0])))
                     break
-            except Exception, errinfo:
-                print '%s: failure doing recv %s :%s:' % \
-                      (mpd_my_id,errinfo.__class__,errinfo)
+            except Exception as errinfo:
+                print('%s: failure doing recv %s :%s:' % \
+                      (mpd_my_id,errinfo.__class__,errinfo))
                 break
         return data
     def recv_dict_msg(self,timeout=None):
@@ -481,14 +484,14 @@ class MPDSock(object):
 		        mpd_signum = 0
                         (readyToRecv,unused1,unused2) = select.select([self.sock],[],[],timeout)
                         break;
-                    except os.error, errinfo:
+                    except os.error as errinfo:
                         if errinfo[0] == EINTR:
                             # Retry interrupted system calls
                             pass
                         else:
-                            raise os.error, errinfo
+                            raise os.error(errinfo)
                 # End of the while(1)
-            except select.error, errinfo:
+            except select.error as errinfo:
                 if errinfo[0] == EINTR:
                     if mpd_signum == signal.SIGINT  or  mpd_signum == signal.SIGALRM:
                         mpd_print(0,"sigint/alrm check");
@@ -499,11 +502,11 @@ class MPDSock(object):
                         mpd_print_tb(1,"Unhandled EINTR: errinfo=%s" % (errinfo) )
                 else:
                     mpd_print(1, '%s: select error: %s' % (mpd_my_id,os.strerror(errinfo[0])))
-            except KeyboardInterrupt, errinfo:
+            except KeyboardInterrupt as errinfo:
                 # print 'recv_dict_msg: keyboard interrupt during select'
                 mpd_print(0,"KeyboardInterrupt");
                 return msg
-            except Exception, errinfo:
+            except Exception as errinfo:
                 mpd_print(1, 'recv_dict_msg: exception during select %s :%s:' % \
                       ( errinfo.__class__, errinfo))
                 return msg
@@ -528,7 +531,7 @@ class MPDSock(object):
                             #    mpd_print(1,"continuing because recv failed")
                             #    continue
                             break
-                        except socket.error,errinfo:
+                        except socket.error as errinfo:
                             if errinfo[0] == EINTR:
                                 mpd_print(mpd_dbg_level,"Saw EINTR")
                                 pass
@@ -537,7 +540,7 @@ class MPDSock(object):
                                 return msg;
                             else:
                                 mpd_print_tb(1,"recv_dict_msg: sock.recv(8): errinfo=:%s:" % (errinfo))
-                                raise socket.error,errinfo
+                                raise socket.error(errinfo)
                     # end of while(1)
                     if not tempRecvd:
                          break
@@ -554,18 +557,18 @@ class MPDSock(object):
                             try:
                                 recvdMsg = self.sock.recv(lenLeft)
                                 break
-                            except socket.error,errinfo:
+                            except socket.error as errinfo:
                                 if errinfo[0] == EINTR:
                                     pass
                                 else:
                                     mpd_print_tb(1,"recv_dict_msg: sock.recv(8): errinfo=:%s:" % (errinfo))
-                                    raise socket.error,errinfo
+                                    raise socket.error(errinfo)
                         # end of while(1)            
 
                         pickledMsg += recvdMsg
                         lenLeft -= len(recvdMsg)
                     msg = loads(pickledMsg)
-            except socket.error, errinfo:
+            except socket.error as errinfo:
                 if errinfo[0] == EINTR:
                     mpd_print(1, "Unhandled EINTR on sock.recv")
                     return msg
@@ -574,9 +577,9 @@ class MPDSock(object):
                     pass   # socket.error: (104, 'Connection reset by peer')
                 else:
                     mpd_print_tb(1,'recv_dict_msg: socket error: errinfo=:%s:' % (errinfo))
-            except StandardError, errmsg:    # any built-in exceptions
+            except Exception as errmsg:    # any built-in exceptions
                 mpd_print_tb(1, 'recv_dict_msg: errmsg=:%s:' % (errmsg) )
-            except Exception, errmsg:
+            except Exception as errmsg:
                 mpd_print_tb(1, 'recv_dict_msg failed on sock %s errmsg=:%s:' % \
                              (self.name,errmsg) )
         if mpd_dbg_level:
@@ -596,11 +599,11 @@ class MPDSock(object):
                 try:
                     c = self.sock.recv(1)
                     break
-                except socket.error, errinfo:
+                except socket.error as errinfo:
                     if errinfo[0] != EINTR:
-                        raise socket.error, errinfo
+                        raise socket.error(errinfo)
             # end of while
-        except socket.error, errinfo:
+        except socket.error as errinfo:
             if errinfo[0] == EINTR:   # sigchld, sigint, etc.
                 # This should no longer happen (handled above)
                 mpd_print_tb( 1,  "Unhandled EINTR in sock.recv" );
@@ -608,9 +611,9 @@ class MPDSock(object):
             elif errinfo[0] == ECONNRESET:   # connection reset (treat as eof)
                 return msg
             else:
-                print '%s: recv error: %s' % (mpd_my_id,os.strerror(errinfo[0]))
+                print('%s: recv error: %s' % (mpd_my_id,os.strerror(errinfo[0])))
                 sys.exit(-1)
-        except Exception, errmsg:
+        except Exception as errmsg:
             c = ''
             msg = ''
             mpd_print_tb(1, 'recv_char_msg: errmsg=:%s:' % (errmsg) )
@@ -619,15 +622,15 @@ class MPDSock(object):
                 msg += c
                 try:
                     c = self.sock.recv(1)
-                except socket.error, errinfo:
+                except socket.error as errinfo:
                     if errinfo[0] == EINTR:   # sigchld, sigint, etc.
                         return msg
                     elif errinfo[0] == ECONNRESET:   # connection reset (treat as eof)
                         return msg
                     else:
-                        print '%s: recv error: %s' % (mpd_my_id,os.strerror(errinfo[0]))
+                        print('%s: recv error: %s' % (mpd_my_id,os.strerror(errinfo[0])))
                         sys.exit(-1)
-                except Exception, errmsg:
+                except Exception as errmsg:
                     c = ''
                     msg = ''
                     mpd_print_tb(1, 'recv_char_msg: errmsg=:%s:' % (errmsg) )
@@ -648,7 +651,7 @@ class MPDSock(object):
                 try:
                     self.sendall( "%08d%s" % (len(pickledMsg),pickledMsg) )
                     break
-                except socket.error, errmsg:
+                except socket.error as errmsg:
 		    if errmsg[0] == EPIPE  \
                     or errmsg[0] == ECONNRESET \
                     or errmsg[0] == EINTR:
@@ -657,9 +660,9 @@ class MPDSock(object):
                         # (We need to plan error handling more thoroughly)
                         break  ## RMB: chgd from pass
                     else:
-                        raise socket.error, errmsg
+                        raise socket.error(errmsg)
             # end of While
-        except Exception, errmsg:
+        except Exception as errmsg:
             mpd_print_tb(errprint,'send_dict_msg: sock=%s errmsg=:%s:' % (self.name,errmsg))
     def send_char_msg(self,msg,errprint=1):
         try:
@@ -667,16 +670,16 @@ class MPDSock(object):
                 try:
                     self.sock.sendall(msg)
                     break
-                except socket.error, errmsg:
+                except socket.error as errmsg:
 		    if errmsg[0] == EPIPE:
 			# silent failure on pipe failure, as we usually
                         # just want to discard messages in this case 
                         # (We need to plan error handling more thoroughly)
                         pass
                     if errmsg[0] != EINTR:
-                        raise socket.error, errmsg
+                        raise socket.error(errmsg)
             # end of While
-        except Exception, errmsg:
+        except Exception as errmsg:
             mpd_print_tb(errprint,'send_char_msg: sock=%s errmsg=:%s:' % (self.name,errmsg))
 
 class MPDListenSock(MPDSock):
@@ -690,11 +693,11 @@ class MPDListenSock(MPDSock):
         # see if we have a PORT_RANGE environment variable
         try:
             port_range = os.environ['MPIEXEC_PORT_RANGE']
-            (low_port, high_port) = map(int, port_range.split(':'))
+            (low_port, high_port) = list(map(int, port_range.split(':')))
         except:
             try:
                 port_range = os.environ['MPICH_PORT_RANGE']
-                (low_port, high_port) = map(int, port_range.split(':'))
+                (low_port, high_port) = list(map(int, port_range.split(':')))
             except:
                 (low_port,high_port) = (0,0)
         if low_port < 0  or  high_port < low_port:
@@ -707,7 +710,7 @@ class MPDListenSock(MPDSock):
                         self.sock.bind((host,port))
                         self.sock.listen(listen)
                         break
-                    except socket.error, e:
+                    except socket.error as e:
                         port += 1
                         if port <= high_port:
                             self.sock.close()
@@ -733,7 +736,7 @@ class MPDStreamHandler(object):
     def set_handler(self,stream,handler,args=()):
         self.activeStreams[stream] = (handler,args)
     def del_handler(self,stream):
-        if self.activeStreams.has_key(stream):
+        if stream in self.activeStreams:
             del self.activeStreams[stream]
     def close_all_active_streams(self):
         for stream in self.activeStreams.keys():
@@ -745,13 +748,13 @@ class MPDStreamHandler(object):
             if streams:
                 streamsToSelect = streams
             else:
-                streamsToSelect = self.activeStreams.keys()
+                streamsToSelect = list(self.activeStreams.keys())
             readyStreams = []
             try:
                 mpd_signum = 0
                 (readyStreams,u1,u2) = select.select(streamsToSelect,[],[],timeout)
                 break
-            except select.error, errinfo:
+            except select.error as errinfo:
                 if errinfo[0] == EINTR:
                     if mpd_signum == signal.SIGCHLD:
                         break
@@ -760,24 +763,24 @@ class MPDStreamHandler(object):
                     else:
                         continue
                 else:
-                    print '%s: handle_active_streams: select error: %s' % \
-                          (mpd_my_id,os.strerror(errinfo[0]))
+                    print('%s: handle_active_streams: select error: %s' % \
+                          (mpd_my_id,os.strerror(errinfo[0])))
                     return (-1,os.strerror(errinfo[0]))
-            except KeyboardInterrupt, errinfo:
+            except KeyboardInterrupt as errinfo:
                 # print 'handle_active_streams: keyboard interrupt during select'
                 return (-1,errinfo.__class__,errinfo)
-            except Exception, errinfo:
-                print 'handle_active_streams: exception during select %s :%s:' % \
-                      ( errinfo.__class__, errinfo)
+            except Exception as errinfo:
+                print('handle_active_streams: exception during select %s :%s:' % \
+                      ( errinfo.__class__, errinfo))
                 return (-1,errinfo.__class__,errinfo)
         for stream in readyStreams:
-            if self.activeStreams.has_key(stream):
+            if stream in self.activeStreams:
                 (handler,args) = self.activeStreams[stream]
                 handler(stream,*args)
             else:
                 # this is not nec bad; an active stream (handler) may
                 # have been deleted by earlier handler in this loop
-                print '*** OOPS, unknown stream in handle_active_streams'
+                print('*** OOPS, unknown stream in handle_active_streams')
         return (len(readyStreams),0)  #  len >= 0
 
 class MPDRing(object):
@@ -840,7 +843,7 @@ class MPDRing(object):
         return rc
     def enter_ring(self,entryIfhn='',entryPort=0,lhsHandler='',rhsHandler='',ntries=1):
         if not lhsHandler  or  not rhsHandler:
-            print 'missing handler for enter_ring'
+            print('missing handler for enter_ring')
             sys.exit(-1)
         if not entryIfhn:
             entryIfhn = self.entryIfhn
@@ -852,9 +855,9 @@ class MPDRing(object):
             else:
                 (entryIfhn,entryPort) = mpd_find_zc_peer(self.zcMyLevel-1)
                 if not entryPort:
-                    print "FAILED TO FIND A PEER AT LEVEL", self.zcMyLevel-1
+                    print("FAILED TO FIND A PEER AT LEVEL", self.zcMyLevel-1)
                     sys.exit(-1)
-            print "ENTRY INFO", (entryIfhn,entryPort)
+            print("ENTRY INFO", (entryIfhn,entryPort))
         if not entryIfhn:
             self.create_single_mem_ring(ifhn=self.myIfhn,
                                         port=self.listenPort,
@@ -902,9 +905,9 @@ class MPDRing(object):
             self.lhsSock = MPDSock(name='lhs')
             try:
                 self.lhsSock.connect((self.lhsIfhn,self.lhsPort))
-            except socket.error, errinfo:
-                print '%s: conn error in connect_lhs: %s' % \
-                      (mpd_my_id,os.strerror(errinfo[0]))
+            except socket.error as errinfo:
+                print('%s: conn error in connect_lhs: %s' % \
+                      (mpd_my_id,os.strerror(errinfo[0])))
                 self.lhsSock.close()
                 self.lhsSock = 0
                 sleep(random())
@@ -919,10 +922,10 @@ class MPDRing(object):
         self.lhsSock.send_dict_msg(msgToSend)
         msg = self.lhsSock.recv_dict_msg()
         if (not msg) \
-        or (not msg.has_key('cmd')) \
+        or ('cmd' not in msg) \
         or (not msg['cmd'] == 'challenge') \
-        or (not msg.has_key('randnum')) \
-        or (not msg.has_key('generation')):
+        or ('randnum' not in msg) \
+        or ('generation' not in msg):
             mpd_print(1,'invalid challenge from %s %d: %s' % \
                       (self.lhsIfhn,self.lhsPort,msg) )
             return (-1,None)
@@ -935,13 +938,13 @@ class MPDRing(object):
         self.lhsSock.send_dict_msg(msgToSend)
         msg = self.lhsSock.recv_dict_msg()
         if (not msg) \
-        or (not msg.has_key('cmd')) \
+        or ('cmd' not in msg) \
         or (not msg['cmd'] == 'OK_to_enter_as_rhs'):
             mpd_print(1,'NOT OK to enter ring; one likely cause: mismatched secretwords')
             return (-1,None)
         self.lhsHandler = lhsHandler
         self.streamHandler.set_handler(self.lhsSock,lhsHandler)
-        if msg.has_key('rhsifhn') and msg.has_key('rhsport'):
+        if 'rhsifhn' in msg and 'rhsport' in msg:
             return (1,(msg['rhsifhn'],msg['rhsport']))
         else:
             return (1,None)
@@ -963,9 +966,9 @@ class MPDRing(object):
             self.rhsSock = MPDSock(name='rhs')
             try:
                 self.rhsSock.connect((self.rhsIfhn,self.rhsPort))
-            except socket.error, errinfo:
-                print '%s: conn error in connect_rhs: %s' % \
-                      (mpd_my_id,os.strerror(errinfo[0]))
+            except socket.error as errinfo:
+                print('%s: conn error in connect_rhs: %s' % \
+                      (mpd_my_id,os.strerror(errinfo[0])))
                 self.rhsSock.close()
                 self.rhsSock = 0
                 sleep(random())
@@ -980,10 +983,10 @@ class MPDRing(object):
         self.rhsSock.send_dict_msg(msgToSend)
         msg = self.rhsSock.recv_dict_msg()
         if (not msg) \
-        or (not msg.has_key('cmd')) \
+        or ('cmd' not in msg) \
         or (not msg['cmd'] == 'challenge') \
-        or (not msg.has_key('randnum')) \
-        or (not msg.has_key('generation')):
+        or ('randnum' not in msg) \
+        or ('generation' not in msg):
             mpd_print(1,'invalid challenge from %s %d: %s' % (self.rhsIfhn,rhsPort,msg) )
             return (-1,None)
         if msg['generation'] < self.generation:
@@ -995,13 +998,13 @@ class MPDRing(object):
         self.rhsSock.send_dict_msg(msgToSend)
         msg = self.rhsSock.recv_dict_msg()
         if (not msg) \
-        or (not msg.has_key('cmd')) \
+        or ('cmd' not in msg) \
         or (not msg['cmd'] == 'OK_to_enter_as_lhs'):
             mpd_print(1,'NOT OK to enter ring; one likely cause: mismatched secretwords')
             return (-1,None)
         self.rhsHandler = rhsHandler
         self.streamHandler.set_handler(self.rhsSock,rhsHandler)
-        if msg.has_key('lhsifhn') and msg.has_key('lhsport'):
+        if 'lhsifhn' in msg and 'lhsport' in msg:
             return (1,(msg['lhsifhn'],msg['lhsport']))
         else:
             return (1,None)
@@ -1021,12 +1024,12 @@ class MPDRing(object):
         newsock.name = 'candidate_to_enter_ring'
         msg = newsock.recv_dict_msg()
         if (not msg) or \
-           (not msg.has_key('cmd')) or (not msg.has_key('ifhn')) or  \
-           (not msg.has_key('port')):
+           ('cmd' not in msg) or ('ifhn' not in msg) or  \
+           ('port' not in msg):
             mpd_print(1, 'INVALID msg from new connection :%s: msg=:%s:' % (newaddr,msg) )
             newsock.close()
             return None
-        if msg.has_key('mpd_version'):  # ping, etc may not have one
+        if 'mpd_version' in msg:  # ping, etc may not have one
             if msg['mpd_version'] != mpd_version():
                 msgToSend = { 'cmd' : 'entry_rejected_bad_mpd_version',
                               'your_version' : msg['mpd_version'],
@@ -1060,8 +1063,8 @@ class MPDRing(object):
     def handle_lhs_challenge_response(self,sock):
         msg = sock.recv_dict_msg()
         if (not msg)   or  \
-           (not msg.has_key('cmd'))   or  (not msg.has_key('response'))  or  \
-           (not msg.has_key('ifhn'))  or  (not msg.has_key('port'))  or  \
+           ('cmd' not in msg)   or  ('response' not in msg)  or  \
+           ('ifhn' not in msg)  or  ('port' not in msg)  or  \
            (not msg['response'] == sock.correctChallengeResponse):
             mpd_print(1, 'INVALID msg for lhs response msg=:%s:' % (msg) )
             msgToSend = { 'cmd' : 'invalid_response' }
@@ -1082,8 +1085,8 @@ class MPDRing(object):
     def handle_rhs_challenge_response(self,sock):
         msg = sock.recv_dict_msg()
         if (not msg)   or  \
-           (not msg.has_key('cmd'))   or  (not msg.has_key('response'))  or  \
-           (not msg.has_key('ifhn'))  or  (not msg.has_key('port')):
+           ('cmd' not in msg)   or  ('response' not in msg)  or  \
+           ('ifhn' not in msg)  or  ('port' not in msg):
             mpd_print(1, 'INVALID msg for rhs response msg=:%s:' % (msg) )
             msgToSend = { 'cmd' : 'invalid_response' }
             sock.send_dict_msg(msgToSend)
@@ -1115,7 +1118,7 @@ class MPDRing(object):
 
 class MPDConListenSock(MPDListenSock):
     def __init__(self,name='console_listen',secretword='',**kargs):
-        if os.environ.has_key('MPD_CON_EXT'):
+        if 'MPD_CON_EXT' in os.environ:
             self.conExt = '_'  + os.environ['MPD_CON_EXT']
         else:
             self.conExt = ''
@@ -1126,7 +1129,7 @@ class MPDConListenSock(MPDListenSock):
             sockFamily = socket.AF_UNIX
         else:
             sockFamily = socket.AF_INET
-        if os.environ.has_key('MPD_CON_INET_HOST_PORT'):
+        if 'MPD_CON_INET_HOST_PORT' in os.environ:
             sockFamily = socket.AF_INET    # override above-assigned value
             (conHost,conPort) = os.environ['MPD_CON_INET_HOST_PORT'].split(':')
             conPort = int(conPort)
@@ -1138,7 +1141,7 @@ class MPDConListenSock(MPDListenSock):
                 try:
                     tempSock.connect(self.conFilename)
                     consoleAlreadyExists = 1
-                except Exception, errmsg:
+                except Exception as errmsg:
                     os.unlink(self.conFilename)
                 tempSock.close()
             else:
@@ -1154,13 +1157,13 @@ class MPDConListenSock(MPDListenSock):
                 try:
                     tempSock.sock.connect(('localhost',conPort))
                     consoleAlreadyExists = 1
-                except Exception, errmsg:
+                except Exception as errmsg:
                     os.unlink(self.conFilename)
                 tempSock.close()
         if consoleAlreadyExists:
-            print 'An mpd is already running with console at %s on %s. ' % \
-                  (self.conFilename, socket.gethostname())
-            print 'Start mpd with the -n option for a second mpd on same host.'
+            print('An mpd is already running with console at %s on %s. ' % \
+                  (self.conFilename, socket.gethostname()))
+            print('Start mpd with the -n option for a second mpd on same host.')
             if syslog_module_available:
                 syslog.syslog(syslog.LOG_ERR,
                               "%s: exiting; an mpd is already using the console" % \
@@ -1172,7 +1175,7 @@ class MPDConListenSock(MPDListenSock):
         else:
             MPDListenSock.__init__(self,family=sockFamily,socktype=socket.SOCK_STREAM,
                                    port=conPort,listen=1,name=name)
-            conFD = os.open(self.conFilename,os.O_CREAT|os.O_WRONLY|os.O_EXCL,0600)
+            conFD = os.open(self.conFilename,os.O_CREAT|os.O_WRONLY|os.O_EXCL,0o600)
             self.port = self.sock.getsockname()[1]
             os.write(conFD,'port=%d\n' % (self.port) )
             os.close(conFD)
@@ -1181,7 +1184,7 @@ class MPDConClientSock(MPDSock):
     def __init__(self,name='console_to_mpd',mpdroot='',secretword='',**kargs):
         MPDSock.__init__(self)
         self.sock = 0
-        if os.environ.has_key('MPD_CON_EXT'):
+        if 'MPD_CON_EXT' in os.environ:
             self.conExt = '_'  + os.environ['MPD_CON_EXT']
         else:
             self.conExt = ''
@@ -1209,7 +1212,7 @@ class MPDConClientSock(MPDSock):
                 sockFamily = socket.AF_UNIX
             else:
                 sockFamily = socket.AF_INET
-            if os.environ.has_key('MPD_CON_INET_HOST_PORT'):
+            if 'MPD_CON_INET_HOST_PORT' in os.environ:
                 sockFamily = socket.AF_INET    # override above-assigned value
                 (conHost,conPort) = os.environ['MPD_CON_INET_HOST_PORT'].split(':')
                 conPort = int(conPort)
@@ -1224,7 +1227,7 @@ class MPDConClientSock(MPDSock):
                     socket.setdefaulttimeout(8)
                 try:
                     self.sock.connect(self.conFilename)
-                except Exception, errmsg:
+                except Exception as errmsg:
                     self.sock.close()
                     self.sock = 0
                 if hasattr(signal,'alarm'):
@@ -1257,7 +1260,7 @@ class MPDConClientSock(MPDSock):
                     socket.setdefaulttimeout(8)
                 try:
                     self.sock.connect((conIfhn,conPort))
-                except Exception, errmsg:
+                except Exception as errmsg:
                     mpd_print(1,"failed to connect to host %s port %d" % \
                               (conIfhn,conPort) )
                     self.sock.close()
@@ -1267,15 +1270,15 @@ class MPDConClientSock(MPDSock):
                 else:    # assume python2.3 or later
                     socket.setdefaulttimeout(oldTimeout)
                 if not self.sock:
-                    print '%s: cannot connect to local mpd (%s); possible causes:' % \
-                          (mpd_my_id,self.conFilename)
-                    print '  1. no mpd is running on this host'
-                    print '  2. an mpd is running but was started without a "console" (-n option)'
-                    print 'In case 1, you can start an mpd on this host with:'
-                    print '    mpd &'
-                    print 'and you will be able to run jobs just on this host.'
-                    print 'For more details on starting mpds on a set of hosts, see'
-                    print 'the MPICH2 Installation Guide.'
+                    print('%s: cannot connect to local mpd (%s); possible causes:' % \
+                          (mpd_my_id,self.conFilename))
+                    print('  1. no mpd is running on this host')
+                    print('  2. an mpd is running but was started without a "console" (-n option)')
+                    print('In case 1, you can start an mpd on this host with:')
+                    print('    mpd &')
+                    print('and you will be able to run jobs just on this host.')
+                    print('For more details on starting mpds on a set of hosts, see')
+                    print('the MPICH2 Installation Guide.')
                     sys.exit(-1)
                 msgToSend = { 'cmd' : 'con_init' }
                 self.sock.send_dict_msg(msgToSend)
@@ -1296,15 +1299,15 @@ class MPDConClientSock(MPDSock):
                     mpd_print(1,'expected valid_response from mpd; got msg=:%s:' % (msg) )
                     sys.exit(-1)
         if not self.sock:
-            print '%s: cannot connect to local mpd (%s); possible causes:' % \
-                  (mpd_my_id,self.conFilename)
-            print '  1. no mpd is running on this host'
-            print '  2. an mpd is running but was started without a "console" (-n option)'
-            print 'In case 1, you can start an mpd on this host with:'
-            print '    mpd &'
-            print 'and you will be able to run jobs just on this host.'
-            print 'For more details on starting mpds on a set of hosts, see'
-            print 'the MPICH2 Installation Guide.'
+            print('%s: cannot connect to local mpd (%s); possible causes:' % \
+                  (mpd_my_id,self.conFilename))
+            print('  1. no mpd is running on this host')
+            print('  2. an mpd is running but was started without a "console" (-n option)')
+            print('In case 1, you can start an mpd on this host with:')
+            print('    mpd &')
+            print('and you will be able to run jobs just on this host.')
+            print('For more details on starting mpds on a set of hosts, see')
+            print('the MPICH2 Installation Guide.')
             sys.exit(-1)
 
 class MPDParmDB(dict):
@@ -1328,43 +1331,43 @@ class MPDParmDB(dict):
             sys.exit(-1)
     def __getitem__(self,key):
         for src in self.orderedSources:
-            if self.db[src].has_key(key):
+            if key in self.db[src]:
                 return self.db[src][key]
-        raise KeyError, "key %s not found in parm db" % (key)
+        raise KeyError("key %s not found in parm db" % (key))
     def has_key(self,key):
         for src in self.orderedSources:
-            if self.db[src].has_key(key):
+            if key in self.db[src]:
                 return 1
         return 0
     def printall(self):
-        print "MPDRUN's PARMDB; values from all sources:"
+        print("MPDRUN's PARMDB; values from all sources:")
         for src in self.orderedSources:
-            print '  %s (source)' % (src)
+            print('  %s (source)' % (src))
             for key in self.db[src].keys():
-                print '    %s = %s' % (key,self.db[src][key])
+                print('    %s = %s' % (key,self.db[src][key]))
     def printdef(self):
-        print "MPDRUN's PARMDB; default values only:"
+        print("MPDRUN's PARMDB; default values only:")
         printed = {}
         for src in self.orderedSources:
             for key in self.db[src]:
-                if not printed.has_key(key):
+                if key not in printed:
                     printed[key] = 1
-                    print '  %s  %s = %s' % (src,key,self.db[src][key])
+                    print('  %s  %s = %s' % (src,key,self.db[src][key]))
     def get_parms_from_env(self,parmsToOverride):
         for k in parmsToOverride.keys():
-            if os.environ.has_key(k):
+            if k in os.environ:
                 self[('env',k)] = os.environ[k]
     def get_parms_from_rcfile(self,parmsToOverride,errIfMissingFile=0):
-        if os.environ.has_key('MPD_CONF_FILE'):
+        if 'MPD_CONF_FILE' in os.environ:
             parmsRCFilename = os.environ['MPD_CONF_FILE']
         elif hasattr(os,'getuid')  and  os.getuid() == 0:    # if ROOT
             parmsRCFilename = os.path.abspath('/etc/mpd.conf')
-        elif os.environ.has_key('HOME'):
+        elif 'HOME' in os.environ:
             parmsRCFilename = os.path.join(os.environ['HOME'],'.mpd.conf')
-        elif os.environ.has_key('HOMEPATH'):    # e.g. win32
+        elif 'HOMEPATH' in os.environ:    # e.g. win32
             parmsRCFilename = os.path.join(os.environ['HOMEPATH'],'.mpd.conf')
         else:
-            print 'unable to find mpd.conf file'
+            print('unable to find mpd.conf file')
             sys.exit(-1)
         if sys.platform == 'win32':
             mode = 0x80   # fake it
@@ -1377,22 +1380,22 @@ class MPDParmDB(dict):
         if not mode  and  not errIfMissingFile:
             return
         if not mode:
-            print 'configuration file %s not found' % (parmsRCFilename)
-            print 'A file named .mpd.conf file must be present in the user\'s home'
-            print 'directory (/etc/mpd.conf if root) with read and write access'
-            print 'only for the user, and must contain at least a line with:'
-            print 'MPD_SECRETWORD=<secretword>'
-            print 'One way to safely create this file is to do the following:'
-            print '  cd $HOME'
-            print '  touch .mpd.conf'
-            print '  chmod 600 .mpd.conf'
-            print 'and then use an editor to insert a line like'
-            print '  MPD_SECRETWORD=mr45-j9z'
-            print 'into the file.  (Of course use some other secret word than mr45-j9z.)' 
+            print('configuration file %s not found' % (parmsRCFilename))
+            print('A file named .mpd.conf file must be present in the user\'s home')
+            print('directory (/etc/mpd.conf if root) with read and write access')
+            print('only for the user, and must contain at least a line with:')
+            print('MPD_SECRETWORD=<secretword>')
+            print('One way to safely create this file is to do the following:')
+            print('  cd $HOME')
+            print('  touch .mpd.conf')
+            print('  chmod 600 .mpd.conf')
+            print('and then use an editor to insert a line like')
+            print('  MPD_SECRETWORD=mr45-j9z')
+            print('into the file.  (Of course use some other secret word than mr45-j9z.)') 
             sys.exit(-1)
         if  (mode & 0x3f):
-            print 'configuration file %s is accessible by others' % (parmsRCFilename)
-            print 'change permissions to allow read and write access only by you'
+            print('configuration file %s is accessible by others' % (parmsRCFilename))
+            print('change permissions to allow read and write access only by you')
             sys.exit(-1)
         parmsRCFile = open(parmsRCFilename)
         for line in parmsRCFile:
@@ -1402,14 +1405,14 @@ class MPDParmDB(dict):
                 continue
             splitLine = lineWithoutComments.split('=')
             if not splitLine[0]:    # ['']
-                print 'warning: unrecognized (null) key in %s' % (parmsRCFilename)
+                print('warning: unrecognized (null) key in %s' % (parmsRCFilename))
                 continue
             if len(splitLine) == 2:
                 (k,v) = splitLine
                 origKey = k
                 if k == 'secretword':    # for bkwd-compat
                     k = 'MPD_SECRETWORD'
-                if k in parmsToOverride.keys():
+                if k in list(parmsToOverride.keys()):
                     if k != 'MPD_SECRETWORD'  and  v.isdigit():
                         v = int(v)
                     self[('rcfile',k)] = v
@@ -1423,7 +1426,7 @@ class MPDTest(object):
             grepOut=0, exitOnFail=1):
         rv = {}
         if chkOut and grepOut:
-            print "grepOut and chkOut are mutually exclusive"
+            print("grepOut and chkOut are mutually exclusive")
             sys.exit(-1)
         outLines = []
         if subprocess_module_available:
@@ -1455,11 +1458,11 @@ class MPDTest(object):
             sys.exit(-1)
         rv['OUT'] = outLines[:]
         if chkEC  and  expEC != rv['EC']:
-            print "bad exit code from test: %s" % (cmd)
-            print "   expected exitcode=%d ; got %d" % (expEC,rv['EC'])
-            print "output from cmd:"
+            print("bad exit code from test: %s" % (cmd))
+            print("   expected exitcode=%d ; got %d" % (expEC,rv['EC']))
+            print("output from cmd:")
             for line in outLines:
-                print line
+                print(line)
             if exitOnFail:
                 sys.exit(-1)
         if chkOut:
@@ -1473,21 +1476,21 @@ class MPDTest(object):
                     expOut.remove(line)
                     outLines.remove(line)
             if not orderOK:
-                print "lines out of order in output for test: %s" % (cmd)
+                print("lines out of order in output for test: %s" % (cmd))
                 for line in outLines:
-                    print line
+                    print(line)
                 if exitOnFail:
                     sys.exit(-1)
             if expOut:
-                print "some required lines not found in output for test: %s" % (cmd)
+                print("some required lines not found in output for test: %s" % (cmd))
                 for line in outLines:
-                    print line
+                    print(line)
                 if exitOnFail:
                     sys.exit(-1)
             if outLines:
-                print "extra lines in output for test: %s" % (cmd)
+                print("extra lines in output for test: %s" % (cmd))
                 for line in outLines:
-                    print line
+                    print(line)
                 if exitOnFail:
                     sys.exit(-1)
         elif grepOut:
@@ -1497,9 +1500,9 @@ class MPDTest(object):
                     if outLine.find(expLine) >= 0:
                         foundCnt += 1
             if foundCnt < len(expOut):
-                print "some lines not matched for test: %s" % (cmd)
+                print("some lines not matched for test: %s" % (cmd))
                 for line in outLines:
-                     print line
+                     print(line)
                 if exitOnFail:
                     sys.exit(-1)
         return rv
@@ -1517,7 +1520,7 @@ def mpd_init_zc(ifhn,my_level):
         def removeService(self, zc, service_type, name):
             mpd_zc.peersLock.acquire()
             del mpd_zc.peers[name]
-            print "removed", name ; sys.stdout.flush()
+            print("removed", name) ; sys.stdout.flush()
             mpd_zc.peersLock.release()
         def addService(self, zc, service_type, name):
             info = zc.getServiceInfo(service_type, name)
@@ -1526,17 +1529,17 @@ def mpd_init_zc(ifhn,my_level):
                     return
                 mpd_zc.peersLock.acquire()
                 mpd_zc.peers[name] = info
-                print "added peer:", name, info.properties ; sys.stdout.flush()
+                print("added peer:", name, info.properties) ; sys.stdout.flush()
                 mpd_zc.peersLock.release()
                 mpd_zc.peers_available_event.set()
             else:
-                print "OOPS NO INFO FOR", name ; sys.stdout.flush()
+                print("OOPS NO INFO FOR", name) ; sys.stdout.flush()
     service_type = "_mpdzc._tcp.local."
     listenerForPeers = ListenerForPeers()
     browser = Zeroconf.ServiceBrowser(mpd_zc,service_type,listenerForPeers)
     ##  sleep(1.5)  # give browser a chance to find some peers
 def mpd_find_zc_peer(peer_level):
-    print "finding a peer at level %d..." % (peer_level) ; sys.stdout.flush()
+    print("finding a peer at level %d..." % (peer_level)) ; sys.stdout.flush()
     mpd_zc.peers_available_event.wait(5)
     for (peername,info) in mpd_zc.peers.items():
         if info.properties['mpdid'] == mpd_my_id:
@@ -1573,7 +1576,7 @@ def mpd_close_zc():
 
 def _handle_msg(sock):
     msg = sock.recv_dict_msg()
-    print 'recvd msg=:%s:' % (msg)
+    print('recvd msg=:%s:' % (msg))
 
 if __name__ == '__main__':
     sh = MPDStreamHandler()
@@ -1584,7 +1587,7 @@ if __name__ == '__main__':
     sh.handle_active_streams()
     # just to demo a listen sock
     lsock = MPDListenSock('',9999,name='listen_sock')
-    print lsock.name, lsock.getsockname()[1]
+    print(lsock.name, lsock.getsockname()[1])
 
     ### import sys
     ### sys.excepthook = mpd_uncaught_except_tb

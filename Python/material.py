@@ -1,45 +1,59 @@
 """ Material class """
 
-from types import FloatType,IntType,ListType,StringType,TupleType
+from __future__ import absolute_import
+from __future__ import print_function
+from types import FloatType,\
+                  IntType,\
+                  ListType,\
+                  MethodType,\
+                  StringType,\
+                  TupleType
 #
 from generictools import memberShip
 
 from listtools import toList
 #
-from generictools import isInstance
+from generictools import Generic,\
+                         isInstance
 #
-from PhysicalQuantities import Scalar
+from PhysicalQuantities import Concentration, Scalar
 #
 from PhysicalQuantities import PhysicalQuantity as PQuantity
 #
-from PhysicalProperties import AquiferProperty
-from PhysicalProperties import BiotCoefficient
-from PhysicalQuantities import Concentration
-from PhysicalProperties import Density
-from PhysicalProperties import Dilatation
-from PhysicalProperties import EffectiveDiffusion
-from PhysicalProperties import HydraulicConductivity
-from PhysicalProperties import HydraulicPorosity
-from PhysicalProperties import IntrinsicPermeability
-from PhysicalProperties import KinematicDispersion
-from PhysicalProperties import MassSolubilityLimit
-from PhysicalProperties import MatrixCompressibilityFactor
-from PhysicalProperties import Permeability
-from PhysicalProperties import PoreDiffusion
-from PhysicalProperties import Porosity
-from PhysicalProperties import RetardationFactor
-from PhysicalProperties import ResidualSaturation
-from PhysicalProperties import ResidualWaterContent
-from PhysicalProperties import MaximumSaturation
-from PhysicalProperties import SaturatedWaterContent
-from PhysicalProperties import SharedFactor
-from PhysicalProperties import SolidDensity
-from PhysicalProperties import SolubilityLimit
-from PhysicalProperties import SpecificHeat 
-from PhysicalProperties import SpecificHeatCapacity
-from PhysicalProperties import SpecificStorage
-from PhysicalProperties import ThermalConductivity
-from PhysicalProperties import Viscosity
+from PhysicalProperties import AquiferProperty,\
+                               BiotCoefficient,\
+                               Density,\
+                               Dilatation,\
+                               EffectiveDiffusion,\
+                               HydraulicConductivity,\
+                               HydraulicPorosity,\
+                               IntrinsicPermeability,\
+                               KinematicDispersion,\
+                               MassSolubilityLimit,\
+                               MatrixCompressibilityFactor,\
+                               MaximumSaturation,\
+                               Permeability,\
+                               PoissonRatio,\
+                               PoreDiffusion,\
+                               PoreCompressibility,\
+                               PoreExpansivity,\
+                               Porosity,\
+                               RetardationFactor,\
+                               ResidualSaturation,\
+                               ResidualWaterContent,\
+                               SolidProperty,\
+                               SaturatedWaterContent,\
+                               SharedFactor,\
+                               SolidDensity,\
+                               SolubilityLimit,\
+                               SpecificHeat ,\
+                               SpecificHeatCapacity,\
+                               SpecificStorage,\
+                               ThermalConductivity,\
+                               ThermalConductivity,\
+                               Tortuosity,\
+                               Viscosity,\
+                               YoungModulus
 
 from physicallaws import PermeabilityLaw, SolubilityLaw
 from physicallaws import SaturationLaw, SolubilityByIsotope
@@ -53,19 +67,23 @@ from physicallaws import IntrinsicPermeabilityLaw,FickVapeurLaw,FickAirDissousLa
 # Material
 # =========================================================
 
-class Material:
+class Material(Generic):
 
-    """A material support a list of physical quantities.
-    
     """
-    def __init__(self, name,**properties):
-        """
+    A material supports a dictionary of physical quantities.
+    
+    It is to note that the diffusion is implicitely an aqueous diffusion
+    
+    for gas diffusion in water, see $WRAPPER/Doc/porformat/DiffusionOfGasesInH2O.pdf
+    
+    We use a dictionary to define material properties.
+    
         properties can be among :
         
         biotCoefficient ,
         concentrationAtSaturation,
         density,
-        effectiveDiffusion,
+        effectiveDiffusion,                                                                 
         fickairdissouslaw ,
         fickvapeurlaw,
         hydraulicConductivity,
@@ -79,9 +97,12 @@ class Material:
         maximumSaturation,
         permeability,
         permeabilityLaw,
-        permeabiliteliquide ,
-        permeabilitegaz 
+        permeabiliteliquide,
+        permeabilitegaz,
+        poissonRatio,
+        PoreCompressibility,                                                                       pore compressiblity (1/Pa), (default is 0).
         poreDiffusion,
+        poreExpan,                                                                      pore expansivity    (1./K), (default is 0).
         porosity,
         retardationFactor,
         residualSaturation,
@@ -94,17 +115,25 @@ class Material:
         sorptionLaw,
         specificHeat, 
         SpecificStorage,
-        thermalconductivitylaw
-        viscosity
+        thermalconductivitylaw,
+        tortuosity,
+        viscosity,
+        youngModulus
         
-        Rem:    The property dictionnary contains only properties as strings with lower cases. It
+        Rem:    The property dictionary contains only properties as strings with lower cases. It
                 allows to better handle the properties naming.
-        """
-        
+
+    
+    """
+    def __init__(self, name,**properties):
+    
+        Generic.__init__(self)
+
+
         try:
             type(name) is StringType
         except:
-            raise TypeError, " name must be a string"
+            raise TypeError(" name must be a string")
         self.name = name
         #
         self.propdict={
@@ -128,8 +157,11 @@ class Material:
             'permeabilitylaw':PermeabilityLaw,
             'permeabiliteliquide':PermeabilityLaw,
             'permeabilitegaz':PermeabilityLaw,
+            'poissonratio':PoissonRatio,
             'porediffusion':PoreDiffusion,
             'porosity':Porosity,
+            'poreExpan':PoreExpansivity,
+            'porecompressibility':PoreCompressibility,
             'retardationfactor':RetardationFactor,
             'residualsaturation':ResidualSaturation,
             'residualwatercontent':ResidualWaterContent,
@@ -143,13 +175,19 @@ class Material:
             'specificheat':SpecificHeat,
             'thermalconductivity':ThermalConductivity,
             'thermalconductivitylaw':ThermalconductivityLaw,
-            'viscosity':Viscosity
+            'tortuosity':Tortuosity,
+            'viscosity':Viscosity,
+            'youngmodulus':YoungModulus
             }
         for physicalproperty in self.propdict.values():
-            if not (issubclass(physicalproperty,PhysicalLaw)+issubclass(physicalproperty,PQuantity)+issubclass(physicalproperty,AquiferProperty)):
-                raise Exception, " check the class for %s"%(physicalproperty)
+            if not (issubclass(physicalproperty,PhysicalLaw)+\
+                    issubclass(physicalproperty,PQuantity)+\
+                    issubclass(physicalproperty,AquiferProperty)+\
+                    +issubclass(physicalproperty,SolidProperty)):
+                raise Exception(" check the class for %s"%(physicalproperty))
             pass
         self.density = None
+        self.tortuosity = None
         self.effectiveDiffusion_species =None
         self.effectiveDiffusion_property= None
         self.kinematicDispersion_species = None
@@ -165,9 +203,11 @@ class Material:
         self.poreDiffusion_property = None
         self.hydraulicConductivity = None
         self.hydraulicPorosity = None
-	self.viscosity = None
+        self.viscosity = None
         self.porosity_species = None
-        self.porosity_property = None        
+        self.porosity_property = None
+        self.poreExpansivity = PoreExpansivity(0.,unit = "1/K")
+        self.poreCompressibility = PoreCompressibility(0.,unit = "1/Pa")
         self.retardationFactor_species = None
         self.retardationFactor_property = None
         self.sharedFactor_species = None
@@ -185,64 +225,75 @@ class Material:
         self.massSolubilityLimit_property = None
         self.concentration_species = None
         self.concentration_property = None
-        #Ajouts TH
+        self.gk = 0.0
+        # Addons THM
         self.fickVapeurLaw = None
         self.fickAirDissousLaw = None
         self.thermalconductivityLaw= None
         self.intrinsicPermeabilityLaw =  None
         self.biotCoefficient = None
+        self.specificHeat =  None
         self.specificHeatCapacity =  None
         self.thermalConductivity =  None
         self.permeabiliteliquide = None
         self.permeabilitegaz = None
+        self.poissonRatio = None
+        self.youngModulus = None
 
         for key in properties:
             #print "key",key,type(key)
             prop=properties[key]
-            #print "prop",prop,dir(prop)
+            print ("prop",prop,dir(prop))
             self.setProperty(key,prop)
+            pass
+        #
+        # we specify the hydraulic porosity, if any specified
+        #
+        if "porosity" in properties:
+            self.hydraulicPorosity = properties["porosity"]
             pass
         # self.setProperty affecte 2 fois self.permeabilityLaw
         # d'abord a permeabiliteliquide puis  a permeabilitegaz
         # car propdict(permeabiliteliquide) = PermeabilityLaw  et propdict(permeabiliteliquide)= PermeabilityLaw
         # On contourne ce pb
-        if properties.has_key('permeabiliteliquide'):
+        if 'permeabiliteliquide' in properties:
             self.permeabiliteliquide = properties["permeabiliteliquide"]
-        if properties.has_key('permeabilitegaz'):
+            pass
+        if 'permeabilitegaz' in properties:
             self.permeabilitegaz = properties["permeabilitegaz"]
+            pass
         #
         # if saturation is introduced we also set water contents through
         # the residual and maximum of saturation, and porosity
         #
-        if properties.has_key("maximumsaturation"):
-            if properties.has_key("porosity"):
+        if "maximumsaturation" in properties:
+            if "porosity" in properties:
                 self.saturatedWaterContent = self.porosity * self.maximumSaturation
+                pass
             else:
-                raise Warning," constitency problem "
-            if properties.has_key("residualsaturation"):
+                raise Warning(" constitency problem ")
+            if "residualsaturation" in properties:
                 self.residualWaterContent = self.porosity * self.residualSaturation
-
-        elif properties.has_key("saturatedwatercontent"):
-            if properties.has_key("porosity"):
+                pass
+        elif "saturatedwatercontent" in properties:
+            if "porosity" in properties:
                 self.maximumSaturation = self.saturatedWaterContent / self.porosity
+                pass
             else:
-                raise Warning," constitency problem "
-            if properties.has_key("residualsaturation"):
+                raise Warning(" constitency problem ")
+            if "residualsaturation" in properties:
                 self.maximumSaturation = self.saturatedWaterContent / self.porosity
-
-                
-            
-        
+                pass
         # Verification that both permeability and
         # intrinsicpermeability have not been set
         if (self.permeability and self.intrinsicPermeability):
-            raise Exception, "Material with both permeability and intrinsic permeability can't be defined"
+            raise Exception("Material with both permeability and intrinsic permeability can't be defined")
 
         #verification that both PoreDiffusion and EffectiveDiffusion
         #have not been set
-        print " dbg material we are here "
+        #print " dbg material we are here "
         if (self.effectiveDiffusion_species and  self.poreDiffusion_species):
-            raise Exception, "Material with both effectiveDiffusion and poreDiffusion can't be defined"
+            raise Exception("Material with both effectiveDiffusion and poreDiffusion can't be defined")
 
         # verification that if DistributionCoefficient, langmuir
         # or freundlich sorptionLaw is defined, solidDensity
@@ -251,7 +302,7 @@ class Material:
             for prop in self.sorptionLaw_property:
                 if isInstance(prop, [DistributionCoefficient, Langmuir, Freundlich]):
                     if not self.solidDensity:
-                       raise Exception, "Material defined with DistributionCoefficient, langmuir or freundlich sorptionLaw should also be defined with solidDensity"
+                       raise Exception("Material defined with DistributionCoefficient, langmuir or freundlich sorptionLaw should also be defined with solidDensity")
                     pass
                 pass
             pass
@@ -265,12 +316,12 @@ class Material:
         """
         Change a material property value
         """
-        if not issubclass(PQ,PhysicalLaw)+issubclass(PQ,PQuantity)+issubclass(PQ,AquiferProperty):
-            raise Exception, "problem with class membership"
+        if not issubclass(PQ,PhysicalLaw)+issubclass(PQ,PQuantity)+issubclass(PQ,AquiferProperty)+issubclass(PQ,SolidProperty):
+            raise Exception("problem with class membership")
         key=PQ.__name__
-#        print "dbg material changeProperty",PQ.__name__
+        #print "dbg material changeProperty",PQ.__name__
         key=key[0].lower()+key[1:]
-        print " dbg material key",key
+        #print " dbg material key",key
         
         if hasattr(self,key):
             # property of the material only
@@ -281,18 +332,21 @@ class Material:
                 setattr(self,key+'_property',None)
                 return
             # property depending on the material and species
-##             print 'Classe :',PQ.__name__
+            #print 'Classe :',PQ.__name__
             spec_list,prop_list=createList(value,PQ)
             spec_aux,prop_aux=getattr(self,key+'_species'),\
                                getattr(self,key+'_property')
             if not spec_aux:
                 spec_aux=[]
+                pass
             if not prop_aux:
                 prop_aux=[]
+                pass
             if len(spec_list)==1:
                 if spec_list[0]!='ALL':
                     raise Exception
                 spec_aux,prop_aux=spec_list,prop_list
+                pass
             else:
                 if len(spec_aux)==1:
                     if spec_aux[0]!='ALL':
@@ -303,6 +357,7 @@ class Material:
                     if spe in spec_aux:
                         indexaux=spec_aux.index(spe)
                         prop_aux[indexaux]=prop
+                        pass
                     else:
                         spec_aux.append(spe)
                         prop_aux.append(prop)
@@ -322,25 +377,29 @@ class Material:
         """
         To set a material property
         """
-        print "keyword",keyword
+        #print "dbg property: ",self.name, keyword,property.__class__
+        #raw_input("keyword property1")
         keyword=keyword.lower()
-        if keyword not in self.propdict.keys(): raise Exception, " check the set property function, property: "+keyword
-        print "dbg property: ",keyword,property.__class__
-        if isInstance(property,[PhysicalLaw,PQuantity,AquiferProperty]):
-            print "setproperty propClass is ok "
+        if keyword not in list(self.propdict.keys()):
+            print(list(self.propdict.keys()))
+            raise Exception(" check the set property function, property: "+keyword)
+        #print "dbg property: ",self.name, keyword,property.__class__
+        #raw_input("keyword property2")
+        if isInstance(property,[PhysicalLaw,PQuantity,AquiferProperty,SolidProperty]):
+            #print "setproperty propClass is ok "
             propClass=property.__class__
+            #raw_input("keyword property2 isInstance(property,[PhysicalLaw,PQuantity,AquiferProperty,SolidProperty])")
             pass
         elif type(property) is ListType:
             #
-            # \begin{E.A.}[to allow : "Si", Prop('4.5), "Toto", Prop(5.4), ...]
+            # if property type is of ListType: :
             #
-            # the usual way to do setProperty with a list is like that :
-            # [Prop(4.5), ("toto", Prop(3.4)), ("titi", Prop(4.5))]
-            # if I receive :
-            # ["Si", Prop('4.5), "Toto", Prop(5.4)]
-            # I transform this list in
-            # [("Si", Prop('4.5)), ("Toto", Prop(5.4))]
+            # if we have as input :
+            # ["Na", Prop('3.7), "Cl", Prop(3.8)]
+            # it becomes
+            # [("Na", Prop('3.7)), ("CL", Prop(3.8))]
             #
+            #raw_input("keyword property3 type(property) is ListType")
             myProperty = []
             aNewProp = []
             for prop in property:
@@ -366,29 +425,31 @@ class Material:
             #
             property_buf = []
             for prop in property:
-                if isInstance(prop,[PhysicalLaw,PQuantity,AquiferProperty]):
+                if isInstance(prop,[PhysicalLaw, PQuantity, AquiferProperty, SolidProperty]):
                     property_buf.append(prop)
                     pass
                 elif type(prop,TupleType):
-                    if isInstance(prop[0],[AquiferProperty,PhysicalLaw,PQuantity]):
+                    if isInstance(prop[0],[AquiferProperty,PhysicalLaw,PQuantity, SolidProperty]):
                         property_buf.append(prop)
+                        pass
                     else:
                         property_buf.append((prop[1],prop[0]))
                         pass
                     pass
                 else:
-                    raise Exception, "object membership should be verified : %s"%prop
+                    raise Exception("object membership should be verified : %s"%prop)
                 pass
             property = property_buf
             for prop in property:
-                if isInstance(prop,[AquiferProperty,PhysicalLaw,PQuantity]):
+                if isInstance(prop,[AquiferProperty,PhysicalLaw,PQuantity, SolidProperty]):
                     propClass=prop.__class__
                     pass
                 elif type(prop,TupleType):
-                    memberShip(prop[0],[AquiferProperty,PhysicalLaw,PQuantity])
+                    memberShip(prop[0],[AquiferProperty,PhysicalLaw,PQuantity, SolidProperty])
                     propClass=prop[0].__class__
                     if propClass==self.propdict[keyword]:
                         PQ=propClass
+                        pass
                     elif issubclass(propClass,self.propdict[keyword]):
                         PQ=self.propdict[keyword]
 ##                        if propClass=='SolubilityByElement':
@@ -399,24 +460,24 @@ class Material:
                     key=PQ.__name__
                     key=key[0].lower()+key[1:]
                     if not hasattr(self,key+'_species'):
-                        raise Exception, "No species allowed for %s"%key
+                        raise Exception("No species allowed for %s"%key)
                     pass
                 else:
-                    raise Exception, "object membership should be verified : %s"%prop
+                    raise Exception("object membership should be verified : %s"%prop)
                 pass
             pass
         else:
             if property:
-                raise Exception, "object membership should be verified : %s"%property
+                raise Exception("object membership should be verified : %s"%property)
             else:
                 propClass=self.propdict[keyword]
         #propClass=property.__class__
-#        print " dbg keyword ",keyword
-#        print " dbg propClass ",propClass
-#        print " dbg propdict ",self.propdict[keyword]
+        #print (" dbg keyword ",keyword)
+        #print (" dbg propClass ",propClass)
+        #print (" dbg propdict ",self.propdict[keyword])
         if propClass!=self.propdict[keyword]:
             if not issubclass(propClass,self.propdict[keyword]):
-                raise Exception, " problem with property class "
+                raise Exception(" problem with property class ")
         #self.changeProperty(propClass,property)
         self.changeProperty(self.propdict[keyword],property)
         
@@ -427,8 +488,8 @@ class Material:
         """
         value = None
         keyword = keyword.lower()
-        if keyword not in self.propdict.keys():
-            raise Exception, " check the get property function property: "+keyword
+        if keyword not in list(self.propdict.keys()):
+            raise Exception(" check the get property function property: "+keyword)
         PQ = self.propdict[keyword]
         key = PQ.__name__
         key = key[0].lower()+key[1:]
@@ -463,7 +524,7 @@ class Material:
         """
         boolean=0
         keyword = keyword.lower()
-        if keyword not in self.propdict.keys(): raise Exception, " check the set property function "
+        if keyword not in list(self.propdict.keys()): raise Exception(" check the set property function ")
         PQ = self.propdict[keyword]
         key = PQ.__name__
         key = key[0].lower()+key[1:]
@@ -524,8 +585,8 @@ class Material:
         self.setProperty('Porosity',porosity)
         
     def setViscosity(self,viscosity):
-    	"""set viscosity"""
-    	self.setProperty('Viscosity',viscosity)
+        """set viscosity"""
+        self.setProperty('Viscosity',viscosity)
         
     def setHydraulicPorosity(self,porosity):
         """set hydraulic porosity"""
@@ -537,8 +598,10 @@ class Material:
         retardationFactor_species, retardationFactor_property = createList(retardationFactor, RetardationFactor)
         if not self.retardationFactor_species:
             self.retardationFactor_species=[]
+            pass
         if not self.retardationFactor_property:
             self.retardationFactor_property=[]
+            pass
         self.retardationFactor_species += retardationFactor_species
         self.retardationFactor_property += retardationFactor_property
         #raise stop
@@ -587,6 +650,10 @@ class Material:
         self.matrixCompressibilityFactor=matrixCompressibilityFactor
         return
     
+    def setName(self,name):
+        """ set material name"""
+        self.name=name
+    
     def getKinematicDispersion (self, species = None):
         """if KinematicDispersion is defined :
                if a species is specified,
@@ -608,10 +675,22 @@ class Material:
         In Elmer it is named "Saturated Water Content"
         """
         return self.getProperty('saturatedWaterContent')
+        
+    def getBiotCoefficient(self):
+        """ get BiotCoefficient """
+        return self.getProperty('coefficientbiot')
     
-    def setName(self,name):
-        """ set material name"""
-        self.name=name
+    def getDensity(self):
+        """get solid density"""
+        return self.getProperty('density')
+
+    def getHydraulicConductivity(self):
+        """get HydraulicConductivity"""
+        return self.getProperty('HydraulicConductivity')
+
+    def getIntrinsicPermeability(self):
+        """get intrinsic permeability"""
+        return self.getProperty('intrinsicpermeability')
 
     def getName(self):
         """get material name"""
@@ -621,17 +700,9 @@ class Material:
         """get permeability"""
         return self.getProperty('permeability')
 
-    def getHydraulicConductivity(self):
-        """get HydraulicConductivity"""
-        return self.getProperty('HydraulicConductivity')
-
     def getPermeabilityLaw(self):
         """get permeability law"""
         return self.getProperty('permeabilityLaw')
-
-    def getIntrinsicPermeability(self):
-        """get intrinsic permeability"""
-        return self.getProperty('intrinsicpermeability')
 
     def getPoreDiffusion(self, species = None):
         """if PoreDiffusion is defined :
@@ -648,17 +719,6 @@ class Material:
                else return the default value
            else return None"""
         return self.getProperty('Porosity', species)
-        
-    def getViscosity(self):
-        """if Viscosity is defined :
-               return the associated property value
-           else return None"""
-        return self.getProperty('Viscosity')
-    
-    def getHydraulicPorosity(self):
-        """get hydraulic porosity """
-        return self.getProperty('hydraUlicpoRosity')
-    
 
     def getRetardationFactor(self, species = None):
         """if RetardationFactor is defined :
@@ -668,6 +728,16 @@ class Material:
            else return None"""
 
         return self.getProperty('retardationFactor', species)
+        
+    def getViscosity(self):
+        """if Viscosity is defined :
+               return the associated property value
+           else return None"""
+        return self.getProperty('Viscosity')
+    
+    def getHydraulicPorosity(self):
+        """get hydraulic porosity """
+        return self.getProperty('hydraulicPorosity')   
 
     def getSaturationLaw(self):
         """get saturation law"""
@@ -676,10 +746,6 @@ class Material:
     def getSolidDensity(self):
         """get solid density"""
         return self.getProperty('solidDensity')
-        
-    def getBiotCoefficient(self):
-        """ get BiotCoefficient """
-        return self.getProperty('coefficientbiot')
         
     def getSpecificHeat(self):
         """ get specific Heat Capacity """
@@ -739,5 +805,6 @@ class Material:
                 msg=keyword+\
                      ' is not set for material %s'\
                      %self.getName()
-                print msg
-                raise Exception, msg
+                print(msg)
+                raise Exception(msg)
+            pass

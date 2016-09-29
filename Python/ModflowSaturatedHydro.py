@@ -5,7 +5,7 @@ import string
 
 from cartesianmesh import *
 
-from physicalquantities import Permeability
+from PhysicalProperties import Permeability
 
 from saturatedhydraulicproblem import SaturatedHydraulicProblem
 
@@ -85,10 +85,10 @@ class SaturatedHydroModflow(SaturatedHydraulicProblem):
 	
     def run(self):
         import os
-        osStatus = os.system("which modflow.exe")
+        osStatus = os.system("which modflow96")
         if osStatus<>0:
-            raise "modflow.exe not found"
-        osStatus = os.system("modflow.exe < modf.fil")
+            raise "modflow96 not found"
+        osStatus = os.system("modflow96 < modf.fil")
         
     def setData(self):
         nom_fichier_fil = "modf.fil"
@@ -188,12 +188,15 @@ class SaturatedHydroModflow(SaturatedHydraulicProblem):
 #
         print " traitement des conditions initiales "
         for initialcondition in self.initialConditions:
+            print self.initialConditions
             value = initialcondition.getValue()
-	    print "Initial cond. get value",value
-#	    valeur = value['__all__'].getValue()
-	    valeur = value.getValue()
-	    print "Value of valeur ",valeur
-	    mesh = initialcondition.getZone()
+	    #valeur = value.getValue()
+	    print "initial condition ",type(initialcondition)
+	    print "initial condition ",dir(initialcondition)
+	    print "initial condition ",initialcondition.getRegion()
+	    mesh = initialcondition.getRegion()
+	    print mesh
+	    print dir(mesh)
             zone = mesh.getZones()
 	    
 	    	    
@@ -206,7 +209,7 @@ class SaturatedHydroModflow(SaturatedHydraulicProblem):
             for i in range(i_min,i_max+1,1):
                 for j in range(j_min,j_max+1,1):
                     k = (j-1)*ncol+i
-                    ci[k-1]=valeur
+                    ci[k-1]=value
         print " longueur du tableau ",len(ci),nrow
 #
 # Setting initial conditions for boundaries

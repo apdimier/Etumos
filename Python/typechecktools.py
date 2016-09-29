@@ -3,6 +3,8 @@
 Utilities to check the type of elements
 """
 
+from __future__ import absolute_import
+from __future__ import print_function
 import types
 
 from wrappertools import verifyEqualFloats
@@ -11,7 +13,7 @@ def toList(x):
     """
     Used to change a tuple to a list or an item to a list of one element.
     """
-    if type(x) in [types.ListType,types.TupleType]:
+    if type(x) in [list,tuple]:
         return list(x)
     else:
         return [x]
@@ -24,19 +26,19 @@ def verifyLength(tulist, listLength, message=None):
         if not message:
             message = "check the length of the list"
             pass
-	raise Exception, message
+    raise Exception(message)
     pass
 
 def verifyItem(x, objekt):
     """
     Raises an exception if an item is not in a list, a tuple or a dictionary key.
     """
-    if objekt.__class__ == types.ListType:
-        if x not in objekt : raise Exception, x + " not in list argument "+objekt.__str__()
-    elif objekt.__class__ == types.DictionaryType:
-        if x not in objekt.keys() : raise Exception, x + " not in list argument "+objekt.keys().__str__()
-    elif objekt.__class__ == types.TupleType:
-        if x not in list(objekt) : raise Exception, x + " not in list argument "+list(objekt).__str__()
+    if objekt.__class__ == list:
+        if x not in objekt : raise Exception(x + " not in list argument "+objekt.__str__())
+    elif objekt.__class__ == dict:
+        if x not in list(objekt.keys()) : raise Exception(x + " not in list argument "+list(objekt.keys()).__str__())
+    elif objekt.__class__ == tuple:
+        if x not in list(objekt) : raise Exception(x + " not in list argument "+list(objekt).__str__())
     else:
         message = "The argument objekt must be a dictionary, a list or a tuple"
         raise message
@@ -68,13 +70,13 @@ def verifyRange(x, min=None, max=None):
     """Raises an exception if x is not in [min, max]."""
     if not isInRange(x, min, max):
         if min is None :
-            str = ']..., ' + `max` + ']'
+            str = ']..., ' + repr(max) + ']'
         elif max is None :
-            str = '[' + `min` + ', ...['
+            str = '[' + repr(min) + ', ...['
         else:
-            str = '[' + `min` + ', ' + `max` + ']'
+            str = '[' + repr(min) + ', ' + repr(max) + ']'
             pass
-        message = ' '.join(['Quantity', `x`, 'out of range', str])
+        message = ' '.join(['Quantity', repr(x), 'out of range', str])
         raise message
     pass
 
@@ -107,13 +109,13 @@ def verifyOpenRange(x, min=None, max=None):
     """
     if not isInOpenRange(x, min, max):
         if min is None :
-            str = ']..., ' + `max` + '['
+            str = ']..., ' + repr(max) + '['
         elif max is None :
-            str = ']' + `min` + ', ...['
+            str = ']' + repr(min) + ', ...['
         else:
-            str = ']' + `min` + ', ' + `max` + '['
+            str = ']' + repr(min) + ', ' + repr(max) + '['
             pass
-        message = ' '.join(['Quantity', `x`, 'out of range', str])
+        message = ' '.join(['Quantity', repr(x), 'out of range', str])
         raise message
     pass
 
@@ -137,15 +139,15 @@ def isInstance(x, klassenprobe):
     """
     Returns true if x is an instance of one of the classes within the testclasses, false otherwise
     """
-    if type(klassenprobe) is not types.ListType:
-	if isinstance(x, klassenprobe):
-	    return 1
-	else:
-	    raise Exception, " the x instance is not of the specified type %s"%(klassenprobe.__name__)
+    if type(klassenprobe) is not list:
+        if isinstance(x, klassenprobe):
+            return 1
+        else:
+            raise Exception(" the x instance is not of the specified type %s"%(klassenprobe.__name__))
     else:
         for klasse in klassenprobe:
-	    if isinstance(x, klasse):
-	        return 1
+            if isinstance(x, klasse):
+                return 1
             pass
     return 0
 
@@ -156,8 +158,8 @@ def verifyType(x, someTypes, message = None):
     if type(x) in someTypes:
         return 1
     else:
-	#raise Exception("wrong type")
-	return 0
+    #raise Exception("wrong type")
+        return 0
 
 def verifyTypeList(alist, someTypes):
     alist = toList(alist)
@@ -173,7 +175,7 @@ def verifyClass(x, someClass, message=None):
     try:
         #print "verifyClass",x.__class__,someClass.__class__
         if x.__class__ == someClass.__class__:
-            print "verifyClass it is ok"
+            print("verifyClass it is ok")
             return
         pass
     except:
@@ -189,11 +191,11 @@ def verifyClass(x, someClass, message=None):
 ##         #""""
         if message is None:
             if hasattr(x, "__repr__"): xstr = x.__repr__()
-            else: xstr = `type(x)`
-            xstr = `type(x)`       
+            else: xstr = repr(type(x))
+            xstr = repr(type(x))       
             message =_typeErrorMessage(xstr, _w_(someClass))
             pass
-	raise TypeError, message
+        raise TypeError(message)
     return
 
 def verifyClasse(x, someClass, message=None):
@@ -213,19 +215,20 @@ def verifyClasse(x, someClass, message=None):
             if hasattr(x, "__repr__"):
                 xstr = x.__repr__()
             else:
-                xstr = `type(x)`
-            xstr = `type(x)`       
+                xstr = repr(type(x))
+            xstr = repr(type(x))       
             message = _typeErrorMessage(xstr, _w_(someClass))
             pass
-	raise TypeError, message
+    raise TypeError(message)
     return
 
 def verifyClassList(liste, someClass):
     """
-    Raises an exception if an element of l is not an instance of one of some_classes
+    Raises an exception if an element of the list, liste,  is not an instance of one of some_classes
     """
     liste = list(liste)
     for x in liste:
+        #print(" x class name ",x) 
         verifyClass(x, someClass)
         pass
     return
@@ -252,4 +255,4 @@ def verifyExists( *args):
         ind += 1
         if not item:
             message = "item number %s of 'args' does not exist."%ind
-            raise Exception, message
+            raise Exception(message)

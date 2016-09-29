@@ -2,6 +2,8 @@
 datatable:  How to extract data for post-processing
 """
 
+from __future__ import absolute_import
+from __future__ import print_function
 from generictools import listTypeCheck, memberShip
 
 import numpy
@@ -9,9 +11,9 @@ import numpy
 from typechecktools import verifyType
 
 from types import FloatType,\
-		  IntType,\
-		  ListType,\
-		  StringType
+                  IntType,\
+                  ListType,\
+                  StringType
 
 
 from listtools import toList
@@ -19,6 +21,7 @@ from listtools import toList
 from wrappertools import areClose
 
 import string
+from six.moves import range
 
 def _getIndex(x, list):
     """Gets the index."""
@@ -55,32 +58,35 @@ class DataTable(GenericTable):
             self.name = name
             pass
         else:
-            raise TypeError, " the name of the tables isn't mentionned or should be a string"
+            raise TypeError(" the name of the tables isn't mentionned or should be a string")
         if columnNames:
             if type(columnNames) == StringType:
                 self.columnNames = columnNames
-	        self.data = numpy.reshape(numpy.array([]),(len(columnNames,0)))
-	        pass
+                self.data = numpy.reshape(numpy.array([]),(len(columnNames,0)))
+                pass
             else:
-                raise TypeError, " you have to enter the name of the DataTable"
+                raise TypeError(" you have to enter the name of the DataTable")
         else:
-	    self.columnNames = []
-	    self.data = numpy.reshape(numpy.array([]),(0,0))
+            self.columnNames = []
+            self.data = numpy.reshape(numpy.array([]),(0,0))
+            pass
                 
         if columnUnits:
             if type(columnUnits) == StringType:
                 self.columnUnits = columnUnits
+                pass
             else:
-                raise TypeError, " column units must be a string"
+                raise TypeError(" column units must be a string")
         else:
-	    self.columnUnits = ""
+            self.columnUnits = ""
+            pass
         return None                
             
     def getNbRows(self):
         """
         Giving access to the number of rows
         """
-	return self.data.shape[1]
+        return self.data.shape[1]
     
     def getNbColumns(self):
         """
@@ -93,7 +99,6 @@ class DataTable(GenericTable):
         Enables to set the name
         """
         self.name = name
-        pass
     
     def getName(self):
         """
@@ -129,12 +134,12 @@ class DataTable(GenericTable):
 
     def addRow(self, row):
         """Adds a row to the table. """
-	nc = len(row)
-	if nc != self.data.shape[0]:
+        nc = len(row)
+        if nc != self.data.shape[0]:
             msg="Row of wrong length : %s instead of %s"%(nc,self.data.shape[0])
-	    raise msg
-	new_row = numpy.reshape(numpy.array(row),(-1,1))
-	self.data = numpy.concatenate((self.data, new_row),1)
+            raise msg
+        new_row = numpy.reshape(numpy.array(row),(-1,1))
+        self.data = numpy.concatenate((self.data, new_row),1)
         return
     
     def addColumnValues(self, column):
@@ -142,12 +147,13 @@ class DataTable(GenericTable):
         Enables to add a column of data
         """
         nr1 = self.data.shape[1]
-	nr = len(column)
+        nr = len(column)
         if nr1 == 0:
             # case 1: empty table
             if nr == 0:
                 # case 1a: we're just adding a name
                 self.data = numpy.reshape(self.data, (1, 0))
+                pass
             else:
                 # case 1b: we're adding a column of values
                 self.data = numpy.reshape(numpy.array(column), (1, nr))
@@ -156,7 +162,7 @@ class DataTable(GenericTable):
         else:
             # case 2: non-empty table
             if nr1 > 0 and nr != nr1:
-                raise Exception, "New column must have the same length as existing ones %s %s"%(nr1,nr)
+                raise Exception("New column must have the same length as existing ones %s %s"%(nr1,nr))
             new_column = numpy.reshape(numpy.array(column), (1, nr))
             self.data = numpy.concatenate((self.data, new_column))
             pass
@@ -164,7 +170,7 @@ class DataTable(GenericTable):
     
     def addColumn(self, name, column):
         """Adds a column to the table. """
-	self.columnNames.append(name)
+        self.columnNames.append(name)
         self.addColumnValues(column)
 
     def getRow(self, i):
@@ -178,7 +184,7 @@ class DataTable(GenericTable):
     
     def getItem(self, column, position):
         """Gets an item having a definite position in the table."""
-	return self.data[column, position]
+        return self.data[column, position]
     
     def setRow(self, row_number, row):
         """Sets a row in the table"""
@@ -187,12 +193,12 @@ class DataTable(GenericTable):
     
     def setColumn(self, column_number, column):
         """Sets a column in the table."""
-	self.data[column_number] = column
+        self.data[column_number] = column
         return
     
     def setItem(self, column_number, row_number, value):
         """Sets a value in a definite column and row of the table. """
-	self.data[column_number, row_number] = value
+        self.data[column_number, row_number] = value
         return
 
     def isEqual(self,other,epsilon=None):
@@ -207,12 +213,10 @@ class DataTable(GenericTable):
         nbc1=len(self.getColumnNames())
         nbc2=len(other.getColumnNames())
         
-        if nbc1!=nbc2:
-            return 0
+        if nbc1!=nbc2: return 0
         nbu1 = len(self.getColumnUnits())
         nbu2 = len(other.getColumnUnits())
-        if nbu1!=nbu2:
-            return 0
+        if nbu1!=nbu2: return 0
         for i in range(nbc1):
             if self.getColumnNames()[i].lower().strip()!=\
                other.getColumnNames()[i].lower().strip():
@@ -226,12 +230,10 @@ class DataTable(GenericTable):
         
         nbc1=self.getNbColumns()
         nbc2=other.getNbColumns()
-        if nbc1!=nbc2:
-            return 0
+        if nbc1!=nbc2: return 0
         nbl1=self.getNbColumns()
         nbl2=other.getNbColumns()
-        if nbl1!=nbl2:
-            return 0
+        if nbl1!=nbl2: return 0
         for i in range(nbl1):
             for j in range(nbc1):
                 v1=self.getItem(j,i)
@@ -248,7 +250,7 @@ class DataTable(GenericTable):
     
     def copy(self):
         """Copy method.
-	Returns a new table, in which it inserts the rows from the given table."""
+    Returns a new table, in which it inserts the rows from the given table."""
         new=DataTable(self.getName(),self.getColumnNames(),self.getColumnUnits())
         nlig=self.getNbRows()
         for i in range(nlig):
@@ -287,13 +289,13 @@ class DataTable(GenericTable):
             msg='only one argument allowed.'
             raise msg
         #
-        cle=dico.keys()[0]
+        cle=list(dico.keys())[0]
         val=dico[cle]
         cle=cle.lower()
         if cle=='withvaluesincolumn':
             model,numeroColonne=val[0],val[1]
             listTypeCheck(model,[IntType,FloatType])
-            model=map(lambda x:float(x),model)
+            model=[float(x) for x in model]
             verifyType(numeroColonne,[StringType,\
                        IntType,FloatType])
             tttitres=self.getColumnNames()
@@ -302,22 +304,26 @@ class DataTable(GenericTable):
                 for tit in tttitres:
                     if tit==numeroColonne:
                         numCol=tttitres.index(tit)
+                        pass
+                    pass
+                pass
             else:
                 if numeroColonne>=len(tttitres):
                     msg='The table does not have\n'
                     msg+='that number of columns : %s'%numeroColonne
                     raise msg
                 numCol=numeroColonne
-                
+                pass
             if len(val)==3:
                 eps=val[2]
+                pass
             else:
                 eps=1.e-15
                 pass
             new=DataTable(self.getName(),tttitres,ttunits)
             nlig=self.getNbRows()
             ip=0
-            comp=map(lambda x:float(x),self.getColumn(numCol))
+            comp=[float(x) for x in self.getColumn(numCol)]
             for ip in range(len(model)):
                 for i in range(len(comp)):
                     value=comp[i]
@@ -343,11 +349,9 @@ class DataTable(GenericTable):
                     pass
                 if cle==st:
                     if len(valeurs) != 1:
-                        raise Exception, " list length problem within the extractSubTable function"
-                if cle=='from'+st:
-                    valeurs=valeurs[valeurs[0]:nn-1]
-                if cle=='to'+st:
-                    valeurs=valeurs[0:valeurs[0]]
+                        raise Exception(" list length problem within the extractSubTable function")
+                if cle=='from'+st: valeurs=valeurs[valeurs[0]:nn-1]
+                if cle=='to'+st: valeurs=valeurs[0:valeurs[0]]
                 if cle.find('name')>=0:
                     newv=[]
                     for v in valeurs:
@@ -369,14 +373,15 @@ class DataTable(GenericTable):
                 newunits = []
                 for i in valeurs:
                     newtitres.append(tttitres[i])
-                    if len(ttunits):
-                        newunits.append(ttunits[i])
+                    if len(ttunits): newunits.append(ttunits[i])
                     pass
+                pass
             new=DataTable(self.getName(),newtitres,newunits)
             for i in valeurs:
                 if cleOk=='row':
                     liste=self.getRow(i)
                     new.addRow(liste)
+                    pass
                 if cleOk=='column':
                     liste=self.getColumn(i)
                     new.addColumnValues(liste)
@@ -387,10 +392,9 @@ class DataTable(GenericTable):
                 
     def write(self):
         names = self.columnNames
-        print "DataTable:", self.name
+        print("DataTable:", self.name)
         values = self.data
-        for j in range(len(names)):
-            print names[j], ':', values[j,:]
+        for j in range(len(names)): print(names[j], ':', values[j,:])
         return
          
 
@@ -399,7 +403,7 @@ class DataTable(GenericTable):
         from exceptions import IOError
         try:
             if self.data.shape != (0,0):
-                raise "The table already contains values"
+                raise  Exception("The table already contains values")
             file = open(ffile, 'r')
         except :
             msg="can't open file <%s>...\n"%ffile
@@ -415,17 +419,17 @@ class DataTable(GenericTable):
         isonvalues=0
         allvaluesbycolonne=[]
         nbvalueline=0
-	cpt=1
+        cpt=1
         for line in file.readlines():
             separe = line.split()
             if (len(separe) == 0 ):
                 # blank line
                 continue
-        	    
-        	
+                
+            
             if ( separe[0] == '#' ):
                 # comment line
-		cpt=cpt+1
+                cpt=cpt+1
                 continue
             elif ( separe[0] == '#TITLE:' ):
                 # name line
@@ -434,6 +438,7 @@ class DataTable(GenericTable):
                 for isep in range(len(separe)):
                     s=s+separe[isep]+' '
                     fileName=s
+                    pass
             elif ( separe[0] == '#COLUMN_TITLES:' ):
                 # column name line
                 separe = separe[1:]
@@ -445,12 +450,15 @@ class DataTable(GenericTable):
                         fileNameColumns=[]
                         continue
                     fileNameColumns = s.split('|')
+                    pass
+                pass
             elif ( separe[0] == '#columnUnits:' ):
                 # unit name line
                 fileNameUnits = separe[1:]
+                pass
             elif ( cpt == 1 ):
                 # column name line
-		pass
+                pass
             else:
                 # values line
                 nbvalueline=nbvalueline+1
@@ -459,8 +467,7 @@ class DataTable(GenericTable):
                 fileminnbcol=min(linenbcol,fileminnbcol)
                 linevalues=[]
         
-                for isep in range(linenbcol):
-                    linevalues.append(float(separe[isep]))
+                for isep in range(linenbcol): linevalues.append(float(separe[isep]))
                     
                 # adjust nb columns if not the same on each line
                 # or if the first value's line
@@ -469,68 +476,70 @@ class DataTable(GenericTable):
                         allvaluesbycolonne.append([])
                         for il in range(nbvalueline-1):
                             allvaluesbycolonne[il].append(0)
+                            pass
+                        pass
                 elif ( filemaxnbcol > len(allvaluesbycolonne) ):
                     for icol in range(len(allvaluesbycolonne),filemaxnbcol):
                         allvaluesbycolonne.append([])
                         for il in range(nbvalueline-1):
                             allvaluesbycolonne[icol].append(0)
-        	    
+                            pass
+                        pass
+                    pass
                 # add values
-                for icol in range(linenbcol):
-                    allvaluesbycolonne[icol].append(linevalues[icol])
-                for icol in range(linenbcol,filemaxnbcol):
-                    allvaluesbycolonne[icol].append(0)
-    		    
-	    cpt=cpt+1
-    
+                for icol in range(linenbcol): allvaluesbycolonne[icol].append(linevalues[icol])
+                for icol in range(linenbcol,filemaxnbcol): allvaluesbycolonne[icol].append(0)
+                
+            cpt=cpt+1
+            pass
         file.close()
-        
-        # check consistency beetwen arguments and file contents
-#
-# controlling the table parameters
-#        
+                                                                                           #
+                                                                                           # check consistency beetwen arguments and file contents
+                                                                                           #
+                                                                                           # controlling the table parameters
+                                                                                           #        
         if ( fileminnbcol != filemaxnbcol ):
-            raise IOError, "colums must have the same number of rows"
+            raise IOError("colums must have the same number of rows")
     
         if nbcolumns:
             if ( filemaxnbcol != nbcolumns ):
-                raise IOError, " problem with the number of columns"
+                raise IOError(" problem with the number of columns")
+            pass
         
         # Warnings
         if ( ( columnsNames.lower() == 'no' ) and ( len(fileNameColumns) > 0 ) ):
-            raise Warning, " you should specify column names"
+            raise Warning(" you should specify column names")
         
         if ( ( columnsNames.lower() == 'yes' ) and ( len(fileNameColumns) == 0 ) ):
-            raise Warning, "you specified columnName(s) but the file doesn\'t entail column names"
+            raise Warning("you specified columnName(s) but the file doesn\'t entail column names")
         
         if ( len(fileNameColumns) < filemaxnbcol ):
             nbcol=len(fileNameColumns)
-            for icol in range (nbcol,filemaxnbcol):
-    	        fileNameColumns.append('col'+str(icol+1))
+            for icol in range (nbcol,filemaxnbcol): fileNameColumns.append('col'+str(icol+1))
         
             effectivecolumnNames=fileNameColumns
             
-    	
+        
         if ( ( name.lower() == 'no' ) and fileName ):
             msg='WARNING: you specified no name but there is name in file'
-            print msg
+            print(msg)
         
         if ( ( name.lower() == 'yes' ) and ( fileName == None ) ):
             msg='WARNING: you specified name but there is no name in file'
-            print msg
+            print(msg)
         
         if ( ( columnsUnits.lower() == 'no' ) and ( len(fileNameUnits) > 0 ) ):
             msg='WARNING: you specified no units name but there are units name in file'
-            print msg
+            print(msg)
     
         if ( ( columnsUnits.lower() == 'yes' ) and ( len(fileNameUnits) == 0 ) ):
             msg='WARNING: you specified units name but there are no units name in file'
-            print msg
+            print(msg)
     
         if ( ( len(fileNameUnits) > 0 ) and ( len(fileNameUnits) < filemaxnbcol ) ):
             nbcol=len(fileNameUnits)
-            for icol in range (nbcol,filemaxnbcol):
-    	        fileNameUnits.append('col'+str(icol+1))
+            for icol in range (nbcol,filemaxnbcol): fileNameUnits.append('col'+str(icol+1))
+            pass
     
 
 
@@ -543,8 +552,10 @@ class DataTable(GenericTable):
         for i in range(filemaxnbcol):
             if columnsNames.lower()=='yes':
                 self.addColumn(effectivecolumnNames[i],allvaluesbycolonne[i])
+                pass
             else:
                 self.addColumnValues(allvaluesbycolonne[i])
+                pass
         return
 
     def writeToFile(self, ffile,name='yes',columnNames='yes',columnUnits='yes'):
@@ -608,6 +619,7 @@ class DataTable(GenericTable):
         for i in range(1,len(col_names)):
             c = self.getColumn(i)*coef
             newDataTable.addColumn(col_names[i],c)
+            pass
         return newDataTable
 
 
@@ -622,7 +634,7 @@ class DataTable(GenericTable):
         Possible types of the Norm are: L1 and L2 (table.getColumn[1].[t]**2)
         """
         if col_number <=0 or col_number > (self.getNbColumns()-1):
-            raise "column number out of table, Please verify"
+            raise Exception("column number out of table, Please verify")
         else:
             c = self.getColumn(col_number)
             times = self.getColumn(0)
@@ -631,8 +643,12 @@ class DataTable(GenericTable):
                 if c[i]*c[i+1] > 0:
                     if type.lower()== 'l1':
                         res+= ((abs(c[i])+abs(c[i+1]))/2.) * (times[i+1]-times[i])
+                        pass
                     elif type.lower()== 'l2':
                         res+= (c[i]*c[i]+c[i+1]*c[i+1])*1./2 * (times[i+1]-times[i])
+                        pass
+                    pass
+                pass
             return res
 
     
@@ -656,7 +672,9 @@ class DataTable(GenericTable):
             for j in range(1,len(c)):
                 n =  (c[j]+c[j-1])/2*(time[j]-time[j-1]) + N[-1]
                 N.append(n)
+                pass
             t_cumulate.addColumn(c_names[i],N)
+            pass
             
         return t_cumulate
         
@@ -714,20 +732,14 @@ class DataTable(GenericTable):
         new.addColumn(newColumnNames[0],time)
         # for each other column, cumulate values                             
         for i in range(1,self.getNbColumns()):
-##             print 'LONGUEUR self.getColumn(i):',len(self.getColumn(i))
             c = self.getColumn(i)
-##             print 'LONGUEUR c : len(c)',len(c)
-##             print 'type(c)',type(c)
-##             c = [0.]+c    NE MARCHE PAS CAR type(c) = array
-##             N = []
-##             print 'LONGUEUR c : len(c)',len(c)
             N=[c[0]/(time[1]-time[0])]
             for j in range(1,len(c)):
                 n =  (c[j]-c[j-1])/(time[j]-time[j-1])
                 N.append(n)
                 pass
-##             print 'LONGUEUR N ,self.getColumn(i):',len(N),len(self.getColumn(i))
             new.addColumn(newColumnNames[i],N)
+            pass
 
         return new
         
@@ -749,11 +761,11 @@ def makeTableFromFile(ffile,name=None,nameInFile='No',\
         msg="can't open file <%s>...\n"%ffile
         raise IOError(msg)
     if name and nameInFile.lower()=='yes':
-        raise Warning, "You give a table name and ask to get name from file" 
+        raise Warning("You give a table name and ask to get name from file") 
     if columnsNames and columnsNameInFile.lower()=='yes':
-        raise Warning, "You ask for colum names in the file while already defining them"
+        raise Warning("You ask for colum names in the file while already defining them")
     if columnsUnits and columnsUnitsInFile.lower()=='yes':
-        raise Warning, "You ask for units in the file while already defining them"
+        raise Warning("You ask for units in the file while already defining them")
     # table creation
     if name:
         verifyType(name,StringType)
@@ -795,7 +807,7 @@ def makeTableFromLinearFunction(function,coords,time_list,name=None,columnUnits=
     if columnUnits:
         listTypeCheck(columnUnits, StringType)
         if len(columnUnits) !=2:
-            raise Exception, "makeTableFromLinearFunction creates a two columns table : time and value. You have to give two units"
+            raise Exception("makeTableFromLinearFunction creates a two columns table : time and value. You have to give two units")
         tab.setColumnUnits(columnUnits)
         pass
     value_list = []

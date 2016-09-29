@@ -5,7 +5,7 @@
 # modified by Jim Hugunin 1997-3-3 for repr's and str's (and other details)
 
 import sys
-from umath import *
+from numpy.core.umath import *
 import numpy
 
 def array2string(a, max_line_width = None, precision = None,
@@ -46,9 +46,11 @@ def array2string(a, max_line_width = None, precision = None,
         format = '%' + str(max_str_len) + 'd'
         item_length = max_str_len
         format_function = lambda x, f = format: _formatInteger(x, f)
+        pass
     elif type == 'f' or type == 'd':
         format, item_length = _floatFormat(data, precision, suppress_small)
         format_function = lambda x, f = format: _formatFloat(x, f)
+        pass
     elif type == 'F' or type == 'D':
         real_format, real_item_length = _floatFormat(data.real, precision,
                                                      suppress_small, sign=0)
@@ -57,12 +59,15 @@ def array2string(a, max_line_width = None, precision = None,
         item_length = real_item_length + imag_item_length + 3
         format_function = lambda x, f1 = real_format, f2 = imag_format: \
                           _formatComplex(x, f1, f2)
+        pass
     elif type == 'c':
         item_length = 1
         format_function = lambda x: str(x)
+        pass
     elif type == 'O':
         item_length = max(map(lambda x: len(str(x)), data))
         format_function = _formatGeneral
+        pass
     else:
         return str(a)
     final_spaces = (type != 'c')
@@ -72,6 +77,7 @@ def array2string(a, max_line_width = None, precision = None,
         indent = 6
         if indent == item_length:
             indent = 8
+            pass
         items_first = (max_line_width+final_spaces)/item_length
         if items_first < 1: items_first = 1
         items_continuation = (max_line_width+final_spaces-indent)/item_length
@@ -82,8 +88,10 @@ def array2string(a, max_line_width = None, precision = None,
                                items_continuation-1)/items_continuation
         line_format = (number_of_lines, items_first, items_continuation,
                        indent, line_width, separator)
+        pass
     else:
         line_format = (1, items_per_line, 0, 0, line_width, separator)
+        pass
     lst = _arrayToString(a, format_function, len(a.shape), line_format, 6*array_output, 0)[:-1]
     if array_output:
         if a.typecode() in ['l', 'd', 'D']:
@@ -99,13 +107,16 @@ def _floatFormat(data, precision, suppress_small, sign = 0):
     if len(non_zero) == 0:
         max_val = 0.
         min_val = 0.
+        pass
     else:
         max_val = float(maximum.reduce(non_zero))
         min_val = float(minimum.reduce(non_zero))
         if max_val >= 1.e8:
             exp_format = 1
+            pass
         if not suppress_small and (min_val < 0.0001 or max_val/min_val > 1000.):
             exp_format = 1
+            pass
     if exp_format:
         large_exponent = 0 < min_val < 1e-99 or max_val >= 1e100
         max_str_len = 8 + precision + large_exponent
@@ -113,7 +124,8 @@ def _floatFormat(data, precision, suppress_small, sign = 0):
         else: format = '%'
         format = format + str(max_str_len) + '.' + str(precision) + 'e'
         if large_exponent: format = format + '3'
-        item_length = max_str_len 
+        item_length = max_str_len
+        pass
     else:
         format = '%.' + str(precision) + 'f'
         precision = min(precision, max(tuple(map(lambda x, p=precision,
@@ -123,7 +135,8 @@ def _floatFormat(data, precision, suppress_small, sign = 0):
         if sign: format = '%#+'
         else: format = '%#'
         format = format + str(max_str_len) + '.' + str(precision) + 'f'
-        item_length = max_str_len 
+        item_length = max_str_len
+        pass
     return (format, item_length)
 
 def _digits(x, precision, format):
@@ -141,8 +154,10 @@ def _arrayToString(a, format_function, rank, line_format, base_indent=0, indent_
         items = line_format[1]
         if indent_first:
             indent = base_indent
+            pass
         else:
             indent = 0
+            pass
         index = 0
         for j in range(line_format[0]):
             s = s + indent * ' '+s0
@@ -150,23 +165,29 @@ def _arrayToString(a, format_function, rank, line_format, base_indent=0, indent_
                 s = s + format_function(a[index])+line_format[-1]
                 index = index + 1
                 if index == a.shape[0]: break
+                pass
             if s[-1] == ' ': s = s[:-1]
             s = s + '\n'
             items = line_format[2]
             indent = line_format[3]+base_indent
             s0 = ''
+            pass
         s = s[:-len(line_format[-1])]+']\n'
+        pass
     else:
         if indent_first:
             s = ' '*base_indent+'['
+            pass
         else:
             s = '['
+            pass
         for i in range(a.shape[0]-1):
             s = s + _arrayToString(a[i], format_function, rank-1, line_format, base_indent+1, indent_first=i!=0)
             s = s[:-1]+line_format[-1][:-1]+'\n'
         s = s + _arrayToString(a[a.shape[0]-1], format_function,
                                rank-1, line_format, base_indent+1)
         s = s[:-1]+']\n'
+        pass
     return s
 
 def _formatInteger(x, format):
@@ -179,14 +200,18 @@ def _formatFloat(x, format, strip_zeros = 1):
         third = s[-3]
         if third == '+' or third == '-':
             s = s[1:-2] + '0' + s[-2:]
+            pass
+        pass
     elif format[-1] == 'f':
         s = format % x
         if strip_zeros:
             zeros = len(s)
             while s[zeros-1] == '0': zeros = zeros-1
             s = s[:zeros] + (len(s)-zeros)*' '
+        pass
     else:
         s = format % x
+        pass
     return s
 
 def _formatComplex(x, real_format, imag_format):
@@ -196,8 +221,10 @@ def _formatComplex(x, real_format, imag_format):
         zeros = len(i)
         while zeros > 2 and i[zeros-1] == '0': zeros = zeros-1
         i = i[:zeros] + 'j' + (len(i)-zeros)*' '
+        pass
     else:
         i = i + 'j'
+        pass
     return r + i
 
 def _formatGeneral(x):

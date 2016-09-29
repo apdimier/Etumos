@@ -1,6 +1,8 @@
 """
 Some tools to define functions
 """
+from __future__ import absolute_import
+from __future__ import print_function
 from generictools import listTypeCheck, memberShip, SET_NUMBER
 from listtools import toList
 
@@ -10,6 +12,7 @@ from typechecktools import verifyType
 
 from posttables import Table
 from math import pow
+from six.moves import range
 
 class Function:
     """
@@ -25,13 +28,16 @@ class Function:
         """
         if coefList:
 #            print coefList,type(coefList)
-            verifyType(coefList, [types.ListType])
+            verifyType(coefList, [list])
             for coef in coefList:
 #                print " c ",c
-                verifyType(coef, [types.FloatType,types.IntType])
+                verifyType(coef, [float,int])
+                pass
             self.coefList = coefList
+            pass
         else:
             self.coefList =[]
+            pass
             
         if timeCoef:
             memberShip(timeCoef, Table)
@@ -61,7 +67,7 @@ class Function:
         """
         get ith coefficient
         """
-        verifyType(i, types.IntType)
+        verifyType(i, int)
         return self.coefList[i]
 
     def getCoefficients(self):
@@ -76,6 +82,7 @@ class Function:
         newFunc=self.copy()
         if self.getTimeCoefficient():
             newFunc.timecoeff=self.timecoeff.amult(mult)
+            pass
         else:
             newFunc.coefList=[c*mult for c in self.coefList]
             pass
@@ -136,6 +143,7 @@ class LinearFunction(Function):
         for i in range(len(coords)):
             value+=coefList[i]*coords[i]
 #            print " i ",i, coefList[i], coords[i]
+            pass
         return value
 
 class TimeFunction(Function):
@@ -145,9 +153,9 @@ class TimeFunction(Function):
                    type = type of the function, by default linear function 
     """
     def __init__(self,coef,timeInterval,typeFunction='linear'):
-        if typeFunction not in ['linear','exponential','logarithmic','polynomial','power']: raise Exception, "check the time function"
-        verifyType(coef, types.ListType)
-        verifyType(timeInterval,types.TupleType)
+        if typeFunction not in ['linear','exponential','logarithmic','polynomial','power']: raise Exception("check the time function")
+        verifyType(coef, list)
+        verifyType(timeInterval,tuple)
         self.coef=coef
         self.timeInterval=timeInterval
         self.typeFunction=typeFunction
@@ -183,19 +191,19 @@ class PolynomialFunction(Function):
      """
     def __init__(self,coefList):
         """constructor"""
-        verifyType(coefList, types.ListType)
+        verifyType(coefList, list)
         length = len(coefList)
         if length !=3:
-            raise Exception, "wrong dimension:\n"+\
+            raise Exception("wrong dimension:\n"+\
             "the coefList for a polynomial function should be:"+\
-            "[(an,an-1,...,a1,a0),(bn,bn-1,...,b1,b0),(cn,cn-1,...,c1,c0)] "
+            "[(an,an-1,...,a1,a0),(bn,bn-1,...,b1,b0),(cn,cn-1,...,c1,c0)] ")
         coefList_x = coefList[0]
         coefList_y = coefList[1]
         coefList_z = coefList[2]
         len_coefList = len(coefList_x)
         if ((len_coefList != len(coefList_y)) or
             (len_coefList != len(coefList_z))):
-            raise Exception, "check the coefList length for the PolynomialFunction"
+            raise Exception("check the coefList length for the PolynomialFunction")
         self.coefList_x = coefList_x
         self.coefList_y = coefList_y
         self.coefList_z = coefList_z
@@ -253,9 +261,10 @@ class PolynomialFunction(Function):
         y = coords[1]
         if len(coords) >2:
             z = coords[2]
+            pass
         else:
             z = 0.
-        
+            pass
         for i in range(length):
             value += coefList_x[i]*pow(x,dim -i) + coefList_y[i]*pow(y,dim -i) + coefList_z[i]*pow(z,dim -i)
             pass
@@ -291,7 +300,7 @@ def makeLinearFunction(coefList):
     elif len1 == 4:
         return LinearFunction3D(coefList)
     else:
-        raise "A linear function must have 2-4 coefficients, not " + `len1`
+        raise "A linear function must have 2-4 coefficients, not " + repr(len1)
     return
 
 
@@ -305,7 +314,7 @@ class Interval:
         self.fin = SET_NUMBER(fin)
         self.pas = SET_NUMBER(pas)
         if( self.fin < self.debut):
-            raise "La fin de l'intervalle doit etre au moins egale au debut"
+            raise Exception("check the bounds of the interval")
     def getDebut(self):
         return self.debut
     def getFin(self):
@@ -315,34 +324,40 @@ class Interval:
 
 class DerivableFunction(Function):
     def __init__(self,fonction,derivee=None,interval=None):
-        if isinstance(fonction,types.FunctionType) or isinstance(fonction,types.FloatType) or isinstance(fonction,types.IntType) :
+        if isinstance(fonction,types.FunctionType) or isinstance(fonction,float) or isinstance(fonction,int) :
             self.fonction = fonction
+            pass
         else:
-            raise "Foncthd, fonction doit etre de type Function, Float ou Int"
-        if derivee <> None:
-            if isinstance(derivee,types.FunctionType) or isinstance(derivee,types.FloatType) or isinstance(derivee,types.IntType):
+            raise Exception("Foncthd, fonction doit etre de type Function, Float ou Int")
+        if derivee != None:
+            if isinstance(derivee,types.FunctionType) or isinstance(derivee,float) or isinstance(derivee,int):
                 self.derivee = derivee
+                pass
+            pass
         self.derivee = derivee
         if interval == None:
-            print "Attention interval nul, les fonctions seront evaluees en zero"
+            print("Attention interval nul, les fonctions seront evaluees en zero")
+            pass
         self.interval = interval
         #
         if type(fonction) == types.FunctionType:
-            self.nom=fonction.func_name
+            self.nom=fonction.__name__
+            pass
         else:
             self.nom='const'
+            pass
     def eval(self,x):
         if isinstance(self.fonction,types.FunctionType):
             return self.fonction(x)
-        elif isinstance(self.fonction,types.FloatType) or isinstance(self.fonction,types.IntType):
+        elif isinstance(self.fonction,float) or isinstance(self.fonction,int):
             return self.fonction
         else:
             return None
     def deriv_eval(self,x):
-        if self.derivee <> None:
+        if self.derivee != None:
             if isinstance(self.derivee,types.FunctionType):
                 return self.derivee(x)
-            elif isinstance(self.derivee,types.FloatType) or isinstance(self.derivee,types.IntType):
+            elif isinstance(self.derivee,float) or isinstance(self.derivee,int):
                 return self.derivee
         else:
             return None

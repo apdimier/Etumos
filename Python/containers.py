@@ -4,6 +4,7 @@
 - Set
 - OrderedSet
 """ 
+from __future__ import absolute_import
 from copy import deepcopy 
 
 
@@ -23,6 +24,7 @@ class Set(list):
         ret = []
         for item in a_list:
             ret.append(self.append(item))
+            pass
         return ret
 
     def delete(self, item):
@@ -35,25 +37,27 @@ class Set(list):
 class OrderedSet(Set):
 
     def append(self, item):
-	list = self
-	lo = 0
-	hi = len(list)
-	while lo < hi: # bisection loop
-	    mid = (lo+hi)//2	    
-	    if item < list[mid]: 
-		hi = mid
-	    else: lo = mid+1
-	try:
-	    previous = list[lo-1]
+        list = self
+        lo = 0
+        hi = len(list)
+        while lo < hi: # bisection loop
+            mid = (lo+hi)//2        
+            if item < list[mid]: 
+                hi = mid
+                pass
+            else: lo = mid+1
+            pass
+        try:
+            previous = list[lo-1]
         except IndexError: # smallest (and therefore new) item
-	    list.insert(0, item)
-	    return item
-	if item != previous: # new item
-	    list.insert(lo, item)
-	    return item
-	else: # already there
+            list.insert(0, item)
+            return item
+        if item != previous: # new item
+            list.insert(lo, item)
+            return item
+        else: # already there
             item = previous
-	    return previous
+            return previous
 
 
 class DictOfContainers(dict):
@@ -61,8 +65,10 @@ class DictOfContainers(dict):
         self.dict = {}
         if container == None:
             self.container_proto = []
+            pass
         else:
             self.container_proto = container
+            pass
 
     def __getitem__(self, key):
         return self.dict[key]
@@ -71,10 +77,11 @@ class DictOfContainers(dict):
         nn = 0
         for key in self.dict.keys():
             nn += len(self.dict[key])
+            pass
         return nn
 
     def keys(self):
-        keys = self.dict.keys()
+        keys = list(self.dict.keys())
         keys.sort()
         return keys
 
@@ -107,7 +114,7 @@ class DictOfContainers(dict):
 class DictOfContainersIterator:
     def __init__(self, dict):
         self.dict = dict
-        self.keys = dict.keys()
+        self.keys = list(dict.keys())
         self.key = self.keys[0]
         self.ikey = 0
         self.iter = iter(dict[self.key])
@@ -126,8 +133,8 @@ class DictOfContainersIterator:
 
     def next(self):
         try:
-            return self.iter.next()
+            return next(self.iter)
         except StopIteration: # end of container
             self.nextKey()
-            return self.iter.next()
+            return next(self.iter)
 

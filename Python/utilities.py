@@ -24,7 +24,9 @@ Dictionnaries enable the interpolation switch
                 The references are given within the functions 
 
 """
-from math import log,log10,exp
+from __future__ import absolute_import
+from __future__ import print_function
+from math import log,log10,exp,pi
 
 volumetricExpansionCoefficient = {
 
@@ -54,10 +56,10 @@ def volumeExpanCoefWater(temperature):
     lowerLimit = (temperature // 10)*10
     upperLimit = lowerLimit + 10
     if lowerLimit < 10 or upperLimit > 100:
-        raise Exception, "check the data"
+        raise Exception("check the data")
     coef0 = volumetricExpansionCoefficient[lowerLimit][0]
     coef1 = volumetricExpansionCoefficient[upperLimit][0]
-    print coef0,coef1
+    print(coef0,coef1)
     return volumetricExpansionCoefficient[lowerLimit][1], lowerLimit, coef0 + (coef1-coef0)*(temperature-lowerLimit)/10.
 
 def waterSpecificEnthalpy(temperature, salinity = None):
@@ -85,11 +87,11 @@ def waterSpecificEnthalpy(temperature, salinity = None):
     """
     t = temperature
     if t<0 or t> 120:
-        raise Exception, " Specific Enthalpy: the temperature range validity for temperature is [0:120] "
+        raise Exception(" Specific Enthalpy: the temperature range validity for temperature is [0:120] ")
     s = salinity
     if salinity == None:
         s = 0.
-        print "salinity:",s
+        print("salinity:",s)
     if s>=-1.e-20 and s<120.:
         specEnthalpy = 141.355 + 4202.07*t - 0.535*t**2 + 0.004*t**3
         a10  =-2.34825E+04;
@@ -105,14 +107,14 @@ def waterSpecificEnthalpy(temperature, salinity = None):
     
         return specEnthalpy - s*(a10 + a20*s + a30*s**2 + a40*s**3 + a11*t + a12*t**2 + a13*t**3 + a21*s*t + a31*(s**2)*t + a22*s*t**2)
     else:
-        raise Exception, " Specific Enthalpy: the salinity range validity for temperature is [0:120] g/kg "
+        raise Exception(" Specific Enthalpy: the salinity range validity for temperature is [0:120] g/kg ")
 
 def waterLDensity(temperature):
     """
     rho1 = rho0 /(1+beta * (T1 - T0))
     """
     rho0, lowerLimit, beta = volExpanCoefWater(temperature)
-    print rho0, lowerLimit, beta, temperature - lowerLimit
+    print(rho0, lowerLimit, beta, temperature - lowerLimit)
     
     return rho0 / (1. + beta * (temperature - lowerLimit))
     
@@ -199,7 +201,7 @@ def freshWaterSpecificHeat(temperature):
     """
     t = temperature
     if t<0 or t> 180:
-        raise Exception, " SpecificHeat: the temperature range validity for temperature is [0:180] "
+        raise Exception(" SpecificHeat: the temperature range validity for temperature is [0:180] ")
     return 4209.4 - 1.824*t + 3.0525e-2*t**2 - 1.2388e-4*t**3 + 1.2774e-7*t**4
 
 def thermalConductivity(temperature, salinity = None):
@@ -216,9 +218,9 @@ def thermalConductivity(temperature, salinity = None):
     t = temperature
     s = salinity
     if t<0 or t> 180:
-        raise Exception, " thermal conductivity: the temperature range validity is [0:180] C "
+        raise Exception(" thermal conductivity: the temperature range validity is [0:180] C ")
     if s<0 or s> 160:
-        raise Exception, " thermal conductivity: the salinity range validity is [0:160] g/kg"
+        raise Exception(" thermal conductivity: the salinity range validity is [0:160] g/kg")
     t = 1.00024 * t     # convert from T_90 to T_68
     s = s / 1.00472     # from S to S_P
     return 0.001*(10**(log10(240+0.0002*s)+0.434*(2.3-(343.5+0.037*s)/(t+273.15))*((1-(t+273.15)/(647.3+0.03*s)))**(1./3.)));
@@ -238,7 +240,7 @@ def waterSpecificHeat(temperature, salinity = None):
     """
     t = temperature
     if t<0 or t> 180:
-        raise Exception, " SpecificHeat: the temperature range validity for temperature is [0:180] "
+        raise Exception(" SpecificHeat: the temperature range validity for temperature is [0:180] ")
     s = salinity
     if salinity == None:
         return 4209.4 - 1.824*t + 3.0525e-2*t**2 - 1.2388e-4*t**3 + 1.2774e-7*t**4
@@ -250,7 +252,7 @@ def waterSpecificHeat(temperature, salinity = None):
         d = 6.8777e-7 + s*(1.5170e-6 - s*4.4268e-9)
         return (a + t*(b + t*(c* + t*d)))
     else:
-        raise Exception, " SpecificHeat: the salinity range validity for temperature is [0:180] g/kg "
+        raise Exception(" SpecificHeat: the salinity range validity for temperature is [0:180] g/kg ")
         
     
     
@@ -298,10 +300,10 @@ def volumeExpanCoefWater(temperature):
     lowerLimit = (temperature // 10)*10
     upperLimit = lowerLimit + 10
     if lowerLimit < 10 or upperLimit > 100:
-        raise Exception, "check the data temperature must lie in [10.,100.]"
+        raise Exception("check the data temperature must lie in [10.,100.]")
     coef0 = volumetricExpansionCoefficient[lowerLimit][0]
     coef1 = volumetricExpansionCoefficient[upperLimit][0]
-    print coef0,coef1
+    print(coef0,coef1)
     return volumetricExpansionCoefficient[lowerLimit][1], lowerLimit, coef0 + (coef1-coef0)*(temperature-lowerLimit)/10.
 
 def pressWaterHeatCapacity(temperature, pressure):
@@ -333,7 +335,7 @@ def pressWaterHeatCapacity(temperature, pressure):
     c3 = 6.1360e-13
     
     cp_t = 4217.4 +t* (-3.720283 + t*(0.1412855 +t*(- 2.654387e-3 + t*2.093236e-5)))
-    print " cp_t ",cp_t
+    print(" cp_t ",cp_t)
     return cp_t + p* (a0 + t* (a1 + t*(a2 + t*(a3 + t*a4))) +\
            p* (b0 + t* (b1 + t*(b2 + t*(b3 + t*b4))) +\
            p* (c0 + t* (c1 + t*(c2 + t*c3))) ))
@@ -342,31 +344,37 @@ def surfaceVolumeFactor(porosity, density, grainDiameter):
     """
     That function enables to determine the surface to volume factor in the lasaga kinetic formulation A/V * ki * (1 -SR)
     
+    see Postma, p162/163.
+    
     units are SI units: kg m s
+    
+    the two coefficients to take into account are A anv V, A in m2/kg V in L
     """
     grainRadius = 0.5*grainDiameter
     
-    grainSurface = 4.*3.1415926535897931*grainRadius**2         # surface of 1 grain
+    grainSurface = 4.*3.1415926535897931*grainRadius**2                                    # surface of 1 grain
     
-    print "grainSurface %e\n"%grainSurface
+    print("grainSurface %e\n"%grainSurface)
     
-    grainVolume = grainSurface*grainRadius/3.                   # volume of 1 grain
+    grainVolume = grainSurface*grainRadius/3.                                              # volume of 1 grain
     
-    print "grainVolume %e\n"%grainVolume
+    print("grainVolume %e\n"%grainVolume)
     
-    vMineral = 1./density                                       # volume of one kg of mineral
+    vMineral = 1./density                                                                  # volume of one kg of mineral
     
-    numberOfGrains = vMineral/grainVolume                       # number of grains in 1 kg of mineral
+    numberOfGrains = vMineral/grainVolume                                                  # number of grains in 1 kg of mineral
     
-    print " number of grains %e\n"%numberOfGrains
+    print(" number of grains %e\n"%numberOfGrains)
     
-    A = numberOfGrains * grainSurface                           # surface area of 1 kg mineral
+    A = numberOfGrains * grainSurface                                                      # surface area of 1 kg mineral
     
-    V = vMineral*porosity/(1.-porosity)
+    V = vMineral*porosity/(1.-porosity)                                                    # volume of water in contact with 1 kg of soil
     
-    print " A : ",A," in  m2/kg V : ",V," in m-3"
+    print(" A : ",A," in  m2/kg surface per kg of mineral, V : ",V," in m-3")
+    print(" A : ",A," in  m2/kg surface per kg of mineral, V : ",V*1000," in Lit")
+    print ("the function returns the coefficient A0/V in m2/L for 1kg mineral\n")
     
-    return A/(V*1000)
+    return A/(V*1000)                                                                      # 1000 to convert mol/Lhyyy
     
 def hydraulicConductivity(intrinsicPermeability, temperature, salinity = None, g = None):
     """
@@ -387,9 +395,9 @@ def hydraulicConductivity(intrinsicPermeability, temperature, salinity = None, g
     if salinity == None:
         salinity = 0.0
     elif salinity > 1:
-       raise Warning, " salinity should be lower than 120 g/kg"
+       raise Warning(" salinity should be lower than 120 g/kg")
     if temperature > 100:
-        raise Warning, " temperature should be expressed in Celcius degrees and lower than 100 Celcius degree"
+        raise Warning(" temperature should be expressed in Celcius degrees and lower than 100 Celcius degree")
       
     rho = waterDensity(temperature, salinity)
     mu  = waterViscosity(temperature)
@@ -402,7 +410,7 @@ def radius(density, surface):
     
     """        
     radius = 3./density/surface
-    print radius
+    print(radius)
     
     return (1./density)*porosity/(1.-porosity)
 
@@ -445,8 +453,8 @@ def log10k(temperature, coef):
 
         T is in Kelvin
     """
-    print temperature
-    print coef
+    print(temperature)
+    print(coef)
     return coef[0] + coef[1]*temperature + coef[2]/temperature + coef[3]*log10(temperature) + coef[4]/(temperature*temperature)
 
 def logtrk(temperature, coef):
@@ -457,8 +465,8 @@ def logtrk(temperature, coef):
 
         T is in Kelvin
     """
-    print temperature
-    print coef
+    print(temperature)
+    print(coef)
     return coef[0]*log(temperature) + coef[1] + coef[2]*temperature + coef[3]/temperature + coef[4]/(temperature*temperature)
     
 def km(k25, Ea, temperature, referenceTemperature = None):
@@ -475,9 +483,29 @@ def km(k25, Ea, temperature, referenceTemperature = None):
     
     k25*exp(-Ea*((1./temperature) - (1./298.15))/R)
     
-    R, the univeral constant expressed in J/[mol-K] takes the value 8.314
+    R, the univeral constant expressed in J/[mol-K] takes the value 8.31446
     """
     if referenceTemperature == None:
         referenceTemperature = 298.15
-    return k25*exp(-Ea*((1./temperature) - (1./referenceTemperature))/8.314)
+    return k25*exp(-Ea*((1./temperature) - (1./referenceTemperature))/8.31446)
+
+def kineticParameters(porosity,density,grainDiam):
+    """"
+    That function enables an evaluation of kinetic parameters
+    
+    from appelo / postma p. 163
+    all three parameters in SI units 
+     
+     density kg/m3
+     grainDiam in meters
+    """
+    oneGrainVolume = 4.*pi*((grainDiam*0.05)**3)/3.
+    volumeOfOneKgMineral = 1./density
+    numberOfGrainsPerKg = volumeOfOneKgMineral/oneGrainVolume
+    surfaceOfOneGrain = 4.*pi*grainDiam*0.05*grainDiam*0.05
+    surfaceAreaPerKg  = numberOfGrainsPerKg*surfaceOfOneGrain
+    volumeOfWaterInContactWithOneKgSoil = volumeOfOneKgMineral*porosity/(1.-porosity)
+    print(" surface Area Of 1kg soil is in m2: ",surfaceAreaPerKg)
+    print(" volume of water in contact with 1kg soil is in m3 ",volumeOfWaterInContactWithOneKgSoil)
+    return surfaceAreaPerKg,volumeOfWaterInContactWithOneKgSoil
 

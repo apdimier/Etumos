@@ -1,7 +1,11 @@
+from __future__ import absolute_import
+from __future__ import print_function
 from posttables import Table
 from listtools import toList
 import string
 import numpy
+from six.moves import map
+from six.moves import range
 #
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
@@ -12,7 +16,6 @@ def getTimeUnifiedTables(*ttuple):
     N tables dont les instants sont l'union des instants
     de chacune des tables initiales
     """
-    
     tablist=toList(ttuple)
     glue=tuple([x.getColumn(0).tolist() for x in tablist])
     if not len(glue):return
@@ -21,6 +24,9 @@ def getTimeUnifiedTables(*ttuple):
         for item in element:
             if item not in temporary:
                 temporary.append(item)
+                pass
+            pass
+        pass
     temporary.sort()
 
     
@@ -60,8 +66,10 @@ def interpolate(TimeGlobColumn,oneTable):
         #   put it to 0 (see initialisation before)
         if ti < time[0]:
             pos=1
+            pass
         elif ti > time[-1]:
             pos=len(time)-1
+            pass
         # else: - add the time to the list, even if it exists
         #       - sort list
         #       - get the index of the time in the new sorted list
@@ -73,6 +81,7 @@ def interpolate(TimeGlobColumn,oneTable):
             local_time.append(ti)
             local_time.sort()
             pos = local_time.index(ti)
+            pass
         lamda = (ti-time[pos-1])/(time[pos]-time[pos-1])
         l_flux = (1-lamda)*flux_l[pos-1]+lamda*flux_l[pos]
         interp_flux[i] = l_flux
@@ -83,7 +92,7 @@ def interpolate(TimeGlobColumn,oneTable):
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
 class Dico:
-    """ Dico class definition as dictionnary, ou les cles sont ordonnees en fifo
+    """ Dico class definition as dictionnary, keys are fifo organised (First In, First Out)
     """
     #---------------------------------------------------------------------------
     def __init__(self, name=''):
@@ -93,6 +102,7 @@ class Dico:
         self._name = name
         self._dict = {}
         self._cles = []
+        pass
     #---------------------------------------------------------------------------
     def getName(self):
         """
@@ -126,7 +136,7 @@ class Dico:
     def has_key(self, key):
         """ retourne 1 si key est une cle du dico et 0 sinon.
         """            
-        return self._dict.has_key(key)
+        return key in self._dict
     #---------------------------------------------------------------------------
     def __len__(self):
         """ retourne le nombre de cles du dico.
@@ -134,10 +144,10 @@ class Dico:
         return len(self._cles)
     #---------------------------------------------------------------------------
     def __setitem__(self, key, value):
-        """ affectation de la veleur 'value' a la cle 'key' du dico
+        """ affectation de la valeur 'value' a la cle 'key' du dico
             via l'operateur [].
         """             
-        if not self._dict.has_key(key): self._cles.append(key)
+        if key not in self._dict: self._cles.append(key)
         self._dict[key] = value
     #---------------------------------------------------------------------------
 
@@ -181,8 +191,10 @@ def whichType(object):
        contenu = "vide"
        if len (object) : contenu = whichType(object[0])
        mytype = "%s<%s> len=%s" % (mytype,  contenu,len (object))
+       pass
     if mytype == "instance":
-       mytype = "instance<%s>" % (object.__class__.__name__) 
+       mytype = "instance<%s>" % (object.__class__.__name__)
+       pass
     return mytype
     
 #-------------------------------------------------------------------------------
@@ -190,15 +202,15 @@ def whichType(object):
 def myDir(object, name, nbCol=6):
    
    listDir = dir(object)
-   lenCol = max(map(len, listDir))
+   lenCol = max(list(map(len, listDir)))
  
    lenDir = len(listDir)
-   print "dir(%s) = [" % name
+   print("dir(%s) = [" % name)
    format = '%-' + "%ss " % lenCol
    for i in range (lenDir):
-       if (i % nbCol) == 0: print format % listDir[i]
-       else:                print format % listDir[i],    
-   print "]"
+       if (i % nbCol) == 0: print(format % listDir[i])
+       else:                print(format % listDir[i], end=' ')    
+   print("]")
    return
 
 def linear1DMatc(dico, key, variable = None):
@@ -210,11 +222,14 @@ def linear1DMatc(dico, key, variable = None):
    """
    if variable == None:
        variable = key
+       pass
    elif type(variable) == StringType:
        variable = variable
+       pass
    else:
-       raise Warning, " variable should be a string, it has been set to"+key
+       raise Warning(" variable should be a string, it has been set to"+key)
        string = key
+       pass
    if variable.lower() == 'head' : variable = "Charge"
    polynomial = dico[key].coefList
    length = len(polynomial)
@@ -230,16 +245,20 @@ def linear1DMatc(dico, key, variable = None):
    if abs(x) > 1.e-15:
        string = "  %s = Variable Coordinate\n   Real MATC \"(%f + %f*(tx(0)))\"\n"
        pollux.append(x)
+       pass
    elif abs(polynomial[2]) > 1.e-15:
        y = polynomial[2]
        string = "  %s = Variable Coordinate\n   Real MATC \"%f + %f*tx(1)\"\n"
        pollux.append(y)
+       pass
    elif abs(polynomial[3]) > 1.e-15:
        z = polynomial[3]
        string = "  %s = Variable Coordinate\n   Real MATC \"%f + %f*tx(2)\"\n"
        pollux.append(z)
-   print "dbg ",variable
+       pass
+   print("dbg ",variable)
    for i in polynomial:
-       print i
+       print(i)
+       pass
    #raw_input("elmertools")
    return string,tuple([variable]+[i for i in pollux])

@@ -17,7 +17,7 @@ import getopt
 def lameta(temperature,pressure):
     """
     to calculate the CO2 activity, the virial expansion of Gibbs is used  (Pitzer extension)
-    The reference formula is found in the article of Duan and sun (2003)
+    The reference formula is found in the article of Duan and Sun (2003)
     That extension being used only by considering CO2/Na and CO2/NaCl interactions, the extension is
     limited to up to 6 coefficients compared to the reference of Duan and Sun
     The initial extension for the activity coefficients is :
@@ -112,7 +112,7 @@ def polyCubicRoots(a, b, c):
         r1 = mag * cos(alpha)  - xn
         r2 = -mag * cos(alpha + pi/3) - xn
         r3 = -mag * cos(alpha - pi/3) - xn
-        print r1,r2,r3
+        print (r1,r2,r3)
         return  max(r1, r2, r3)
 
 def cubicV(a2,a1,a0):

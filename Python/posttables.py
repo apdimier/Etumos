@@ -2,6 +2,8 @@
 Tables are the way to extract data for post-processing
 """
 
+from __future__ import absolute_import
+from __future__ import print_function
 from generictools import memberShip, listTypeCheck
 
 import numpy
@@ -9,9 +11,9 @@ import numpy
 from typechecktools import verifyType
 
 from types import FloatType,\
-		  IntType,\
-		  ListType,\
-		  StringType
+          IntType,\
+          ListType,\
+          StringType
 
 
 from listtools import toList
@@ -19,6 +21,7 @@ from listtools import toList
 from wrappertools import areClose
 
 import string
+from six.moves import range
 
 def _getIndex(x, list):
     """Gets the index."""
@@ -49,30 +52,35 @@ class Table:
         """
         if type(name) == StringType:
             self.name = name
+            pass
         else:
-            raise TypeError, " the name of one of the tables isn't mentionned"
+            raise TypeError(" the name of one of the tables isn't mentionned")
         if column_names:
             if type(column_names) == StringType:
                 self.column_names = column_names
-	        self.values = numpy.reshape(numpy.array([]),(len(column_names,0)))
+                self.values = numpy.reshape(numpy.array([]),(len(column_names,0)))
+                pass
             else:
-                raise TypeError, " you forgot to mention the name of one of the tables"
+                raise TypeError(" you forgot to mention the name of one of the tables")
+            pass
         else:
-	    self.column_names = []
-	    self.values = numpy.reshape(numpy.array([]),(0,0))
+            self.column_names = []
+            self.values = numpy.reshape(numpy.array([]),(0,0))
+            pass
                 
         if column_units:
             if type(column_units) == StringType:
                 self.column_units = column_units
+                pass
             else:
-                raise TypeError, " column units must be a string"
+                raise TypeError(" column units must be a string")
         else:
-	    self.column_units = ""
+            self.column_units = ""
         return None                
             
     def getNbRows(self):
         """Gets the number of rows of the table."""
-	return self.values.shape[1]
+        return self.values.shape[1]
     
     def getNbColumns(self):
         """Gets the number of columns of the table."""
@@ -108,23 +116,24 @@ class Table:
 
     def addRow(self, row):
         """Adds a row to the table. """
-	nc = len(row)
-	if nc != self.values.shape[0]:
+        nc = len(row)
+        if nc != self.values.shape[0]:
             msg="Row of wrong length : %s instead of %s"%(nc,self.values.shape[0])
-	    raise msg
-	new_row = numpy.reshape(numpy.array(row),(-1,1))
-	self.values = numpy.concatenate((self.values, new_row),1)
+            raise msg
+        new_row = numpy.reshape(numpy.array(row),(-1,1))
+        self.values = numpy.concatenate((self.values, new_row),1)
         return
     
     def addColumnValues(self, column):
         """Adds a column with values to the table."""
         nr1 = self.values.shape[1]
-	nr = len(column)
+        nr = len(column)
         if nr1 == 0:
             # case 1: empty table
             if nr == 0:
                 # case 1a: we're just adding a name
                 self.values = numpy.reshape(self.values, (1, 0))
+                pass
             else:
                 # case 1b: we're adding a column of values
                 self.values = numpy.reshape(numpy.array(column), (1, nr))
@@ -133,7 +142,7 @@ class Table:
         else:
             # case 2: non-empty table
             if nr1 > 0 and nr != nr1:
-                raise Exception, "New column must have the same length as existing ones %s %s"%(nr1,nr)
+                raise Exception("New column must have the same length as existing ones %s %s"%(nr1,nr))
             new_column = numpy.reshape(numpy.array(column), (1, nr))
             self.values = numpy.concatenate((self.values, new_column))
             pass
@@ -141,7 +150,7 @@ class Table:
     
     def addColumn(self, name, column):
         """Adds a column to the table. """
-	self.column_names.append(name)
+        self.column_names.append(name)
         self.addColumnValues(column)
 
     def getRow(self, i):
@@ -155,7 +164,7 @@ class Table:
     
     def getItem(self, column, position):
         """Gets an item having a definite position in the table."""
-	return self.values[column, position]
+        return self.values[column, position]
     
     def setRow(self, row_number, row):
         """Sets a row in the table"""
@@ -164,12 +173,12 @@ class Table:
     
     def setColumn(self, column_number, column):
         """Sets a column in the table."""
-	self.values[column_number] = column
+        self.values[column_number] = column
         return
     
     def setItem(self, column_number, row_number, value):
         """Sets a value in a definite column and row of the table. """
-	self.values[column_number, row_number] = value
+        self.values[column_number, row_number] = value
         return
 
     def isEqual(self,other,epsilon=None):
@@ -219,7 +228,7 @@ class Table:
     
     def copy(self):
         """Copy method.
-	Returns a new table, in which it inserts the rows from the given table."""
+    Returns a new table, in which it inserts the rows from the given table."""
         new=Table(self.getName(),self.getColumnNames(),self.getColumnUnits())
         nlig=self.getNbRows()
         for i in range(nlig):
@@ -258,13 +267,13 @@ class Table:
             msg='only one argument allowed.'
             raise msg
         #
-        cle=dico.keys()[0]
+        cle=list(dico.keys())[0]
         val=dico[cle]
         cle=cle.lower()
         if cle=='withvaluesincolumn':
             model,numeroColonne=val[0],val[1]
             listTypeCheck(model,[IntType,FloatType])
-            model=map(lambda x:float(x),model)
+            model=[float(x) for x in model]
             verifyType(numeroColonne,[StringType,\
                        IntType,FloatType])
             tttitres=self.getColumnNames()
@@ -273,22 +282,27 @@ class Table:
                 for tit in tttitres:
                     if tit==numeroColonne:
                         numCol=tttitres.index(tit)
+                        pass
+                    pass
+                pass
             else:
                 if numeroColonne>=len(tttitres):
                     msg='The table does not have\n'
                     msg+='that number of columns : %s'%numeroColonne
                     raise msg
                 numCol=numeroColonne
+                pass
                 
             if len(val)==3:
                 eps=val[2]
+                pass
             else:
                 eps=1.e-15
                 pass
             new=Table(self.getName(),tttitres,ttunits)
             nlig=self.getNbRows()
             ip=0
-            comp=map(lambda x:float(x),self.getColumn(numCol))
+            comp=[float(x) for x in self.getColumn(numCol)]
             for ip in range(len(model)):
                 for i in range(len(comp)):
                     value=comp[i]
@@ -314,11 +328,13 @@ class Table:
                     pass
                 if cle==st:
                     if len(valeurs) != 1:
-                        raise Exception, " list length problem within the extractSubTable function"
+                        raise Exception(" list length problem within the extractSubTable function")
                 if cle=='from'+st:
                     valeurs=valeurs[valeurs[0]:nn-1]
+                    pass
                 if cle=='to'+st:
                     valeurs=valeurs[0:valeurs[0]]
+                    pass
                 if cle.find('name')>=0:
                     newv=[]
                     for v in valeurs:
@@ -358,10 +374,11 @@ class Table:
                 
     def write(self):
         names = self.column_names
-        print "Table:", self.name
+        print("Table:", self.name)
         values = self.values
         for j in range(len(names)):
-            print names[j], ':', values[j,:]
+            print(names[j], ':', values[j,:])
+            pass
         return
          
 
@@ -370,7 +387,7 @@ class Table:
         from exceptions import IOError
         try:
             if self.values.shape != (0,0):
-                raise "The table already contains values"
+                raise Warning("The table already contains values")
             file = open(ffile, 'r')
         except :
             msg="can't open file <%s>...\n"%ffile
@@ -386,17 +403,17 @@ class Table:
         isonvalues=0
         allvaluesbycolonne=[]
         nbvalueline=0
-	cpt=1
+        cpt=1
         for line in file.readlines():
             separe = line.split()
             if (len(separe) == 0 ):
                 # blank line
                 continue
-        	    
-        	
+                
+            
             if ( separe[0] == '#' ):
                 # comment line
-		cpt=cpt+1
+                cpt=cpt+1
                 continue
             elif ( separe[0] == '#TITLE:' ):
                 # name line
@@ -405,6 +422,8 @@ class Table:
                 for isep in range(len(separe)):
                     s=s+separe[isep]+' '
                     fileName=s
+                    pass
+                pass
             elif ( separe[0] == '#COLUMN_TITLES:' ):
                 # column name line
                 separe = separe[1:]
@@ -421,7 +440,7 @@ class Table:
                 fileNameUnits = separe[1:]
             elif ( cpt == 1 ):
                 # column name line
-		pass
+                pass
             else:
                 # values line
                 nbvalueline=nbvalueline+1
@@ -445,15 +464,16 @@ class Table:
                         allvaluesbycolonne.append([])
                         for il in range(nbvalueline-1):
                             allvaluesbycolonne[icol].append(0)
-        	    
+                
                 # add values
                 for icol in range(linenbcol):
                     allvaluesbycolonne[icol].append(linevalues[icol])
                 for icol in range(linenbcol,filemaxnbcol):
                     allvaluesbycolonne[icol].append(0)
-    		    
-	    cpt=cpt+1
-    
+                    pass
+                pass
+            pass   
+        cpt=cpt+1
         file.close()
         
         # check consistency beetwen arguments and file contents
@@ -461,47 +481,47 @@ class Table:
 # controlling the table parameters
 #        
         if ( fileminnbcol != filemaxnbcol ):
-            raise IOError, "colums must have the same number of rows"
+            raise IOError("colums must have the same number of rows")
     
         if nbcolumns:
             if ( filemaxnbcol != nbcolumns ):
-                raise IOError, " problem with the number of columns"
+                raise IOError(" problem with the number of columns")
         
         # Warnings
         if ( ( columnsNames.lower() == 'no' ) and ( len(fileNameColumns) > 0 ) ):
-            raise Warning, " you should specify column names"
+            raise Warning(" you should specify column names")
         
         if ( ( columnsNames.lower() == 'yes' ) and ( len(fileNameColumns) == 0 ) ):
-            raise Warning, "you specified columnName(s) but the file doesn\'t entail column names"
+            raise Warning("you specified columnName(s) but the file doesn\'t entail column names")
         
         if ( len(fileNameColumns) < filemaxnbcol ):
             nbcol=len(fileNameColumns)
             for icol in range (nbcol,filemaxnbcol):
-    	        fileNameColumns.append('col'+str(icol+1))
+                fileNameColumns.append('col'+str(icol+1))
         
             effectivecolumnNames=fileNameColumns
             
-    	
+        
         if ( ( name.lower() == 'no' ) and fileName ):
             msg='WARNING: you specified no name but there is name in file'
-            print msg
+            print(msg)
         
         if ( ( name.lower() == 'yes' ) and ( fileName == None ) ):
             msg='WARNING: you specified name but there is no name in file'
-            print msg
+            print(msg)
         
         if ( ( columnsUnits.lower() == 'no' ) and ( len(fileNameUnits) > 0 ) ):
             msg='WARNING: you specified no units name but there are units name in file'
-            print msg
+            print(msg)
     
         if ( ( columnsUnits.lower() == 'yes' ) and ( len(fileNameUnits) == 0 ) ):
             msg='WARNING: you specified units name but there are no units name in file'
-            print msg
+            print(msg)
     
         if ( ( len(fileNameUnits) > 0 ) and ( len(fileNameUnits) < filemaxnbcol ) ):
             nbcol=len(fileNameUnits)
             for icol in range (nbcol,filemaxnbcol):
-    	        fileNameUnits.append('col'+str(icol+1))
+                fileNameUnits.append('col'+str(icol+1))
     
 
 
@@ -591,7 +611,7 @@ class Table:
         Possible types of the Norm are: L1 and L2 (table.getColumn[1].[t]**2)
         """
         if col_number <=0 or col_number > (self.getNbColumns()-1):
-            raise "column number out of table, Please verify"
+            raise Warning("column number out of table, Please verify")
         else:
             c = self.getColumn(col_number)
             times = self.getColumn(0)
@@ -718,11 +738,11 @@ def makeTableFromFile(ffile,name=None,nameInFile='No',\
         msg="can't open file <%s>...\n"%ffile
         raise IOError(msg)
     if name and nameInFile.lower()=='yes':
-        raise Warning, "You give a table name and ask to get name from file" 
+        raise Warning("You give a table name and ask to get name from file") 
     if columnsNames and columnsNameInFile.lower()=='yes':
-        raise Warning, "You ask for colum names in the file while already defining them"
+        raise Warning("You ask for colum names in the file while already defining them")
     if columnsUnits and columnsUnitsInFile.lower()=='yes':
-        raise Warning, "You ask for units in the file while already defining them"
+        raise Warning("You ask for units in the file while already defining them")
     # table creation
     if name:
         verifyType(name,StringType)
@@ -764,7 +784,7 @@ def makeTableFromLinearFunction(function,coords,time_list,name=None,columnUnits=
     if columnUnits:
         listTypeCheck(columnUnits, StringType)
         if len(columnUnits) !=2:
-            raise Exception, "makeTableFromLinearFunction creates a two columns table : time and value. You have to give two units"
+            raise Exception("makeTableFromLinearFunction creates a two columns table : time and value. You have to give two units")
         tab.setColumnUnits(columnUnits)
         pass
     value_list = []

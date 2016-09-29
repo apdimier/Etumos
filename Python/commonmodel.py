@@ -21,13 +21,22 @@ from material import Material
 from PhysicalQuantities import Head,\
                                HeadGradient,\
                                Length,\
+                               Displacement,\
+                               NormalForce,\
                                PhysicalQuantity
 
 from PhysicalProperties import FlowRate
 
-from chemistry import	ChemicalState
+from chemistry import ChemicalState
 
 from species import createList
+
+from re import findall as refindall
+from re import compile as recompile
+
+from types import FloatType, IntType, TupleType
+
+#from sympy import Symbol
 
 class GeometricObject:
     """
@@ -109,19 +118,17 @@ class Region:
         return
 
     def getBody(self):
-	return self.support
+        return self.support
 
     def getMaterial(self):
         """get material"""
-	return self.material
-    pass
+        return self.material
 
     def getSupport(self):
-	return self.support
+        return self.support
 
     def getZone(self):
-	return self.support
-    pass
+        return self.support
 
 class BoundaryCondition ( CommonBoundaryCondition):
     """
@@ -144,30 +151,36 @@ class BoundaryCondition ( CommonBoundaryCondition):
 
             --> massTCoef :             float : mass transfer coefficient or set to zero
 
-            --> velocity :		object Velocity
+            --> velocity :      object Velocity
 
-            --> porosity :		a scalar.
+            --> porosity :      a scalar.
 
-            --> flowRate :		a Flowrate, see PhysicalQuantities
+            --> flowRate :      a Flowrate, see PhysicalQuantities
 
-            --> timeVariation : 	a list of tuples [(time,chemical state)] or [(time,(list of species))]
-	"""
-#	raw_input(" make dico within the common model")
-        bcDico = makeDico(Dirichlet = [ChemicalState, Head], Flux = [ChemicalState, HeadGradient], Neumann = [ChemicalState, HeadGradient])
-#	raw_input (" make dico within the common model over")
+            --> timeVariation :     a list of tuples [(time,chemical state)] , [(time,(list of species and eventually temperature))];
+                            the temperature can also be introduced through a file.
+            
+        -- description a string which will be eventually set as a support for the model comprehension
+         
+        """
+    
+        bcDico = makeDico(Dirichlet = [ChemicalState, Head, Displacement, NormalForce],\
+                          Flux      = [ChemicalState, HeadGradient],\
+                          Neumann   = [ChemicalState, HeadGradient])
 
         CommonBoundaryCondition.__init__(self,boundary, btype, value, bcDico, description)
 #        print "dbg commonmodel CommonBoundaryCondition1"
         
         if type(boundary) is types.ListType:
 #            print "type of boundary is list type "
-#            raw_input("type of boundary is list type ")
+            #raw_input("type of boundary is list type ")
             verifyClassList(boundary,[ CartesianMesh, Body])
+            pass
         else:
             memberShip(boundary,[ CartesianMesh, Body])
-#            raw_input("membership ")
+            #raw_input("membership ")
             pass
-#        raw_input("dbg commonmodel CommonBoundaryCondition2")
+        #raw_input("dbg commonmodel CommonBoundaryCondition2")
         self.boundary = boundary
 
         if type(btype) != types.StringType:
@@ -176,45 +189,99 @@ class BoundaryCondition ( CommonBoundaryCondition):
         
         self.btype = btype
 
+        self.chemicalStateValue = None
+        self.headValue = None
+        self.massTCoef = 0.
         self.value_species = None
         self.value_property = None
         self.value = None
-        self.headValue = None
-        self.massTCoef = 0.
-#        raw_input("here we are ")
-#        print "type(value)",type(value)
-                                                                                                                #
-                                                                                                                # We treat B.C. 
-                                                                                                                # by default, a chemical state is introduced
-                                                                                                                # and in the case of a transient flow, a list
-                                                                                                                # made of a chemical state and a head.
-                                                                                                                #
+                                                                                            #
+                                                                                            # the next ones are linked to a well sim.
+                                                                                            #
+        self.enthalpyBoundaryCondition     = None
+        self.wellMassFlowBoundaryCondition = None
+        self.wellPressureBoundaryCondition = None
+                                                                                            #
+                                                                                            # We treat B.C. 
+                                                                                            # by default, a chemical state is introduced
+                                                                                            # and in the case of a transient flow, eventually a list
+                                                                                            # made of a chemical state, a displacement, a head.
+                                                                                            #
         if type(value) is types.ListType:
-            for i in value:
-                print "dbg commonmodel",type(i)
-            verifyClassList(value, [ Head, ChemicalState])
+            #
+            # useful for debugging
+            #
+            #for i in value:
+            #    print "dbg commonmodel",type(i)
+            #    pass
+            verifyClassList(value, [ Head, ChemicalState, Displacement, NormalForce, TupleType])
             for bc in value:
                 if isinstance(bc, Head):
                     self.headValue = bc # it should be the charge
+                    pass
+                elif isinstance(bc, NormalForce):
+                    self.normalForceValue = bc # it should be NormalForce
+                    pass
+                elif isinstance(bc, Displacement):
+                    self.displacementValue = bc # it should be Displacement
+                    pass
+                elif isinstance(bc, ChemicalState):
+                    self.value = bc
+                    self.chemicalStateValue = bc # it should be ChemicalState
+                    pass
+                elif bc[0].lower() =="enthalpy":                                            # it can also be an enthalpy in the
+                                                                                            # case of a well
+                                                                                            #
+                    if type(bc[1]) == types.StringType:
+                        self.enthalpyBoundaryCondition = refindall(recompile(r'([xyzXYZ0-9.*/+-])'),bc[1])
+                        pass
+                    elif type(bc[1]) in [types.FloatType,types.IntType]:
+                        self.enthalpyBoundaryCondition = bc[1]
+                    pass
+                elif bc[0].lower() =="wellpressure":                                        # it can also be the pressure in the
+                                                                                            # case of a well
+                                                                                            #
+                    if type(bc[1]) == types.StringType:
+                        self.wellPressureBoundaryCondition = refindall(recompile(r'([xyzXYZ0-9.*/+-])'),bc[1])
+                        pass
+                    elif type(bc[1]) in [types.FloatType,types.IntType]:
+                        self.wellPressureBoundaryCondition = bc[1]
+                        #print("commonmodel well pressure debug yes\n")
+                        #raw_input()
+                        pass
+                    pass
+                elif bc[0].lower() =="wellmassflow":                                        # it can also be the mass flow in the
+                                                                                            # case of a well
+                                                                                            #
+                    if type(bc[1]) == types.StringType:
+                        self.wellMassFlowBoundaryCondition = refindall(recompile(r'([xyzXYZ0-9.*/+-])'),bc[1])
+                        pass
+                    elif type(bc[1]) in [types.FloatType,types.IntType]:
+                        self.wellMassFlowBoundaryCondition = bc[1]
+                        pass
+                    pass
                 else:
-                    self.value = bc # it should be chemistry
+                    #self.value = bc # it should be chemistry
+                    pass
+                pass
             pass
         else:
-            memberShip(value,[PhysicalQuantity, ChemicalState])
-            pass
+            memberShip(value,[PhysicalQuantity, ChemicalState, Displacement, NormalForce])
             if (isinstance(value, PhysicalQuantity) or
                 type(value) is types.ListType):
                 self.value_species, self.value_property = createList(value, PhysicalQuantity)
+                pass
             else:
                 self.value = value
+                self.chemicalStateValue = value
                 pass
             pass
-
+        print "massTCoef",massTCoef,type(massTCoef)
         if massTCoef:
             memberShip(massTCoef,[types.FloatType])
-            pass
             if (type(massTCoef) is types.FloatType): 
                 self.massTCoef = massTCoef
+                pass
             else:
                 self.massTCoef = 0.0
                 pass
@@ -235,20 +302,22 @@ class BoundaryCondition ( CommonBoundaryCondition):
                 pass
             else:
                 flowrate = FlowRate(flowrate,"m**3/s") # the flow rate is supposed to be in m**3/s
+                pass
         self.flowRate = flowRate
 
         if timeVariation:
             if type(timeVariation) != types.ListType:
                 raise typeError, " Time variation should be a list"
-	    for item in timeVariation:
-	        if type(item[0]) not in [types.FloatType,types.IntType]:
+            for item in timeVariation:
+                if type(item[0]) not in [types.FloatType,types.IntType]:
                     raise typeError, "item[@]  should be a list"
-	        memberShip(item[1],[ChemicalState])
+                memberShip(item[1],[ChemicalState])
+                pass
             pass
 
         self.timeVariation = timeVariation
         
-        return
+        return None
 
     def getBoundary (self):
         """get boundary condition boundary"""
@@ -262,7 +331,7 @@ class BoundaryCondition ( CommonBoundaryCondition):
 
     def getRegion (self):
         """
-        to get boundary condition boundary
+        to get boundary condition domain
         """
         return self.boundary
 
@@ -304,6 +373,16 @@ class BoundaryCondition ( CommonBoundaryCondition):
         """
         return self.porosity
 
+    def getChemicalStateValue (self):
+        """get boundary condition Value
+         if a species is specified,
+                return the associated boundary condition value
+         else return the default value"""
+        if self.chemicalStateValue != None:
+            return self.chemicalStateValue
+        else:
+            raise Exception("check the boundary definition")  
+
     def getValue (self, species = None):
         """get boundary condition Value
          if a species is specified,
@@ -316,6 +395,8 @@ class BoundaryCondition ( CommonBoundaryCondition):
                 for spe in range(len(self.value_species)):
                     if (self.value_species[spe] == species):
                         return self.value_property[spe]
+                    pass
+                pass
 
             return self.value_property[0]
         else:
@@ -333,51 +414,110 @@ class BoundaryCondition ( CommonBoundaryCondition):
         """
         return self.flowRate
 
-    pass
-
 class InitialCondition:
     """
     InitialCondition
     """    
-    def __init__(self, body, value):
+    def __init__(self, body, value, description = None):
         """
         constructor with :
         - body : object body or CartesianMesh
-        - value : a PhysicalQuantity or a list of tuples (PhysicalQuantity,species)
-                  or a ChemicalState
+        - value :   a PhysicalQuantity,
+                a list of tuples (PhysicalQuantity,species)
+                    a ChemicalState or 
+                    a tuple to introduce a function on a specific variable
         """
-
         if type(body) is types.ListType:
             verifyClassList(body,[CartesianMesh])
+            pass
         else:
             memberShip(body,[CartesianMesh, Body])
             pass
         self.zone = body
         self.body = body
-#        print " body within initialcondition 0",self.body
-
-#        raw_input("body within initialcondition ")
-
         self.value_species = None
         self.value_property = None
         self.value = None
+        self.enthalpyInitialCondition = None
         self.headValue = None
+        self.temperatureInitialCondition = None
+        self.wellMassFlowInitialCondition = None
+        self.wellPressureInitialCondition = None
         if type(value) is types.ListType:
             for i in value:
-                print "dbg commonmodel",type(i)
-            verifyClassList(value, [ Head, ChemicalState])
-            for bc in value:
-                if isinstance(bc, Head):
-                    self.headValue = bc # it should be the charge
+                print ("dbg commonmodel",type(i))
+                pass
+            verifyClassList(value, [ Head, ChemicalState, Displacement, types.TupleType])
+            for ic in value:
+                if isinstance(ic, Head):
+                    self.headValue = ic                                                     # it should be the charge
+                    pass
+                elif isinstance(ic, (Displacement,ChemicalState)) :
+                    self.value = ic                                                         # it should be chemistry or a displacement
+                    pass
+                elif isinstance(ic, types.TupleType):
+                    #print("debug commonmodel ic %s\n"%(ic[0].lower()))
+                    if ic[0].lower() =="temperature":                                       # it should be temperature otherwise a warning
+                                                                                            # is raised. we extract the formula thanks to !=
+                                                                                            # regular expressions modules.
+                                                                                            #
+                        if type(ic[1]) == types.StringType:
+                            self.temperatureInitialCondition = refindall(recompile(r'([xyzXYZ0-9.*/+-])'),ic[1])
+                            pass
+                        pass
+                    elif ic[0].lower() =="enthalpy":                                        # it can also be an enthalpy in the
+                                                                                            # case of a well
+                                                                                            #
+                        if type(ic[1]) == types.StringType:
+                            #raw_input("common model debug")
+                            self.enthalpyInitialCondition = refindall(recompile(r'([xyzXYZ0-9.*/+-])'),ic[1])
+                            pass
+                        pass
+                    elif ic[0].lower() =="wellpressure":                                        # it can also be the pressure in the
+                                                                                            # case of a well
+                                                                                            #
+                        if type(ic[1]) == types.StringType:
+                            self.wellPressureInitialCondition = refindall(recompile(r'([xyzXYZ0-9.*/+-])'),ic[1])
+                            pass
+                        elif type(ic[1]) in [types.FloatType,types.IntType]:
+                            self.wellPressureInitialCondition = ic[1]
+                            #print("commonmodel well pressure debug yes\n")
+                            #raw_input()
+                            pass
+                        pass
+                    elif ic[0].lower() =="wellmassflow":                                    # it can also be the mass flow in the
+                                                                                            # case of a well
+                                                                                            #
+                        if type(ic[1]) == types.StringType:
+                            self.wellMassFlowInitialCondition = refindall(recompile(r'([xyzXYZ0-9.*/+-])'),ic[1])
+                            pass
+                        elif type(ic[1]) in [types.FloatType,types.IntType]:
+                            self.wellMassFlowInitialCondition = ic[1]
+                            pass
+                        pass
+                    else:
+                        raise Warning, "check the  name of the vriable "
+                    pass
                 else:
-                    self.value = bc     # it should be chemistry
+                    if (isinstance(ic, PhysicalQuantity) or type(ic) is types.ListType): 
+                        self.value_species, self.value_property  = createList(ic, PhysicalQuantity)
+                        pass
+                    else:
+                        self.value = ic
+                        pass
+                    pass
+                pass
+            pass
         else:
             memberShip(value,[PhysicalQuantity,ChemicalState])
             if (isinstance(value, PhysicalQuantity) or type(value) is types.ListType): 
                 self.value_species,self.value_property  = createList(value, PhysicalQuantity)
+                pass
             else:
                 self.value = value
+                pass
             pass
+        self.description = description
         return None
 
     def getZone(self):
@@ -406,12 +546,14 @@ class InitialCondition:
         """ value is the chemical state"""
         if self.value:
             return self.value
+            pass
         elif self.value_species:
             if species:
                 for spe in range(len(self.value_species)):
                     if (self.value_species[spe] == species):
                         return self.value_property[spe]
-
+                    pass
+                pass
             return self.value_property[0]
         else:
             return None
@@ -422,8 +564,6 @@ class InitialCondition:
             return self.value
         else:
             return None 
-
-    pass
 
 
 class ZoneCondition:
@@ -441,6 +581,7 @@ class ZoneCondition:
         """
         if type(zone) is types.ListType:
             verifyClassList(zone,[CartesianMesh])
+            pass
         else:
             memberShip(zone,[CartesianMesh])
             pass
@@ -451,13 +592,13 @@ class ZoneCondition:
         self.value = None
         if value:
             memberShip(value,[PhysicalQuantity,ChemicalState])
-            if (isInstance(value, PhysicalQuantity) or
-                type(value) is types.ListType): 
+            if (isInstance(value, PhysicalQuantity) or type(value) is types.ListType): 
                 self.value_species, self.value_property = createList(value, PhysicalQuantity)
+                pass
             else:
                 self.value = value
+                pass
             pass
-        pass
 
     def getZone(self):
         """
@@ -477,11 +618,11 @@ class ZoneCondition:
                 for spe in range(len(self.value_species)):
                     if (self.value_species[spe] == species):
                         return self.value_property[spe]
-
+                    pass
+                pass
             return self.value_property[0]
         else:
             return None            
-    pass
 
 
 class Source:    
@@ -505,12 +646,13 @@ class Source:
             if (isInstance(value, PhysicalQuantity) or
                 type(value) is types.ListType): 
                 self.value_species,self.value_property  = createList(value, PhysicalQuantity)
+                pass
             else:
                 self.value = value
+                pass
             pass
 
-        if rate:
-            memberShip(value, Flowrate)
+        if rate: memberShip(value, Flowrate)
         self.rate = rate
         return
 
@@ -534,9 +676,8 @@ class Source:
                 for spe in range(len(self.value_species)):
                     if (self.value_species[spe] == species):
                         return self.value_property[spe]
-
+                    pass
+                pass
             return self.value_property[0]
         else:
             return None  
-
-    pass

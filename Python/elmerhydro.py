@@ -31,6 +31,8 @@ Varying boundary conditions can be introduced as linear functions
 #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+from __future__ import absolute_import
+from __future__ import print_function
 from datamodel import TimeTabulatedFunction, LinearFunction, PolynomialFunction
 
 from elmertools import *
@@ -38,12 +40,14 @@ from elmertools import *
 from exceptions import Exception
 
 from elmerroot import ElmerRoot
+from six.moves import map
+from six.moves import range
 
 try:
     pass
 #    import DarcyCurrentSolve
 except ImportError:
-    print 'Unable to import the elmer module'
+    print('Unable to import the elmer module')
 
 import exceptions
 #from functions import LinearFunction
@@ -79,18 +83,21 @@ class ElmerHydro(ElmerRoot):
     #
     def __init__(self, meshFileName="elmerMesh", saturation = None):
     
-	ElmerRoot.__init__(self,meshFileName)
+        ElmerRoot.__init__(self,meshFileName)
         self.problemName                = "hydraulic problem"
         self.module                     = "hydro"
         self.meshType                   = "msh"
         self.meshFileName               = meshFileName
         if saturation == None:
             self.saturation             = "saturated"
+            pass
         elif type(saturation) == StringType and saturation.lower() in ["unsaturated","unsaturated"]:
             self.saturation             = saturation.lower()
+            pass
         else:
             #raise Warning, " check the saturation parameter, it has been set to its default value "
             self.saturation             = "saturated"
+            pass
         self.calc_type                  = ""
         self.title                      = "hydraulic with elmer"
         self.srcDict={}
@@ -160,19 +167,20 @@ class ElmerHydro(ElmerRoot):
         Method to launch the simulation,
         interactivally (transient) or directly (steady state)
         """
-	#
-	# ELMERSOLVER_STARTINFO is the file enabling Elmer to be launched
-	#
-	self.elmerStartInfo = open("ELMERSOLVER_STARTINFO","w")
-	self.elmerStartInfo.write(self.sifFileName)
-	self.elmerStartInfo.close()
-	#
+        #
+        # ELMERSOLVER_STARTINFO is the file enabling Elmer to be launched
+        #
+        self.elmerStartInfo = open("ELMERSOLVER_STARTINFO","w")
+        self.elmerStartInfo.write(self.sifFileName)
+        self.elmerStartInfo.close()
+        #
         self.createSifFile()
         if self.simulationType == "Transient":
-            print "dbgpy launching WElmer"
+            print("dbgpy launching WElmer")
             self.essai = WElmer
-            print "dbgpy reading the sif file"
+            print("dbgpy reading the sif file")
             self.essai.initialize()
+            pass
 #            raw_input("dbg elmerhydro launch")
 
     def run(self):
@@ -186,19 +194,21 @@ class ElmerHydro(ElmerRoot):
 #        print retcode
         if self.simulationType == "Steady":
             #self.essai.oneSHTimeStep()
+            print(" ////////////////// dbg elmersolver steady //////////////////")
             system("$ELMER_SOLVER htest.sif")
+            pass
         elif self.simulationType == "Transient":
             #system("ElmerSolver htest.sif")
-            print " ////////////////// dbg elmersolver transient //////////////////"
+            print(" ////////////////// dbg elmersolver transient //////////////////")
             t = 0.0
             while t < self.calcTimesDico ['finalTime']:
                 self.essai.oneSHTimeStep()
-                print " dbg elmerhydro oneSHTimeStep over",timeStepSizes
+                print(" dbg elmerhydro oneSHTimeStep over",timeStepSizes)
                 self.setTimeStep(self.timeStepSizes)
                 t = t + min(self.timeStepSizes,self.calcTimesDico['finalTime']-t)
 #                raw_input(" dbg one hydraulic time step is over")
+                pass
             pass
-        pass
 
     def oneTimeStep(self):
         """
@@ -207,7 +217,7 @@ class ElmerHydro(ElmerRoot):
         self.essai.oneSHTimeStep()
         
     def setBoundaryConditions(self,boundaryConditions):
-        print " debug eh setBoundaryConditions",boundaryConditions,type(boundaryConditions)
+        print(" debug eh setBoundaryConditions",boundaryConditions,type(boundaryConditions))
         self.boundaryConditions = boundaryConditions
 
     def setBodyList(self,bodies):
@@ -224,10 +234,14 @@ class ElmerHydro(ElmerRoot):
         if type(simulationType) is StringType:
             if simulationType.lower() in ["steady"]:
                 self.simulationType = "Steady"
+                pass
             else:
                 self.simulationType = "Transient"
+                pass
+            pass
         else:
            self.simulationType ="Steady"
+           pass
 
     setSimulationType = setSimulationKind
 
@@ -241,7 +255,7 @@ class ElmerHydro(ElmerRoot):
         """
         to set initial conditions
         """
-        print " debug eh setinitialConditions",initialConditions
+        print(" debug eh setinitialConditions",initialConditions)
         self.initialConditions = initialConditions
 
     def createSifFile(self):
@@ -254,9 +268,9 @@ class ElmerHydro(ElmerRoot):
         self.sifFile = sifFile = open(self.sifFileName,"w")
         sifFile.write("Check Keywords Warn\n\n")
         sifFile.write("Header\n")
-        sifFile.write("Mesh DB \".\" \"" + self.meshDirectoryName+"\"\n")
-        sifFile.write("Include Path \".\"\n")
-        sifFile.write("Results Directory \"\"\nEnd\n\n")
+        sifFile.write("  Mesh DB \".\" \"" + self.meshDirectoryName+"\"\n")
+        sifFile.write("  Include Path \".\"\n")
+        sifFile.write("  Results Directory \"\"\nEnd\n\n")
         #
         if self.simulationType.lower() == "steady":
             self.writeSimulation()
@@ -302,30 +316,34 @@ class ElmerHydro(ElmerRoot):
             if self.getTimeSteppingMethod() == "BDF":
                 if int(self.getBDFOrder())>0 and int(self.getBDFOrder())< 6 :
                     sifFile.write("  BDF Order = "+str(self.getBDFOrder())+"\n")
+                    pass
                 else :
-            	    raise Exception("BDF Order must integer between 1 and 5")
+                    raise Exception("BDF Order must integer between 1 and 5")
+                pass
             else:
                 sifFile.write("  \n")
+                pass
             sifFile.write("  Solver Input File = %s\n"%(self.sifFileName))
             sifFile.write("  Timestep Sizes = "+str(self.timeStepSizes)+"\n")
             sifFile.write("  Timestep Intervals = "+str(self.timeStepIntervals)+"\n")
-                
+            pass
 #            sifFile.write("  Newmark Beta 0.0\n\n")
         else:
-                sifFile.write("  Steady State Max Iterations = 1\n")
-                sifFile.write("  Output Intervals = 1\n")
-                sifFile.write("  Solver Input File =  \"%s\"\n"%(self.sifFileName))
-                sifFile.write("  Output File = \"HeVel.dat\"\n")
-                sifFile.write("  Post File = \"HeVel.ep\"\n")
+            sifFile.write("  Steady State Max Iterations = 1\n")
+            sifFile.write("  Output Intervals = 1\n")
+            sifFile.write("  Solver Input File =  \"%s\"\n"%(self.sifFileName))
+            sifFile.write("  Output File = \"HeVel.dat\"\n")
+            sifFile.write("  Post File = \"HeVel.ep\"\n")
+            pass
         sifFile.write("End\n\n")
         return None
 
     def writeSolver(self):
         sifFile = self.sifFile
         sifFile.write("! ~~\n! Solver p27 ref. Manual\n! ~~\n")
-                                                                                                                #
-                                                                                                                # only charge is treated
-                                                                                                                #
+                                                                                            #
+                                                                                            # only charge is treated
+                                                                                            #
         if (self.saturation == "saturated"):
             sifFile.write("Solver %i\n"%(1))
             sifFile.write("  Exec Solver = \"%s\"\n"%("Always"))
@@ -333,10 +351,13 @@ class ElmerHydro(ElmerRoot):
 
             if self.simulationType == "Transient":
                 sifFile.write("  Procedure = \"SaturatedDarcyTimeStep\" \"SaturatedDarcyTimeStepSolver\"\n")
+                pass
             else:
                 sifFile.write("  Procedure = \"DarcySolve\" \"DarcySolver\"\n")
+                pass
             sifFile.write("  Variable = \"%s\"\n"%("Charge"))
             sifFile.write("  Variable Dofs = %i\n"%(1))
+            pass
         elif (self.saturation == "unsaturated"):
             sifFile.write("Solver %i\n"%(1))
             sifFile.write("  Exec Solver = \"%s\"\n"%("Always"))
@@ -346,14 +367,14 @@ class ElmerHydro(ElmerRoot):
             sifFile.write("!  Discontinuous Galerkin = Logical True ! not operational yet\n")
             sifFile.write("! Uses saturated conditions (pure Darcy flow) for the 1st iteration\n")
             sifFile.write("  Saturated Initial Guess = True\n")
-            
-          
-
+            pass
         if self.chargeParameterDico["algebraicResolution"] != "Direct":
            self.chargeParameterDico['linearSystemSolver'] = "Iterative"
+           pass
         else:
            # a corriger
            sifFile.write("  Linear System Direct Method = %s\n"%self.chargeParameterDico["linear System Iterative Method"])
+           pass
 
         sifFile.write("  Linear System Solver = \"%s\"\n"%self.chargeParameterDico['Linear System Solver'])
         sifFile.write("  Linear System Iterative Method = \"%s\"\n"%self.chargeParameterDico["Linear System Iterative Method"])
@@ -365,17 +386,21 @@ class ElmerHydro(ElmerRoot):
 
         if self.chargeParameterDico['stabilize'] == True:
             sifFile.write("  Stabilize = True\n")
+            pass
         else:
             sifFile.write("  Stabilize = True\n")
+            pass
 
         if (self.saturation == "saturated"):
             sifFile.write("  Namespace = string \"charge\"\n")
+            pass
         else:
             sifFile.write("  Namespace = string \"Total Head\"\n")
             sifFile.write("  Nonlinear System Max Iterations = %s\n"%self.chargeParameterDico["Nonlinear System Max Iterations"])
             sifFile.write("  Nonlinear System Convergence Tolerance = %s\n"%self.chargeParameterDico["Nonlinear System Convergence Tolerance"])
             sifFile.write("  Nonlinear System Convergence Measure = solution\n")
             sifFile.write("  Nonlinear System Relaxation Factor = %s\n"%self.chargeParameterDico["Nonlinear System Relaxation Factor"])
+            pass
             
         
         sifFile.write("End\n\n")
@@ -397,6 +422,7 @@ class ElmerHydro(ElmerRoot):
 #            sifFile.write("  Procedure = \"AdvectionDiffusionTimeStep\" \"AdvectionDiffusionTimeStepSolver\"\n")
             sifFile.write("  Linear System Convergence Tolerance = %e\n"
             %(self.chargeParameterDico["Flux Parameter"]))
+            pass
         else:
             sifFile.write("Solver %i\n"%(2))
             sifFile.write("  Equation = RichardsFlux\n")
@@ -405,6 +431,7 @@ class ElmerHydro(ElmerRoot):
             %(self.chargeParameterDico["Linear System Convergence Tolerance"]))
         
             sifFile.write("  Flux Multiplier = Real %s\n"%(self.chargeParameterDico["Flux Multiplier"]))
+            pass
 
         sifFile.write("End\n\n")
 
@@ -420,10 +447,10 @@ class ElmerHydro(ElmerRoot):
         sifFile.write("! ~~\n! Body\n! ~~\n")
         indb = 0
         ibc = 0
-        print "writing bodies "
+        print("writing bodies ")
         #raw_input(" type de self.boundaryConditions")
-        for ibc in range(len(self.boundaryConditions.keys())):
-            print " body treatment ", self.boundaryConditions[ibc]
+        for ibc in range(len(list(self.boundaryConditions.keys()))):
+            print(" body treatment ", self.boundaryConditions[ibc])
             sifFile.write("Body %i\n"%(self.boundaryConditions[ibc]["ind"]))
             sifFile.write("  Name = \"body%s\"\n"%(self.boundaryConditions[ibc]["ind"]))
             sifFile.write("  Equation = 1\n")
@@ -433,9 +460,9 @@ class ElmerHydro(ElmerRoot):
             sifFile.write("  Material = %s\n"%(self.boundaryConditions[ibc]["ind"]))
 
             sifFile.write("End\n\n")
-            
+            pass
 #
-# doit etre modifie des que plusieurs materiaux interviennent
+# to be modified
 #            
         ibc+=1
         for initialCondition in self.initialConditions.keys():
@@ -451,6 +478,7 @@ class ElmerHydro(ElmerRoot):
 #            sifFile.write("  Body Force = %s\n"%(indb+1))
             sifFile.write("  Body Force = %s\n"%(1))
             sifFile.write("End\n\n")
+            pass
         return None
 
     def writeMaterial(self):
@@ -489,15 +517,19 @@ class ElmerHydro(ElmerRoot):
                     sifFile.write("  van Genuchten Alpha = %s\n"%(self.bodies[indb].getMaterial().saturationLaw.alpha))
                     sifFile.write("  van Genuchten N = %s\n"%(self.bodies[indb].getMaterial().saturationLaw.n))
                     sifFile.write("  van Genuchten M = %s\n"%(self.bodies[indb].getMaterial().saturationLaw.m))
+                    pass
                 elif self.bodies[indb].getMaterial().saturationLaw.name == "exponential":
                     sifFile.write("  exp Alpha = %s\n"%(self.bodies[indb].getMaterial().saturationLaw.alpha))
                     sifFile.write("  exp N = %s\n"%(self.bodies[indb].getMaterial().saturationLaw.n))
                     sifFile.write("  exp C = %s\n"%(self.bodies[indb].getMaterial().saturationLaw.c))
+                    pass
+                pass
             if (self.saturation != "saturated"):
                 sifFile.write("  Residual Water Content = %s\n"%(self.bodies[indb].getMaterial().residualWaterContent.value))
                 sifFile.write("  Saturated Water Content = %s\n"%(self.bodies[indb].getMaterial().saturatedWaterContent.value))
                 pass
             sifFile.write("End\n\n")
+            pass
         return None
 
     def writeBoundaryCondition(self):
@@ -518,16 +550,20 @@ class ElmerHydro(ElmerRoot):
                 sifFile.write("Boundary Condition %s\n"%stindb)
                 #sifFile.write("  Target Boundaries (1) = %s\n"%str(boundary+1))
                 sifFile.write("  Target Boundaries (1) = %s\n"%str(self.boundaryConditions[boundary]['ind']))
-                print " 355dbg ",self.boundaryConditions[boundary]["head"].__class__.__name__
+                print(" 355dbg ",self.boundaryConditions[boundary]["head"].__class__.__name__)
                 if self.saturation == "saturated":
                     sifFile.write("! charge\n")
+                    pass
                 else:
                     sifFile.write("! Total Head\n")
+                    pass
                 if type(self.boundaryConditions[boundary]["head"]) == FloatType:
                     if self.saturation == "saturated":
                         sifFile.write("  %s = Real %e\n"%("Charge", self.boundaryConditions[boundary]["head"]))
+                        pass
                     else:
                         sifFile.write("  %s = Real %e\n"%("Total Head", self.boundaryConditions[boundary]["head"]))
+                        pass
 #                    print  type(self.boundaryConditions[boundary]["head"]).__name__
 #                    print " toto",self.boundaryConditions[boundary]["head"]
                     pass
@@ -542,8 +578,9 @@ class ElmerHydro(ElmerRoot):
 #                    raw_input("list type")
                     pass
                 else:
-                    raise Exception, " you have to check the type of the Head definition "
+                    raise Exception(" you have to check the type of the Head definition ")
                 sifFile.write(" End\n\n")
+                pass
             elif (self.boundaryConditions[boundaryName]["typ"].lower() == "neumann"):
             #
             # Neumann p 16 Elmer models manual
@@ -555,6 +592,7 @@ class ElmerHydro(ElmerRoot):
 #                sifFile.write("End\n\n")
                 pass
             inds+=1
+            pass
         return None
 
     def writeInitialCondition(self):
@@ -570,18 +608,20 @@ class ElmerHydro(ElmerRoot):
         sifFile = self.sifFile
         inds = 0        
         sifFile.write("! ~~\n! initial condition p8 ref. ElmersolverManual\n! ~~\n")
-        print self.initialConditions
+        print(self.initialConditions)
         for initialConditionName in self.initialConditions.keys():
             inds+=1
             sifFile.write("Initial Condition %s\n"%self.initialConditions[initialConditionName]["ind"])
             ind = 0
             if type(self.initialConditions[initialConditionName]["head"]) == FloatType:
                 sifFile.write("  %s = Real %e\n"%("Charge", self.initialConditions[initialConditionName]["head"]))
+                pass
             elif isinstance(self.initialConditions[initialConditionName]["head"], LinearFunction):
                 string, elementsToPrint = linear1DMatc(self.initialConditions[initialConditionName], "head", variable = None)
                 sifFile.write(string%elementsToPrint)
                 pass
             sifFile.write("End\n")
+            pass
         return None
 
     def setDensity(self, density):
@@ -598,16 +638,18 @@ class ElmerHydro(ElmerRoot):
         self.gravity = gravity
         if isinstance(self.gravity,Vector):
             if len(self.gravity) != 3:
-                raise Whoops,"Gravity vector has not the right dimension"
+                raise Whoops("Gravity vector has not the right dimension")
             self.absoluteGravity=self.gravity.magnitude()
+            pass
         elif isinstance(self.gravity,float):
             self.absoluteGravity=abs(self.gravity)
             pass
         else:
-            raise Whoops,"gravity has to be a scalar or a vector"
+            raise Whoops("gravity has to be a scalar or a vector")
                         
         if abs(self.absoluteGravity)<1e-100:
             self.absoluteGravity = 9.78
+            pass
         return None
 
     def setViscosity(self , viscosity):
@@ -626,7 +668,7 @@ class ElmerHydro(ElmerRoot):
         
     def setMesh(self,  mesh):
         """
-	to set or reset the name or the mesh
+    to set or reset the name or the mesh
         """        
         self.mesh  = mesh
         return None
@@ -650,6 +692,7 @@ class ElmerHydro(ElmerRoot):
             rho = self.density
             g = self.absoluteGravity
             mu = self.viscosity
+            pass
         elif type=='perm':
             self.viscosity = self.absoluteGravity * self.density
             rho = self.density
@@ -661,6 +704,7 @@ class ElmerHydro(ElmerRoot):
 #            print 'self.absoluteGravity,self.density,self.viscosity',self.absoluteGravity,self.density,self.viscosity
 #            mu = self.viscosity
             hCCoef = rho*g/mu
+            pass
         else:
             raise Whoops("Not Allowed permeability")
 #        print 'type,hCCoef',type,hCCoef
@@ -676,7 +720,7 @@ class ElmerHydro(ElmerRoot):
             zone       = field.getZone(zoneInd)
             zoneName   = zone.getName()
             val        = field.getZoneValues(zoneInd)
-
+            
             permHydroDictList.append({})
             permHydroDictList[i]['nbzones'] = nbZones
             
@@ -688,6 +732,7 @@ class ElmerHydro(ElmerRoot):
                     permT.append(val[0]) # kxx
                     permT.append(val[0]) # kyy
                     permT.append(0.)     # kxy
+                    pass
                 else:
 
                     permT.append(val[0]) # kxx
@@ -696,19 +741,22 @@ class ElmerHydro(ElmerRoot):
                     permT.append(val[0]) # kzz
                     permT.append(0.)     # kyz
                     permT.append(0.)     # kxz
-            elif len(val) == 3:
-                permT.append(val[0]) 	 # kxx
-                permT.append(val[1]) 	 # kyy
-                permT.append(val[2]) 	 # kxy
-            elif len(val) == 6:
-                permT.append(val[0]) 	 # kxx
-                permT.append(val[2]) 	 # kyy
-                permT.append(val[1]) 	 # kxy
-                permT.append(val[5]) 	 # kzz
-                permT.append(val[3]) 	 # kyz
-                permT.append(val[4]) 	 # kxz
+                    pass
                 pass
-            print 'zone,permea',zoneName,permT
+            elif len(val) == 3:
+                permT.append(val[0])     # kxx
+                permT.append(val[1])     # kyy
+                permT.append(val[2])     # kxy
+                pass
+            elif len(val) == 6:
+                permT.append(val[0])     # kxx
+                permT.append(val[2])     # kyy
+                permT.append(val[1])     # kxy
+                permT.append(val[5])     # kzz
+                permT.append(val[3])     # kyz
+                permT.append(val[4])     # kxz
+                pass
+            print('zone,permea',zoneName,permT)
             permHydroDictList[i]['permT'] = permT
             i += 1
             pass
@@ -732,6 +780,7 @@ class ElmerHydro(ElmerRoot):
                 tnew=val
                 nbTimeCal=max(nbTimeCal,tnew.getNbRows() )
                 tnew.setTitle('Dirichlet')
+                pass
             elif isinstance(val,float):
                 tnew=Table('Dirichlet')
                 tnew.addColumn('time',[0.,1.])
@@ -764,6 +813,7 @@ class ElmerHydro(ElmerRoot):
             if isinstance(val, Table):                    
                 tnew = val
                 tnew.setTitle('Neumann')
+                pass
             else:
                 tnew = Table('Neumann')
                 tnew.addColumn('time',[0.,1.])
@@ -795,6 +845,7 @@ class ElmerHydro(ElmerRoot):
             #zoneName   = zone.getName()
             val        = field.getZoneValues(zoneInd)
             valeurs.append(val)
+            pass
             
         nbTypeSrc = nbZones
 
@@ -814,7 +865,7 @@ class ElmerHydro(ElmerRoot):
                     'mailSrc': zone.getGlobalIndexes(), 
                     'timetab': 0
                     })
-                
+                pass
             elif isinstance(val[0], TimeTabulatedFunction):
                 dictValeurs.append({
                      'nbTypeSrc': nbTypeSrc,
@@ -825,6 +876,7 @@ class ElmerHydro(ElmerRoot):
                      'mailSrc': zone.getGlobalIndexes(),
                      'timetab':val[0].getTimeCoefficient()
                      })
+                pass
             elif isinstance(val[0], LinearFunction):
                 globalface = zone.getGlobalIndexes()
                 baryField  = zone.getBarycenters()
@@ -836,9 +888,12 @@ class ElmerHydro(ElmerRoot):
                     py = points[indP+1]
                     if spaceDimensions == 2:
                         newPoint.append((px, py))
+                        pass
                     else:
                         pz = points[indP+2]
                         newPoint.append((px, py, pz))
+                        pass
+                    pass
                 for indElem in range (zone.getNbElements()):
                     point = newPoint[indElem]
                     eval = val[0].eval(point)
@@ -851,10 +906,13 @@ class ElmerHydro(ElmerRoot):
                         'mailSrc': [globalface[indElem]],
                         'timetab':0
                         })
+                    pass
+                pass
             else:
                 raise Whoops('Not Yet Implemented')
           
             indZone += 1
+            pass
             
         listTimeTab=[]
         for valeurs in dictValeurs:
@@ -863,13 +921,14 @@ class ElmerHydro(ElmerRoot):
                 indZone=valeurs['numerozone']
                 newtab.setTitle("%s" %indZone)
                 listTimeTab.append(newtab)
-                
+                pass
+            pass
         if listTimeTab:
             listTimeTab=tuple(listTimeTab)
             listTimeTab=getTimeUnifiedTables(*listTimeTab)
             timeref=listTimeTab[0].getColumn(0).tolist()
             nbTimeSrc=listTimeTab[0].getNbRows()
-
+            pass
         for timeTab in listTimeTab:
             indZone=string.atoi(timeTab.getTitle())
             time=timeTab.getColumn(0).tolist()
@@ -877,6 +936,7 @@ class ElmerHydro(ElmerRoot):
             dictValeurs[indZone]['time']=time
             dictValeurs[indZone]['val']=val
             dictValeurs[indZone]['timetab']=1
+            pass
         if listTimeTab:
             #si certaines sources dependent du temps alors il faut aligner les
             #autres valeurs non dependantes du temps :
@@ -886,14 +946,16 @@ class ElmerHydro(ElmerRoot):
                     dictValeurs[indZone]['time']=timeref
                     newval=valeurs['val']*nbTimeSrc
                     dictValeurs[indZone]['val']=newval
-
+                    pass
+                pass
+            pass
         #Calcul du nombre d'Elements concerernes par un puit/source
         nmSrc=0
         for valeurs in dictValeurs:
             nmSrc+=valeurs['nbNm']
             dictValeurs[0]['nmSrc']=nmSrc
             # Attention seul le premier dictionnaire contiendra ce nombre total !!
-            
+            pass
         self.srcDict = dictValeurs
         return
         
@@ -904,7 +966,7 @@ class ElmerHydro(ElmerRoot):
         
     def getSteadyStateMaxIter(self):
         return self.chargeParameterDico["Steady State Max Iterations"]
-	
+    
     def getTimeSteppingMethod(self):
         return self.chargeParameterDico["Timestepping Method"]
         return timeStepIntervals, timeStepSizes
@@ -916,25 +978,29 @@ class ElmerHydro(ElmerRoot):
         """
         if timeStepIntervals != None:
             self.timeStepIntervals = timeStepIntervals
+            pass
         elif timeStepSizes != None:
             self.timeStepSizes = timeStepSizes
+            pass
         else:
-            raise Warning, "You should give at least an argument to the setTimeDiscretisation function"
+            raise Warning("You should give at least an argument to the setTimeDiscretisation function")
 
     setCalculationTimes = setTimeDiscretisation
-	
+    
     def getTimeStepIntervals(self,timeStepIntervals = None):
         """
         That function is used as a control for the time step in 
         """
         if timeStepIntervals == None:
             if self.timeStepIntervals == None:
-                raise Exception, " You should define the time discretisation for a transient hydraulic problem"
+                raise Exception(" You should define the time discretisation for a transient hydraulic problem")
+            pass
         else:
-                self.timeStepIntervals = timeStepIntervals
+            self.timeStepIntervals = timeStepIntervals
+            pass
         self.timeStepSizes = self.calcTimesDico ['finalTime']/self.timeStepIntervals
         return None
-	
+    
     def getBDFOrder(self):
         return self.chargeParameterDico["BDF Order"]
 
@@ -948,9 +1014,9 @@ class ElmerHydro(ElmerRoot):
 # 
     def getDensityGravity(self):
         if not hasattr(self,'density'):
-            raise Exception," Density should be defined"
+            raise Exception(" Density should be defined")
         if not hasattr(self,'gravity'):
-            raise Exception," Density should be defined"
+            raise Exception(" Density should be defined")
         return self.density, self.gravity
 #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -980,34 +1046,46 @@ class ElmerHydro(ElmerRoot):
         for key, value in parameters.items():
             if key == "linearSystemSolver":
                 self.chargeParameterDico['Linear System Iterative Method'] = value
+                pass
             if key == "linearSystemIterativeMethod":
                 self.chargeParameterDico['Linear System Iterative Method'] = value
+                pass
             
             if key == "linearSystemMaxIterations":
                 self.chargeParameterDico['Linear System Max Iterations']   = value
+                pass
             
             if key == "linearSystemConvergenceTolerance":
                 self.chargeParameterDico['Linear System Convergence Tolerance'] = value
+                pass
             if key == "fluxMultiplier":
                 self.chargeParameterDico['Flux Multiplier'] = value
+                pass
             if key == "linearSystemPreconditioning":
                 self.chargeParameterDico['Linear System Preconditioning'] = value
+                pass
             if key == "steadyStateConvergenceTolerance":
                 self.chargeParameterDico['Steady State Convergence Tolerance'] = value
+                pass
             if key == "stabilize":
                 self.chargeParameterDico['Stabilize'] = value
+                pass
             #
             # non linear parameters => richards solver
             #
             if key == "nonlinearSystemMaxIterations":
                 self.chargeParameterDico["Nonlinear System Max Iterations"] = value
+                pass
             if key == "nonlinearSystemConvergenceTolerance":
                 self.chargeParameterDico["Nonlinear System Convergence Tolerance"] = value
+                pass
             if key == "nonlinearSystemConvergenceMeasure":
                 self.chargeParameterDico["Nonlinear System Convergence Measure"] = value
+                pass
             if key == "nonlinearSystemRelaxationFactor":
                 self.chargeParameterDico["Nonlinear System Relaxation Factor"] = value
-
+                pass
+            pass
 #            verifyItem(key, self.chargeParameterDico)
 #            self.chargeParameterDico[key] = value
 
@@ -1058,13 +1136,6 @@ class ElmerHydro(ElmerRoot):
                 extCompoz.append(h)
                 #extCompoz.extend([gr[n]*coo[i+n]] for n in range(dim)])
                 pass
-##             print 'extCompoz',extCompoz
-##             print 'len(extCompoz)',len(extCompoz)
-##             print 'len(coo),dim',len(coo),dim
-##             print 'coo( maille 900)',coo(899
-##             print "self.meshDico['nbElements'] ",self.meshDico['nbElements'] 
-##
-## ***********************************************************
 ##
             globalIndexes = zone.getGlobalIndexes()
             val           = field.getZoneValues(indZone)[0]
@@ -1084,6 +1155,8 @@ class ElmerHydro(ElmerRoot):
                     resC = mul*pressureC+zi
                     head.append((globalIndexes[ind], resA, resB, resC))
                     ind = ind+1
+                    pass
+                pass
             elif isinstance(val, float):
                 # cas general : FLOAT
                 pressure = val
@@ -1108,6 +1181,7 @@ class ElmerHydro(ElmerRoot):
                     #if globalIndexes[ind] == 900:raise toto
                     ind += 1
                     pass
+                pass
                 #raise toto
             elif isinstance(val,TimeTabulatedFunction):
                 pressure=val
@@ -1119,13 +1193,14 @@ class ElmerHydro(ElmerRoot):
                     newval=[]
                     for vv in valcolumn:
                         newval.append( mul*vv+zi )
-                        print 'pressure %e  ==> head %e'%(vv,mul*vv+zi)
-               
-
+                        print('pressure %e  ==> head %e'%(vv,mul*vv+zi))
+                        pass
                     tabletime.setColumn( 1, newval )
                    
                     head.append([globalIndexes[ind],tabletime])
                     ind+=1
+                    pass
+                pass
            
             elif isinstance(val,PolynomialFunction) or isinstance(val,LinearFunction):
                 bary =  zone.getBarycenters()
@@ -1157,7 +1232,7 @@ class ElmerHydro(ElmerRoot):
                     pass
                 pass
             else:
-                raise Exception, " Implementation failure"
+                raise Exception(" Implementation failure")
             #print 'head_resultant',head
 ##             raise toto
         return head
@@ -1197,6 +1272,8 @@ class ElmerHydro(ElmerRoot):
                     resC = mul*pressureC+zi
                     head.append((globalIndexes[ind], resA, resB, resC))
                     ind = ind+1
+                    pass
+                pass
             elif isinstance(val, float):
                 # cas general : FLOAT
                 pressure = val
@@ -1209,6 +1286,8 @@ class ElmerHydro(ElmerRoot):
                     calcu = mul*pressure+zi
                     head.append([globalIndexes[ind],calcu])
                     ind += 1
+                    pass
+                pass
             elif isinstance(val,TimeTabulatedFunction):
                 pressure=val
                 z=zone.getHeights()
@@ -1221,13 +1300,13 @@ class ElmerHydro(ElmerRoot):
                     newval=[]
                     for vv in valcolumn:
                         newval.append( mul*vv+zi )
-               
-
+                        pass
                     tabletime.setColumn( 1, newval )
                    
                     head.append([globalIndexes[ind],tabletime])
                     ind+=1
-           
+                    pass
+                pass
             elif isinstance(val,PolynomialFunction) or isinstance(val,LinearFunction):
                 bary =  zone.getBarycenters()
                 xx=bary.extractComponentValues(1)
@@ -1253,9 +1332,11 @@ class ElmerHydro(ElmerRoot):
 ##                         pass
                     head.append([globalIndexes[ind],valf/roger])
                     ind += 1
+                    pass
+                pass
             else:
-               raise Exception, "has to be Implemented"
-        raise 'False implementation. To be corrected.'   
+                raise Exception("has to be Implemented")
+            pass
         return head
 #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1292,9 +1373,6 @@ class ElmerHydro(ElmerRoot):
                 pass
             extCompoz.append(h)
             pass
-##         for i in range(0,len(coo),dim):
-##             extCompoz.extend([gr[n]*coo[i+n] for n in range(dim)])
-##             pass
 #
 #***********************************************************
 #
@@ -1310,7 +1388,7 @@ class ElmerHydro(ElmerRoot):
 ##                 pass
             press.append(pressure)
             ind += 1
-        
+            pass
         return press
         
 #
@@ -1341,7 +1419,7 @@ class ElmerHydro(ElmerRoot):
                 tableTime.setTitle('Dirichlet')
                 valCalT.append(tableTime) 
                 nbTimeCal=tableTime.getNbRows()
-    
+                pass
             elif isinstance(val[0],float):
                 nbFac.append( zone.getNbElements() )
                 indFac.append( zone.getGlobalIndexes() )
@@ -1349,7 +1427,7 @@ class ElmerHydro(ElmerRoot):
                 tnew.addColumn('time',[0.,1.])
                 tnew.addColumn('f(t)',[val[0],val[0] ])
                 valCalT.append(tnew)
-                                
+                pass
             elif isinstance(val[0],LinearFunction):
                 baryField=zone.getBarycenters()
                 points=baryField.getValues()
@@ -1360,10 +1438,12 @@ class ElmerHydro(ElmerRoot):
                     py = points[indP+1]
                     if spaceDimensions==2:
                         newPoint.append((px, py))
+                        pass
                     else:
                         pz = points[indP+2]
                         newPoint.append((px, py, pz))
-
+                        pass
+                    pass
                 for indElem in range (zone.getNbElements()):
                     nbFac.append(1)
                     indFac.append( [zone.getGlobalIndexes()[indElem]] )                   
@@ -1372,13 +1452,14 @@ class ElmerHydro(ElmerRoot):
                     tnew.addColumn('time',[0.,1.])
                     tnew.addColumn('f(t)',[val[0].eval(point),val[0].eval(point)])
                     valCalT.append(tnew)
+                    pass
             else:
-                print 'val',val
-                print 'type de val[0]',type(val[0])
-                print 'Instance ?',val[0].__class__.__name__
-                raise Exception, "implementation failure"
+                print('val',val)
+                print('type de val[0]',type(val[0]))
+                print('Instance ?',val[0].__class__.__name__)
+                raise Exception("implementation failure")
             i+=1
-    
+            pass
         nbTypeCal=len(valCalT)
 
         self.dirichletDict={'nbTypeCal': nbTypeCal,
@@ -1386,7 +1467,7 @@ class ElmerHydro(ElmerRoot):
                             'nbFac':     nbFac,
                             'valCalT':   valCalT,
                             'indFac':    indFac}
-        print "len(self.dirichletDict['valCalT'])",len(self.dirichletDict['valCalT'])
+        print("len(self.dirichletDict['valCalT'])",len(self.dirichletDict['valCalT']))
         return
 #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1421,6 +1502,7 @@ class ElmerHydro(ElmerRoot):
                 tableTime.setTitle('Gradient')
                 valCalTZone.append(tableTime)
                 nbTimeCal=tableTime.getNbRows()
+                pass
             elif isinstance(val[0],float):
                 tnew=Table('Gradient')
                 tnew.addColumn('time',[0.,1.])
@@ -1428,6 +1510,7 @@ class ElmerHydro(ElmerRoot):
                 valCalTZone.append(tnew)
                 nbFac.append( zone.getNbElements() )
                 indFac.append( zone.getGlobalIndexes() )
+                pass
             elif isinstance(val[0],LinearFunction):
                 baryField=zone.getBarycenters()
                 points=baryField.getValues()
@@ -1437,6 +1520,7 @@ class ElmerHydro(ElmerRoot):
                     py = points[indP+1]
                     if spaceDimensions==2:
                         newPoint.append((px, py))
+                        pass
                     else:
                         pz = points[indP+2]
                         newPoint.append((px, py, pz))
@@ -1453,12 +1537,12 @@ class ElmerHydro(ElmerRoot):
                     pass
                 pass
             else:
-                raise Exception, "implementation failure"
+                raise Exception("implementation failure")
             if len(self.permHydroDictList[zoneInd]['permT']) != 1:
                 for tab in valCalTZone:
-                    va=map(abs,tab.getColumn('f(t)').tolist()[:])
+                    va=list(map(abs,tab.getColumn('f(t)').tolist()[:]))
                     if max(va) > 1e-200:
-                        raise Exception,"HeadGradient B.C. eventually bounded to a scalar permeability"
+                        raise Exception("HeadGradient B.C. eventually bounded to a scalar permeability")
                     pass
                 pass
             valCalT.extend(valCalTZone)
@@ -1491,25 +1575,25 @@ class ElmerHydro(ElmerRoot):
         for zoneInd in range(nbZones):
             zone       = field.getZone(zoneInd)
             val        = field.getZoneValues(zoneInd)
-            print 'setFluxBoundaryCondition : VAL ?',val
+            print('setFluxBoundaryCondition : VAL ?',val)
             if isinstance(val[0],TimeTabulatedFunction):
                 tableTime=val[0].getTimeCoefficient().copy()
                 tableTime.setTitle('Neumann')
                 valCalT.append(tableTime)
                 nbTimeCal=tableTime.getNbRows()
-                print '1len(valCalT)',len(valCalT)
-    
+                print('1len(valCalT)',len(valCalT))
+                pass
             elif isinstance(val[0],float):
                 tnew=Table('Neumann')
                 tnew.addColumn('time',[0.,1.])
                 tnew.addColumn('f(t)',[val[0],val[0] ])
-                print 'flux_nul ?',val[0]
+                print('flux_nul ?',val[0])
 ##                 raise stop
                 valCalT.append(tnew)
-                print '2len(valCalT)',len(valCalT)
+                print('2len(valCalT)',len(valCalT))
                 nbFac.append( zone.getNbElements() )
                 indFac.append( zone.getGlobalIndexes() )
-                
+                pass
             elif isinstance(val[0],LinearFunction):
                 baryField=zone.getBarycenters()
                 points=baryField.getValues()
@@ -1520,10 +1604,11 @@ class ElmerHydro(ElmerRoot):
                     py = points[indP+1]
                     if spaceDimensions==2:
                         newPoint.append((px, py))
+                        pass
                     else:
                         pz = points[indP+2]
                         newPoint.append((px, py, pz))
-
+                        pass
                 for indElem in range (zone.getNbElements()):
                     nbFac.append(1)
                     indFac.append( [zone.getGlobalIndexes()[indElem]] )                   
@@ -1532,19 +1617,21 @@ class ElmerHydro(ElmerRoot):
                     tnew.addColumn('time',[0.,1.])
                     tnew.addColumn('f(t)',[val[0].eval(point),val[0].eval(point)])              
                     valCalT.append(tnew)
-                print '3len(valCalT)',len(valCalT)
+                    pass
+                print('3len(valCalT)',len(valCalT))
+                pass
             else:
-                raise Exception, "to be Implemented"
-
+                raise Exception("to be Implemented")
+            pass
         nbTypeCal=len(valCalT)
-        print '4len(valCalT)',len(valCalT)
+        print('4len(valCalT)',len(valCalT))
 
         self.neumannDict={'nbTypeCal': nbTypeCal,
                           'nbTimeCal': nbTimeCal,
                           'nbFac':     nbFac,
                           'valCalT':   valCalT,
                           'indFac':    indFac} 
-        print "len(self.neumannPressDict['valCalT'])",len(self.neumannPressDict['valCalT'])
+        print("len(self.neumannPressDict['valCalT'])",len(self.neumannPressDict['valCalT']))
   
         return
 #
@@ -1569,10 +1656,10 @@ class ElmerHydro(ElmerRoot):
             val  = field.getZoneValues(zoneInd)
             if isinstance(val, Vector):
                 abc = val._v
-            elif type(val) == types.ListType:
+            elif type(val) == list:
                 abc = val[:]
             else:
-                raise Exception, "to be Implemented"
+                raise Exception("to be Implemented")
 
             if isinstance(abc[0],float):
                 nbFac.append( zone.getNbElements() )
@@ -1592,6 +1679,7 @@ class ElmerHydro(ElmerRoot):
                 valCalT.append(tnewa)
                 valCalT.append(tnewb)
                 valCalT.append(tnewc)
+                pass
             elif isinstance(abc[0],TimeTabulatedFunction):
                 nbFac.append( zone.getNbElements() )
                 indFac.append( zone.getGlobalIndexes() )   

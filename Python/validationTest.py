@@ -1,5 +1,7 @@
 from exceptions import Exception
 from os import system,environ,chdir,sys
+from time import sleep
+import redirect
 import getopt
 pathtc = environ["WTCT"]
 pathc = environ["WTC"]
@@ -7,52 +9,71 @@ pathf = environ["WTF"]
 patht = "~/Wrapper/Tests/Chemicaltransport/Interactiveplot"
 b = (patht,"testpv.py")
 #
-# to enable the use of mpi4py 
+# to enable the use of mpipython 
 #
-system("mpdboot &")
+#os.system("mpdboot &")
 a = [(pathc+"/Acidifiedwaterandcarbonates","Acidified_and_carbonates.py"),\
      (pathc+"/Alkalinewater","test.py"),\
      (pathc+"/Calciteequilibrium","alka.py"),\
      (pathc+"/Caprock","test.py"),\
-     (pathc+"/Charmotte","Charmotte.py"),\
+     (pathc+"/Charmotte","charmotte.py"),\
      (pathc+"/Dogger","dogger.py"),\
-     (pathc+"/Exchange","Solution.py"),\
-     (pathc+"/Surfacesolution","flaeche1.py"),\
-     (pathc+"/Surfacesolution","flaeche2.py"),\
-     (pathc+"/Solidsolution","test.py"),\
+     (pathc+"/Exchange","solution.py"),\
+     (pathc+"/Gasphase","autoclave.py"),\
+     (pathc+"/Gasphase","gasphase_ex7fp.py"),                           # fixed pressure, 1.1
+     (pathc+"/Gasphase","gasphase_ex7fv.py"),                           # fixed volume,  22.5
+     (pathc+"/Gasphase","gasphase.py"),\
+     (pathc+"/Gebo","test.py"),                                         # testing the gebo addendum
      (pathc+"/Pitzer","test.py"),\
      (pathc+"/Pitzer","test1.py"),\
-     (pathc+"/Ultimate","test.py"),\
-     (pathc+"/Gasphase","gasphase.py"),\
-     (pathtc+"/Cec_column","guitest1.py"),\
+     (pathc+"/Simplifiedcaprockequilibrium","test.py"),\
+     (pathc+"/Solidsolution","test.py"),\
+     (pathc+"/Surfacesolution","flaeche1.py"),\
+     (pathc+"/Surfacesolution","flaeche2.py"),\
+     (pathc+"/Ultimate","test.py"),                                     # clay test
+     (pathtc+"/Analyticaltracer","teste.py"),                           # anal. tracer coarse mesh
+     (pathtc+"/Analyticaltracer","testf.py"),                           # anal. tracer finer mesh
+     (pathtc+"/Cec_column","guitest1.py"),                              # normalisation of the output, to continue from here
      (pathtc+"/Cec_column","column.py"),\
      (pathtc+"/Cec_column","boundary.py"),\
-     (pathtc+"/Porosityvariation/Constantdiffusion/","test.py"),\
+     (pathtc+"/Autoklav/A1","teste.py"),\
      (pathtc+"/Cec_column/Elmercase","teste.py"),\
+     (pathtc+"/Cec_column_species_addenda/Elmercase","teste.py"),\
      (pathtc+"/Cesiummigration","guitest.py"),\
      (pathtc+"/Cesiummigration","column.py"),\
      (pathtc+"/Cesiummigration","boundary.py"),\
      (pathtc+"/Cesiummigration/Elmercase","teste.py"),\
-     (pathtc+"/Ex11","ultimate.py"),\
-     (pathtc+"/Ex11","guitest.py"),\
-     (pathtc+"/Ex11","column.py"),\
-     (pathtc+"/Ex11","boundary.py"),\
-     (pathtc+"/Restart","test.py"),\
-     (pathtc+"/Restart","testbackup_restart.py"),\
      (pathtc+"/Chemval","guitest.py"),\
      (pathtc+"/Chemval","concrete.py"),\
      (pathtc+"/Chemval","clay.py"),\
      (pathtc+"/Chemval/Elmercase","teste.py"),\
-     (pathtc+"/2DSilicadissolution","column.py"),\
-     (pathtc+"/2DSilicadissolution","soda.py"),\
-     (pathtc+"/2DSilicadissolution","test_cc1.py"),\
-     (pathtc+"/2DSilicadissolution/Elmercase","teste.py"),\
+     (pathtc+"/Diffusionprocess","teste.py"),\
+     (pathtc+"/Diffusionprocessni","teste.py"),\
+     (pathtc+"/Ex11","ultimate.py"),\
+     (pathtc+"/Ex11","guitest.py"),\
+     (pathtc+"/Ex11","column.py"),\
+     (pathtc+"/Ex11","boundary.py"),\
+     (pathtc+"/Ex11/Elmercase","teste.py"),\
+     (pathtc+"/Threezoneborehole_cp/","teste.py"),\
+     (pathtc+"/Heatcapacityvariation/","testeb.py"),\
+     #(pathtc+"/Heatconductivityvariation/","teste.py"),\
+     (pathtc+"/Porosityvariation/Constantdiffusion/","test.py"),\
+     (pathtc+"/Restart","test.py"),\
+     (pathtc+"/Restart","testbackup_restart.py"),\
      (pathtc+"/Silicadissolution","column.py"),\
      (pathtc+"/Silicadissolution","soda.py"),\
      (pathtc+"/Silicadissolution","test.py"),\
      (pathtc+"/Silicadissolution/Elmercase","teste.py"),\
+     (pathtc+"/Soultzborehole","teste.py"),\
+     (pathtc+"/Soultzborehole","testeb.py"),\
      (pathtc+"/Temperature","test.py"),\
-     (pathtc+"/Porosityvariation/Youngpostprocessing","test.py"),\
+     (pathtc+"/Urea","teste.py"),\
+     (pathtc+"/2DSilicadissolution","column.py"),\
+     (pathtc+"/2DSilicadissolution","soda.py"),\
+     (pathtc+"/2DSilicadissolution","test_cc1.py"),\
+     (pathtc+"/2DSilicadissolution/Elmercase","testf.py"),\
+     (pathtc+"/2Dplot","test.py"),\
+#     (pathtc+"/Porosityvariation/Youngpostprocessing","test.py"),\
      (pathtc+"/Fluxboundary","test.py"),\
 #     (pathtc+"/Uraniumdioxyde/Elmercase","teste.py"),\
      (pathf+"/SDirichlet","test.py"),\
@@ -60,7 +81,6 @@ a = [(pathc+"/Acidifiedwaterandcarbonates","Acidified_and_carbonates.py"),\
      (pathf+"/2DLinear","test.py"),\
      (pathf+"/2DLinear","testi.py"),\
      (pathf+"/Specificstorage","test.py"),\
-     (pathf+"/RichardsDyke","test.py"),\
      ]
 def main():
     """
@@ -75,13 +95,15 @@ def main():
         for example, just type "python validationTest.py ct"
     
     """#
+    redic = redirect.output("validation.log")
+    redic.toFile()
     result = 0
     ind = 0
-    print " sys ",sys.argv[1:],type(sys.argv[1:])
+    #print " sys ",sys.argv[1:],sys.argv[1:][0],type(sys.argv[1:])
     if sys.argv[1:] != []:
-        if sys.argv[1:][0].lower() in ["f","ct","c"]:
-            if sys.argv[1:][0].lower() == "f":
-                option = "WT"+sys.argv[1:][0].upper()
+        if sys.argv[1:][0].lower() in ["f","ct","c","wtf"]:
+            if sys.argv[1:][0].lower() in ["f","wtf"]:
+                option = "WTF"
             elif sys.argv[1:][0].lower() == "ct":
                 option = "WT"+sys.argv[1:][0].upper()
             if sys.argv[1:][0].lower() == "c":
@@ -102,23 +124,24 @@ def main():
         if stringc == "all":
             path = chdir(a[ind][0])
             string = "python "+a[ind][1]
-            result = system(string)
             print " ~~~~~~~~~~~ "
-            print " case run id ",ind
+            print " case run id ",ind," name: ",a[ind][1]," in the directory: ",a[ind][0]
             print " ~~~~~~~~~~~ "
             sys.stdout.flush()
+            result = system(string)
             indc+=1
         elif stringc in a[ind][0]:
             path = chdir(a[ind][0])
             string = "python "+a[ind][1]
-            result = system(string)
             print " ~~~~~~~~~~~ "
-            print " case run id ",ind
+            print " case run id ",ind," name: ",a[ind][1]," in the directory: ",a[ind][0]
             print " ~~~~~~~~~~~ "
             sys.stdout.flush()
+            result = system(string)
             indc+=1
         else:
             pass
+        sleep(0.5)
         print " reg",ind,stringc, path
         ind+=1
         pass
@@ -127,7 +150,7 @@ def main():
 #    mpirun -np 2 mpipython guitest_mpi.py
 #    subprocess( -> mpdballexit)
     if result != 0:
-        raise Exception,  " problem with the test case "+a[ind-1][1]+" in the directory: "+ a[ind-1][0]
+        raise Exception,  " problem with the test case %s  in the directory: %s"%(a[ind-1][1],a[ind-1][0])
     else:
         print " test cases run fine",indc
         

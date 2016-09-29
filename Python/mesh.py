@@ -6,11 +6,11 @@ This module takes a Gmsh output file (`.msh`) . This module should be able to
 read all kind of files issued from gmsh.
 The mesh file must have the following structure:
 
-	$MeshFormat
-	$PhysicalNames
-	$Nodes
-	$Elements
-	
+    $MeshFormat
+    $PhysicalNames
+    $Nodes
+    $Elements
+    
 Freely inspired from some Fipy python files in the sense of the GPL license
  #
  #  FILE: "/meshes/numMesh/gmshImport.py"
@@ -25,6 +25,10 @@ from generictools import Generic
 import subprocess
 
 import sys
+
+from os import path as osdotpath
+
+from types import ListType
 
 def MeshReader(fileName):
     readFile = open (fileName)
@@ -47,18 +51,17 @@ def MeshReader(fileName):
         #raw_input("dbd dimension: "+str(a))
         if len(a) == 3:
             dimension = max(int(a[0]),dimension)
+            pass
+        pass
     #raw_input("mesh dimension :"+str(dimension))
     readFile.close()
     while readFile.closed == False:
         pass
     print " pmesh dimension",dimension
     #raw_input()
-    if dimension == 2:
-       mesh = Mesh2D(fileName)
-    elif dimension == 3:
-       mesh = Mesh3D(fileName)
-    else:
-       raise Exception, "the dimension should be 2 or 3"
+    if dimension == 2: mesh = Mesh2D(fileName)
+    elif dimension == 3: mesh = Mesh3D(fileName)
+    else: raise Exception, "the dimension should be 2 or 3"
     return mesh
 
 class MeshImportError(Exception):
@@ -71,14 +74,14 @@ class Body(Generic):
 
     def __init__(self,body,bodyName = None, internalNodesAnz = None, nodes = None, dim = None):
         Generic.__init__(self)
-	self.body = body
-	self.bodyName = bodyName
-	self.physicalName = bodyName
-	self.internalNodesAnz = internalNodesAnz
-	self.dim = dim
-	self.nodes = nodes
-	print len(self.internalNodesAnz),bodyName
-	#raw_input("class body ")
+        self.body = body
+        self.bodyName = bodyName
+        self.physicalName = bodyName
+        self.internalNodesAnz = internalNodesAnz
+        self.dim = dim
+        self.nodes = nodes
+        print len(self.internalNodesAnz),bodyName
+        #raw_input("class body ")
 
     def getBodyName(self):
         return self.bodyName
@@ -136,8 +139,7 @@ class DataGetter(Generic):
         
     def getData(self, filename, dimensions, coordDimensions = None):
 
-        if coordDimensions is None:
-            coordDimensions = dimensions
+        if coordDimensions is None: coordDimensions = dimensions
 
 #        if (dimensions != 2 and dimensions != 3):
 #            raise MeshImportError, "Number of dimensions must be 2 or 3"
@@ -146,33 +148,35 @@ class DataGetter(Generic):
         self.dim = dimensions
         self.meshFileName = filename
         self.inFile = open (filename)
-        line = self.inFile.readline()                                                                           ## skip the $MeshFormat
+        line = self.inFile.readline()                                                       ## skip the $MeshFormat
         self.version, self.fileType, self.datasize = self.inFile.readline().split()
-        line = self.inFile.readline()	                                                                        ## skip the $EndMeshFormat
-        line = self.inFile.readline()	                                                                        ## skip the $PhysicalNames
+        line = self.inFile.readline()                                                       ## skip the $EndMeshFormat
+        line = self.inFile.readline()                                                       ## skip the $PhysicalNames
         nBodies = int(self.inFile.readline())
         self.boundaryNodes = []
         self.physicalBodyNames = {}
         for i in range(nBodies):
             tempList  = self.inFile.readline().split()
-            
             if len(tempList) ==2:
                 ind =  tempList[0]
                 name = tempList[1]
+                pass
             else:
                 ind =  tempList[1]
                 name = tempList[2]
+                pass
             print ind,name
             #raw_input("datagetter bodies")
             self.physicalBodyNames[str(name)[1:-1]] = [int(ind),[]]
+            pass
 #        if not self.physicalBodyNames.has_key('domain'):
 #            raise Exception, " the mesh must have at least a body name called \"domain\" and representing the whole mesh"
         print "dbg self.physicalBodyNames",self.physicalBodyNames
-        line = self.inFile.readline()	                                                                        ## $ skip the EndPhysicalNames
+        line = self.inFile.readline()                                                       ## $ skip the EndPhysicalNames
         self.vertexCoords = vertexCoords = self._calcVertexCoords(coordDimensions)
         print " number of vertices ",len(self.vertexCoords)
         print " vertex coordinates 1 ",self.vertexCoords[0]
-#        raw_input("dbg vertex coordinates")
+        #raw_input("dbg vertex coordinates")
         self.internalNodesAnz = self.numVertices
         print " call of _calcCellVertexIDs"
         self._calcCellVertexIDs()
@@ -208,30 +212,33 @@ class DataGetter(Generic):
         # element types belonging to Physical Body Names of dimension N
         #
         if dimensions == 1:
-            #
-            # 1 : 2-node line
-            #
+                                                                                            #
+                                                                                            # 1 : 2-node line
+                                                                                            #
             indPBN = [1]
+            pass
         elif dimensions == 2:
-            #
-            # 2 : 3 node triangle
-            # 3 : 4 node quadrangle
-            #
+                                                                                            #
+                                                                                            # 2 : 3 node triangle
+                                                                                            # 3 : 4 node quadrangle
+                                                                                            #
             indPBN = [2,3]
+            pass
         else:
-            #
-            # 4 : 4 node tetrahedron
-            # 5 : 8 node hexahedron
-            # 6 : 6 node prism
-            # 7 : 4 node node pyramid
-            #
+                                                                                            #
+                                                                                            # 4 : 4 node tetrahedron
+                                                                                            # 5 : 8 node hexahedron
+                                                                                            # 6 : 6 node prism
+                                                                                            # 7 : 4 node node pyramid
+                                                                                            #
             indPBN = [4,5,6,7]
+            pass
 #        print " indPBN   ",indPBN,self.elementArray[0],self.elementArray[1]
 #
 # we identify nodes belonging to boundary 
 #
         frontN = []
-        print  "self.elementArray \n",self.elementArray
+        #print  "self.elementArray \n",self.elementArray
         
         if self.dimensions != 1:
             for element in self.elementArray:
@@ -244,12 +251,18 @@ class DataGetter(Generic):
                     for vertex in range(indRef,indRef+_nodeElements(element[1])):
                         if element[vertex] not in frontN and element[vertex]>0:
                             frontN.append(element[vertex])
+                            pass
+                        pass
+                    pass
+                pass
+            pass
         else:
-        
             for element in self.elementArray:
                 if element[1] not in indPBN:
                     frontN.append(element[0])
-
+                    pass
+                pass
+            pass
         #print " nodes on boundaries: ",frontN                      
         indPDO = []
         #print " vertex coordinates2 ",self.vertexCoords[0]
@@ -266,7 +279,11 @@ class DataGetter(Generic):
                     if element[ind] not in frontN and element[ind]>0:
                         if element[ind] not in indPDO:
                             indPDO.append(element[ind])
-
+                            pass
+                        pass
+                    pass
+                pass
+            pass
         #print frontN
         print " vertex coordinates3 ",self.vertexCoords[0]
         self.internalNodesAnz -= len(frontN)
@@ -283,12 +300,14 @@ class DataGetter(Generic):
         #raw_input()
         print " vertex coordinates4 ",self.vertexCoords[0]
         if not subprocess.os.path.exists(self.meshFileName[0:-4]):
+            self._nodesReordering()
+            pass
             #print "mesh dbg we reorder the file"
             #raw_input()
-            self._nodesReordering()
         else:
             if not subprocess.os.path.exists("commandfile.eg"):
                 raise Exception, " problem with the mesh handling"
+            pass
         #
         #
         #
@@ -301,8 +320,8 @@ class DataGetter(Generic):
         #print "self.vertexCoords[:]",self.vertexCoords[0:-1]
         #raw_input("dbg 281")
         return {'vertexCoords': self.vertexCoords},\
-            self.numElements, self.elementArray, self.physicalBodyNames,\
-            self.internalNodesAnz,self.internalNodesAnzList
+                self.numElements, self.elementArray, self.physicalBodyNames,\
+                self.internalNodesAnz,self.internalNodesAnzList
 #            'vertexCoords': vertexCoords,
 #            'faceVertexIDs': faceVertexIDs,
 #            'cellFaceIDs': cellFaceIDs
@@ -326,38 +345,34 @@ class DataGetter(Generic):
         
     def _calcVertexCoords(self, coordDimensions):
 
-    ## initialize the file input stream
-        a = self.inFile.readline() ## skip the $NOD
+        a = self.inFile.readline()                                                          # initialize the file input stream
 
-    ## get the vertex coordinates
         nodeToVertexIDdict = {}
 
-        self.numVertices = int(self.inFile.readline())
+        self.numVertices = int(self.inFile.readline())                                      # get the vertex coordinates
         #print "dbg contr ",self.numVertices
         #raw_input()
-    ## scan the number of spatial dimensions
-    ## not to be confused with the ultimate dimensionality of the mesh 
-    ## (polygonal cells vs. polyhedral cells)
+        ## scan the number of spatial dimensions
+        ## not to be confused with the ultimate dimensionality of the mesh 
+        ## (polygonal cells vs. polyhedral cells)
         savePos = self.inFile.tell()
         ##dimensions = len(self.inFile.readline().split()) - 1
         self.inFile.seek(savePos)
         
         self.vertexCoords = numpy.zeros((self.numVertices, coordDimensions))
         #print self.vertexCoords
-	#raw_input(" vertexCoords ")
         self.vertexCoords = self.vertexCoords.astype(numpy.float)
         #print self.vertexCoords
-	#raw_input(" vertexCoords1 ")
         for i in range(self.numVertices):
             currLineArray = self.inFile.readline().split()
             nodeToVertexIDdict[int(currLineArray[0])] = i
             self.vertexCoords[i] = [float(n) for n in currLineArray[1: coordDimensions + 1]]
-            #print "vertexCoords[i]", i, self.vertexCoords[i]
-
+            pass
         maxNode = max(nodeToVertexIDdict.keys())
         nodeToVertexIDs = numpy.zeros((maxNode + 1,))
         for i in nodeToVertexIDdict.keys():
             nodeToVertexIDs[i] = nodeToVertexIDdict[i]
+            pass
         self.nodeToVertexIDs = nodeToVertexIDs
         return self.vertexCoords
 
@@ -374,8 +389,12 @@ class DataGetter(Generic):
             for element in self.elementArray:
                 if element[3] == self.physicalBodyNames[physBodyNames][0]:
                     assElementList.append(element[0])
+                    pass
+                pass
 #            print physBodyNames,assElementList
             self.physicalBodyNames[physBodyNames][1] = assElementList
+            pass
+        return None
         #print self.physicalBodyNames
         
     def _calcCellVertexIDs(self):
@@ -394,10 +413,8 @@ class DataGetter(Generic):
 #
 # le parametre maxLength doit etre ajuste par une lecture prealable.
 #        
-        if self.dimensions !=1:
-            maxLength = (4*self.dimensions + self.dimensions)
-        else:
-            maxLength = 8
+        if self.dimensions !=1: maxLength = (4*self.dimensions + self.dimensions)
+        else: maxLength = 8
         self.elementArray = numpy.zeros((numElements, maxLength),dtype=numpy.int )
 #        print " numElements:",numElements
         #raw_input()
@@ -405,18 +422,19 @@ class DataGetter(Generic):
             currLineArrayInt = []
             for x in self.inFile.readline().split():
                 currLineArrayInt.append(int(x))
+                pass
 #            print "dbg currLineArrayInt",i, currLineArrayInt
             self.elementArray[elm_number, :len(currLineArrayInt)] = currLineArrayInt
+            pass
 #        print self.elementArray
 #        print " out of loop "
         validElementArray = numpy.compress(self.elementArray[:, 1] == ((2 * self.dimensions) - 2), self.elementArray, 0)
         cellNodeIDs = validElementArray[:, 5:]
-        if len(cellNodeIDs)!= 0:
-            cellVertexIDs = numpy.take(self.nodeToVertexIDs, cellNodeIDs)
-        else:
-            cellVertexIDs = numpy.array([])
+        if len(cellNodeIDs)!= 0: cellVertexIDs = numpy.take(self.nodeToVertexIDs, cellNodeIDs)
+        else: cellVertexIDs = numpy.array([])
         self.cellVertexIDs = cellVertexIDs
         self.numCells = len(cellVertexIDs)
+        return None
 
     def _calcBaseFaceVertexIDs(self):
         
@@ -430,12 +448,12 @@ class DataGetter(Generic):
             cellFaceVertexIDs[:, 1, :] = numpy.concatenate((cellVertexIDs[:, :2], cellVertexIDs[:, 3:]), axis = 1)
             cellFaceVertexIDs[:, 2, :] = numpy.concatenate((cellVertexIDs[:, :1], cellVertexIDs[:, 2:]), axis = 1)
             cellFaceVertexIDs[:, 3, :] = cellVertexIDs[:, 1:]
+            pass
         if (self.dimensions == 2):
             cellFaceVertexIDs[:, 0, :] = cellVertexIDs[:, :2]
-##            cellFaceVertexIDs[:, 1, :] = numpy.concatenate((cellVertexIDs[:, :1], cellVertexIDs[:, 2:]), axis = 1)
             cellFaceVertexIDs[:, 1, :] = numpy.concatenate((cellVertexIDs[:, 2:], cellVertexIDs[:, :1]), axis = 1)
             cellFaceVertexIDs[:, 2, :] = cellVertexIDs[:, 1:]
-
+            pass
         cellFaceVertexIDs = cellFaceVertexIDs[:, :, ::-1]
         self.unsortedBaseIDs = numpy.reshape(cellFaceVertexIDs, (self.numCells * (self.dimensions + 1), self.dimensions))
 
@@ -444,6 +462,7 @@ class DataGetter(Generic):
 
         self.baseFaceVertexIDs = baseFaceVertexIDs       
         self.cellFaceVertexIDs = cellFaceVertexIDs
+        return None
 
     def _calcFaceVertexIDs(self):
 
@@ -460,13 +479,14 @@ class DataGetter(Generic):
             if(not (self.faceStrToFaceIDs.has_key(key))):
                 self.faceStrToFaceIDs[key] = currIndex
                 faceStrToFaceIDsUnsorted[' '.join([str(j) for j in listJ])] = currIndex
-
                 currIndex = currIndex + 1
+                pass
+            pass
         numFaces = currIndex
         faceVertexIDs = numpy.zeros((numFaces, self.dimensions))
         for i in faceStrToFaceIDsUnsorted.keys():
             faceVertexIDs[faceStrToFaceIDsUnsorted[i], :] = [int(x) for x in i.split(' ')]
-
+            pass
         return faceVertexIDs
 
     def _calcCellFaceIDs(self):
@@ -476,6 +496,8 @@ class DataGetter(Generic):
             cell = self.cellFaceVertexIDs[i]
             for j in range(len(cell)):
                 cellFaceIDs[i, j] = self.faceStrToFaceIDs[' '.join([str(k) for k in self.cellFaceVertexIDs[i, j]])]
+                pass
+            pass
         return cellFaceIDs
 
     def _nodesReordering(self):
@@ -493,17 +515,16 @@ class DataGetter(Generic):
         #
         if subprocess.os.path.exists("commandfile.eg"):
             try:
-                retcode = subprocess.Popen("rm -f ./commandfile.eg", shell = True)
+                retcode = subprocess.Popen("rm -f ./commandfile.eg",bufsize=-1, shell = True)
                 #print " retcode ",dir(retcode)
                 #raw_input("retour de rm -f commandfile.eg")
                 
                 if retcode < 0:
                     print >>sys.stderr, "Child was terminated by signal", -retcode
                 else:
-                    print >>sys.stderr, "Child returned", retcode
+                    print >>sys.stderr, "Child process on commandfile.eg returned", retcode
             except OSError, e:
                 print >>sys.stderr, "Execution failed:", e
-        #print  " we write commandfile.eg"
         #raw_input("writing the commandfile.eg file with "+str(self.meshFileName))
         commandfile = open("commandfile.eg","w")
         commandfile.write ("Input File = "+self.meshFileName+"\n")
@@ -512,33 +533,38 @@ class DataGetter(Generic):
         commandfile.write ("Output Mode = ElmerSolver"+"\n")
         commandfile.flush()
         commandfile.close ()
-        while commandfile.closed == False:
-            #
-            # It should stop
-            #
+        #print "commandfile",commandfile.name
+        while not osdotpath.exists(commandfile.name):
+                                                                                            #
+                                                                                            # We wait for the creation of the file. That process should stop
+                                                                                            #
+            time.sleep(.1)
             pass
-        #
-        # element types belonging to Physical Body Names of dimension N
-        #
+                                                                                            #
+                                                                                            # element types belonging to Physical Body Names of dimension N
+                                                                                            #
         if self.dimensions == 1:
-            #
-            # 1 : 2 node line
-            #
+                                                                                            #
+                                                                                            # 1 : 2 node line
+                                                                                            #
             elm_typePBN = [1]
+            pass
         elif self.dimensions == 2:
-            #
-            # 2 : 3 node triangle
-            # 3 : 4 node quadrangle
-            #
+                                                                                            #
+                                                                                            # 2 : 3 node triangle
+                                                                                            # 3 : 4 node quadrangle
+                                                                                            #
             elm_typePBN = [2,3]
+            pass
         else:
-            #
-            # 4 : 4 node tetrahedron
-            # 5 : 8 node hexahedron
-            # 6 : 6 node prism
-            # 7 : 4 node node pyramid
-            #
+                                                                                            #
+                                                                                            # 4 : 4 node tetrahedron
+                                                                                            # 5 : 8 node hexahedron
+                                                                                            # 6 : 6 node prism
+                                                                                            # 7 : 4 node node pyramid
+                                                                                            #
             elm_typePBN = [4,5,6,7]
+            pass
 #        print " indPBN   ",indPBN,self.elementArray[0],self.elementArray[1]
 #
 # we identify nodes belonging to boundary: frontN list
@@ -554,11 +580,18 @@ class DataGetter(Generic):
                     for vertex in  range(indRef,indRef+_nodeElements(element[1])):
                         if element[vertex] not in frontN and element[vertex]>0:
                             frontN.append(element[vertex])
+                            pass
+                        pass
+                    pass
+                pass
+            pass
         else:
-         
             for element in self.elementArray:
                 if element[1] not in elm_typePBN:
                     frontN.append(element[0])
+                    pass
+                pass
+            pass
         #
         # We build up the permutation
         #
@@ -571,9 +604,7 @@ class DataGetter(Generic):
         # keys are made of body names
         #
         indexBody = []
-        for body in self.physicalBodyNames.keys():
-#            indexBody.append(str(self.physicalBodyNames[body][0])+body)
-            indexBody.append(str(self.physicalBodyNames[body][0])+"_"+body)
+        for body in self.physicalBodyNames.keys(): indexBody.append(str(self.physicalBodyNames[body][0])+"_"+body)
         #
         # We respect the order introduced in the mesh file, first for physical body names of dimension N
         # ignoring boundary nodes
@@ -582,7 +613,6 @@ class DataGetter(Generic):
         #print indexBody
         #raw_input("dbg index body ")
         for ibody in indexBody:
-        
             #body = ibody[1:]
             body = ibody.split("_")[1]
             indPBN = self.physicalBodyNames[body][0]
@@ -594,7 +624,7 @@ class DataGetter(Generic):
                 #print body,indPBN,elm_number,self.elementArray[elm_number-1]
                 
                 element = self.elementArray[elm_number-1]
-                print "element", element
+                print "element", element, "body: ",ibody
                 if element[1] in elm_typePBN:
                     indRef = 3 + element[2]
 
@@ -605,8 +635,11 @@ class DataGetter(Generic):
                         if permutation[vertex] == -1 and element[vertex_index]>0 and vertex not in frontN:
                             permutation[vertex] = indC
                             indC+=1
-#                if element == 1: print "element ",element,self.elementArray[0]
+                            pass
+                        pass
+                    pass
                 pass
+            pass
         #raw_input()
         #
         # We use a second loop to get the permutation of boundary nodes
@@ -614,12 +647,12 @@ class DataGetter(Generic):
         for vertex in frontN:
             permutation[vertex] = indC
             indC+=1
-        
+            pass
         indt = 0
         for i in permutation:
-            print indt,i
+            print "permutation ",indt,i
             indt+=1
-        
+            pass
         #raw_input()
         #
         # Now we reindex the nodes using a temporary file
@@ -629,11 +662,8 @@ class DataGetter(Generic):
         #raw_input(" dimension of self.vertexCoords: "+str(len(self.vertexCoords)))
 
         for vertex_index in range(1,len(self.vertexCoords)+1):
-        
-            #print vertex_index,permutation[vertex_index],self.vertexCoords[vertex_index-1]
-            
             self.permutedVertexCoords[permutation[vertex_index]] = self.vertexCoords[vertex_index-1]
-            
+            pass
 #        coordFile = open("coordFile","w")
 #        coordFile.write ("POINTS %5d float\n"%(len(self.vertexCoords)))
         
@@ -650,7 +680,9 @@ class DataGetter(Generic):
             if ind == 0: print indRef, element[1], _nodeElements(element[1])
             for vertex_index in range( indRef, indRef+_nodeElements(element[1])):                
                 self.elementArray[ind][vertex_index] = permutation[self.elementArray[ind][vertex_index]]
+                pass
             ind+= 1
+            pass
 
         #print self.elementArray
         #raw_input("new elementArray")
@@ -670,7 +702,9 @@ class DataGetter(Generic):
         #print "string  rm -f "+self.meshFileName
         #raw_input()
         #self.meshFileName = "essai.msh"
-        retcode = subprocess.call("mv "+self.meshFileName+" toto.msh", shell=True)
+        if osdotpath.exists(self.meshFileName): 
+            retcode = subprocess.call("mv -f"+self.meshFileName+" toto.msh", shell=True)
+            pass
 #        print " return code ",retcode
 #        while (retcode != 0):
 #            pass
@@ -688,10 +722,13 @@ class DataGetter(Generic):
             if ind < 10:
                 format = "%d %2d \""+"%"+str(len(ibody.split("_")[1]))+"s"+"\"\n"
                 reorderedMeshFile.write (format%(self.dimensions, ind, ibody.split("_")[1]))
+                pass
             else:
                 format = "%d %2d \""+"%"+str(len(ibody.split("_")[1]))+"s"+"\"\n"
                 reorderedMeshFile.write (format%(self.dimensions, ind, ibody.split("_")[1]))
+                pass
             ind+=1
+            pass
         reorderedMeshFile.write("$EndPhysicalNames\n")
         reorderedMeshFile.write("$Nodes\n")
         reorderedMeshFile.write("%6d\n"%(self.numVertices))
@@ -699,11 +736,15 @@ class DataGetter(Generic):
         for node in self.permutedVertexCoords[1:]: # node indexation beginning at 1
             if len(node) == 1:
                 reorderedMeshFile.write ("%2d %15.8e 0 0\n"%(ind, node[0]))
+                pass
             if len(node) == 2:
                 reorderedMeshFile.write ("%2d %15.8e %15.8e 0\n"%(ind, node[0], node[1]))
+                pass
             elif len(node) == 3:
                 reorderedMeshFile.write ("%2d %15.8e %15.8e %15.8e\n"%(ind, node[0], node[1], node[2]))
+                pass
             ind+=1
+            pass
         reorderedMeshFile.write ("$EndNodes\n")
         reorderedMeshFile.write ("$Elements\n")
         reorderedMeshFile.write ("%6d\n"%(len(self.elementArray)))
@@ -731,21 +772,27 @@ class DataGetter(Generic):
             indRef = 3 + element[2]
             for node in range(indRef,indRef+_nodeElements(element[1])):
                 reorderedMeshFile.write (format%(element[node]))
+                pass
             reorderedMeshFile.write ("\n")
+            pass
         reorderedMeshFile.write ("$EndElements\n")
         reorderedMeshFile.flush()
         #raw_input("closing the mesh : "+reorderedMeshFile.name)
         reorderedMeshFile.close()
         #print subprocess.os.system("ls -lt ./essai.msh")
         #raw_input()
-        while reorderedMeshFile.closed == False:
-            #
-            # It should stop
-            #
+        while not osdotpath.exists(reorderedMeshFile.name):
+                                                                                            #
+                                                                                            # It should wait
+                                                                                            #
+            time.sleep(0.1)
             pass
         if not subprocess.os.path.exists(self.meshFileName[0:-4]):
             print "  creating the directory ",self.meshFileName[0:-4]
             subprocess.os.mkdir (self.meshFileName[0:-4])
+            while not osdotpath.exists(self.meshFileName[0:-4]):
+                time.sleep(0.1)
+                pass
             #
             # Now, we launch ElmerGrid
             #
@@ -755,12 +802,14 @@ class DataGetter(Generic):
                 if retcode < 0:
                     print >>sys.stderr, "Child was terminated by signal", -retcode
                 else:
-                    print >>sys.stderr, "Child returned", retcode
+                    print >>sys.stderr, "Child process ElmerGrid commandfile.eg returned", retcode
             except OSError, e:
                 print >>sys.stderr, "Execution failed:", e
+            pass
         else:
             #raw_input(" the directory exists")
             subprocess.Popen("./ElmerGrid commandfile.eg", shell = True)
+            pass
         #
         # we call the Elmer processor
         #
@@ -780,21 +829,21 @@ class CommonMesh:
     """
 
     def __init__(self):
-	self.scale = {
-	    'length': 1.,
-	    'area': 1.,
-	    'volume': 1.
-	}
+        self.scale = {
+                      'length': 1.,
+                      'area': 1.,
+                      'volume': 1.
+                      }
 #
 # commented but has to be reintroduced
-#	
-#	self._calcTopology()
+#   
+#   self._calcTopology()
 
 #
 # the line self._calcGeometry() has been commented
 # to be handled.
-#	
-#	self._calcGeometry()
+#   
+#   self._calcGeometry()
     
     def __add__(self, other):
         """
@@ -960,41 +1009,43 @@ class CommonMesh:
     """topology methods"""
     
     def _calcTopology(self):
-	self._calcInteriorAndExteriorFaceIDs()
-	self._calcInteriorAndExteriorCellIDs()
-	self._calcCellToFaceOrientations()
-	self._calcAdjacentCellIDs()
-	self._calcCellToCellIDs()
+        self._calcInteriorAndExteriorFaceIDs()
+        self._calcInteriorAndExteriorCellIDs()
+        self._calcCellToFaceOrientations()
+        self._calcAdjacentCellIDs()
+        self._calcCellToCellIDs()
         self._calcCellToCellIDsFilled()
+        return None
        
     """calc topology methods"""
-	
+    
     def _calcInteriorAndExteriorFaceIDs(self):
-	pass
+        pass
 
     def _calcExteriorCellIDs(self):
-	pass
-	
+        pass
+    
     def _calcInteriorCellIDs(self):
         pass
-##	self.interiorCellIDs = list(sets.Set(range(self.numberOfCells)) - sets.Set(self.exteriorCellIDs))
+##  self.interiorCellIDs = list(sets.Set(range(self.numberOfCells)) - sets.Set(self.exteriorCellIDs))
 ##        onesWhereInterior = numpy.zeros(self.numberOfCells)
 ##        numpy.put(onesWhereInterior, self.exteriorCells, numpy.zeros((len(self.exteriorCellIDs))))
 ##        self.interiorCellIDs = numpy.nonzero(onesWhereInterior)
 ##        self.interiorCellIDs = (0,0)
         
     def _calcInteriorAndExteriorCellIDs(self):
-	self._calcExteriorCellIDs()
-	self._calcInteriorCellIDs()
+        self._calcExteriorCellIDs()
+        self._calcInteriorCellIDs()
+        return None
 
     def _calcCellToFaceOrientations(self):
-	pass
+        pass
 
     def _calcAdjacentCellIDs(self):
-	pass
+        pass
 
     def _calcCellToCellIDs(self):
-	pass
+        pass
 
     def _calcCellToCellIDsFilled(self):
         N = self.getNumberOfCells()
@@ -1013,30 +1064,30 @@ class CommonMesh:
         return self.cellFaceIDs
 
     def getExteriorFaces(self):
-	pass
+        pass
 
     def getInteriorFaces(self):
         pass
-	
+    
     def _getExteriorCellIDs(self):
         """ Why do we have this?!? It's only used for testing against itself? """
-	return self.exteriorCellIDs
+        return self.exteriorCellIDs
 
     def _getInteriorCellIDs(self):
         """ Why do we have this?!? It's only used for testing against itself? """
-	return self.interiorCellIDs
+        return self.interiorCellIDs
 
     def _getCellFaceOrientations(self):
         return self.cellToFaceOrientations
 
     def getNumberOfCells(self):
-	return self.numberOfCells
+        return self.numberOfCells
     
     def _getNumberOfVertices(self):
         #print " dbg mesh vertex Coord ", self.vertexCoords[0]
         #print " dbg mesh vertex Coord1 ", self.vertexCoords[1]
         return len(self.vertexCoords)
-	
+    
     def _getAdjacentCellIDs(self):
         return self.adjacentCellIDs
 
@@ -1044,12 +1095,12 @@ class CommonMesh:
         return self.dim
 
     def _getCellsByID(self, ids = None):
-	pass
-	    
+        pass
+        
     def getCells(self, filter = None, ids = None, **args):
-	"""Return `Cell` objects of `Mesh`."""
-	cells = self._getCellsByID(ids)
-	
+        """Return `Cell` objects of `Mesh`."""
+        cells = self._getCellsByID(ids)
+    
         if filter is not None:
             cells = [cell for cell in cells if filter(cell, **args)]
 
@@ -1059,81 +1110,82 @@ class CommonMesh:
         pass
     
     def getFaces(self, filter = None, **args):
-	"""Return `Face` objects of `Mesh`."""
-	faces = self._getFaces()
-	
+        """Return `Face` objects of `Mesh`."""
+        faces = self._getFaces()
+    
         if filter is not None:
-	    return [face for face in faces if filter(face, **args)]
+            return [face for face in faces if filter(face, **args)]
 
         return faces
 
     def _getMaxFacesPerCell(self):
-	pass
+        pass
 
     def _getNumberOfFaces(self):
-	return self.numberOfFaces
+        return self.numberOfFaces
 
     def _getCellToCellIDs(self):
         return self.cellToCellIDs
 
     def _getCellToCellIDsFilled(self):
         return self.cellToCellIDsFilled
-	
+    
     """geometry methods"""
     
     def _calcGeometry(self):
-	self._calcFaceAreas()
-	self._calcFaceNormals()
-	self._calcOrientedFaceNormals()
-	self._calcCellVolumes()
-	self._calcCellCenters()
-	self._calcFaceToCellDistances()
-	self._calcCellDistances()        
-	self._calcFaceTangents()
-	self._calcCellToCellDistances()
-	self._calcScaledGeometry()
+        self._calcFaceAreas()
+        self._calcFaceNormals()
+        self._calcOrientedFaceNormals()
+        self._calcCellVolumes()
+        self._calcCellCenters()
+        self._calcFaceToCellDistances()
+        self._calcCellDistances()        
+        self._calcFaceTangents()
+        self._calcCellToCellDistances()
+        self._calcScaledGeometry()
         self._calcCellAreas()
+        return None
        
     """calc geometry methods"""
     
     def _calcFaceAreas(self):
-	pass
-	
+        pass
+    
     def _calcFaceNormals(self):
-	pass
-	
+        pass
+    
     def _calcOrientedFaceNormals(self):
-	pass
-	
+        pass
+    
     def _calcCellVolumes(self):
-	pass
-	
+        pass
+    
     def _calcCellCenters(self):
-	pass
-	
+        pass
+    
     def _calcFaceToCellDistances(self):
-	pass
+        pass
 
     def _calcCellDistances(self):
-	pass
+        pass
         
     def _calcAreaProjections(self):
-	pass
+        pass
 
     def _calcOrientedAreaProjections(self):
-	pass
+        pass
 
     def _calcFaceTangents(self):
-	pass
+        pass
 
     def _calcFaceToCellDistanceRatio(self):
-	pass
+        pass
 
     def _calcFaceAspectRatios(self):
-	self.faceAspectRatios = self._getFaceAreas() / self._getCellDistances()
+        self.faceAspectRatios = self._getFaceAreas() / self._getCellDistances()
 
     def _calcCellToCellDistances(self):
-	pass
+        pass
 
 #    def _calcCellAreas(self):
 #        from fipy.tools.numerix import MAtake
@@ -1146,12 +1198,12 @@ class CommonMesh:
 
     def _getFaceNormals(self):
         return self.faceNormals
-	
+    
     def getCellVolumes(self):
-	return self.scaledCellVolumes
+        return self.scaledCellVolumes
 
     def getCellCenters(self):
-	return self.scaledCellCenters
+        return self.scaledCellCenters
 
     def _getFaceToCellDistances(self):
         return self.scaledFaceToCellDistances
@@ -1176,12 +1228,12 @@ class CommonMesh:
 
     def _getFaceTangents2(self):
         return self.faceTangents2
-	
+    
     def _getFaceAspectRatios(self):
-	return self.faceAspectRatios
+        return self.faceAspectRatios
     
     def _getCellToCellDistances(self):
-	return self.scaledCellToCellDistances
+        return self.scaledCellToCellDistances
 
     def _getCellNormals(self):
         return self.cellNormals
@@ -1194,7 +1246,7 @@ class CommonMesh:
 
     """scaling"""
 
-	
+    
     """point to cell distances"""
     
 
@@ -1222,9 +1274,11 @@ class Mesh(CommonMesh):
         self.internalNodesAnzList = internalNodesAnzList
         if vertexCoords == None:
             self.dim = 2
+            pass
         else:
             #print "1161 Mesh self.vertexCoords[0]:",self.vertexCoords
             self.dim = len(self.vertexCoords[0])
+            pass
         #print " class mesh",self.dim
         #raw_input(" class mesh")
         self.meshType = "unstructured"
@@ -1248,6 +1302,10 @@ class Mesh(CommonMesh):
                     for ind in range(indRef,len(element)):
                         if element[ind] not in indPDO and element[ind]!=0:
                             indPDO.append(element[ind])
+                            pass
+                        pass
+                    pass
+                pass
 #            if element[3] == indPBN:
 #              if element[6]!=0 and element[6] not in indPDO:
 #                indPDO.append(element[6])
@@ -1262,7 +1320,6 @@ class Mesh(CommonMesh):
 #        
             #print " mesh dbg getBody nodes found ",len(indPDO),self.dim
             #raw_input()
-        
             return Body(self.physicalBodyNames.get(bodyName),bodyName,indPDO,nodes = self.vertexCoords, dim = self.dim)
         else:
             return None
@@ -1273,10 +1330,8 @@ class Mesh(CommonMesh):
     """
 
     def __add__(self, other):
-        if(isinstance(other, Mesh)):
-            return self._concatenate(other, smallNumber = 1e-15)
-        else:
-            return self._translate(other)
+        if(isinstance(other, Mesh)): return self._concatenate(other, smallNumber = 1e-15)
+        else: return self._translate(other)
 
     def __mul__(self, factor):
         newCoords = self.vertexCoords * factor
@@ -1351,7 +1406,7 @@ class Mesh(CommonMesh):
             faceNormals = self.faceNormals[:,dim].copy()
             numpy.put(faceNormals, faces0, MA.take(faceNormals, faces1))
             self.faceNormals[:,dim] = faceNormals
-
+            pass
         ## Cells that are adjacent to faces1 are changed to point at faces0
         ## get the cells adjacent to faces1
         faceCellIDs = MA.take(self.faceCellIDs[:,0], faces1)
@@ -1367,7 +1422,7 @@ class Mesh(CommonMesh):
             tmp = self.cellFaceIDs[:,i]
             MA.put(tmp, faceCellIDs, cellFaceIDs[:,i])
             self.cellFaceIDs[:,i] = tmp
-
+            pass
         ## calculate new topology
         _CommonMesh._calcTopology(self)
 
@@ -1402,6 +1457,9 @@ class Mesh(CommonMesh):
                 diff = numpy.array(diff)
                 if (sum(diff ** 2) < smallNumber):
                     vertexCorrelates[j] = i
+                    pass
+                pass
+            pass
         if (vertexCorrelates == {}):
             raise MeshAdditionError, "Vertices are not aligned"
         ## compute face correlates
@@ -1411,37 +1469,44 @@ class Mesh(CommonMesh):
             keepGoing = 1
             currIndex = 0
             for item in currFace:
-                if(vertexCorrelates.has_key(item)):
+                if (vertexCorrelates.has_key(item)):
                     currFace[currIndex] = vertexCorrelates[item]
                     currIndex = currIndex + 1
+                    pass
                 else:
                     keepGoing = 0
-            if(keepGoing == 1):
+                    pass
+                pass
+            if (keepGoing == 1):
                 for j in range(selfNumFaces):
                     if (self._equalExceptOrder(currFace, self.faceVertexIDs[j])):
                         faceCorrelates[i] = j
-        if(faceCorrelates == {}):
-            raise MeshAdditionError, "Faces are not aligned"
+                        pass
+                    pass
+                pass
+            pass
+        if(faceCorrelates == {}): raise MeshAdditionError, "Faces are not aligned"
 
         faceIndicesToAdd = ()
         for i in range(otherNumFaces):
-            if(not faceCorrelates.has_key(i)):
-                faceIndicesToAdd = faceIndicesToAdd + (i,)
+            if(not faceCorrelates.has_key(i)): faceIndicesToAdd = faceIndicesToAdd + (i,)
+            pass
         vertexIndicesToAdd = ()
         for i in range(otherNumVertices):
-            if(not vertexCorrelates.has_key(i)):
-                vertexIndicesToAdd = vertexIndicesToAdd + (i,)
+            if(not vertexCorrelates.has_key(i)): vertexIndicesToAdd = vertexIndicesToAdd + (i,)
+            pass
 
         ##compute the full face and vertex correlation list
         a = selfNumFaces
         for i in faceIndicesToAdd:
             faceCorrelates[i] = a
             a = a + 1
+            pass
         b = selfNumVertices
         for i in vertexIndicesToAdd:
             vertexCorrelates[i] = b
             b = b + 1
-
+            pass
         ## compute what the cells are that we need to add
         cellsToAdd = numpy.ones((other.cellFaceIDs.shape[0], self.cellFaceIDs.shape[1]))
         cellsToAdd = -1 * cellsToAdd
@@ -1449,6 +1514,8 @@ class Mesh(CommonMesh):
         for i in range(len(other.cellFaceIDs)):
             for j in range(len(other.cellFaceIDs[i])):
                 cellsToAdd[i, j] = faceCorrelates[other.cellFaceIDs[i, j]]
+                pass
+            pass
 
         cellsToAdd = MA.masked_values(cellsToAdd, -1)
 
@@ -1458,6 +1525,8 @@ class Mesh(CommonMesh):
         for i in range(len(facesToAdd)):
             for j in range(len(facesToAdd[i])):
                 facesToAdd[i, j] = vertexCorrelates[facesToAdd[i, j]]
+                pass
+            pass
         #
         # compute what the vertices are that we need to add
         #
@@ -1478,13 +1547,18 @@ class Mesh(CommonMesh):
         res = 0
         if (len(first) == len(second)):
             res = 1
+            pass
         for i in first:
             isthisin = 0
             for j in second:
                 if (i == j):
                     isthisin = 1
+                    pass
+                pass
             if(isthisin == 0):
                 res = 0
+                pass
+            pass
         return res
     
 
@@ -1531,6 +1605,12 @@ class Mesh1D(Mesh):
         self.internalNodesAnzList = internalNodesAnzList
         Mesh.__init__(self, vertices["vertexCoords"], numElements, elementArray, physicalBodyNames, internalNodesAnzList)
         self.meshFileName = filename
+        self.xextension = max(self.getNodesCoordinates()) - min(self.getNodesCoordinates())
+        #
+        # we set by default the extension to 1 in the y and z direction
+        #
+        self.yextension = 1.
+        self.zextension = 1.
 
     def getConnectivity(self):
         connectivity = []
@@ -1545,6 +1625,11 @@ class Mesh1D(Mesh):
                         if element[0] not in connectivitylist:
                             connectivity.append(element)
                             connectivitylist.append(element[0])
+                            pass
+                        pass
+                    pass
+                pass
+            pass
         return connectivity
            
     def getPhysicalBodyNames(self):
@@ -1554,11 +1639,14 @@ class Mesh1D(Mesh):
         
     def getDimensionString(self):
         return "1D"
-        
+
     def getElAnz(self):
         print "dbg getElAnz",self.numElements
         return self.numElements
 
+    def getMeshType(self):
+        return self.meshType
+        
     def getName(self):
         return self.meshFileName
         
@@ -1582,9 +1670,16 @@ class Mesh1D(Mesh):
         
     def getNodesCoordinates(self):
         return self.vertices['vertexCoords']
-             
-    def getMeshType(self):
-        return self.meshType
+        
+    def getNodesXCoordinates(self):
+        #print self.vertices['vertexCoords']
+        #return map(lambda x: x[0],self.vertices['vertexCoords'].tolist())
+        if type(self.vertices['vertexCoords']) == ListType:
+            return map(lambda x: x[0],self.vertices['vertexCoords'])
+            pass
+        else:
+            return map(lambda x: x[0], self.vertices['vertexCoords'].tolist())
+            pass
 
 class Mesh2D(Mesh):
     def __init__(self, filename):
@@ -1603,13 +1698,19 @@ class Mesh2D(Mesh):
         self.internalNodesAnzList = internalNodesAnzList
         print ' dbg mesh element array', len(elementArray), numElements
         #print ' element array',physicalBodyNames, internalNodesAnz
-        #raw_input()
+        #raw_input("dbg mesh element array")
         #for i in elementArray:
             #print i
         #print vertices["vertexCoords"]
         #raw_input("vertices")
         Mesh.__init__(self, vertices["vertexCoords"], numElements, elementArray, physicalBodyNames, internalNodesAnzList)
         self.meshFileName = filename
+        self.xextension = max(self.getNodesXCoordinates()) - min(self.getNodesXCoordinates())
+        self.yextension = max(self.getNodesYCoordinates()) - min(self.getNodesYCoordinates())
+        #
+        # we set by default the extension to 1 in the z direction
+        #
+        self.zextension = 1.
         
     def getConnectivity(self):
         connectivity = []
@@ -1629,6 +1730,11 @@ class Mesh2D(Mesh):
 #                            print element, type(element)
                             connectivity.append(element)
                             connectivitylist.append(element[0])
+                            pass
+                        pass
+                    pass
+                pass
+            pass
 #        print len(connectivity),len(connectivitylist)
         return connectivity
            
@@ -1673,7 +1779,31 @@ class Mesh2D(Mesh):
     def getNodesCoordinates(self):
         #print self.vertices['vertexCoords']
         return self.vertices['vertexCoords']
+    getVertexCoords = getNodesCoordinates
+        
+    def getNodesXCoordinates(self):
+        #print self.vertices['vertexCoords']
+        #print "self.vertices: ",type(self.vertices['vertexCoords'])
+        #print dir(self.vertices)
+        #raw_input("dbg getNodesXCoordinates")
+        if type(self.vertices['vertexCoords']) == ListType:
+            return map(lambda x: x[0],self.vertices['vertexCoords'])
+            pass
+        else:
+            return map(lambda x: x[0], self.vertices['vertexCoords'].tolist())
+            pass
              
+        
+    def getNodesYCoordinates(self):
+        #print self.vertices['vertexCoords']
+        if type(self.vertices['vertexCoords']) == ListType:
+            return map(lambda x: x[-1],self.vertices['vertexCoords'])
+            pass
+        else:
+            return map(lambda x: x[-1],self.vertices['vertexCoords'].tolist())
+            pass
+            
+    
     def getMeshType(self):
         return self.meshType
 
@@ -1702,6 +1832,9 @@ class Mesh3D(Mesh):
         #raw_input( "Mesh3D")
         self.meshFileName = filename
         #raw_input(" dbg call to mesh init is over ")
+        self.xextension = max(self.getNodesXCoordinates()) - min(self.getNodesXCoordinates())
+        self.yextension = max(self.getNodesYCoordinates()) - min(self.getNodesYCoordinates())
+        self.zextension = max(self.getNodesZCoordinates()) - min(self.getNodesZCoordinates())
         
     def getConnectivity(self):
         connectivity = []
@@ -1719,6 +1852,11 @@ class Mesh3D(Mesh):
 #                            print element, type(element)
                             connectivity.append(element)
                             connectivitylist.append(element[0])
+                            pass
+                        pass
+                    pass
+                pass
+            pass
 #        print len(connectivity),len(connectivitylist)
         return connectivity
 
@@ -1740,8 +1878,10 @@ class Mesh3D(Mesh):
 
     def getNodesCoordinates(self):
         #print self.vertices['vertexCoords'][0], self.vertices['vertexCoords'][1], self.vertexCoords[1]
+        
         return self.vertices['vertexCoords']
-
+    getVertexCoordinates = getNodesCoordinates
+    
     def getPhysicalBodyNames(self):
         return self.physicalBodyNames.keys()
 
@@ -1762,6 +1902,49 @@ class Mesh3D(Mesh):
         gmshType = self.elementArray[self.physicalBodyNames.items()[0][1][1][0]][1]
 
         return gmshType, _typeConverter(gmshType)
+
+    def getNodesXCoordinates(self):
+        #print self.vertices['vertexCoords']
+        #print "self.vertices: ",type(self.vertices['vertexCoords'])
+        #print dir(self.vertices)
+        #raw_input("dbg getNodesXCoordinates")
+        if type(self.vertices['vertexCoords']) == ListType:
+            return map(lambda x: x[0],self.vertices['vertexCoords'])
+            pass
+        else:
+            return map(lambda x: x[0], self.vertices['vertexCoords'].tolist())
+            pass
+             
+        
+    def getNodesYCoordinates(self):
+        #print self.vertices['vertexCoords']
+        if type(self.vertices['vertexCoords']) == ListType:
+            return map(lambda x: x[1],self.vertices['vertexCoords'])
+            pass
+        else:
+            return map(lambda x: x[1],self.vertices['vertexCoords'].tolist())
+            pass
+        
+    def getNodesZCoordinates(self):
+        #print self.vertices['vertexCoords']
+        if type(self.vertices['vertexCoords']) == ListType:
+            return map(lambda x: x[-1],self.vertices['vertexCoords'])
+            pass
+        else:
+            return map(lambda x: x[-1],self.vertices['vertexCoords'].tolist())
+            pass
+        
+#    def getNodesXCoordinates(self):
+#        #print self.vertices['vertexCoords']
+#        return map(lambda x: x[0],self.vertices['vertexCoords'].tolist())
+        
+#    def getNodesYCoordinates(self):
+#        #print self.vertices['vertexCoords']
+#        return map(lambda x: x[1],self.vertices['vertexCoords'].tolist())
+        
+#    def getNodesZCoordinates(self):
+#        #print self.vertices['vertexCoords']
+#        return map(lambda x: x[-1],self.vertices['vertexCoords'].tolist())
 
 class GmshImporter2D(Mesh2D):
 

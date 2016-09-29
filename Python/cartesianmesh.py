@@ -2,22 +2,25 @@
 Used to handle a cartesian structured Mesh
 ie a mesh where meshlines are straight lines"""
 
+from __future__ import absolute_import
+from __future__ import print_function
 import numpy
 
 from listtools import toList
 
 from mpoints import *
+from six.moves import range
 
 
 def _verifyDimensions(obj1, obj2):
     """Raises an exception if the two objects don't have the same dimensions"""
     if obj1.getDimensions() != obj2.getDimensions():
-        raise "The two objects don't have the same dimension"
+        raise Warning("The two objects don't have the same dimension")
 
 def _verifyIndexOrder(index1, index2):
     """Raises an exception if the two indices are not ordered"""
     if index1 > index2:
-        raise "Indices are not correctly ordered"
+        raise Warning("Indices are not correctly ordered")
 
 def _verifyIndices(index1, index2):
     _verifyDimensions(index1, index2)
@@ -30,70 +33,74 @@ class AbstractIndex:
 class Index1D(AbstractIndex):
 
     def __init__(self, i):
-	self.i = i
+        self.i = i
 
     def getDimensions(self):
-	return 1
+        return 1
 
     def getValues(self):
-	return self.i
+        return self.i
 
     def outOfBounds(self, min, max):
         return self.i < min or self.i >= max
 
     def __cmp__(self, other):
-	return cmp(self.i, other.i)
+        return cmp(self.i, other.i)
 
 class Index2D(AbstractIndex):
 
     def __init__(self, i, j):
-	self.i = i
-	self.j = j
+        self.i = i
+        self.j = j
 
     def getDimensions(self):
-	return 2
+        return 2
 
     def getValues(self):
-	return self.i, self.j
+        return self.i, self.j
 
-    def outOfBounds(self, (i_min, j_min), (i_max, j_max)):
+    def outOfBounds(self, xxx_todo_changeme, xxx_todo_changeme1):
+        (i_min, j_min) = xxx_todo_changeme
+        (i_max, j_max) = xxx_todo_changeme1
         return self.i < i_min or self.i >= i_max or \
                self.j < j_min or self.j >= j_max
 
     def __cmp__(self, other):
-	return cmp([self.j, self.i], [other.j, other.i])
+        return cmp([self.j, self.i], [other.j, other.i])
 
 class Index3D(AbstractIndex):
 
     def __init__(self, i, j, k):
-	self.i = i
-	self.j = j
-	self.k = k
+        self.i = i
+        self.j = j
+        self.k = k
 
     def getDimensions(self):
-	return 3
+        return 3
 
     def getValues(self):
-	return self.i, self.j, self.k
+        return self.i, self.j, self.k
 
-    def outOfBounds(self, (i_min, j_min, k_min), (i_max, j_max, k_max)):
+    def outOfBounds(self, xxx_todo_changeme2, xxx_todo_changeme3):
+        (i_min, j_min, k_min) = xxx_todo_changeme2
+        (i_max, j_max, k_max) = xxx_todo_changeme3
         return self.i < i_min or self.i >= i_max or \
                self.j < j_min or self.j >= j_max or \
                self.k < k_min or self.k >= k_max
 
     def __cmp__(self, other):
-	return cmp([self.k, self.j, self.i], 
-		   [other.k, other.j, other.i])
+        return cmp([self.k, self.j, self.i], 
+                   [other.k, other.j, other.i])
 
 def Index(*values):
     """Return an instance of Index1D, Index2D or Index3D,
     based on the number of indexes (i,j,k) given."""
     if len(values) == 1:
-	return Index1D(*values)
+        return Index1D(*values)
     elif len(values) == 2:
-	return Index2D(*values)
+        return Index2D(*values)
     else:
-	return Index3D(*values)
+        return Index3D(*values)
 
 
 class CartesianZone:
@@ -116,6 +123,9 @@ class CartesianZone:
     def getDimensions(self):
         return self.dims
 
+    getSpaceDimension = getDimensions
+    
+    
     def getName(self):
         return self.name
 
@@ -142,15 +152,15 @@ class CartesianZone:
 class CartesianZone1D(CartesianZone):
     dims = 1
     def containsIndex(self, index):
-	i = index.getValues()
+        i = index.getValues()
         i0 = self.min.getValues()
         i1 = self.max.getValues()
-	return i0 <= i and i < i1
+        return i0 <= i and i < i1
 
     def getCornerIndexes(self):
-	i0 = self.getIndexMin().getValues()
-	i1 = self.getIndexMax().getValues() - 1
-	return [Index1D(i0), Index1D(i1)]
+        i0 = self.getIndexMin().getValues()
+        i1 = self.getIndexMax().getValues() - 1
+        return [Index1D(i0), Index1D(i1)]
 
     def setMap(self, map, value):
         i0 = self.min.getValues()
@@ -161,18 +171,18 @@ class CartesianZone1D(CartesianZone):
 class CartesianZone2D(CartesianZone):
     dims = 2
     def containsIndex(self, index):
-	i,j = index.getValues()
+        i,j = index.getValues()
         i0, j0 = self.min.getValues()
         i1, j1 = self.max.getValues()
-	return i0 <= i and i < i1 and \
-	       j0 <= j and j < j1
+        return i0 <= i and i < i1 and \
+           j0 <= j and j < j1
 
     def getCornerIndexes(self):
-	i0, j0 = self.getIndexMin().getValues()
-	i1, j1 = self.getIndexMax().getValues()
-	i1 -= 1; j1 -= 1
-	return [Index2D(i0,j0), Index2D(i1,j0),
-		Index2D(i1,j1), Index2D(i0,j1)]
+        i0, j0 = self.getIndexMin().getValues()
+        i1, j1 = self.getIndexMax().getValues()
+        i1 -= 1; j1 -= 1
+        return [Index2D(i0,j0), Index2D(i1,j0),
+                Index2D(i1,j1), Index2D(i0,j1)]
 
     def setMap(self, map, value):
         i0, j0 = self.min.getValues()
@@ -183,21 +193,21 @@ class CartesianZone2D(CartesianZone):
 class CartesianZone3D(CartesianZone):
     dims = 3
     def containsIndex(self, index):
-	i, j, k = index.getValues()
+        i, j, k = index.getValues()
         i0, j0, k0 = self.min.getValues()
         i1, j1, k1 = self.max.getValues()
-	return i0 <= i and i < i1 and \
-	       j0 <= j and j < j1 and \
-	       k0 <= k and k < k1
+        return i0 <= i and i < i1 and \
+           j0 <= j and j < j1 and \
+           k0 <= k and k < k1
 
     def getCornerIndexes(self):
-	i0, j0, k0 = self.getIndexMin().getValues()
-	i1, j1, k1 = self.getIndexMax().getValues()
-	i1 -= 1; j1 -= 1; k1 -= 1
-	return [Index3D(i0,j0,k0), Index3D(i1,j0,k0),
-		Index3D(i1,j1,k0), Index3D(i0,j1,k0),
-		Index3D(i0,j0,k1), Index3D(i1,j0,k1),
-		Index3D(i1,j1,k1), Index3D(i0,j1,k1)]
+        i0, j0, k0 = self.getIndexMin().getValues()
+        i1, j1, k1 = self.getIndexMax().getValues()
+        i1 -= 1; j1 -= 1; k1 -= 1
+        return [Index3D(i0,j0,k0), Index3D(i1,j0,k0),
+                Index3D(i1,j1,k0), Index3D(i0,j1,k0),
+                Index3D(i0,j0,k1), Index3D(i1,j0,k1),
+                Index3D(i1,j1,k1), Index3D(i0,j1,k1)]
 
     def setMap(self, map, value):
         i0, j0, k0 = self.min.getValues()
@@ -252,9 +262,9 @@ class CartesianCell1D(CartesianCell):
         """Return a list of sides numbers.
 
         The order is: [west, east]."""
-	side_west = self.i
-	side_east = self.i + 1
-	return [side_west, side_east]
+        side_west = self.i
+        side_east = self.i + 1
+        return [side_west, side_east]
 
     def getSidesVolumes(self):
         return [1., 1.]
@@ -297,20 +307,20 @@ class CartesianCell2D(CartesianCell):
         """Return a list of sides numbers.
 
         The order is: [sud, east, north, west]."""
-	i = self.i
-	j = self.j
+        i = self.i
+        j = self.j
         getEastSide = self.mesh.getEastSideNb
-	side_east = getEastSide(i, j)
-	side_north = side_east + 1
-	if i == 0:
-	    side_west = side_north + 1
-	else:
-	    side_west =  getEastSide(i-1, j)
-	if j == 0:
-	    side_sud = side_east - 1
-	else:
-	    side_sud = getEastSide(i, j-1) + 1
-	return [side_sud, side_east, side_north, side_west]
+        side_east = getEastSide(i, j)
+        side_north = side_east + 1
+        if i == 0:
+            side_west = side_north + 1
+        else:
+            side_west =  getEastSide(i-1, j)
+        if j == 0:
+            side_sud = side_east - 1
+        else:
+            side_sud = getEastSide(i, j-1) + 1
+        return [side_sud, side_east, side_north, side_west]
 
     def getSidesVolumes(self):
         xs = self.mesh.coords[0]
@@ -441,6 +451,8 @@ class CartesianMesh:
 
     def getSpaceDimensions(self):
         return self.dims
+        
+    getSpaceDimension = getSpaceDimensions
 
     def getType(self):
         return "Cartesian"
@@ -511,7 +523,7 @@ class CartesianMesh:
         """
         A list of already defined coordinates is treated
         """
-	if axisName not in self.axis_names: raise Exception, " checking the axis name  to be in setAxis"
+        if axisName not in self.axis_names: raise Exception(" checking the axis name  to be in setAxis")
         axisIndex = self.getAxisIndex(axisName)
         self.coords[axisIndex] = numpy.array(coordinates, numpy.float)
         self.nb_of_intervals[axisIndex] = len(coordinates) - 1
@@ -520,7 +532,7 @@ class CartesianMesh:
         """
         A list of already defined intervals is treated
         """
-	if axisName not in self.axis_names: raise Exception, " checking the axis name  to be in setdAxis"
+        if axisName not in self.axis_names: raise Exception(" checking the axis name  to be in setdAxis")
         axisIndex = self.getAxisIndex(axisName)
         coordinates = [0.0]
         for i in range (0, len (delta), 1):
@@ -552,20 +564,20 @@ class CartesianMesh:
 class CartesianMesh1D(CartesianMesh):
     dims = 1
     def __init__(self, name, axis='X'):
-	if axis not in ['X', 'Y', 'Z', 'R']: raise Exception, " check the axis denomination"
-	if axis in ['X', 'Y', 'Z']:
-	    self.coord_system = 'Cartesian'
-	    self.axis_names = ['X']
-	    self.element_type = 'Seg2'
-	elif axis == 'R':
-	    self.coord_system = 'Cylindrical'
-	    self.axis_names = ['R']
-	    self.element_type = 'Other'
-	CartesianMesh.__init__(self, name)
+        if axis not in ['X', 'Y', 'Z', 'R']: raise Exception(" check the axis denomination")
+        if axis in ['X', 'Y', 'Z']:
+            self.coord_system = 'Cartesian'
+            self.axis_names = ['X']
+            self.element_type = 'Seg2'
+        elif axis == 'R':
+            self.coord_system = 'Cylindrical'
+            self.axis_names = ['R']
+            self.element_type = 'Other'
+        CartesianMesh.__init__(self, name)
 
     def getCell(self, cell_nb):
         if cell_nb > self.getNbCells():
-            raise Exception, "Cell number out of range"
+            raise Exception("Cell number out of range")
         return CartesianCell1D(self, cell_nb, self.toCellIndex(cell_nb))
 
     def getNbNodes(self):
@@ -601,23 +613,23 @@ class CartesianMesh1D(CartesianMesh):
 class CartesianMesh2D(CartesianMesh):
     dims = 2
     def __init__(self, name, axis='XY'):
-	if axis not in ['XY', 'XZ', 'YZ', 'RZ', 'RTeta']: raise Exception, " check the axis denomination"
-	if axis in ['XY', 'XZ', 'YZ']:
-	    self.coord_system = 'Cartesian'
-	    self.axis_names = ['X', 'Y']
-	    self.element_type = 'Quad4'
-	elif axis == 'RZ' or axis == 'RTheta':
-	    self.coord_system = 'Cylindrical'
-	    self.element_type = 'Other'
-	    if axis == 'RZ':
-		self.axis_names = ['R', 'Z']
-	    else:
-		self.axis_names = ['R', 'Theta']
-	CartesianMesh.__init__(self, name)
+        if axis not in ['XY', 'XZ', 'YZ', 'RZ', 'RTeta']: raise Exception(" check the axis denomination")
+        if axis in ['XY', 'XZ', 'YZ']:
+            self.coord_system = 'Cartesian'
+            self.axis_names = ['X', 'Y']
+            self.element_type = 'Quad4'
+        elif axis == 'RZ' or axis == 'RTheta':
+            self.coord_system = 'Cylindrical'
+            self.element_type = 'Other'
+            if axis == 'RZ':
+                self.axis_names = ['R', 'Z']
+            else:
+                self.axis_names = ['R', 'Theta']
+        CartesianMesh.__init__(self, name)
 
     def getCell(self, cell_nb):
         if cell_nb > self.getNbCells():
-            raise Exception, "Cell number out of range"
+            raise Exception("Cell number out of range")
         return CartesianCell2D(self, cell_nb, self.toCellIndex(cell_nb))
 
     def getNbNodes(self):
@@ -704,49 +716,49 @@ class CartesianMesh2D(CartesianMesh):
 class CartesianMesh3D(CartesianMesh):
     dims = 3
     def __init__(self, name, axis='XYZ'):
-	if axis not in ['XYZ', 'RTetaZ']: raise Exception, " check the axis denomination"
-	if axis == 'XYZ':
-	    self.coord_system = 'Cartesian'
-	    self.axis_names = ['X', 'Y', 'Z']
-	    self.element_type = 'Hexa6'
-	elif axis == 'RThetaZ':
-	    self.coord_system = 'Cylindrical'
-	    self.element_type = 'Other'
-	    self.axis_names = ['R', 'Theta', 'Z']
-	CartesianMesh.__init__(self, name)
+        if axis not in ['XYZ', 'RTetaZ']: raise Exception(" check the axis denomination")
+        if axis == 'XYZ':
+            self.coord_system = 'Cartesian'
+            self.axis_names = ['X', 'Y', 'Z']
+            self.element_type = 'Hexa6'
+        elif axis == 'RThetaZ':
+            self.coord_system = 'Cylindrical'
+            self.element_type = 'Other'
+            self.axis_names = ['R', 'Theta', 'Z']
+        CartesianMesh.__init__(self, name)
 
     def getCell(self, cell_nb):
         if cell_nb > self.getNbCells():
-            raise Exception, "Cell number out of range"
+            raise Exception("Cell number out of range")
         return CartesianCell3D(self, cell_nb, self.toCellIndex(cell_nb))
 
     def getNbNodes(self):
-	nx = self.nb_of_intervals[0] + 1
-	ny = self.nb_of_intervals[1] + 1
-	nz = self.nb_of_intervals[2] + 1
+        nx = self.nb_of_intervals[0] + 1
+        ny = self.nb_of_intervals[1] + 1
+        nz = self.nb_of_intervals[2] + 1
         return nx * ny * nz
 
     def getNbCells(self):
-	nx = self.nb_of_intervals[0]
-	ny = self.nb_of_intervals[1]
-	nz = self.nb_of_intervals[2]
+        nx = self.nb_of_intervals[0]
+        ny = self.nb_of_intervals[1]
+        nz = self.nb_of_intervals[2]
         return nx * ny * nz
 
     def getNbSides(self):
-	nx = self.nb_of_intervals[0]
-	ny = self.nb_of_intervals[1]
-	nz = self.nb_of_intervals[2]
+        nx = self.nb_of_intervals[0]
+        ny = self.nb_of_intervals[1]
+        nz = self.nb_of_intervals[2]
         return (nx + 1) * ny * nz + nx * (ny + 1) * nz + nx * ny * (nz + 1)
 
     def makeZone(self, name, index_min, index_max):
         return CartesianZone3D(name, index_min, index_max)
 
     def toCellIndex(self, cell_nb):
-	nx = self.nb_of_intervals[0] 
-	ny = self.nb_of_intervals[1]
-	k, rest = divmod(cell_nb, (nx * ny))
-	j, i = divmod(rest, nx)
-	return Index3D(i,j,k)
+        nx = self.nb_of_intervals[0] 
+        ny = self.nb_of_intervals[1]
+        k, rest = divmod(cell_nb, (nx * ny))
+        j, i = divmod(rest, nx)
+        return Index3D(i,j,k)
 
     def toCellNb(self, cell_index):
         nx = self.nb_of_intervals[0]
@@ -755,7 +767,7 @@ class CartesianMesh3D(CartesianMesh):
         if cell_index.outOfBounds((0,0,0), (nx,ny,nz)):
             return None
         i, j, k = cell_index.getValues()
-	return k * nx * ny + j * nx + i
+        return k * nx * ny + j * nx + i
 
 class CartesianField:
 
@@ -767,7 +779,7 @@ class CartesianField:
         self.components = components_names
         self.type = type
         if type not in ['Float','Int'] :
-            raise 'Type unsupport by cartesian Fields'
+            raise Warning('Type unsupport by cartesian Fields')
         self.field={}
         if flags:
             self.iteration=flags[iteration]
@@ -804,8 +816,8 @@ class CartesianField:
             component_name=self.components[indice_component]
             nb_values=len(value)  
             if nb_values!=nb_expected_values:
-                print nb_values,nb_expected_values
-                raise 'Invalid number of values in cartesian field read'
+                print(nb_values,nb_expected_values)
+                raise Warning('Invalid number of values in cartesian field read')
             if self.type=='Float' :
                 self.field[component_name]=numpy.array(value, numpy.float)
             else :
@@ -819,11 +831,11 @@ class CartesianField:
     def setComponentValues(self, component, values):
         """One component for all elements."""
         if component not in self.components:
-            raise 'not in component list'
+            raise Warning('not in component list')
         nb_values=len(values)
         nb_expected_values=self.support.getNbCells()
         if nb_values!=nb_expected_values:
-            raise 'Invalid number of values in cartesian field read: expected number=%d, number found=%d'%(nb_expected_values,nb_values)
+            raise Warning('Invalid number of values in cartesian field read: expected number=%d, number found=%d'%(nb_expected_values,nb_values))
         if self.type=='Float' :
             self.field[component]=numpy.array(values, numpy.float)
         else :
@@ -833,11 +845,11 @@ class CartesianField:
     def getComponentValues(self, component):
         """One component for all elements."""
         if component not in self.components:
-            raise 'not in component list'
-        if self.field.has_key(component):
+            raise Warning('not in component list')
+        if component in self.field:
             return self.field[component]
         else :
-            raise 'No field for this component'
+            raise Warning('No field for this component')
 
 
 class CartesianSupport:

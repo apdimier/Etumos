@@ -2,6 +2,8 @@
 Enables to treat fields over bodies.
 """
 
+from __future__ import absolute_import
+from __future__ import print_function
 import copy, os, types
 
 from functions import Function
@@ -9,11 +11,12 @@ from functions import Function
 from generictools import listTypeCheck
 
 from numpy import array,\
-                    concatenate,\
-                    float,\
-                    int,\
-                    ravel,\
-                    reshape
+                  concatenate,\
+                  float,\
+                  int,\
+                  ravel,\
+                  reshape
+from six.moves import range
 
 class Field:
     pass
@@ -37,14 +40,14 @@ class ZoneField(Field):
         return self.name
 
     def getEntity(self):
-        print " dbg fields getEntity is:\n ",self.entity
-        print " dbg fields getEntity over\n"
+        #print " dbg fields getEntity is:\n ",self.entity
+        #print " dbg fields getEntity over\n"
         return self.entity
 
     def setEntity(self, entity):
         if hasattr(self,'entity'):
             raise RuntimeError("entity value already set")
-        print "dbg fields setEntity",self.entity
+        print("dbg fields setEntity",self.entity)
         self.entity = entity
 
     def getNbBodies(self):
@@ -63,8 +66,8 @@ class ZoneField(Field):
     def setZone(self, zone, values, material=None):
         try:
             myEntity = self.getEntity()
-            print " dbg fields setZone: it was ok myEntity",myEntity
-            print " dbg fields setZone ok"
+            #print " dbg fields setZone: it was ok myEntity",myEntity
+            #print " dbg fields setZone ok"
         except AttributeError:
             myEntity = zone.getEntity()
             self.entity = myEntity
@@ -144,15 +147,14 @@ class NumericZoneField(ZoneField):
         copy = NumericZoneField(name, self.mesh, self.components_names, self.numType)
         copy.zones = self.zones
         copy.materials = self.materials
-        if 'entity' in self.__dict__.keys():
-            copy.entity = self.entity
+        if 'entity' in list(self.__dict__.keys()): copy.entity = self.entity
         return copy
 
     def extractComponentValue(self,component_name):
         try:
             index = self.components_names.index(component_name)
         except ValueError:
-            raise Exception, "problem with the component name!!!"
+            raise Exception("problem with the component name!!!")
         name = self.name
         copy = NumericZoneField(name, self.mesh, component_name, self.numType)
         copy.components_names=[component_name]
@@ -212,10 +214,12 @@ class NumericZoneField(ZoneField):
                             pass
                         pass
                     new_field.appendZoneValues(val)
+                    pass
                 #new_field.values = self.values.amult(value)
+            pass
         else:
             components=toList(components)
-            listTypeCheck(components,types.IntType)
+            listTypeCheck(components,int)
             nb_zones = self.getNbZones()
             nb_compo = self.getNbComponents()
             for f in range(nb_zones):
@@ -257,9 +261,11 @@ class NumericZoneField(ZoneField):
                             pass
                         pass
                     new_field.appendZoneValues(val)
+                    pass
+            pass
         else:
             components=toList(components)
-            listTypeCheck(components,types.IntType)
+            listTypeCheck(components,int)
             nb_zones = self.getNbZones()
             nb_compo = self.getNbComponents()
             for f in range(nb_zones):
@@ -325,15 +331,14 @@ class NumericBodyField(ZoneField):
         copy = NumericBodyField(name, self.mesh, self.components_names, self.numType)
         copy.zones = self.zones
         copy.materials = self.materials
-        if 'entity' in self.__dict__.keys():
-            copy.entity = self.entity
+        if 'entity' in list(self.__dict__.keys()): copy.entity = self.entity  
         return copy
 
     def extractComponentValue(self,component_name):
         try:
             index = self.components_names.index(component_name)
         except ValueError:
-            raise Exception, "You should give a correct component_name!!!"
+            raise Exception("You should give a correct component_name!!!")
         name = self.name
         copy = NumericBodyField(name, self.mesh, component_name, self.numType)
         copy.components_names=[component_name]
@@ -393,10 +398,12 @@ class NumericBodyField(ZoneField):
                             pass
                         pass
                     new_field.appendZoneValues(val)
+                    pass
                 #new_field.values = self.values.amult(value)
+            pass
         else:
             components=toList(components)
-            listTypeCheck(components,types.IntType)
+            listTypeCheck(components,int)
             nb_zones = self.getNbZones()
             nb_compo = self.getNbComponents()
             for f in range(nb_zones):
@@ -438,9 +445,10 @@ class NumericBodyField(ZoneField):
                             pass
                         pass
                     new_field.appendZoneValues(val)
+            pass
         else:
             components=toList(components)
-            listTypeCheck(components,types.IntType)
+            listTypeCheck(components,int)
             nb_zones = self.getNbZones()
             nb_compo = self.getNbComponents()
             for f in range(nb_zones):
@@ -511,8 +519,7 @@ class InstanceBodyField(ZoneField):
         values = []
         values_0 = self.values
         values_1 = other.values
-        for i in range(len(values_0)):
-            values.append(values_0[i] + values_1[i])
+        for i in range(len(values_0)): values.append(values_0[i] + values_1[i])
         new_field.values = values
         return new_field
 
@@ -522,8 +529,7 @@ class InstanceBodyField(ZoneField):
         values = []
         values_0 = self.values
         values_1 = other.values
-        for i in range(len(values_0)):
-            values.append(values_0[i] - values_1[i])
+        for i in range(len(values_0)): values.append(values_0[i] - values_1[i])
         new_field.values = values
         return new_field
 
@@ -531,8 +537,7 @@ class InstanceBodyField(ZoneField):
         new_field = self.duplicate()
         values = []
         values_0 = self.values
-        for i in range(len(values_0)):
-            values.append(- values_0[i])
+        for i in range(len(values_0)): values.append(- values_0[i])
         new_field.values = values
         return new_field
 
@@ -540,8 +545,7 @@ class InstanceBodyField(ZoneField):
         new_field = self.duplicate()
         values = []
         values_0 = self.values
-        for i in range(len(values_0)):
-            values.append(values_0[i].amult(scalar))
+        for i in range(len(values_0)): values.append(values_0[i].amult(scalar))
         new_field.values = values
         return new_field
 
@@ -551,7 +555,7 @@ class BodyFieldFunction(ZoneField):
     Zone field of functions.
 
     
-    WARNING : FOR INSTANCE, IT SUPPOSE THAT ALL COMPONENTS ARE OF SAME TYPE (fLOAT, FUNCTION)
+    WARNING : FOR INSTANCE, IT SUPPOSE THAT ALL COMPONENTS ARE OF SAME TYPE (FLOAT, FUNCTION)
     """
     def __init__(self, name, mesh, components_names, type=float,depend=None):
         ZoneField.__init__(self, name, mesh)
@@ -605,7 +609,7 @@ class BodyFieldFunction(ZoneField):
                 #new_field.values = self.values.amult(value)
         else:
             components=toList(components)
-            listTypeCheck(components,types.IntType)
+            listTypeCheck(components,int)
             nb_zones = self.getNbZones()
             nb_compo = self.getNbComponents()
             for f in range(nb_zones):

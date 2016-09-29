@@ -5,9 +5,13 @@ This module is associated to the class chemical
 """
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+from __future__ import absolute_import
 from chemistry  import  ChemicalProblem
 
 from phreeqc import Phreeqc
+
+from PhysicalQuantities import Time,\
+                               _findUnit                           
 
 class Chemical:
     """
@@ -30,6 +34,8 @@ class Chemical:
         self.speciesBaseAddenda = None
         self.outputs= None
         self.timeStep= None
+        self.simulationTime = None
+        
         self.trace= 0
 
         return None
@@ -39,11 +45,12 @@ class Chemical:
 
     def setData(self, problem):
         """
-        Within that method we access from the problem to chemical data      
+        Within that method we access through the problem to chemical data      
+        That method is used in the python script.
         """
 
         if not isinstance(problem, ChemicalProblem):
-            raise exception, " the problem should be a chemical problem "
+            raise Exception(" the problem should be a chemical problem ")
 
         self.activityLaw =  problem.getActivityLaw()
         self.dB = problem.getDB()
@@ -53,6 +60,7 @@ class Chemical:
         self.outputs =  problem.getOutputs()
         self.speciesBaseAddenda = problem.getSpeciesBaseAddenda()
         self.timeStep =  problem.getTimeStep()
+        self.simulationTime = problem.simulationTime
 
         return None
 
@@ -61,9 +69,10 @@ class Chemical:
 
     def initialise(self, componentName= None):
         """
-        As in a fairy tail, if the emse software is introduced
+        As in a fairy tale, if the emse software is introduced
         """
         self.component = Phreeqc()
+        self.solver = self.component                                                        # to evolve to solver
 
         self.componentName = "phreeqc"
 
@@ -86,6 +95,10 @@ class Chemical:
         if self.timeStep:
             self.component.setTimeStep(self.timeStep)
             pass
+        if isinstance(self.simulationTime,Time):
+                self.component.setSimulationTime(self.simulationTime)
+        if self.timeStep and self.simulationTime:
+            self.component.batch == True
         return None
 
     def setParameter(self, out):
@@ -98,8 +111,25 @@ class Chemical:
         if self.component:
             self.component.setParameter(out)
         else:
-            raise "You have to execute setComponent before setParameter"
-        return
+            raise Exception("You have to execute setComponent before setParameter")
+        return None
+
+    def setComponent(self,name):
+        self.initialise()
+
+    def setComponentTimeParameters(self):
+        """
+        Set specific time component parameters
+          Input :
+        """
+        if self.component:
+            if isinstance(self.timeStep,Time) and isinstance(self.simulationTime,Time):
+                self.component.setTimeParameters(self.timeStep, self.simulationTime)
+            else:
+                raise Warning("check the definition of the time parameters of the chemicalproblem instance.")
+        else:
+            raise Exception("You have to execute setComponent before setTimeParameters")
+        return None
 
     def run(self):
         """
@@ -115,12 +145,15 @@ class Chemical:
         module.initialise()
         module.setParameter("soda.out")
         module.run()
+        
+        The evolution of a batch over time can also be modelled. Then time steps and the simulation time have
+        to be introduced.
         """
 
         if self.component:
             self.component.run()
         else:
-            raise "You have to execute setComponent before run"
+            raise Exception("You have to execute setComponent before run")
         return
 
     def launch(self):
@@ -136,7 +169,7 @@ class Chemical:
             self.component.end()
         return None
 
-    def getOutput(self, outputName=None):
+    def getOutput(self, outputName=None, outputFormat = None):
         """
         To get a specific output
           Input :
@@ -147,19 +180,22 @@ class Chemical:
             ()
           pH = module.getOutput('pH')
         """
-	if (outputName==None):
-	    outputName='state'
+        if (outputName==None):
+            outputName='state'
         if self.component:
             if (outputName=='state'):
-                return self.component.getOutputState()
+                if outputFormat == None:
+                    return self.component.getOutputState()
+                else:
+                    return self.component.getOutputState({})
             elif (outputName=='componentsConcentration'):
                 self.component.getPrimarySpeciesNames()
-                return self.component.getAqueousStatePrimaryConcentrations()
+                return self.component.getMobileConcentration()
             else:
                 return self.component.getOutput(outputName)
             pass
         else:
-            raise "You have to execute setPrimary before getOutput"
+            raise Exception("You have to execute setPrimary before getOutput")
         return
 
     def outputStateSaving(self):
@@ -171,14 +207,14 @@ class Chemical:
                sorbed species number
                minerals number            
                ph
-	       pe
-	       water activity
-	       ionicstrength
+           pe
+           water activity
+           ionicstrength
                temperature
                electrical_balance
-	       total_h
-	       total_o
-	       and a list of tuples representing the aqueous and mineral states
+           total_h
+           total_o
+           and a list of tuples representing the aqueous and mineral states
         """
         state = self.getOutput()
         #print type(state)
@@ -199,9 +235,10 @@ class Chemical:
         outFile.write("electrical_balance                     %20s\n"%str(state[9]))
         outFile.write("total H                                %20s\n"%str(state[10]))
         outFile.write("total O                                %20s\n"%str(state[11]))
+        outFile.write("density of water                       %20s\n"%str(state[12]))
         #print " type",state[11],type(state[10])
         ind = 0
-        anf = 12
+        anf = 13
         end = anf + int(state[0])
         #print state
         outFile.write("\n\n primary species: mol/l\n\n")
@@ -235,5 +272,5 @@ class Chemical:
         if self.component:
             self.component.printOutputState()
         else:
-            raise "You have to execute setPrimary before getOutput"
+            raise Exception("You have to execute setPrimary before getOutput")
         return

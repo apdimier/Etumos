@@ -3,6 +3,7 @@
 That module is the base of a Transient Hydraulic problem
 """
 # -- __init__
+from __future__ import absolute_import
 from PhysicalQuantities import HydraulicFlux, Pressure, PressureGradient
 from generictools import makeDico
 from hydraulicproblem import HydraulicProblem
@@ -77,7 +78,7 @@ class TransientHydraulicProblem(HydraulicProblem):
         if fluidCompressibility:
             from datamodel import FluidCompressibility
             if not isinstance(fluidCompressibility, FluidCompressibility):
-                raise Exception, " fluid compressibility must be an instance of the FluidCompressibility class"
+                raise Exception(" fluid compressibility must be an instance of the FluidCompressibility class")
             pass
         self.fluidCompressibility = fluidCompressibility
 
@@ -85,7 +86,8 @@ class TransientHydraulicProblem(HydraulicProblem):
         if densityLaw:
             from datamodel import DensityLaw
             if not isinstance(densityLaw, DensityLaw):
-                raise Exception, " density must be an instance of the densityLaw class"
+                raise Exception(" density must be an instance of the densityLaw class")
+            pass
         self.densityLaw = densityLaw
 
 
@@ -93,7 +95,8 @@ class TransientHydraulicProblem(HydraulicProblem):
         if viscosityLaw:
             from datamodel import ViscosityLaw
             if not isinstance(viscosityLaw, ViscosityLaw):
-                raise Exception, " the viscosity law must be an instance of the ViscosityLaw class"
+                raise Exception(" the viscosity law must be an instance of the ViscosityLaw class")
+            pass
         self.viscosityLaw = viscosityLaw
             
         #

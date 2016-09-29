@@ -1,8 +1,10 @@
 """TimeSpecification"""
 
+from __future__ import absolute_import
 import types
 
 from species import Species
+from six.moves import range
 
 def floatRange(start, stop, step, epsilon=0.001):
     """Like range, but for floats.
@@ -18,6 +20,7 @@ def floatRange(start, stop, step, epsilon=0.001):
     while last + eps <= stop:
         res.append(last)
         last += step
+        pass
     res.append(stop)
     return res
 
@@ -31,14 +34,16 @@ def _count_args(*args):
     for arg in args:
         if arg:
             iargs += 1
+            pass
+        pass
     return iargs
 
 def verifyNbArguments(nb, *args):
     nb_args = _count_args(*args)
     if nb_args < nb:
-        raise Warning, "At least " +`nb`+ "  arguments must be provided"
+        raise Warning("At least " +repr(nb)+ "  arguments must be provided")
     if nb_args > nb:
-        raise Warning, "At most " +`nb`+ " arguments can be provided"
+        raise Warning("At most " +repr(nb)+ " arguments can be provided")
 
 class TimeSpecification:
     """
@@ -63,10 +68,13 @@ class TimeSpecification:
         verifyNbArguments(1, frequency, period, times)
         if frequency:
             self.setFrequency(frequency)
+            pass
         elif period:
             self.setPeriod(period)
+            pass
         elif times:
             self.setTimes(times)
+            pass
         else:
             raise RuntimeError
         self.setUnit(unit)
@@ -77,6 +85,7 @@ class TimeSpecification:
         if frequency:
             self.frequency = int(frequency)
             self.specification = 'frequency'
+            pass
         return
 
     def setPeriod(self, period):
@@ -92,9 +101,11 @@ class TimeSpecification:
     def setUnit(self, unit):
         if self.getFrequency():
             self.unit = None
+            pass
         else:
-            if unit not in ['s','year']: raise Exception, " check the time specification unit"
+            if unit not in ['s','year']: raise Exception(" check the time specification unit")
             self.unit = unit
+            pass
         return
         
     def getSpecification(self):
@@ -128,7 +139,7 @@ class TimeSpecification:
 class MyTimeSpecification(TimeSpecification):
 
     def setUnit(self, unit):
-        if unit not in ['s','year']: raise Exception, " check the time specification unit"
+        if unit not in ['s','year']: raise Exception(" check the time specification unit")
         self.unit = unit
         return
 
@@ -201,6 +212,7 @@ def _floatRange(start, stop, step, epsilon=0.001):
     while last + eps <= stop:
         res.append(last)
         last += step
+        pass
     res.append(stop)
     return res
 
@@ -255,7 +267,9 @@ class TimeSequence(list):
         n_out = nb / jump
         for i in range(n_out):
             times.append(self[i*jump])
+            pass
         if nb%jump != 0: # always include last time
             times.append(self[-1])
+            pass
         return TimeSequence(times)
             

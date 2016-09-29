@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
+from __future__ import print_function
 import types
 
 import os.path
@@ -11,6 +13,7 @@ from mesh import *
 from numpy import  float as Float
 from types import StringType
 from hydraulicproblem import HydraulicProblem
+from six.moves import range
 #
 class HydraulicModule:
     """
@@ -54,19 +57,18 @@ class HydraulicModule:
         self.problem = problem
         self.saturation = self.problem.saturation
         if not isinstance(problem, HydraulicProblem):
-            raise Exception, " the problem must be an hydraulic problem (SaturatedHydraulicProblem or an unSaturatedHydraulicProblem)"
+            raise Exception(" the problem must be an hydraulic problem (SaturatedHydraulicProblem or an unSaturatedHydraulicProblem)")
         self.problemName = problem.getName()
         self.regions = problem.getRegions()
-
         self.mesh = mesh
-                                                                                                                #
-                                                                                                                # Permeability
-                                                                                                                #
-                                                                                                                # The permeability is a real for the moment,
-                                                                                                                # depending only on parameters to be treated
-                                                                                                                # We introduce here a dictionnary,
-                                                                                                                # to handle in the near future the "ad hoc" version.
-                                                                                                                #
+                                                                                            #
+                                                                                            # Permeability
+                                                                                            #
+                                                                                            # The permeability is a real for the moment,
+                                                                                            # depending only on parameters to be treated
+                                                                                            # We introduce here a dictionnary,
+                                                                                            # to handle in the near future the "ad hoc" version.
+                                                                                            #
         mediumProperties = {
                            "density"                    : None,
                            "gravity"                    : None,
@@ -85,21 +87,23 @@ class HydraulicModule:
         #
         if self.times == None:
             self.simulationType = "Steady"
+            pass
         else:
             self.simulationType = "Transient"
+            pass
         #                        
         self.boundaryConditions = {}
         #                        
         self.initialConditions  = {}
-                                                                                                                #
-                                                                                                                # we fill the medium properties dictionnary
-                                                                                                                #
-                                                                                                                # Density
+                                                                                            #
+                                                                                            # we fill the medium properties dictionnary
+                                                                                            #
+                                                                                            # Density
         self.density = problem.getDensity()
-                                                                                                                # Gravity
+                                                                                            # Gravity
         self.gravity = problem.getGravity()
-		# gravity effect
-                                                                                                                #viscosity
+        # gravity effect
+                                                                                            #viscosity
         self.viscosity = problem.getViscosity()
         #
         for reg in self.regions:
@@ -109,8 +113,10 @@ class HydraulicModule:
 
             if not self.problem.saturation:
                 permeability = material.getPermeability()
+                pass
             else:
                 permeability = None
+                pass
             hydraulicConductivity = material.getHydraulicConductivity()
             intrinsicPermeability = material.getIntrinsicPermeability()
             self.regionProperties[regionName]["density"]                = self.density
@@ -120,11 +126,11 @@ class HydraulicModule:
             self.regionProperties[regionName]["permeability"]           = permeability
             self.regionProperties[regionName]["viscosity"]              = self.viscosity
 #        print self.regionProperties
-                                                                                                                #
-                                                                                                                # We treat here the boundary conditions.
-                                                                                                                # We establish a dictionnary independant from
-                                                                                                                # the tool to be treated.
-                                                                                                                #
+                                                                                            #
+                                                                                            # We treat here the boundary conditions.
+                                                                                            # We establish a dictionnary independant from
+                                                                                            # the tool to be treated.
+                                                                                            #
         boundarySpecification = {
                                 "typ"           : None,
                                 "head"          : None,
@@ -137,8 +143,10 @@ class HydraulicModule:
         #
         ind = 0
         for boundarycondition in boundaryconditions:
-#            print type(boundarycondition)
+            #print type(boundarycondition),boundarycondition.__class__.__name__
+            #print "debug type value ",boundarycondition.getValue().__class__.__name__
             value = boundarycondition.getValue()
+            #print "debug type value ",value.__class__.__name__
             boundaryName = boundarycondition.getSupport().getBodyName()
 ##            print boundaryName
 #            print " cont ",boundarycondition.boundary.support.body[0]
@@ -161,9 +169,9 @@ class HydraulicModule:
 #            print "D             ",self.boundaryConditions[boundaryName]
             
 #        print self.boundaryConditions
-                                                                                                                #
-                                                                                                                # We treat here the initial conditions
-                                                                                                                #
+                                                                                            #
+                                                                                            # We treat here the initial conditions
+                                                                                            #
         initialconditions = problem.getInitialConditions()
         for initialcondition in initialconditions:
 #            print " dbg hm ",initialcondition
@@ -179,9 +187,11 @@ class HydraulicModule:
                                                         "ind":initialcondition.getRegion().support.body[0]
                                                     }
 
-                                                                                                                #
-                                                                                                                # We treat here the sources
-                                                                                                                #
+                                                                                            #
+                                                                                            # We treat here the sources
+                                                                                            #
+
+            pass                                                                             
         sourceList = problem.getSource()
         sourceCtrl = 0
         if sourceList:
@@ -194,12 +204,16 @@ class HydraulicModule:
                 if isInstance(value,Flowrate):
                     sourceFlowrate.setZone(source.getZone(), [value.getValue()])
                     sourceCtrl = 1
+                    pass
+                pass
+            pass
 
         if sourceCtrl:
             self.sourceField = sourceFlowrate
-                                                                                                                #        
-                                                                                                                # We treat outputs: outputs -> list of dictionnary
-                                                                                                                #
+            pass
+                                                                                            #        
+                                                                                            # We treat outputs: outputs -> list of dictionnary
+                                                                                            #
         if self.expectedOutput:
             for eo in self.expectedOutput:
                 varnames=['Pressure']
@@ -220,8 +234,8 @@ class HydraulicModule:
                     self.timeStepSizes = [self.calculationTimes[i+1]-self.calculationTimes[i] for i in range(len(self.calculationTimes)-1)]
                 self.flowComponent.setTimeDiscretisation(self.timeStepIntervals, self.timeStepSizes)
                 self.flowComponent.setSimulationKind(self.simulationType)
-                raise Warning, " the default hydraulic has been fixed to elmer"+\
-                ", other hydraulic tools should be introduced in the near future"
+                raise Warning(" the default hydraulic has been fixed to elmer"+\
+                ", other hydraulic tools should be introduced in the near future")
             else:
                 self.componentName == "elmer"
                 self.flowComponent = ElmerHydro(self.mesh, self.saturation)
@@ -231,11 +245,13 @@ class HydraulicModule:
                 elif (self.timeStepIntervals != None):
                     self.flowComponent.setTimeDiscretisation(self.timeStepIntervals, self.timeStepSizes)
                 self.flowComponent.setSimulationKind(self.simulationType)
-                print " the flow component has been set"
+                print(" the flow component has been set")
+                pass
                 
         else:
-            raise Warning, " the default hydraulic has been fixed to elmer "
+            raise Warning(" the default hydraulic has been fixed to elmer ")
             self.componentName = "elmer"
+            pass
         #
         #
         #
@@ -244,81 +260,89 @@ class HydraulicModule:
         #
         #
         #
-#	print " dbg hm we set the bic ",self.boundaryConditions
+#   print " dbg hm we set the bic ",self.boundaryConditions
         self.flowComponent.setBoundaryConditions(self.boundaryConditions)
                                                                                                                 #
                                                                                                                 # Density
                                                                                                                 #
 #        print " self.flowComponent",self.flowComponent
 #        raw_input()
-        if self.density:
-            self.flowComponent.setDensity(self.density)
+        if self.density: self.flowComponent.setDensity(self.density)
         #
         #
         #
-#	print " dbg hm we set the ic "
+#   print " dbg hm we set the ic "
         self.flowComponent.setInitialConditions(self.initialConditions)
                                                                                                                 #
                                                                                                                 # Gravity
                                                                                                                 #
         if self.gravity:
-#	    print " dbg hm we set the gravity "
-	    self.flowComponent.setGravity(self.gravity)
-                                                                                                                #
-                                                                                                                # Permeability
-                                                                                                                #
-#        print " debug permeability "
+#       print " dbg hm we set the gravity "
+            self.flowComponent.setGravity(self.gravity)
+            pass
+                                                                                            #
+                                                                                            # Permeability
+                                                                                            #
         if self.permeability:
             self.flowComponent.setPermeability(self.permeability)
-                                                                                                                #
-                                                                                                                # Intrinsic Permeability
-                                                                                                                #
+            pass
+                                                                                            #
+                                                                                            # Intrinsic Permeability
+                                                                                            #
         if self.intrinsicPermeability:
-            self.flowComponent.setIntrinsecPermeability(self.intrinsicPermeability)        
-                                                                                                                #
-                                                                                                                # Porosity
-                                                                                                                #
+            self.flowComponent.setIntrinsecPermeability(self.intrinsicPermeability)
+            pass       
+                                                                                            #
+                                                                                            # Porosity
+                                                                                            #
         if self.hydraulicPorosity:
             self.flowComponent.setPorosity(self.hydraulicPorosity)
+            pass
         elif self.porosity:
             self.flowComponent.setPorosity(self.porosity)
-                                                                                                                #
-                                                                                                                # Viscosity
-                                                                                                                #
+            pass
+                                                                                            #
+                                                                                            # Viscosity
+                                                                                            #
         if self.viscosity:
             self.flowComponent.setViscosity(self.viscosity)
-                                                                                                                #
-                                                                                                                # Matrix compressibility factor
-                                                                                                                #
+            pass
+                                                                                            #
+                                                                                            # Matrix compressibility factor
+                                                                                            #
         if self.matrixCompressibilityFactor:
             self.flowComponent.setMatrixCompressibilityFactor(self.matrixCompressibilityFactor)
+            pass
 
         if self.liquidResidualSaturation:
             self.flowComponent.setLiquidResidualSaturation(self.liquidResidualSaturation)
-                                                                                                                #
-                                                                                                                # Source
-                                                                                                                #
+            pass
+                                                                                            #
+                                                                                            # Source
+                                                                                            #
         if self.sourceField :
             self.flowComponent.setSource(self.sourceField)
-                                                                                                                #
-                                                                                                                # time steps treatment
-                                                                                                                #
+            pass
+                                                                                            #
+                                                                                            # time steps treatment
+                                                                                            #
         if self.simulationType == "Transient":
             self.flowComponent.calcTimesDico ['finalTime']= self.problem.calculationTimes[-1]
-        
+            pass
         #
         #setExpectedOutput
         #
 #        Module.setExpectedOutput(self)
-                                                                                                                #       
-                                                                                                                # to affect numerical parameters
-                                                                                                                #
+                                                                                            #       
+                                                                                            # to affect numerical parameters
+                                                                                            #
     def setParameter(self,*tuple,**dico):
         if self.flowComponent:
             self.flowComponent.setParameter(*tuple,**dico)
+            pass
         else:
-            raise Exception," You have to set the Hydraulic component solver"
-                                                                                                                #       
+            raise Exception(" You have to set the Hydraulic component solver")
+                                                                                            #       
 
     def setTimeDiscretisation(self,timeStepIntervals = None, timeStepSizes = None):
         """
@@ -327,16 +351,21 @@ class HydraulicModule:
         """
         if timeStepIntervals != None:
             self.timeStepIntervals = timeStepIntervals
+            pass
         elif timeStepSizes != None:
             self.timeStepSizes = timeStepSizes
+            pass
         else:
-            raise Warning, "You should give at least an argument to the setTimeDiscretisation function"
+            raise Warning("You should give at least an argument to the setTimeDiscretisation function")
         if self.timeStepIntervals != None:
-            print "dbg hm ",self.timeStepIntervals
-            print "dbg hm ",self.problem.calculationTimes[-1]
+            print("dbg hm ",self.timeStepIntervals)
+            print("dbg hm ",self.problem.calculationTimes[-1])
             self.timeStepSizes = self.problem.calculationTimes[-1]/self.timeStepIntervals
+            pass
         else:
             self.timeStepIntervals = self.problem.calculationTimes[-1]/self.timeStepSizes
+            pass
+            
     setCalculationTimes = setTimeDiscretisation
 
                                                                                                                 
@@ -359,23 +388,25 @@ class HydraulicModule:
 #            raw_input(" trying to retrieve charge")
             
             self.charge = self.flowComponent.essai.getCharge()
-            print self.charge[0:10]
+            print(self.charge[0:10])
 #            raw_input(" trying to retrieve points")
             self.points = self.flowComponent.essai.getCoordinates()
             self.points = self.mesh.getNodesCoordinates()
-            print self.points
+            #print self.points
 #            raw_input(" trying to retrieve velocity")
             self.velocity = self.flowComponent.essai.getVelocity()
             return self.points, self.charge, self.velocity
         #
         # steady part
         #
+        #print " we re here "
+        #raw_input()
         if type(name) == StringType:
             if name.lower() == "velocity":
                 fileName = "./" + self.flowComponent.meshDirectoryName + "/" + "HeVel.ep"
                 if not os.path.isfile(fileName):
                     message = " problem with the velocity file: " + fileName
-                    raise Exception,message
+                    raise Exception(message)
                     return None
             elif name.lower() == "watercontent":
                 fileName = "./" + "watercontent.vtu"
@@ -389,18 +420,22 @@ class HydraulicModule:
             self.points = []
             while "#group all" not in line:
                 #line = line.split()
-                self.points.append([float(line[0:20]),float(line[20:40]),float(line[40:60])])
+                #print " line ",line
+                #raw_input("line : ")
+                self.points.append([float(line[0:17]),float(line[17:34]),float(line[34:53])])
                 line = velocityFile.readline()
+                pass
             while "#time" not in velocityFile.readline():
                 pass
             line = velocityFile.readline()
             physic = []
             while len(line) > 1:
-                physic.append([float(line[0:20]),\
-                               float(line[20:40]),\
-                               float(line[40:60]),\
-                               float(line[60:80])])
+                physic.append([float(line[0:17]),\
+                               float(line[17:34]),\
+                               float(line[34:51]),\
+                               float(line[51:68])])
                 line = velocityFile.readline()
+                pass
             self.charge = []
             self.velocity = []
             ind = 0
@@ -409,6 +444,8 @@ class HydraulicModule:
                 self.charge.append(a[0])
                 self.velocity.append([a[1],a[2],a[3]])
                 ind+=1
+                pass
+            pass
 #        print charge[0],charge[-1]
         return self.points, self.charge, self.velocity
             
@@ -416,6 +453,7 @@ class HydraulicModule:
         """simulation stop and clean"""
         if self.flowComponent:
             self.flowComponent.end()
+            pass
             
     def getComponentName(self):
         """
@@ -424,7 +462,7 @@ class HydraulicModule:
         if self.componentName:
             return self.componentName
         else:
-            raise Warning, "No component name has been currently defined"
+            raise Warning("No component name has been currently defined")
             
     def getComponent(self):
         """
@@ -439,10 +477,11 @@ class HydraulicModule:
         Ex: getHelp() or getHelp(a.function)
         """
         if func == None:
-            print self.__doc__
+            print(self.__doc__)
+            pass
         else:
-            print func.__doc__
-        pass
+            print(func.__doc__)
+            pass
         
     def run(self,transient = None):
         """
@@ -451,15 +490,20 @@ class HydraulicModule:
         The simulation is supposed to be a steady one by default.
         """
         if self.flowComponent == None:
-            self.flowComponent = "elmer"     
+            #
+            # is it possible ?
+            #
+            self.flowComponent = ElmerHydro(self.mesh)
+            pass
         if not transient:
             #raw_input(" running elmer ")
             self.flowComponent.run()
+            pass
         else:
             self.flowComponent.launch()
             #dir(self.flowComponent)
-            #raw_input(" run ")
             self.flowComponent.run()
+            pass
         
     def setInitialPermeability(self,permeabilityField):
         """
@@ -467,8 +511,9 @@ class HydraulicModule:
         """
         if self.flowComponent != None:
             self.flowComponent.setpermeabilityfield(permeabilityField)
+            pass
         else:
-            raise Exception, " the flow component must be launched before trying to setup K "
+            raise Exception(" the flow component must be launched before trying to setup K ")
         
     def writeVelocityPlot(self):
         """
@@ -482,106 +527,129 @@ class HydraulicModule:
         chargeFile.write("%s\n"%("DATASET UNSTRUCTURED_GRID"))
         chargeFile.write("%s %i %s\n"%("POINTS",len(self.points),"double"))
         dim = self.mesh.getSpaceDimensions()
-	if (dim==2):	    
-	    for ind in range(0,len(self.points)):
-	        chargeFile.write("%15.8e %15.8e %15.8e\n"%(self.points[ind][0],\
-	                                                self.points[ind][1],\
-	                                                0.))
-	elif (dim==3):	
-	    for ind in range(0,len(self.points)):
-	        chargeFile.write("%15.8e %15.8e %15.8e\n"%(self.points[ind][0],\
-	                                                self.points[ind][1],\
-	                                                self.points[ind][2]))
-	else:
-	    raise " error in mesh dimension "       
-	numberOfCells = self.mesh.getNumberOfCells()
-	connectivity = self.mesh.getConnectivity()
+        if (dim==2):        
+            for ind in range(0,len(self.points)):
+                chargeFile.write("%15.8e %15.8e %15.8e\n"%(self.points[ind][0],\
+                                                           self.points[ind][1],\
+                                                           0.))
+                pass
+            pass
+        elif (dim==3):  
+            for ind in range(0,len(self.points)):
+                chargeFile.write("%15.8e %15.8e %15.8e\n"%(self.points[ind][0],\
+                                                           self.points[ind][1],\
+                                                           self.points[ind][2]))
+                pass
+            pass
+        else:
+            raise Exception(" error in mesh dimension ")       
+        numberOfCells = self.mesh.getNumberOfCells()
+        connectivity = self.mesh.getConnectivity()
 
         cellListSize = 0
-	for i in range(0,numberOfCells):                # gmsh meshes: type of elements
-	    gmshType = connectivity[i][1]
-	    if gmshType == 1:           # 2-node line
-	        cellListSize += 3
-	    elif gmshType == 2:           # 3-node triangles
-	        cellListSize += 4
-	    elif gmshType == 3:           # 4-node quadrangles
-	        cellListSize += 5
-	    elif gmshType == 4:         # 4-node tetrahedron
-	        cellListSize += 5
-            elif gmshType == 5:         # 8-node hexahedrons
-	        cellListSize += 9
+        for i in range(0,numberOfCells):                # gmsh meshes: type of elements
+            gmshType = connectivity[i][1]
+            if gmshType == 1:                           # 2-node line
+                cellListSize += 3
+                pass
+            elif gmshType == 2:                         # 3-node triangles
+                cellListSize += 4
+                pass
+            elif gmshType == 3:                         # 4-node quadrangles
+                cellListSize += 5
+                pass
+            elif gmshType == 4:                         # 4-node tetrahedron
+                cellListSize += 5
+                pass
+            elif gmshType == 5:                         # 8-node hexahedrons
+                cellListSize += 9
+                pass
+            pass
         chargeFile.write("CELLS %i %i\n"%(numberOfCells,cellListSize))
-	ind = 0
-	for cell in connectivity:
-	    ind = cell[2]+3
-#	            print " ctm dbg cell ",vtkTyp,ind,cell," perm ",permutation[ind],permutation[ind+1],permutation[ind+2],permutation[ind+3]
+        ind = 0
+        for cell in connectivity:
+            ind = cell[2]+3
+#               print " ctm dbg cell ",vtkTyp,ind,cell," perm ",permutation[ind],permutation[ind+1],permutation[ind+2],permutation[ind+3]
                     # 
-	    vtkTyp = _vtkGmsh(cell[1])
-	    if (vtkTyp==3):                                                                                     # 2-node line
-	        ind = cell[2]+3
-	        chargeFile.write("%i %i %i\n"%(
-	                       2,\
-		               cell[ind]-1,\
-		               cell[ind+1]-1)
-		              )
-	            
-	    elif (vtkTyp==5):                                                                                   # triangles
-	        chargeFile.write("%i %i %i %i\n"%(
-	                       3, 
-	                       cell[ind]-1,\
-	                       cell[ind+1]-1,\
-	                       cell[ind+2]-1)
-	                      )
- 	    elif (vtkTyp==9):                                                                                   # quadr
- 	        chargeFile.write("%i %i %i %i %i\n"%(
- 	                       4,\
- 		               cell[ind]-1,\
- 			       cell[ind+1]-1,\
- 			       cell[ind+2]-1,\
- 			       cell[ind+3]-1)
- 			      )
- 	    elif (vtkTyp==10):                                                                                  # tetra
- 	        chargeFile.write("%i %i %i %i %i\n"%(
- 		               4,\
- 		               cell[ind]-1,\
- 			       cell[ind+1]-1,\
- 			       cell[ind+2]-1,\
- 			       cell[ind+3]-1)
- 			      )
-  	    elif (vtkTyp==12):                                                                                  # hexahedron
-	        chargeFile.write("%i %i %i %i %i %i %i %i %i\n"%(
-	                       8,\
-		               cell[ind]-1,\
-		               cell[ind+1]-1,\
-			       cell[ind+2]-1,\
-		               cell[ind+3]-1,\
-		               cell[ind+4]-1,\
-			       cell[ind+5]-1,\
-			       cell[ind+6]-1,\
-			       cell[ind+7]-1)
-			      )
+            vtkTyp = _vtkGmsh(cell[1])
+            if (vtkTyp==3):                                                                                     # 2-node line
+                ind = cell[2]+3
+                chargeFile.write("%i %i %i\n"%(
+                               2,\
+                               cell[ind]-1,\
+                               cell[ind+1]-1)
+                              )
+                pass
+                
+            elif (vtkTyp==5):                                                                                   # triangles
+                chargeFile.write("%i %i %i %i\n"%(
+                                 3, 
+                                 cell[ind]-1,\
+                                 cell[ind+1]-1,\
+                                 cell[ind+2]-1)
+                                )
+                pass
+            elif (vtkTyp==9):                                                                                   # quadr
+                chargeFile.write("%i %i %i %i %i\n"%(
+                                 4,\
+                                 cell[ind]-1,\
+                                 cell[ind+1]-1,\
+                                 cell[ind+2]-1,\
+                                 cell[ind+3]-1)
+                                )
+                pass
+            elif (vtkTyp==10):                                                                                  # tetra
+                chargeFile.write("%i %i %i %i %i\n"%(
+                                 4,\
+                                 cell[ind]-1,\
+                                 cell[ind+1]-1,\
+                                 cell[ind+2]-1,\
+                                 cell[ind+3]-1)
+                                )
+                pass
+            elif (vtkTyp==12):                                                                                  # hexahedron
+                chargeFile.write("%i %i %i %i %i %i %i %i %i\n"%(
+                                 8,\
+                                 cell[ind]-1,\
+                                 cell[ind+1]-1,\
+                                 cell[ind+2]-1,\
+                                 cell[ind+3]-1,\
+                                 cell[ind+4]-1,\
+                                 cell[ind+5]-1,\
+                                 cell[ind+6]-1,\
+                                 cell[ind+7]-1)
+                                )
+                pass
+            pass
         chargeFile.write("%s %i\n"%("CELL_TYPES",numberOfCells))
 #
-	for i in range(0,numberOfCells):
-	    gmshType = connectivity[i][1]
+        for i in range(0,numberOfCells):
+            gmshType = connectivity[i][1]
 
             if (gmshType)==1:
                 cellTyp = 3
+                pass
             elif (gmshType)==2:
                 cellTyp = 5
+                pass
             elif (gmshType)==3:
                 cellTyp = 9
+                pass
             elif (gmshType)==4:
                 cellTyp = 10
+                pass
             elif (gmshType)==5:
                 cellTyp = 12
+                pass
             elif (gmshType)==6:
                 cellTyp = 13
+                pass
             elif gmshType == 7:
-	        cellTyp = 14
+                cellTyp = 14
+                pass
             else:
-                raise Exception, " check gmshtype "
-	    chargeFile.write("%i\n"%(cellTyp))
+                raise Exception(" check gmshtype ")
+        chargeFile.write("%i\n"%(cellTyp))
         chargeFile.write("%s %d\n"%("POINT_DATA",len(self.points)))
         chargeFile.write("%s\n"%("VECTORS vectors float"))
         for velocityComponent in self.velocity:
@@ -601,15 +669,12 @@ class HydraulicModule:
 #
 # We read the permutation
 #
-        for i in range(int(nodesNumber)):
-            chargeDataFile.readline()
+        for i in range(int(nodesNumber)): chargeDataFile.readline()
 #
 # We read the charge
 #
-        for i in range(int(nodesNumber)):
-            chargeFile.write(" %15.10e\n "%(float(chargeDataFile.readline())))
+        for i in range(int(nodesNumber)): chargeFile.write(" %15.10e\n "%(float(chargeDataFile.readline())))
 
-        pass
         
 def _vtkGmsh(indGmsh):
     """
@@ -617,17 +682,24 @@ def _vtkGmsh(indGmsh):
     """
     if (indGmsh == 1):
         indVtk = 3
+        pass
     elif (indGmsh == 2):
         indVtk = 5
+        pass
     elif (indGmsh == 3):
         indVtk = 9
+        pass
     elif (indGmsh == 4):
         indVtk = 10
+        pass
     elif (indGmsh == 5):
         indVtk = 12
+        pass
     elif indGmsh == 6:         # 6-node prism
-	indVtk = 13
+        indVtk = 13
+        pass
     elif indGmsh == 7:         # 5-node pyramid
-	indVtk = 14
+        indVtk = 14
+        pass
     return indVtk
 

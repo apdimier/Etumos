@@ -2,6 +2,7 @@
  To define Points and Coordinates.
 """
 
+from __future__ import absolute_import
 import bisect # Bisection algorithms.
 from generictools import Generic
 import math
@@ -35,10 +36,10 @@ class Point1D(GenericPoint):
         return cmp(self.x, point.x)
 
     def __eq__(self, point):
-	return self.x == point.x
+        return self.x == point.x
 
     def __ne__(self, point):
-	return self.x != point.x
+        return self.x != point.x
 
 class Point2D(GenericPoint):
     """
@@ -61,10 +62,10 @@ class Point2D(GenericPoint):
         return cmp([self.y, self.x], [point.y, point.x])
 
     def __eq__(self, point):
-	return self.x == point.x and self.y == point.y
+        return self.x == point.x and self.y == point.y
 
     def __ne__(self, point):
-	return self.x != point.x or self.y != point.y
+        return self.x != point.x or self.y != point.y
 
 class Point3D(GenericPoint):
     """
@@ -89,10 +90,10 @@ class Point3D(GenericPoint):
         return cmp([self.z, self.y, self.x], [point.z, point.y, point.x])
 
     def __eq__(self, point):
-	return self.x == point.x and self.y == point.y and self.z == point.z
+        return self.x == point.x and self.y == point.y and self.z == point.z
 
     def __ne__(self, point):
-	return self.x != point.x or self.y != point.y or self.z != point.z
+        return self.x != point.x or self.y != point.y or self.z != point.z
 
 def Point(*coords):
     """
@@ -100,19 +101,18 @@ def Point(*coords):
     based on the number of coordinates (x,y,z) given.
     """
     if len(coords) == 1:
-	return Point1D(*coords)
+        return Point1D(*coords)
     elif len(coords) == 2:
-	return Point2D(*coords)
+        return Point2D(*coords)
     else:
-	return Point3D(*coords)
+        return Point3D(*coords)
 
 def computeCenter1D(pointList):
     """
     Computes the center and returns a 1D point
     """
     center = 0.
-    for point in pointList:
-        center += point.getCoordinates()
+    for point in pointList: center += point.getCoordinates()
     center = center / float(len(pointList))
     return Point1D(center)
     
@@ -125,6 +125,7 @@ def computeCenter2D(pointList):
     for point in pointList:
         x1, y1 = point.getCoordinates()
         x += x1; y += y1
+        pass
     den = 1. / len(pointList)
     x = x * den
     y = y * den
@@ -142,6 +143,7 @@ def computeCenter3D(points):
         x += x1
         y += y1
         z += z1
+        pass
     den = 1./len(pointList)
     x = x * den; y = y * den; z = z * den
     return Point3D(x, y, z)

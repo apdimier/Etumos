@@ -83,9 +83,9 @@ def numberOfMoles(dicMinerals,mineralName,volumicpercent,porosity):
     to define the number of moles given a volumic %
     """
     if volumicpercent >1.0:
-        raise Warning, " a percentage should be lower than 1"
+        raise Warning(" a percentage should be lower than 1")
     if porosity >1.0:
-        raise Warning, " the porosity should be lower than 1"
+        raise Warning(" the porosity should be lower than 1")
     dens = dicMinerals[mineralName]['DENSITY']              # mineral density
     rap = (1.-porosity)/porosity                            # balance between mineral and water
     rapVol = volumicpercent*rap                             # balance between the specific mineral and water
