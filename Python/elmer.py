@@ -336,9 +336,6 @@ class Elmer(ElmerRoot):
                 ic+=1
                 pass
             pass
-
-
-
         return None
 
     def writeMaterial(self):
@@ -360,7 +357,6 @@ class Elmer(ElmerRoot):
             #
             # water density is supposed to be 1000 kg / m3. But it can
             # be fixed to other walues through the setWaterDensity function
-            #
             #
             # rock density                    2700 kg / m3
             #
@@ -402,7 +398,6 @@ class Elmer(ElmerRoot):
                 else:
                     raise Warning, " the poisson ratio is mandatory"
                 pass
-
                                                                                             #
                                                                                             #       temperature:
                                                                                             #       specificHeatCapacity and heatConductivity
@@ -531,21 +526,28 @@ class Elmer(ElmerRoot):
                     sifFileW("              %15.10e %15.10e %15.10e\\\n" %(0.,longDisp*darcy_y + effecDiff,0.))
                     sifFileW("              %15.10e %15.10e %15.10e\\\n" %(0.,0.,longDisp*darcy_z + effecDiff))
                     sifFileW(" End\n")
+                    if self.parameterDico["oneDimensionalBoreHole"]:
                                                                                             #
                                                                                             # to handle a one phase, one dimensional borehole
                                                                                             #
-                    if self.parameterDico["oneDimensionalBoreHole"] and self.parameterDico["onePhaseBoreHole"]:
-                        if inds == tempcont-1:
-                            _writeHeatLoadParameters(sifFile, self.bodies[indb].support.body[0],self.bodies[indb].support.bodyName)
+                        if self.parameterDico["onePhaseBoreHole"]:
+                            if inds == tempcont-1:
+                                self.boreholeDico = _writeHeatLoadParameters(sifFile, self.bodies[indb].support.body[0],\
+                                                                             self.bodies[indb].support.bodyName)
+                                pass
                             pass
-                        pass
                                                                                             #
                                                                                             # to handle a two phases, one dimensional borehole
                                                                                             #
-                    elif self.parameterDico["oneDimensionalBoreHole"] and self.parameterDico["vapor"]:
-                        if inds == tempcont-1:
-                            _writeTwoPhaseHeatLoadParameters(sifFile, self.bodies[indb].support.body[0],self.bodies[indb].support.bodyName)
+                        elif self.parameterDico["vapor"]:
+                            if inds == tempcont-1:
+                                self.boreholeDico = _writeTwoPhasesHeatLoadParameters(sifFile, self.bodies[indb].support.body[0],\
+                                                                                      self.bodies[indb].support.bodyName)
+                                pass
                             pass
+                        if inds == tempcont-1:
+                            self.boreHoleDiameter = _boreHoleDiameter(self.mesh, self.boreholeDico)
+                        pass
 
 ##                sifFileW(" %s Diffusivity = Real %15.10e\n"%(self.speciesNamesList[inds],\
 ##                                  longDisp*darcy_x + effecDiff))
@@ -2207,14 +2209,59 @@ class Elmer(ElmerRoot):
 
         it enables to handle some properties, see the core of the function.
         """
-        if (propertyName.lower() == "aqueousdensity"):
-            self.elmso.setPropertyField(aField,"aqueousdensity")
+#
+#   aqueous properties
+#
+        if (propertyName.lower() in ["aqueouscp", "liquidcp"]):
+            self.elmso.setPropertyField(aField,"liquidcp")
             pass
+        elif (propertyName.lower() in ["aqueousdensity", "liquiddensity"]):
+            self.elmso.setPropertyField(aField,"liquiddensity")
+            pass
+        elif (propertyName.lower() in ["aqueous_drhodh_p", "liquid_drhodh_p"]):
+            self.elmso.setPropertyField(aField,"liquidenthalpy")
+            pass
+        elif (propertyName.lower() in ["aqueous_drhodp_h", "liquid_drhodp_h"]):
+            self.elmso.setPropertyField(aField,"liquidenthalpy")
+            pass
+        elif (propertyName.lower() in ["aqueousenthalpy", "liquidenthalpy"]):
+            self.elmso.setPropertyField(aField,"liquidenthalpy")
+            pass
+#
+#   gas properties
+#
+        elif (propertyName.lower() in ["gascp"]):
+            self.elmso.setPropertyField(aField,"gascp")
+            pass
+        elif (propertyName.lower() in ["gasdensity"]):
+            self.elmso.setPropertyField(aField,"gasdensity")
+            pass
+        elif (propertyName.lower() in ["gas_drhodh_p", "gas_drhodh_p"]):
+            self.elmso.setPropertyField(aField,"liquidenthalpy")
+            pass
+        elif (propertyName.lower() in ["gas_drhodp_h", "gas_drhodp_h"]):
+            self.elmso.setPropertyField(aField,"liquidenthalpy")
+            pass
+        elif (propertyName.lower() in ["gasenthalpy"]):
+            self.elmso.setPropertyField(aField,"gasenthalpy")
+            pass
+#
+#
+#
         elif (propertyName.lower() == "quality"):
             self.elmso.setPropertyField(aField,"quality")
             pass
+        elif (propertyName.lower() == "surfacetension"):
+            self.elmso.setPropertyField(aField,"surfacetension")
+            pass
+        elif (propertyName.lower() == "tubediameter"):
+            self.elmso.setPropertyField(aField,"tubediameter")
+            pass
+        elif (propertyName.lower() == "voidfraction"):
+            self.elmso.setPropertyField(aField,"voidfraction")
+            pass
         else:
-            raise Warning, " the field you want to transfer to the solver is not managed."
+            raise Warning, " the field: "+propertyName.lower +"you want to transfer to the solver is not managed."
         return None
         
     def setWaterDensity(self,waterDensity):
@@ -3305,6 +3352,13 @@ def _vtkGmsh(indGmsh):
     return indVtk
 
 def _wellboreParameter(wellboreDataDict, sifFile, string):
+    """
+    Function used to write the sif file parameters linked to the treatment of a wellbore with Elmer.
+    
+    A question can arise, do we set some parameters to zero; a tentavive answer is given.
+    """
+    intDico   = {"tutu":0}
+    floatDico = {"liquid_drhodh_p":0.0,"gas_drhodh_p":0.0,"liquid_drhodp_h":0.0,"gas_drhodp_h":0.0}
     #print(wellboreDataDict.keys())
     #raw_input()
     sfpar = " %18s"
@@ -3312,7 +3366,6 @@ def _wellboreParameter(wellboreDataDict, sifFile, string):
     if string in wellboreDataDict.keys():
         #print " debug ",string,wellboreDataDict[string].keys()[0][0]
         if wellboreDataDict[string].keys()[0].lower() == "real":
-            print ("dbg elmer: ",wellboreDataDict[string])
             sifFileW(" %-20s = Real %15.10e ! %s\n"%(string.ljust(16),float(wellboreDataDict[string]["Real"][0]), wellboreDataDict[string]["Real"][1]))
             pass
         elif wellboreDataDict[string].keys()[0].lower() == "int":
@@ -3330,12 +3383,21 @@ def _wellboreParameter(wellboreDataDict, sifFile, string):
             #print(" debug : %s\n"%(wellboreDataDict[string].keys()[0].lower()))
             raise Warning, color.red+"check the wellbore or the two phase wellbore data file for key string of unknown type: "+color.end+string
 
+    elif string in intDico.keys():
+        sifFileW(" %-20s = Integer %5i ! %s\n"%(string.ljust(16), 0, " That parameter has been set to a default value, there is a discrepancy between the data file and the elmer module"))
+        pass
+    elif string in floatDico.keys():
+        sifFileW(" %-20s = Real %15.10e ! %s\n"%(string.ljust(16), 0.0, " That parameter has been set to a default value, there is a discrepancy between the data file and the elmer module"))
+        pass
     else:
         print("debug: ",wellboreDataDict.keys())
         raise Warning, color.red+"check the wellbore or the two phase wellbore data file for string: "+color.end+string
 
 
 def _writeHeatLoadParameters(sifFile, materialId, bodyName = None):
+    """
+    should be modified, some calls are repeated without necessity
+    """
     from wellBoreReader import *
     fineName = os.environ["PWD"]+"/Data/wellbore.dat"
     #
@@ -3395,9 +3457,9 @@ def _writeHeatLoadParameters(sifFile, materialId, bodyName = None):
     if wellboreDataDict[materialKey].has_key("TemperatureInterpolation"):
         #raw_input(" wellboreDataDict")
         _wellboreParameter(wellboreDataDict[materialKey], sifFile, "TemperatureInterpolation")
-                                                         #
-                                                     # we realize the interpolation with a second order polynomial
-                                                     #
+                                                                                           #
+                                                                                           # we realize the interpolation with a second order polynomial
+                                                                                           #
         _wellboreParameter(wellboreDataDict[materialKey], sifFile, "T1")
         _wellboreParameter(wellboreDataDict[materialKey], sifFile, "T2")
         _wellboreParameter(wellboreDataDict[materialKey], sifFile, "T3")
@@ -3424,19 +3486,23 @@ def _writeHeatLoadParameters(sifFile, materialId, bodyName = None):
     #sifFile.write(" p1 = Variable (time - 0.1)\n%8s\n%s\n"%("Real","    include p_wellhead.dat"))
     #sifFile.write(" p1 = Variable (time + 0.1)\n%8s\n%s\n"%("Real","    include p_wellhead.dat"))
 
-    return None
+    return wellboreDataDict
 
 
-def _writeTwoPhaseHeatLoadParameters(sifFile, materialId, bodyName = None):
+def _writeTwoPhasesHeatLoadParameters(sifFile, materialId, bodyName = None):
+    """
+    That function is used to handle a two phases wellbore simulation
+    """
     from wellBoreReader import *
     sifFileW = sifFile.write
+    print ("au dela du fleuve")
     fileName = os.environ["PWD"]+"/Data/twophasewellbore.dat"
     #
     # the file has not to be read for each material : has to be corrected
     #
     wellboreDataDict = wellBoreDataRead(fileName, onePhase = False)
-    #print wellboreDataDict
-    #raw_input("_writeHeatLoadParameters: "+str(materialId) +" "+ str(bodyName))
+    print (wellboreDataDict)
+    #raw_input("_writeTwoPhasesHeatLoadParameters: "+str(materialId) +" "+ str(bodyName))
     if bodyName == None:
         materialKey = "Material"+str(materialId)
         pass
@@ -3465,13 +3531,16 @@ def _writeTwoPhaseHeatLoadParameters(sifFile, materialId, bodyName = None):
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "liquidCp")
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "liquidAlphaCoef")
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "liquidKappaCoef")
-    print(wellboreDataDict.keys)
+    _wellboreParameter(wellboreDataDict[materialKey], sifFile, "liquid_drhodh_p")
+    _wellboreParameter(wellboreDataDict[materialKey], sifFile, "liquid_drhodp_h")
+    #print(wellboreDataDict.keys)
     sifFileW("! --------------------\n")
     sifFileW("! water level parameter\n")
     sifFileW("! --------------------\n");sifFile.flush()
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "annWaterLevel")
     sifFileW("! --------------------\n");sifFile.flush()
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "enthalpyScale")
+    _wellboreParameter(wellboreDataDict[materialKey], sifFile, "enthalpyFraction")
     sifFileW("! --------------------\n");sifFile.flush()
     sifFileW("! ---------------------------------------\n")
     sifFileW("! Physical properties of the vapor phase \n")
@@ -3483,6 +3552,8 @@ def _writeTwoPhaseHeatLoadParameters(sifFile, materialId, bodyName = None):
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "gasCp")
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "gasAlphaCoef")
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "gasKappaCoef");sifFile.flush()
+    _wellboreParameter(wellboreDataDict[materialKey], sifFile, "gas_drhodh_p")
+    _wellboreParameter(wellboreDataDict[materialKey], sifFile, "gas_drhodp_h")
     sifFileW("! ---------------------------\n")
     sifFileW("! average physical properties\n")
     sifFileW("! ---------------------------\n")
@@ -3496,6 +3567,8 @@ def _writeTwoPhaseHeatLoadParameters(sifFile, materialId, bodyName = None):
                                                                                             # surface tension
                                                                                             #
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "SurfaceTension")
+    _wellboreParameter(wellboreDataDict[materialKey], sifFile, "dqualitydh_p")
+    _wellboreParameter(wellboreDataDict[materialKey], sifFile, "dqualitydp_h")
     
     sifFileW("! --------------------------------------\n")
     sifFileW("! geometrical parameters of the wellbore\n")
@@ -3514,7 +3587,8 @@ def _writeTwoPhaseHeatLoadParameters(sifFile, materialId, bodyName = None):
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "tubeRoughness")
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "insulationThermCond")
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "casingThermCond")
-    _wellboreParameter(wellboreDataDict[materialKey], sifFile, "cementThermCond");sifFile.flush()
+    _wellboreParameter(wellboreDataDict[materialKey], sifFile, "cementThermCond")
+    _wellboreParameter(wellboreDataDict[materialKey], sifFile, "tubularMassCp");sifFile.flush()
     sifFileW("! ---------------------------------------------\n")
     sifFileW("! physical properties linked to the underground\n")
     sifFileW("! ---------------------------------------------\n")
@@ -3522,8 +3596,8 @@ def _writeTwoPhaseHeatLoadParameters(sifFile, materialId, bodyName = None):
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "earthThermCond")
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "earthCp")
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "earthTempGradient")
-    _wellboreParameter(wellboreDataDict[materialKey], sifFile, "groundTemperature");sifFile.flush()
-    _wellboreParameter(wellboreDataDict[materialKey], sifFile, "earthTemperature")
+    _wellboreParameter(wellboreDataDict[materialKey], sifFile, "groundTemperature")
+    _wellboreParameter(wellboreDataDict[materialKey], sifFile, "earthTemperature");sifFile.flush()
     if wellboreDataDict[materialKey].has_key("TemperatureInterpolation"):
         #raw_input(" wellboreDataDict")
         _wellboreParameter(wellboreDataDict[materialKey], sifFile, "TemperatureInterpolation")
@@ -3556,4 +3630,35 @@ def _writeTwoPhaseHeatLoadParameters(sifFile, materialId, bodyName = None):
     #sifFile.write(" p1 = Variable (time - 0.1)\n%8s\n%s\n"%("Real","    include p_wellhead.dat"))
     #sifFile.write(" p1 = Variable (time + 0.1)\n%8s\n%s\n"%("Real","    include p_wellhead.dat"))
 
-    return None
+    return wellboreDataDict
+    
+def _boreHoleDiameter(mesh, boreholeDico):
+    """
+    that function enables to determine the diameter of the borehole over depth
+        
+    """
+    #print ("_boreHoleDiameter boreholeDico: ",boreholeDico)
+    #print (boreholeDico.keys())
+    #print ("_boreHoleDiameter mesh ",mesh.getPhysicalBodyNames())
+    nodesList = []
+    nodePoints = []
+    initialDiameter = []
+    for bodyName in mesh.getPhysicalBodyNames():
+        #print(" the key material",boreholeDico[bodyName])
+        #print(" the key material",boreholeDico[bodyName], boreholeDico[boreholeDico[bodyName]]["d_tubing"])
+        #print ("mesh vertexcoords: ",bodyName, mesh.vertexCoords)
+        #print(mesh.getBody(bodyName).getBodyNodesList())
+        for node in mesh.getBody(bodyName).getBodyNodesList():
+            if node not in nodesList:
+                print("nodes ",node,nodesList)
+                nodesList.append(node)
+                nodePoints.append(float(mesh.vertexCoords[node-1]))
+                initialDiameter.append(float(boreholeDico[boreholeDico[bodyName]]["d_tubing"]['Real'][0]))
+                pass
+            pass
+        pass
+        # Body(self.physicalBodyNames.get(bodyName),bodyName,indPDO,nodes = self.vertexCoords, dim = self.dim)
+    #print (initialDiameter)
+    #print (len(initialDiameter))
+    #raw_input("_boreHoleDiameter functionality")
+    return initialDiameter

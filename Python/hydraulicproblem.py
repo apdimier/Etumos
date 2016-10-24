@@ -9,8 +9,9 @@ Arguments are analysed and the regime determined.
 # -- __init__
 
 # -- Verifications .
+from __future__ import absolute_import
+from __future__ import print_function
 from generictools import isInstance, makeDico, memberShip
-
 
 from cartesianmesh import CartesianMesh
 
@@ -30,15 +31,15 @@ from commonproblem import CommonBoundaryCondition,\
 from commonmodel import Region
 from vector import V as Vector
 
-from PhysicalProperties import  Density,\
-                                Viscosity
-from PhysicalQuantities import  FlowRate,\
-                                Head,\
-                                HeadGradient,\
-                                HydraulicFlux,\
-                                PressureGradient,\
-                                Pressure,\
-                                SaturationLevel
+from PhysicalProperties import Density,\
+                               Viscosity
+from PhysicalQuantities import FlowRate,\
+                               Head,\
+                               HeadGradient,\
+                               HydraulicFlux,\
+                               PressureGradient,\
+                               Pressure,\
+                               SaturationLevel
 import types
 
 class HydraulicProblem:
@@ -58,7 +59,6 @@ class HydraulicProblem:
         
         05/05/2011 introduction of Richards solver (steady) with the standard Elmer (V. 6.1) Richards dyke test case
         
-        
     """
     def __init__(self,\
                  name,\
@@ -73,7 +73,8 @@ class HydraulicProblem:
                  density = None,\
                  source = None,\
                  viscosity = None,\
-                 outputs = None):
+                 outputs = None,\
+                 description = None):
                  
         """
         Problem initialisation with :
@@ -94,44 +95,46 @@ class HydraulicProblem:
         
         - sources               default None
         
-        - outputs               default None              
-        """                                                                                                     # 
-                                                                                                                # name should be a string
-                                                                                                                #
-        if type(name) != types.StringType:
-            raise TypeError, "name should be a string "
+        - outputs               default None
+
+        """
+                                                                                            # 
+                                                                                            # name should be a string
+                                                                                            #
+        if type(name) != bytes:
+            raise TypeError("name should be a string ")
         self.name = name
-                                                                                                                #
-                                                                                                                # saturation
-                                                                                                                #
+                                                                                            #
+                                                                                            # saturation
+                                                                                            #
         self.problemType = "saturated"
         self.saturation = "saturated"
-        if type(saturation) == types.StringType:
-           if saturation == "unsaturated" or saturation.lower()=="no":
-               self.saturation = "unsaturated"
-               self.problemType = "unsaturated"
-                                                                                                                #
-                                                                                                                # regions treatment
-                                                                                                                #
+        if type(saturation) == bytes:
+            if saturation == "unsaturated" or saturation.lower()=="no":
+                self.saturation = "unsaturated"
+                self.problemType = "unsaturated"
+                pass
+            pass
+                                                                                            #
+                                                                                            # regions treatment
+                                                                                            #
         verifyClassList(regions, Region)
         regions_zones = [region.getZone() for region in regions]
         self.regions = regions
-                                                                                                                #
-                                                                                                                # gravity treatment
-                                                                                                                #
+                                                                                            #
+                                                                                            # gravity treatment
+                                                                                            #
         check = -1
         if gravity:
             memberShip(gravity, Gravity)
             try:
                 value=gravity.getValue()
-                if type(value) not in [types.FloatType, types.IntType]:
-                    raise TypeError, " value should be a float or an int "
+                if type(value) not in [float, int]:
+                    raise TypeError(" value should be a float or an int ")
                 meshdim = regions_zones[0].getSpaceDimension()
                 value=[0.]*meshdim
                 value[-1] = 9.81
-                if meshdim == 2:
-                    value.append(0.)
-
+                if meshdim == 2: value.append(0.)
                 gravity=Vector(value)
             except:
                 pass
@@ -140,68 +143,68 @@ class HydraulicProblem:
             meshdim = regions_zones[0].getSpaceDimension()
             value=[0.]*meshdim
             value[-1] = 9.81
-            if meshdim == 2:
-                value.append(0.)
+            if meshdim == 2: value.append(0.)
             gravity=Vector(value)
-            print value
+            print(value)
         
         self.gravity = gravity
-                                                                                                                #
-                                                                                                                # density treatment
-                                                                                                                #        
+                                                                                            #
+                                                                                            # density treatment
+                                                                                            #        
         if density:
-            if type(density) == FloatType:
-               density = Density(density, 'kg/m/s') 
+            if type(density) == FloatType: density = Density(density, 'kg/m**3') 
             memberShip(density, Density)
             check = 2*check
             pass
         self.density = density
-                                                                                                                #
-                                                                                                                # viscosity treatment
-                                                                                                                #
-        print " dbg viscosity ",viscosity;#raw_input()
+                                                                                            #
+                                                                                            # viscosity treatment
+                                                                                            #
+        print(" dbg viscosity ",viscosity);#raw_input()
         if viscosity:
-            if type(viscosity) == FloatType:
-               viscosity = Viscosity(viscosity, 'kg/m/s') 
+            if type(viscosity) == FloatType: viscosity = Viscosity(viscosity, 'kg/m/s') 
             memberShip(viscosity, Viscosity)
             check = 3*check
             pass
         else:
             viscosity = Viscosity(1.0, 'kg/m/s')
-        print " dbg viscosity 1",viscosity;#raw_input()
+            pass
+        print(" dbg viscosity 1",viscosity);#raw_input()
         self.viscosity = viscosity
-                                                                                                                #
-                                                                                                                # Do we use intrinsic permeability
-                                                                                                                #
+                                                                                            #
+                                                                                            # Do we use intrinsic permeability
+                                                                                            #
         if self.saturation == "unsaturated": intrinsicPermeabilityCheck(self.regions, check)
-                                                                                                                #        
-                                                                                                                # times definition
-                                                                                                                #        
+                                                                                            #        
+                                                                                            # times definition
+                                                                                            #        
         self.simulationType = simulationType
 #        #raw_input("calculation times ")
         if calculationTimes:
             self.calculationTimes = calculationTimes
             self.simulationType = "Transient"
+            pass
         else:
             self.calculationTimes = None
             self.simulationType = "Steady"
-
+            pass
         self.steadyState = 1 
         if self.calculationTimes!= None:
-            if type(calculationTimes) != types.ListType:
-                raise typeError, " calculationTimes should be a list "
-	    CalculationTimes=toFloatList( self.calculationTimes)
+            if type(calculationTimes) != list:
+                raise TypeError(" calculationTimes should be a list ")
+            CalculationTimes=toFloatList( self.calculationTimes)
             #
             for item in CalculationTimes:
-                if type(item) != types.FloatType:
-                    raise TypeError, " item should be a float "
+                if type(item) != float:
+                    raise TypeError(" item should be a float ")
+                pass
             self.calculationTimes = sorted( CalculationTimes)
 #            print self.calculationTimes;#raw_input(" within the loop, calculation times are printed here")
-            self.steadyState = 0                                                                                # The simulation is transient
+            self.steadyState = 0                                                            # The simulation is transient
             pass
-                                                                                                                #
-                                                                                                                # Permeability
-                                                                                                                #
+                                                                                            #
+                                                                                            # Permeability
+                                                                                            #
         if self.saturation == "unsaturated":
             #
             # only Richards for the moment
@@ -209,14 +212,14 @@ class HydraulicProblem:
             pass
             #raise Exception, " for the moment, undersaturated flows are not implemented"
             #regionPhysicalQuantitiesCheck([Permeability, IntrinsicPermeability], regions)
-                                                                                                                #        
-                                                                                                                # boundaryConditions treatment
-                                                                                                                #        
+                                                                                            #        
+                                                                                            # boundaryConditions treatment
+                                                                                            #        
         self.defaultBC = None
         boundaryConditions = toList(boundaryConditions)
-        print " problem type ",self.problemType
+        print(" problem type ",self.problemType)
 #        raw_input(str(self.problemType))
-        print dir(boundaryConditions[0]) 
+        print(dir(boundaryConditions[0])) 
 
         # verification if all boundaries are treated.
         # If some are not, affect a default value (an homogeneous
@@ -224,22 +227,19 @@ class HydraulicProblem:
         boundaries = []
         for boundaryElement in boundaryConditions:
             boundary = toList(boundaryElement.getBoundary())
-            for bound in boundary:
-                boundaries.append(bound)
-        # In case of structured mesh, not all the bounadary could be define for the problem
+            for bound in boundary: boundaries.append(bound)
+            pass
+        # In case of structured mesh, not all the boundary could be defined for the problem
         if self.defaultBC:
             if not self.density:
                 self.density = Density(1.)
                 pass
             if not self.gravity:
                 mesh_dim=regions[0].getZone().getMesh().getSpaceDimension()
-                if mesh_dim==2:
-                    self.gravity=Gravity(Vector(0.,1.))
-                elif mesh_dim==3:
-                    self.gravity=Gravity(Vector(0.,0.,1.))
+                if mesh_dim==2: self.gravity=Gravity(Vector(0.,1.))
+                elif mesh_dim==3: self.gravity=Gravity(Vector(0.,0.,1.))
                 else:
-                    raise 'Dimension ????'
-                
+                    raise Warning('Dimension ????')
                 pass
             pass        
         # Verification if a pressure condition has been set
@@ -248,34 +248,33 @@ class HydraulicProblem:
         
 #        verifyPressureBoundaryConditions(boundaryConditions, self.density, self.gravity)       
         self.boundaryConditions = boundaryConditions
-                                                                                                                #
-                                                                                                                # initialConditions treatment
-                                                                                                                #        
+                                                                                            #
+                                                                                            # initialConditions treatment
+                                                                                            #        
         self.initialConditions = initialConditions
 #        print " initialConditions",initialConditions;raw_input()
-                                                                                                                #
-                                                                                                                # source treatment
-                                                                                                                #
+                                                                                            #
+                                                                                            # source treatment
+                                                                                            #
         if source: verifyClassList(source, Source)
         self.source = source
-                                                                                                                #
-                                                                                                                # outputs treatment
-                                                                                                                #
+                                                                                            #
+                                                                                            # outputs treatment
+                                                                                            #
         if outputs:
             outputs1 = toList(outputs)
             verifyClassList(outputs1, _dicoproblem[type].ExpectedOutput)
 
-            if not hasattr(self,'output_names'):
-                self.output_names=[]
+            if not hasattr(self,'output_names'): self.output_names=[]
             for output in outputs1:
                 if output.getName() in self.output_names:
                     msg = '\n\nDifferent outputs should not share the same name.\n'
                     msg+= 'End of the hydraulic problem run.\n\n'
-                    raise msg
+                    raise Warning(msg)
                 self.output_names.append(output.getName())
+                pass
             #
         self.outputs = outputs
-
         return
 
     def getBoundaryConditions(self):
@@ -353,9 +352,9 @@ class BoundaryCondition_old(CommonBoundaryCondition):
           If Neumann, value can be HeadGradient or PressureGradient.
           If Flux, value can be HydraulicFlux.
         """
-        print "b",boundary
-        print "k",kind
-        print "v",value
+        print("b",boundary)
+        print("k",kind)
+        print("v",value)
         
         boundaryConditionDict = makeDico( Dirichlet = [Head,Pressure,SaturationLevel],\
                                           Neumann = [HeadGradient,PressureGradient],\
@@ -381,9 +380,9 @@ class BoundaryCondition( CommonBoundaryCondition):
           If Neumann, value can be HeadGradient or PressureGradient.
           If Flux, value can be HydraulicFlux.
         """
-        print "b",boundary
-        print "k",btype
-        print "v",value
+        print("b",boundary)
+        print("k",btype)
+        print("v",value)
         
         boundaryConditionDico = makeDico(Dirichlet=[Head,Pressure,SaturationLevel],\
                                          Neumann=[HeadGradient,PressureGradient],\
@@ -423,7 +422,7 @@ class InitialCondition(CommonInitialCondition):
             #
             # if faut pouvoir verifier qu'une condition de saturation n'a pas ete fixee
             #
-    
+#   
 class Source(CommonSource):
     """Source definition"""        
     def __init__(self, zone, value):
@@ -433,10 +432,10 @@ class Source(CommonSource):
         """
         CommonSource.__init__(self,zone,value,[Flowrate])
         return
+#
 class ZoneCondition(CommonZoneCondition):
     """specific ZoneCondition class for hydraulicproblem"""
     def __init__(self, zone, value):
         """Zone condition initialisation"""
         CommonZoneCondition.__init__(self,zone,value,Pressure)
         return
-    

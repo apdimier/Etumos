@@ -119,8 +119,8 @@ class GenericModule(Generic):
         self.spatialInteractiveOutputs = None 
         self.spatialSaveOutputs = None  
         self.vtkFileWriter = None
-	self.vtkFrequency = None
-	
+        self.vtkFrequency = None
+    
         self.outputs = {}
         
         self.maxTimeStep = 1.e+15
@@ -188,7 +188,7 @@ def checkClass(x, classes, message=None):
             if hasattr(x, "__repr__"): xstr = x.__repr__()
             else: xstr = repr(type(x))
             xstr = repr(type(x))       
-	raise TypeError(" x of type "+xstr+" is not within ["+_classesNameVerbose(classes)+"]")
+        raise TypeError(" x of type "+xstr+" is not within ["+_classesNameVerbose(classes)+"]")
     return
 
 def checkClassList(liste, classes):
@@ -246,13 +246,12 @@ def fileWOpening(fileName):
 def isInstance(x, klassenprobe):
     """Returns true if x is an instance of one of the classes within the testclasses, false otherwise"""
     if type(klassenprobe) is not ListType:
-	    if isinstance(x, klassenprobe):
-	        return 1
+        if isinstance(x, klassenprobe):
+            return 1
     else:
         for klasse in klassenprobe:
-	    if isinstance(x, klasse):
-	        return 1
-            pass
+            if isinstance(x, klasse):
+                return 1
     return 0
     
 def kafka():

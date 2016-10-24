@@ -1028,8 +1028,11 @@ class Phreeqc:
             pass
         #print " pdbg init ",self.solverFileName,output
         self.defineInputOutput(self.solverFileName,output)
-
+                                                                                            #
+                                                                                            # We launch the solver
+                                                                                            #
         self.solver.initialize(internalNodes,self.mpiSize)
+        self.molarMassDict = self.getMolarMassList("phreeqc.dat",typ = {})
         #
         # porosity treatment: structure creation to treat the porosity variation
         #
@@ -1438,6 +1441,9 @@ class Phreeqc:
         return self.cellPorosity
     
     def getMolarMassList(self,URL, typ = None):
+        """
+        can only take place un the soft module; a database analysis being mandatory.
+        """
         URL = URL.split("/")
         print(URL)
         URL = os.getenv("WRAPPER")+"/Phreeqc_dat/"+URL[-1]

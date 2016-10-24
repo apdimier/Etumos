@@ -8,7 +8,9 @@
 #
 # minor modifications, partially extended to access to classes: A. Dimier
 #
-
+# and enable the domain of T-H-M-C modelling.
+#
+#
 """
 Physical quantities with units.
 
@@ -34,6 +36,8 @@ recommended values from CODATA. Other conversion factors
 guarantee for the correctness of all entries in the unit
 table, so use this at your own risk.
 """
+from __future__ import absolute_import
+from __future__ import print_function
 from functions import *
 from generictools import memberShip
 
@@ -43,7 +47,11 @@ from Scientific.NumberDict import NumberDict
 from Scientific import N
 from tensors import Tensor, IsotropicTensor,Tensor2D,Tensor3D
 import re, string
-
+from vector import V
+import six
+from six.moves import map
+from six.moves import range
+from functools import reduce
 # Class definitions
 
 class PhysicalQuantity:
@@ -121,18 +129,21 @@ class PhysicalQuantity:
         @param args: either (value, unit) or (value_with_unit,)
         @type args: (number, C{str}) or (C{str},)
         """
+        #print ("debug ",len(args))
         if len(args) == 2:
             self.value = args[0]
             self.unit = _findUnit(args[1])
+            pass
         else:
-            print " dbg scalar "
+            #print " dbg scalar "
             s = string.strip(args[0])
-            print s
+            #print s
             match = PhysicalQuantity._number.match(s)
             if match is None:
                 raise TypeError('No number found')
             self.value = string.atof(match.group(0))
             self.unit = _findUnit(s[len(match.group(0)):])
+            pass
 
     _number = re.compile('[+-]?[0-9]+(\\.[0-9]*)?([eE][+-]?[0-9]+)?')
 
@@ -140,8 +151,12 @@ class PhysicalQuantity:
         return str(self.value) + ' ' + self.unit.name()
 
     def __repr__(self):
-        return (self.__class__.__name__ + '(' + `self.value` + ',' + 
-                `self.unit.name()` + ')')
+        if (self.__class__.__name__ == "MSConc"):
+            print(self.__class__.__name__ + '(' + repr(self.value) + ',' +"%"')')
+            return (self.__class__.__name__ + '(' + repr(self.value) + ',' +"%" + ')')
+        else:
+            return (self.__class__.__name__ + '(' + repr(self.value) + ',' + 
+                repr(self.unit.name()) + ')')
 
     def _sum(self, other, sign1, sign2):
         if not isPhysicalQuantity(other):
@@ -251,7 +266,7 @@ class PhysicalQuantity:
         @raises TypeError: if any of the specified units are not compatible
         with the original unit
         """
-        units = map(_findUnit, units)
+        units = list(map(_findUnit, units))
         if len(units) == 1:
             unit = units[0]
             value = _convertValue (self.value, self.unit, unit)
@@ -265,11 +280,14 @@ class PhysicalQuantity:
                 value = value*unit.conversionFactorTo(units[i])
                 if i == 0:
                     rounded = value
+                    pass
                 else:
                     rounded = _round(value)
+                    pass
                 result.append(self.__class__(rounded, units[i]))
                 value = value - rounded
                 unit = units[i]
+                pass
             return tuple(result)
 
     # Contributed by Berthold Hoellmann
@@ -282,21 +300,27 @@ class PhysicalQuantity:
         new_value = self.value * self.unit.factor
         num = ''
         denom = ''
-        for i in xrange(9):
+        for i in range(9):
             unit = _base_names[i]
             power = self.unit.powers[i]
             if power < 0:
                 denom = denom + '/' + unit
                 if power < -1:
                     denom = denom + '**' + str(-power)
+                    pass
+                pass
             elif power > 0:
                 num = num + '*' + unit
                 if power > 1:
                     num = num + '**' + str(power)
+                    pass
+                pass
         if len(num) == 0:
             num = '1'
+            pass
         else:
             num = num[1:]
+            pass
         return self.__class__(new_value, num + denom)
 
     def isCompatible (self, unit):
@@ -373,8 +397,10 @@ class PhysicalUnit:
         if type(names) == type(''):
             self.names = NumberDict()
             self.names[names] = 1
+            pass
         else:
             self.names = names
+            pass
         self.factor = factor
         self.offset = offset
         self.powers = powers
@@ -395,8 +421,8 @@ class PhysicalUnit:
         if isPhysicalUnit(other):
             return PhysicalUnit(self.names+other.names,
                                 self.factor*other.factor,
-                                map(lambda a,b: a+b,
-                                    self.powers, other.powers))
+                                list(map(lambda a,b: a+b,
+                                    self.powers, other.powers)))
         else:
             return PhysicalUnit(self.names+{str(other): 1},
                                 self.factor*other,
@@ -411,8 +437,8 @@ class PhysicalUnit:
         if isPhysicalUnit(other):
             return PhysicalUnit(self.names-other.names,
                                 self.factor/other.factor,
-                                map(lambda a,b: a-b,
-                                    self.powers, other.powers))
+                                list(map(lambda a,b: a-b,
+                                    self.powers, other.powers)))
         else:
             return PhysicalUnit(self.names+{str(other): -1},
                                 self.factor/other, self.powers)
@@ -423,40 +449,45 @@ class PhysicalUnit:
         if isPhysicalUnit(other):
             return PhysicalUnit(other.names-self.names,
                                 other.factor/self.factor,
-                                map(lambda a,b: a-b,
-                                    other.powers, self.powers))
+                                list(map(lambda a,b: a-b,
+                                    other.powers, self.powers)))
         else:
             return PhysicalUnit({str(other): 1}-self.names,
                                 other/self.factor,
-                                map(lambda x: -x, self.powers))
+                                [-x for x in self.powers])
 
     def __pow__(self, other):
         if self.offset != 0:
             raise TypeError("cannot exponentiate units with non-zero offset")
         if isinstance(other, int):
             return PhysicalUnit(other*self.names, pow(self.factor, other),
-                                map(lambda x,p=other: x*p, self.powers))
+                                list(map(lambda x,p=other: x*p, self.powers)))
         if isinstance(other, float):
             inv_exp = 1./other
             rounded = int(N.floor(inv_exp+0.5))
             if abs(inv_exp-rounded) < 1.e-10:
                 if reduce(lambda a, b: a and b,
-                          map(lambda x, e=rounded: x%e == 0, self.powers)):
+                          list(map(lambda x, e=rounded: x%e == 0, self.powers))):
                     f = pow(self.factor, other)
-                    p = map(lambda x,p=rounded: x/p, self.powers)
+                    p = list(map(lambda x,p=rounded: x/p, self.powers))
                     if reduce(lambda a, b: a and b,
-                              map(lambda x, e=rounded: x%e == 0,
-                                  self.names.values())):
+                              list(map(lambda x, e=rounded: x%e == 0,
+                                  list(self.names.values())))):
                         names = self.names/rounded
+                        pass
                     else:
                         names = NumberDict()
                         if f != 1.:
                             names[str(f)] = 1
+                            pass
                         for i in range(len(p)):
                             names[_base_names[i]] = p[i]
+                            pass
+                        pass
                     return PhysicalUnit(names, f, p)
                 else:
                     raise TypeError('Illegal exponent')
+                pass
         raise TypeError('Only integer and inverse integer exponents allowed')
 
     def conversionFactorTo(self, other):
@@ -536,14 +567,20 @@ class PhysicalUnit:
                 denom = denom + '/' + unit
                 if power < -1:
                     denom = denom + '**' + str(-power)
+                    pass
+                pass
             elif power > 0:
                 num = num + '*' + unit
                 if power > 1:
                     num = num + '**' + str(power)
+                    pass
+                pass
         if len(num) == 0:
             num = '1'
+            pass
         else:
             num = num[1:]
+            pass
         return num + denom
 
 
@@ -578,10 +615,14 @@ def _findUnit(unit):
         for cruft in ['__builtins__', '__args__']:
             try: del _unit_table[cruft]
             except: pass
+        pass
 
     if not isPhysicalUnit(unit):
         raise TypeError(str(unit) + ' is not a unit')
     return unit
+
+def _getDefault(unitname):
+    return _findUnit(unitname)
 
 def _round(x):
     if N.greater(x, 0.):
@@ -636,16 +677,18 @@ _unit_table = {}
 
 for unit in _base_units:
     _unit_table[unit[0]] = unit[1]
+    pass
 
 _help = []
 
 def _addUnit(name, unit, comment=''):
-    if _unit_table.has_key(name):
-	raise KeyError, 'Unit ' + name + ' already defined'
+    if name in _unit_table:
+        raise Warning('Unit ' + name + ' already defined')
     if comment:
         _help.append((name, comment, unit))
+        pass
     if type(unit) == type(''):
-	unit = eval(unit, _unit_table)
+        unit = eval(unit, _unit_table)
         for cruft in ['__builtins__', '__args__']:
             try: del _unit_table[cruft]
             except: pass
@@ -656,9 +699,10 @@ def _addPrefixed(unit):
     _help.append('Prefixed units for %s:' % unit)
     _prefixed_names = []
     for prefix in _prefixes:
-	name = prefix[0] + unit
-	_addUnit(name, prefix[1]*_unit_table[unit])
+        name = prefix[0] + unit
+        _addUnit(name, prefix[1]*_unit_table[unit])
         _prefixed_names.append(name)
+        pass
     _help.append(', '.join(_prefixed_names))
 
 
@@ -693,6 +737,7 @@ del _unit_table['kg']
 
 for unit in _unit_table.keys():
     _addPrefixed(unit)
+    pass
 
 # Fundamental constants
 _help.append('Fundamental constants:')
@@ -763,6 +808,9 @@ _addUnit('lb', '16*oz', 'pound')
 _addUnit('ton', '2000*lb', 'ton')
 
 # Force units
+#
+# Newton ( m*kg/s**2 )
+#
 _help.append('Force units:')
 
 _addUnit('dyn', '1.e-5*N', 'dyne (cgs unit)')
@@ -780,6 +828,12 @@ _addUnit('cali', '4.1868*J', 'international calorie')
 _addUnit('kcali', '1000*cali', 'international kilocalorie')
 _addUnit('Btu', '1055.05585262*J', 'British thermal unit')
 
+_addPrefixed('eV')
+
+# Power units
+_help.append('Power units:')
+
+_addUnit('hp', '745.7*W', 'horsepower')
 # Pressure units
 _help.append('Pressure units:')
 
@@ -811,6 +865,7 @@ _addUnit('SpecificHeatCapacity', 'J/g/K', 'J/g/K')
 _addUnit('SpecificHeat', 'J/g/K', 'J/g/K')
 _addUnit('KinematicDispersion', 'm', 'm')
 _addUnit('EffectiveDiffusion', 'm**2/s', 'm**2/s')
+_addUnit('NormalForce', 'kg/s**2/m', 'N')
 
 _addUnit('SpecificStorage', '1/s', '1/s')
 _addUnit('DecayRate', '1/s', '1/s')
@@ -839,19 +894,22 @@ _addUnit('Velocity','m/s','m/s')
 _addUnit('MassActivity','GBq/kg','GBq/kg')
 _addUnit('Activity','Bq', 'Bq')
 _addUnit('MolalConcentration','molal', 'molal')
-_addUnit('SpecificSurfaceArea','m**2/kg','m**2/kg')
+_addUnit('ReactiveSurface','m**2/kg', comment='per kg H2O')
+_addUnit('SpecificSurfaceArea','m**2/kg', comment='per kg H2O')
 _addUnit('VolumicSurfaceArea','1/m','1/m')
+_addUnit('Volume','m**3','m**3')
+_addUnit('YoungModulus','N/m**2','N/m**2')
 
 _addUnit('Porosity','m/m','Porosity')
+_addUnit('Tortuosity','m/m','Tortuosity')
 _addUnit('Saturation','m/m','Saturation')
+#_addUnit('PoissonRatio','m/m','PoissonRatio')
 
-
-_addPrefixed('eV')
 
 # Power units
 _help.append('Power units:')
 
-_addUnit('hp', '745.7*W', 'horsepower')
+#_addUnit('hp', '745.7*W', 'horsepower')
 
 
 # Angle units
@@ -875,15 +933,18 @@ def description():
     """Return a string describing all available units."""
     s = ''  # collector for description text
     for entry in _help:
-        if isinstance(entry, basestring):
+        if isinstance(entry, six.string_types):
             # headline for new section
             s += '\n' + entry + '\n'
+            pass
         elif isinstance(entry, tuple):
             name, comment, unit = entry
             s += '%-8s  %-26s %s\n' % (name, comment, unit)
+            pass
         else:
             # impossible
-            raise TypeError, 'wrong construction of _help list'
+            raise TypeError('wrong construction of _help list')
+        pass
     return s
 
 # add the description of the units to the module's doc string:
@@ -893,12 +954,12 @@ __doc__ += '\n' + description()
     
 class Scalar(PhysicalQuantity):
     """
-    value can be :
-    o 'Unknown'
-    o A scalar in one the three forms :
-    o    single value (float or int)
-    o    function of scalar (LinearFunction, TimeTabulatedFunction,SpaceAndTimeTabulatedFunction, PolynomialFunction or TimeFunction)
-    o    field of scalar
+    The value can be :
+    - 'Unknown'
+    - A scalar can be :
+        - a single value (float or int)
+        - a function of scalar (LinearFunction, TimeTabulatedFunction,SpaceAndTimeTabulatedFunction, PolynomialFunction or TimeFunction)
+        - field of scalar
     """
     def __init__(self, value,unit = None):
         PhysicalQuantity.__init__(self,value, unit)
@@ -909,10 +970,14 @@ class Scalar(PhysicalQuantity):
 #        valueOK = verifyValueIsUnknown(value)
         valueOK = 0
         if not valueOK:
-            # value : float ou int ??
-            if type(value) in [FloatType,IntType]:
+            if type(value) in [FloatType, IntType]:
                 value = float(value)
                 valueOK = 1
+                pass
+            if type(value) in [ListType]:
+                value = list(map(float,value))
+                valueOK = 1
+                pass
             pass
         if not valueOK:
             # value : instance de Field ou de LinearFunction2D
@@ -926,7 +991,7 @@ class Scalar(PhysicalQuantity):
             pass
         if not valueOK:
             # Exception levee
-            raise "IncorrectValue for  a physical quantity"
+            raise Warning("IncorrectValue for  a physical quantity")
         self.value = value
         return
     
@@ -946,13 +1011,13 @@ class Scalar(PhysicalQuantity):
 class Tensor(PhysicalQuantity):
     """
     A tensor can be:
-    	a single value of type float or int,
-    	a tensor, orthotropictensor or isotrocpictensor
-    	programmation should be enhanced
+        a single value of type float or int,
+        a tensor, orthotropictensor or isotrocpictensor
+        programmation should be enhanced
         """
     
     def __init__(self, value,unit = None):
-        print "Tensor value",value,unit
+        #print "Tensor value",value,unit
         PhysicalQuantity.__init__(self,value,unit)
         self.value =self.verifyValue(value)
 #        print "Tensor self.value",self.value
@@ -961,11 +1026,13 @@ class Tensor(PhysicalQuantity):
 #        valueOK = verifyValueIsUnknown(value)
         valueOK = 0
         if not valueOK:
-#            print "Tensor value : float ou int ??",value,type(value)
+            #print "Tensor value : float ou int ??",value,type(value)
             if type(value) in [FloatType, IntType]:
 #                print "Tensor value ok "
                 value = IsotropicTensor(float(value))
                 valueOK = 1
+                pass
+            pass
 #        print "Tensor what value 0",valueOK
         if not valueOK:
             # value : Tensor, or IsotropicTensor
@@ -986,7 +1053,7 @@ class Tensor(PhysicalQuantity):
                 pass
             pass
         if not valueOK:
-            raise ValueError, "physical quantity"
+            raise ValueError("physical quantity")
 #        print " at the end ",value,type(value)
         return value
         
@@ -1011,7 +1078,7 @@ class Vektor(PhysicalQuantity):
     to scalar.
     """
     
-    def __init__(self, value, unit='m/s'):
+    def __init__(self, value, unit = 'm/s'):
         PhysicalQuantity.__init__(self,value, unit)
         self.setValue(value)
         return
@@ -1019,6 +1086,7 @@ class Vektor(PhysicalQuantity):
     def checkValue(self, value):
         if value.__class__.__name__=="V":
             valueOK = 1
+            pass
         else:
             try:
                 if type(value) in [FloatType,IntType]:
@@ -1076,9 +1144,32 @@ class ConcentrationFlux(Scalar):
 class ConcentrationRate(Scalar):
     default_unit = _findUnit('ConcentrationRate')
     pass
+
+class Density(Scalar):
+    """
+    the volumetric mass density, of a substance is its mass per unit volume
+    """
+    default_unit = _findUnit('Density')
+    pass
+
+class Displacement(Vektor):
+    default_unit = _findUnit('Length')
+    pass
     
 class Enthalpy(Scalar):
     default_unit = _findUnit('Enthalpy')
+    pass
+    
+class Flowrate(Scalar):
+    default_unit = _getDefault('FlowRate')
+    pass
+    
+class NormalForce(Scalar):
+    """
+    A force is the product of a mass and an acceleration
+    the acceleration being the rate of change of velocity
+    """
+    default_unit = _findUnit('NormalForce')
     pass
     
 class Gravity(Vektor):
@@ -1086,9 +1177,18 @@ class Gravity(Vektor):
 
 class Head(Scalar):
     """
-    head is a normalised Pressure, is a scalar quantity and has SI units of m
+    The head is a normalised Pressure, is a scalar quantity and has SI units of m
     """
     default_unit = _findUnit("Head")
+    pass
+
+class Pressure(Scalar):
+    """
+    Pressure is a scalar quantity, and has SI units of pascals kg/(m*s**2)
+    A force applied on a surface
+    1 Pa = 1 kg.m-1.s-2
+    """
+    default_unit = _findUnit('Pressure')
     pass
 
 class SaturationLevel(Scalar):
@@ -1109,16 +1209,6 @@ class Temperature(Scalar):
 class RefTemperature(Temperature):
     default_unit = _findUnit('Temperature')
     pass
-
-class Pressure(Scalar):
-    """
-    Pressure is a scalar quantity, and has SI units of pascals
-    """
-    default_unit = _findUnit('Pressure')
-    pass
-#
-# etrange sert a definir une condition de neumann et est de classe vektor
-#   
 
 class FlowRate(Scalar):
     default_unit = _findUnit('FlowRate')
@@ -1145,6 +1235,10 @@ class Moles(Scalar):
     pass
 
 MolesAmount = Moles
+    
+class Volume(Scalar):
+    default_unit = _findUnit('l')
+    pass
 
 # Some demonstration code. Run with "python -i PhysicalQuantities.py"
 # to have this available.
@@ -1154,18 +1248,16 @@ if __name__ == '__main__':
     from Scientific.N import *
     l = PhysicalQuantity(10., 'm')
     big_l = PhysicalQuantity(10., 'km')
-    print big_l + l
+    print(big_l + l)
     t = PhysicalQuantity(314159., 's')
-    print t.inUnitsOf('d','h','min','s')
+    print(t.inUnitsOf('d','h','min','s'))
 
     p = PhysicalQuantity # just a shorthand...
 
     e = p('2.7 Hartree*Nav')
     e.convertToUnit('kcal/mol')
-    print e
-    print e.inBaseUnits()
+    print(e)
+    print(e.inBaseUnits())
 
     freeze = p('0 degC')
-    print freeze.inUnitsOf ('degF')
-    
-
+    print(freeze.inUnitsOf ('degF'))

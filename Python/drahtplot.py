@@ -54,7 +54,7 @@ class TestFrame(wx.Frame):
         self.mainmenu.Append(menu, '&File')
 
         menu = wx.Menu()
-	
+    
         menu.Append(211, '&Redraw', 'Redraw plots')
         self.Bind(wx.EVT_MENU,self.OnPlotRedraw, id=211)
         menu.Append(212, '&Clear', 'Clear canvas')
@@ -102,7 +102,7 @@ class TestFrame(wx.Frame):
         self.Show(True)
 
     def DrawPointLabel(self, dc, mDataDict):
-        """This is the fuction that defines how the pointLabels are plotted
+        """This is the function that defines how the pointLabels are plotted
             dc - DC that will be passed
             mDataDict - Dictionary of data that you want to use for the pointLabel
 
@@ -143,6 +143,8 @@ class TestFrame(wx.Frame):
                             "pointXY":pointXY, "scaledXY":scaledXY}
                 #pass dict to update the pointLabel
                 self.client.UpdatePointLabel(mDataDict)
+                pass
+            pass
         event.Skip()           #go to next handler
 
     def OnFilePageSetup(self, event):
@@ -176,6 +178,7 @@ class TestFrame(wx.Frame):
         if self.client.last_draw != None:
             graphics, xAxis, yAxis= self.client.last_draw
             self.client.Draw(graphics,(1,3.05),(0,1))
+            pass
 
     def OnEnableZoom(self, event):
         self.client.SetEnableZoom(event.IsChecked())
@@ -224,116 +227,117 @@ class Plot(wx.Dialog):
         plot
         """
         def __init__(self, parent, id, title):
-                wx.Dialog.__init__(self, parent, id, title, size=(180, 280))
+            wx.Dialog.__init__(self, parent, id, title, size=(180, 280))
 
-                self.data = [(1,2), (2,3), (3,5), (4,6), (5,8), (6,8), (10,10)]
-                btn1 = wx.Button(self,  1, 'scatter', (50,50))
-                btn2 = wx.Button(self,  2, 'line', (50,90))
-                btn3 = wx.Button(self,  3, 'bar', (50,130))
-                btn4 = wx.Button(self,  4, 'quit', (50,170))
-                wx.EVT_BUTTON(self, 1, self.OnScatter)
-                wx.EVT_BUTTON(self, 2, self.OnLine2)
-                wx.EVT_BUTTON(self, 3, self.OnBar)
-                wx.EVT_BUTTON(self, 4, self.OnQuit)
-                wx.EVT_CLOSE(self, self.OnQuit)
+            self.data = [(1,2), (2,3), (3,5), (4,6), (5,8), (6,8), (10,10)]
+            btn1 = wx.Button(self,  1, 'scatter', (50,50))
+            btn2 = wx.Button(self,  2, 'line', (50,90))
+            btn3 = wx.Button(self,  3, 'bar', (50,130))
+            btn4 = wx.Button(self,  4, 'quit', (50,170))
+            wx.EVT_BUTTON(self, 1, self.OnScatter)
+            wx.EVT_BUTTON(self, 2, self.OnLine2)
+            wx.EVT_BUTTON(self, 3, self.OnBar)
+            wx.EVT_BUTTON(self, 4, self.OnQuit)
+            wx.EVT_CLOSE(self, self.OnQuit)
 
         def OnScatter(self, event):
-                frm = wx.Frame(self, -1, 'scatter', size=(600,450))
-                client = plot.PlotCanvas(frm)
-                markers = plot.PolyMarker(self.data, legend='', colour='pink', marker='triangle_down', size=1)
-                gc = plot.PlotGraphics([markers], 'Scatter Graph', 'X Axis', 'Y Axis')
-                client.Draw(gc, xAxis=(0,15), yAxis=(0,15))
-                frm.Show(True)
+            frm = wx.Frame(self, -1, 'scatter', size=(600,450))
+            client = plot.PlotCanvas(frm)
+            markers = plot.PolyMarker(self.data, legend='', colour='pink', marker='triangle_down', size=1)
+            gc = plot.PlotGraphics([markers], 'Scatter Graph', 'X Axis', 'Y Axis')
+            client.Draw(gc, xAxis=(0,15), yAxis=(0,15))
+            frm.Show(True)
 
         def OnLine(self, event):
-                frm = wx.Frame(self, -1, 'line', size=(600,450))
-                client = plot.PlotCanvas(frm)
-                line = plot.PolyLine(self.data, legend='', colour='pink', width=5, style=wx.DOT)
-                gc = plot.PlotGraphics([line], 'Line Graph', 'X Axis', 'Y Axis')
-                client.Draw(gc,  xAxis= (0,15), yAxis= (0,15))
-                frm.Show(True)
+            frm = wx.Frame(self, -1, 'line', size=(600,450))
+            client = plot.PlotCanvas(frm)
+            line = plot.PolyLine(self.data, legend='', colour='pink', width=5, style=wx.DOT)
+            gc = plot.PlotGraphics([line], 'Line Graph', 'X Axis', 'Y Axis')
+            client.Draw(gc,  xAxis= (0,15), yAxis= (0,15))
+            frm.Show(True)
 
         def OnLine2(self, event):
-        	toto = TestFrame(None, -1, "Gnade")
-                line = plot.PolyLine(self.data, legend='', colour='pink', width=5, style=wx.DOT)
-                gc = plot.PlotGraphics([line], 'Line Graph', 'X Axis', 'Y Axis')
-                toto.client.Draw(gc,  xAxis= (0,15), yAxis= (0,15))
-                toto.Show(True)
+            toto = TestFrame(None, -1, "Gnade")
+            line = plot.PolyLine(self.data, legend='', colour='pink', width=5, style=wx.DOT)
+            gc = plot.PlotGraphics([line], 'Line Graph', 'X Axis', 'Y Axis')
+            toto.client.Draw(gc,  xAxis= (0,15), yAxis= (0,15))
+            toto.Show(True)
 
         def OnBar(self, event):
-                frm = wx.Frame(self, -1, 'bar', size=(600,450))
-                client = plot.PlotCanvas(frm)
-                bar1 = plot.PolyLine([(1, 0), (1,5)], legend='', colour='gray', width=25)
-                bar2 = plot.PolyLine([(3, 0), (3,8)], legend='', colour='gray', width=25)
-                bar3 = plot.PolyLine([(5, 0), (5,12)], legend='', colour='gray', width=25)
-                bar4 = plot.PolyLine([(6, 0), (6,2)], legend='', colour='gray', width=25)
-                gc = plot.PlotGraphics([bar1, bar2, bar3, bar4],'Bar Graph', 'X Axis', 'Y Axis')
-                client.Draw(gc, xAxis=(0,15), yAxis=(0,15))
-                frm.Show(True)
+            frm = wx.Frame(self, -1, 'bar', size=(600,450))
+            client = plot.PlotCanvas(frm)
+            bar1 = plot.PolyLine([(1, 0), (1,5)], legend='', colour='gray', width=25)
+            bar2 = plot.PolyLine([(3, 0), (3,8)], legend='', colour='gray', width=25)
+            bar3 = plot.PolyLine([(5, 0), (5,12)], legend='', colour='gray', width=25)
+            bar4 = plot.PolyLine([(6, 0), (6,2)], legend='', colour='gray', width=25)
+            gc = plot.PlotGraphics([bar1, bar2, bar3, bar4],'Bar Graph', 'X Axis', 'Y Axis')
+            client.Draw(gc, xAxis=(0,15), yAxis=(0,15))
+            frm.Show(True)
 
         def OnQuit(self, event):
-                self.Destroy()
+            self.Destroy()
 
 class MyApp(wx.App):
-       """
-       essai
-       """
-       def OnInit(self):
-                 dlg = Plot(None, -1, 'plot.py')
-                 dlg.Show(True)
-                 dlg.Centre()
-                 return True
+        """
+        essai
+        """
+        def OnInit(self):
+            dlg = Plot(None, -1, 'plot.py')
+            dlg.Show(True)
+            dlg.Centre()
+            return True
 
 class IGPlot:
     def __init__(self):
         self.tPlot = threading.Thread(target = self.plot,args=())
-	self.tPlot.setName("Gnade")
-	self.title = "default: interactive plot"
+        self.tPlot.setName("Gnade")
+        self.title = "default: interactive plot"
         return None
 
     def run(self):
         return None
-	
+    
     def setData(self,data):
         self.data = data
         return None
-	
+    
     def setTitle(self,title):
         self.title = title
         return None
-	
+    
     def start(self):
         print " Draht start "
         self.tPlot.start()
-	return None     
-	
+        return None     
+    
     def stop(self):
         print " Draht stop "
         self.toto0.toto.Close()
         self.tPlot._Thread__stop()
         del(self.toto0)
-	return None
+        return None
+        
     def plot(self):
-	self.toto0 = wx.App()
-#	data = [(1,2), (2,3), (3,5), (4,6), (5,8), (6,8), (10,10)]
+        self.toto0 = wx.App()
+#   data = [(1,2), (2,3), (3,5), (4,6), (5,8), (6,8), (10,10)]
         print "we are in plot "*30
-	self.toto0.toto = TestFrame(None, -1, "Gnade")
-	line = plot.PolyLine(self.data, legend='', colour='pink', width=5, style=wx.DOT)
-	gc = plot.PlotGraphics([line], self.title, 'X Axis', 'Y Axis')
-	self.toto0.toto.client.Draw(gc,  xAxis= (0,1), yAxis= (0,15))
-	#self.toto0.toto.Show(True)
-	print "self.toto0.MainLoop()"
-	self.toto0.MainLoop()
-	print "after self.toto0.MainLoop()"
-	return None
+        self.toto0.toto = TestFrame(None, -1, "Gnade")
+        line = plot.PolyLine(self.data, legend='', colour='pink', width=5, style=wx.DOT)
+        gc = plot.PlotGraphics([line], self.title, 'X Axis', 'Y Axis')
+        self.toto0.toto.client.Draw(gc,  xAxis= (0,1), yAxis= (0,15))
+    #self.toto0.toto.Show(True)
+        print "self.toto0.MainLoop()"
+        self.toto0.MainLoop()
+        print "after self.toto0.MainLoop()"
+        return None
 
     def plot1(self):
-	line = plot.PolyLine(self.data, legend='', colour='pink', width=5, style=wx.DOT)
-	gc = plot.PlotGraphics([line], self.title, 'X Axis', 'Y Axis')
-	self.toto0.toto.resetDefaults()
-	self.toto0.toto.client.Draw(gc,  xAxis= (0,20), yAxis= (0,20))
-	self.toto0.toto.client.Redraw()
-	#self.toto0.MainLoop()
+        line = plot.PolyLine(self.data, legend='', colour='pink', width=5, style=wx.DOT)
+        gc = plot.PlotGraphics([line], self.title, 'X Axis', 'Y Axis')
+        self.toto0.toto.resetDefaults()
+        self.toto0.toto.client.Draw(gc,  xAxis= (0,20), yAxis= (0,20))
+        self.toto0.toto.client.Redraw()
+    #self.toto0.MainLoop()
     
         return None
         
