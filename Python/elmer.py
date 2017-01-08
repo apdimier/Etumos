@@ -9,7 +9,7 @@ Velocity: saturated
 
         For the moment, the velocity can be:
 
-                constant:
+                steady(constant):
 
                         In that case, the velocity is introduced as a Darcy velocity, There are two ways to introduce the porosity :
                                 1/ introducing the porosity coefficient in the effective diffusion coefficient, the porosity being set to one
@@ -242,19 +242,19 @@ class Elmer(ElmerRoot):
         else:
             return False
 
-    def getHelp(self,func = None):
-        """
-        That function is used to get some help on the
-        class and on relevant functions
-        Ex: getHelp() or getHelp(a.function)
-        """
-        if func == None:
-            print(self.__doc__)
-            pass
-        else:
-            print(func.__doc__)
-            pass
-        pass
+#    def getHelp(self,func = None):
+#        """
+#        That function is used to get some help on the
+#        class and on relevant functions
+#        Ex: getHelp() or getHelp(a.function)
+#        """
+#        if func == None:
+#            print(self.__doc__)
+#            pass
+#        else:
+#            print(func.__doc__)
+#            pass
+#        pass
 
     def writeBodies(self):
         """
@@ -462,9 +462,9 @@ class Elmer(ElmerRoot):
             sifFileW(" Compressibility Model = Incompressible\n")
             if self.problemType in ["chemicaltransport","thmc"]:
                 tempcont = len(self.speciesNamesList)
-                                                        #
-                                                        # we write the diff.disp tensor
-                                                        #
+                                                                                            #
+                                                                                            # we write the diff.disp tensor
+                                                                                            #
                 for inds in range(tempcont):
                     effecDiff       = self.bodies[indb].getMaterial().getEffectiveDiffusion()
                     if (type(effecDiff) not in [NoneType]):
@@ -565,10 +565,10 @@ class Elmer(ElmerRoot):
                 sifFileW(" Convection Velocity 2 = %e\n"%v[1])
                 sifFileW(" Convection Velocity 3 = %e\n\n"%v[2])
                 pass
-                                                                                           #
-                                                                                           # the velocity is piecewise constant;
-                                                                                           # introduced as a matc function or as a float if constant
-                                                                                           #
+                                                                                            #
+                                                                                            # the velocity is piecewise constant;
+                                                                                            # introduced as a matc function or as a float if constant
+                                                                                            #
             elif self.advConv == "PiecewiseConstant" and  not self.parameterDico["vapor"]:
                 v = self.darcyVelocity.getValue()
                 if (type(v[0]) == StringType):
@@ -2210,9 +2210,15 @@ class Elmer(ElmerRoot):
         it enables to handle some properties, see the core of the function.
         """
 #
+#   annular flow pattern
+#
+        if (propertyName.lower() in ["annularflowpattern"]):
+            self.elmso.setPropertyField(aField,"annularflowpattern")
+            pass
+#
 #   aqueous properties
 #
-        if (propertyName.lower() in ["aqueouscp", "liquidcp"]):
+        elif (propertyName.lower() in ["aqueouscp", "liquidcp"]):
             self.elmso.setPropertyField(aField,"liquidcp")
             pass
         elif (propertyName.lower() in ["aqueousdensity", "liquiddensity"]):
@@ -2246,10 +2252,28 @@ class Elmer(ElmerRoot):
             self.elmso.setPropertyField(aField,"gasenthalpy")
             pass
 #
+#   heat source
+#
+        elif (propertyName.lower() in ["heat source", "heatsource"]):
+            self.elmso.setPropertyField(aField,"heatsource")
+            pass
+#
+#   inclination
+#
+        elif (propertyName.lower() in ["inclination"]):
+            self.elmso.setPropertyField(aField,"inclination")
+            pass
+#
 #
 #
         elif (propertyName.lower() == "quality"):
             self.elmso.setPropertyField(aField,"quality")
+            pass
+        elif (propertyName.lower() == "dqualitydh_p"):
+            self.elmso.setPropertyField(aField,"dqualitydh_p")
+            pass
+        elif (propertyName.lower() == "dqualitydp_h"):
+            self.elmso.setPropertyField(aField,"dqualitydp_h")
             pass
         elif (propertyName.lower() == "surfacetension"):
             self.elmso.setPropertyField(aField,"surfacetension")
@@ -3569,6 +3593,10 @@ def _writeTwoPhasesHeatLoadParameters(sifFile, materialId, bodyName = None):
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "SurfaceTension")
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "dqualitydh_p")
     _wellboreParameter(wellboreDataDict[materialKey], sifFile, "dqualitydp_h")
+                                                                                            #
+                                                                                            # weighting factor between annular and non-annular flow
+                                                                                            #
+    _wellboreParameter(wellboreDataDict[materialKey], sifFile, "annularFlowPattern")
     
     sifFileW("! --------------------------------------\n")
     sifFileW("! geometrical parameters of the wellbore\n")
@@ -3650,7 +3678,7 @@ def _boreHoleDiameter(mesh, boreholeDico):
         #print(mesh.getBody(bodyName).getBodyNodesList())
         for node in mesh.getBody(bodyName).getBodyNodesList():
             if node not in nodesList:
-                print("nodes ",node,nodesList)
+                #print("nodes ",node,nodesList)
                 nodesList.append(node)
                 nodePoints.append(float(mesh.vertexCoords[node-1]))
                 initialDiameter.append(float(boreholeDico[boreholeDico[bodyName]]["d_tubing"]['Real'][0]))

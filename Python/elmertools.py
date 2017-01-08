@@ -2,6 +2,7 @@ from __future__ import absolute_import
 from __future__ import print_function
 from posttables import Table
 from listtools import toList
+from generictools import Dico
 import string
 import numpy
 from six.moves import map
@@ -91,97 +92,6 @@ def interpolate(TimeGlobColumn,oneTable):
 
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
-class Dico:
-    """ Dico class definition as dictionnary, keys are fifo organised (First In, First Out)
-    """
-    #---------------------------------------------------------------------------
-    def __init__(self, name=''):
-        """
-        Constructor
-        """
-        self._name = name
-        self._dict = {}
-        self._cles = []
-        pass
-    #---------------------------------------------------------------------------
-    def getName(self):
-        """
-        dictionnary name, see the class constructor
-        """
-        return self._name
-    #---------------------------------------------------------------------------        
-
-    def keys(self):
-        """
-        list of boundary keys
-        """
-        return self._cles
-    #---------------------------------------------------------------------------
-    def values(self):
-        """
-        List of associated key values
-        """        
-        listValues = []
-        for  key in self._cles : listValues.append(self._dict[key])
-        return listValues
-    #---------------------------------------------------------------------------    
-    def items(self):
-        """ retourne une liste de couples :(cle, valeur), ou cle est une cle
-            du dico et val est la valeur associee.
-        """             
-        listItems = []
-        for  key in self._cles :listItems.append((key, self._dict[key]))
-        return listItems
-    #---------------------------------------------------------------------------
-    def has_key(self, key):
-        """ retourne 1 si key est une cle du dico et 0 sinon.
-        """            
-        return key in self._dict
-    #---------------------------------------------------------------------------
-    def __len__(self):
-        """ retourne le nombre de cles du dico.
-        """           
-        return len(self._cles)
-    #---------------------------------------------------------------------------
-    def __setitem__(self, key, value):
-        """ affectation de la valeur 'value' a la cle 'key' du dico
-            via l'operateur [].
-        """             
-        if key not in self._dict: self._cles.append(key)
-        self._dict[key] = value
-    #---------------------------------------------------------------------------
-
-    def __getitem__(self, key):
-        """ retourne la valeur associee a la cle 'key' via l'instruction
-            via l'operateur [].
-        """
-        return self._dict[key]
-    #---------------------------------------------------------------------------
-    def __str__(self):
-        """ conversion d'une instance de la classe dico en une chaine de
-            caracteres. 
-        """        
-        lst = []
-        for key  in self._cles:
-            lst.append("%s:%s" % (key, self._dict[key]))
-        ret = "Dico<name=%s>{%s}" % (self._name, string.join(lst, ", "))
-        return ret
-    #---------------------------------------------------------------------------   
-    def __repr__(self):
-        """ presentation d'une instance de la classe dico lors de l'impression.
-        """              
-        return  self.__str__()
-
-    def delete(self,key):
-        """ presentation d'une instance de la classe dico lors de l'impression.
-        """
-        del self._dict[key]
-        self._cles.remove(key)
-        return  
-
-
-
-
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
 def whichType(object):

@@ -32,6 +32,7 @@ from commonmodel import Region
 from vector import V as Vector
 
 from PhysicalProperties import Density,\
+                               IntrinsicPermeability,\
                                Viscosity
 from PhysicalQuantities import FlowRate,\
                                Head,\
@@ -42,7 +43,7 @@ from PhysicalQuantities import FlowRate,\
                                SaturationLevel
 import types
 
-class HydraulicProblem:
+class HydraulicProblem(object):
     """
     A hydraulic problem can be 
     
@@ -72,6 +73,7 @@ class HydraulicProblem:
                  gravity = None,\
                  density = None,\
                  source = None,\
+                 intrinsicPermeability = None,\
                  viscosity = None,\
                  outputs = None,\
                  description = None):
@@ -87,15 +89,17 @@ class HydraulicProblem:
         - initial conditions:   
         - regions:              all regions covering the entire mesh. Regions make up a partition of the mesh
                                 
-        - gravity:              default None
+        - gravity:                  default None
         
-        - density:              default None
+        - density:                  default None
         
-        - viscosity:            default None
+        - intrinsicPermeability:    default None
         
-        - sources               default None
+        - viscosity:                default None
         
-        - outputs               default None
+        - sources                   default None
+        
+        - outputs                   default None
 
         """
                                                                                             # 
@@ -146,7 +150,7 @@ class HydraulicProblem:
             if meshdim == 2: value.append(0.)
             gravity=Vector(value)
             print(value)
-        
+            pass
         self.gravity = gravity
                                                                                             #
                                                                                             # density treatment
@@ -158,9 +162,26 @@ class HydraulicProblem:
             pass
         self.density = density
                                                                                             #
+                                                                                            # intrinsicPermeability treatment
+                                                                                            # the introduction of the intrinsic permeability
+                                                                                            # is related to the introduction of the openfoam solver.
+                                                                                            #        
+        #print (intrinsicPermeability)
+        #print (type(intrinsicPermeability))
+        #raw_input("problem type intrinsicPermeability")
+        if intrinsicPermeability:
+            if type(intrinsicPermeability) == FloatType: intrinsicPermeability = IntrinsicPermeability(intrinsicPermeability, 'm**2') 
+            memberShip(intrinsicPermeability, IntrinsicPermeability)
+            check = 2*check
+            pass
+        self.intrinsicPermeability = intrinsicPermeability
+        #print (intrinsicPermeability)
+        #print (type(intrinsicPermeability))
+        #raw_input("problem type intrinsicPermeability b")
+                                                                                            #
                                                                                             # viscosity treatment
                                                                                             #
-        print(" dbg viscosity ",viscosity);#raw_input()
+        #print(" dbg viscosity ",viscosity);#raw_input()
         if viscosity:
             if type(viscosity) == FloatType: viscosity = Viscosity(viscosity, 'kg/m/s') 
             memberShip(viscosity, Viscosity)
@@ -169,7 +190,7 @@ class HydraulicProblem:
         else:
             viscosity = Viscosity(1.0, 'kg/m/s')
             pass
-        print(" dbg viscosity 1",viscosity);#raw_input()
+        #print(" dbg viscosity 1",viscosity);#raw_input()
         self.viscosity = viscosity
                                                                                             #
                                                                                             # Do we use intrinsic permeability
@@ -273,6 +294,7 @@ class HydraulicProblem:
                     raise Warning(msg)
                 self.output_names.append(output.getName())
                 pass
+            pass
             #
         self.outputs = outputs
         return
@@ -296,6 +318,10 @@ class HydraulicProblem:
     def getInitialConditions(self):
         """get initial conditions"""
         return self.initialConditions
+        
+    def getIntrinsicPermeability(self):
+        """get viscosity"""
+        return self.intrinsicPermeability
 
     def getName(self):
         """to get the name of the hydraulic problem"""
@@ -356,8 +382,8 @@ class BoundaryCondition_old(CommonBoundaryCondition):
         print("k",kind)
         print("v",value)
         
-        boundaryConditionDict = makeDico( Dirichlet = [Head,Pressure,SaturationLevel],\
-                                          Neumann = [HeadGradient,PressureGradient],\
+        boundaryConditionDict = makeDico( Dirichlet = [Head, Pressure, SaturationLevel],\
+                                          Neumann = [HeadGradient, PressureGradient],\
                                           Flux = [HydraulicFlux])
                         
         CommonBoundaryCondition.__init__(self,boundary, kind, value, boundaryConditionDict, porosity, description)
@@ -380,12 +406,12 @@ class BoundaryCondition( CommonBoundaryCondition):
           If Neumann, value can be HeadGradient or PressureGradient.
           If Flux, value can be HydraulicFlux.
         """
-        print("b",boundary)
-        print("k",btype)
-        print("v",value)
+        #print("b",boundary)
+        #print("k",btype)
+        #print("v",value)
         
-        boundaryConditionDico = makeDico(Dirichlet=[Head,Pressure,SaturationLevel],\
-                                         Neumann=[HeadGradient,PressureGradient],\
+        boundaryConditionDico = makeDico(Dirichlet=[Head, Pressure, SaturationLevel],\
+                                         Neumann=[HeadGradient, PressureGradient],\
                                          Flux=[HydraulicFlux])
                         
         CommonBoundaryCondition.__init__(self,boundary, btype, value, boundaryConditionDico, porosity, description)

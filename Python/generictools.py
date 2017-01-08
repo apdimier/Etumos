@@ -70,23 +70,118 @@ class Color:
     end = '\033[0m'
 
 color = Color()
+
+class Dico(object):
+    """ Dico class definition as dictionary, keys are fifo organised (First In, First Out)
+    """
+    #---------------------------------------------------------------------------
+    def __init__(self, name=''):
+        """
+        Constructor
+        """
+        self._name = name
+        self._dict = {}
+        self._cles = []
+        pass
+    #---------------------------------------------------------------------------
+    def getName(self):
+        """
+        dictionary name, see the class constructor
+        """
+        return self._name
+    #---------------------------------------------------------------------------        
+
+    def keys(self):
+        """
+        list of boundary keys
+        """
+        return self._cles
+    #---------------------------------------------------------------------------
+    def values(self):
+        """
+        List of associated key values
+        """
+        listValues = []
+        for  key in self._cles : listValues.append(self._dict[key])
+        return listValues
+    #---------------------------------------------------------------------------    
+    def items(self):
+        """ delivers a list of tuples:(key, value), key an entry of
+            dico and value the associated valuee.
+        """             
+        listItems = []
+        for  key in self._cles :listItems.append((key, self._dict[key]))
+        return listItems
+    #---------------------------------------------------------------------------
+    def has_key(self, key):
+        """ boolean 1 ifi key is a key of dico and 0 otherwise.
+        """
+        return key in self._dict
+    #---------------------------------------------------------------------------
+    def __len__(self):
+        """ number of entries in the dico
+        """
+        return len(self._cles)
+    #---------------------------------------------------------------------------
+    def __setitem__(self, key, value):
+        """ affectation of 'value' to the key 'key' within dico
+            via the [] operator.
+        """
+        if key not in self._dict: self._cles.append(key)
+        self._dict[key] = value
+    #---------------------------------------------------------------------------
+
+    def __getitem__(self, key):
+        """
+        return the value associated to 'key' via the [] operator.
+        """
+        if key in self._dict:
+            return self._dict[key]
+        else:
+            return None
+    #---------------------------------------------------------------------------
+    def __str__(self):
+        """
+        Instance conversion:
+        from an instance of the Dico class, we make a string.
+        """
+        lst = []
+        for key  in self._cles:
+            lst.append("%s:%s" % (key, self._dict[key]))
+        ret = "Dico<name=%s>{%s}" % (self._name, string.join(lst, ", "))
+        return ret
+    #---------------------------------------------------------------------------   
+    def __repr__(self):
+        """
+        """
+        return  self.__str__()
+
+    def delete(self,key):
+        """
+        We delete on element of the dictionary
+        """
+        del self._dict[key]
+        self._cles.remove(key)
+        return  
     
-class Generic:
+class Generic(object):
     """
     That class is only used as a generic container
     to provide help on class and associated methods to the user
     """
     def __init__(self):
         #self.pyversion = version_info[0] + version_info[1]*0.1
-        global pyversion
+        #global pyversion
         self.pyversion = pyversion
         pass
 
     def getHelp(self,method = None):
         """
-        Enables to get help on the class and on relevant methods:        
+        That function enables to get some help on the
+        class and on relevant methods:        
             a = class()
             getHelp(a.method)        
+        Ex: getHelp() or getHelp(a.function)
         """
         if method == None or type(method) != MethodType:
             print(self.__doc__)

@@ -1465,6 +1465,8 @@ class ChemicalTransportModule(GenericCTModule):
                      "\n\"Auf, preiset die Tage!\"\n",
                      "\n\"Do turkeys enjoy Thanksgiving ?\"\n",
                      "\n\"Everything should be made as simple as possible,\n but not simpler!\"\n",
+                     "\n\"les hommes usent des statistiques comme les ivrognes des reverberes,\n"+\
+                         "pour l'appui qu'elles fournissent plutot que pour la lumiere qu'elles repandent\"\n",
                      "\n\"Everything is possible, everything is achievable\"\n",
                      "\n\"Forecasts are always difficult,\nespecially if they concern the future!\"\n",
                      "\n\"Summum jus, summa injuria\"\n",
@@ -1488,7 +1490,12 @@ class ChemicalTransportModule(GenericCTModule):
                      "\n\"De omnibus dubitandum est\"\n",
                      "\n\"Plus on apprend plus on ne sait rien\"\n",
                      "\n\"Tout ce qui a pu se dire contre la science ne saurait faire oublier que la recherche scientifique reste, dans la degradation de tant d'ordres humains, l'un des rares domaines ou l'homme se controele, s'incline devant le raisonnable, est non bavard, non violent et pur. Moments de la recherche certes constamment interrompus par les banalites du quotidien mais qui se renouent en duree propre. Le lieu de la morale et de l'elevation ne se trouve-t-il pas desormais au laboratoire ?\"\n",
-                     
+                     "\n\"On definit trop l’intelligence par la scolarite. L’intelligence devient alors une classe, la classe de ceux qui ont fait leurs etudes.\n"+\
+                         "Les etudes sont demontrees par les diploemes, preuves materielles.\n"+\
+                         "Ce systeme est excellent pour la preservation et la transmission des connaissances,"+\
+                         "mais il est mediocre, sinon mauvais pour leur accroissement. Il arrive que la preuve materielle, le diploeme, soit plus durable que ce qu’elle prouve,"+\
+                         " que le zele, la curiosite, la vigueur mentale de celui qu’elle institue membre de la caste des lettres."+\
+                         "Parmi les inconvenients de ce systeme, il faut signaler l’ankylose de l’homme dans son attitude initiale."
                      ]
         random.seed()     
         print random.choice(citations);#sys.stdout.flush()
@@ -3444,14 +3451,14 @@ class ChemicalTransportModule(GenericCTModule):
             print "~ ctmdbg Elmer Boundaries: ~";sys.stdout.flush()                         # Elmer boundary conditions
             print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~";sys.stdout.flush()                         #
             numberOfBoundaries = len(self.boundaryConditions)
-            #
-            # A boundary is represented by a single point within the chemistry.
-            # But points belonging to a boundary can belong to a domain region.
-            # Therefore, a list of these points is established and hereafter for B.C.
-            # these points are ignored
-            #
-            #
-            #raw_input("ctm dbg loop over boundary conditions")
+                                                                                            #
+                                                                                            # A boundary is represented by a single point within the chemistry.
+                                                                                            # But points belonging to a boundary can belong to a domain region.
+                                                                                            # Therefore, a list of these points is established and hereafter for B.C.
+                                                                                            # these points are ignored
+                                                                                            #
+                                                                                            #
+                                                                                            #raw_input("ctm dbg loop over boundary conditions")
             indPlot = 0
             for boundary in self.boundaryConditions:
                 diclist = {}

@@ -129,15 +129,19 @@ class PhysicalQuantity:
         @param args: either (value, unit) or (value_with_unit,)
         @type args: (number, C{str}) or (C{str},)
         """
-        #print ("debug ",len(args))
+        print ("debug ",len(args))
+        print ("debug args",args)
         if len(args) == 2:
             self.value = args[0]
-            self.unit = _findUnit(args[1])
-            pass
+            if type(args[1]) != NoneType:
+                self.unit = _findUnit(args[1])
+                pass
+            else:
+                print(" args[0] is",args[0])
+                raise Warning("you didn't give a dimension to your physical quantity")
         else:
-            #print " dbg scalar "
             s = string.strip(args[0])
-            #print s
+            #print ("debug s",s)
             match = PhysicalQuantity._number.match(s)
             if match is None:
                 raise TypeError('No number found')
@@ -962,8 +966,14 @@ class Scalar(PhysicalQuantity):
         - field of scalar
     """
     def __init__(self, value,unit = None):
-        PhysicalQuantity.__init__(self,value, unit)
-        self.verifyValue(value)
+        if unit != None:
+            #print (" debug unit ",unit)
+            PhysicalQuantity.__init__(self, value, unit)
+            pass
+        else:
+            PhysicalQuantity.__init__(self, value)
+            pass
+        self.verifyValue(self.value)
         return
     
     def verifyValue(self, value):
@@ -1119,6 +1129,7 @@ class Mass(Scalar):
     pass
   
 class Time(Scalar):
+    default_unit = _findUnit('Time')
     pass
     
 class Length(Scalar):

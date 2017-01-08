@@ -177,16 +177,21 @@ def molarMassStringEval(mineralName):
 #----------
 # Elements
 #----------
-class Element:
+class Element(object):
     """
-    Element of the periodic table
+    Element of the periodic table.
+    An element or chemical element is a species of atoms having the same number of protons in their atomic nuclei (i.e. the same atomic number, Z).
+    There are 80 elements that have at least one stable isotope and 38 that have exclusively radioactive isotopes, which decay over time into other elements.
+    
+    example: Carbon. The element Carbon has 6 protons and 2 stable natural isotopes of atomic mass 11 and 12.
     """
 
-    def __init__(self,symbol, name = None):
+    def __init__(self, symbol, atomicNumber = None, name = None):
         """
         Init
           Input :
             symbol (string)
+            atomicNumber (int) : number of protons in the nuclei.
             name (string, OPTIONAL)
         """
         if type(symbol) != StringType:
@@ -241,6 +246,19 @@ class Element:
                 pass
             pass
         return None
+
+class Atom(Element):
+    """
+    Atoms of a chemical element can have a varying number of neutrons in the kernel; those ones are named isotopes.
+    The number of protons in the nucleus defines to what chemical element the atom belongs: for example, all carbon atoms contain 6 protons.
+    
+    Carbon 12 has 6 neutrons
+    Carbon 13 has 7 neutrons
+    """
+    def __init__(self, symbol, atomicNumber = None, atomicMass = None, name = None):
+        Element.__init__(self, symbol, atomicNumber = None, name = None)
+        self.atomicMass = atomicMass
+
 
 class Salt:
     """

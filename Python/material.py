@@ -219,7 +219,7 @@ class Material(Generic):
         self.solubilityLaw_property = None
         self.sorptionLaw_species = None
         self.sorptionLaw_property = None
-        self.specificStorage = SpecificStorage(1.)
+        self.specificStorage = SpecificStorage(1., unit = "1/s")
         self.matrixCompressibilityFactor = None
         self.massSolubilityLimit_species = None
         self.massSolubilityLimit_property = None

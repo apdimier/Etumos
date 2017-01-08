@@ -217,6 +217,7 @@ class Chemical:
            and a list of tuples representing the aqueous and mineral states
         """
         state = self.getOutput()
+        self.equilibriumState = state
         #print type(state)
         if self.component.outFile == None:
             outFile = open("phreeqCFile.out", 'w')
@@ -260,7 +261,6 @@ class Chemical:
         outFile.write("\n\n                 mineral species:            SI                   moles\n\n")
         for i in state[anf:]:
             outFile.write("%30s         %15.8e      %15.8e\n\n"%(str(i[0]),float(str(i[2])),float(str(i[1]))))
-
 
     def printOutputState(self):
         """

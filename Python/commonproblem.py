@@ -103,7 +103,7 @@ class CommonBoundaryCondition:
         All boundary conditions satisfy that format. It should enable the lecture of hydraulic, mechanical and chemical-transport boundary conditions.
         
         Exemple: bcdict = {'Flux': [class chemistry.ChemicalState , class PhysicalQuantities.HeadGradient],
-                   'Dirichlet': [class chemistry.ChemicalState, class PhysicalQuantities.Head,\
+                   'Dirichlet': [class chemistry.ChemicalState, class PhysicalQuantities.Head, class PhysicalQuantities.Pressure,\
                          class PhysicalQuantities.Displacement, class PhysicalQuantities.NormalForce], 
                    'Neumann': [class chemistry.ChemicalState, class PhysicalQuantities.HeadGradient]}
         
@@ -120,7 +120,6 @@ class CommonBoundaryCondition:
         else:
             memberShip(boundary.support,[CartesianMesh, Body])
             pass
-
         self.boundary = boundary
         if type(btype) != StringType: raise TypeError(" type should be a string ")
         if btype not in list(bcdict.keys()): 
@@ -177,7 +176,7 @@ class CommonBoundaryCondition:
                 pass
             pass
             
-        elif isinstance(value,Head):
+        elif isinstance(value,(Head, Pressure)):
             print(" value is of type Head")
             from datamodel import Species
             value=toList (value)

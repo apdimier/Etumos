@@ -1,8 +1,10 @@
 from exceptions import Exception
+import resource
 from os import system,environ,chdir,sys
-from time import sleep
-import redirect
+from time import sleep,clock, gmtime, time
 import getopt
+import redirect
+import resource
 pathtc = environ["WTCT"]
 pathc = environ["WTC"]
 pathf = environ["WTF"]
@@ -14,7 +16,7 @@ b = (patht,"testpv.py")
 #os.system("mpdboot &")
 a = [(pathc+"/Acidifiedwaterandcarbonates","Acidified_and_carbonates.py"),\
      (pathc+"/Alkalinewater","test.py"),\
-     (pathc+"/Calciteequilibrium","alka.py"),\
+     (pathc+"/Calciteequilibrium","test.py"),\
      (pathc+"/Caprock","test.py"),\
      (pathc+"/Charmotte","charmotte.py"),\
      (pathc+"/Dogger","dogger.py"),\
@@ -31,6 +33,8 @@ a = [(pathc+"/Acidifiedwaterandcarbonates","Acidified_and_carbonates.py"),\
      (pathc+"/Surfacesolution","flaeche1.py"),\
      (pathc+"/Surfacesolution","flaeche2.py"),\
      (pathc+"/Ultimate","test.py"),                                     # clay test
+     (pathc+"/Waterevaporation","evaporation.py"),                      # evaporation test
+#     (pathc+"/Evaporation","evaporationb.py"),                          # evaporation test with kinetics
      (pathtc+"/Analyticaltracer","teste.py"),                           # anal. tracer coarse mesh
      (pathtc+"/Analyticaltracer","testf.py"),                           # anal. tracer finer mesh
      (pathtc+"/Cec_column","guitest1.py"),                              # normalisation of the output, to continue from here
@@ -94,7 +98,10 @@ def main():
         
         for example, just type "python validationTest.py ct"
     
-    """#
+    """
+    startingDate = gmtime()
+    initialCpuTime = clock()
+    initialTime = time()
     redic = redirect.output("validation.log")
     redic.toFile()
     result = 0
@@ -150,10 +157,19 @@ def main():
 #    mpirun -np 2 mpipython guitest_mpi.py
 #    subprocess( -> mpdballexit)
     if result != 0:
-        raise Exception,  " problem with the test case %s  in the directory: %s"%(a[ind-1][1],a[ind-1][0])
+        raise Exception,  " problem with the test case %s in the directory: %s"%(a[ind-1][1],a[ind-1][0])
     else:
         print " test cases run fine",indc
-        
+    print " the elapsed time in seconds is",time()-initialTime
+    print " the starting date is ",startingDate 
+    print " the date is          ",gmtime()
+
+def _syscpuTime():
+    """ 
+    that function is useless due to the call of system or subprocess
+    """
+    return resource.getrusage(resource.RUSAGE_SELF)[1]
+    
 if __name__ == "__main__":
     main()
 

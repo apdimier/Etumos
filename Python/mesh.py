@@ -69,18 +69,24 @@ class MeshImportError(Exception):
     
 class Body(Generic):
     """
-    a class to handle bodies in the sense of the elmer solver
+    A class to handle bodies in the sense of the elmer or openfoam solvers
     """
 
-    def __init__(self,body,bodyName = None, internalNodesAnz = None, nodes = None, dim = None):
+    def __init__(self, body, bodyName = None, internalNodesAnz = None, nodes = None, dim = None, meshDimension = None):
         Generic.__init__(self)
         self.body = body
         self.bodyName = bodyName
         self.physicalName = bodyName
         self.internalNodesAnz = internalNodesAnz
         self.dim = dim
+        if meshDimension != None:
+            self.meshDimension = meshDimension
+            pass
+        else:
+            self.meshDimension = dim
+            pass
         self.nodes = nodes
-        print len(self.internalNodesAnz),bodyName
+        #print len(self.internalNodesAnz),bodyName
         #raw_input("class body ")
 
     def getBodyName(self):
@@ -122,6 +128,8 @@ class Body(Generic):
         return self.bodyName
 
     def getSpaceDimension(self):
+        #print("debug getSpaceDimension: ", self.dim, type(self.dim))
+        #raw_input("debug")
         return self.dim
 
     def getMeshDimension(self):
@@ -148,31 +156,33 @@ class DataGetter(Generic):
         self.dim = dimensions
         self.meshFileName = filename
         self.inFile = open (filename)
-        line = self.inFile.readline()                                                       ## skip the $MeshFormat
+        line = self.inFile.readline()                                                       # skip the $MeshFormat
         self.version, self.fileType, self.datasize = self.inFile.readline().split()
-        line = self.inFile.readline()                                                       ## skip the $EndMeshFormat
-        line = self.inFile.readline()                                                       ## skip the $PhysicalNames
+        line = self.inFile.readline()                                                       # skip the $EndMeshFormat
+        line = self.inFile.readline()                                                       # skip the $PhysicalNames
         nBodies = int(self.inFile.readline())
         self.boundaryNodes = []
         self.physicalBodyNames = {}
         for i in range(nBodies):
             tempList  = self.inFile.readline().split()
-            if len(tempList) ==2:
+            if len(tempList) == 2:
+                physicalDimension = dimensions                                              # the dimension is st by default
                 ind =  tempList[0]
                 name = tempList[1]
                 pass
-            else:
+            else:                                                                           # physical-dimension physical-number physical-name
+                physicalDimension = int(tempList[0])
                 ind =  tempList[1]
                 name = tempList[2]
                 pass
             print ind,name
             #raw_input("datagetter bodies")
-            self.physicalBodyNames[str(name)[1:-1]] = [int(ind),[]]
+            self.physicalBodyNames[str(name)[1:-1]] = [int(ind), [], physicalDimension]
             pass
 #        if not self.physicalBodyNames.has_key('domain'):
 #            raise Exception, " the mesh must have at least a body name called \"domain\" and representing the whole mesh"
         print "dbg self.physicalBodyNames",self.physicalBodyNames
-        line = self.inFile.readline()                                                       ## $ skip the EndPhysicalNames
+        line = self.inFile.readline()                                                       # skip the EndPhysicalNames
         self.vertexCoords = vertexCoords = self._calcVertexCoords(coordDimensions)
         print " number of vertices ",len(self.vertexCoords)
         print " vertex coordinates 1 ",self.vertexCoords[0]
@@ -624,7 +634,7 @@ class DataGetter(Generic):
                 #print body,indPBN,elm_number,self.elementArray[elm_number-1]
                 
                 element = self.elementArray[elm_number-1]
-                print "element", element, "body: ",ibody
+                #print "element", element, "body: ",ibody
                 if element[1] in elm_typePBN:
                     indRef = 3 + element[2]
 
@@ -649,10 +659,10 @@ class DataGetter(Generic):
             indC+=1
             pass
         indt = 0
-        for i in permutation:
-            print "permutation ",indt,i
-            indt+=1
-            pass
+        #for i in permutation:
+        #    print "permutation ",indt,i
+        #    indt+=1
+        #    pass
         #raw_input()
         #
         # Now we reindex the nodes using a temporary file
@@ -817,7 +827,7 @@ class DataGetter(Generic):
         #
         return None
 
-class CommonMesh:
+class CommonMesh(object):
     """
     Generic mesh class defining implementation-agnostic behavior.
 
@@ -1287,7 +1297,7 @@ class Mesh(CommonMesh):
 
         CommonMesh.__init__(self)
         
-    def getBody(self,bodyName):
+    def getBody(self, bodyName):
         #
         # indPDO list of nodes associated to the body. A node can belong to several bodies
         #
@@ -1320,10 +1330,15 @@ class Mesh(CommonMesh):
 #        
             #print " mesh dbg getBody nodes found ",len(indPDO),self.dim
             #raw_input()
-            return Body(self.physicalBodyNames.get(bodyName),bodyName,indPDO,nodes = self.vertexCoords, dim = self.dim)
+            if len(self.physicalBodyNames[bodyName]) == 3:
+                bodyDimension = self.physicalBodyNames[bodyName][2]
+                pass
+            else:
+                bodyDimension = self.dim
+                pass
+            return Body(self.physicalBodyNames.get(bodyName), bodyName, indPDO, nodes = self.vertexCoords, dim = bodyDimension)
         else:
             return None
-        
 
     """
     Topology methods
@@ -1696,7 +1711,7 @@ class Mesh2D(Mesh):
 
         self.internalNodesAnz = internalNodesAnz
         self.internalNodesAnzList = internalNodesAnzList
-        print ' dbg mesh element array', len(elementArray), numElements
+        #print ' dbg mesh element array', len(elementArray), numElements
         #print ' element array',physicalBodyNames, internalNodesAnz
         #raw_input("dbg mesh element array")
         #for i in elementArray:

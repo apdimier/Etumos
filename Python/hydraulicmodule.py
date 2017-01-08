@@ -13,12 +13,18 @@ from mesh import *
 from numpy import  float as Float
 from types import StringType
 from hydraulicproblem import HydraulicProblem
+from PhysicalQuantities import Head,\
+                               Pressure
 from six.moves import range
 #
-class HydraulicModule:
+class HydraulicModule(object):
     """
-    The hydraulic module can treat (un)saturated flows. Only one software is relevant: Elmer.
+    For saturated flows, openfoam and elmer can be used in a generic way.
+    This means, openfoam and elmer can be used to simulated saturated flows.
+    The hydraulic module can treat (un)saturated flows. Only one software is relevant for unsaturated flows: Elmer.
     An unsaturated flow solver (Richards) is running.
+    
+    For openfoam; only 3D meshes are relevant. It means that a checking is made of the mesh relevance for openfoam. If the mesh isn't 3D, a warning is raised.
     """
 
     def __init__(self):
@@ -70,12 +76,12 @@ class HydraulicModule:
                                                                                             # to handle in the near future the "ad hoc" version.
                                                                                             #
         mediumProperties = {
-                           "density"                    : None,
-                           "gravity"                    : None,
-                           "HydraulicConductivity"      : None,
-                           "intrinsicPermeability"      : None, 
-                           "permeability"               : None, 
-                           "viscosity"                  : None,
+                            "density"                    : None,
+                            "gravity"                    : None,
+                            "HydraulicConductivity"      : None,
+                            "intrinsicPermeability"      : None,
+                            "permeability"               : None,
+                            "viscosity"                  : None,
                            }
         #
         # regionProperties is a dictionnary. It is made of a list of tuples, each region is associated to a dictionnary,
@@ -105,6 +111,7 @@ class HydraulicModule:
         # gravity effect
                                                                                             #viscosity
         self.viscosity = problem.getViscosity()
+        self.intrinsicPermeability = problem.getIntrinsicPermeability()
         #
         for reg in self.regions:
             regionName = reg.support.getBodyName()
@@ -125,6 +132,7 @@ class HydraulicModule:
             self.regionProperties[regionName]["intrinsicPermeability"]  = intrinsicPermeability
             self.regionProperties[regionName]["permeability"]           = permeability
             self.regionProperties[regionName]["viscosity"]              = self.viscosity
+            pass
 #        print self.regionProperties
                                                                                             #
                                                                                             # We treat here the boundary conditions.
@@ -134,6 +142,7 @@ class HydraulicModule:
         boundarySpecification = {
                                 "typ"           : None,
                                 "head"          : None,
+                                "pressure"      : None,
                                 "material"      : None,
                                 }
         boundaryconditions = problem.getBoundaryConditions()
@@ -143,26 +152,31 @@ class HydraulicModule:
         #
         ind = 0
         for boundarycondition in boundaryconditions:
-            #print type(boundarycondition),boundarycondition.__class__.__name__
-            #print "debug type value ",boundarycondition.getValue().__class__.__name__
+            print (type(boundarycondition),boundarycondition.__class__.__name__)
+            #print ("debug type value ",boundarycondition.getValue().__class__.__name__)
+            #raw_input("debug hydraulicmodule")
             value = boundarycondition.getValue()
             #print "debug type value ",value.__class__.__name__
             boundaryName = boundarycondition.getSupport().getBodyName()
-##            print boundaryName
-#            print " cont ",boundarycondition.boundary.support.body[0]
-#            print " cont0 ",type(boundarycondition.boundary.support)
-#            print type(value)
-#            print value.getValue()
-#            print boundarycondition.getType()
-#            raw_input(" hydraulic module")
+            #print boundaryName
+            #print " cont ",boundarycondition.boundary.support.body[0]
+            #print " cont0 ",type(boundarycondition.boundary.support)
+            #print value.getValue()
+            #print boundarycondition.getType()
+            #raw_input(" hydraulic module")
             val = value.getValue()
-            self.boundaryConditions[ind] = {"head":value.getValue(),\
+            self.boundaryConditions[ind] = {#"head":value.getValue(),\
                                             "typ":boundarycondition.getType(),
                                             "material":boundarycondition.getRegion().getMaterial(),
                                             "boundaryName": boundaryName,
                                             "ind":boundarycondition.getSupport().body[0]
                                            }
+            if isinstance(value,Head):
+                self.boundaryConditions[ind]["head"] = value.getValue()
+            elif isinstance(value,Pressure):
+                self.boundaryConditions[ind]["pressure"] = value.getValue()
             ind+=1
+            pass
 #            self.boundaryConditions[boundaryName]["head"]       = value.getValue()
 #            self.boundaryConditions[boundaryName]["typ"]        = boundarycondition.getType()
 #            self.boundaryConditions[boundaryName]["material"]   = boundarycondition.getRegion().getMaterial()
@@ -174,17 +188,15 @@ class HydraulicModule:
                                                                                             #
         initialconditions = problem.getInitialConditions()
         for initialcondition in initialconditions:
-#            print " dbg hm ",initialcondition
-#            print " dbg hm ",initialcondition.domain.getSupport()
             value = initialcondition.getValue()
             initialConditionName = initialcondition.domain.getSupport().getBodyName()
 #            print " dbg hm ",initialConditionName
 #            print " dbg hm ",type(value)
 #            print " dbg hm ",value
 #            raw_input()
-            self.initialConditions[initialConditionName] = {   "head":value,\
-                                                        "material":initialcondition.getRegion().getMaterial(),
-                                                        "ind":initialcondition.getRegion().support.body[0]
+            self.initialConditions[initialConditionName] = {"head":value,\
+                                                            "material":initialcondition.getRegion().getMaterial(),
+                                                            "ind":initialcondition.getRegion().support.body[0]
                                                     }
 
                                                                                             #
@@ -226,41 +238,52 @@ class HydraulicModule:
         if type(componentName) == StringType:
             self.componentName = componentName.lower()
             from elmerhydro import ElmerHydro
-            if (self.componentName!="elmer"):
+            if (self.componentName!="elmer") and (self.componentName!="openfoam"):
                 self.componentName == "elmer"
                 self.flowComponent = ElmerHydro(self.mesh) # by default the problem is set to saturated
                 if (self.timeStepIntervals == None and self.calculationTimes != None):
                     self.timeStepIntervals = len(self.calculationTimes)-1
                     self.timeStepSizes = [self.calculationTimes[i+1]-self.calculationTimes[i] for i in range(len(self.calculationTimes)-1)]
+                    pass
                 self.flowComponent.setTimeDiscretisation(self.timeStepIntervals, self.timeStepSizes)
                 self.flowComponent.setSimulationKind(self.simulationType)
                 raise Warning(" the default hydraulic has been fixed to elmer"+\
                 ", other hydraulic tools should be introduced in the near future")
+            elif (self.componentName=="openfoam"):
+                from openfoamhydro import OpenfoamHydro
+                self.saturation = "saturated"
+                self.simulationType = "Steady"
+                self.componentName == "openfoam"
+                self.flowComponent = OpenfoamHydro(self.mesh, self.saturation)
+                self.flowComponent.setSimulationKind(self.simulationType)
+                #
+                # we check the dimensionality of the mesh
+                #
+                if self.mesh.spaceDimensions != 3:
+                    raise Warning, "Openfoam is handling only 3D meshes."
+                pass
             else:
                 self.componentName == "elmer"
                 self.flowComponent = ElmerHydro(self.mesh, self.saturation)
                 if (self.timeStepIntervals == None and self.calculationTimes != None):
                     self.timeStepIntervals = len(self.calculationTimes)-1
                     self.timeStepSizes = [self.calculationTimes[i+1]-self.calculationTimes[i] for i in range(len(self.calculationTimes)-1)]
+                    pass
                 elif (self.timeStepIntervals != None):
                     self.flowComponent.setTimeDiscretisation(self.timeStepIntervals, self.timeStepSizes)
+                    pass
                 self.flowComponent.setSimulationKind(self.simulationType)
                 print(" the flow component has been set")
                 pass
-                
+            print(" the flow component has been set: %s"%(self.componentName))
+            pass
         else:
             raise Warning(" the default hydraulic has been fixed to elmer ")
             self.componentName = "elmer"
             pass
         #
-        #
-        #
-#        print "dbg setBodyList"
         self.flowComponent.setBodyList(self.problem.getRegions())
         #
-        #
-        #
-#   print " dbg hm we set the bic ",self.boundaryConditions
         self.flowComponent.setBoundaryConditions(self.boundaryConditions)
                                                                                                                 #
                                                                                                                 # Density
@@ -268,8 +291,6 @@ class HydraulicModule:
 #        print " self.flowComponent",self.flowComponent
 #        raw_input()
         if self.density: self.flowComponent.setDensity(self.density)
-        #
-        #
         #
 #   print " dbg hm we set the ic "
         self.flowComponent.setInitialConditions(self.initialConditions)
@@ -290,7 +311,7 @@ class HydraulicModule:
                                                                                             # Intrinsic Permeability
                                                                                             #
         if self.intrinsicPermeability:
-            self.flowComponent.setIntrinsecPermeability(self.intrinsicPermeability)
+            self.flowComponent.setIntrinsicPermeability(self.intrinsicPermeability)
             pass       
                                                                                             #
                                                                                             # Porosity
@@ -329,10 +350,6 @@ class HydraulicModule:
         if self.simulationType == "Transient":
             self.flowComponent.calcTimesDico ['finalTime']= self.problem.calculationTimes[-1]
             pass
-        #
-        #setExpectedOutput
-        #
-#        Module.setExpectedOutput(self)
                                                                                             #       
                                                                                             # to affect numerical parameters
                                                                                             #
@@ -399,55 +416,86 @@ class HydraulicModule:
         #
         # steady part
         #
-        #print " we re here "
-        #raw_input()
         if type(name) == StringType:
-            if name.lower() == "velocity":
-                fileName = "./" + self.flowComponent.meshDirectoryName + "/" + "HeVel.ep"
-                if not os.path.isfile(fileName):
-                    message = " problem with the velocity file: " + fileName
-                    raise Exception(message)
-                    return None
-            elif name.lower() == "watercontent":
-                fileName = "./" + "watercontent.vtu"
-                pass
+            if (self.componentName == "elmer"):
+                if name.lower() == "velocity":
+                    fileName = "./" + self.flowComponent.meshDirectoryName + "/" + "HeVel.ep"
+                    if not os.path.isfile(fileName):
+                        message = " problem with the velocity file: " + fileName
+                        raise Exception(message)
+                        return None
+                elif name.lower() == "watercontent":
+                    fileName = "./" + "watercontent.vtu"
+                    pass
 
-            velocityFile=open(fileName,'r')
-            velocityFile.readline()
-            velocityFile.readline()
-            line = velocityFile.readline()
-            f = len(line)/3
-            self.points = []
-            while "#group all" not in line:
-                #line = line.split()
-                #print " line ",line
-                #raw_input("line : ")
-                self.points.append([float(line[0:17]),float(line[17:34]),float(line[34:53])])
+                velocityFile=open(fileName,'r')
+                velocityFile.readline()
+                velocityFile.readline()
                 line = velocityFile.readline()
-                pass
-            while "#time" not in velocityFile.readline():
-                pass
-            line = velocityFile.readline()
-            physic = []
-            while len(line) > 1:
-                physic.append([float(line[0:17]),\
-                               float(line[17:34]),\
-                               float(line[34:51]),\
-                               float(line[51:68])])
+                f = len(line)/3
+                self.points = []
+                while "#group all" not in line:
+                    #line = line.split()
+                    #print " line ",line
+                    #raw_input("line : ")
+                    self.points.append([float(line[0:17]),float(line[17:34]),float(line[34:53])])
+                    line = velocityFile.readline()
+                    pass
+                while "#time" not in velocityFile.readline():
+                    pass
                 line = velocityFile.readline()
+                physic = []
+                while len(line) > 1:
+                    physic.append([float(line[0:17]),\
+                                   float(line[17:34]),\
+                                   float(line[34:51]),\
+                                   float(line[51:68])])
+                    line = velocityFile.readline()
+                    pass
+                self.charge = []
+                self.velocity = []
+                ind = 0
+                for iunknown in range(0,len(physic)):
+                    a = physic[iunknown]
+                    self.charge.append(a[0])
+                    self.velocity.append([a[1],a[2],a[3]])
+                    ind+=1
+                    pass
                 pass
-            self.charge = []
-            self.velocity = []
-            ind = 0
-            for iunknown in range(0,len(physic)):
-                a = physic[iunknown]
-                self.charge.append(a[0])
-                self.velocity.append([a[1],a[2],a[3]])
-                ind+=1
+                return self.points, self.charge, self.velocity
+            elif (self.componentName == "openfoam"):
+                self.points = self.mesh.getNodesCoordinates()
+                pressureFile = open("./1/p",'r')
+                line = pressureFile.readline()
+                while "internalField" not in line:
+                    line = pressureFile.readline()
+                    pass
+                numberOfPoints = pressureFile.readline()
+                line = pressureFile.readline()
+                self.pressure = []
+                line = pressureFile.readline()
+                while ")" not in line:
+                    self.pressure.append(float(line))
+                    line = pressureFile.readline()
+                    pass
+                #
+                velocityFile = open("./1/U",'r')
+                line = velocityFile.readline()
+                while "internalField" not in line:
+                    line = velocityFile.readline()
+                    pass
+                numberOfPoints = velocityFile.readline()
+                line = velocityFile.readline()
+                self.velocity = []
+                line = velocityFile.readline()
+                while ")" not in line:
+                    self.velocity.append(line)
+                    line = velocityFile.readline()
+                    pass
+                    
                 pass
+                return self.points, self.pressure, self.velocity
             pass
-#        print charge[0],charge[-1]
-        return self.points, self.charge, self.velocity
             
     def end(self):
         """simulation stop and clean"""
@@ -491,10 +539,9 @@ class HydraulicModule:
         """
         if self.flowComponent == None:
             #
-            # is it possible ?
+            # Is it possible ? No
             #
-            self.flowComponent = ElmerHydro(self.mesh)
-            pass
+            raise Exception(" the flowcomponent solver has to be defined prior to the call of the run method")
         if not transient:
             #raw_input(" running elmer ")
             self.flowComponent.run()

@@ -49,7 +49,6 @@ try:
 except ImportError:
     print('Unable to import the elmer module')
 
-import exceptions
 #from functions import LinearFunction
 import functions
 from os import system
@@ -140,7 +139,6 @@ class ElmerHydro(ElmerRoot):
         self.gravityValue               = 9.78
 #
         self.mesh                       = self.meshFile
-        self.meshType                   = "msh"
         self.meshDico                   = Dico()
         self.calcTimesDico ['finalTime']= 0.5
         self.density                    = 1000. # water density under standard conditions, density is
@@ -1111,7 +1109,6 @@ class ElmerHydro(ElmerRoot):
         indexMax = 0
         for indZone  in range(nbZones):
             zone          = field.getZone(indZone)
-            #ent = zone.getEntity()
             globalIndexes = zone.getGlobalIndexes()
             indexMax = max(indexMax,max(globalIndexes))
             pass
@@ -1120,7 +1117,8 @@ class ElmerHydro(ElmerRoot):
         if indexMax > max(self.meshDico['nbElements'], self.meshDico['nbFaces']):
             raise exceptions.Exception('cas non prevu (pressure2head)')
         for indZone  in range(nbZones):
-            zone          = field.getZone(indZone)
+            zone = field.getZone(indZone)
+            pass
 ## ##             z             = zone.getHeights()
 ## ##             extCompoz = z.extractComponentValues(1)
 ##

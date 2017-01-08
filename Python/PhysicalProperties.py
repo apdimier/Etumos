@@ -274,7 +274,8 @@ class SpecificStorage(Scalar):
     """
     def __init__(self, value=None, unit=None):
         default_unit = _findUnit('SpecificStorage')
-        Scalar.__init__(self, value,unit=default_unit)
+        default_unit = '1/s'
+        Scalar.__init__(self, value, unit = default_unit)
         pass
 
 class SolidDensity(Scalar):
@@ -299,6 +300,7 @@ class SpecificHeatCapacity(Scalar):
     """
     def __init__(self, value=None, unit=None):
         default_unit = _findUnit("SpecificHeatCapacity")
+        default_unit = 'J/g/K'
         Scalar.__init__(self, value,unit=default_unit)
         pass
     default_unit = _findUnit("SpecificHeatCapacity")
@@ -408,8 +410,9 @@ class Permeability(Tensor):
     """
     def __init__(self,value,unit=None):
         default_unit = _findUnit('Permeability')
+        default_unit = "m/s"
         if unit==None: unit = default_unit
-        Tensor.__init__(self,value,unit)
+        Tensor.__init__(self, value, unit)
 
 class IntrinsicPermeability(Tensor):
     """

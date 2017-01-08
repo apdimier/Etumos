@@ -49,11 +49,11 @@ class ChemicalQuantity(Scalar):
             unit    is a string
         
         """
-        _typecontrol(symbol,[StringType]," the symbol must be a string ")
+        _typecontrol(symbol,[StringType], " the symbol must be a string ")
         self.symbol = symbol
         if type(unit) == NoneType:
             unit = "mol/l"
-        Scalar.__init__(self,value,unit)
+        Scalar.__init__(self, value, unit)
 
     def getSymbol(self):
         
@@ -302,7 +302,8 @@ class Fugacity(ChemicalQuantity):
         value   <->     fugacity ( saturation index )
         amount  <->     amount of moles
         """
-        default_unit = _findUnit("Fugacity")
+        default_unit = "atm"
+        print (" debug chemistry default_unit: ",default_unit)
         ChemicalQuantity.__init__(self, symbol, value, unit = default_unit)
         self.amount = 10.
 
@@ -312,7 +313,6 @@ class Fugacity(ChemicalQuantity):
         """
         self.amount = amount
 
-    pass
 
 class SpecificSurfaceArea(ChemicalQuantity):
     """
@@ -324,7 +324,6 @@ class SpecificSurfaceArea(ChemicalQuantity):
       SurfY =  SpecificSurfaceArea('Y',200,'m2/kg')
     """
     default_unit = _findUnit('SpecificSurfaceArea')
-    pass
 
 class SpecificAreaPerGram(ChemicalQuantity):
     """
@@ -335,7 +334,6 @@ class SpecificAreaPerGram(ChemicalQuantity):
     Examples 
     """
     default_unit = _findUnit('SpecificSurfaceArea')
-    pass
 
 
 class ConstantSurfaceArea(ChemicalQuantity):
@@ -480,6 +478,7 @@ class FreeKineticLaw(KineticLaw):
 
         if formula != None:
             _typecontrol(formula,[StringType]," string expressing the reaction to be used ")
+            pass
         self.formula  = formula
         
         if lawParameter != None:
@@ -532,11 +531,11 @@ class ReversibleKineticLaw(KineticLaw):
     
     """
     def __init__(self, symbol,
-                rate, 
-                SRExponent = None,
-                sphereModelExponent = None,
-                specificSurfaceArea = None,
-                parameter=None
+                 rate, 
+                 SRExponent = None,
+                 sphereModelExponent = None,
+                 specificSurfaceArea = None,
+                 parameter=None
                 ):
         """
         Init
@@ -708,6 +707,7 @@ class DebyeHuckel(ActivityLaw):
         if (B!=None):
             _typecontrol(B,[FloatType,IntType],"B coef within Debye Huckel should be a float or an int ")
             self.B = float(B)
+            pass
         else:
             self.B = 0.328
             pass
@@ -946,14 +946,15 @@ class WYMEKineticLaw(KineticLaw):
         if not StringType(symbol): raise Exception("Error with the WYME declaration")
         
         if surface.__class__.__name__  not in ["VolumicSurfaceArea",\
-                            "SpecificSurfaceArea",\
-                            "ConstantSurfaceArea",\
-                            "SugarSurfaceArea",\
-                            "CompositeSurfaceArea",\
-                            "LatticeSurfaceArea",None]:
+                                               "SpecificSurfaceArea",\
+                                               "ConstantSurfaceArea",\
+                                               "SugarSurfaceArea",\
+                                               "CompositeSurfaceArea",\
+                                               "LatticeSurfaceArea",None]:
             raise Exception(" Error for surface ")
         else:
             self.surface = surface
+            pass
             
         self.WKineticTerm = WKineticTerm
         self.YKineticTerm = YKineticTerm
@@ -963,7 +964,8 @@ class WYMEKineticLaw(KineticLaw):
         self.nucleus = nucleus
 
         if name != None:
-            _typecontrol(name,[StringType]," name of WYMEKineticLaw is not of the right type ")            
+            _typecontrol(name,[StringType]," name of WYMEKineticLaw is not of the right type ")
+            pass
         
         if isInstance(self.surface,CompositeSurfaceArea):
             try:
@@ -993,10 +995,10 @@ class ChemicalState:
                  surfaceComplexation = None,\
                  solidSolution = None,\
                  phFixed = None,\
-         chargeBalance = None,\
-         mineralEquilibrium = None,\
-         charge = None,\
-         gasMassBalance = None):
+                 chargeBalance = None,\
+                 mineralEquilibrium = None,\
+                 charge = None,\
+                 gasMassBalance = None):
         """
         Init
           Input :
@@ -1193,6 +1195,7 @@ class AqueousSolution:
         if Eh:
             if not isinstance(Eh, ElectricPotential):
                 raise Exception(" Eh must be redefined ")
+            pass
         self.Eh = Eh
         
         _typecontrol(balance,[StringType]," balance should be a string ")            
@@ -1301,6 +1304,7 @@ class SolidSolution(Generic):
                 _typecontrol(gugg[1],[FloatType]," gugg[1] should be a float ")            
           
             self.gugg = gugg
+            pass
         _typecontrol(temperature,[FloatType]," the solidSolution temperature should be a float ")            
         self.temperature = temperature
              
@@ -1405,7 +1409,7 @@ class MSConc(ChemicalQuantity):
             else:
                 self.reacSurUnit    = "m2/kg"
                 pass
-    pass
+            pass
 
     def getHelp(self):
         print(self.__doc__)
@@ -1437,8 +1441,6 @@ class GasPhase:
     def getHelp(self):
         print(self.__doc__)
 
-    pass
-
 class IonicExchangers:
     """Definition of a ionic exchanger"""
     def __init__(self,exchangers):
@@ -1452,8 +1454,6 @@ class IonicExchangers:
     def getExchangers(self):
         return self.exchangers
 
-    pass
-
 class SurfaceComplexation:
     """Definition of a surface complexation"""
     def __init__(self,surfaces):
@@ -1465,8 +1465,6 @@ class SurfaceComplexation:
 
     def getSurfaces(self):
         return self.surfaces
-
-    pass
 
 class ExchangeBindingSpecies(Species):
     """ This class can be used to characterise the quantity of exchange species in moles"""
@@ -1510,7 +1508,7 @@ class SurfaceBindingSpecies(Species):
     
     def __init__(self,symbol,sites,specificAreaPerGram=None,mass=None):
 
-        Species.__init__(self,symbol)
+        Species.__init__(self, symbol)
     
         if not isinstance(sites,MolesAmount):
             raise Exception(" SurfaceBindingSpecies must be redefined")
@@ -1626,12 +1624,24 @@ class ChemicalProblem:
  
         if timeStep:
             if not isinstance(timeStep,Time):
-                raise Exception(" timeStep instance has to be redefined")
+                if type(timeStep) in [FloatType,IntType]:
+                    timeStep = Time(timeStep,'s')
+                    pass
+                else:
+                    raise Exception(" timeStep instance has to be redefined")
+                pass
+            pass
         self.timeStep = timeStep
  
         if simulationTime:
             if not isinstance(simulationTime,Time):
-                raise Exception(" simulationTime instance has to be redefined")
+                if type(simulationTime) in [FloatType,IntType]:
+                    simulationTime = Time(simulationTime,'s')
+                    pass
+                else:
+                    raise Exception(" simulationTime instance has to be redefined")
+                pass
+            pass
         self.simulationTime = simulationTime
 
         if outputs:
