@@ -97,7 +97,10 @@ def execVersion(execName,versionControl = None):
         execName+= " "*(20-len(execName))
         print("%20s %s %s"%(execName,":",version))
         if versionControl != None:
-            if (version < versionControl):
+            versionList = map(int,version.split("."))
+            versionControlList = map(int,versionControl.split("."))
+            if (versionList < versionControlList):
+                #print("control: ",versionList,versionControl)
                 raise Exception("the version of "+execName+" seems not compatible with the use of etumos")
             else:
                 print(" "*(len(version)+3)+    "version compatible with requirements")
