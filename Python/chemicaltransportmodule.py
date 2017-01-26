@@ -321,7 +321,7 @@ class ChemicalTransportModule(GenericCTModule):
         GenericCTModule.__init__(self)
         
         self.bodyPorosities = None
-        self.times =None                                                                    # specification of times, printout gen.
+        self.times = None                                                                    # specification of times, printout gen.
         self.curveTable = None
         self.darcyVelocity  = None
 
@@ -988,17 +988,21 @@ class ChemicalTransportModule(GenericCTModule):
         
         return None
 
-    def chemicaltransportOutput(self,final_time,it,error):
+    def chemicalTransportOutput(self, final_time, it, error):
 #        print "InteractiveSpatialPlot";#sys.stdout.flush()
         #
-        # we use gnuplot for plotting
+        # we use gnuplot for interactive 1D plotting
         #
-        if self.spatialInteractiveOutputs:
+        #print ("dbg chemicalTransportOutput self.spatialInteractiveOutputs: ", self.spatialInteractiveOutputs)
+        #print ("dbg chemicalTransportOutput self.expectedOutputs: ", self.expectedOutputs)
+        #print ("dbg chemicalTransportOutput self.outputs: ", self.outputs)
+        #print ("dbg chemicalTransportOutput call of iTimePlot: ")
+        if self.spatialInteractiveOutputs and self.timeStepNumber >= 1:
+        
             self.iTimePlot(self.spatialInteractiveOutputs,\
                            self.gnuplot,\
                            self.iPFrequency,\
                            self.iPTitle, self.iPSubTitle, self.iPRotate, savingFrequency = self.iPSavingFrequency)
-#            self.interactiveSpatialPlot(self.simulatedTime,self.timeStepNumber)
             pass
         #print("spatialSaveOutputs");sys.stdout.flush()
         if  (self.spatialSaveOutputs and
@@ -1008,16 +1012,16 @@ class ChemicalTransportModule(GenericCTModule):
         #print ("expectedOutputs: ");sys.stdout.flush()
         if (self.expectedOutputs):
             for output in self.expectedOutputs:
+                #print " dbg chemicalTransport module output.getTimeSpecification(): ", output.getTimeSpecification(), output.getTimeSpecification().getSpecification()
                 if output.getTimeSpecification():
-                                        
                     if ((output.getTimeSpecification().getSpecification() ==  'frequency')
-                        and (not (self.timeStepNumber==1 or self.simulatedTime==final_time))):
+                        and (not (self.timeStepNumber == 1 or self.simulatedTime == final_time))):
                         if (self.timeStepNumber % output.getTimeSpecification().getFrequency() !=0): 
                             output = 0
                             pass
                         pass
                     elif ((output.getTimeSpecification().getSpecification() ==  'period')
-                          and (not (self.timeStepNumber==1 or self.simulatedTime==final_time))):
+                          and (not (self.timeStepNumber == 1 or self.simulatedTime == final_time))):
                         raise Exception,"period output type not yet implemented"
                     elif (output.getTimeSpecification().getSpecification() ==  'times'):                     
                         if (self.simulatedTime not in output.getTimeSpecification().getTimes()): 
@@ -1031,19 +1035,16 @@ class ChemicalTransportModule(GenericCTModule):
                             mess = output.getTimeSpecification().getSpecification() + " output type not yet implemented"
                             print mess
                             raise Exception, "output type not yet implemented, available types are times, period or frequency"
-                            pass
                         else:
                             pass
                         pass
                     pass
                 if output:
-                    #print(" we get the support")
                     support = output.getSupport()
-                    #print(" we have the support");print support
                     if (output.getQuantity().lower() == 'numerics'):
-                        self.outputs[output.getName()].addRow([self.simulatedTime,self.timeStepNumber,self.dT,it,error])
+                        self.outputs[output.getName()].addRow( [self.simulatedTime, self.timeStepNumber, self.dT, it, error] )
                         pass                        
-                    elif isinstance(support,CartesianMesh):
+                    elif isinstance(support, CartesianMesh):
                          raise Exception, "CartesianMesh output type not yet implemented"
 #                    elif isinstance(support,AbstractPoint):
 #                        pid = id(support)
@@ -1066,7 +1067,10 @@ class ChemicalTransportModule(GenericCTModule):
                                 table.writeToFile(self.problem.getName() + '.tab')
                                 pass
                             else:
-                                self.outputs[output.getName()].append((self.simulatedTime,table))
+                                                                                            #
+                                                                                            # we update the dictionary with new data.
+                                                                                            #
+                                self.outputs[output.getName()].append( (self.simulatedTime, table) )
                                 pass
                         else:
                             raise Warning, " we should be able to define a field and to write it as a file: to do "
@@ -1312,7 +1316,7 @@ class ChemicalTransportModule(GenericCTModule):
     
         return None
 
-    def run(self,option='all',simulationTime=None):
+    def run(self,option = 'all', simulationTime = None):
         """
         Enables to launch the coupling and to ride the simulation over time
         """         
@@ -1442,7 +1446,11 @@ class ChemicalTransportModule(GenericCTModule):
         return None       
 
     def getOutput(self, unknown):
+        print "\ndbg getOutput keys: ",self.outputs.keys()
+        print "\ndbg getOutput: ",type(self.outputs)
         if self.outputs.has_key(unknown):
+            print "dbg getOutput output: ",self.outputs[unknown]
+            print "dbg getOutput type: ",type(self.outputs[unknown])
             return self.outputs[unknown]
         else:
             print "Undefined output", unknown;#sys.stdout.flush()
@@ -1479,17 +1487,20 @@ class ChemicalTransportModule(GenericCTModule):
                      "\n\"Ailleurs c'est bien, c'est meme mieux\"\n",
                      "\n\"toi qui chemine, il n\'y a pas de chemin,\n le chemin se fait en marchant\"\n",
                      "\n\"Ce qu\'un imbecile peut faire, n\'importe quel imbecile peut le faire\"\n",
-                     "\n\"Sachez vous eloigner car, lorsque vous reviendrez à votre travail, votre jugement sera plus suer.\"\n"
+                     "\n\"Sachez vous eloigner car, lorsque vous reviendrez a votre travail, votre jugement sera plus suer.\"\n"
                      "\n\"Wozu\"\n",
                      "\n\"La science peut etre l’asymptote de la verite, elle approche sans cesse, et ne touche jamais\"\n",
                      "\n\"Le jardin est dans le jardinier.\"\n",
                      "\n\"Die Suche nach der Wahrheit ist wertvoller als ihr Besitz.\"\n",
                      "\n\"Panta rhei\"\n",
-                     "\n\"Est-il besoin d'exécuter,\nL\'on ne rencontre plus personne.\"\n",
+                     "\n\"Money is like muck, not good unless spread.\"\n",
+                     "\n\"Ite missa est\"\n",
+                     "\n\"Est-il besoin d'executer,\nL\'on ne rencontre plus personne.\"\n",
                      "\n\"like chasing the wind\"\n",
                      "\n\"De omnibus dubitandum est\"\n",
-                     "\n\"Plus on apprend plus on ne sait rien\"\n",
-                     "\n\"Tout ce qui a pu se dire contre la science ne saurait faire oublier que la recherche scientifique reste, dans la degradation de tant d'ordres humains, l'un des rares domaines ou l'homme se controele, s'incline devant le raisonnable, est non bavard, non violent et pur. Moments de la recherche certes constamment interrompus par les banalites du quotidien mais qui se renouent en duree propre. Le lieu de la morale et de l'elevation ne se trouve-t-il pas desormais au laboratoire ?\"\n",
+                     "\n\"Plus on apprend, plus on ne sait rien\"\n",
+                     "\n\"Dosis (sola) facit venenum\"\n",
+                     "\n\"Tout ce qui a pu se dire contre la science ne saurait faire oublier que la recherche scientifique reste, dans la degradation de tant d'ordres humains, l'un des rares domaines ou l'homme se controele, s'incline devant le raisonnable, est non bavard, non violent et pur. Moments de la recherche certes constamment interrompus par les banalites du quotidien mais qui se renouent en duree propre. Le lieu de la morale et de l'eflevation ne se trouve-t-il pas desormais au laboratoire ?\"\n",
                      "\n\"On definit trop l’intelligence par la scolarite. L’intelligence devient alors une classe, la classe de ceux qui ont fait leurs etudes.\n"+\
                          "Les etudes sont demontrees par les diploemes, preuves materielles.\n"+\
                          "Ce systeme est excellent pour la preservation et la transmission des connaissances,"+\
@@ -1534,13 +1545,13 @@ class ChemicalTransportModule(GenericCTModule):
                 import Gnuplot, Gnuplot.funcutils
                 self.gnuplot = Gnuplot.Gnuplot()
                 pass
-            
+            pass
         else:
             raise Warning, " check the list of outputs for the interactive plot"
         self.iPTitle = title
         self.iPSubTitle = subTitle
-        if rotate == None:
-            self.iPRotate = True
+        if rotate == None or rotate == False:
+            self.iPRotate = False
             pass
         else:
             self.iPRotate = rotate
@@ -1556,8 +1567,8 @@ class ChemicalTransportModule(GenericCTModule):
             pass
         return None
         
-    def setInteractiveSpatialPlot(self,outputs,abscissis=None,plotter=None, isfrequency = None):        
-
+    def setInteractiveSpatialPlot(self, outputs, abscissis=None, plotter=None, isfrequency = None):        
+        print "dbg call to setInteractiveSpatialPlot",outputs
         if isfrequency==None:
             self.isfrequency = 1
             pass
@@ -1577,9 +1588,7 @@ class ChemicalTransportModule(GenericCTModule):
             for output in outputs:
                 self.addChemicalOutputs(output)               
                 pass
-
             self.spatialInteractiveOutputs = outputs
-            pass
             if self.pyversion<2.7:
                 import _Gnuplot, Gnuplot.funcutils
                 self.gnuplot = _Gnuplot.Gnuplot()
@@ -1587,8 +1596,9 @@ class ChemicalTransportModule(GenericCTModule):
             else:
                 import Gnuplot, Gnuplot.funcutils
                 self.gnuplot = Gnuplot.Gnuplot()
-            self.iPTitle = ""; self.iPSubTitle = "";self.iPRotate = False;self.iPSavingFrequency = 1
+            self.iPTitle = "Etumos:"; self.iPSubTitle = "";self.iPRotate = False;self.iPSavingFrequency = 1
             self.listOfOutputs = self.spatialInteractiveOutputs
+            print "dbg setInteractiveSpatialPlot listOfOutputs",self.listOfOutputs
         return None
 
     def setVtkOutputsParameters(self,unknowns, vtkTimeUnit, frequency, vtkFileFormat = None, fmt = None):
@@ -1902,7 +1912,7 @@ class ChemicalTransportModule(GenericCTModule):
             pass
         else:  
             name =  output.getChemicalName()
-            values =  self.chemicalSolver.getOutput(name,unit=unit)
+            values =  self.chemicalSolver.getOutput(name, unit=unit)
             pass
         return name, values
 
@@ -2135,8 +2145,8 @@ class ChemicalTransportModule(GenericCTModule):
                   self.cpuOnList/self.globalCPUTime*100," % of global CPU time)";#sys.stdout.flush()
              print "cpu setResidualEvaluation :",self.cpu_tot_residu,"(",\
               self.cpu_tot_residu/self.globalCPUTime*100," % of global CPU time)";#sys.stdout.flush()
-             print "cpu chemicalTransportOutput :",self.cpu_chemicaltransportOutput,"(",\
-                  self.cpu_chemicaltransportOutput/self.globalCPUTime*100," % of global CPU time)";#sys.stdout.flush()
+             print "cpu chemicalTransportOutput :",self.cpu_chemicalTransportOutput,"(",\
+                  self.cpu_chemicalTransportOutput/self.globalCPUTime*100," % of global CPU time)";#sys.stdout.flush()
              pass
         print "----------------------";#sys.stdout.flush()
         print "\n\n";#sys.stdout.flush()
@@ -2736,18 +2746,19 @@ class ChemicalTransportModule(GenericCTModule):
         """
 #        print "ctmdbg one time step "
         if self.curveTable:
+            print "ctmdbg one time step  self.curveTable"
             self.timeInteractivePlot(self.simulatedTime,self.timeStepNumber,
-                                       self.curveTable,
-                                       self.curve,
-                                       self.TimeGplot,
-                                       self.pointtoplot,
-                                       self.listofSpeciestoplot,
-                                       self.componentList,
-                                       self.internalNodesNumber,
-                                       self.aqueousCn,
-                                       self.plotFrequency,
-                                       ' mol/l',
-                       0)
+                                     self.curveTable,
+                                     self.curve,
+                                     self.TimeGplot,
+                                     self.pointtoplot,
+                                     self.listofSpeciestoplot,
+                                     self.componentList,
+                                     self.internalNodesNumber,
+                                     self.aqueousCn,
+                                     self.plotFrequency,
+                                     ' mol/l',
+                                     0)
             pass
         #print "ctmdbg self.dT",self.dT
         self.simulatedTime = self.simulatedTime+self.dT
@@ -2940,7 +2951,9 @@ class ChemicalTransportModule(GenericCTModule):
             #raw_input(" ctmdbg self.aqueousCkp1")
             #if self.communicator.rank == 0: print " ctm dbg proc 0 ",len(self.aqueousCkp1);#sys.stdout.flush()
             #if self.communicator.rank == 1: print " ctm dbg proc 1 ",len(self.aqueousCkp1);#sys.stdout.flush()
+                                                                                                        #
                                                                                                         # the first time step is non iterative
+                                                                                                        #
             if self.couplingAlgorithm=="NI" or self.timeStepNumber == 1 :
                 couplingAlgorithmError = 1.e-15       # non iterative algorithm
                 pass
@@ -3045,17 +3058,17 @@ class ChemicalTransportModule(GenericCTModule):
 
             if self.variablePorosityOption: self.currentPorosity = copy(self.kPorosityField)# porosity from one step to the other
                                                                                             #
-                                                                                            # the call of chemicaltransportOutput is made on each processor
-                                                                                            # due to a chemical getoutput
+                                                                                            # the call of chemicalTransportOutput is made on each processor
+                                                                                            # due to a chemical getoutput; it includes interactive outputs
                                                                                             #
             #print " at the output level"
-            self.chemicaltransportOutput(self.finalTime,it,couplingAlgorithmError)          # user outputs
+            self.chemicalTransportOutput(self.finalTime, it, couplingAlgorithmError)        # user outputs
             #print " after the output level"
 
             if (self.environ()):
                 if self.chat:
                     outputCPU = self.cpuTime()
-                    self.cpu_chemicaltransportOutput+=(outputCPU - cpu2)
+                    self.cpu_chemicalTransportOutput+=(outputCPU - cpu2)
                     pass
                 pass
             # Reaching convergence, we update unknowns Ci(tn) => Ci(tn+1) and advance in time
@@ -3124,7 +3137,7 @@ class ChemicalTransportModule(GenericCTModule):
                     pass
                                                                                             #
                                                                                             # The user can introduce here the call to its own functions
-                                                                                            # in the way it is done with the functions present in the user.py.
+                                                                                            # in the way it is done with the functions present in the etuser.py.
                                                                                             #                        
             if self.userProcessing:
                 print " user  processing ok "
@@ -3158,7 +3171,7 @@ class ChemicalTransportModule(GenericCTModule):
                         self.vtkControl += 1
                         pass
                     pass
-                else: # It should be elmer
+                else: # It should be elmer or openfoam
                     if int(self.simulatedTime / (self.vtkScalingFactor*self.vtkFrequency)) == self.vtkControl:
                         self.vtkFileWriter.vtkLegDataFileWriter(self.simulatedTime,
                                                                 self.vtkTimeUnit,
@@ -3222,7 +3235,7 @@ class ChemicalTransportModule(GenericCTModule):
             self.cpu_with_transport_communication = 0
             self.cpuOnList = 0.
             self.cpu_tot_residu = 0
-            self.cpu_chemicaltransportOutput = 0
+            self.cpu_chemicalTransportOutput = 0
             pass
 
     def timeStepInitialisation(self):
@@ -3834,13 +3847,20 @@ class ChemicalTransportModule(GenericCTModule):
         That function enables to produce an interactive plot over time.
         It uses gnuplot.py and gnuplot 4.4. and 5.0.2
         ListOfOutuputs : list containing the names of the ExpectedOutputs
-        if rotate is None, meters are on y, else meters are on x
+        if rotate is None, meters are on x, else meters are on x
        
-        savingFrequency is thought in terms of iteration time steps
+        savingFrequency is thought in terms of number of time steps
        
         The function as class arguments to enable a call within a script.
        
         """
+        #print "debuglistOfOutputs: ",listOfOutputs
+        #print "debugfrequency: ",frequency
+        #print "debugsavingFrequency: ",savingFrequency
+        if rotate == None or rotate == False:
+            rotate = False
+        else:
+            rotate = True
         if frequency == None:
             interactivePlotFrequency = 1
             pass
@@ -3849,6 +3869,8 @@ class ChemicalTransportModule(GenericCTModule):
             pass
         else:
             raise Warning, " the plot frequency in the interActivePlot frequency should be an integer: "+str(frequency)
+        #print "dbg itimeplot interactivePlotFrequency: ",interactivePlotFrequency
+            
         if savingFrequency == None:
             savingFrequency = None
             outputFrequency = interactivePlotFrequency
@@ -3858,7 +3880,13 @@ class ChemicalTransportModule(GenericCTModule):
         else:
             savingFrequency = savingFrequency
             outputFrequency = min(interactivePlotFrequency, savingFrequency)
+        #
+        # we set the plot frequency to the one requested
+        #
+        self.iPSaving = 'intGnuFile.dem'
         if self.timeStepNumber == 1:
+            #print "dbg itimeplot len(self.problem.getOutputs): ",len(self.problem.getOutputs())
+            #raw_input("rm -f intGnuFile.dem")
             for outputs in self.problem.getOutputs():
                 if outputs.timeSpecification == None:
                     outputs.timeSpecification = TimeSpecification(frequency = interactivePlotFrequency)
@@ -3867,6 +3895,7 @@ class ChemicalTransportModule(GenericCTModule):
                     outputs.timeSpecification.setFrequency(interactivePlotFrequency)
                     pass
                 pass
+            os.system("rm -f intGnuFile.dem")
             pass
         
         if outputType == None or outputType.lower() == "png":
@@ -3874,7 +3903,8 @@ class ChemicalTransportModule(GenericCTModule):
         else:
             outputType = "ps"
         
-        self.iPSaving = 'intGnuFile.dem'
+        #self.iPSaving = 'intGnuFile.dem'
+        #os.system("rm -f intGnuFile.dem")
 
         if extent == None:
             Nb_meters = 3.0
@@ -3889,6 +3919,8 @@ class ChemicalTransportModule(GenericCTModule):
 
         #g('clear')
         #if platform.uname()[0] == 'Linux': g('set title \"Etumos\"')
+        #print "dbg itimeplot self.timeStepNumber % interactivePlotFrequency: ",self.timeStepNumber % interactivePlotFrequency
+        #print "dbg itimeplot rotate: ",rotate
         if self.timeStepNumber % interactivePlotFrequency == 0:
             g('set style data lines')
             g('set grid')       
@@ -3896,26 +3928,34 @@ class ChemicalTransportModule(GenericCTModule):
                 os.system("rm -f intGnuFile.dem")
                 pass
             elapsedTime = self.simulatedTime
-            #elapsedTime = self.getOutput(listOfOutputs[0])[-1][0]                          # Time of the last simulation
+            #elapsedTime = self.getOutput(listOfOutputs[0])[-1][0]                          # Time of the last simulation step
             
             gExpectedOutput = []
             aqueousOutputsNames = []
-            for i in range(len(self.problem.outputs)):
-                gExpectedOutput.append(self.problem.outputs[i].getName())
-                if self.problem.outputs[i].quantity.lower() == 'aqueousconcentration':
-                    aqueousOutputsNames.append(self.problem.outputs[i].getName())
+            #print "dbg itimeplot self.problem.outputs", self.problem.outputs
+            for indOutput in range(len(self.problem.outputs)):
+                #gExpectedOutput.append(self.problem.outputs[i].getName())
+                print "dbg itimeplot self.problem.outputs", self.problem.outputs[indOutput].quantity.lower(), self.problem.outputs[indOutput].getName()
+                if self.problem.outputs[indOutput].quantity.lower() == 'aqueousconcentration':
+                    print "    dbg we update aqueousOutputsNames"
+                    aqueousOutputsNames.append(self.problem.outputs[indOutput].getName())
                     pass
                 else:
-                    gExpectedOutput.append(self.problem.outputs[i].getName())
+                    print "    dbg we update gExpectedOutput"
+                    gExpectedOutput.append(self.problem.outputs[indOutput].getName())
                     pass
                 pass
-                
+            #print "dbg itimeplot aqueousOutputsNames: ", aqueousOutputsNames,self.problem.outputs[i].quantity.lower()
+            #print "dbg itimeplot listOfOutputs: ", listOfOutputs
+            #print "dbg itimeplot gExpectedOutput: ", gExpectedOutput
+            
             listOfAqueousOutputs = []
             for eO in listOfOutputs:
-                if eO not in gExpectedOutput + aqueousOutputsNames:
+                eOName = eO.getName()
+                if eOName not in gExpectedOutput + aqueousOutputsNames:
                     listOfOutputs.remove(eO)
                     pass
-                if eO in aqueousOutputsNames:
+                if eOName in aqueousOutputsNames:
                     listOfAqueousOutputs.append(eO)
                     listOfOutputs.remove(eO)
                     pass
@@ -3924,6 +3964,8 @@ class ChemicalTransportModule(GenericCTModule):
                     raise Warning, " You should control the name of Species you want to plot in an interactive manner"
                 pass
             listOfOutputs = listOfOutputs + listOfAqueousOutputs
+            #print listOfOutputs
+            #raw_input("dbg itimeplot listOfOutputs")
             #listOfOutputs = listOfOutputs[0:4]
             
 #            if listOfAqueousOutputs != []:
@@ -3931,60 +3973,79 @@ class ChemicalTransportModule(GenericCTModule):
 #                    listOfOutputs[-1] = 'AqueousConcentrationsList'
 #                else:
 #                    listOfOutputs.append('AqueousConcentrationsList')
-            length = min(len(listOfOutputs),4)
+            numberOfPlots = min(len(listOfOutputs),4)
                                                                                             #
                                                                                             # Titles & subtitles
                                                                                             #
-            g(_gnuTitle(title, subTitle, length, elapsedTime))
+            g(_gnuTitle(title, subTitle, numberOfPlots, elapsedTime))
 
-            sizeString, origins, rot, rot2 = _gnuRotate(rotate, length)
-
+            sizeString, origins, rot, rot2 = _gnuRotate(rotate, numberOfPlots)              # we determine gnuplot parameters to the number of plots
+                                                                                            # rot = x means "no rotation"
             g(sizeString)               
                                                                                             #
                                                                                             # plotting all the curves via that loop
                                                                                             #
-            #print "dbg itimeplot ",listOfOutputs
-            #print "dbg itimeplot ",self.getOutput("pH")[-1][1].getColumn(-1)
-            #raw_input("dbg itimeplot")
-            for var in range(length):
-                name = listOfOutputs[var]
-            #print "itime plot ",name
+            print "dbg itimeplot listOfOutputs: ", listOfOutputs
+            print "dbg itimeplot numberOfPlots of listOfOutputs", len(listOfOutputs)
+            print "dbg problem outputs dir ", dir(self.problem.outputs[0])
+            print "dbg problem outputs type ", type(self.problem.outputs)
+            print "dbg problem outputs[0] ", self.problem.outputs[0]
+            print "dbg problem outputs self.problem.outputs[0].__class__.__name__: ", self.problem.outputs[0].__class__.__name__
+            #print "dbg problem outputs self.getOutput('K_output')", self.getOutput('K_output'), self.getOutput('K_output')
+            #print "dbg problem outputs self.getOutput('K_output')",  self.getOutput('K_output')
+            #print "dbg itimeplot self.getOutput(\"Na_output\"): ", self.problem.outputs[0]
+            #print "dbg itimeplot self.getOutput(\"Na_output\")[-1]: ", self.problem.outputs[0][-1]
+            #print "dbg itimeplot self.getOutput(\"Na_output\")[-1]: ", self.problem.outputs[0][-1][1].getColumn(-1)
+            #raw_input()
+            for var in range(numberOfPlots):
+                name = listOfOutputs[var].getName()
+                #print "itime plot ",name
+                #raw_input("dbg itimeplot")
 
-                if length>1:
+                if numberOfPlots>1:
                     g('set origin ' + origins[var])
                     #if rot == 'x':
                     g.title(name + ' profile')
                     pass
-                                                                                #
-                                                                                # Label, scale of output axis
-                                                                                #
-                ecart = max(self.getOutput(name)[-1][1].getColumn(-1))-min(self.getOutput(name)[-1][1].getColumn(-1))
-                if ecart > 1.e-15:
-                    str3 = "%9.3e"%(ecart/3)
+                                                                                           #
+                                                                                           # Label, scale of output axis
+                                                                                           #
+                outputToPlot = self.getOutput(name)[-1][1].getColumn(-1)
+                yextension = max(outputToPlot)-min(outputToPlot)
+                if yextension > 1.e-15:
+                    str3 = "%9.3e"%(yextension/3.)
                 else:
-                    if max(self.getOutput(name)[-1][1].getColumn(-1))> 1.e-15:
-                        str3 = "%9.3e"%(2.*max(self.getOutput(name)[-1][1].getColumn(-1)/3)/3.)
+                    if max(outputToPlot)> 1.e-15:
+                        str3 = "%9.3e"%(2.*max(outputToPlot/3)/3.)
                     else:
                         str3 = "%9.3e"%(1.e-5)
+                #
                 if rotate == False:
-                    g('set ' + rot + 'tics 0, ' + str3 + " rotate by -20")
+                    position = self.getOutput(name)[-1][1].getColumn( 0)
+                    position = max(position)-min(position)
+                    strx = "%9.3e"%(position/3.)
+                    g('set ' + rot + 'tics 0, ' + strx + " rotate by -20")
                     pass
                 else:
-                    g('set ' + rot + 'tics 0, ' + str3)
+                    position = self.getOutput(name)[-1][1].getColumn( 1)
+                    position = max(position)-min(position)
+                    stry = "%9.3e"%(position/3.)
+                    g('set ' + rot + 'tics 0, ' + stry)
                     pass
-                g('set format ' + rot + ' "%8.3e"')
-                g('set ' + rot + 'label "' + name + '"')
-                                                                                #
-                                                                                # Label and scale of depth axis
-                                                                                #       
-                ecart = Nb_meters
-                g('set ' + rot2 + 'label "m"')
-                g('set ' + rot2 + 'tics 0, ' + str(ecart/3))
-                g('set format ' + rot2 + ' "%5.1f"')
-                                                                                #
-                                                                                # plot
-                                                                                #
-                last_var = self.getOutput(name)[-1][1].getColumn(-1)
+                g('set format ' + rot + ' "%10.3e"')
+                g('set ' + rot + 'label "m"')
+                                                                                            #
+                                                                                            # Label and scale of depth axis
+                                                                                            #       
+                #yextension = Nb_meters
+                yextension = max(outputToPlot)-min(outputToPlot)
+                g('set ' + rot2 + 'label "' + name + '"')
+                g('set ' + rot2 + 'tics 0, ' + str(yextension/3.))
+                g('set format ' + rot2 + ' "%10.3e"')
+                                                                                            #
+                                                                                            # plot
+                                                                                            #
+                last_var = outputToPlot
                 if (self.TransportComponent == "mt3d"):
                     ext = self.transport.getMeshExtent()
                     if ext[0] < ext[1]:
@@ -3992,81 +4053,99 @@ class ChemicalTransportModule(GenericCTModule):
                     else:
                         abscisse = self.getOutput(name)[-1][1].getColumn(1).tolist()
                     del abscisse[0]
-                else:
-                    abscisse = self.getOutput(name)[-1][1].getColumn( 1)
+                else:                                                                       # it should be Elmer
+                    abscisse = self.getOutput(name)[-1][1].getColumn( 0)
                 courbes = []
                 i = 0
                 if rot == 'x':
                     while abscisse[i] < Nb_meters and i < len(abscisse)-1:
-                        courbes.append([last_var[i], abscisse[i]])
-                        i+=1
-                        pass
-                elif rot == 'y':
-                    while abscisse[i] < Nb_meters and i+1 < len(abscisse):
                         courbes.append([abscisse[i], last_var[i]])
                         i+=1
                         pass
-                #print " length of courbes ",len(courbes);sys.stdout.flush()
+                    pass
+                elif rot == 'y':
+                    while abscisse[i] < Nb_meters and i+1 < len(abscisse):
+                        courbes.append([last_var[i], abscisse[i]])
+                        i+=1
+                        pass
+                    pass
+                #print " dbg itimeplot abscisse: ",abscisse;sys.stdout.flush()
+                #print " dbg itimeplot rot: ",rot;sys.stdout.flush()
+                #print " dbg itimeplot Plots: ",courbes;sys.stdout.flush()
+                #print " dbg numberOfPlots: ",len(courbes);sys.stdout.flush()
+                g('set autoscale x')
                 g('clear')
                 g.plot(courbes)
                 pass
                                                                                             #
                                                                                             # end of the plotting loop
                                                                                             #
-
             if savingFrequency != None and self.timeStepNumber % savingFrequency == 0:
+                print "dbg itime plot saving frequency: ",savingFrequency, self.timeStepNumber, self.timeStepNumber % savingFrequency
                 self.gnuFile = open(self.iPSaving, "a")
                 self.gnuFile.write("reset\n")
                 if (outputType == "png"):
                     self.gnuFile.write("set term png\n")
+                    pass
                 else:
                     self.gnuFile.write("set term postscript\n")
-                
+                    pass
                 self.gnuFile.write("set style data linespoints\n")
                 self.gnuFile.write(_gnuTitle(title, subTitle, 1, elapsedTime)+"\n")
                                                                                             #
                                                                                             # -> file saving
                                                                                             #
                 for var in range(len(listOfOutputs)):
-                    print listOfOutputs;sys.stdout.flush()
-                    name = listOfOutputs[var]
+                    print "listOfOutputs : ",listOfOutputs;sys.stdout.flush()
+                    name = listOfOutputs[var].getName()
+                    outputToPlot = self.getOutput(name)[-1][1].getColumn(-1)
                     self.gnuFile.write("set output \"int_"+name+"_"+str(str(elapsedTime/3.15576e+7))+"y."+outputType+"\"\n")
                                                                                 #
                                                                                 # Label and scale of output axis
                                                                                 #
-                    ecart = max(self.getOutput(name)[-1][1].getColumn(-1))-min(self.getOutput(name)[-1][1].getColumn(-1))
-                    if ecart > 1.e-15:
-                        str3 = "%9.3e"%(ecart/3)
+                    yextension = max(outputToPlot)-min(outputToPlot)
+                    if yextension > 1.e-15:
+                        str3 = "%9.3e"%(yextension/3.)
                     else:
-                        str3 = "%10.4e"%(2.*max(self.getOutput(name)[-1][1].getColumn(-1)/3)/3.)
+                        str3 = "%10.4e"%(2.*max(outputToPlot/3.)/3.)
                     if rotate == False:
-                        self.gnuFile.write("set " + rot + "tics 0, " + str3 + " rotate by -20\n")
-                    else:
-                        self.gnuFile.write("set " + rot + "tics 0, " + str3 + "\n")
+                        position = self.getOutput(name)[-1][1].getColumn( 0)
+                        position = max(position)-min(position)
+                        strx = "%9.3e"%(position/3.)
+                        self.gnuFile.write("set " + rot + "tics 0, " + strx + " rotate by -20\n")
                         pass
-                    self.gnuFile.write("set format " + rot + " \"%10.2e\"\n")
-                    self.gnuFile.write("set " + rot + 'label \"' + name + '\"\n')
+                    else:
+                        position = self.getOutput(name)[-1][1].getColumn( 1)
+                        position = max(position)-min(position)
+                        stry = "%9.3e"%(position/3.)
+                        self.gnuFile.write("set " + rot + "tics 0, " + stry + "\n")
+                        pass
+                    self.gnuFile.write("set format " + rot + " \"%10.3e\"\n")
+                    self.gnuFile.write('set ' + rot + 'label \"m\"\n')
                                                                                 #
                                                                                 # Label and scale of depth axis
                                                                                 #       
-                    ecart = 1.
-                    self.gnuFile.write('set ' + rot2 + 'label \"m\"\n')
-                    self.gnuFile.write('set ' + rot2 + 'tics 0,' + str(ecart/3)+'\n')
-                    self.gnuFile.write('set format ' + rot2 + ' \"%5.2f\"\n')
+                    #yextension = 1.
+                    self.gnuFile.write("set " + rot2 + 'label \"' + name + '\"\n')
+                    self.gnuFile.write('set ' + rot2 + 'tics 0,' + str(yextension/3.)+'\n')
+                    self.gnuFile.write('set format ' + rot2 + ' \"%10.3e\"\n')
                                                                                 #
                                                                                 # plot
                                                                                 #
-                    last_var = self.getOutput(name)[-1][1].getColumn(-1)
+                    last_var = outputToPlot
                     #
                     if (self.TransportComponent == "mt3d"):
                         ext = self.transport.getMeshExtent()
                         if ext[0] < ext[1]:
                             abscisse = self.getOutput(name)[-1][1].getColumn(0).tolist()
+                            pass
                         else:
                             abscisse = self.getOutput(name)[-1][1].getColumn(1).tolist()
+                            pass
                         del abscisse[0]
                     else:
-                        abscisse = self.getOutput(name)[-1][1].getColumn( 1)
+                        abscisse = self.getOutput(name)[-1][1].getColumn( 0)
+                        pass
                     #
                     courbes = []
                     self.gnuFile.write("plot \"-\""+ " title "+"\""+name+"\"\n")
@@ -4074,16 +4153,17 @@ class ChemicalTransportModule(GenericCTModule):
                     #print "dbg length of absc ",len(abscisse), abscisse[0], abscisse[1]
                     while abscisse[i] < Nb_meters and i < len(abscisse)-1:
                         if rot == 'x':
-                            self.gnuFile.write(" %9.5e %9.4e\n"%(last_var[i], abscisse[i]))
+                            self.gnuFile.write(" %9.5e %9.4e\n"%(abscisse[i], last_var[i]))
                             pass
                         else:
-                            self.gnuFile.write(" %9.5e %9.4e\n"%(abscisse[i], last_var[i]))
+                            self.gnuFile.write(" %9.5e %9.4e\n"%(last_var[i], abscisse[i]))
                             pass
                         i+=1
                         pass
                     self.gnuFile.write("e\n")
                 self.gnuFile.write("exit\n")
                 self.gnuFile.close()
+                pass
 
             subprocess.Popen("gnuplot " + str(self.iPSaving), shell = True).wait()
             pass
@@ -4906,18 +4986,21 @@ def _gnuTitle(title, subTitle, length, timeSpecification):
         titre = str(title)
         pass
     else:
-        titre = 'Etumos Interactive plot'
+        titre = 'Etumos Interactive plot:'
         soustitre = '"'
         pass
+    #print "title",title
+    #raw_input("title")
     if subTitle != None:
         soustitre = '\\n' + str(subTitle) + '"'
         pass
     if length>1:
-        return 'set multiplot title "' + titre + ' (time = + %9.2e + years)'%(timeSpecification/3.15576e+7) + soustitre + \
-        " font \"Times-Roman,10\""
+        return 'set multiplot title "' + titre + ' \\n{/*0.75(time = + %9.2e + years)}'%(timeSpecification/3.15576e+7) + soustitre + \
+        " font \"Times-Roman,16\""
     else:
-        return 'set title "' + titre + ' (time = + %9.2e + years)'%(timeSpecification/3.15576e+7) + soustitre + \
-        " font \"Times-Roman,10\""
+        #return 'set title "' + titre + ' (time = + %9.2e + years)'%(timeSpecification/3.15576e+7) + soustitre + \
+        return 'set title "' + titre + ' \\n{/*0.76time = + %9.2e + years)}'%(timeSpecification/3.15576e+7) + soustitre + \
+        " font \"Times-Roman,16\""
 #    
 def _gnuRotate(rotate, length):
     """
