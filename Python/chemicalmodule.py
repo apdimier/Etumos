@@ -13,7 +13,7 @@ from phreeqc import Phreeqc
 from PhysicalQuantities import Time,\
                                _findUnit                           
 
-class Chemical:
+class Chemical(object):
     """
     Module of Chemistry
     """
@@ -75,8 +75,10 @@ class Chemical:
         self.solver = self.component                                                        # to evolve to solver
 
         self.componentName = "phreeqc"
-
-        self.component.setDataBase(self.dB)       
+        if self.componentName == "phreeqc":
+            #self.dB = self.component.fileRecognition(self.dB)
+            self.component.setDataBase(self.dB)
+            pass
 
         self.component.setChemicalState(self.chemicalState)
 

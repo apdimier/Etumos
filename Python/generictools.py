@@ -285,6 +285,17 @@ def checkClass(x, classes, message=None):
             xstr = repr(type(x))       
         raise TypeError(" x of type "+xstr+" is not within ["+_classesNameVerbose(classes)+"]")
     return
+    
+def reverseList(listToReverse):
+    """
+    cpu time efficiency > list(reversed(listToReverse)) and listToReverse[::-1]
+    tested with the timeit module:
+    
+    timeit(lambda: reverseList(listToReverse), number=1000)
+    
+    """
+    listToReverse.reverse()
+    return listToReverse
 
 def checkClassList(liste, classes):
     """

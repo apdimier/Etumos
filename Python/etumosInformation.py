@@ -2,6 +2,7 @@
 from __future__ import absolute_import
 import os,sys
 from platform import uname, python_compiler
+import re
 import subprocess
 """
     that module is used to test the available configuration.
@@ -11,35 +12,25 @@ import subprocess
 """
 machineInformation = uname()
 
-print("system: ",machineInformation[0])
-print()
-print("node: ",machineInformation[1])
-print()
-print("release: ",machineInformation[2])
-print()
-print("version: ",machineInformation[3])
-print()
-print("machine: ",machineInformation[4])
-print()
-print("processor architecture: ",machineInformation[5])
-print()
+print("system: %s\n"%(machineInformation[0]))
+print("node: %s\n"%(machineInformation[1]))
+print("release: %s\n"%(machineInformation[2]))
+print("version: %s\n"%(machineInformation[3]))
+print("machine: %s\n"%(machineInformation[4]))
+print("processor architecture: %s\n"%(machineInformation[5]))
 pyversion = sys.version.split(" ")[0]
-print("Python version: ",pyversion)
-print()
-print("Python executable: ",sys.executable)
-print()
-print("number of digits: ",sys.float_info.dig)
-print()
-print("epsilon: ",sys.float_info.epsilon)
-print()
-print(" gcc compiler: ",python_compiler())
+print("Python version: %s\n"%(pyversion))
+print("Python executable: %s\n"%(sys.executable))
+print("number of digits: %s\n"%(sys.float_info.dig))
+print("epsilon: %s\n"%(sys.float_info.epsilon))
+print(" gcc compiler: %s"%(python_compiler()))
 #gccVersion = os.system("gcc -dumpversion")
 #print("gcc version: %s"%(gccVersion))
 try:
-    print("PYTHONPATH:", os.environ["PYTHONPATH"])
+    print("PYTHONPATH: %s"%(os.environ["PYTHONPATH"]))
 except KeyError:
     print("check your PYTHONPATH in ~/.bashrc")
-print()
+print("")
 try:
     import WPhreeqc
     Wph = WPhreeqc.__version__.split("\n")[1]
@@ -49,7 +40,7 @@ except:
 try:
     import WElmer
     WEl = WElmer.__version__.split("\n")[1]
-    print("%20ls %s"%(" wrapping version of elmer:",WEl))
+    print("%20ls %s"%(" elmer wrapping version:",WEl))
 except:
     print("check your PYTHONPATH to have $WRAPPER/Wlib in your python path")
 #
@@ -79,12 +70,19 @@ def softEnvironmentTesting(moduleName,
             moduleNameversion+= " "*(20-len(moduleNameversion))
             print("%20s %s %s"%(moduleNameversion,":",moduleVersion))
             if minimalVersion:
-                if moduleVersion<minimalVersion:
+                print ("moduleVersion: %s"%(moduleVersion))
+                moduleVersion = re.sub(u'\x00', '', moduleVersion)
+                if map(int,moduleVersion.split(".")) < map(int,minimalVersion.split(".")):
                     raise Warning(" your installed version is not compatible,\n"\
                                   " you need at least version:%s\n"%(minimalVersion))
                 else:
                     print(" "*(len(moduleNameversion)+3)+    "version compatible with requirements")
                     pass
+        else:
+            try:
+                print (eval(moduleName+".__version__"))
+            except:
+                pass
     except ImportError:
         return False
 
@@ -116,7 +114,7 @@ print("\n")
 # module environment
 #
 softEnvironmentTesting("cython","Not used. Maybe can be used later to speedup the tool; first trials were not concluding")
-softEnvironmentTesting("numpy",   "used in the frame of the simulation")
+softEnvironmentTesting("numpy",   "used in the frame of the simulation",     minimalVersion = "1.7.1")
 softEnvironmentTesting("Tkinter", "used in the frame of the simulation")
 softEnvironmentTesting("wx","ground stone of the interface",                 minimalVersion = "2.8.12")
 softEnvironmentTesting("xml"," xml ")
@@ -129,7 +127,7 @@ softEnvironmentTesting("docx"," python-docx is a Python library for creating and
 softEnvironmentTesting("pip"," tool for installing Python packages", minimalVersion = "1.3.1")
 softEnvironmentTesting("CoolProp"," python wrapper of the CoolProp C++ library that implements\n"+\
                        "Pure and pseudo-pure fluid equations of state and transport properties for 122 components\n"\
-                       , minimalVersion = "5.1.2")
+                       , minimalVersion = "5.1")
 if pyversion < "3.0.0":
     softEnvironmentTesting("PIL"," The Python Imaging Library (PIL) adds image processing capabilities")
     pass

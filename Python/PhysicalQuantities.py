@@ -129,8 +129,8 @@ class PhysicalQuantity:
         @param args: either (value, unit) or (value_with_unit,)
         @type args: (number, C{str}) or (C{str},)
         """
-        print ("debug ",len(args))
-        print ("debug args",args)
+        #print ("debug ",len(args))
+        #print ("debug args",args)
         if len(args) == 2:
             self.value = args[0]
             if type(args[1]) != NoneType:
@@ -139,6 +139,7 @@ class PhysicalQuantity:
             else:
                 print(" args[0] is",args[0])
                 raise Warning("you didn't give a dimension to your physical quantity")
+            pass
         else:
             s = string.strip(args[0])
             #print ("debug s",s)
@@ -148,7 +149,6 @@ class PhysicalQuantity:
             self.value = string.atof(match.group(0))
             self.unit = _findUnit(s[len(match.group(0)):])
             pass
-
     _number = re.compile('[+-]?[0-9]+(\\.[0-9]*)?([eE][+-]?[0-9]+)?')
 
     def __str__(self):

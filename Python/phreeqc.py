@@ -506,7 +506,7 @@ def mineralSolution (State, batchBeg, batchEnd, inFile, kineticLaws, gasOption, 
                             pass
             pass
         except Warning:
-            print("##Warning: No mineral phase in contact with the aqueous phase within that solution")
+            print("##Caution: No mineral phase in contact with the aqueous phase within that solution")
         #
         #
         #
@@ -540,7 +540,7 @@ def mineralSolution (State, batchBeg, batchEnd, inFile, kineticLaws, gasOption, 
                                 form = "%25s    %12.7e  %12.7e\n"
                                 inFile.write(form%(spezien.symbol,saturationIndex,spezien.value))
             except Warning:
-                print("## Warning: No mineral phase found associated to that solution")
+                print("## Caution: No mineral phase found associated to that solution")
         if (boolean == 1) and (State.gasMassBalance.lower() != "ok"):
             try:
                 if gasPhase:
@@ -548,7 +548,7 @@ def mineralSolution (State, batchBeg, batchEnd, inFile, kineticLaws, gasOption, 
                         form = "%25s    %10.5e  %10.5e\n"
                         inFile.write(form%(spezien.symbol,spezien.value,spezien.amount))
             except Warning:
-                print("# Warning: No gaz phase associated to this solution")     
+                print("# Caution: No gaz phase associated to this solution")     
             if phFixed:
                 form = "%25s    %10.5e  %s  %10.5e\n"
                 inFile.write(form%("Fix_H+",-1.0*State.aqueousSolution.pH,\
@@ -569,7 +569,7 @@ def mineralSolution (State, batchBeg, batchEnd, inFile, kineticLaws, gasOption, 
                         pass
                     pass
             except Warning:
-                print(" Warning: The solution does\'nt entail any gas phase")
+                print(" Caution: The solution does\'nt entail any gas phase")
             if phFixed != None:
                 form = "%25s    %10.5e  %s  %10.5e\n"
                 inFile.write(form%("Fix_H+",-1.0*State.aqueousSolution.pH,\
@@ -690,7 +690,7 @@ def mineralSolution (State, batchBeg, batchEnd, inFile, kineticLaws, gasOption, 
             pass
         
         except Warning:
-            print("## Warning: No kinetic law within the"+State.name+" state ")
+            print("## Caution: No kinetic law within the "+State.name+" state ")
                                                                                 #
                                                                                 # we don't want to use a FreeKineticLaw here
                                                                                 #
@@ -752,7 +752,7 @@ def mineralSolution (State, batchBeg, batchEnd, inFile, kineticLaws, gasOption, 
             
         if kineticBoolean == 0 and incremental == 1: inFile.write("    INCREMENTAL_REACTIONS true\n\n")
     elif mineralPhase != None:
-        print("## Warning: No kinetic law within the"+State.name+" state ")
+        print("## Caution: No kinetic law within the "+State.name+" state ")
         pass
         
 def solidSolution(solidSol,iAnf,iEnd,inFile, name = None):
@@ -1444,10 +1444,20 @@ class Phreeqc:
         """
         can only take place un the soft module; a database analysis being mandatory.
         """
+        print(" url getMolar: %s"%(URL))
         URL = URL.split("/")
-        print(URL)
+        print(" url getMolar1: %s"%(URL))
         URL = os.getenv("WRAPPER")+"/Phreeqc_dat/"+URL[-1]
-        dataBaseFile = open (URL, 'r')    
+        print(" url getMolar2: %s"%(URL))
+        try:
+            print (" try url to be opened: %s"%(URL))
+            URL = _fileIdentify(URL)
+            print (" try url to be opened: %s"%(URL))
+            dataBaseFile = open (URL, 'r')
+            print (" try opened: %s"%(URL))
+        except:
+            raise Warning("")
+                  
         if typ == DictType or type(typ) == DictType:
             molarMassDict = {}
             pass
@@ -1479,7 +1489,7 @@ class Phreeqc:
                         pass
             line=dataBaseFile.readline()
         dataBaseFile.close()
-        #print "phreedbg ",dbbPrimarysList,dbbPrimarysMolarMassList
+        #print ("phreedbg ",dbbPrimarysList,dbbPrimarysMolarMassList)
         #raw_input("phreedbg ")
         if (molarMassDict):
             return molarMassDict
@@ -1517,16 +1527,16 @@ class Phreeqc:
             pass
         return None
 
-    def setDataBase(self,name):
+    def setDataBase(self,urlName):
         """
         database to be emploied.
         """
-        URL = os.path.splitext(name)[0] + '.dat'
-        if not os.path.isabs(URL):
-            URL = os.environ['PHREEQCDAT'] + "/" + URL
-            pass
-        self.solver.setDataBase(URL)
-        self.elementList, self.molarMassList = self.getMolarMassList(URL)
+        urlName = self.fileRecognition(urlName)
+        #print(" dbgp setDataBase: %s"%(urlName))
+        #print (type(self.solver))
+        #print (dir(self.solver))
+        self.solver.setDataBase(urlName)
+        self.elementList, self.molarMassList = self.getMolarMassList(urlName)
         return None
     
     def setInitialPorosity(self,porosityField):
@@ -1625,8 +1635,9 @@ class Phreeqc:
             #raw_input("integrationMethod.lower()")
 
             if integrationMethod.lower() == "cvode":
-                                                                                                        #
-                                                                                                        # cvode integration
+                                                                                            #
+                                                                                            # cvode integration
+                                                                                            #
                 if type(intParamDict).__name__ == "dict":
                     self.intParamDict = intParamDict
 
@@ -2265,17 +2276,8 @@ class Phreeqc:
         print("one cell equilibrium"*100)
         self.solver.einzelequilibrium(cell)
 
-    def run(self):
-        """To equilibrate a single state cell"""
-        if self.simulationTime and self.kineticLaws != []:
-            self.solver.initialize(1,self.mpiSize)
-            self.solver.setTimeStep(self.simulationTime)
-            self.solver.reactions(1, "internal")
-            pass
-        else:
-            self.solver.initialize(1,self.mpiSize)
-            self.solver.einzelequilibrium(1)
-            pass
+    def fileRecognition(self,dataBaseName):
+        return _fileIdentify(dataBaseName)
 
     def getAllOutput(self):
         """
@@ -2444,6 +2446,21 @@ class Phreeqc:
         for i in state:
             outFile.write("%s"%str(i))
             pass
+    
+    def phiBalance(self):
+        return "residual ",self.solver.phibalance()
+
+    def run(self):
+        """To equilibrate a single state cell"""
+        if self.simulationTime and self.kineticLaws != []:
+            self.solver.initialize(1,self.mpiSize)
+            self.solver.setTimeStep(self.simulationTime)
+            self.solver.reactions(1, "internal")
+            pass
+        else:
+            self.solver.initialize(1,self.mpiSize)
+            self.solver.einzelequilibrium(1)
+            pass
 
     def setActivityLaw(self,activityLaw = None):
         """
@@ -2462,9 +2479,6 @@ class Phreeqc:
         else:
             self.activityLaw = 'davies'
             pass
-    
-    def phiBalance(self):
-        return "residual ",self.solver.phibalance()
 
     def setChemicalState(self,chemicalState):
         """
@@ -3125,6 +3139,32 @@ def _ascDi(elem):
     if di=="":
         di=1
     return (asc,float(di))
+
+def _fileIdentify(databaseName):
+    """
+    used to identify the path of the phreeqc database file
+    """
+    #print("url-1: %s"%(databaseName))
+    url = os.path.splitext(databaseName)[0] + '.dat'                                        # we ensure that we have the right extension
+    #print("url0: %s"%(url))
+    if not os.path.isabs(url):
+        url = os.environ['PHREEQCDAT'] + "/" + url
+        #print("url1: %s"%(url))
+        pass
+    if os.path.isfile(url):
+        return url.decode('utf-8')
+    else:
+        #print("url2: %s"%(url))
+        url = os.getcwd()+ "/" + url.split("/")[-1]
+        #print("url3: %s"%(url))
+        if os.path.isfile(url.decode('utf-8')):
+            #print (" we return the following string: %s"%(url.decode('utf-8')))
+            #print (" we return the following string: %s"%(url.split("/")[-1]))
+            return url.split("/")[-1]
+            #return url.decode('utf-8')
+        else:
+                raise Warning("check the existence of the database file you identified")
+        pass
     
 def cvodewriter(inFile, kineticLaw, integrationMethod, intParamDict):
     """

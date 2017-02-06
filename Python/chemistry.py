@@ -1645,8 +1645,8 @@ class ChemicalProblem:
         self.simulationTime = simulationTime
 
         if outputs:
-            checkClassList(outputs,ExpectedOutput)
-        self.outputs =  outputs
+            checkClassList(outputs, ExpectedOutput)
+        self.outputs = outputs
 
     def getName(self):
         return self.name
@@ -1711,7 +1711,6 @@ class ExpectedOutput(CommonExpectedOutput):
 
         save (string between 'file' or 'memory') : default is memory
 
-
         name (string) : default is quantity_unknown_unit
         """
     def __init__(self, quantity = None, unknown = None, unit = None,
@@ -1749,11 +1748,8 @@ class ExpectedOutput(CommonExpectedOutput):
             self.chemicalName += '_' + unit
             pass
 
-        if not name:
-            self.name =  self.chemicalName
-            pass
-                
-        return
+        if not name: self.name =  self.chemicalName
+        else: self.name = name
 
     def getFormat(self):
         """

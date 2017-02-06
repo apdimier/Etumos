@@ -5,7 +5,7 @@ from species import *
 Tr = AqueousMasterSpecies(symbol = "Tr+",\
                           name = "Tr",\
                           element = "Tr",\
-                          molarMass = MolarMass(35.0,"kg/mol"),\
+                          molarMass = MolarMass(0.035,"kg/mol"),\
                           alkalinity = 0)
 #
 Ru = AqueousMasterSpecies(symbol = "RuO4-2",\
@@ -110,6 +110,18 @@ C = AqueousMasterSpecies(symbol = "HCO3-",\
                          molarMass = MolarMass(0.012011,"kg/mol"),\
                          alkalinity = 1.0)
 #
+C_m3_ = AqueousMasterSpecies(symbol = "C2H6",\
+                             name = "C(-3)",\
+                             element = "C2H6",\
+                             molarMass = MolarMass(12.011,"g/mol"),\
+                             alkalinity = 0)
+#
+C_p4_ = AqueousMasterSpecies(symbol = "HCO3-",\
+                             name = "C(+4)",\
+                             element = "HCO3-",\
+                             molarMass = MolarMass(12.011,"g/mol"),\
+                             alkalinity = 0)
+#
 Pb = AqueousMasterSpecies(symbol = "Pb+2",\
                           name = "Pb",\
                           element = "Pb",\
@@ -194,6 +206,18 @@ S = AqueousMasterSpecies(symbol = "SO4-2",\
                          molarMass = MolarMass(0.032066,"kg/mol"),\
                          alkalinity = 0.0)
 #
+S_p6_ = AqueousMasterSpecies(symbol = "SO4-2",\
+                             name = "S(+6)",\
+                             element = "SO4",\
+                             molarMass = MolarMass(32.066,"g/mol"),\
+                             alkalinity = 0)
+#
+S_m2_ = AqueousMasterSpecies(symbol = "HS-",\
+                             name = "S(-2)",\
+                             element = "S",\
+                             molarMass = MolarMass(32.066,"g/mol"),\
+                             alkalinity = 1)
+#
 W = AqueousMasterSpecies(symbol = "WO4-2",\
                          name = "W",\
                          element = "W",\
@@ -265,6 +289,18 @@ Fe = AqueousMasterSpecies(symbol = "Fe+2",\
                           element = "Fe",\
                           molarMass = MolarMass(0.055847,"kg/mol"),\
                           alkalinity = 0.0)
+#
+Fe_p2_ = AqueousMasterSpecies(symbol = "Fe+2",\
+                              name = "Fe(+2)",\
+                              element = "Fe",\
+                              molarMass = MolarMass(55.847,"g/mol"),\
+                              alkalinity = 0)
+#
+Fe_p3_ = AqueousMasterSpecies(symbol = "Fe+3",\
+                              name = "Fe(+3)",\
+                              element = "Fe",\
+                              molarMass = MolarMass(55.847,"g/mol"),\
+                              alkalinity = -2)
 #
 B = AqueousMasterSpecies(symbol = "B(OH)3",\
                          name = "B",\

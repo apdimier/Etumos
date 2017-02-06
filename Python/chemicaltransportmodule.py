@@ -1468,45 +1468,48 @@ class ChemicalTransportModule(GenericCTModule):
             return
         import random        
         citations = [
+                     "\n\"Ailleurs c'est bien, c'est meme mieux\"\n",
                      "\n\"Apres ? c'est une autre histoire...\"\n",
                      "\n\"Ad libitum\"\n",
                      "\n\"Auf, preiset die Tage!\"\n",
+                     "\n\"Ce qu\'un imbecile peut faire, n\'importe quel imbecile peut le faire\"\n",
+                     "\n\"Chacun est responsable de tous. Chacun est seul responsable. Chacun est seul responsable de tous.\"\n",
+                     "\n\"De omnibus dubitandum est\"\n",
+                     "\n\"Die Suche nach der Wahrheit ist wertvoller als ihr Besitz.\"\n",
+                     "\n\"Dosis (sola) facit venenum\"\n",
                      "\n\"Do turkeys enjoy Thanksgiving ?\"\n",
-                     "\n\"Everything should be made as simple as possible,\n but not simpler!\"\n",
-                     "\n\"les hommes usent des statistiques comme les ivrognes des reverberes,\n"+\
-                         "pour l'appui qu'elles fournissent plutot que pour la lumiere qu'elles repandent\"\n",
+                     "\n\"Est-il besoin d'executer,\nL\'on ne rencontre plus personne.\"\n",
+                     "\n\"Et ignem regunt numeri\"\n",
+                     "\n\"Everything should be kept as simple as possible,\n but not simpler!\"\n",
                      "\n\"Everything is possible, everything is achievable\"\n",
                      "\n\"Forecasts are always difficult,\nespecially if they concern the future!\"\n",
-                     "\n\"Summum jus, summa injuria\"\n",
                      "\n\"On devient ce que notre regard contemple\"\n",
-                     "\n\"tout s\'opere parce qu\'a force de temps tout se rencontre\"\n",
-                     "\n\"Und seiner Haende Werk zeigt an das Firmament!\"\n",
-                     "\n\"Nul ne doit souffler plus haut qu\'il n\'a l\'esprit!\"\n",
-                     "\n\"Where the willingness is great the difficulties cannot be great\"\n",
-                     "\n\"Et ignem regunt numeri\"\n",
-                     "\n\"Ailleurs c'est bien, c'est meme mieux\"\n",
-                     "\n\"toi qui chemine, il n\'y a pas de chemin,\n le chemin se fait en marchant\"\n",
-                     "\n\"Ce qu\'un imbecile peut faire, n\'importe quel imbecile peut le faire\"\n",
-                     "\n\"Sachez vous eloigner car, lorsque vous reviendrez a votre travail, votre jugement sera plus suer.\"\n"
-                     "\n\"Wozu\"\n",
-                     "\n\"La science peut etre l’asymptote de la verite, elle approche sans cesse, et ne touche jamais\"\n",
-                     "\n\"Le jardin est dans le jardinier.\"\n",
-                     "\n\"Die Suche nach der Wahrheit ist wertvoller als ihr Besitz.\"\n",
-                     "\n\"Panta rhei\"\n",
-                     "\n\"Money is like muck, not good unless spread.\"\n",
-                     "\n\"Ite missa est\"\n",
-                     "\n\"Est-il besoin d'executer,\nL\'on ne rencontre plus personne.\"\n",
-                     "\n\"like chasing the wind\"\n",
-                     "\n\"De omnibus dubitandum est\"\n",
-                     "\n\"Plus on apprend, plus on ne sait rien\"\n",
-                     "\n\"Dosis (sola) facit venenum\"\n",
-                     "\n\"Tout ce qui a pu se dire contre la science ne saurait faire oublier que la recherche scientifique reste, dans la degradation de tant d'ordres humains, l'un des rares domaines ou l'homme se controele, s'incline devant le raisonnable, est non bavard, non violent et pur. Moments de la recherche certes constamment interrompus par les banalites du quotidien mais qui se renouent en duree propre. Le lieu de la morale et de l'eflevation ne se trouve-t-il pas desormais au laboratoire ?\"\n",
                      "\n\"On definit trop l’intelligence par la scolarite. L’intelligence devient alors une classe, la classe de ceux qui ont fait leurs etudes.\n"+\
                          "Les etudes sont demontrees par les diploemes, preuves materielles.\n"+\
                          "Ce systeme est excellent pour la preservation et la transmission des connaissances,"+\
                          "mais il est mediocre, sinon mauvais pour leur accroissement. Il arrive que la preuve materielle, le diploeme, soit plus durable que ce qu’elle prouve,"+\
                          " que le zele, la curiosite, la vigueur mentale de celui qu’elle institue membre de la caste des lettres."+\
-                         "Parmi les inconvenients de ce systeme, il faut signaler l’ankylose de l’homme dans son attitude initiale."
+                         "Parmi les inconvenients de ce systeme, il faut signaler l’ankylose de l’homme dans son attitude initiale.",
+                     "\n\"Und seiner Haende Werk zeigt an das Firmament!\"\n",
+                     "\n\"les hommes usent des statistiques comme les ivrognes des reverberes,\n"+\
+                         "pour l'appui qu'elles fournissent plutot que pour la lumiere qu'elles repandent\"\n",
+                     "\n\"Nul ne doit souffler plus haut qu\'il n\'a l\'esprit!\"\n",
+                     "\n\"Ite missa est\"\n",
+                     "\n\"La science peut etre l’asymptote de la verite, elle approche sans cesse, et ne touche jamais\"\n",
+                     "\n\"Le jardin est dans le jardinier.\"\n",
+                     "\n\"like chasing the wind\"\n",
+                     "\n\"Money is like muck, not good unless spread.\"\n",
+                     "\n\"Numquam ponenda est pluralitas sine necessitate.\"\n",
+                     "\n\"Panta rhei\"\n",
+                     "\n\"Plus on apprend, plus on ne sait rien\"\n",
+                     "\n\"Qui accroit sa science accroit sa douleur\"\n",
+                     "\n\"Sachez vous eloigner car, lorsque vous reviendrez a votre travail, votre jugement sera plus suer.\"\n",
+                     "\n\"Summum jus, summa injuria\"\n",
+                     "\n\"Toi qui chemine, il n\'y a pas de chemin,\n le chemin se fait en marchant\"\n",
+                     "\n\"Tout ce qui a pu se dire contre la science ne saurait faire oublier que la recherche scientifique reste, dans la degradation de tant d'ordres humains, l'un des rares domaines ou l'homme se controele, s'incline devant le raisonnable, est non bavard, non violent et pur. Moments de la recherche certes constamment interrompus par les banalites du quotidien mais qui se renouent en duree propre. Le lieu de la morale et de l'eflevation ne se trouve-t-il pas desormais au laboratoire ?\"\n",
+                     "\n\"Tout s\'opere parce qu\'a force de temps tout se rencontre\"\n",
+                     "\n\"Where the willingness is great the difficulties cannot be great\"\n",
+                     "\n\"Wozu\"\n"
                      ]
         random.seed()     
         print random.choice(citations);#sys.stdout.flush()
