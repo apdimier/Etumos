@@ -23,7 +23,7 @@ class Field:
 
 class ZoneField(Field):
     """
-    structure used other a body field.
+    structure used over a body field.
     """
     def __init__(self, name, mesh):
         self.name = name
@@ -47,7 +47,9 @@ class ZoneField(Field):
     def setEntity(self, entity):
         if hasattr(self,'entity'):
             raise RuntimeError("entity value already set")
-        print("dbg fields setEntity",self.entity)
+        #print("dbg fields setEntity", self.entity)
+        #print("dbg fields setEntity", type(self.entity))
+        #print("dbg fields setEntity", self.entity.name)
         self.entity = entity
 
     def getNbBodies(self):
@@ -66,14 +68,17 @@ class ZoneField(Field):
     def setZone(self, zone, values, material=None):
         try:
             myEntity = self.getEntity()
-            #print " dbg fields setZone: it was ok myEntity",myEntity
-            #print " dbg fields setZone ok"
+            #print (" dbg fields setZone: it was ok myEntity", myEntity)
+            #print (" dbg fields setZone: it was ok myEntity:", dir(myEntity))
+            #print (" dbg fields setZone: it was ok myEntity:", type(myEntity))
+            #print (" dbg fields setZone ok")
         except AttributeError:
             myEntity = zone.getEntity()
             self.entity = myEntity
-#        if zone.getEntity() != myEntity:
-#            print "dbg fields setZone ",self.entity," zone.getEntity", zone.getEntity()
-#            raise ValueError("zone of wrong entity")
+        #if zone.getEntity() != myEntity:
+        #    print ("dbg fields setZone, name: ", self.name, " zone.getEntity", zone.getEntity())
+        #    print ("dbg fields setZone ",self.entity, " zone.getEntity", zone.getEntity())
+        #    raise ValueError("zone of wrong entity")
         self.zones.append(zone)
         self.materials.append(material)
         self.appendZoneValues(values)
@@ -293,8 +298,9 @@ class NumericBodyField(ZoneField):
     """
     Numerical values defined over a body
     """
-    def __init__(self, name, mesh, components_names, numType=float, depend=None):
+    def __init__(self, name, mesh, components_names, numType = float, depend=None):
         ZoneField.__init__(self, name, mesh)
+        #print (" fields debug 20 06 2017: names and components_names: ", name, components_names)
         self.setComponentsNames(components_names)
         self.nb_components = len(components_names)
         values = array([], numType)
@@ -304,8 +310,14 @@ class NumericBodyField(ZoneField):
         self.depend=depend
 
     def appendZoneValues(self, values):
+        #print ("fields dbg self.nb_components: %i\n"%(self.nb_components))
+        #print ("fields dbg self.values: ", self.values)
+        #print ("fields dbg type of values: ",type(values))
+        #print ("fields dbg values: ", values)
         values = reshape(values, (1, self.nb_components))
+        #print ("fields dbg reshaped values: ",len(values), values)
         self.values = concatenate((self.values, values))
+        #print ("fields dbg concatenated values: ",  self.values)
         return
 
     def getDepend(self):

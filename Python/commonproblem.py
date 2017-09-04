@@ -19,7 +19,7 @@ from cartesianmesh import CartesianMesh
 
 from mesh import Body
 
-from PhysicalQuantities import Head, Pressure, Displacement, NormalForce
+from PhysicalQuantities import Displacement, Head, NormalForce, PhysicalQuantity, Pressure, Temperature
 
 from types import ListType, StringType, TupleType
 
@@ -56,7 +56,6 @@ class CommonBoundaryCondition_old:
             if type(val) is TupleType:
                 checked = val[0] 
                 for i in range(1,len(val)):
-                    from datamodel import Species
                     memberShip(val[i], Species)
                     pass
                 pass
@@ -84,7 +83,7 @@ class CommonBoundaryCondition_old:
             pass
         return
 
-class CommonBoundaryCondition:
+class CommonBoundaryCondition(object):
     """ 
     BoundaryCondition definition
     """
@@ -98,7 +97,9 @@ class CommonBoundaryCondition:
           We verify that it's a key of bcdict dictionnary
         - a boundary condition value. Value depend of boundary condition type.
         
-        - bcdict : a dictionnary with key = type of boundary condition and value = Possible class of boundary condition value
+        - bcdict : a dictionnary with key = type of boundary condition and value = Possible class of boundary condition value: 
+        
+            As an example, we can have for bcdict.keys() : ['Flux', 'Dirichlet', 'Neumann']
         
         All boundary conditions satisfy that format. It should enable the lecture of hydraulic, mechanical and chemical-transport boundary conditions.
         
@@ -110,8 +111,8 @@ class CommonBoundaryCondition:
         """   
         self.value = None       
         self.value_species = None
-        #print " here we are 1, bcdict ", bcdict
-        #print " here we are 2, bcdict ", bcdict.keys()
+        #print (" here we are 1, bcdict ", bcdict)
+        #print (" here we are 2, bcdict ", bcdict.keys())
         #print value
         #raw_input()
         #print("dbg bcdict ",list(bcdict.keys()))
@@ -123,31 +124,32 @@ class CommonBoundaryCondition:
         self.boundary = boundary
         if type(btype) != StringType: raise TypeError(" type should be a string ")
         if btype not in list(bcdict.keys()): 
-            print("bcdict.keys():",list(bcdict.keys()))
-            print("btype : ",btype)
+            print("bcdict.keys() are:",list(bcdict.keys()))
+            print("and btype %s is not in bdict: "%(btype))
             raise Exception(" check the boundary condition type ")
         self.type = btype
-        print("value: ",type(value.__class__.__name__),value.__class__.__name__)
+        print("debug commonproblem CommonBoundaryCondition value: ",type(value.__class__.__name__), value.__class__.__name__)
         #print "dbg bcdict ",bcdict.keys()
         #raw_input( "valuefffffffff     fff")
         #if value.__class__.__name__ == 'Head':
         #    print "valueeeee Head",value.__class__.__name__
         #else:
         #    print "valueeeef",value.__class__.__name__
-        if isinstance(value,ListType):
-            print(" value is of type ListType")
+        if isinstance(value, (ListType, TupleType)):
+            #print(" debug commonproblem CommonBoundaryCondition, value is of type ListType", type(value), value)
             for val in value:
-                if isinstance(val,Displacement):
-                    self.value = {"Displacement":val.getValue()}
+                print ("debug commonproblem CommonBoundaryCondition, debug val: ",val)
+                if isinstance(val, Displacement):
+                    self.value = {"Displacement": val.getValue()}
                     pass
-                elif isinstance(val,NormalForce):
+                elif isinstance(val, NormalForce):
                     if self.value != None:
                         self.value["NormalForce"] = val.getValue()
                         pass
                     else:
                         self.value = {"NormalForce":val.getValue()}
                         pass
-                elif isinstance(value,Head):
+                elif isinstance(val, (Head, Pressure)):
                     valeurs=toList (val)
                     for vale in valeurs:
                         if type(val) is TupleType:
@@ -160,14 +162,27 @@ class CommonBoundaryCondition:
                             checked = val
                             pass
                         pass
+                    print ("dbg commonproblem %s\n"%(val.__class__.__name__.lower()))
+                    if self.value != None:
+                        self.value [val.__class__.__name__.lower()] = val.getValue()
+                    else:
+                        self.value = {val.__class__.__name__.lower():val.getValue()}
                     pass
-
-        elif isinstance(value,Displacement):
-            print(" value is of type Displacement")
+                elif isinstance(val, Temperature):
+                    if self.value != None:
+                        self.value [val.__class__.__name__.lower()] = val.getValue()
+                    else:
+                        self.value = {val.__class__.__name__.lower(): val.getValue()}
+                    pass
+                pass
+            print ("debug commonproblem CommonBoundaryCondition: ", self.value)
+            pass
+        elif isinstance(value, Displacement):
+            #print("debug commonproblem  value is of type Displacement")
             self.value = {"Displacement":value.getValue()}
             pass
-        elif isinstance(value,NormalForce):
-            print(" value is of type NormalForce")
+        elif isinstance(value, NormalForce):
+            #print("debug commonproblem  value is of type NormalForce")
             if self.value != None:
                 self.value["NormalForce"] = value.getValue()
                 pass
@@ -176,10 +191,12 @@ class CommonBoundaryCondition:
                 pass
             pass
             
-        elif isinstance(value,(Head, Pressure)):
-            print(" value is of type Head")
+        elif isinstance(value, (Head, Pressure)):
+            print("debug commonproblem  value is of type Head or Pressure")
             from datamodel import Species
-            value=toList (value)
+            value = toList (value)
+            #print("debug commonproblem  value is of type Head or Pressure: ", value)
+            #print("debug commonproblem  value is of type Head or Pressure: ", bcdict)
             for val in value:
                 if type(val) is TupleType:
                     checked = val[0] 
@@ -203,7 +220,9 @@ class CommonBoundaryCondition:
                 print(value)
                 self.value_species, self.value_property = createList(value, PhysicalQuantity)
                 pass
-
+            self.value = {value[0].__class__.__name__.lower(): value[0].getValue()}
+        #print(" dbg commonproblem: valeur de self.value",self.value)
+        #raw_input("dbg commonproblem: CommonBoundaryCondition")
         if description == None:
             self.description = None
             pass
@@ -232,13 +251,13 @@ class CommonBoundaryCondition:
 
     def getDisplacementValue(self, displacement = None):
         """
-        get the displacement components, if any. Value can be a dictionary or a 
+        get the displacement components, if any. Value can be a dictionary 
         """
-        print("getDisplacementValue",self.value)
+        #print("getDisplacementValue",self.value)
         if type(self.value) == DictType:
             if "Displacement" in list(self.value.keys()):
                 return self.value["Displacement"]
-        elif isinstance(self.value,Displacement):
+        elif isinstance(self.value, Displacement):
             return self.value
         else:
             return None
@@ -251,7 +270,7 @@ class CommonBoundaryCondition:
             if "NormalForce" in list(self.value.keys()):
                 return self.value["NormalForce"]
             pass
-        elif isinstance(self.value,NormalForce):
+        elif isinstance(self.value, NormalForce):
             return self.value
         else:
             return None
@@ -260,6 +279,10 @@ class CommonBoundaryCondition:
         """
         get boundary conditions value
         """
+        print ("dbg commonproblem we use this get value")
+        print ("species: ",species)
+        print ("self.value_species:",self.value_species)
+        print ("self.value_property: ", self.value_property)
         return _getValue(species, self.value_species, self.value_property)
         
     getChemicalValue = getValue
@@ -272,14 +295,14 @@ class CommonBoundaryCondition:
 
     pass
 
-class CommonInitialCondition:
+class CommonInitialCondition(object):
     """
     Common InitialCondition definition. 
     It means we should use that class for any kind of problem, hydraulic, chemical/transport ...
     """    
     def __init__(self, body = None, value = None, description = None):
         """
-        domain can be a region of the domain, it could also be a simple body associated to .
+        domain can be a region of the domain, it could also be a simple body associated to.
         """
         if isInstance(body,[CartesianMesh, Body]):
             pass
@@ -289,7 +312,6 @@ class CommonInitialCondition:
         self.body   = body
         self.zone = body
         self.domain = body
-        
 #        if domain !=None:
 #            if isinstance(domain,Region):
 #                memberShip(domain.support,[CartesianMesh, Body])
@@ -301,32 +323,46 @@ class CommonInitialCondition:
         #
         #
         #
-        if not isinstance(value,(Head,Pressure)):
-            pass
-        else:
-            #print "dbg CommonInitialCondition",value
-            if type(value) == None:
-                self.value = Head(0.0,"m")
-                pass
-            elif isinstance(value,Head):
-                self.value = value
+        print (" the value for initial condition is: ", type(value), value, value.__class__.__name__)
+        #raw_input(__name__+": the value for initial condition is")
+        if isinstance(value, PhysicalQuantity): 
+            if not isinstance(value,(Head, Pressure)):
                 pass
             else:
-                raise Exception(" to modify, the pressure must be scaled to be entered as a head")
-        if not isinstance(value,(Displacement)):
-            pass
-        else:
-            #print "dbg CommonInitialCondition",value
-            if type(value) == None:
-                self.value = Displacement(0.0,"m")
-                pass
-            elif isinstance(value,Displacement):
-                self.value = value
+                #print "dbg CommonInitialCondition",value
+                if type(value) == None:
+                    self.value = Head(0.0,"m")
+                    pass
+                elif isinstance(value, Head):
+                    self.value = value
+                    pass
+                else:
+                    self.value = value
+                    #raise Exception(" to modify, the pressure must be scaled to be entered as a head")
+            if not isinstance(value, (Displacement)):
                 pass
             else:
-                raise Exception(" to modify, the pressure must be scaled to be entered as a head")
+                #print "dbg CommonInitialCondition",value
+                if type(value) == None:
+                    self.value = Displacement(0.0,"m")
+                    pass
+                elif isinstance(value,Displacement):
+                    self.value = value
+                    pass
+        elif type(value) in [ListType, TupleType]:
+            self.value = {}
+            for val in value:
+                if isinstance(val, (Head, Pressure, Displacement, Temperature)):
+                    print (" value val.__class__.__name__ ",val.__class__.__name__)
+                    self.value[val.__class__.__name__] = val
+                else:
+                    pass
+                    #raise Warning("check the way a value of type "+val.__class__.__name__+" can be treated")
+                pass
+                
         if description == None:
-            self.description = None
+            print(dir(body))
+            self.description = "CommonInitialCondition stretched over the body "
             pass
         else:
             self.description = description
@@ -335,10 +371,9 @@ class CommonInitialCondition:
 
     def getBody(self):
         """
-        to retrieve the domain
-        
+        To retrieve the domain
         """
-        if isInstance(self.body,Body):
+        if isInstance(self.body, Body):
             return self.body
         else:
             return None
@@ -366,6 +401,7 @@ class CommonInitialCondition:
         """
         get initial conditions Value
         """
+        print ("dbg commonproblem getValue: ",self.value)
         return self.value.getValue()
 
     def getZone(self):
@@ -373,7 +409,7 @@ class CommonInitialCondition:
         to retrieve the domain
         
         """
-        if isInstance(self.body,Body):
+        if isInstance(self.body, Body):
             return self.body
         else:
             return None
@@ -456,7 +492,7 @@ class CommonExpectedOutput:
     #
     def __init__(self, alltype, facetype, quantity, support = None,
                  name = None, unit = None, timeSpecification = None,
-                 where = None, unknown = [],save = 'memory',chemical = 0):
+                 where = None, unknown = [],save = 'memory', chemical = 0):
         if type(quantity) != StringType:
             raise TypeError(" the quantity must be a string ")
         alltypeupper = [q.upper() for q in alltype]

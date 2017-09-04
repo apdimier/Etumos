@@ -13,6 +13,9 @@ For the moment, two classes are created:
 """
 
 from __future__ import absolute_import
+
+from argparse import *
+
 from elmertools import *
 
 from exceptions import Exception

@@ -254,9 +254,12 @@ class BoundaryCondition ( CommonBoundaryCondition):
                                                                                             # case of a well
                                                                                             #
                     if type(bc[1]) == types.StringType:
-                        self.wellMassFlowBoundaryCondition = refindall(recompile(r'([xyzXYZ0-9.*/+-])'),bc[1])
+                        self.wellMassFlowBoundaryCondition = refindall(recompile(r'([$mfunction()ifelse{} ><_=xyzXYZ0-9.*/+-])'),bc[1])
                         pass
                     elif type(bc[1]) in [types.FloatType,types.IntType]:
+                        self.wellMassFlowBoundaryCondition = bc[1]
+                        pass
+                    elif type(bc[1]) is tuple:
                         self.wellMassFlowBoundaryCondition = bc[1]
                         pass
                     pass

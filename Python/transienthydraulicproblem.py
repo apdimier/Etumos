@@ -4,7 +4,7 @@ That module is the base of a Transient Hydraulic problem
 """
 # -- __init__
 from __future__ import absolute_import
-from PhysicalQuantities import HydraulicFlux, Pressure, PressureGradient
+from PhysicalQuantities import Head, HydraulicFlux, Pressure, PressureGradient, Temperature
 from generictools import makeDico
 from hydraulicproblem import HydraulicProblem
 from commonproblem import CommonBoundaryCondition
@@ -136,7 +136,7 @@ class BoundaryCondition(CommonBoundaryCondition):
         """Boundary condition initialisation with :
         - one or several boundaries 
         - a boundary condition type.
-          It can be Dirichlet,Neumann,Mixed or Flux
+          It can be Dirichlet, Neumann, Mixed or Flux.
         - a boundary condition value. Value depend of boundary condition type.
           If Dirichlet, value can be Pressure.
           If Neumann, value can be PressureGradient.
@@ -145,8 +145,8 @@ class BoundaryCondition(CommonBoundaryCondition):
         """
         from datamodel import Pressure, PressureGradient, PressureMixed
         from datamodel import HydraulicFlux
-        bcdict=makeDico(Dirichlet=[Pressure],Neumann=[PressureGradient],\
-                        Mixed=[PressureMixed],Flux=[HydraulicFlux])
+        bcdict = makeDico(Dirichlet=[Head, Pressure, Temperature], Neumann=[PressureGradient],\
+                         Mixed=[PressureMixed], Flux=[HydraulicFlux])
         CommonBoundaryCondition.__init__(self, boundary, type, value, bcdict, description)
         
 

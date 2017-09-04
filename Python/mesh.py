@@ -24,11 +24,13 @@ from generictools import Generic
 
 import subprocess
 
-import sys
-
 from os import path as osdotpath
 
-from types import ListType
+import sys
+
+from time import sleep,clock, gmtime, time
+
+from types import ListType, NoneType
 
 def MeshReader(fileName):
     readFile = open (fileName)
@@ -76,6 +78,7 @@ class Body(Generic):
         Generic.__init__(self)
         self.body = body
         self.bodyName = bodyName
+        self.name = bodyName
         self.physicalName = bodyName
         self.internalNodesAnz = internalNodesAnz
         self.dim = dim
@@ -90,7 +93,7 @@ class Body(Generic):
         #raw_input("class body ")
 
     def getBodyName(self):
-        return self.bodyName
+        return self.name
     
     def getElements(self):
 #        print "\nmesh dbg body getEntity function:",self.physicalName,"\n body number:",self.body[0],"\n entity list: ",len(self.body[1])
@@ -98,7 +101,7 @@ class Body(Generic):
         return self.body[1]
 
     def getName(self):
-        return self.bodyName
+        return self.name
     
     def getNodesNumber(self):
         return len(self.internalNodesAnz)
@@ -125,7 +128,7 @@ class Body(Generic):
         return self.body[1]
 
     def getPhysicalName(self):
-        return self.bodyName
+        return self.name
 
     def getSpaceDimension(self):
         #print("debug getSpaceDimension: ", self.dim, type(self.dim))
@@ -188,6 +191,8 @@ class DataGetter(Generic):
         print " vertex coordinates 1 ",self.vertexCoords[0]
         #raw_input("dbg vertex coordinates")
         self.internalNodesAnz = self.numVertices
+        print " self.internalNodesAnz ",self.internalNodesAnz
+        #raw_input("self.internalNodesAnz")
         print " call of _calcCellVertexIDs"
         self._calcCellVertexIDs()
         print " call of _calcCellVertexIDs over"
@@ -309,15 +314,15 @@ class DataGetter(Generic):
         print " mesh file name control: ",self.meshFileName[0:-4]
         #raw_input()
         print " vertex coordinates4 ",self.vertexCoords[0]
-        if not subprocess.os.path.exists(self.meshFileName[0:-4]):
+        if not subprocess.os.path.isdir(self.meshFileName[0:-4]):
             self._nodesReordering()
             pass
             #print "mesh dbg we reorder the file"
             #raw_input()
-        else:
-            if not subprocess.os.path.exists("commandfile.eg"):
-                raise Exception, " problem with the mesh handling"
-            pass
+        #else:
+        #    if not subprocess.os.path.exists("commandfile.eg"):
+        #        raise Exception, " problem with the mesh handling"
+        #    pass
         #
         #
         #
@@ -331,7 +336,7 @@ class DataGetter(Generic):
         #raw_input("dbg 281")
         return {'vertexCoords': self.vertexCoords},\
                 self.numElements, self.elementArray, self.physicalBodyNames,\
-                self.internalNodesAnz,self.internalNodesAnzList
+                self.internalNodesAnz, self.internalNodesAnzList
 #            'vertexCoords': vertexCoords,
 #            'faceVertexIDs': faceVertexIDs,
 #            'cellFaceIDs': cellFaceIDs
@@ -1282,7 +1287,7 @@ class Mesh(CommonMesh):
         self.elementArray       = elementArray
         self.physicalBodyNames = physicalBodyNames
         self.internalNodesAnzList = internalNodesAnzList
-        if vertexCoords == None:
+        if type(vertexCoords) == NoneType:
             self.dim = 2
             pass
         else:
@@ -1807,7 +1812,6 @@ class Mesh2D(Mesh):
         else:
             return map(lambda x: x[0], self.vertices['vertexCoords'].tolist())
             pass
-             
         
     def getNodesYCoordinates(self):
         #print self.vertices['vertexCoords']
@@ -1817,7 +1821,6 @@ class Mesh2D(Mesh):
         else:
             return map(lambda x: x[-1],self.vertices['vertexCoords'].tolist())
             pass
-            
     
     def getMeshType(self):
         return self.meshType
@@ -1902,7 +1905,6 @@ class Mesh3D(Mesh):
 
     getBodies = getPhysicalBodyNames
 
-
     def getSpaceDimensions(self):
         return self.spaceDimensions
         
@@ -1929,7 +1931,6 @@ class Mesh3D(Mesh):
         else:
             return map(lambda x: x[0], self.vertices['vertexCoords'].tolist())
             pass
-             
         
     def getNodesYCoordinates(self):
         #print self.vertices['vertexCoords']

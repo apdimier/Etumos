@@ -7,10 +7,12 @@
 from commonproblem import CommonBoundaryCondition
 from commonproblem import CommonExpectedOutput
 from material import Permeability, IntrinsicPermeability
-from PhysicalQuantities import Head, HeadGradient, HydraulicFlux, PressureGradient
+from PhysicalQuantities import Head, HeadGradient, HydraulicFlux, PressureGradient, Temperature
+from PhysicalProperties import SpecificHeat, Density
 from datamodel import Pressure
 from generictools import makeDict
 from hydraulicproblem import HydraulicProblem,\
+                             InitialCondition,\
                              Source,\
                              ZoneCondition
 
@@ -27,13 +29,15 @@ class SaturatedHydraulicProblem(HydraulicProblem):
                  regions,
                  boundaryConditions,
                  initialConditions = None,\
+                 temperature = None,\
                  simulationType = None,\
                  calculationTimes = None,\
-                 gravity=None,
-                 density=None,
-                 source=None,
-                 viscosity=None,
-                 outputs=None):
+                 gravity = None,
+                 density = None,
+                 source = None,
+                 intrinsicPermeability = None,\
+                 viscosity = None,
+                 outputs = None):
         """Problem initialisation with :
         - a name (string)
         - one or several regions (object Region or list of Region)
@@ -61,13 +65,15 @@ class SaturatedHydraulicProblem(HydraulicProblem):
                                   regions = regions,
                                   boundaryConditions = boundaryConditions,\
                                   initialConditions = initialConditions,\
+                                  temperature = temperature,\
                                   simulationType = simulationType,\
                                   calculationTimes = calculationTimes,\
                                   gravity = gravity,\
                                   density = density,\
+                                  intrinsicPermeability =intrinsicPermeability,\
                                   viscosity = viscosity,\
-                                  source=source,\
-                                  outputs=outputs)
+                                  source = source,\
+                                  outputs = outputs)
 
 
 
@@ -83,18 +89,23 @@ class BoundaryCondition(CommonBoundaryCondition):
         - one or several boundaries (a body or a structured mesh element)
         - a boundary condition type.
           It can be Dirichlet,Neumann or Flux
-        - a boundary condition value. Value depend of boundary condition type.
+        - a boundary condition value. Value depends of boundary condition type.
           If Dirichlet, value can be Head or Pressure.
           If Neumann, value can be HeadGradient or PressureGradient.
           If Flux, value can be HydraulicFlux.
         """
-        boundaryConditionDico = makeDict(Dirichlet=[Head,Pressure],
+        boundaryConditionDico = makeDict(Dirichlet=[Head, Pressure, Temperature],
                                          Neumann=[HeadGradient,PressureGradient],
                                          Flux=[HydraulicFlux])
 
         CommonBoundaryCondition.__init__(self,boundary, btype, value,\
                                          boundaryConditionDico, porosity = None, description = None)
 
+    def getValue(self):
+        """
+        get boundary conditions value
+        """
+        return self.value
 
 class ExpectedOutput(CommonExpectedOutput):
     """
@@ -126,4 +137,6 @@ class ExpectedOutput(CommonExpectedOutput):
                    'Flux', 'DarcyVelocity','TotalFlux',
                    'TotalInflux']
         facetype = ['DarcyVelocity']
-        CommonExpectedOutput.__init__(self,alltype,facetype,quantity, support, name , unit,None,where) 
+        CommonExpectedOutput.__init__(self,alltype,facetype,quantity, support, name , unit,None,where)
+
+

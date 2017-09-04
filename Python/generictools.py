@@ -26,13 +26,18 @@ except:
 #
 # The Python Imaging Library: This script can be used to change one image to another or remove an image.
 #
-import Image
+try:
+    import Image
+except:
+    from PIL import Image
 #
 # Return a list of paths matching a pathname pattern
 #
 from glob import glob
 
 from listtools import toList
+
+from os import getcwd, listdir, path, remove
 
 from platform import architecture, uname
 
@@ -41,6 +46,12 @@ from types import ListType,\
                   ModuleType
 
 import resource
+
+try:
+    import shutil
+except ImportError:
+    # python version should be 2.7 or newer ones.
+    pass
 
 import subprocess
 
@@ -175,7 +186,7 @@ class Generic(object):
         self.pyversion = pyversion
         pass
 
-    def getHelp(self,method = None):
+    def getHelp(self, method = None):
         """
         That function enables to get some help on the
         class and on relevant methods:        
@@ -189,7 +200,17 @@ class Generic(object):
             print(method.__doc__)
         pass
         
-
+    def clearVtkResults(self):
+        """
+        used to clear vtk files entailed in the current directory
+        """
+        name = getcwd()
+        if path.exists(path.join(name,"VTK")):
+            self.rmTree(path.join(name,"VTK"))
+            pass
+        vtkFiles = [fichier for fichier in listdir(os.getcwd()) if path.isfile(path.join(os.getcwd(), fichier))]
+        removeFile(vtkFile for vtkFile in vtkFiles)
+            
     def getModule(self):
         """
         To obtain the module name, the class is coming from
@@ -199,11 +220,29 @@ class Generic(object):
     def rawInput(self,arg):
         return input("dbg"+self.__class__.__name__ +" "+str(arg))
 
+    def removeFile(self, targetedFile):
+        """
+        Remove a file if it exists.
+        """
+        if path.exists(targetedFile):
+            remove(targetedFile)
+            pass
+
+    def rmTree(self, targetDirectory, ignoreErrors = False):
+        """
+        Used to remove files in the directory tree.
+        It wraps the shutil rmtree
+        """
+        if path.isdir(targetDirectory):
+            shutil.rmtree(targetDirectory, ignore_errors = ignoreErrors)
+        else:
+            self.removeFile(targetDirectory)                                                         # removing the file targetDirectory
+    
 class GenericModule(Generic):
     """
     That class is only used as a generic container for new modules
     
-    Modules are supposed by default to be transient
+    Modules are supposed to be transient by default 
     """
     def __init__(self) :
         """
@@ -231,6 +270,8 @@ class GenericModule(Generic):
         Used to determine the cpu time
         """
         return resource.getrusage(resource.RUSAGE_SELF)[0]
+        
+#    def clearResults(self,
 
 class GenericCTModule(GenericModule):
     """
@@ -387,7 +428,7 @@ def memberShip(x,liste,message = None):
         
 def makeDict(**options):
     """
-    Example: makeDico(a=1,b=2) -> {'a': 1, 'b': 2}
+    Example: makeDict(a=1,b=2) -> {'a': 1, 'b': 2}
     """
     return options
 
@@ -472,7 +513,21 @@ def reportAddendum(reportFile,listofOutputsTobeAdded,listOfComments = None):
     filenameToBeSaved = reportFile+"_pp.docx"
     document.save(filenameToBeSaved)
     return None
-
+    
+def keyAnalysis(ToolParameterAnalysisDictionary, key, value):
+    """
+    used to retrieve information from the user keywords
+    to set solver or scheme parameters
+    An example:
+    
+     "pressureSolverTolerance = value" becomes a tuple ("solver", "pressure", "Tolerance", value)
+     returned by this method.
+    """
+    dico = {};dicoKey = {}
+    if key:
+        return dico, dicoKey, value
+    else:
+        return None, key, value
 def _classesNameVerbose(liste):
     """returns a string made of the different classes names within a list,
        so it supposes each element has __name__ as attribute.

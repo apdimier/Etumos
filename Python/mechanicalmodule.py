@@ -125,14 +125,16 @@ class MechanicalModule:
             #print "boundary name ",boundaryCondition.name
             #print boundaryCondition.getSupport()
             bodyToConsider = boundaryCondition.boundary
-            print(bodyToConsider)
-            print("entity ", bodyToConsider.getEntity())
-            print(" type " , boundaryCondition.getType())
-            print(" name " , bodyToConsider.getName())
+            #print(bodyToConsider)
+            #print("entity ", bodyToConsider.getEntity())
+            #print(" type " , boundaryCondition.getType())
+            #print(" name " , bodyToConsider.getName())
             #print "material ",boundaryCondition.boundary.material
             #raw_input()
             dis = boundaryCondition.getDisplacementValue()
-            #print type(dis)
+            #print (dis)
+            #print (type(dis))
+            
             #raw_input("dis")
             nf = boundaryCondition.getNormalForceValue()
             ok = 0

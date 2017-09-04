@@ -44,7 +44,9 @@ from generictools import memberShip
 from types import FloatType,IntType,ListType,NoneType,StringType,TupleType
 
 from Scientific.NumberDict import NumberDict
-from Scientific import N
+
+from math import sin, cos,  tan, floor, ceil, pi
+
 from tensors import Tensor, IsotropicTensor,Tensor2D,Tensor3D
 import re, string
 from vector import V
@@ -112,6 +114,18 @@ class PhysicalQuantity:
     >>> str(freeze)
     '32.0 degF'
     >>> 
+    >>> cp = PhysicalQuantity('1 cal/g/K')  # heat capacity of water
+    >>> cp.convertToUnit('J/(g*K)')         # standard SI unit
+    >>> cp.value
+    
+    Basic SI units:
+    s    second
+    m    meter
+    kg   kilogram
+    A    ampere
+    K    kelvin
+    mol  mole
+    cd   candela
     """
 
     def __init__(self, *args):
@@ -147,7 +161,10 @@ class PhysicalQuantity:
             if match is None:
                 raise TypeError('No number found')
             self.value = string.atof(match.group(0))
-            self.unit = _findUnit(s[len(match.group(0)):])
+            if s[len(match.group(0)):] != "":
+                self.unit = _findUnit(s[len(match.group(0)):])
+            else:
+                raise Warning("check the way a physical quantity has to be defined : value_with_unit or value, unit")
             pass
     _number = re.compile('[+-]?[0-9]+(\\.[0-9]*)?([eE][+-]?[0-9]+)?')
 
@@ -351,21 +368,21 @@ class PhysicalQuantity:
 
     def sin(self):
         if self.unit.isAngle():
-            return N.sin(self.value * \
+            return sin(self.value * \
                              self.unit.conversionFactorTo(_unit_table['rad']))
         else:
             raise TypeError('Argument of sin must be an angle')
 
     def cos(self):
         if self.unit.isAngle():
-            return N.cos(self.value * \
+            return cos(self.value * \
                              self.unit.conversionFactorTo(_unit_table['rad']))
         else:
             raise TypeError('Argument of cos must be an angle')
 
     def tan(self):
         if self.unit.isAngle():
-            return N.tan(self.value * \
+            return tan(self.value * \
                              self.unit.conversionFactorTo(_unit_table['rad']))
         else:
             raise TypeError('Argument of tan must be an angle')
@@ -468,7 +485,7 @@ class PhysicalUnit:
                                 list(map(lambda x,p=other: x*p, self.powers)))
         if isinstance(other, float):
             inv_exp = 1./other
-            rounded = int(N.floor(inv_exp+0.5))
+            rounded = int(floor(inv_exp+0.5))
             if abs(inv_exp-rounded) < 1.e-10:
                 if reduce(lambda a, b: a and b,
                           list(map(lambda x, e=rounded: x%e == 0, self.powers))):
@@ -629,11 +646,10 @@ def _getDefault(unitname):
     return _findUnit(unitname)
 
 def _round(x):
-    if N.greater(x, 0.):
-        return N.floor(x)
+    if x > 0.:
+        return floor(x)
     else:
-        return N.ceil(x)
-
+        return ceil(x)
 
 def _convertValue (value, src_unit, target_unit):
     (factor, offset) = src_unit.conversionTupleTo(target_unit)
@@ -644,16 +660,29 @@ def _convertValue (value, src_unit, target_unit):
 
 _base_names = ['m', 'kg', 's', 'A', 'K', 'mol', 'cd', 'rad', 'sr']
 
-_base_units = [('m',   PhysicalUnit('m',   1.,    [1,0,0,0,0,0,0,0,0])),
-               ('g',   PhysicalUnit('g',   0.001, [0,1,0,0,0,0,0,0,0])),
-               ('s',   PhysicalUnit('s',   1.,    [0,0,1,0,0,0,0,0,0])),
-               ('A',   PhysicalUnit('A',   1.,    [0,0,0,1,0,0,0,0,0])),
-               ('K',   PhysicalUnit('K',   1.,    [0,0,0,0,1,0,0,0,0])),
-               ('mol', PhysicalUnit('mol', 1.,    [0,0,0,0,0,1,0,0,0])),
-               ('cd',  PhysicalUnit('cd',  1.,    [0,0,0,0,0,0,1,0,0])),
-               ('rad', PhysicalUnit('rad', 1.,    [0,0,0,0,0,0,0,1,0])),
-               ('sr',  PhysicalUnit('sr',  1.,    [0,0,0,0,0,0,0,0,1])),
-               ]
+_base_units = [('m',   PhysicalUnit('m',   1.,    [1,0,0,0,0,0,0,0,0])),                    # The metre, or meter (American spelling), symbol m, is the base unit of length in the International System of Units (SI).
+               ('g',   PhysicalUnit('g',   0.001, [0,1,0,0,0,0,0,0,0])),                    # The kilogram, symbol: kg, is the SI base unit of mass.
+               ('s',   PhysicalUnit('s',   1.,    [0,0,1,0,0,0,0,0,0])),                    # The second, symbol: s, is the SI base unit of time.
+               ('A',   PhysicalUnit('A',   1.,    [0,0,0,1,0,0,0,0,0])),                    # The ampere, SI unit symbol: A, is the SI unit of electric current
+               ('K',   PhysicalUnit('K',   1.,    [0,0,0,0,1,0,0,0,0])),                    # The kelvin, symbol K, is the SI unit of measure for temperature based upon an absolute scale.
+               ('mol', PhysicalUnit('mol', 1.,    [0,0,0,0,0,1,0,0,0])),                    # The mole, symbol: mol, is the SI unit for measurement of the amount of substance. 
+               ('cd',  PhysicalUnit('cd',  1.,    [0,0,0,0,0,0,1,0,0])),                    # The candela, symbol: cd, is the SI base unit of luminous intensity
+               ('rad', PhysicalUnit('rad', 1.,    [0,0,0,0,0,0,0,1,0])),                    # The radian is the standard unit of angular measure
+               ('sr',  PhysicalUnit('sr',  1.,    [0,0,0,0,0,0,0,0,1])),                    # The steradian (symbol: sr) or square radian[1][2] is the SI unit of solid angle.
+              ]
+#
+#_base_names = ['kg', 'm', 's', 'K', 'mol', 'A', 'cd', 'rad', 'sr']
+#_base_units = [
+#               ('g',   PhysicalUnit('g',   0.001, [0,1,0,0,0,0,0,0,0])),                    # The kilogram, symbol: kg, is the SI base unit of mass.
+#               ('m',   PhysicalUnit('m',   1.,    [1,0,0,0,0,0,0,0,0])),                    # The metre, or meter (American spelling), symbol m, is the base unit of length in the International System of Units (SI).
+#               ('s',   PhysicalUnit('s',   1.,    [0,0,1,0,0,0,0,0,0])),                    # The second, symbol: s, is the SI base unit of time.
+#               ('K',   PhysicalUnit('K',   1.,    [0,0,0,0,1,0,0,0,0])),                    # The kelvin, symbol K, is the SI unit of measure for temperature based upon an absolute scale.
+#               ('mol', PhysicalUnit('mol', 1.,    [0,0,0,0,0,1,0,0,0])),                    # The mole, symbol: mol, is the SI unit for measurement of the amount of substance. 
+#               ('A',   PhysicalUnit('A',   1.,    [0,0,0,1,0,0,0,0,0])),                    # The ampere, SI unit symbol: A, is the SI unit of electric current
+#               ('cd',  PhysicalUnit('cd',  1.,    [0,0,0,0,0,0,1,0,0])),                    # The candela, symbol: cd, is the SI base unit of luminous intensity
+#               ('rad', PhysicalUnit('rad', 1.,    [0,0,0,0,0,0,0,1,0])),                    # The radian is the standard unit of angular measure
+#               ('sr',  PhysicalUnit('sr',  1.,    [0,0,0,0,0,0,0,0,1])),                    # The steradian (symbol: sr) or square radian[1][2] is the SI unit of solid angle.
+#              ]
 
 _prefixes = [('Y',  1.e24),
              ('Z',  1.e21),
@@ -692,7 +721,9 @@ def _addUnit(name, unit, comment=''):
         _help.append((name, comment, unit))
         pass
     if type(unit) == type(''):
+        #print( "debug unit ",unit)
         unit = eval(unit, _unit_table)
+        #print ("debug1 unit ",unit)
         for cruft in ['__builtins__', '__args__']:
             try: del _unit_table[cruft]
             except: pass
@@ -716,7 +747,8 @@ _help.append('SI derived units; these automatically get prefixes:\n' + \
              '\n')
              
 
-_unit_table['kg'] = PhysicalUnit('kg',   1., [0,1,0,0,0,0,0,0,0])
+_unit_table['kg'] = PhysicalUnit('kg',   1., [0, 1, 0, 0, 0, 0, 0, 0, 0])
+#_unit_table['kg'] = PhysicalUnit('kg',   1., [1, 0, 0, 0, 0, 0, 0, 0, 0])
 
 _addUnit('Hz', '1/s', 'Hertz')
 _addUnit('N', 'm*kg/s**2', 'Newton')
@@ -746,7 +778,7 @@ for unit in _unit_table.keys():
 # Fundamental constants
 _help.append('Fundamental constants:')
 
-_unit_table['pi'] = N.pi
+_unit_table['pi'] = pi
 _addUnit('c', '299792458.*m/s', 'speed of light')
 _addUnit('mu0', '4.e-7*pi*N/A**2', 'permeability of vacuum')
 _addUnit('eps0', '1/mu0/c**2', 'permittivity of vacuum')
@@ -850,6 +882,8 @@ _addUnit('PressureGradient', 'Pa/m', 'Pa/m')
 
 _addUnit('molal','mol/kg','mol/kg')
 
+_unit_table['kg'] = PhysicalUnit('kg',   1., [0, 1, 0, 0, 0, 0, 0, 0, 0])
+#_unit_table['kg'] = PhysicalUnit('kg',   1., [1, 0, 0, 0, 0, 0, 0, 0, 0])
 _addUnit('Mass', 'kg', 'kg')
 _addUnit('Length', 'm', 'm')
 _addUnit('Surface', 'm**2', 'm**2')
@@ -874,6 +908,7 @@ _addUnit('NormalForce', 'kg/s**2/m', 'N')
 _addUnit('SpecificStorage', '1/s', '1/s')
 _addUnit('DecayRate', '1/s', '1/s')
 _addUnit('Density', 'kg/m**3', 'kg/m**3')
+
 _addUnit('Viscosity','kg/m/s','kg/m/s')
 _addUnit('Diffusion', 'm**2/s', 'm**2/s')
 _addUnit('ElectricPotential', 'V','V')
@@ -907,6 +942,7 @@ _addUnit('YoungModulus','N/m**2','N/m**2')
 _addUnit('Porosity','m/m','Porosity')
 _addUnit('Tortuosity','m/m','Tortuosity')
 _addUnit('Saturation','m/m','Saturation')
+#del _unit_table['kg']
 #_addUnit('PoissonRatio','m/m','PoissonRatio')
 
 
@@ -965,7 +1001,7 @@ class Scalar(PhysicalQuantity):
         - a function of scalar (LinearFunction, TimeTabulatedFunction,SpaceAndTimeTabulatedFunction, PolynomialFunction or TimeFunction)
         - field of scalar
     """
-    def __init__(self, value,unit = None):
+    def __init__(self, value, unit = None):
         if unit != None:
             #print (" debug unit ",unit)
             PhysicalQuantity.__init__(self, value, unit)

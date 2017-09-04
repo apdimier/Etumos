@@ -307,18 +307,18 @@ class Elmer(ElmerRoot):
                 pass
             pass
         elif self.problemType == "mechanical":
-            print(self.dirBCList1)
+            #print(self.dirBCList1)
             #
-            # boundary conditions are set at once through an appennd => [0]
+            # boundary conditions are set at once through an append => [0]
             #
-            for boundaryCondition in range(len(self.dirBCList1[0].keys())):
-                print(" body treatment ", self.dirBCList1[0][boundaryCondition])
-                sifFileW("Body %i\n"%( self.dirBCList1[0][boundaryCondition]["index"]))
-                sifFileW("  Equation = 1 \n")
-                sifFileW("  Material = %s\n"%(self.dirBCList1[0][boundaryCondition]["index"]))
+            #for boundaryCondition in range(len(self.dirBCList1[0].keys())):
+            #    print(" body treatment ", self.dirBCList1[0][boundaryCondition])
+            #    sifFileW("Body %i\n"%( self.dirBCList1[0][boundaryCondition]["index"]))
+            #    sifFileW("  Equation = 1 \n")
+             #   sifFileW("  Material = %s\n"%(self.dirBCList1[0][boundaryCondition]["index"]))
 
-                sifFileW("End\n\n")
-                pass
+             #   sifFileW("End\n\n")
+           #     pass
 #
 # to be modified
 #
@@ -363,14 +363,22 @@ class Elmer(ElmerRoot):
             sifFileW(" ! --------------------------------------------\n")
             sifFileW(" !Properties linked to the host rock simulation\n")
             sifFileW(" ! --------------------------------------------\n")
-            porosity = self.bodies[indb].getMaterial().getPorosity().value
-            sifFileW(" Density = Real %15.10e\n"%(self.waterDensity*porosity+2700*(1.-porosity)))
+            materiel = self.bodies[indb].getMaterial()
+            print (materiel)
+            print (dir(materiel))
+            porosity = materiel.getPorosity().value
+            #sifFileW(" Density = Real %15.10e\n"%(self.waterDensity*porosity+2700*(1.-porosity)))
+            if type(materiel.getDensity()) != NoneType:
+                sifFileW(" Density = Real %15.10e\n"%(self.waterDensity*porosity + materiel.getDensity().value*(1.-porosity)))
+                pass
+            else:
+                sifFileW(" Density = Real %15.10e\n"%(self.waterDensity*porosity+2700*(1.-porosity)))
             if self.problemType in ["chemicaltransport","thmc"]:
                 sifFileW(" Water Density = Real %15.10e\n"%(self.waterDensity))
                 pass
             if self.problemType in ["chemicaltransport", "mechanical", "elasticity","thmc"] :
                 if self.problemType in ["mechanical", "elasticity","thmc"] :
-                    sifFileW("! Solid Density = Real %15.10e\n"%(self.bodies[indb].getMaterial().getDensity().value))
+                    sifFileW("! Solid Density = Real %15.10e\n"%(materiel.getDensity().value))
                     pass
                 pass
             else:
@@ -384,16 +392,16 @@ class Elmer(ElmerRoot):
                 else:
                     sifFileW(" Variable Elasticity Modulus = Logical True\n")
                     pass
-                print(self.bodies[indb].getMaterial().youngModulus.value)
-                print(self.bodies[indb].getMaterial().poissonRatio.value)
+                print(materiel.youngModulus.value)
+                print(materiel.poissonRatio.value)
                 #raw_input()
-                if self.bodies[indb].getMaterial().youngModulus:
-                    sifFileW(" Youngs Modulus = Real %15.10e\n"%(self.bodies[indb].getMaterial().youngModulus.value))
+                if materiel.youngModulus:
+                    sifFileW(" Youngs Modulus = Real %15.10e\n"%(materiel.youngModulus.value))
                     pass
                 else:
                     raise Warning, " the young modulus is mandatory"
-                if self.bodies[indb].getMaterial().poissonRatio:
-                    sifFileW(" Poisson Ratio = Real %15.10e\n"%(self.bodies[indb].getMaterial().poissonRatio.value))
+                if materiel.poissonRatio:
+                    sifFileW(" Poisson Ratio = Real %15.10e\n"%(materiel.poissonRatio.value))
                     pass
                 else:
                     raise Warning, " the poisson ratio is mandatory"
@@ -403,14 +411,14 @@ class Elmer(ElmerRoot):
                                                                                             #       specificHeatCapacity and heatConductivity
                                                                                             #
             if self.temperature==True:
-                if self.bodies[indb].getMaterial().getSpecificHeat() :
-                    specificHeatCapacity    = self.bodies[indb].getMaterial().getSpecificHeat().value
+                if materiel.getSpecificHeat() :
+                    specificHeatCapacity    = materiel.getSpecificHeat().value
                     sifFileW(" Heat Capacity = Real %15.10e\n"%(specificHeatCapacity))
                     pass
                 else :
                     raise Exception("As the temperature mode is used, you have to give a heat capacity")
-                if self.bodies[indb].getMaterial().getThermalConductivity() :
-                    heatConductivity        = self.bodies[indb].getMaterial().getThermalConductivity().value.value
+                if materiel.getThermalConductivity() :
+                    heatConductivity        = materiel.getThermalConductivity().value.value
                     sifFileW(" Heat Conductivity = Real %15.10e\n"%(heatConductivity))
                     pass
                 else :
@@ -432,8 +440,8 @@ class Elmer(ElmerRoot):
                 #
                 # viscosity
                 #
-                if self.bodies[indb].getMaterial().getViscosity() != None:
-                    viscosity       = self.bodies[indb].getMaterial().getViscosity().value
+                if materiel.getViscosity() != None:
+                    viscosity       = materiel.getViscosity().value
                     sifFileW(" Viscosity         = Real %15.10e\n"%(viscosity))
                     pass
                 pass
@@ -441,17 +449,17 @@ class Elmer(ElmerRoot):
                                                                                             #       computed velocity: saturated flow
                                                                                             #
             if "computed" in str(self.darcyVelocity) and self.saturation == "saturated":
-                if self.bodies[indb].getMaterial().getViscosity() != None:
-                    viscosity       = self.bodies[indb].getMaterial().getViscosity().value
+                if materiel.getViscosity() != None:
+                    viscosity       = materiel.getViscosity().value
                     sifFileW(" Viscosity         = Real %15.10e\n"%(viscosity))
                     pass
-                #print self.bodies[indb].getMaterial().getHydraulicConductivity()
-                if type(self.bodies[indb].getMaterial().getHydraulicConductivity()) != NoneType:
-                    sifFileW(" Hydr Conductivity = Real %15.10e\n"%(self.bodies[indb].getMaterial().getHydraulicConductivity().value.value))
-                    sifFileW(" Saturated Hydraulic Conductivity = Real %15.10e\n"%(self.bodies[indb].getMaterial().getHydraulicConductivity().value.value))
+                #print materiel.getHydraulicConductivity()
+                if type(materiel.getHydraulicConductivity()) != NoneType:
+                    sifFileW(" Hydr Conductivity = Real %15.10e\n"%(materiel.getHydraulicConductivity().value.value))
+                    sifFileW(" Saturated Hydraulic Conductivity = Real %15.10e\n"%(materiel.getHydraulicConductivity().value.value))
                     pass
-                if self.bodies[indb].getMaterial().getSpecificStorage() != None:
-                    sifFileW(" Specific Storage = Real %15.10e\n"%(self.bodies[indb].getMaterial().getSpecificStorage().value))
+                if materiel.getSpecificStorage() != None:
+                    sifFileW(" Specific Storage = Real %15.10e\n"%(materiel.getSpecificStorage().value))
                     pass
                 pass
             elif "computed" in str("self.darcyVelocity") and self.saturation == "undersaturated":
@@ -466,21 +474,21 @@ class Elmer(ElmerRoot):
                                                                                             # we write the diff.disp tensor
                                                                                             #
                 for inds in range(tempcont):
-                    effecDiff       = self.bodies[indb].getMaterial().getEffectiveDiffusion()
+                    effecDiff       = materiel.getEffectiveDiffusion()
                     if (type(effecDiff) not in [NoneType]):
                         effecDiff       = effecDiff.value.value
                         pass
                     else:
                         effecDiff       = 0.0
                         pass
-                    porosity        = self.bodies[indb].getMaterial().getPorosity()
+                    porosity        = materiel.getPorosity()
                     if (porosity not in [NoneType]):
                         porosity        = porosity.value
                         pass
                     else:
                         porosity        = 1.0
                         pass
-                    longitudinalDispersivity = self.bodies[indb].getMaterial().getKinematicDispersion()
+                    longitudinalDispersivity = materiel.getKinematicDispersion()
                     if (type(longitudinalDispersivity) not in [NoneType]):
                         longDisp        = longitudinalDispersivity.value[0]
                         tranDisp        = longitudinalDispersivity.value[1]
@@ -489,20 +497,19 @@ class Elmer(ElmerRoot):
                         longDisp        = 0.0
                         tranDisp        = 0.0
                         pass
-                    v = None
+                    velocity = None
                     if isinstance(self.darcyVelocity,Velocity):
-                        v = self.darcyVelocity.getValue()
-                        print(" v ",v)
+                        velocity = self.darcyVelocity.getValue()
                         pass
                     elif isinstance(self.darcyVelocity,StringType):
                         pass
-                    if type(v)!=type(None):
-                        if (len(filter(lambda x: type(x)==FloatType, v)) ==3):
-                            norm = (v[0]**2+v[1]**2+v[2]**2)**0.5
+                    if type(velocity)!=type(None):
+                        if (len(filter(lambda x: type(x)==FloatType, velocity)) ==3):
+                            norm = (velocity[0]**2+velocity[1]**2+velocity[2]**2)**0.5
                             if norm > 0:
-                                darcy_x = v[0]**2/norm
-                                darcy_y = v[1]**2/norm
-                                darcy_z = v[2]**2/norm
+                                darcy_x = velocity[0]**2/norm
+                                darcy_y = velocity[1]**2/norm
+                                darcy_z = velocity[2]**2/norm
                                 pass
                             else:
                                 darcy_x = 0.0
@@ -560,43 +567,46 @@ class Elmer(ElmerRoot):
                                                                                             # We treat the velocity, see page 22
                                                                                             #
             if self.advConv == "Constant" and not self.parameterDico["vapor"]:
-                v = self.darcyVelocity.getValue()
-                sifFileW(" Convection Velocity 1 = %e\n"%v[0])
-                sifFileW(" Convection Velocity 2 = %e\n"%v[1])
-                sifFileW(" Convection Velocity 3 = %e\n\n"%v[2])
+                velocity = self.darcyVelocity.getValue()
+                sifFileW(" Convection Velocity 1 = %e\n"%velocity[0])
+                sifFileW(" Convection Velocity 2 = %e\n"%velocity[1])
+                sifFileW(" Convection Velocity 3 = %e\n\n"%velocity[2])
                 pass
                                                                                             #
                                                                                             # the velocity is piecewise constant;
                                                                                             # introduced as a matc function or as a float if constant
                                                                                             #
             elif self.advConv == "PiecewiseConstant" and  not self.parameterDico["vapor"]:
-                v = self.darcyVelocity.getValue()
-                if (type(v[0]) == StringType):
-                    if (indb==0):
-                        sifFileW("%s"%(v[0]))
+                velocity = self.darcyVelocity.getValue()
+                if (type(velocity[0]) == StringType):
+                    if (indb==0 and "$" in velocity[0]):
+                        sifFileW("%s"%(velocity[0]))
+                        sifFileW(" Convection Velocity 1 = Variable time\n    Real MATC \"ux(tx)\"\n")
                         pass
-                    sifFileW(" Convection Velocity 1 = Variable Time \n  Real MATC \"ux(tx)\"\n")
+                    else:
+                        sifFileW(" Convection Velocity 1 = Variable time\n    Real MATC \"%s\"\n"%(velocity[0]))
+                        pass
                     pass
                 else:
-                    sifFileW(" Convection Velocity 1 = %e\n"%v[0])
+                    sifFileW(" Convection Velocity 1 = %e\n"%velocity[0])
                     pass
-                if (type(v[1]) == StringType):
+                if (type(velocity[1]) == StringType):
                     if (indb==0):
-                        sifFileW("%s"%(v[1]))
+                        sifFileW("%s"%(velocity[1]))
                         pass
-                    sifFileW(" Convection Velocity 2 = Variable Time \n  Real MATC \"uy(tx)\"\n")
+                    sifFileW(" Convection Velocity 2 = Variable time;Real MATC \"uy(tx)\"\n")
                     pass
                 else:
-                    sifFileW(" Convection Velocity 2 = %e\n"%v[1])
+                    sifFileW(" Convection Velocity 2 = %e\n"%velocity[1])
                     pass
-                if (type(v[2]) == StringType):
+                if (type(velocity[2]) == StringType):
                     if (indb==0):
-                        sifFileW("%s"%(v[2]))
+                        sifFileW("%s"%(velocity[2]))
                         pass
-                    sifFileW(" Convection Velocity 3 = Variable Time \n  Real MATC \"uz(tx)\"\n")
+                    sifFileW(" Convection Velocity 3 = Variable time;Real MATC \"uz(tx)\"\n")
                     pass
                 else:
-                    sifFileW(" Convection Velocity 3 = %e\n"%v[2])
+                    sifFileW(" Convection Velocity 3 = %e\n"%velocity[2])
                     pass
                 pass
                                                                                             #
@@ -813,6 +823,9 @@ class Elmer(ElmerRoot):
             sifFileW("  Convection = %s\n"%"No")
 
         sifFileW("  Concentration Units = Absolute Mass\n")
+        if self.problemType in ["thmcproblem"]:
+            sifFileW("  Calculate Stresses = True\n")
+            pass
 
 #        if self.temperature == None:
 #            sifFileW("  ActiveSolvers(1) = 1\n")
@@ -1056,9 +1069,10 @@ class Elmer(ElmerRoot):
             sifFileW("Solver %i\n"%(ind))
             sifFileW("  Equation = Linear Elasticity\n")
 
-            sifFileW("  Procedure = \"LinearElasticityTimeStep\" \"LinearElasticityTimeStepSolver\"\n")
+            sifFileW("  Procedure = \"StressTimeStep\" \"StressTimeStepSolver\"\n")
             sifFileW("  Variable = Displacement\n")
-            sifFileW("  Variable DOFs = 2\n\n")
+            #sifFileW("  Variable DOFs = 2\n\n")
+            sifFileW("  Variable = -dofs %s Displacement\n\n"%self.mesh.getDimensionString()[0])
             sifFileW("  Exec Solver = Always\n")
             sifFileW("  Calculate Stresses = TRUE\n")
             #print "self.mechanicsParameterDico.keys(): ",self.mechanicsParameterDico.keys()
@@ -1343,14 +1357,14 @@ class Elmer(ElmerRoot):
             sifFileW("  Linear System Preconditioning = %s\n"%self.mechanicsParameterDico["Linear System Preconditioning"])
             sifFileW("  Linear System Abort Not Converged = False\n")
             sifFileW("  Linear System Precondition Recompute = %s\n"%1)
-            sifFileW("  Linear System Residual Output = %s\n"%(str(self.mechanicsParameterDico["Linear System Residual Output"])))
             if "Linear System ILUT Tolerance" in self.mechanicsParameterDico.keys():
-                sifFileW("Linear System ILUT Tolerance = %s\n"
+                sifFileW("  Linear System ILUT Tolerance = %e\n"
                          %self.mechanicsParameterDico["Linear System ILUT Tolerance"])
                 pass
             else:
                 sifFileW("  Linear System ILUT Tolerance = %e\n"%1.e-3)
                 pass
+            sifFileW("  Linear System Residual Output = %s\n"%(str(self.mechanicsParameterDico["Linear System Residual Output"])))
 
         elif self.mechanicsParameterDico["algebraicResolution"] == "Multigrid":
             raise Exception("Multigrid does not work for the moment.\nError:: LoadMesh: Unable to load mesh: ./mgrid2")
@@ -1455,10 +1469,13 @@ class Elmer(ElmerRoot):
                                                                                             #    Dirichlet or Flux
                                                                                             #
         if problemType in ["elasticity", "mechanical", "mechanicalproblem"]:
-            print("1037 self.dirBCList1: ",self.dirBCList1[0][0])
+            #print("1037 self.dirBCList1: ",self.dirBCList1[0][0])
             for dirBC in self.dirBCList1[0].keys():
-                print("index: ",self.dirBCList1[0][dirBC]["index"])
-                print("name: ", self.dirBCList1[0][dirBC]["name"])
+                #print("index: ",self.dirBCList1[0][dirBC]["index"])
+                #print("name: ", self.dirBCList1[0][dirBC]["name"])
+                #print (self.dirBCList1[0][dirBC])
+                if self.dirBCList1[0][dirBC]["Normalforce"] != None: print (": ", self.dirBCList1[0][dirBC]["Displacement"])
+                #raw_input("Displacement")
                 sifFileW("Boundary Condition %i ! %s\n"%(self.dirBCList1[0][dirBC]["index"], self.dirBCList1[0][dirBC]["name"]))
                 sifFileW("  Target Boundaries (1) = %s\n"%str(self.dirBCList1[0][dirBC]["index"]))
                 if self.dirBCList1[0][dirBC]["description"] != None:
@@ -1486,6 +1503,9 @@ class Elmer(ElmerRoot):
                 #print(dirBC)
                 #print(" borehole",self.parameterDico["oneDimensionalBoreHole"])
                 #raw_input(" elmer dbg dirBC")
+                #print ("dirBC.keys() : ",dirBC["name"], dirBC.keys())
+                if "Displacement" in dirBC.keys(): print ("Displacement: ",dirBC["Displacement"])
+                #raw_input("Displacement %s"%(dirBC["name"]))
                 inds = 0
                                                                                             #
                                                                                             # Dirichlet
@@ -1509,18 +1529,18 @@ class Elmer(ElmerRoot):
                         sifFileW(" Normal Force = Real %e\n"%(dirBC["normalforce"].value))
                         pass
                     if dirBC.has_key("Displacement"):
-                        if dirBC["Displacement"] != None:
-                            print(" displacement ", dirBC["Displacement"])
-                            ind = 1
-                            for component in  dirBC["Displacement"]:
-                                sifFileW(" Displacement %i = Real %e\n"%(ind,component))
-                                ind+=1
+                        if dirBC["Displacement"]:
+                            print(" Displacement ", dirBC["Displacement"])
+                            displacement = dirBC["Displacement"]
+                            for ind in range(len(displacement.value)):
+                                sifFileW("  Displacement %i = Real %e\n"%(ind+1, displacement.value[ind]))
                                 pass
                             pass
                         pass
                     conc = dirBC["conc"]
                                                                                             #
                                                                                             # Dirichlet boundary conditions on species
+                                                                                            #
                     if dirBC.has_key("timeVariation"):
                         if (dirBC["timeVariation"] not in (None,[])):
                             print(" timeVariation",dirBC["timeVariation"])
@@ -1602,21 +1622,51 @@ class Elmer(ElmerRoot):
                             else:
                                 raise Exception("%s should be a float"%("enthalpyBoundaryCondition"))
                             pass
+                        print (dirBC)
+                        #raw_input("which dirBC")
                         if dirBC.has_key("wellMassFlowBoundaryCondition"):
+                            print("elmerdbg wellMassFlowBoundaryCondition : ",dirBC)
+                            #raw_input(" we are here ")
                             sifFileW("! mass flow\n")
                             if (type(dirBC["wellMassFlowBoundaryCondition"]) in [FloatType, IntType]):
                                 sifFileW("  %s = Real %e\n"%("WMassFlow", dirBC["wellMassFlowBoundaryCondition"]))
                                 pass
+                            elif (type(dirBC["wellMassFlowBoundaryCondition"]) is str):
+                                sifFileW("  %s = Real %s\n"%("WMassFlow", dirBC["wellMassFlowBoundaryCondition"]))
+                                pass
+                            elif (type(dirBC["wellMassFlowBoundaryCondition"]) is list):
+                                wellMassFlowBoundaryCondition = "".join(argument for argument in dirBC["wellMassFlowBoundaryCondition"])
+                                if "function" in wellMassFlowBoundaryCondition:
+                                    sifFileW("%s \n"%(wellMassFlowBoundaryCondition))
+                                    sifFileW("  %s\n"%("WMassFlow = Variable Time"))
+                                    sifFileW("  Real MATC \"mx(tx(0))\"\n")
+                                    pass
+                                else:
+                                    sifFileW("  %s\n"%("WMassFlow = Variable Time"))
+                                    sifFileW("  Real MATC \"%s\"\n"%(wellMassFlowBoundaryCondition))
+                                    pass
+                                pass
+                            elif (type(dirBC["wellMassFlowBoundaryCondition"]) is tuple):
+                                sifFileW("  %s = Real Procedure \"massflowrateboundarycondition\" \"getmassflowrateboundarycondition\"\n"%("WMassFlow"))
+                                print (" we handle the tuple")
                             else:
-                                raise Exception("%s should be a float"%("enthalpyBoundaryCondition"))
+                                #print dirBC
+                                #print ("wellMassFlowBoundaryCondition:",dirBC["wellMassFlowBoundaryCondition"])
+                                #print (type(dirBC["wellMassFlowBoundaryCondition"]))
+                                #raw_input()
+                                #print "wellMassFlowBoundaryCondition:",dirBC["wellMassFlowBoundaryCondition"]
+                                #print "dirBC[\"wellMassFlowBoundaryCondition\"]: ", dirBC["wellMassFlowBoundaryCondition"]
+                                #print "type of dirBC[\"wellMassFlowBoundaryCondition\"] is : ",type(dirBC["wellMassFlowBoundaryCondition"])
+                                raise Exception("%s should be a float or a string"%("wellMassFlowBoundaryCondition"))
                             pass
+                            #raw_input("out of the control ")
                         if dirBC.has_key("wellPressureBoundaryCondition"):
                             sifFileW("! pressure\n")
                             if (type(dirBC["wellPressureBoundaryCondition"]) in [FloatType, IntType]):
                                 sifFileW("  %s = Real %e\n"%("Pressure", dirBC["wellPressureBoundaryCondition"]))
                                 pass
                             else:
-                                raise Exception("%s should be a float"%("enthalpyBoundaryCondition"))
+                                raise Exception("%s should be a float"%("wellPressureBoundaryCondition"))
                             pass
                         pass
                     if "computed" in str(self.advConv.lower()):
@@ -1727,10 +1777,10 @@ class Elmer(ElmerRoot):
 
                 if self.problemType == "thmc":
                     print(dirIC)
-                    if dirIC.has_key("displacement"):
-                        for ind in range(len(dirIC["displacement"].value)):
+                    if dirIC.has_key("Displacement"):
+                        for ind in range(len(dirIC["Displacement"].value)):
                             sifFileW("  Displacement %i = Real %e\n"\
-                                    %(ind+1,dirIC["displacement"].value[ind]))
+                                    %(ind+1,dirIC["Displacement"].value[ind]))
                             pass
                         pass
                     pass
@@ -1841,8 +1891,8 @@ class Elmer(ElmerRoot):
             pass
         # the following parameters are irrelevant, they are treated via the coupling algorithm
         sifFileW("  Solver Input File = %s\n"%(self.sifFileName))
-        sifFileW("  Timestep Sizes = 100\n")
-        sifFileW("  Timestep Intervals = 5\n\n")
+        sifFileW("  Timestep Sizes = 50\n")
+        sifFileW("  Timestep Intervals = 10\n\n")
 
         sifFileW("  Output Intervals = 1\n")
         sifFileW("!  Lumped Mass Matrix = "+self.parameterDico["Lumped Mass Matrix"]+"\n")
@@ -1907,7 +1957,8 @@ class Elmer(ElmerRoot):
         """
 #        self.dirICList.append(initialCondition)
         self.dirICList.append(dicList)
-        #print dicList
+        #print (dicList)
+        #print (" longueur de self.dirICList: %i"%(len(self.dirICList)))
         #raw_input(" azry")
         return None
 
@@ -1916,10 +1967,11 @@ class Elmer(ElmerRoot):
         To set the Darcy velocity for elmer.
         A computed Darcy velocity can be inserted through the "read" option
         """
-        print("dbg set Darcy velocity ",darcyVelocity)
-        #raw_input("set Darcy velocity")
+        #print("dbg set Darcy velocity ",darcyVelocity)
+        #if isinstance(darcyVelocity, Velocity):
+        #    print ("darcy velocity ");print (darcyVelocity.__class__.__name__);raw_input("set Darcy velocity")
         norm = 0.
-        if isinstance(darcyVelocity,Velocity):
+        if isinstance(darcyVelocity, Velocity):
                                                                                             #
                                                                                             # we have to distinguish between a constant and a piecewise constant velocity
                                                                                             # For a piecewise constant velocity, the only dependance can be time.
@@ -1933,7 +1985,7 @@ class Elmer(ElmerRoot):
             if self.advConv != "PiecewiseConstant":
                 if norm>0:
                     self.advConv = "Constant"
-        elif isinstance(darcyVelocity,StringType):
+        elif isinstance(darcyVelocity, StringType):
             if darcyVelocity.lower() == "read":
                 self.advConv = "Read"
             elif darcyVelocity.lower() == "rcomputed":
@@ -1945,7 +1997,7 @@ class Elmer(ElmerRoot):
                 #print self.chargeParameterDico
                 #raw_input("we set the darcy velocity as computed")
                 self.advConv = "Computed"
-        #raw_input(" we have already defined the velocity ")
+        #print (self.darcyVelocity);raw_input(" we have already defined the velocity ")
         self.darcyVelocity = darcyVelocity
 
     def setInitBody(self,initialisedBody):
@@ -1958,13 +2010,13 @@ class Elmer(ElmerRoot):
 
     def setInstance(self, instance):
         """
-    a control parameter of the instance
+        a control parameter of the instance
         """
         #print "  elmer dbg instance ",self.instance
         self.instance = instance
         return None
 
-    def setMesh(self,  mesh):
+    def setMesh(self, mesh):
         """
     to set or reset the name or the mesh
         """
@@ -1989,9 +2041,9 @@ class Elmer(ElmerRoot):
         """
         Here the parameters of the algebraic solver for the charge are introduced
         """
-        print(solverparameterdict.items())
+        #print(solverparameterdict.items())
         for key, value in solverparameterdict.items():
-            print("setChargeParameter key, value ",key, value)
+            #print("setChargeParameter key, value ",key, value)
             if key == "preconditioner":
                 self.chargeParameterDico['Linear System Preconditioning'] = value
             if key == "steadyStateConvergenceTolerance":
@@ -2150,7 +2202,7 @@ class Elmer(ElmerRoot):
                 self.parameterDico["vapor"] = value
                 if self.parameterDico["vapor"]:
                     self.parameterDico["onePhaseBoreHole"] = False
-                    print(" debug ok ? ",self.parameterDico["onePhaseBoreHole"],self.parameterDico["vapor"])
+                    #print(" debug ok ? ",self.parameterDico["onePhaseBoreHole"],self.parameterDico["vapor"])
                     self.setWellboreSolverDefaults()
                     #raw_input()
                     pass
@@ -2342,17 +2394,20 @@ class Elmer(ElmerRoot):
                 self.zonePerCellDico[cell] = zoneNumber
         return
 
-    def advanceTime(self):
+    def advanceTime(self, simulatedTime):
         """
-        used to update time
+        used to update the simulated time, 
+        a new time step has been completed.
         """
         if self.instance!=2:
-            self.elmso.advanceTime()
+            self.elmso.advanceTime(simulatedTime)
+            print ("we called elmer with %e "%(simulatedTime))
+            #raw_input("within elmer.py")
         else:
-            self.essaig.advanceTime()
+            self.essaig.advanceTime(simulatedTime)
         return None
 
-    def setTimeSteppingMethod(self,tSM):
+    def setTimeSteppingMethod(self, tSM):
         """
         Used to set the time step
         """
@@ -2360,7 +2415,7 @@ class Elmer(ElmerRoot):
             if tSM in ["Explicit Euler","BDF","Crank-Nicholson"]:
                 self.parameterDico["Timestepping Method"] = tSM
 
-    def setTimeStep(self,deltat):
+    def setTimeStep(self, deltat):
         """
         used to update the time step
         """
@@ -2858,7 +2913,7 @@ class Elmer(ElmerRoot):
 
     #---------------------------------------------------------------------------
     #---------------------------------------------------------------------------
-    def vtkMeshFile(self,mesh,fileType = None):
+    def vtkMeshFile(self, mesh, fileType = None):
         """
     vtk representation in the legacy format of a mesh file :
 
@@ -2873,8 +2928,8 @@ class Elmer(ElmerRoot):
         LOOKUP_TABLE default
 
         """
-        self.vtkMeshFile = 'mesh.vtk'
-        self.file_mesh=open(self.vtkMeshFile,'w')
+        self.vtkMeshFileName = 'mesh.vtk'
+        self.file_mesh=open(self.vtkMeshFileName,'w')
         self.file_mesh.write("%s\n"%("# vtk DataFile Version 2.0"))
         self.file_mesh.write("%s\n"%("vtk output"))
         self.file_mesh.write("%s\n"%("ASCII"))
@@ -3525,7 +3580,8 @@ def _writeTwoPhasesHeatLoadParameters(sifFile, materialId, bodyName = None):
     # the file has not to be read for each material : has to be corrected
     #
     wellboreDataDict = wellBoreDataRead(fileName, onePhase = False)
-    print (wellboreDataDict)
+    #print (" wellboredatadict ", wellboreDataDict)
+    #print (" bodyName ", bodyName);raw_input("wellboredatadict")
     #raw_input("_writeTwoPhasesHeatLoadParameters: "+str(materialId) +" "+ str(bodyName))
     if bodyName == None:
         materialKey = "Material"+str(materialId)

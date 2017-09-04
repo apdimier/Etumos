@@ -50,7 +50,6 @@ from PhysicalProperties import AquiferProperty,\
                                SpecificHeatCapacity,\
                                SpecificStorage,\
                                ThermalConductivity,\
-                               ThermalConductivity,\
                                Tortuosity,\
                                Viscosity,\
                                YoungModulus
@@ -173,6 +172,7 @@ class Material(Generic):
             'sorptionlaw':SorptionLaw,
             'specificstorage':SpecificStorage,
             'specificheat':SpecificHeat,
+            'specificheatcapacity':SpecificHeatCapacity,
             'thermalconductivity':ThermalConductivity,
             'thermalconductivitylaw':ThermalconductivityLaw,
             'tortuosity':Tortuosity,
@@ -373,7 +373,7 @@ class Material(Generic):
             raise Exception
         return
 
-    def setProperty(self,keyword,property):
+    def setProperty(self, keyword, property):
         """
         To set a material property
         """

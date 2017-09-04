@@ -16,7 +16,7 @@ from tensors import IsotropicTensor
 from types import FloatType, IntType, NoneType
 import six
 
-class AquiferProperty:
+class AquiferProperty(object):
     """
     class enabling to treat dimensionless aquifer properties
     """
@@ -75,7 +75,7 @@ class AquiferPropertyScalar(AquiferProperty):
         self.value = value
         return
 
-class SolidProperty:
+class SolidProperty(object):
     """
     class enabling to treat rock properties
     A dimension can be introduced like for expansivity or compressibility
@@ -282,7 +282,7 @@ class SolidDensity(Scalar):
     def __init__(self, value=None, unit=None):
         default_unit = _findUnit('Density')
         if unit == None:
-            Scalar.__init__(self, value,unit=default_unit)
+            Scalar.__init__(self, value, unit = default_unit)
             pass
         else:
             Scalar.__init__(self, value,unit)
@@ -301,7 +301,7 @@ class SpecificHeatCapacity(Scalar):
     def __init__(self, value=None, unit=None):
         default_unit = _findUnit("SpecificHeatCapacity")
         default_unit = 'J/g/K'
-        Scalar.__init__(self, value,unit=default_unit)
+        Scalar.__init__(self, value, unit=default_unit)
         pass
     default_unit = _findUnit("SpecificHeatCapacity")
     
@@ -591,3 +591,10 @@ class YoungModulus(Scalar):
     its unit is therefore the one of a pressure.
     """
     default_unit = _findUnit('YoungModulus')
+#waterHeatCapacity = SpecificHeat('4180 J/
+# properties of water at 25 Celcius degree
+#
+
+waterDensity = Density('997.1 kg/m**3')
+waterHeatCapacity = SpecificHeat(value = 4187, unit='J/kg/K')
+

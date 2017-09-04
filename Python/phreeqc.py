@@ -374,6 +374,7 @@ def aqueousSolution(state,iAnf,iEnd,inFile):
     The SI unit for molality is mol/kg; the solvent being here water.
     """
     _keywordWriter(inFile,"SOLUTION",iAnf,iEnd,state.name)
+    #inFile.write("#debug line %i %i "%(iAnf,iEnd))
     aqueousSol = state.aqueousSolution
     if aqueousSol.temperature == None:
         form = "   temp %15.10e\n"
@@ -860,8 +861,8 @@ def gasSolution(chemicalState,iAnf,iEnd,inFile):
 #
     solutionGasPhase = chemicalState.gasPhase
     print("degug ",solutionGasPhase.__class__.__name__)
-    print("degug ",solutionGasPhase.fixedpressure)
-    print("degug ",solutionGasPhase.pressure)
+    #print("degug ",solutionGasPhase.fixedpressure)
+    #print("degug ",solutionGasPhase.pressure)
     if solutionGasPhase.pressure == None and solutionGasPhase.fixedpressure:
         inFile.write("        -fixed_pressure\n"\
                      "        -pressure 1.0 # the pressure is set to the atmospheric pressure\n"\
@@ -1015,6 +1016,7 @@ class Phreeqc:
             pass
 
         self.internalNodesNumber = internalNodes
+        self.activeCellsNumber = internalNodes
         self.cellPorosity = [1.0]*self.internalNodesNumber
         print ("dbp phreeqc at init level: ", StatesBounds)
         print ("dbp phreeqc at init level: ", StatesBounds.keys())
@@ -2071,14 +2073,14 @@ class Phreeqc:
         """
         to obain the temperature field
         """
-        print("dbg phreeq getTemperatureField")
+        #print("dbg phreeq getTemperatureField")
         return self.solver.getTemperatureField()
     
     def getTotalCO2Field(self):
         """
         to obain the total CO2 field
         """
-        print("dbg phreeq getTotalCO2Field")
+        #print("dbg phreeq getTotalCO2Field")
         return self.solver.getTotalCO2Field()   
 
     def getMobileConcentration(self,celltype=None):
@@ -2363,7 +2365,7 @@ class Phreeqc:
             return liste
         else:
         # only for internal cells
-            liste = self.solver.getSelectedOutput_mpi(indA,self.internalNodesNumber,self.outputname,self.unit)
+            liste = self.solver.getSelectedOutput_mpi(indA,self.internalNodesNumber, self.outputname,self.unit)
 
             if len(liste)>1: return liste
 
@@ -2861,6 +2863,7 @@ class Phreeqc:
                     pass
                 self.kinetics(kineticLaw)
                 pass
+        print ("states bounds items :",StatesBounds.items())
         for stateBound in StatesBounds.items():
 
             Staat = stateBound[1][1]
@@ -2890,7 +2893,9 @@ class Phreeqc:
                     self.gasOption, self.integrationMethod, self.intParamDict,\
                     self.timeStep, self.simulationTime)
                     pass
-                if Staat.gasPhase:
+                #print ("Staat.gasPhase : ",Staat.gasPhase)
+                #raw_input("Staat.gasPhase")
+                if Staat.gasPhase != None:
                     gasSolution(Staat,gA,gE,self.inFile)
                     pass
                 pass

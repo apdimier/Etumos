@@ -82,7 +82,7 @@ def softEnvironmentTesting(moduleName,
             try:
                 print (eval(moduleName+".__version__"))
             except:
-                pass
+                raise Exception("check the installation of %s"%(moduleName))
     except ImportError:
         return False
 
@@ -125,11 +125,12 @@ softEnvironmentTesting("mpi4py","MPI for Python provides bindings of the Message
 softEnvironmentTesting("six"," It provides utility functions for smoothing differences between python versions", minimalVersion = "1.10.0")
 softEnvironmentTesting("docx"," python-docx is a Python library for creating and updating Microsoft Word", minimalVersion = "0.8.5")
 softEnvironmentTesting("pip"," tool for installing Python packages", minimalVersion = "1.3.1")
+softEnvironmentTesting("netCDF4"," netCDF4-python is a Python interface to the netCDF C library", minimalVersion = "1.0.2")
 softEnvironmentTesting("CoolProp"," python wrapper of the CoolProp C++ library that implements\n"+\
                        "Pure and pseudo-pure fluid equations of state and transport properties for 122 components\n"\
                        , minimalVersion = "5.1")
 if pyversion < "3.0.0":
-    softEnvironmentTesting("PIL"," The Python Imaging Library (PIL) adds image processing capabilities")
+    #softEnvironmentTesting("PIL"," The Python Imaging Library (PIL) adds image processing capabilities")
     pass
 else:
     softEnvironmentTesting("pillow"," The Python Imaging Library (PIL) adds image processing capabilities")

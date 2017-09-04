@@ -11,8 +11,7 @@ from tensors import Tensor
 from listtools import toList
 from mesh import *
 from numpy import  float as Float
-from types import StringType
-from hydraulicproblem import HydraulicProblem
+from types import DictType, StringType, ListType, TupleType
 from PhysicalQuantities import Head,\
                                Pressure
 from six.moves import range
@@ -20,7 +19,7 @@ from six.moves import range
 class HydraulicModule(object):
     """
     For saturated flows, openfoam and elmer can be used in a generic way.
-    This means, openfoam and elmer can be used to simulated saturated flows.
+    This means, openfoam and elmer can be used to simulate saturated flows.
     The hydraulic module can treat (un)saturated flows. Only one software is relevant for unsaturated flows: Elmer.
     An unsaturated flow solver (Richards) is running.
     
@@ -143,6 +142,7 @@ class HydraulicModule(object):
                                 "typ"           : None,
                                 "head"          : None,
                                 "pressure"      : None,
+                                "temperature"   : None,
                                 "material"      : None,
                                 }
         boundaryconditions = problem.getBoundaryConditions()
@@ -152,29 +152,46 @@ class HydraulicModule(object):
         #
         ind = 0
         for boundarycondition in boundaryconditions:
-            print (type(boundarycondition),boundarycondition.__class__.__name__)
-            #print ("debug type value ",boundarycondition.getValue().__class__.__name__)
-            #raw_input("debug hydraulicmodule")
+            #print ("dbh hydraulicmodule: ", type(boundarycondition), boundarycondition.__class__.__name__)
+            #print ("debug hydraulicmodule type value: ", boundarycondition.value, boundarycondition.getValue().__class__.__name__)
+            #raw_input("debug "+__name__)
             value = boundarycondition.getValue()
-            #print "debug type value ",value.__class__.__name__
+            print ("debug type value: ",value.__class__.__name__, boundarycondition.value)
             boundaryName = boundarycondition.getSupport().getBodyName()
             #print boundaryName
             #print " cont ",boundarycondition.boundary.support.body[0]
             #print " cont0 ",type(boundarycondition.boundary.support)
-            #print value.getValue()
-            #print boundarycondition.getType()
-            #raw_input(" hydraulic module")
-            val = value.getValue()
+            #print (value)
+            #print (boundarycondition.getType())
+            #raw_input(__name__)
+            #val = value.getValue()
             self.boundaryConditions[ind] = {#"head":value.getValue(),\
                                             "typ":boundarycondition.getType(),
                                             "material":boundarycondition.getRegion().getMaterial(),
                                             "boundaryName": boundaryName,
                                             "ind":boundarycondition.getSupport().body[0]
                                            }
-            if isinstance(value,Head):
+            print(" value type: ",__name__, type(value))
+            print(" value: ",__name__,  value)
+            if type(value) is dict: print(" value dict: ", value.keys())
+            #raw_input(" hydraulicmodule debug of value")
+            if isinstance(value, Head):
                 self.boundaryConditions[ind]["head"] = value.getValue()
-            elif isinstance(value,Pressure):
+            elif type(value) is dict and value.keys() == ["head"]:
+                self.boundaryConditions[ind]["head"] = value["head"]
+            elif isinstance(value, Pressure):
                 self.boundaryConditions[ind]["pressure"] = value.getValue()
+            elif type(value) is dict and value.keys() == ["pressure"]:
+                self.boundaryConditions[ind]["head"] = value["pressure"]
+            elif isinstance(value,(ListType,TupleType, DictType)):                                    # the only allowed list or tuple is made of Pressure and Temperature
+                #print ("hydraulic module, we reach that point: ", value)
+                #raw_input(__name__)
+                if len(value) == 1:
+                    self.boundaryConditions[ind]["pressure"] = value["pressure"]
+                    pass
+                elif len(value) == 2:
+                    self.boundaryConditions[ind]["pressure"] = value["pressure"]
+                    self.boundaryConditions[ind]["temperature"] = value["temperature"]
             ind+=1
             pass
 #            self.boundaryConditions[boundaryName]["head"]       = value.getValue()
@@ -188,16 +205,32 @@ class HydraulicModule(object):
                                                                                             #
         initialconditions = problem.getInitialConditions()
         for initialcondition in initialconditions:
-            value = initialcondition.getValue()
+            #print ("dbg hydraulicmodule initial condition: ", initialcondition)
+            #raw_input("dbg hydraulicmodule initial condition")
+            #value = initialcondition.getValue()
+            value = initialcondition.value
             initialConditionName = initialcondition.domain.getSupport().getBodyName()
 #            print " dbg hm ",initialConditionName
 #            print " dbg hm ",type(value)
 #            print " dbg hm ",value
 #            raw_input()
-            self.initialConditions[initialConditionName] = {"head":value,\
-                                                            "material":initialcondition.getRegion().getMaterial(),
+            #self.initialConditions[initialConditionName] = {"head": value,\
+            #                                                "material":initialcondition.getRegion().getMaterial(),
+            #                                                "ind":initialcondition.getRegion().support.body[0]
+            #                                        }
+            self.initialConditions[initialConditionName] = {"material":initialcondition.getRegion().getMaterial(),
                                                             "ind":initialcondition.getRegion().support.body[0]
                                                     }
+            #print (type(value))
+            if type(value) is not DictType:
+                self.initialConditions[initialConditionName][value.__class__.__name__.lower()] = value
+                #print (" value is not dict ", value.__class__.__name__.lower(), value)
+            else:
+                for val in value.keys():
+                    self.initialConditions[initialConditionName][val.lower()] = value[val]
+                    pass
+                pass
+            #raw_input("initialconditions")
 
                                                                                             #
                                                                                             # We treat here the sources
@@ -247,20 +280,20 @@ class HydraulicModule(object):
                     pass
                 self.flowComponent.setTimeDiscretisation(self.timeStepIntervals, self.timeStepSizes)
                 self.flowComponent.setSimulationKind(self.simulationType)
-                raise Warning(" the default hydraulic has been fixed to elmer"+\
-                ", other hydraulic tools should be introduced in the near future")
+                raise Warning(" the default hydraulic are elmer or openfoam "+\
+                ", other hydraulic tools could be introduced in the near future")
             elif (self.componentName=="openfoam"):
                 from openfoamhydro import OpenfoamHydro
                 self.saturation = "saturated"
-                self.simulationType = "Steady"
+                #self.simulationType = "Steady"
                 self.componentName == "openfoam"
-                self.flowComponent = OpenfoamHydro(self.mesh, self.saturation)
-                self.flowComponent.setSimulationKind(self.simulationType)
+                self.flowComponent = OpenfoamHydro(self.problem, self.mesh, self.saturation)
+                self.flowComponent.setSimulationType(self.simulationType)
                 #
                 # we check the dimensionality of the mesh
                 #
                 if self.mesh.spaceDimensions != 3:
-                    raise Warning, "Openfoam is handling only 3D meshes."
+                    raise Warning("Openfoam is handling only 3D meshes.")
                 pass
             else:
                 self.componentName == "elmer"

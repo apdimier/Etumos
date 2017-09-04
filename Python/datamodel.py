@@ -85,7 +85,7 @@ from chemistry import ChemicalQuantity,Activity, SpeciesConcentration, \
      MineralTotalMassConcentration, MineralTotalMolalConcentration, Fugacity , \
      SpecificSurfaceArea, SpecificAreaPerGram, VolumicSurfaceArea, RelativeTotalConcentration , \
      KineticLaw, ReversibleKineticLaw, ActivityLaw, Davies, TruncatedDavies, DebyeHuckel, Bdot , \
-     ChemicalState,  ChemicalState, AqueousSolution, MineralPhase, GasPhase, \
+     ChemicalState, AqueousSolution, MineralPhase, GasPhase, \
      IonicExchangers, SurfaceComplexation, ExchangeBindingSpecies, ExchangeMineralBindingSpecies, \
      SolidSolution, SurfaceBindingSpecies, SurfaceMineralBindingSpecies
 ##import points
@@ -120,8 +120,9 @@ def setProblemType(name):
     """ This method sets the current type of the problem """
     from types import StringType
     if type(name) != StringType:
-        raise TypeError(" the name within set probletype should be a string ")
+        raise TypeError(" the name argument within SetProblemType should be a string ")
     _name = name.lower()
+    #raw_input("we are at that level")
     global _problemType
     if _name in _moduleDict:
         _problemType = _name
@@ -138,6 +139,7 @@ def checkIfProblemTypeIsSet():
     raise RuntimeError(_message)
 
 def BoundaryCondition(*liste, **dico):
+    #raw_input("BoundaryCondition ")
     checkIfProblemTypeIsSet()
     module = _moduleDict[_problemType]
 #    print "type of 1",module
@@ -146,6 +148,7 @@ def BoundaryCondition(*liste, **dico):
     return module.BoundaryCondition(*liste, **dico)
 
 def InitialCondition(*liste, **dico):
+    #raw_input("InitialCondition ")
     checkIfProblemTypeIsSet()
     module = _moduleDict[_problemType]
     #print "type of ",type(module.InitialCondition(*list, **dict))

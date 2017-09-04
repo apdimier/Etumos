@@ -55,7 +55,7 @@ def userBrasilianTestLaw (ctmi):
     Setting the porosity to variable, you 
     construct here the following effective Young modulus
     
-     E = E0(1-w/w0)**f 
+     E = E0((1-w)/(1-w0))**f 
     """
     #print "It works too: ",ctmi.cpuTime()
     E0 = 57.73
@@ -86,8 +86,53 @@ def userBrasilianTestLaw (ctmi):
     #
     #
     print(" effective Young modulus ",ctmi.youngModulusField[0:5],len(ctmi.youngModulusField))
-    ctmi.transportSolver.essai.setMYField(ctmi.youngModulusField)
+    ctmi.transportSolver.elmso.setMYField(ctmi.youngModulusField)
     print(" effective Young modulus ",ctmi.youngModulusField[0:5],len(ctmi.youngModulusField))
+
+def userUniaxialCompressionTestLaw (ctmi):
+    """
+    Setting the porosity to variable, you 
+    construct here the following effective Young modulus
+    
+     E = E0((1-w)/(1-w0))**f 
+     
+     The law has to be established via autoclave tests
+     
+    """
+    #
+    #
+    E0 = 3.409393e+09 #exp(21.9498)
+    E0 = 3.409393e+09 #exp(21.9498)
+    f = -1.50795
+    f = 23.7513 
+    ctmi.youngModulusField = []
+    if (ctmi.variablePorosityOption ):
+        porosityField = ctmi.chemical.getPorosityField()
+        pass
+    else:
+        print(" che mod? ",ctmi.__class__.__name__)
+        porosityField = ctmi.initialPorosityValues
+        pass
+    #print "porosity field ",porosityField[0:5],len(porosityField),len(ctmi.initialPorosityValues)
+    ind = 0
+    for porosity in porosityField:
+        if porosity <= ctmi.initialPorosityValues[ind]:
+            aux = E0
+            ind+=1
+            pass
+        else:
+            aux = E0*((1-porosity)/(1- ctmi.initialPorosityValues[ind]))**f
+            ind+=1
+            pass
+        #print " ind of the etuser loop ",ind,aux
+        ctmi.youngModulusField.append(aux)
+        pass
+    #
+    #
+    #
+    print(" effective Young modulus ", ctmi.youngModulusField[0:5], len(ctmi.youngModulusField))
+    ctmi.transportSolver.elmso.setMYField(ctmi.youngModulusField)
+    print(" effective Young modulus ", ctmi.youngModulusField[0:5], len(ctmi.youngModulusField))
 
 def effectiveYoungModulus (ctmi):
     """
@@ -259,9 +304,110 @@ def setInitialPorosityAutoklav (ctmi):
             the outer radius is 0.5*0.02553
     """
     from random import gauss 
-    print("It works too: ",ctmi.cpuTime())
+    print("setInitialPorosityAutoklav, It works too: ",ctmi.cpuTime(), ctmi.timeStepNumber)
+    raw_input()
     outerRadius = 0.5*0.02553
     if ctmi.timeStepNumber == 0:
+        print("setInitialPorosityAutoklav, It works too: ",ctmi.cpuTime())
+        raw_input()
+        amount = []
+        if ctmi.TransportComponent == 'elmer':
+            #print " we are in the setInitialPorosity function "
+            ind = 0
+            coordinates = ctmi.transportSolver.getCoordinatesValues() #meshPointCoordinates
+            
+            #print type(coordinates),len(coordinates[0])
+            elementsNumber = len(coordinates[0])
+            initialPorosity = []
+            for point in range(1,elementsNumber+1):
+                #print point, elementsNumber
+                radius = (coordinates[ 1][(point-1)]**2+coordinates[ 2][(point-1)]**2)**0.5
+                porosity = gauss(0.131,0.005)
+                initialPorosity.append(porosity)
+                amount.append(177.4072192041498*0.90/porosity)
+                #print " porosity ",point, porosity, amount[-1]
+                pass
+            print("we are out of the porosity evaluation ",len(initialPorosity))
+            ctmi.transportSolver.setPorosityField(initialPorosity)
+            ctmi.chemical.setPorosity(initialPorosity)
+            ctmi.chemical.setMineralAmount("KCalcite", amount)
+            print(" python set Mineral Amount\n",porosity, 177.4072192041498*0.90/porosity, amount[10], amount[-1])
+            #raw_input( "we go out of the porosity function and call set mineral amount\n")
+            print("length of amount",len(amount))
+            #print ctmi.chemical.getImmobileConcentration("KCalcite")
+            #raw_input( "we go out of the porosity function and call set mineral amount\n")
+            pass
+        else:
+            raise Exception("You are using Mt3d, the setInitialPorosity user function has only been validated using Elmer")
+        pass
+    else:
+        pass
+
+def setInitialPorosityEnpc (ctmi):
+    """
+    Example of a function used to set an initial porosity field for a plug:
+    
+            the initial porosity is 0.122, see the Gaussian distribution parameters:
+            
+            gauss(mu,sigma) mu is the mean, and sigma is the standard deviation.
+            the initial mineral amount is 2.57216e+01
+            the outer radius is 0.5*0.02552
+    """
+    from random import gauss 
+    print("It works too: ",ctmi.cpuTime())
+    outerRadius = 0.5*0.02553
+    initialPorosity = 0.122
+    if ctmi.timeStepNumber == 0:
+        amount = []
+        if ctmi.TransportComponent == 'elmer':
+            #print " we are in the setInitialPorosity function "
+            ind = 0
+            coordinates = ctmi.transportSolver.getCoordinatesValues() #meshPointCoordinates
+            
+            #print type(coordinates),len(coordinates[0])
+            elementsNumber = len(coordinates[0])
+            initialPorosity = []
+            for point in range(1,elementsNumber+1):
+                #print point, elementsNumber
+                radius = (coordinates[ 1][(point-1)]**2+coordinates[ 2][(point-1)]**2)**0.5
+                porosity = gauss(initialPorosity,0.005)
+                initialPorosity.append(porosity)
+                amount.append(177.4072192041498*0.90/porosity)
+                #print " porosity ",point, porosity, amount[-1]
+                pass
+            print("we are out of the porosity evaluation ",len(initialPorosity))
+            ctmi.transportSolver.setPorosityField(initialPorosity)
+            ctmi.chemical.setPorosity(initialPorosity)
+            ctmi.chemical.setMineralAmount("KCalcite", amount)
+            print(" python set Mineral Amount\n",porosity, 177.4072192041498*0.90/porosity, amount[10], amount[-1])
+            #raw_input( "we go out of the porosity function and call set mineral amount\n")
+            print("length of amount",len(amount))
+            #print ctmi.chemical.getImmobileConcentration("KCalcite")
+            #raw_input( "we go out of the porosity function and call set mineral amount\n")
+            pass
+        else:
+            raise Exception("You are using Mt3d, the setInitialPorosity user function has only been validated using Elmer")
+        pass
+    else:
+        pass
+    return None
+
+def setInitialPorosityCoupling (ctmi):
+    """
+    Example of a function used to set an initial porosity field for a plug:
+    
+            the initial porosity is 0.131, see the Gaussian distribution parameters:
+            
+            gauss(mu,sigma) mu is the mean, and sigma is the standard deviation.
+            the initial mineral amount is 2.57216e+01
+            the outer radius is 0.5*0.02553
+    """
+    from random import gauss 
+    #print("setInitialPorosityCoupling, It works too: ",ctmi.cpuTime(), ctmi.timeStepNumber)
+    outerRadius = 0.5*0.02553
+    if ctmi.timeStepNumber == 2:
+        #print("setInitialPorosityAutoklav, It works too: ",ctmi.cpuTime(), ctmi.timeStepNumber)
+        #raw_input()
         amount = []
         if ctmi.TransportComponent == 'elmer':
             #print " we are in the setInitialPorosity function "

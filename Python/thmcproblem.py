@@ -7,7 +7,8 @@ It can be steady or transient.
 # -- __init__
 
 # -- Verifications .
-from chemistry import ExpectedOutput
+from chemistry import KineticLaw,\
+                      ExpectedOutput
 
 from generictools import isInstance, makeDico, memberShip
 
@@ -247,7 +248,7 @@ class THMCProblem:
                                                                                             # density treatment
                                                                                             #
         if density:
-            if type(density) == FloatType:
+            if type(density) in [int,float]:
                density = Density(density, 'kg/m**3')
             memberShip(density, Density)
             check = 2*check
@@ -276,7 +277,7 @@ class THMCProblem:
                                                                                             #
                                                                                             # user processing set up
                                                                                             #
-        if userProcessing and type(userFunctionList) == ListType:
+        if userProcessing and type(userFunctionList) == types.ListType:
             self.userProcessing = True
             self.processingList = userFunctionList
             for processingFunction in range(len(self.processingList)):
@@ -293,7 +294,7 @@ class THMCProblem:
                                                                                             # Kinetics Laws
                                                                                             #
         if kineticLaws != None :
-            verifyClassList(kineticLaws,KineticLaw)
+            verifyClassList(kineticLaws, KineticLaw)
             self.kineticLaws = kineticLaws
             pass
         else :
