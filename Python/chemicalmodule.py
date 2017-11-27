@@ -67,14 +67,14 @@ class Chemical(object):
     def setVerbose(self, trace):
         self.component.setVerbose(trace)
 
-    def initialise(self, componentName= None):
+    def initialise(self, componentName = None):
         """
         As in a fairy tale, if the emse software is introduced
         """
         self.component = Phreeqc()
-        self.solver = self.component                                                        # to evolve to solver
+        self.solver = self.component                                                        # To evolve to solver
 
-        self.componentName = "phreeqc"
+        self.componentName = "phreeqc"                                                      # We only have phreeqc as solver. Thoughreact 1.5 isn't validated
         if self.componentName == "phreeqc":
             #self.dB = self.component.fileRecognition(self.dB)
             self.component.setDataBase(self.dB)
@@ -153,7 +153,9 @@ class Chemical(object):
         """
 
         if self.component:
+            #raw_input(" call to run within py: chemicalmodule")
             self.component.run()
+            #raw_input("end of call to run within py: chemicalmodule")
         else:
             raise Exception("You have to execute setComponent before run")
         return
@@ -184,6 +186,7 @@ class Chemical(object):
         """
         if (outputName==None):
             outputName='state'
+            pass
         if self.component:
             if (outputName=='state'):
                 if outputFormat == None:
@@ -197,7 +200,7 @@ class Chemical(object):
                 return self.component.getOutput(outputName)
             pass
         else:
-            raise Exception("You have to execute setPrimary before getOutput")
+            raise Exception("Prior to this call, the simulation has to be setup accordingly")
         return
 
     def outputStateSaving(self):
@@ -226,43 +229,58 @@ class Chemical(object):
         else:
             outFile = open(self.component.outFile, 'w')
         outFile.write("%20s\n\n\n"%str(self.comment))
-        outFile.write("number of aqueous primary species      %20s\n"%str(state[0]))
-        outFile.write("number of aqueous secondary species    %20s\n"%str(state[1]))
-        outFile.write("number of minerals                     %20s\n"%str(state[3]))
-        outFile.write("number of sorbed species               %20s\n"%str(state[2]))
-        outFile.write("\npH                                   %20s\n"%str(state[4]))
-        outFile.write("pe                                     %20s\n"%str(state[5]))
-        outFile.write("water activity                         %20s\n"%str(state[6]))
-        outFile.write("ionicstrength                          %20s\n"%str(state[7]))
-        outFile.write("temperature                            %20s\n"%str(state[8]))
-        outFile.write("electrical_balance                     %20s\n"%str(state[9]))
-        outFile.write("total H                                %20s\n"%str(state[10]))
-        outFile.write("total O                                %20s\n"%str(state[11]))
-        outFile.write("density of water                       %20s\n"%str(state[12]))
-        #print " type",state[11],type(state[10])
+        outFile.write("number of aqueous primary species      %20s\n" %str(state[0]))
+        outFile.write("number of aqueous secondary species    %20s\n" %str(state[1]))
+        outFile.write("number of minerals                     %20s\n" %str(state[3]))
+        outFile.write("number of sorbed species               %20s\n" %str(state[2]))
+        outFile.write("\npH                                   %20s\n" %str(state[4]))
+        outFile.write("pe                                     %20s\n" %str(state[5]))
+        outFile.write("water activity                         %20s\n" %str(state[6]))
+        outFile.write("ionicstrength                          %20s\n" %str(state[7]))
+        outFile.write("temperature                            %20s\n" %str(state[8]))
+        outFile.write("electrical_balance                     %20s\n" %str(state[9]))
+        outFile.write("total H                                %20s\n" %str(state[10]))
+        outFile.write("total O                                %20s\n" %str(state[11]))
+        outFile.write("density of water (kg/m3)               %20s\n" %str(state[12]))
         ind = 0
         anf = 13
+        print " self.component.defaultPhreeqcVersion: ", self.component.version
+        #raw_input()
+        if (self.component.version == 3):
+            outFile.write("volume (L)                             %20s\n" %str(state[14]))
+            outFile.write("totalCO2 (mol/kg)                      %20s\n" %str(state[13]))
+            outFile.flush()
+            anf = 15
         end = anf + int(state[0])
-        #print state
+        #print " type",state[11],type(state[10])
+        #print " state: ", state
+        #raw_input()
         outFile.write("\n\n primary species: mol/l\n\n")
+        #print " state anf end: ", state[anf:end]
+        #raw_input()
         for i in state[anf:end]:
+            print i[0], i[1], type(i[0]), type(i[1])
             outFile.write("%20s %s\n"%(str(i[0]),str(i[1])))
+            pass
         anf = end
         end = anf + int(state[1])            
         outFile.write("\n\n secondary species: mol/l\n\n")
         for i in state[anf:end]:
             outFile.write("%20s %s\n"%(str(i[0]),str(i[1])))
+            pass
         anf = end
-        end = anf + int(state[2])            
+        end = anf + int(state[2])
         outFile.write("\n\n sorbed species: moles\n\n")
         for i in state[anf:end]:
             outFile.write("%20s %s\n"%(str(i[0]),str(i[1])))
+            pass
         anf = end
         outFile.write("\n\n     SI( target saturation index):        SI < 0 undersaturation, 0: equilibrium and supersaturation otherwise\n\n")
         outFile.write("\n\n")
         outFile.write("\n\n                 mineral species:            SI                   moles\n\n")
         for i in state[anf:]:
-            outFile.write("%30s         %15.8e      %15.8e\n\n"%(str(i[0]),float(str(i[2])),float(str(i[1]))))
+            outFile.write("%30s         %15.8e      %15.8e\n\n"%(str(i[0]), float(str(i[2])), float(str(i[1]))))
+            pass
 
     def printOutputState(self):
         """

@@ -229,7 +229,7 @@ class BoundaryCondition ( CommonBoundaryCondition):
                     self.value = bc
                     self.chemicalStateValue = bc # it should be ChemicalState
                     pass
-                elif bc[0].lower() =="enthalpy":                                            # it can also be an enthalpy in the
+                elif bc[0].lower() == "enthalpy":                                           # it can also be an enthalpy in the
                                                                                             # case of a well
                                                                                             #
                     if type(bc[1]) == types.StringType:
@@ -238,7 +238,7 @@ class BoundaryCondition ( CommonBoundaryCondition):
                     elif type(bc[1]) in [types.FloatType,types.IntType]:
                         self.enthalpyBoundaryCondition = bc[1]
                     pass
-                elif bc[0].lower() =="wellpressure":                                        # it can also be the pressure in the
+                elif bc[0].lower() == "wellpressure":                                       # it can also be the pressure in the
                                                                                             # case of a well
                                                                                             #
                     if type(bc[1]) == types.StringType:
@@ -250,7 +250,7 @@ class BoundaryCondition ( CommonBoundaryCondition):
                         #raw_input()
                         pass
                     pass
-                elif bc[0].lower() =="wellmassflow":                                        # it can also be the mass flow in the
+                elif bc[0].lower() == "wellmassflow":                                       # it can also be the mass flow in the
                                                                                             # case of a well
                                                                                             #
                     if type(bc[1]) == types.StringType:
@@ -441,11 +441,16 @@ class InitialCondition:
         self.value_species = None
         self.value_property = None
         self.value = None
-        self.enthalpyInitialCondition = None
         self.headValue = None
+        #
+        #  Linked to the treatment of a wellbore
+        #
+        self.enthalpyInitialCondition = None
+        self.wellFeedZoneInitialCondition = None
         self.temperatureInitialCondition = None
         self.wellMassFlowInitialCondition = None
         self.wellPressureInitialCondition = None
+        #
         if type(value) is types.ListType:
             for i in value:
                 print ("dbg commonmodel",type(i))
@@ -453,53 +458,60 @@ class InitialCondition:
             verifyClassList(value, [ Head, ChemicalState, Displacement, types.TupleType])
             for ic in value:
                 if isinstance(ic, Head):
-                    self.headValue = ic                                                     # it should be the charge
+                    self.headValue = ic                                                     # It should be the charge
                     pass
-                elif isinstance(ic, (Displacement,ChemicalState)) :
-                    self.value = ic                                                         # it should be chemistry or a displacement
+                elif isinstance(ic, (Displacement, ChemicalState)) :
+                    self.value = ic                                                         # It should be chemistry or a displacement
                     pass
                 elif isinstance(ic, types.TupleType):
                     #print("debug commonmodel ic %s\n"%(ic[0].lower()))
-                    if ic[0].lower() =="temperature":                                       # it should be temperature otherwise a warning
-                                                                                            # is raised. we extract the formula thanks to !=
-                                                                                            # regular expressions modules.
-                                                                                            #
-                        if type(ic[1]) == types.StringType:
-                            self.temperatureInitialCondition = refindall(recompile(r'([xyzXYZ0-9.*/+-])'),ic[1])
-                            pass
-                        pass
-                    elif ic[0].lower() =="enthalpy":                                        # it can also be an enthalpy in the
+                    if ic[0].lower() == "enthalpy":                                         # It can also be an enthalpy in the
                                                                                             # case of a well
-                                                                                            #
                         if type(ic[1]) == types.StringType:
                             #raw_input("common model debug")
-                            self.enthalpyInitialCondition = refindall(recompile(r'([xyzXYZ0-9.*/+-])'),ic[1])
+                            self.enthalpyInitialCondition = refindall(recompile(r'([xyzXYZ0-9.*/+-])'), ic[1])
                             pass
                         pass
-                    elif ic[0].lower() =="wellpressure":                                        # it can also be the pressure in the
-                                                                                            # case of a well
-                                                                                            #
-                        if type(ic[1]) == types.StringType:
-                            self.wellPressureInitialCondition = refindall(recompile(r'([xyzXYZ0-9.*/+-])'),ic[1])
+                    elif ic[0].lower().replace(" ","") == "feedzoneheatsource":             # We introduce here a heat source linked to a feed zone.
+                        if type(ic[1]) in [types.TupleType, types.ListType]:                # It should be a tuple: position and value of the source term.
+                            self.wellFeedZoneInitialCondition = ic[1]
                             pass
-                        elif type(ic[1]) in [types.FloatType,types.IntType]:
-                            self.wellPressureInitialCondition = ic[1]
-                            #print("commonmodel well pressure debug yes\n")
-                            #raw_input()
+                        elif type(ic[1]) is types.StringType:                               # It should be a tuple: position and value of the source term.
+                            self.wellFeedZoneInitialCondition = refindall(recompile(r'([ifelsxyzXYZ0-9.*;()/+-<>=])'), ic[1])
+                            pass
+                        
+                        #print("in commonmodel ",self.wellFeedZoneInitialCondition)
+                        #raw_input()
+                        pass
+                    elif ic[0].lower() == "temperature":                                    # It should be temperature otherwise a warning
+                                                                                            # is raised. We extract the formula thanks to !=
+                                                                                            # regular expressions modules.
+                        if type(ic[1]) == types.StringType:
+                            self.temperatureInitialCondition = refindall(recompile(r'([xyzXYZ0-9.*/+-])'), ic[1])
                             pass
                         pass
-                    elif ic[0].lower() =="wellmassflow":                                    # it can also be the mass flow in the
+                    elif ic[0].lower().replace(" ","") == "wellmassflow":                   # It can also be the mass flow in the
                                                                                             # case of a well
-                                                                                            #
                         if type(ic[1]) == types.StringType:
-                            self.wellMassFlowInitialCondition = refindall(recompile(r'([xyzXYZ0-9.*/+-])'),ic[1])
+                            self.wellMassFlowInitialCondition = refindall(recompile(r'([xyzXYZ0-9.*/+-])'), ic[1])
                             pass
                         elif type(ic[1]) in [types.FloatType,types.IntType]:
                             self.wellMassFlowInitialCondition = ic[1]
                             pass
                         pass
+                    elif ic[0].lower().replace(" ","") == "wellpressure":                   # It can also be the pressure in the
+                                                                                            # case of a well
+                        if type(ic[1]) == types.StringType:
+                            self.wellPressureInitialCondition = refindall(recompile(r'([xyzXYZ0-9.*/+-])'), ic[1])
+                            pass
+                        elif type(ic[1]) in [types.FloatType, types.IntType]:
+                            self.wellPressureInitialCondition = ic[1]
+                            #print("commonmodel well pressure debug yes\n")
+                            #raw_input()
+                            pass
+                        pass
                     else:
-                        raise Warning, "check the  name of the vriable "
+                        raise Warning, "check the  name of the variable "
                     pass
                 else:
                     if (isinstance(ic, PhysicalQuantity) or type(ic) is types.ListType): 

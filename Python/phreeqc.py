@@ -32,13 +32,15 @@ from constant import epsFP
 
 from exceptions import Warning
 
+from inspect import currentframe
+
 from generictools import isInstance
 
 from generictools import color
 
 from math import floor,log10
 
-from os import system
+from os import environ, system
 
 import os
 
@@ -917,10 +919,24 @@ class Phreeqc:
     Phreeqc class used to enable driving of the tool, mainly, interaction between chemistry and transport  within
     the coupling algorithm. Parallelism is also covered.
     """
-    def __init__(self, numberOfProcessors = None, rank = None):
+    def __init__(self, numberOfProcessors = None, phreeqCVersion = None, rank = None):
         """
-        geochemical solver
+        geochemical solver, see https://wwwbrr.cr.usgs.gov/projects/GWC_coupled/phreeqc/
+        
+        Two versions of phreeqC are handled, the phreeqC 2 (2.18) and 3 (3.3.5) versions.
         """
+        phreeqCVersion = os.environ.get('etumosphreeqc')
+        #print ("version of phreeqCVersion %s\n"%(phreeqCVersion))
+        if phreeqCVersion == None or phreeqCVersion == "2":
+            self.phreeqCVersion = 2
+            self.version = "phreeqC" + str(self.phreeqCVersion)
+            pass
+        else:
+            self.phreeqCVersion = 3
+            self.version = "phreeqC" + str(self.phreeqCVersion)
+            pass
+        #print ("version of defaultPhreeqcVersion %d %s\n"%(self.phreeqCVersion, self.version))
+        #raw_input()
         self.cellPorosity = None
         self.cellsNumber = 0
         self.chemicalParameters = []
@@ -929,7 +945,13 @@ class Phreeqc:
         self.inFile = None
         self.kineticLaws = []
         self.porosityOption = None
-        if (numberOfProcessors!=None):
+        if (numberOfProcessors != None):
+            if (type(numberOfProcessors) != IntType): numberOfProcessors =1
+            pass
+        else:
+            numberOfProcessors =1
+            pass
+        if (numberOfProcessors != 1):
             self.mpiSize  = numberOfProcessors
             from WPhreeqc_mpi import *
             self.solver = WPhreeqc_mpi()
@@ -938,8 +960,14 @@ class Phreeqc:
         else:
             self.numberOfProcessors = 1
             self.mpiSize = 1
-            from WPhreeqc import *
-            self.solver = WPhreeqc()
+            if (self.phreeqCVersion == 2):
+                from WPhreeqc import *
+                self.solver = WPhreeqc()
+            else:
+                print ("We use the wrapped version of phreeqc3\n")
+                from WPhreeqc3 import *
+                self.solver = WPhreeqc3()
+            #self.solver = WPhreeqc()
             self.solverFileName = "phreeqCFile"
             pass
         self.speciesBaseAddenda = []
@@ -1033,6 +1061,7 @@ class Phreeqc:
                                                                                             #
                                                                                             # We launch the solver
                                                                                             #
+        #printm(" solver.einzelequilibrium: \n", ri = True)
         self.solver.initialize(internalNodes,self.mpiSize)
         self.molarMassDict = self.getMolarMassList("phreeqc.dat",typ = {})
         #
@@ -1449,16 +1478,21 @@ class Phreeqc:
         print(" url getMolar: %s"%(URL))
         URL = URL.split("/")
         print(" url getMolar1: %s"%(URL))
-        URL = os.getenv("WRAPPER")+"/Phreeqc_dat/"+URL[-1]
+        dataFileName = URL[-1]
+        URL = os.getenv("WRAPPER")+"/Phreeqc_dat/"+"Phreeqc"+str(self.phreeqCVersion)
+        if dataFileName in os.listdir(URL):
+            URL = os.getenv("WRAPPER")+"/Phreeqc_dat/"+"Phreeqc"+str(self.phreeqCVersion)+"/"+dataFileName
+        elif dataFileName in os.listdir(os.getenv("WRAPPER")+"/Phreeqc_dat/"):
+            URL = os.getenv("WRAPPER")+"/Phreeqc_dat/"+dataFileName
         print(" url getMolar2: %s"%(URL))
         try:
             print (" try url to be opened: %s"%(URL))
             URL = _fileIdentify(URL)
-            print (" try url to be opened: %s"%(URL))
+            print (" try url to be opened bis: %s"%(URL))
             dataBaseFile = open (URL, 'r')
             print (" try opened: %s"%(URL))
         except:
-            raise Warning("")
+            raise Warning("Chek the path of the database you want to use.  $PHREEQCDAT")
                   
         if typ == DictType or type(typ) == DictType:
             molarMassDict = {}
@@ -1535,8 +1569,9 @@ class Phreeqc:
         """
         urlName = self.fileRecognition(urlName)
         #print(" dbgp setDataBase: %s"%(urlName))
-        #print (type(self.solver))
+        #print (" dbgp setDataBase type of solver: ",type(self.solver))
         #print (dir(self.solver))
+        #printm(" solver.setDataBase: \n", ri = True)
         self.solver.setDataBase(urlName)
         self.elementList, self.molarMassList = self.getMolarMassList(urlName)
         return None
@@ -1591,19 +1626,19 @@ class Phreeqc:
 
     def setParameter(self, outFile = None):
         """
-        method used to define the input and output file
+        method used to define the input and output files
         """
-        #print (" phreeqc dbg setParameter ",self.solverFileName,outFile)
-        #raw_input("in setParameter")
+        #printm(" setParameter solverFileName: %s and output: %s"%(self.solverFileName, outFile),ri = True)
         self.inFile = open(self.solverFileName,'w')
         StatesBounds = {}
         StatesBounds[self.chemicalState.name] = [[1,1],self.chemicalState]
         self.chemicalStateList = [self.chemicalState]
         self.dataSetup(StatesBounds)
+        #printm(" // solver.defineInputOutput within setParameter module: //\n", ri = True)
         self.solver.defineInputOutput(self.solverFileName, outFile)
         self.outFile = outFile
         return None
-        
+
     def setKineticParameter(self, integrationMethod = None,\
                                   intParamDict = None,\
                                   intOrder = None,\
@@ -1979,6 +2014,7 @@ class Phreeqc:
         """
         Used to set verbose for phreeqC 
         """
+        #printm(" solver.defineVerbose within setChat: \n", ri = True)
         self.solver.defineVerbose(verbose)
         return None
     
@@ -1987,6 +2023,7 @@ class Phreeqc:
         to get chemical primary species names
         """
         #print "dbp getPrimarySpeciesNames"
+        #printm(" solver.getPrimarySpecies within getPrimarySpeciesNames: \n", ri = True)
         return self.solver.getPrimarySpecies()
     
     
@@ -1994,6 +2031,7 @@ class Phreeqc:
         """
         To get the list of chemicals unknowns: chemical components +  ionic strength and activity of water.
         """
+        #printm(" solver.getChemicalUnknowns within getChemicalUnknownNames: \n", ri = True)
         return self.solver.getChemicalUnknowns()
     
     def getPrimarySpecies(self):
@@ -2001,6 +2039,7 @@ class Phreeqc:
         see getPrimarySpeciesNames
         """
         #print "dbp getPrimarySpecies"
+        ##printm(" solver.getPrimarySpecies within getPrimarySpecies: \n", ri = True)
         return [Species(component) for component in self.solver.getPrimarySpecies()]
     
     def getGasSpecies(self,gasList):
@@ -2036,7 +2075,7 @@ class Phreeqc:
         """
         return self.solver.getChemicalZero()
 
-    def getMobileConcentrationField(self,celltype=None):
+    def getMobileConcentrationField(self, celltype=None):
         """
         Retrieve primaries concentrations fields from PhreeqC
     celltype can be either internal or boundary. Default is set to internal.
@@ -2226,7 +2265,8 @@ class Phreeqc:
         """
         self.internalNodesNumber = internalNodes
         self.activeCellsNumber = internalNodes
-        self.totalNodesNumber = self.solver.initialize(internalNodes,self.mpiSize)
+        #printm(" solver.initialize within initialize: \n", ri = True)
+        self.totalNodesNumber = self.solver.initialize(internalNodes, self.mpiSize)
         return None
     
     def equilibrate(self,zellTyp=None):
@@ -2404,7 +2444,12 @@ class Phreeqc:
             outputDict["electrical balance"] = outputList[11]
             outputDict["mass of water"] = outputList[12]
             ind = 13
-            inf = 13+outputList[0]
+            if (self.phreeqCVersion == 3):
+                outputDict["volume"] = outputList[14]
+                outputDict["totalCO2"] = outputList[13]
+                ind = 15
+                pass
+            inf = ind + outputList[0]
             outputDict["primary species"] = outputList[ind:inf]
             ind = inf
             inf = ind+outputList[1]
@@ -2455,12 +2500,14 @@ class Phreeqc:
     def run(self):
         """To equilibrate a single state cell"""
         if self.simulationTime and self.kineticLaws != []:
-            self.solver.initialize(1,self.mpiSize)
+            self.solver.initialize(1, self.mpiSize)
             self.solver.setTimeStep(self.simulationTime)
             self.solver.reactions(1, "internal")
             pass
         else:
-            self.solver.initialize(1,self.mpiSize)
+            #printm(" solver.initialize within run: \n", ri = True)
+            self.solver.initialize(1, self.mpiSize)
+            #printm(" solver.einzelequilibrium: \n", ri = True)
             self.solver.einzelequilibrium(1)
             pass
 
@@ -2485,13 +2532,13 @@ class Phreeqc:
     def setChemicalState(self,chemicalState):
         """
         In the case of an equilibrium study for
-        a non dimensional case, you use that method normally
+        a non dimensional case, you use this method normally
         followed by a call to get its equilibrium.
-        no cell numbering, having just one to be defined
+        No cell numbering, having just one to be defined
         """
         self.internalNodesNumber = 1
         self.chemicalState = chemicalState
-        self.phreeqC = Phreeqc()
+        self.phreeqC = Phreeqc() # we instantiate the class Phreeqc
     
     def setComment(self,comment = None):
         """
@@ -3198,4 +3245,12 @@ def cvodewriter(inFile, kineticLaw, integrationMethod, intParamDict):
         inFile.write("    -cvode_order %d\n"%(integrationMethod[1]))    
         inFile.write("    -cvode_steps %d\n\n"%(integrationMethod[3]))
         pass
-    
+
+def printm(lineToPrint, ri = None):
+    lineToPrint = " dbg "+lineToPrint+" at line: "+str(currentframe().f_back.f_lineno+1)+" \n"
+    if ri != None:
+        raw_input(lineToPrint)
+    else:
+        print(lineToPrint)
+        pass
+    return None   

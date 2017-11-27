@@ -304,12 +304,12 @@ def setInitialPorosityAutoklav (ctmi):
             the outer radius is 0.5*0.02553
     """
     from random import gauss 
-    print("setInitialPorosityAutoklav, It works too: ",ctmi.cpuTime(), ctmi.timeStepNumber)
-    raw_input()
+    #print("setInitialPorosityAutoklav, It works too: ",ctmi.cpuTime(), ctmi.timeStepNumber)
+    #raw_input()
     outerRadius = 0.5*0.02553
     if ctmi.timeStepNumber == 0:
         print("setInitialPorosityAutoklav, It works too: ",ctmi.cpuTime())
-        raw_input()
+        #raw_input()
         amount = []
         if ctmi.TransportComponent == 'elmer':
             #print " we are in the setInitialPorosity function "

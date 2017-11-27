@@ -6,7 +6,7 @@
         
         for flow and transport: 
         
-                        modflow/ mt3d and elmer
+                        modflow/ mt3d and elmer ( openfoam wrapping is currently under dev.)
                         
         for chemistry:
         
@@ -69,8 +69,6 @@ from physicallaws import EffectiveDiffusionLaw,\
                          ProportionalDiffusionLaw,\
                          WinsauerDiffusionLaw
 
-from Scientific import N
-
 try:
     from toughreact import ToughReact
 except:
@@ -83,7 +81,7 @@ from mpi4py import MPI
 
 from timespecification import TimeSpecification
 
-from types import IntType, ListType, StringType
+from types import FloatType, IntType, ListType, StringType
 
 from species import Species
 
@@ -384,7 +382,7 @@ class ChemicalTransportModule(GenericCTModule):
 
         return None
 
-    def setData(self,problem,\
+    def setData(self, problem,\
                 unstructured = None,\
                 trace = None,\
                 mesh = None,\
@@ -712,7 +710,6 @@ class ChemicalTransportModule(GenericCTModule):
                 except ImportError:
                     Elmer = None
                     raise Exception, " unable to load Elmer "
-                    pass
                 pass
                                                                                             #
                                                                                             # temperature
@@ -1501,12 +1498,13 @@ class ChemicalTransportModule(GenericCTModule):
                      "\n\"Money is like muck, not good unless spread.\"\n",
                      "\n\"Numquam ponenda est pluralitas sine necessitate.\"\n",
                      "\n\"Panta rhei\"\n",
+                     "\n\"tempus tantum nostrum est\"\n",
                      "\n\"Plus on apprend, plus on ne sait rien\"\n",
                      "\n\"Qui accroit sa science accroit sa douleur\"\n",
                      "\n\"Sachez vous eloigner car, lorsque vous reviendrez a votre travail, votre jugement sera plus suer.\"\n",
                      "\n\"Summum jus, summa injuria\"\n",
                      "\n\"Toi qui chemine, il n\'y a pas de chemin,\n le chemin se fait en marchant\"\n",
-                     "\n\"Tout ce qui a pu se dire contre la science ne saurait faire oublier que la recherche scientifique reste, dans la degradation de tant d'ordres humains, l'un des rares domaines ou l'homme se controele, s'incline devant le raisonnable, est non bavard, non violent et pur. Moments de la recherche certes constamment interrompus par les banalites du quotidien mais qui se renouent en duree propre. Le lieu de la morale et de l'eflevation ne se trouve-t-il pas desormais au laboratoire ?\"\n",
+                     "\n\"Tout ce qui a pu se dire contre la science ne saurait faire oublier que la recherche scientifique reste, dans la degradation de tant d'ordres humains, l'un des rares domaines ou l'homme se controele, s'incline devant le raisonnable, est non bavard, non violent et pur. Moments de la recherche certes constamment interrompus par les banalites du quotidien mais qui se renouent en duree propre. (Levinas) ?\"\n",
                      "\n\"Tout s\'opere parce qu\'a force de temps tout se rencontre\"\n",
                      "\n\"Where the willingness is great the difficulties cannot be great\"\n",
                      "\n\"Wozu\"\n"
@@ -2195,6 +2193,11 @@ class ChemicalTransportModule(GenericCTModule):
                                                                                             # Chemical states for initial conditions
                                                                                             #
         internal_chemical_states = []
+        if (self.TransportComponent == 'elmer'):
+            self.transportSolver.getChemicalSolverIdentifier(self.chemicalSolver.version)
+            #print ("ctmdbg self.chemicalSolver.version: %s\n",self.chemicalSolver.version)
+            pass
+        #raw_input("ctmdbg self.chemicalSolver.version")
 
         if (self.TransportComponent == 'mt3d'):
             # RQ : ne pourrait on pas avoir une methode mt3d qui fasse cela et se nomme
@@ -2244,7 +2247,7 @@ class ChemicalTransportModule(GenericCTModule):
                         pass
                     pass
                 pass
-            print color.bold+" list of boundary points "+color.end,self.listOfBoundaryPoints
+            print color.bold+" list of boundary points "+color.end, self.listOfBoundaryPoints, len(self.listOfBoundaryPoints)
             indParPer = 0
             #print "ctm debug parpertionList ",self.problem.initialConditions[0].getBody().getElements()
             #print "number of elements ",len(self.problem.initialConditions[0].getBody().getElements())
@@ -2262,9 +2265,11 @@ class ChemicalTransportModule(GenericCTModule):
                 for node in initialCondition.getBody().getBodyNodesList():
                     if node not in self.listOfBoundaryPoints and node not in controlList:
                         if (indParPer == self.mesh.internalNodesAnz):
-                            raise Warning, " check the treatment of init. cond., "+\
-                                           "you probably forgot to treat some mesh body: %s"%str(indParPer)
-                        pass
+                            print color.bold+" 2269 debug node:"+color.end+" %i"%(node)+color.bold+" indParPer:"+color.end+" %i len(controlList):  %i"%(indParPer, len(controlList))
+                            print "self.mesh.internalNodesAnz: %i initialCondition.getBody().getBodyNodesList(): %i"%(self.mesh.internalNodesAnz, len(initialCondition.getBody().getBodyNodesList()))
+                            #raise Warning, "Check the treatment of init. cond., "+\
+                            #               "you probably forgot to treat some mesh body: %s"%str(indParPer)
+                            pass
                         self.parpertionList[indParPer] = node-1
                         indParPer+=1
                         pass
@@ -2354,7 +2359,7 @@ class ChemicalTransportModule(GenericCTModule):
             
             self.chemicalSolver.init()
             self.chemicalSolver.getCellNumber()
-            printm(" ctmdbg chemicalsolver init and getCellNumber: "+str(self.chemicalSolver.getCellNumber()),True)
+            #printm(" ctmdbg chemicalsolver init and getCellNumber: "+str(self.chemicalSolver.getCellNumber()),True)
             pass
         #
                                                                                         #~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2567,6 +2572,9 @@ class ChemicalTransportModule(GenericCTModule):
         print "~ ctmdbg Transport init method call~";#sys.stdout.flush()                    # Transport initialisation
         print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";#sys.stdout.flush()                    #~~~~~~~~~~~~~~~~~~~~~~~~~
         
+                                                                                            #
+                                                                                            # we will mention the chemistry solver in the sif file
+                                                                                            # 
         if self.mpiEnv == None:
             if (self.TransportComponent == 'mt3d'):
                 sizeumt = os.path.getsize('Monod.umt')
@@ -2580,8 +2588,10 @@ class ChemicalTransportModule(GenericCTModule):
             #raw_input()
             if self.problem.__class__.__name__.lower() == "chemicaltransportproblem":
                 self.transportSolver.setProblemType("chemicaltransport")
+                pass
             elif self.problem.__class__.__name__ == "thmcproblem":
                 self.transportSolver.setProblemType("thmc")
+                pass
                                                                                             #
                                                                                             # call of the init method
                                                                                             # which, for Elmer, enables to write the simulation file
@@ -2623,7 +2633,12 @@ class ChemicalTransportModule(GenericCTModule):
             pass
             self.transportSolver.setConcentrationValues(self.aqueousCn)
             print "self.transportSolver.setConcentrationValues";#sys.stdout.flush()
-            self.transportSolver.advanceTime()
+            if (self.TransportComponent == 'elmer'):
+                self.transportSolver.advanceTime(self.initialTimeStep)
+                pass
+            else:
+                self.transportSolver.advanceTime()
+                pass
             #
             # We set the temperature field
             #
@@ -2642,7 +2657,12 @@ class ChemicalTransportModule(GenericCTModule):
                 self.transportSolver.setTemperatureField(self.chemicalSolver.getTemperatureField())
                 pass
             self.transportSolver.setConcentrationValues(self.aqueousCn)
-            self.transportSolver.advanceTime()
+            if (self.TransportComponent == 'elmer'):
+                self.transportSolver.advanceTime(self.initialTimeStep)
+                pass
+            else:
+                self.transportSolver.advanceTime()
+                pass
             pass
                                                                                             #
                                                                                             # Time loop 
@@ -3149,17 +3169,21 @@ class ChemicalTransportModule(GenericCTModule):
                     exec(method)
                     pass
                 pass
-#
-#
-#            
+                                                                                            #
+                                                                                            # Here we update the time, the simulated time.
+                                                                                            #            
             if self.environ():
-                self.transportSolver.advanceTime()
+                if (self.TransportComponent == 'elmer'):
+                    self.transportSolver.advanceTime(self.simulatedTime)
+                    #raw_input("updating the simulated time: %e with dt: %e"%(self.simulatedTime, self.dT))
+                    pass
+                else:
+                    self.transportSolver.advanceTime()
+                    pass
                 pass
                                                                                             #
                                                                                             # call to vtk writer
                                                                                             #
-            #
-            #
             if self.vtkFrequency != None:
                 if (self.TransportComponent == 'mt3d'):
                     if int(self.simulatedTime / (self.vtkScalingFactor*self.vtkFrequency)) == self.vtkControl:
@@ -3261,6 +3285,9 @@ class ChemicalTransportModule(GenericCTModule):
         self.timeStepNumber = 0
     
     def environ(self):
+        """
+        method used to control the master in the master-slave  // paradigm
+        """
         if self.mpiEnv == None:                                                             # sequential
             return 1
         elif self.communicator.rank == 0:                                                   # // root
@@ -3268,7 +3295,7 @@ class ChemicalTransportModule(GenericCTModule):
         else:
             return 0
             
-    def timeUpdate(self,it):
+    def timeUpdate(self, it):
         if (self.simTimesList == 0):
             self.newTimeStepEvaluation(it,1)
             self.convergenceAnalysisParameter = 1
@@ -3280,11 +3307,11 @@ class ChemicalTransportModule(GenericCTModule):
                 self.dT = self.times[increment] - self.simulatedTime
                 self.increment+=1
                 pass
-            if (abs(old_dt - self.dT) > 1E-10):
-                if (self.mpiEnv == None):
-                    self.transportSolver.setTimeStep(self.dT)
-                elif (self.communicator.rank == 0):
-                    self.transportSolver.setTimeStep(self.dT)
+            if (self.mpiEnv == None):
+                self.transportSolver.setTimeStep(self.dT)
+                pass
+            elif (self.communicator.rank == 0):
+                self.transportSolver.setTimeStep(self.dT)
                 pass
             pass
 
@@ -3425,8 +3452,7 @@ class ChemicalTransportModule(GenericCTModule):
                 self.transportSolver.setDarcyVelocity(self.darcyVelocity)
                 pass
 
-            print " transportinitialisation setBody ";#sys.stdout.flush()
-            #raw_input("ctmdbg bodies")
+            #print " transportinitialisation setBody ";#sys.stdout.flush()
             self.transportSolver.setBodyList(self.problem.getRegions())
             #print "ctmdbg transportinitialisation setBody over";#sys.stdout.flush()
                                                                                             #
@@ -3435,9 +3461,9 @@ class ChemicalTransportModule(GenericCTModule):
             if self.temperature:
                 self.transportSolver.setTemperature()
                 pass
-            print "ctmdbg self.componentList: ",self.componentList
+            #print "ctmdbg for self.componentList: ",self.componentList
             self.transportSolver.setUnknownsNumber(len(self.componentList))
-            printm ("ctmdbg self.componentList: ")
+            #printm ("ctmdbg self.componentList: ")
                                                                                             #
                                                                                             # We treat the resolution scheme
                                                                                             #
@@ -3461,8 +3487,12 @@ class ChemicalTransportModule(GenericCTModule):
                     pass
                 pass
             print "ctmdbg ",self.chemicalSolver.getPrimarySpecies()
-            self.transportSolver.parameterDico['thetaScheme'].keys().remove("ALL")
+            try:
+                self.transportSolver.parameterDico['thetaScheme'].keys().remove("ALL")
+            except:
+                pass
             self.speciesNamesList = self.transportSolver.speciesNamesList
+            print("ctmdbg self.speciesNamesList: ",len(self.speciesNamesList), self.speciesNamesList)
             print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~";sys.stdout.flush()                         #
             print "~ ctmdbg Elmer Boundaries: ~";sys.stdout.flush()                         # Elmer boundary conditions
             print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~";sys.stdout.flush()                         #
@@ -3481,22 +3511,23 @@ class ChemicalTransportModule(GenericCTModule):
                 Cvalues = []
                 Tvalues = []
                 Hvalues = []
-                #print " boundary ",boundary.boundary.getBodyName()
-                #raw_input()
                 if self.temperature:
                     self.dirichletBodyCond = NumericBodyField('Dirichlet boundary condition ',
                                                               self.mesh, self.componentList+['temperature'], float)
                     pass
                 else:
+                    #print ("ctmdbg for self.componentList: ",self.componentList)
+                    #printm("we call NumericBodyField:\" self.componentList",1)
                     self.dirichletBodyCond = NumericBodyField('Dirichlet boundary condition ',
                                                               self.mesh, self.componentList, float)
+                    #print("debug ctm : self.componentList",self.componentList)
+                    #printm(" after dirichletBodyCond")
                     pass
                 #
                 # liste represents the list of primary species (the unknowns) to be handled as boundary condition
                 #
                 if (self.ChemicalComponent.lower() == "phreeqc"):
                     liste = self.chemicalSolver.getCellConcAtEqui(self.StatesBounds[boundary.boundary.getBodyName()][0][0])
-                    pass
                 elif (self.ChemicalComponent.lower() == "toughreact"):
                     #
                     # for toughreact, the b.c. values are taken "as is", no equilibrium is made; or that
@@ -3599,6 +3630,7 @@ class ChemicalTransportModule(GenericCTModule):
                     #raw_input(" we retrieve boundary conditions")
                     diclist["head"] = boundary.getHeadValue()
                     pass
+                print("ctmdbg self.componentAnz : ",self.componentAnz)
                 [Cvalues.append(liste[conc]) for conc in range(self.componentAnz)]
                     #
                     # We need to modify the indexation of points between the mesher and python
@@ -3607,11 +3639,13 @@ class ChemicalTransportModule(GenericCTModule):
                 for node in boundary.getBoundary().getBodyNodesList():
                     plotList.append(node-1)
                     pass
-                self.boundPlot.append((Cvalues, plotList, self.componentList))
+                #printm("the length of componentList is %s"%(len(self.componentList)))
+                self.boundPlot.append((Cvalues, plotList, self.chemicalSolver.getPrimarySpeciesNames()))
+                #printm("after boundPlot the length of componentList is %s"%(len(self.componentList)))
 
                 if self.temperature:
                     if (boundary.getType() == "Dirichlet"):
-                        self.dirichletBodyCond.setZone(boundary.getBoundary(),Cvalues+Tliste)
+                        self.dirichletBodyCond.setZone(boundary.getBoundary(), Cvalues+Tliste)
                         pass
                                                                                             #
                                                                                             # We need to modify the indexation of points
@@ -3627,7 +3661,10 @@ class ChemicalTransportModule(GenericCTModule):
                 else:
                     # print " dbg ctm ",boundary.boundary.getBodyName(),boundary.btype
                     if (boundary.getType() == "Dirichlet") or (boundary.getType() == "Flux"):
-                        self.dirichletBodyCond.setZone(boundary.getBoundary(),Cvalues)
+                        print("dbg ctm: %s\n"%(boundary.getName()))
+                        print("dbg ctm: %i\n"%(len(Cvalues)))
+                        print (Cvalues)
+                        self.dirichletBodyCond.setZone(boundary.getBoundary(), Cvalues)
                         pass
                     pass
                 #
@@ -3636,6 +3673,7 @@ class ChemicalTransportModule(GenericCTModule):
                 #print "dbg ctm diclist",diclist
                 #print "dbg ctm diclist, boundary.getType",boundary.getType()
                 #raw_input("dbg ctm diclist at the end of the boundary evaluation")
+                #printm("before the call to transportSolver the length of componentList is %s"%(len(self.componentList)))
                 if self.temperature:
                     if (boundary.getType() == "Dirichlet"):
                         #print "debug ctm 1 ",liste+Tliste
@@ -3705,7 +3743,11 @@ class ChemicalTransportModule(GenericCTModule):
                             #
                             # we introduce the species name
                             #
+                            print ("self.componentList: ",self.componentList)
                             self.boundPlot[-1][-1].append(species)
+                            print ("boundPlot:          ",self.boundPlot[-1][-1])
+                            #printm("b in the species loop, %s the length of componentList is %s"%(species, len(self.componentList)), 1)
+                            
                             pass
                         elif species == "porosity":
                             #
@@ -3715,7 +3757,7 @@ class ChemicalTransportModule(GenericCTModule):
                             
                             #if porosity == None:
                             #
-                            # That value is set to zero to be easelier removed through a threshold
+                            # That value is set to zero to be more easely removed through a threshold
                             #
                             if boundary.getPorosity() == None:
                                 porosity = 0.0
@@ -3728,14 +3770,16 @@ class ChemicalTransportModule(GenericCTModule):
                             pass
                         pass
                     pass
+                printm("after the vtkFieldSpecies treatment, the length of componentList is %s"%(len(self.componentList)))
                 #
                     #print self.boundPlot
                     #raw_input(" boundPlot")
                 pass # end of the boundary treatment
                         
-            #print " the number of points on the boundary is ",len(self.listOfBoundaryPoints);#sys.stdout.flush()
-            #raw_input(" the number of points on the boundary is ")
-            if self.mesh.getSpaceDimensions() !=1: self.transportSolver.vtkMeshFile(self.mesh)
+            print ("type of self.mesh is ",type(self.mesh))
+            if self.mesh.getSpaceDimensions() !=1:
+                #printm(" self.mesh.getSpaceDimensions() is %i"%(self.mesh.getSpaceDimensions()),1)
+                self.transportSolver.vtkMeshFile(self.mesh)
 
             self.transportSolver.setSorptionLaw()
 
@@ -3762,7 +3806,7 @@ class ChemicalTransportModule(GenericCTModule):
             print "~ ctmdbg Elmer IC: ~";sys.stdout.flush()                                 # Elmer initial conditions
             print "~~~~~~~~~~~~~~~~~~~~";sys.stdout.flush()                                 #
             ind = 0
-
+            #printm("the number of initial conditions is %i "%(len(self.initialConditions)), 1)
             for initialCondition in self.initialConditions:
                 Cvalues = []
                 Tvalues = []
@@ -3798,12 +3842,25 @@ class ChemicalTransportModule(GenericCTModule):
                     diclist["temperature"] = float(initialCondition.getChemicalState().getAqueousSolution().getTemperature())
                 if initialCondition.temperatureInitialCondition != None:
                     diclist["temperatureInitialCondition"] = initialCondition.temperatureInitialCondition
+                    #
+                    # The temperatureInitialCondition should prevail over the chemical state temperature initial condition
+                    #
+                    if type(initialCondition.temperatureInitialCondition) in [IntType, FloatType]:
+                        diclist["temperature"] = initialCondition.temperatureInitialCondition
+                        pass
+                    pass
                 if initialCondition.enthalpyInitialCondition != None:
                     diclist["enthalpyInitialCondition"] = initialCondition.enthalpyInitialCondition
+                    pass
+                if initialCondition.wellFeedZoneInitialCondition != None:
+                    diclist["wellFeedZoneInitialCondition"] = initialCondition.wellFeedZoneInitialCondition
+                    pass
                 if initialCondition.wellMassFlowInitialCondition != None:
                     diclist["wellMassFlowInitialCondition"] = initialCondition.wellMassFlowInitialCondition
+                    pass
                 if initialCondition.wellPressureInitialCondition != None:
                     diclist["wellPressureInitialCondition"] = initialCondition.wellPressureInitialCondition
+                    pass
                 #
                 # head
                 #
@@ -3823,6 +3880,7 @@ class ChemicalTransportModule(GenericCTModule):
 #            if isinstance(self.darcyVelocity,(Velocity,StringType)): 
 #                self.transportSolver.setDarcyVelocity(self.darcyVelocity)
 
+            #printm("the number of initial conditions diclist is %i "%(len(diclist)), 1)
             self.transportSolver.setExpectedOutput([])
 
             self.initialPorosityValues = self.transportSolver.getPorosityValues()
@@ -4638,7 +4696,7 @@ class VtkFileWriter:
                         pass
                     pass
                 self.dataFile.flush()
-                print " we are at the CELL_TYPES level"
+                #print " we are at the CELL_TYPES level"
                 if self.transportSolver != None:
                     self.dataFile.write("%s %i\n"%("CELL_TYPES",numberOfCells))
                     for i in range(0,numberOfCells):
@@ -5056,6 +5114,6 @@ def printm(lineToPrint,ri = None):
     if ri != None:
         raw_input(lineToPrint)
     else:
-        print lineToPrint
+        print (lineToPrint)
     return None
 

@@ -57,7 +57,7 @@ import os
 import string
 import sys
 
-from types import NoneType, StringType, FloatType, IntType
+from types import NoneType, StringType, FloatType, IntType, ListType
 
 from vector import V
 
@@ -712,14 +712,15 @@ class Elmer(ElmerRoot):
         """
         The body force section may be used to give additional force terms for the equations
 
-        For the one dimensional borehole simulator, the source term for heat is introduced. For the moment,
-        only one body is considered over the whole pipe length
-        the
+        For the one dimensional borehole simulator, the source term for heat is introduced.
+        Only one source term is considered; it should be changed.
+        
+        The introduction of a feed zone is made while considering a source term based on a mat definition
         """
         sifFile = self.sifFile
         sifFileW = sifFile.write
         sifFileW("! ~~~~~~~~~~\n! Body Force\n! ~~~~~~~~~~\n")
-        print(self.dirICList)
+        #print(self.dirICList)
         for  indb in range(len(self.dirICList[0]["conc"])):
             if (indb==0):
                 sifFileW("Body Force %i\n"%(indb+1))
@@ -741,6 +742,33 @@ class Elmer(ElmerRoot):
                         #
                         sifFileW("  Heat Source = Variable WMassFlow, Twell, Quality, WEnthalpy\n")
                         sifFileW("    Real Procedure \"twoPhasesWellHeatSource\" \"getTwoPhasesWellHeatSource\"\n")
+
+                        for dirIC in self.dirICList:
+                            if "wellFeedZoneInitialCondition" in dirIC.keys():
+                                #print("type of wellFeedZoneInitialCondition is: ",dirIC["wellFeedZoneInitialCondition"])
+                                #print("type of wellFeedZoneInitialCondition is: ",type(dirIC["wellFeedZoneInitialCondition"]))
+                                #raw_input()
+                                if type(dirIC["wellFeedZoneInitialCondition"]) in [FloatType,IntType]:
+                                    sifFileW("  %s = Real %e\n"%("Heat Source Feed", dirIC["wellFeedZoneInitialCondition"]))
+                                    pass
+                                elif (type(dirIC["wellFeedZoneInitialCondition"]) == ListType) and (type(dirIC["wellFeedZoneInitialCondition"][0]) == FloatType):
+                                    #
+                                    # to be improved, doesn't work this way
+                                    #
+                                    sifFileW("  Heat Source Feed = Variable Coordinate 1\n")
+                                    sifFileW("      Real\n")
+                                    for couple in dirIC["wellFeedZoneInitialCondition"]:
+                                        sifFileW("          %e %e\n"%(couple[0], couple[1]))
+                                        pass
+                                    sifFileW("      End\n")
+                                    pass
+                                else:
+                                    sifFileW("  Heat Source Feed = Variable Coordinate\n")
+                                    sifFileW("    Real MATC \"%s\"\n"%(_matcString(dirIC["wellFeedZoneInitialCondition"])))
+                                    #sifFileW("    Real MATC \"%s\"\n"%("if (tx>=-2300) 0.0; else 1000;"))
+                                    pass
+                                pass
+                            pass
                         #
 #                        sifFileW("  HTC = Variable MassFlow, Twell, Text, Quality, Enthalpy\n")
 #                        sifFileW("  HTC = Variable WMassFlow, Twell, Quality, WEnthalpy\n")
@@ -1181,7 +1209,7 @@ class Elmer(ElmerRoot):
                                                                                             #
                                                                                             # linear solver
                                                                                             #
-                if wPDico["Linear System Iterative Method"].lower() in ["cg","cgs","bicgstab","tgqmp","gmres","gcr"] :
+                if wPDico["Linear System Iterative Method"].lower() in ["cg", "cgs", "bicgstab", "tgqmp", "gmres", "gcr"] :
                     sifFileW("  Linear System Iterative Method = %s\n"%wPDico["Linear System Iterative Method"])
                     pass
                 else:
@@ -1437,12 +1465,12 @@ class Elmer(ElmerRoot):
 
         return None
 
-    def writeBoundaryCondition(self,problemType = None):
+    def writeBoundaryCondition(self, problemType = None):
         """
         In advection-diffusion equation we may set the concentration directly by Dirichlet boundary conditions
         or use mass flux condition. The natural boundary condition is zero flux condition.
 
-        Elmer enables the treatment of elasticity (small deformations). In that frame, we have two kind of boundary conditions:
+        Elmer enables the treatment of elasticity (small deformations). In that frame, we have two kinds of boundary conditions:
 
                 a displacement or a normal force.
                 The displacement is expressed other the three directionx x, y and z.
@@ -1495,7 +1523,7 @@ class Elmer(ElmerRoot):
                 sifFileW("End\n\n");sifFile.flush()
                 pass
             return None
-        elif problemType in ["chemicaltransport","thmc","chemicaltransportproblem","thmcproblem"]:
+        elif problemType in ["chemicaltransport", "thmc", "chemicaltransportproblem", "thmcproblem"]:
             #print self.dirBCList1
             #printm("reaching that level",1)
             for dirBC in self.dirBCList1:
@@ -1518,6 +1546,8 @@ class Elmer(ElmerRoot):
                     print("name: ", dirBC["name"])
                     #printm(" boundary condition looking for the transient term",1)
                     sifFileW("Boundary Condition %i ! %s\n"%(dirBC["index"], dirBC["name"]))
+                    sifFileW("!\n!  chemical state issued from: %s\n!\n"%(self.chemicalSolverIdentifier))
+                    
                     sifFileW("  Target Boundaries (1) = %s\n"%str(dirBC["index"]))
                     if dirBC.has_key("description"):
                         if dirBC["description"] != None:
@@ -1582,7 +1612,7 @@ class Elmer(ElmerRoot):
                                                                                             #
                     if (self.temperature) or (self.parameterDico["oneDimensionalBoreHole"]):
 
-                        if (dirBC["timeVariation"] not in (None,[])):                   # temperature is varying with time
+                        if (dirBC["timeVariation"] not in (None, [])):                   # temperature is varying with time
                             if dirBC["TemperatureVariationList"] not in (None,[]):
                                 sifFileW("  %s = Variable time\n"%("Temperature"))
                                 sifFileW("    Real\n")
@@ -1625,8 +1655,7 @@ class Elmer(ElmerRoot):
                         print (dirBC)
                         #raw_input("which dirBC")
                         if dirBC.has_key("wellMassFlowBoundaryCondition"):
-                            print("elmerdbg wellMassFlowBoundaryCondition : ",dirBC)
-                            #raw_input(" we are here ")
+                            print("elmerdbg wellMassFlowBoundaryCondition : ", dirBC)
                             sifFileW("! mass flow\n")
                             if (type(dirBC["wellMassFlowBoundaryCondition"]) in [FloatType, IntType]):
                                 sifFileW("  %s = Real %e\n"%("WMassFlow", dirBC["wellMassFlowBoundaryCondition"]))
@@ -1715,6 +1744,7 @@ class Elmer(ElmerRoot):
                             pass
                         inds+=1
                     sifFileW("End\n\n");sifFile.flush()
+                    
                 elif (dirBC["type"].lower() == "neumann"):
                                                                                             #
                                                                                             # Neumann boundary condition.
@@ -1732,7 +1762,7 @@ class Elmer(ElmerRoot):
                     for spconc in dirBC["conc"]:
                         stinds = _digit(inds+1)
                         stindb = str(dirBC["name"])+stinds
-                        sifFileW("  %s Flux = Real %e\n"%(self.speciesNamesList[inds],0.0))
+                        sifFileW("  %s Flux = Real %e\n"%(self.speciesNamesList[inds], 0.0))
                         inds+=1
 
                     sifFileW("End\n\n");sifFile.flush()
@@ -2255,7 +2285,7 @@ class Elmer(ElmerRoot):
                 self.parameterDico["Linear System Residual Output"] = value
             pass
 
-    def setTwoPhaseProperty(self,aField,propertyName):
+    def setTwoPhaseProperty(self, aField, propertyName):
         """
         To set properties linked with a two phase flow.
 
@@ -2265,76 +2295,76 @@ class Elmer(ElmerRoot):
 #   annular flow pattern
 #
         if (propertyName.lower() in ["annularflowpattern"]):
-            self.elmso.setPropertyField(aField,"annularflowpattern")
+            self.elmso.setPropertyField(aField, "annularflowpattern")
             pass
 #
 #   aqueous properties
 #
         elif (propertyName.lower() in ["aqueouscp", "liquidcp"]):
-            self.elmso.setPropertyField(aField,"liquidcp")
+            self.elmso.setPropertyField(aField, "liquidcp")
             pass
         elif (propertyName.lower() in ["aqueousdensity", "liquiddensity"]):
-            self.elmso.setPropertyField(aField,"liquiddensity")
+            self.elmso.setPropertyField(aField, "liquiddensity")
             pass
         elif (propertyName.lower() in ["aqueous_drhodh_p", "liquid_drhodh_p"]):
-            self.elmso.setPropertyField(aField,"liquidenthalpy")
+            self.elmso.setPropertyField(aField, "liquidenthalpy")
             pass
         elif (propertyName.lower() in ["aqueous_drhodp_h", "liquid_drhodp_h"]):
-            self.elmso.setPropertyField(aField,"liquidenthalpy")
+            self.elmso.setPropertyField(aField, "liquidenthalpy")
             pass
         elif (propertyName.lower() in ["aqueousenthalpy", "liquidenthalpy"]):
-            self.elmso.setPropertyField(aField,"liquidenthalpy")
+            self.elmso.setPropertyField(aField, "liquidenthalpy")
             pass
 #
 #   gas properties
 #
         elif (propertyName.lower() in ["gascp"]):
-            self.elmso.setPropertyField(aField,"gascp")
+            self.elmso.setPropertyField(aField, "gascp")
             pass
         elif (propertyName.lower() in ["gasdensity"]):
-            self.elmso.setPropertyField(aField,"gasdensity")
+            self.elmso.setPropertyField(aField, "gasdensity")
             pass
         elif (propertyName.lower() in ["gas_drhodh_p", "gas_drhodh_p"]):
             self.elmso.setPropertyField(aField,"liquidenthalpy")
             pass
         elif (propertyName.lower() in ["gas_drhodp_h", "gas_drhodp_h"]):
-            self.elmso.setPropertyField(aField,"liquidenthalpy")
+            self.elmso.setPropertyField(aField, "liquidenthalpy")
             pass
         elif (propertyName.lower() in ["gasenthalpy"]):
-            self.elmso.setPropertyField(aField,"gasenthalpy")
+            self.elmso.setPropertyField(aField, "gasenthalpy")
             pass
 #
 #   heat source
 #
         elif (propertyName.lower() in ["heat source", "heatsource"]):
-            self.elmso.setPropertyField(aField,"heatsource")
+            self.elmso.setPropertyField(aField, "heatsource")
             pass
 #
 #   inclination
 #
         elif (propertyName.lower() in ["inclination"]):
-            self.elmso.setPropertyField(aField,"inclination")
+            self.elmso.setPropertyField(aField, "inclination")
             pass
 #
 #
 #
         elif (propertyName.lower() == "quality"):
-            self.elmso.setPropertyField(aField,"quality")
+            self.elmso.setPropertyField(aField, "quality")
             pass
         elif (propertyName.lower() == "dqualitydh_p"):
-            self.elmso.setPropertyField(aField,"dqualitydh_p")
+            self.elmso.setPropertyField(aField, "dqualitydh_p")
             pass
         elif (propertyName.lower() == "dqualitydp_h"):
-            self.elmso.setPropertyField(aField,"dqualitydp_h")
+            self.elmso.setPropertyField(aField, "dqualitydp_h")
             pass
         elif (propertyName.lower() == "surfacetension"):
-            self.elmso.setPropertyField(aField,"surfacetension")
+            self.elmso.setPropertyField(aField, "surfacetension")
             pass
         elif (propertyName.lower() == "tubediameter"):
-            self.elmso.setPropertyField(aField,"tubediameter")
+            self.elmso.setPropertyField(aField, "tubediameter")
             pass
         elif (propertyName.lower() == "voidfraction"):
-            self.elmso.setPropertyField(aField,"voidfraction")
+            self.elmso.setPropertyField(aField, "voidfraction")
             pass
         else:
             raise Warning, " the field: "+propertyName.lower +"you want to transfer to the solver is not managed."
@@ -2349,7 +2379,7 @@ class Elmer(ElmerRoot):
         elif isinstance(waterDensity,float):
             self.waterDensity = waterDensity
 
-    def setSolidDensity(self,solidDensity):
+    def setSolidDensity(self, solidDensity):
         """
         To set the solid density in the frame of a mechanical problem
         """
@@ -2375,7 +2405,7 @@ class Elmer(ElmerRoot):
 
     def defineElmerZones(self, field):
         """
-    definition of zones for the elmer component
+        Definition of zones for the elmer component
         """
         zonesList  = field.getZones()
         zoneNumber = 0
@@ -2412,7 +2442,7 @@ class Elmer(ElmerRoot):
         Used to set the time step
         """
         if type(tSM) is StringType:
-            if tSM in ["Explicit Euler","BDF","Crank-Nicholson"]:
+            if tSM in ["Explicit Euler", "BDF", "Crank-Nicholson"]:
                 self.parameterDico["Timestepping Method"] = tSM
 
     def setTimeStep(self, deltat):
@@ -2436,6 +2466,13 @@ class Elmer(ElmerRoot):
         else:
 #       print " call of getConcentrationValues"
             return self.elmso.getConcentration()
+
+    def getChemicalSolverIdentifier(self, chemicalSolverVersion):
+        """
+        used to retrieve the version of the chemical solver in order to
+        handle the chemical solver versioning.
+        """
+        self.chemicalSolverIdentifier = chemicalSolverVersion
 
     def getCoordinatesValues(self):
         """
@@ -2534,7 +2571,7 @@ class Elmer(ElmerRoot):
         else:
             msg='Unknown Component : <%s>'%self.__class__.__name__
             raise msg
-
+    
     def setHydraulicPorosityParameter(self,hpor):
         return None
                                                                                             #
@@ -3401,6 +3438,26 @@ def _matcString(matcListOfChar):
     if "z" in matcListOfChar:
         matcListOfChar.replace("z","tx(2)")
         pass
+    if ";" in matcListOfChar:
+        matcListOfChar.replace(";","; ")
+        pass
+    if "if" in matcListOfChar:
+        matcListOfChar = matcListOfChar.replace("if","if ")
+        pass
+    if "else" in matcListOfChar:
+        matcListOfChar = matcListOfChar.replace("else"," else ")
+        pass
+    if "(" in matcListOfChar:
+        matcListOfChar = matcListOfChar.replace("("," ( ")
+        pass
+    if ")" in matcListOfChar:
+        matcListOfChar = matcListOfChar.replace(")"," ) ")
+        pass
+    if " 0 " in matcListOfChar:
+        matcListOfChar = matcListOfChar.replace(" 0 ","0")
+        pass
+    #print(" matcstring: %s"%(matcListOfChar));
+    #raw_input()
     return matcListOfChar
     
 def _TimeException():

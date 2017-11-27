@@ -687,10 +687,11 @@ class SecondarySpecies( Species):
             (MolarMass)
             
         That function is used with a prior call like:
-             URL  = os.getenv("WRAPPER")+"/Phreeqc_dat/"+"phreeqc.dat"
+             URL  = os.getenv("WRAPPER")+"/Phreeqc_dat/"+$ETUMOSVERSION+"phreeqc.dat"
              molarMassDictionary = chemistrySolver.getMolarMassList(URL,typ = {})
              where chemistrySolver is an instance of a chemical solver.
              For the moment, only phreeqc is available (chemistrySolver = Phreeqc()).
+             Nevertheless, two versions of Phreeqc coexist, phreeqc 2.18 and phreeqc 3.3.5.
         """
         molarMass = 0
         aqueousMasterSpeciesAmount = molarMassStringEval(self.symbol) 
@@ -703,7 +704,8 @@ class SecondarySpecies( Species):
     
     def getVantHoffFactor(self):
         """
-        For most ionic compounds dissolved in water, the van 't Hoff factor is equal to the number of discrete ions in a formula unit of the substance.
+        For most ionic compounds dissolved in water,
+        the van 't Hoff factor is equal to the number of discrete ions in a formula unit of the substance.
         This is true for ideal solutions only, as occasionally ion pairing occurs in solution.  
         """
         ifactor = 0

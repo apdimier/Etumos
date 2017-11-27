@@ -58,7 +58,7 @@ class ElmerRoot(Generic):
         self.gravityDirection                   = None
         self.porosityState                      = "constant"
         self.gravityValue                       = None
-        self.meshFile=meshFile
+        self.meshFile = meshFile
         #print meshFile.__repr__()
         #raw_input("meshFile.__repr__")
         if meshFile.__repr__() in ["Mesh1D", "Mesh2D()", "Mesh3D()"]:
@@ -83,6 +83,7 @@ class ElmerRoot(Generic):
         self.parameterDico["vapor"]                  = False
         self.wellboreParameterDico = {}
         
+        self.chemicalSolverVersion  = None
         self.temperature            = False
         self.oneDimensionalBoreHole = None
     #

@@ -212,11 +212,17 @@ class TotalMolalConcentration(ChemicalQuantity):
     
 class MineralConcentration(ChemicalQuantity):
     """
-    The user enters here a mineral species and its concentration
+    The user enters here a mineral species, its concentration and the saturation index
     Unit type = Concentration
+    
+    The mineral saturation index is an index showing whether a water will tend to dissolve or precipitate a particular mineral.
+    Its value is negative when the mineral may be dissolved, positive when it may be precipitated, and zero when the water and mineral are at chemical equilibrium.
+    The saturation index (SI) is calculated by comparing the chemical activities of the dissolved ions of the mineral (ion activity product, IAP) with their solubility product (solpr),
+    giving in equation form, SI = log(IAP/sp).
+
     Init as ChemicalQuantity
-    phreeqc uses minerals with a capital letter at first
-      
+    phreeqC uses minerals with a capital letter at first.
+          
     Examples
       Quartz = MineralTotalConcentration('Quartz',0.1,'mmol/l',saturationIndex=0.0)
     """
@@ -242,7 +248,7 @@ class ToDissolveMineralTotalConcentration(ChemicalQuantity):
       Init as ChemicalQuantity
       Enables to specify a mineral that can't precipitate
     Examples
-      Quartz = ToDissolveMineralTotalConcentration('Quartz',0.1,'mmol/l')
+      Quartz = ToDissolveMineralTotalConcentration('Quartz', 0.1,'mmol/l')
     """
         
 ##  if self.saturationIndex == None:
@@ -272,7 +278,7 @@ class MineralTotalMolalConcentration(ChemicalQuantity):
       Init as ChemicalQuantity
       
     Examples
-      Quartz = MineralTotalMolalConcentration('Quartz',0.1,'mmol')
+      Quartz = MineralTotalMolalConcentration('Quartz', 0.1,'mmol')
     """
     default_unit = _findUnit('MolalConcentration')
     pass
@@ -321,7 +327,7 @@ class SpecificSurfaceArea(ChemicalQuantity):
       Init as ChemicalQuantity  
        
     Examples
-      SurfY =  SpecificSurfaceArea('Y',200,'m2/kg')
+      SurfY =  SpecificSurfaceArea('Y', 200, 'm2/kg')
     """
     default_unit = _findUnit('SpecificSurfaceArea')
 
@@ -348,7 +354,7 @@ class VolumicSurfaceArea(ChemicalQuantity):
       Init as ChemicalQuantity  
        
     Examples  
-      SurfY =  VolumicSurfaceArea('Y',200,'1/m3')
+      SurfY =  VolumicSurfaceArea('Y', 200, '1/m3')
     """
     default_unit = _findUnit('VolumicSurfaceArea')
     pass
@@ -356,7 +362,7 @@ class VolumicSurfaceArea(ChemicalQuantity):
 class CompositeSurfaceArea(ChemicalQuantity):
 
     ## @brief Constructor of the class
-    def __init__(self,symbol, value, area,unit = None):
+    def __init__(self,symbol, value, area, unit = None):
         ChemicalQuantity.__init__(self,symbol, value, unit)
         self.area = area
         default_unit = None
@@ -1056,7 +1062,7 @@ class ChemicalState:
             for gas in gazen:
                 print(" gas phase ",type(gas))
                 print(gas)
-                if not isinstance(gas,GasPhase):
+                if not isinstance(gas, GasPhase):
                     raise Exception(" gas phase has to be redefined ")
                 pass
             pass
